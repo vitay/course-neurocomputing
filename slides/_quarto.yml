@@ -1,0 +1,19 @@
+project:
+  output-dir: ../docs/slides
+
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: 
+      buttons: false
+
+title-slide-attributes:
+    data-background-image: "img/tuc.svg"
+    data-background-size: 30%
+    data-background-opacity: "1"
+    data-background-position: top
+
+filters:
+  - center_images.lua
+  - quarto

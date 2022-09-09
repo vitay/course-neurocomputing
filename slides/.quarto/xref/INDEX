@@ -1,0 +1,147 @@
+{
+  "test.qmd": {
+    "test.html": "bda1d28d",
+    "test.tex": "4d99402b"
+  },
+  "4.1-Limits.md": {
+    "4.1-Limits.html": "1c2c8f3c"
+  },
+  "3.6-Autoencoders.md": {
+    "3.6-Autoencoders.html": "f02e97c5"
+  },
+  "3.2-DeepNN.md": {
+    "3.2-DeepNN.html": "fc4a0b59"
+  },
+  "2.5-Multiclassification.md": {
+    "2.5-Multiclassification.html": "27dba2ce"
+  },
+  "3.10-Attention.md": {
+    "3.10-Attention.html": "fe78b388"
+  },
+  "2.4-LinearClassification.md": {
+    "2.4-LinearClassification.html": "9c521fdc"
+  },
+  "3.3-CNN.md": {
+    "3.3-CNN.html": "c8899199"
+  },
+  "2.2-LinearRegression.md": {
+    "2.2-LinearRegression.html": "dd01c7a9"
+  },
+  "2.3-Regularization.md": {
+    "2.3-Regularization.html": "b975e283"
+  },
+  "2.1-Optimization.md": {
+    "2.1-Optimization.html": "662fe5b6"
+  },
+  "1.2-Basics.md": {
+    "1.2-Basics.html": "ac542de7"
+  },
+  "3.5-Segnet.md": {
+    "3.5-Segnet.html": "8183b1cf"
+  },
+  "3.1-NeuralNetworks.md": {
+    "3.1-NeuralNetworks.html": "a16c28c3"
+  },
+  "4.4-NeuralFields.md": {
+    "4.4-NeuralFields.html": "7414198c"
+  },
+  "4.2-SOM.md": {
+    "4.2-SOM.html": "e5546f33"
+  },
+  "3.8-GAN.md": {
+    "3.8-GAN.html": "0d640342"
+  },
+  "4.6-Hebbian.md": {
+    "4.6-Hebbian.html": "d3cfbebb"
+  },
+  "1.3-Neurons.md": {
+    "1.3-Neurons.html": "462527b7"
+  },
+  "3.4-ObjectDetection.md": {
+    "3.4-ObjectDetection.html": "85ec3ace"
+  },
+  "1.1-Introduction.md": {
+    "1.1-Introduction.html": "ae90e22d"
+  },
+  "1.0-Foreword.md": {
+    "1.0-Foreword.html": "0577216b"
+  },
+  "4.5-Reservoir.md": {
+    "4.5-Reservoir.html": "679cedb3"
+  },
+  "5.1-SVM.md": {
+    "5.1-SVM.html": "bdfce1f8"
+  },
+  "4.7-Spiking.md": {
+    "4.7-Spiking.html": "bcd838ea"
+  },
+  "3.7-RBM.md": {
+    "3.7-RBM.html": "f947bf4e"
+  },
+  "4.3-Hopfield.md": {
+    "4.3-Hopfield.html": "58e7a322"
+  },
+  "3.9-RNN.md": {
+    "3.9-RNN.html": "9f9f3947"
+  },
+  "2.6-LearningTheory.md": {
+    "2.6-LearningTheory.html": "402dacde"
+  },
+  "9.5-Hebbian.md": {
+    "9.5-Hebbian.html": "a4b92a16"
+  },
+  "9.6-Spiking.md": {
+    "9.6-Spiking.html": "556ca737"
+  },
+  "5.3-GAN.md": {
+    "5.3-GAN.html": "7a098a4d"
+  },
+  "8.1-Limits.md": {
+    "8.1-Limits.html": "b0ab049e"
+  },
+  "9.2-Hopfield.md": {
+    "9.2-Hopfield.html": "cdf4710b"
+  },
+  "5.1-Autoencoders.md": {
+    "5.1-Autoencoders.html": "824038e9"
+  },
+  "5.2-RBM.md": {
+    "5.2-RBM.html": "94f64154"
+  },
+  "6.1-RNN.md": {
+    "6.1-RNN.html": "52e3a5bb"
+  },
+  "9.1-SOM.md": {
+    "9.1-SOM.html": "caf89555"
+  },
+  "4.1-CNN.md": {
+    "4.1-CNN.html": "dbc61869"
+  },
+  "4.2-ObjectDetection.md": {
+    "4.2-ObjectDetection.html": "cf51fd45"
+  },
+  "9.3-NeuralFields.md": {
+    "9.3-NeuralFields.html": "e0a4517e"
+  },
+  "4.3-Segnet.md": {
+    "4.3-Segnet.html": "5a8a2589"
+  },
+  "9.7-SVM.md": {
+    "9.7-SVM.html": "8638362d"
+  },
+  "9.4-Reservoir.md": {
+    "9.4-Reservoir.html": "30cec781"
+  },
+  "7.1-Attention.md": {
+    "7.1-Attention.html": "64f7800d"
+  },
+  "2.4-Multiclassification.md": {
+    "2.4-Multiclassification.html": "da8f5e3c"
+  },
+  "2.3-LinearClassification.md": {
+    "2.3-LinearClassification.html": "b656ed73"
+  },
+  "2.5-LearningTheory.md": {
+    "2.5-LearningTheory.html": "9ddc47f0"
+  }
+}

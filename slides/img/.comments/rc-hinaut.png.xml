@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment version="3.0">
+  <caption>Figure 1</caption>
+  <note>Thematic role assignment and correspondence between cortico-striatal and reservoir implementations of sentence processing.A. Grammatical construction processing in the reservoir framework. Semantic and grammatical words (i.e. open and closed class words, respectively) are separated on input. Semantic words (SW) are stored in a memory stack. Grammatical words and a single input for all SWs are inputs to the reservoir (analogous to prefrontal cortex area BA47). During training, input sentences are presented word-by-word, and readout units (corresponding to striatum) are forced to the corresponding coded meaning (i.e. SW1-Object, SW2-Predicate, SW3-Agent). In testing, readout units code the predicted role(s) of each semantic word, forming the coded meaning. The meaning (i.e. hit(Mary, John, _)) can be reconstructed from the coded meaning, as SWs in memory stack are reassigned to the thematic roles (predicate, agent, object, recipient) identified in the read-outs. B. Active and passive grammatical constructions (i.e. mapping from sentence form to meaning), and their shared meaning. Coded meaning (indicated by the arrows) corresponds to specific mapping from open class words to meaning, which defines the grammatical construction.</note>
+  <place/>
+  <categories/>
+</comment>
