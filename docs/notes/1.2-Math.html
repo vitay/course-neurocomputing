@@ -20,6 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -30,7 +49,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notes/1.3-Neurons.html" rel="next">
+<link href="../exercises/1-Python-solution.html" rel="next">
 <link href="../notes/1.1-Introduction.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -117,47 +136,10 @@ ul.task-list li input[type="checkbox"] {
   <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.4-Multiclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-class classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.5-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Learning theory</span></a>
-  </div>
-</li>
-      </ul>
+      <span class="sidebar-item-text sidebar-link text-start">Linear algorithms</span>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">Neural networks</span>
@@ -178,7 +160,19 @@ ul.task-list li input[type="checkbox"] {
       <span class="sidebar-item-text sidebar-link text-start">Outlook</span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">Exercises</span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -197,7 +191,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link active" data-scroll-target="#linear-algebra"><span class="toc-section-number">2.1</span>  Linear algebra</a>
   <ul class="collapse">
   <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="toc-section-number">2.1.1</span>  Vectors</a></li>
-  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">2.1.2</span>  Matrices</a></li>
   </ul></li>
   <li><a href="#calculus" id="toc-calculus" class="nav-link" data-scroll-target="#calculus"><span class="toc-section-number">2.2</span>  Calculus</a>
   <ul class="collapse">
@@ -245,13 +238,10 @@ ul.task-list li input[type="checkbox"] {
 <p>Slides: <a href="../slides/1.2-Basics.html" target="_blank">html</a> <a href="../slides/pdf/1.2-Basics.pdf" target="_blank">pdf</a></p>
 <p>This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the important mathematical notions that are needed to understand this course. Students who have studied mathematics as a major can safely skip this part, as there is nothing fancy (although the section on information theory could be worth a read).</p>
 <p>It is not supposed to replace any course in mathematics (we won’t show any proof and will skip what we do not need) but rather to provide a high-level understanding of the most important concepts and set the notations. Nothing should be really new to you, but it may be useful to have everything summarized at the same place.</p>
-<p><strong>References:</strong> Part I of Goodfellow et al.&nbsp;(2016) {cite}<code>Goodfellow2016</code>. Any mathematics textbook can be used in addition.</p>
+<p><strong>References:</strong> Part I of <span class="citation" data-cites="Goodfellow2016">Goodfellow et al. (<a href="../references.html#ref-Goodfellow2016" role="doc-biblioref">2016</a>)</span>. Any mathematics textbook can be used in addition.</p>
 <section id="linear-algebra" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="linear-algebra"><span class="header-section-number">2.1</span> Linear algebra</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/gE3W7pymA2k" frameborder="0" allowfullscreen="">
-</iframe>
-</div>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/gE3W7pymA2k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Several mathematical objects are manipulated in linear algebra:</p>
 <ul>
 <li><p><strong>Scalars</strong> <span class="math inline">\(x\)</span> are 0-dimensional values (single numbers, so to speak). They can either take real values (<span class="math inline">\(x \in \Re\)</span>, e.g.&nbsp;<span class="math inline">\(x = 1.4573\)</span>, floats in CS) or natural values (<span class="math inline">\(x \in \mathbb{N}\)</span>, e.g.&nbsp;<span class="math inline">\(x = 3\)</span>, integers in CS).</p></li>
@@ -281,10 +271,41 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <li>Vectors can be multiplied by a scalar:</li>
 </ul>
 <p><span class="math display">\[a \, \mathbf{x} = a \, \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} = \begin{bmatrix} a \, x_1 \\ a \, x_2 \\ \vdots \\ a \, x_d \end{bmatrix}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vectorspace.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Vector spaces allow additions of vectors. Source: <a href="https://mathinsight.org/image/vector_2d_add" class="uri">https://mathinsight.org/image/vector_2d_add</a></figcaption><p></p>
+</figure>
+</div>
+<p>These two operations generate a lot of nice properties (see <a href="https://en.wikipedia.org/wiki/Vector_space" class="uri">https://en.wikipedia.org/wiki/Vector_space</a> for a full list), including:</p>
+<ul>
+<li>associativity: <span class="math inline">\(\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}\)</span></li>
+<li>commutativity: <span class="math inline">\(\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}\)</span></li>
+<li>the existence of a zero vector <span class="math inline">\(\mathbf{x} + \mathbf{0} = \mathbf{x}\)</span></li>
+<li>inversion: <span class="math inline">\(\mathbf{x} + (-\mathbf{x}) = \mathbf{0}\)</span></li>
+<li>distributivity: <span class="math inline">\(a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}\)</span></li>
+</ul>
+<p>Vectors have a <strong>norm</strong> (or length) <span class="math inline">\(||\mathbf{x}||\)</span>. The most intuitive one (if you know the Pythagoras theorem) is the <strong>Euclidean norm</strong> or <span class="math inline">\(L^2\)</span>-norm, which sums the square of each element:</p>
+<p><span class="math display">\[||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}\]</span></p>
+<p>Other norms exist, distinguished by the subscript. The <strong><span class="math inline">\(L^1\)</span>-norm</strong> (also called Taxicab or Manhattan norm) sums the absolute value of each element:</p>
+<p><span class="math display">\[||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|\]</span></p>
+<p>The <strong>p-norm</strong> generalizes the Euclidean norm to other powers <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}\]</span></p>
+<p>The <strong>infinity norm</strong> (or maximum norm) <span class="math inline">\(L^\infty\)</span> returns the maximum element of the vector:</p>
+<p><span class="math display">\[||\mathbf{x}||_\infty = \max(|x_1|, |x_2|, \ldots, |x_d|)\]</span></p>
+<p>One important operation for vectors is the <strong>dot product</strong> (also called scalar product or inner product) between two vectors:</p>
+<p><span class="math display">\[\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} \rangle = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_d \, y_d\]</span></p>
+<p>The dot product basically sums one by one the product of the elements of each vector. The angular brackets are sometimes omitted (<span class="math inline">\(\mathbf{x} \cdot \mathbf{y}\)</span>) but we will use them in this course for clarity.</p>
+<p>One can notice immediately that the dot product is <strong>symmetric</strong>:</p>
+<p><span class="math display">\[\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \mathbf{y} \cdot \mathbf{x} \rangle\]</span></p>
+<p>and <strong>linear</strong>:</p>
+<p><span class="math display">\[\langle (a \, \mathbf{x} + b\, \mathbf{y}) \cdot \mathbf{z} \rangle = a\, \langle \mathbf{x} \cdot \mathbf{z} \rangle + b \, \langle \mathbf{y} \cdot \mathbf{z} \rangle\]</span></p>
+<p>The dot product is an indirect measurement of the <strong>angle</strong> <span class="math inline">\(\theta\)</span> between two vectors:</p>
+<p><span class="math display">\[\langle \mathbf{x} \cdot \mathbf{y} \rangle = ||\mathbf{x}||_2 \, ||\mathbf{y}||_2 \, \cos(\theta)\]</span></p>
 <table class="table">
 <thead>
 <tr class="header">
-<th>```{figure} ../img/vectorspace.png</th>
+<th>```{figure} ../img/dotproduct.png</th>
 </tr>
 </thead>
 <tbody>
@@ -293,72 +314,27 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 </tr>
 </tbody>
 </table>
-<p>Vector spaces allow additions of vectors. Source: <a href="https://mathinsight.org/image/vector_2d_add" class="uri">https://mathinsight.org/image/vector_2d_add</a></p>
+<p>The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: <a href="https://en.wikipedia.org/wiki/Dot_product" class="uri">https://en.wikipedia.org/wiki/Dot_product</a></p>
 <pre><code>
-These two operations generate a lot of nice properties (see &lt;https://en.wikipedia.org/wiki/Vector_space&gt; for a full list), including:
-
-* associativity: $\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}$
-* commutativity: $\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}$
-* the existence of a zero vector $\mathbf{x} + \mathbf{0} = \mathbf{x}$
-* inversion: $\mathbf{x} + (-\mathbf{x}) = \mathbf{0}$
-* distributivity: $a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}$
-
-Vectors have a **norm** (or length) $||\mathbf{x}||$. The most intuitive one (if you know the Pythagoras theorem) is the **Euclidean norm** or $L^2$-norm, which sums the square of each element:
-
-$$||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}$$
-
-Other norms exist, distinguished by the subscript. The **$L^1$-norm** (also called Taxicab or Manhattan norm) sums the absolute value of each element:
-
-$$||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|$$
-
-The **p-norm** generalizes the Euclidean norm to other powers $p$: 
-
-$$||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}$$
-
-The **infinity norm** (or maximum norm) $L^\infty$ returns the maximum element of the vector:
-
-$$||\mathbf{x}||_\infty = \max(|x_1|, |x_2|, \ldots, |x_d|)$$
+If you normalize the two vectors by dividing them by their norm (which is a scalar), we indeed have the cosine of the angle between them: The higher the normalized dot product, the more the two vectors point towards the same direction (**cosine distance** between two vectors).
 
 
-One important operation for vectors is the **dot product** (also called scalar product or inner product) between two vectors:
+$$\langle \displaystyle\frac{\mathbf{x}}{||\mathbf{x}||_2} \cdot \frac{\mathbf{y}}{||\mathbf{y}||_2} \rangle =  \cos(\theta)$$
 
-$$\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} \rangle = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_d \, y_d$$
+### Matrices
 
-The dot product basically sums one by one the product of the elements of each vector. The angular brackets are sometimes omitted ($\mathbf{x} \cdot \mathbf{y}$) but we will use them in this course for clarity.
+Matrices are derived from vectors, so most of the previous properties will be true. Let's consider this 4x3 matrix:
 
-
-One can notice immediately that the dot product is **symmetric**: 
-
-$$\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \mathbf{y} \cdot \mathbf{x} \rangle$$
-
-and **linear**:
-
-$$\langle (a \, \mathbf{x} + b\, \mathbf{y}) \cdot \mathbf{z} \rangle = a\, \langle \mathbf{x} \cdot \mathbf{z} \rangle + b \, \langle \mathbf{y} \cdot \mathbf{z} \rangle$$
-
-The dot product is an indirect measurement of the **angle** $\theta$ between two vectors:
-
-
-$$\langle \mathbf{x} \cdot \mathbf{y} \rangle = ||\mathbf{x}||_2 \, ||\mathbf{y}||_2 \, \cos(\theta)$$
-
-```{figure} ../img/dotproduct.png
----
-width: 50%
----
-The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: &lt;https://en.wikipedia.org/wiki/Dot_product&gt;</code></pre>
-<p>If you normalize the two vectors by dividing them by their norm (which is a scalar), we indeed have the cosine of the angle between them: The higher the normalized dot product, the more the two vectors point towards the same direction (<strong>cosine distance</strong> between two vectors).</p>
-<p><span class="math display">\[\langle \displaystyle\frac{\mathbf{x}}{||\mathbf{x}||_2} \cdot \frac{\mathbf{y}}{||\mathbf{y}||_2} \rangle =  \cos(\theta)\]</span></p>
-</section>
-<section id="matrices" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="matrices"><span class="header-section-number">2.1.2</span> Matrices</h3>
-<p>Matrices are derived from vectors, so most of the previous properties will be true. Let’s consider this 4x3 matrix:</p>
-<p><span class="math display">\[A = \begin{bmatrix}
+$$A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; a_{13} \\
 a_{21} &amp; a_{22} &amp; a_{23} \\
 a_{31} &amp; a_{32} &amp; a_{33} \\
 a_{41} &amp; a_{42} &amp; a_{43} \\
-\end{bmatrix}\]</span></p>
-<p>Each column of the matrix is a vector with 4 elements:</p>
-<p><span class="math display">\[\mathbf{a}_1 = \begin{bmatrix}
+\end{bmatrix}$$
+
+Each column of the matrix is a vector with 4 elements:
+
+$$\mathbf{a}_1 = \begin{bmatrix}
 a_{11} \\
 a_{21} \\
 a_{31} \\
@@ -376,19 +352,27 @@ a_{23} \\
 a_{33} \\
 a_{43} \\
 \end{bmatrix} \qquad
-\]</span></p>
-<p>A <span class="math inline">\(m \times n\)</span> matrix is therefore a collection of <span class="math inline">\(n\)</span> vectors of size <span class="math inline">\(m\)</span> put side by side column-wise:</p>
-<p><span class="math display">\[A = \begin{bmatrix}
+$$
+
+A $m \times n$ matrix is therefore a collection of $n$ vectors of size $m$ put side by side column-wise:
+
+$$A = \begin{bmatrix}
 \mathbf{a}_1 &amp; \mathbf{a}_2 &amp; \mathbf{a}_3\\
-\end{bmatrix}\]</span></p>
-<p>So all properties of the vector spaces (associativity, commutativity, distributivity) also apply to matrices, as additions and multiplications with a scalar are defined.</p>
-<p><span class="math display">\[\alpha \, A + \beta \, B = \begin{bmatrix}
+\end{bmatrix}$$
+
+So all properties of the vector spaces (associativity, commutativity, distributivity) also apply to matrices, as additions and multiplications with a scalar are defined.
+
+$$\alpha \, A + \beta \, B = \begin{bmatrix}
 \alpha\, a_{11} + \beta \, b_{11} &amp; \alpha\, a_{12} + \beta \, b_{12} &amp; \alpha\, a_{13} + \beta \, b_{13} \\
 \alpha\, a_{21} + \beta \, b_{21} &amp; \alpha\, a_{22} + \beta \, b_{22} &amp; \alpha\, a_{23} + \beta \, b_{23} \\
 \alpha\, a_{31} + \beta \, b_{31} &amp; \alpha\, a_{32} + \beta \, b_{32} &amp; \alpha\, a_{33} + \beta \, b_{33} \\
 \alpha\, a_{41} + \beta \, b_{41} &amp; \alpha\, a_{42} + \beta \, b_{42} &amp; \alpha\, a_{43} + \beta \, b_{43} \\
-\end{bmatrix}\]</span></p>
-<pre class="{note}"><code>Beware, you can only add matrices of the same dimensions $m\times n$. You cannot add a $2\times 3$ matrix to a $5 \times 4$ one.</code></pre>
+\end{bmatrix}$$
+
+
+
+```{note}
+Beware, you can only add matrices of the same dimensions $m\times n$. You cannot add a $2\times 3$ matrix to a $5 \times 4$ one.</code></pre>
 <p>The <strong>transpose</strong> <span class="math inline">\(A^T\)</span> of a <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span> is a <span class="math inline">\(n \times m\)</span> matrix, where the row and column indices are swapped:</p>
 <p><span class="math display">\[A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
@@ -1340,6 +1324,11 @@ Refer
 &lt;https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a&gt; for nice visual explanantions of the cross-entropy.</code></pre>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Goodfellow2016" class="csl-entry" role="doc-biblioentry">
+Goodfellow, I., Bengio, Y., and Courville, A. (2016). <em>Deep <span>Learning</span></em>. <span>MIT Press</span>.
+</div>
+</div>
 </section>
 </section>
 
@@ -1449,8 +1438,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../notes/1.3-Neurons.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../exercises/1-Python-solution.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction To Python</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

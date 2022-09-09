@@ -5,7 +5,7 @@ slides: $(slides_targets)
 	quarto render $? --to revealjs
 
 
-notes_targets := $(wildcard notes/*.qmd)
+notes_targets := $(wildcard notes/notes/*.qmd)
 notes: $(notes_targets)
 	quarto render $?  --to html
 
