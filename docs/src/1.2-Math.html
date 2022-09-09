@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.175">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 2&nbsp; Math basics (optional)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../src/1.3-Neurons.html" rel="next">
+<link href="../src/1.1-Introduction.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Course description</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/1.2-Math.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/2.4-Multiclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-class classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../src/2.5-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Neural networks</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Convolutional neural networks</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Unsupervised learning and generative modeling</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Recurrent neural networks</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Self-supervised learning</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Outlook</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Exercises</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link active" data-scroll-target="#linear-algebra"><span class="toc-section-number">2.1</span>  Linear algebra</a>
+  <ul class="collapse">
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="toc-section-number">2.1.1</span>  Vectors</a></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">2.1.2</span>  Matrices</a></li>
+  </ul></li>
+  <li><a href="#calculus" id="toc-calculus" class="nav-link" data-scroll-target="#calculus"><span class="toc-section-number">2.2</span>  Calculus</a>
+  <ul class="collapse">
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="toc-section-number">2.2.1</span>  Functions</a></li>
+  <li><a href="#differentiation" id="toc-differentiation" class="nav-link" data-scroll-target="#differentiation"><span class="toc-section-number">2.2.2</span>  Differentiation</a></li>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration"><span class="toc-section-number">2.2.3</span>  Integration</a></li>
+  </ul></li>
+  <li><a href="#probability-theory" id="toc-probability-theory" class="nav-link" data-scroll-target="#probability-theory"><span class="toc-section-number">2.3</span>  Probability theory</a>
+  <ul class="collapse">
+  <li><a href="#discrete-probability-distributions" id="toc-discrete-probability-distributions" class="nav-link" data-scroll-target="#discrete-probability-distributions"><span class="toc-section-number">2.3.1</span>  Discrete probability distributions</a></li>
+  <li><a href="#continuous-probability-distributions" id="toc-continuous-probability-distributions" class="nav-link" data-scroll-target="#continuous-probability-distributions"><span class="toc-section-number">2.3.2</span>  Continuous probability distributions</a></li>
+  </ul></li>
+  <li><a href="#statistics" id="toc-statistics" class="nav-link" data-scroll-target="#statistics"><span class="toc-section-number">2.4</span>  Statistics</a>
+  <ul class="collapse">
+  <li><a href="#monte-carlo-sampling" id="toc-monte-carlo-sampling" class="nav-link" data-scroll-target="#monte-carlo-sampling"><span class="toc-section-number">2.4.1</span>  Monte Carlo sampling</a></li>
+  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem"><span class="toc-section-number">2.4.2</span>  Central limit theorem</a></li>
+  </ul></li>
+  <li><a href="#information-theory" id="toc-information-theory" class="nav-link" data-scroll-target="#information-theory"><span class="toc-section-number">2.5</span>  Information theory</a>
+  <ul class="collapse">
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy"><span class="toc-section-number">2.5.1</span>  Entropy</a></li>
+  <li><a href="#mutual-information-cross-entropy-and-kullback-leibler-divergence" id="toc-mutual-information-cross-entropy-and-kullback-leibler-divergence" class="nav-link" data-scroll-target="#mutual-information-cross-entropy-and-kullback-leibler-divergence"><span class="toc-section-number">2.5.2</span>  Mutual Information, cross-entropy and Kullback-Leibler divergence</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/1.2-Basics.html" target="_blank">html</a> <a href="../slides/pdf/1.2-Basics.pdf" target="_blank">pdf</a></p>
+<p>This chapter is not part of the course itself (there will not be questions at the exam on basic mathematics) but serves as a reminder of the important mathematical notions that are needed to understand this course. Students who have studied mathematics as a major can safely skip this part, as there is nothing fancy (although the section on information theory could be worth a read).</p>
+<p>It is not supposed to replace any course in mathematics (we won’t show any proof and will skip what we do not need) but rather to provide a high-level understanding of the most important concepts and set the notations. Nothing should be really new to you, but it may be useful to have everything summarized at the same place.</p>
+<p><strong>References:</strong> Part I of Goodfellow et al.&nbsp;(2016) {cite}<code>Goodfellow2016</code>. Any mathematics textbook can be used in addition.</p>
+<section id="linear-algebra" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="linear-algebra"><span class="header-section-number">2.1</span> Linear algebra</h2>
+<div class="embed-container">
+<iframe src="https://www.youtube.com/embed/gE3W7pymA2k" frameborder="0" allowfullscreen="">
+</iframe>
+</div>
+<p>Several mathematical objects are manipulated in linear algebra:</p>
+<ul>
+<li><p><strong>Scalars</strong> <span class="math inline">\(x\)</span> are 0-dimensional values (single numbers, so to speak). They can either take real values (<span class="math inline">\(x \in \Re\)</span>, e.g.&nbsp;<span class="math inline">\(x = 1.4573\)</span>, floats in CS) or natural values (<span class="math inline">\(x \in \mathbb{N}\)</span>, e.g.&nbsp;<span class="math inline">\(x = 3\)</span>, integers in CS).</p></li>
+<li><p><strong>Vectors</strong> <span class="math inline">\(\mathbf{x}\)</span> are 1-dimensional arrays of length <span class="math inline">\(d\)</span>. The bold notation <span class="math inline">\(\mathbf{x}\)</span> will be used in this course, but you may also be accustomed to the arrow notation <span class="math inline">\(\overrightarrow{x}\)</span> used on the blackboard. When using real numbers, the <strong>vector space</strong> with <span class="math inline">\(d\)</span> dimensions is noted <span class="math inline">\(\Re^d\)</span>, so we can note <span class="math inline">\(\mathbf{x} \in \Re^d\)</span>. Vectors are typically represented vertically to outline their <span class="math inline">\(d\)</span> elements <span class="math inline">\(x_1, x_2, \ldots, x_d\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}\]</span></p>
+<ul>
+<li><strong>Matrices</strong> <span class="math inline">\(A\)</span> are 2-dimensional arrays of size (or shape) <span class="math inline">\(m \times n\)</span> (<span class="math inline">\(m\)</span> rows, <span class="math inline">\(n\)</span> columns, <span class="math inline">\(A \in \Re^{m \times n}\)</span>). They are represented by a capital letter to distinguish them from scalars (classically also in bold <span class="math inline">\(\mathbf{A}\)</span> but not here). The element <span class="math inline">\(a_{ij}\)</span> of a matrix <span class="math inline">\(A\)</span> is the element on the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</li>
+</ul>
+<p><span class="math display">\[A = \begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
+\end{bmatrix}\]</span></p>
+<ul>
+<li><strong>Tensors</strong> <span class="math inline">\(\mathcal{A}\)</span> are arrays with more than two dimensions. We will not really do math on these objects, but they are useful internally (hence the name of the <code>tensorflow</code> library).</li>
+</ul>
+<section id="vectors" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.1.1</span> Vectors</h3>
+<p>A vector can be thought of as the <strong>coordinates of a point</strong> in an Euclidean space (such the 2D space), relative to the origin. A vector space relies on two fundamental operations, which are that:</p>
+<ul>
+<li>Vectors can be added:</li>
+</ul>
+<p><span class="math display">\[\mathbf{x} + \mathbf{y} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} + \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} = \begin{bmatrix} x_1 + y_1 \\ x_2 + y_2 \\ \vdots \\ x_d + y_d \end{bmatrix}\]</span></p>
+<ul>
+<li>Vectors can be multiplied by a scalar:</li>
+</ul>
+<p><span class="math display">\[a \, \mathbf{x} = a \, \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} = \begin{bmatrix} a \, x_1 \\ a \, x_2 \\ \vdots \\ a \, x_d \end{bmatrix}\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/vectorspace.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 50%</td>
+</tr>
+</tbody>
+</table>
+<p>Vector spaces allow additions of vectors. Source: <a href="https://mathinsight.org/image/vector_2d_add" class="uri">https://mathinsight.org/image/vector_2d_add</a></p>
+<pre><code>
+These two operations generate a lot of nice properties (see &lt;https://en.wikipedia.org/wiki/Vector_space&gt; for a full list), including:
+
+* associativity: $\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}$
+* commutativity: $\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}$
+* the existence of a zero vector $\mathbf{x} + \mathbf{0} = \mathbf{x}$
+* inversion: $\mathbf{x} + (-\mathbf{x}) = \mathbf{0}$
+* distributivity: $a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}$
+
+Vectors have a **norm** (or length) $||\mathbf{x}||$. The most intuitive one (if you know the Pythagoras theorem) is the **Euclidean norm** or $L^2$-norm, which sums the square of each element:
+
+$$||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}$$
+
+Other norms exist, distinguished by the subscript. The **$L^1$-norm** (also called Taxicab or Manhattan norm) sums the absolute value of each element:
+
+$$||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|$$
+
+The **p-norm** generalizes the Euclidean norm to other powers $p$: 
+
+$$||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}$$
+
+The **infinity norm** (or maximum norm) $L^\infty$ returns the maximum element of the vector:
+
+$$||\mathbf{x}||_\infty = \max(|x_1|, |x_2|, \ldots, |x_d|)$$
+
+
+One important operation for vectors is the **dot product** (also called scalar product or inner product) between two vectors:
+
+$$\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} \rangle = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_d \, y_d$$
+
+The dot product basically sums one by one the product of the elements of each vector. The angular brackets are sometimes omitted ($\mathbf{x} \cdot \mathbf{y}$) but we will use them in this course for clarity.
+
+
+One can notice immediately that the dot product is **symmetric**: 
+
+$$\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \mathbf{y} \cdot \mathbf{x} \rangle$$
+
+and **linear**:
+
+$$\langle (a \, \mathbf{x} + b\, \mathbf{y}) \cdot \mathbf{z} \rangle = a\, \langle \mathbf{x} \cdot \mathbf{z} \rangle + b \, \langle \mathbf{y} \cdot \mathbf{z} \rangle$$
+
+The dot product is an indirect measurement of the **angle** $\theta$ between two vectors:
+
+
+$$\langle \mathbf{x} \cdot \mathbf{y} \rangle = ||\mathbf{x}||_2 \, ||\mathbf{y}||_2 \, \cos(\theta)$$
+
+```{figure} ../img/dotproduct.png
+---
+width: 50%
+---
+The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: &lt;https://en.wikipedia.org/wiki/Dot_product&gt;</code></pre>
+<p>If you normalize the two vectors by dividing them by their norm (which is a scalar), we indeed have the cosine of the angle between them: The higher the normalized dot product, the more the two vectors point towards the same direction (<strong>cosine distance</strong> between two vectors).</p>
+<p><span class="math display">\[\langle \displaystyle\frac{\mathbf{x}}{||\mathbf{x}||_2} \cdot \frac{\mathbf{y}}{||\mathbf{y}||_2} \rangle =  \cos(\theta)\]</span></p>
+</section>
+<section id="matrices" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="matrices"><span class="header-section-number">2.1.2</span> Matrices</h3>
+<p>Matrices are derived from vectors, so most of the previous properties will be true. Let’s consider this 4x3 matrix:</p>
+<p><span class="math display">\[A = \begin{bmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} \\
+a_{21} &amp; a_{22} &amp; a_{23} \\
+a_{31} &amp; a_{32} &amp; a_{33} \\
+a_{41} &amp; a_{42} &amp; a_{43} \\
+\end{bmatrix}\]</span></p>
+<p>Each column of the matrix is a vector with 4 elements:</p>
+<p><span class="math display">\[\mathbf{a}_1 = \begin{bmatrix}
+a_{11} \\
+a_{21} \\
+a_{31} \\
+a_{41} \\
+\end{bmatrix} \qquad
+\mathbf{a}_2 = \begin{bmatrix}
+a_{12} \\
+a_{22} \\
+a_{32} \\
+a_{42} \\
+\end{bmatrix} \qquad
+\mathbf{a}_3 = \begin{bmatrix}
+a_{13} \\
+a_{23} \\
+a_{33} \\
+a_{43} \\
+\end{bmatrix} \qquad
+\]</span></p>
+<p>A <span class="math inline">\(m \times n\)</span> matrix is therefore a collection of <span class="math inline">\(n\)</span> vectors of size <span class="math inline">\(m\)</span> put side by side column-wise:</p>
+<p><span class="math display">\[A = \begin{bmatrix}
+\mathbf{a}_1 &amp; \mathbf{a}_2 &amp; \mathbf{a}_3\\
+\end{bmatrix}\]</span></p>
+<p>So all properties of the vector spaces (associativity, commutativity, distributivity) also apply to matrices, as additions and multiplications with a scalar are defined.</p>
+<p><span class="math display">\[\alpha \, A + \beta \, B = \begin{bmatrix}
+\alpha\, a_{11} + \beta \, b_{11} &amp; \alpha\, a_{12} + \beta \, b_{12} &amp; \alpha\, a_{13} + \beta \, b_{13} \\
+\alpha\, a_{21} + \beta \, b_{21} &amp; \alpha\, a_{22} + \beta \, b_{22} &amp; \alpha\, a_{23} + \beta \, b_{23} \\
+\alpha\, a_{31} + \beta \, b_{31} &amp; \alpha\, a_{32} + \beta \, b_{32} &amp; \alpha\, a_{33} + \beta \, b_{33} \\
+\alpha\, a_{41} + \beta \, b_{41} &amp; \alpha\, a_{42} + \beta \, b_{42} &amp; \alpha\, a_{43} + \beta \, b_{43} \\
+\end{bmatrix}\]</span></p>
+<pre class="{note}"><code>Beware, you can only add matrices of the same dimensions $m\times n$. You cannot add a $2\times 3$ matrix to a $5 \times 4$ one.</code></pre>
+<p>The <strong>transpose</strong> <span class="math inline">\(A^T\)</span> of a <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span> is a <span class="math inline">\(n \times m\)</span> matrix, where the row and column indices are swapped:</p>
+<p><span class="math display">\[A = \begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
+\end{bmatrix}, \qquad
+A^T = \begin{bmatrix}
+a_{11} &amp; a_{21} &amp; \cdots &amp; a_{m1} \\
+a_{12} &amp; a_{22} &amp; \cdots &amp; a_{m2} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{1n} &amp; a_{2n} &amp; \cdots &amp; a_{mn} \\
+\end{bmatrix}
+\]</span></p>
+<p>This is also true for vectors, which become horizontal after transposition:</p>
+<p><span class="math display">\[\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}, \qquad
+\mathbf{x}^T = \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_d \end{bmatrix}
+\]</span></p>
+<p>A very important operation is the <strong>matrix multiplication</strong>. If <span class="math inline">\(A\)</span> is a <span class="math inline">\(m\times n\)</span> matrix and <span class="math inline">\(B\)</span> a <span class="math inline">\(n \times p\)</span> matrix:</p>
+<p><span class="math display">\[
+A=\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
+\end{bmatrix},\quad
+B=\begin{bmatrix}
+b_{11} &amp; b_{12} &amp; \cdots &amp; b_{1p} \\
+b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+b_{n1} &amp; b_{n2} &amp; \cdots &amp; b_{np} \\
+\end{bmatrix}
+\]</span></p>
+<p>we can multiply them to obtain a <span class="math inline">\(m \times p\)</span> matrix:</p>
+<p><span class="math display">\[
+C = A \times B =\begin{bmatrix}
+c_{11} &amp; c_{12} &amp; \cdots &amp; c_{1p} \\
+c_{21} &amp; c_{22} &amp; \cdots &amp; c_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+c_{m1} &amp; c_{m2} &amp; \cdots &amp; c_{mp} \\
+\end{bmatrix}
+\]</span></p>
+<p>where each element <span class="math inline">\(c_{ij}\)</span> is the dot product of the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(A\)</span> and <span class="math inline">\(j\)</span>th column of <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[c_{ij} = \langle A_{i, :} \cdot B_{:, j} \rangle = a_{i1}b_{1j} + a_{i2}b_{2j} +\cdots + a_{in}b_{nj}= \sum_{k=1}^n a_{ik}b_{kj}\]</span></p>
+<pre class="{note}"><code>$n$, the number of columns of $A$ and rows of $B$, must be the same!</code></pre>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/matrixmultiplication.jpg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>The element <span class="math inline">\(c_{ij}\)</span> of <span class="math inline">\(C = A \times B\)</span> is the dot product between the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(A\)</span> and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(B\)</span>. Source: <a href="https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication" class="uri">https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication</a> CC BY-NC-SA; Marcia Levitus</p>
+<pre><code>
+Thinking of vectors as $n \times 1$ matrices, we can multiply a matrix $m \times n$ with a vector:
+
+$$
+\mathbf{y} = A \times \mathbf{x} = \begin{bmatrix}
+ a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
+\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}
+$$
+
+The result $\mathbf{y}$ is a vector of size $m$. In that sense, a matrix $A$ can transform a vector of size $n$ into a vector of size $m$: $A$ represents a **projection** from $\Re^n$ to $\Re^m$.
+
+```{figure} ../img/projection.png
+---
+width: 60%
+---
+A $2 \times 3$ projection matrix allows to project any 3D vector onto a 2D plane. This is for example what happens inside a camera. Source: &lt;https://en.wikipedia.org/wiki/Homogeneous_coordinate&gt;</code></pre>
+<p>Note that the <strong>dot product</strong> between two vectors of size <span class="math inline">\(n\)</span> is the matrix multiplication between the transpose of the first vector and the second one:</p>
+<p><span class="math display">\[\mathbf{x}^T \times \mathbf{y} = \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_n \end{bmatrix} \times \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_n \, y_n = \langle \mathbf{x} \cdot \mathbf{y} \rangle\]</span></p>
+<p>Square matrices of size <span class="math inline">\(n \times n\)</span> can be inverted. The <strong>inverse</strong> <span class="math inline">\(A^{-1}\)</span> of a matrix <span class="math inline">\(A\)</span> is defined by:</p>
+<p><span class="math display">\[A \times A^{-1} = A^{-1} \times A = I\]</span></p>
+<p>where <span class="math inline">\(I\)</span> is the identity matrix (a matrix with ones on the diagonal and 0 otherwise). Not all matrices have an inverse (those who don’t are called singular or degenerate). There are plenty of conditions for a matrix to be invertible (for example its determinant is non-zero, see <a href="https://en.wikipedia.org/wiki/Invertible_matrix" class="uri">https://en.wikipedia.org/wiki/Invertible_matrix</a>), but they will not matter in this course. Non-square matrices are generally not invertible, but see the pseudoinverse (<a href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse" class="uri">https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse</a>).</p>
+<p>Matrix inversion allows to solve linear systems of equations. Given the problem:</p>
+<p><span class="math display">\[
+\begin{cases}
+    a_{11} \, x_1 + a_{12} \, x_2 + \ldots + a_{1n} \, x_n = b_1 \\
+    a_{21} \, x_1 + a_{22} \, x_2 + \ldots + a_{2n} \, x_n = b_2 \\
+    \ldots \\
+    a_{n1} \, x_1 + a_{n2} \, x_2 + \ldots + a_{nn} \, x_n = b_n \\
+\end{cases}
+\]</span></p>
+<p>which is equivalent to:</p>
+<p><span class="math display">\[A \times \mathbf{x} = \mathbf{b}\]</span></p>
+<p>we can multiply both sides to the left with <span class="math inline">\(A^{-1}\)</span> (if it exists) and obtain:</p>
+<p><span class="math display">\[\mathbf{x} = A^{-1} \times \mathbf{b}\]</span></p>
+</section>
+</section>
+<section id="calculus" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="calculus"><span class="header-section-number">2.2</span> Calculus</h2>
+<div class="embed-container">
+<iframe src="https://www.youtube.com/embed/RsQVNOTgYwk" frameborder="0" allowfullscreen="">
+</iframe>
+</div>
+<section id="functions" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.2.1</span> Functions</h3>
+<p>A <strong>univariate function</strong> <span class="math inline">\(f\)</span> associates to any real number <span class="math inline">\(x \in \Re\)</span> (or a subset of <span class="math inline">\(\Re\)</span> called the support of the function) another (unique) real number <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[
+\begin{align}
+f\colon \quad \Re &amp;\to \Re\\
+x &amp;\mapsto f(x),\end{align}
+\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/function.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>Example of univariate function, here the quadratic function <span class="math inline">\(f(x) = x^2 - 2 \, x + 1\)</span>.</p>
+<pre><code>
+
+A **multivariate function** $f$ associates to any vector $\mathbf{x} \in \Re^n$ (or a subset) a real number $f(\mathbf{x})$:
+
+$$
+\begin{align}
+f\colon \quad \Re^n &amp;\to \Re\\
+\mathbf{x} &amp;\mapsto f(\mathbf{x}),\end{align}
+$$
+
+The variables of the function are the elements of the vector. For low-dimensional vector spaces, it is possible to represent each element explicitly, for example:
+
+$$
+\begin{align}
+f\colon \quad\Re^3 &amp;\to \Re\\
+x, y, z &amp;\mapsto f(x, y, z),\end{align}
+$$
+
+```{figure} ../img/multivariatefunction.png
+---
+width: 60%
+---
+Example of a multivariate function $f(x_1, x_2)$ mapping $\Re^2$ to $\Re$. Source: &lt;https://en.wikipedia.org/wiki/Function_of_several_real_variables&gt;</code></pre>
+<p><strong>Vector fields</strong> associate to any vector <span class="math inline">\(\mathbf{x} \in \Re^n\)</span> (or a subset) another vector (possibly of different size):</p>
+<p><span class="math display">\[
+\begin{align}
+\overrightarrow{f}\colon \quad \Re^n &amp;\to \Re^m\\
+\mathbf{x} &amp;\mapsto \overrightarrow{f}(\mathbf{x}),\end{align}
+\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/vectorfield.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 40%</td>
+</tr>
+</tbody>
+</table>
+<p>Vector field associating to each point of <span class="math inline">\(\Re^2\)</span> another vector. Source: <a href="https://en.wikipedia.org/wiki/Vector_field" class="uri">https://en.wikipedia.org/wiki/Vector_field</a></p>
+<pre><code>
+
+
+```{note}
+The matrix-vector multiplication $\mathbf{y} = A \times \mathbf{x}$ is a linear vector field, mapping any vector $\mathbf{x}$ into another vector $\mathbf{y}$.</code></pre>
+</section>
+<section id="differentiation" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="differentiation"><span class="header-section-number">2.2.2</span> Differentiation</h3>
+<section id="derivatives" class="level4" data-number="2.2.2.1">
+<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">2.2.2.1</span> Derivatives</h4>
+<p>Differential calculus deals with the <strong>derivative</strong> of a function, a process called differentiation.</p>
+<p>The derivative <span class="math inline">\(f'(x)\)</span> or <span class="math inline">\(\displaystyle\frac{d f(x)}{dx}\)</span> of a univariate function <span class="math inline">\(f(x)\)</span> is defined as the local <em>slope</em> of the tangent to the function for a given value of <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\]</span></p>
+<p>The line passing through the points <span class="math inline">\((x, f(x))\)</span> and <span class="math inline">\((x + h, f(x + h))\)</span> becomes tangent to the function when <span class="math inline">\(h\)</span> becomes very small:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/derivative-approx.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>The derivative of the function <span class="math inline">\(f(x)\)</span> can be approximated by the slope of the line passing through <span class="math inline">\((x, f(x))\)</span> and <span class="math inline">\((x + h, f(x + h))\)</span> when <span class="math inline">\(h\)</span> becomes very small.</p>
+<pre><code>
+The sign of the derivative tells you how the function behaves locally:
+
+* If the derivative is positive, increasing a little bit $x$ increases the function $f(x)$, so the function is **locally increasing**.
+* If the derivative is negative, increasing a little bit $x$ decreases the function $f(x)$, so the function is **locally decreasing**.
+
+It basically allows you to measure the local influence of $x$ on $f(x)$: if I change a little bit the value $x$, what happens to $f(x)$? This will be very useful in machine learning.
+
+A special case is when the derivative is equal to 0 in $x$. $x$ is then called an **extremum** (or optimum) of the function, i.e. it can be a maximum or minimum. 
+
+
+
+```{note}
+If you differentiate $f'(x)$ itself, you obtain the **second-order derivative** $f''(x)$. You can repeat that process and obtain higher order derivatives. 
+
+For example, if $x(t)$ represents the position $x$ of an object depending on time $t$, the first-order derivative $x'(t)$ denotes the **speed** of the object and the second-order derivative $x''(t)$ its **acceleration**.</code></pre>
+<p>You can tell whether an extremum is a maximum or a minimum by looking at its second-order derivative:</p>
+<ul>
+<li>If <span class="math inline">\(f''(x) &gt; 0\)</span>, the extremum is a <strong>minimum</strong>.</li>
+<li>If <span class="math inline">\(f''(x) &lt; 0\)</span>, the extremum is a <strong>maximum</strong>.</li>
+<li>If <span class="math inline">\(f''(x) = 0\)</span>, the extremum is a <strong>saddle point</strong>.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/optimization-example.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 80%</td>
+</tr>
+</tbody>
+</table>
+<p>Quadratic functions have only one extremum (here a minimum in -1), as their derivative is linear and is equal to zero for only one value.</p>
+<pre><code>
+The derivative of a **multivariate function** $f(\mathbf{x})$ is a vector of partial derivatives called the **gradient of the function** $\nabla_\mathbf{x} \, f(\mathbf{x})$:
+
+$$
+    \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix}
+        \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_1} \\
+        \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_2} \\
+        \ldots \\
+        \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_n} \\
+    \end{bmatrix}
+$$
+
+
+The subscript to the $\nabla$ operator denotes *with respect to* (w.r.t) which variable the differentiation is done.
+
+A **partial derivative** w.r.t. to particular variable (or element of the vector) is simply achieved by differentiating the function while considering all other variables to be **constant**. For example the function:
+
+$$f(x, y) = x^2 + 3 \, x \, y + 4 \, x \, y^2 - 1$$
+
+can be partially differentiated w.r.t. $x$ and $y$ as:
+
+$$\begin{cases}
+\displaystyle\frac{\partial f(x, y)}{\partial x} = 2 \, x + 3\, y + 4 \, y^2 \\
+\\
+\displaystyle\frac{\partial f(x, y)}{\partial y} = 3 \, x + 8\, x \, y
+\end{cases}$$
+
+The gradient can be generalized to **vector fields**, where the **Jacobian** or **Jacobi matrix** is a matrix containing all partial derivatives.
+
+$$
+J = \begin{bmatrix}
+    \dfrac{\partial \mathbf{f}}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial \mathbf{f}}{\partial x_n} \end{bmatrix}
+= \begin{bmatrix}
+    \dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n}\\
+    \vdots &amp; \ddots &amp; \vdots\\
+    \dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n} \end{bmatrix}
+$$
+
+#### Analytical properties
+
+The analytical form of the derivative of most standard mathematical functions is known. The following table lists the most useful ones in this course:
+
+```{list-table}
+:header-rows: 1
+:name: example-table
+
+* - $f(x)$
+  - $f'(x)$
+* - $x$
+  - $1$
+* - $x^p$
+  - $p \, x^{p-1}$
+* - $\displaystyle\frac{1}{x}$
+  - $- \displaystyle\frac{1}{x^2}$
+* - $e^x$
+  - $e^x$
+* - $\ln x$
+  - $\displaystyle\frac{1}{x}$</code></pre>
+<p>Differentiation is linear, which means that if we define the function:</p>
+<p><span class="math display">\[h(x) = a \, f(x) + b \, g(x)\]</span></p>
+<p>its derivative is:</p>
+<p><span class="math display">\[h'(x) = a \, f'(x) + b \, g'(x)\]</span></p>
+<p>A product of functions can also be differentiated analytically:</p>
+<p><span class="math display">\[(f(x) \times g(x))' = f'(x) \times g(x) + f(x) \times g'(x)\]</span></p>
+<p>```{admonition} Example <span class="math display">\[f(x) = x^2 \, e^x\]</span></p>
+<p><span class="math display">\[f'(x) = 2 \, x \, e^x + x^2 \cdot e^x\]</span></p>
+<pre><code>
+#### Chain rule
+
+A very important concept for neural networks is the **chain rule**, which tells how to differentiate **function compositions** (functions of a function) of the form:
+
+$$(f \circ g) (x) = f(g(x))$$
+
+The derivative of $f \circ g$ is:
+
+$$(f \circ g)' (x) = (f' \circ g) (x) \times g'(x)$$
+
+The chain rule may be more understandable using Leibniz's notation:
+
+$$\frac{d f \circ g (x)}{dx} = \frac{d f (g (x))}{d g(x)} \times \frac{d g (x)}{dx}$$
+
+By posing $y = g(x)$ as an intermediary variable, it becomes:
+
+
+$$\frac{d f(y)}{dx} = \frac{d f(y)}{dy} \times \frac{dy}{dx}$$
+
+
+```{admonition} Example
+The function :
+
+$$h(x) = \frac{1}{2 \, x + 1}$$
+
+is the function composition of $g(x) = 2 \, x + 1$ and $f(x) = \displaystyle\frac{1}{x}$, whose derivatives are known:
+
+$$g'(x) = 2$$
+$$f'(x) = -\displaystyle\frac{1}{x^2}$$
+
+Its derivative according to the **chain rule** is:
+
+$$h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2$$</code></pre>
+<p>The chain rule also applies to partial derivatives:</p>
+<p><span class="math display">\[
+    \displaystyle\frac{\partial f \circ g (x, y)}{\partial x} = \frac{\partial f \circ g (x, y)}{\partial g (x, y)} \times \frac{\partial g (x, y)}{\partial x}
+\]</span></p>
+<p>and gradients:</p>
+<p><span class="math display">\[
+    \nabla_\mathbf{x} \, f \circ g (\mathbf{x}) = \nabla_{g(\mathbf{x})} \, f \circ g (\mathbf{x}) \times \nabla_\mathbf{x} \, g (\mathbf{x})
+\]</span></p>
+</section>
+</section>
+<section id="integration" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="integration"><span class="header-section-number">2.2.3</span> Integration</h3>
+<p>The opposite operation of differentation is <strong>integration</strong>. Given a function <span class="math inline">\(f(x)\)</span>, we search a function <span class="math inline">\(F(x)\)</span> whose <em>derivative</em> is <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="math display">\[F'(x) = f(x)\]</span></p>
+<p>The <strong>integral</strong> of <span class="math inline">\(f\)</span> is noted:</p>
+<p><span class="math display">\[F(x) = \int f(x) \, dx\]</span></p>
+<p><span class="math inline">\(dx\)</span> being an infinitesimal interval (similar <span class="math inline">\(h\)</span> in the definition of the derivative). There are tons of formal definitions of integrals (Riemann, Lebesgue, Darboux…) and we will not get into details here as we will not use integrals a lot.</p>
+<p>The most important to understand for now is maybe that the integral of a function is the <strong>area under the curve</strong>. The area under the curve of a function <span class="math inline">\(f\)</span> on the interval <span class="math inline">\([a, b]\)</span> is:</p>
+<p><span class="math display">\[\mathcal{S} = \int_a^b f(x) \, dx\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/riemann-sum1.svg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>The integral of <span class="math inline">\(f\)</span> on <span class="math inline">\([a, b]\)</span> is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on <span class="math inline">\([a, b]\)</span>. Source: <a href="https://www.math24.net/riemann-sums-definite-integral/" class="uri">https://www.math24.net/riemann-sums-definite-integral/</a></p>
+<pre><code>
+One way to approximate this surface is to split the interval $[a, b]$ into $n$ intervals of width $dx$ with the points $x_1, x_2, \ldots, x_n$. This defines $n$ rectangles of width $dx$ and height $f(x_i)$, so their surface is $f(x_i) \, dx$. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.
+
+```{figure} ../img/riemann-sum.svg
+---
+width: 60%
+---
+The interval$[a, b]$ can be split in $n$ small intervals of width $dx$, defining $n$ rectangles whose sum is close to the area under the curve. Source: &lt;https://www.math24.net/riemann-sums-definite-integral/&gt;</code></pre>
+<p>When <span class="math inline">\(n \to \infty\)</span>, or equivalently <span class="math inline">\(dx \to 0\)</span>, the sum of these rectangular areas (called the Riemann sum) becomes exactly the area under the curve. This is the definition of the definite integral:</p>
+<p><span class="math display">\[\int_a^b f(x) \, dx = \lim_{dx \to 0} \sum_{i=1}^n f(x_i) \, dx\]</span></p>
+<p>Very roughly speaking, the integral can be considered as the equivalent of a sum for continuous functions.</p>
+</section>
+</section>
+<section id="probability-theory" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="probability-theory"><span class="header-section-number">2.3</span> Probability theory</h2>
+<div class="embed-container">
+<iframe src="https://www.youtube.com/embed/X5uSbrFe82Q" frameborder="0" allowfullscreen="">
+</iframe>
+</div>
+<section id="discrete-probability-distributions" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="discrete-probability-distributions"><span class="header-section-number">2.3.1</span> Discrete probability distributions</h3>
+<p>Let’s note <span class="math inline">\(X\)</span> a <strong>discrete random variable</strong> with <span class="math inline">\(n\)</span> realizations (or outcomes) <span class="math inline">\(x_1, \ldots, x_n\)</span>.</p>
+<ul>
+<li>A coin has two outcomes: head and tails.</li>
+<li>A dice has six outcomes: 1, 2, 3, 4, 5, 6.</li>
+</ul>
+<p>The <strong>probability</strong> that <span class="math inline">\(X\)</span> takes the value <span class="math inline">\(x_i\)</span> is defined in the frequentist sense by the <strong>relative frequency of occurrence</strong>, i.e.&nbsp;the proportion of samples having the value <span class="math inline">\(x_i\)</span>, when the total number <span class="math inline">\(N\)</span> of samples tends to infinity:</p>
+<p><span class="math display">\[
+    P(X = x_i) = \frac{\text{Number of favorable cases}}{\text{Total number of samples}}
+\]</span></p>
+<p>The set of probabilities <span class="math inline">\(\{P(X = x_i)\}_{i=1}^n\)</span> define the <strong>probability distribution</strong> for the random variable (or probability mass function, pmf). By definition, we have <span class="math inline">\(0 \leq P(X = x_i) \leq 1\)</span> and the probabilities <strong>have</strong> to respect:</p>
+<p><span class="math display">\[
+    \sum_{i=1}^n P(X = x_i) = 1
+\]</span></p>
+<p>An important metric for a random variable is its <strong>mathematical expectation</strong> or expected value, i.e.&nbsp;its “mean” realization weighted by the probabilities:</p>
+<p><span class="math display">\[
+    \mathbb{E}[X] = \sum_{i=1}^n P(X = x_i) \, x_i
+\]</span></p>
+<p>The expectation does not even need to be a valid realization:</p>
+<p><span class="math display">\[
+    \mathbb{E}[\text{Coin}] = \frac{1}{2} \, 0 + \frac{1}{2} \, 1 = 0.5
+\]</span></p>
+<p><span class="math display">\[
+    \mathbb{E}[\text{Dice}] = \frac{1}{6} \, (1 + 2 + 3 + 4 + 5 + 6) = 3.5
+\]</span></p>
+<p>We can also compute the mathematical expectation of <strong>functions of</strong> a random variable:</p>
+<p><span class="math display">\[
+    \mathbb{E}[f(X)] = \sum_{i=1}^n P(X = x_i) \, f(x_i)
+\]</span></p>
+<p>The <strong>variance</strong> of a random variable is the squared deviation around the mean:</p>
+<p><span class="math display">\[
+    \text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \sum_{i=1}^n P(X = x_i) \, (x_i - \mathbb{E}[X])^2
+\]</span></p>
+<p>Variance of a coin:</p>
+<p><span class="math display">\[
+    \text{Var}(\text{Coin}) = \frac{1}{2} \, (0 - 0.5)^2 + \frac{1}{2} \, (1 - 0.5)^2 = 0.25
+\]</span></p>
+<p>Variance of a dice:</p>
+<p><span class="math display">\[
+    \text{Var}(\text{Dice}) = \frac{1}{6} \, ((1-3.5)^2 + (2-3.5)^2 + (3-3.5)^2 + (4-3.5)^2 + (5-3.5)^2 + (6-3.5)^2) = \frac{105}{36}
+\]</span></p>
+</section>
+<section id="continuous-probability-distributions" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="continuous-probability-distributions"><span class="header-section-number">2.3.2</span> Continuous probability distributions</h3>
+<p><strong>Continuous random variables</strong> can take infinitely many values in a continuous interval, e.g.&nbsp;<span class="math inline">\(\Re\)</span> or some subset. The closed set of values they can take is called the <strong>support</strong> <span class="math inline">\(\mathcal{D}_X\)</span> of the probability distribution. The probability distribution is described by a <strong>probability density function</strong> (pdf) <span class="math inline">\(f(x)\)</span>.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/normaldistribution.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>Normal distributions are continuous distributions. The area under the curve is always 1.</p>
+<pre><code>
+The pdf of a distribution must be positive ($f(x) \geq 0 \, \forall x \in \mathcal{D}_X$) and its integral (area under the curve) must be equal to 1:
+
+$$
+    \int_{x \in \mathcal{D}_X} f(x) \, dx = 1
+$$
+
+The pdf does not give the probability of taking a particular value $x$ (it is 0), but allows to get the probability that a value lies in a specific interval:
+
+$$
+    P(a \leq X \leq b) = \int_{a}^b f(x) \, dx 
+$$
+
+
+One can however think of the pdf as the **likelihood** that a value $x$ comes from that distribution.
+
+
+For continuous distributions, the mathematical expectation is now defined by an integral instead of a sum:
+
+$$
+    \mathbb{E}[X] = \int_{x \in \mathcal{D}_X} f(x) \, x \, dx
+$$
+
+the variance also:
+
+$$
+    \text{Var}(X) = \int_{x \in \mathcal{D}_X} f(x) \, (x - \mathbb{E}[X])^2 \, dx
+$$
+
+or a function of the random variable:
+
+$$
+    \mathbb{E}[g(X)] = \int_{x \in \mathcal{D}_X} f(x) \, g(x) \, dx
+$$
+
+Note that the expectation operator is **linear**:
+
+$$
+    \mathbb{E}[a \, X + b \, Y] = a \, \mathbb{E}[X] + b \, \mathbb{E}[Y]
+$$
+
+but not the variance, even when the distributions are independent:
+
+$$
+    \text{Var}[a \, X + b \, Y] = a^2 \, \text{Var}[X] + b^2 \, \text{Var}[Y]
+$$
+
+### Standard distributions
+
+Probability distributions can in principle have any form: $f(x)$ is unknown. However, specific parameterized distributions can be very useful: their pmf/pdf is fully determined by a couple of parameters.
+
+* The **Bernouilli** distribution is a binary (discrete, 0 or 1) distribution with a parameter $p$ specifying the probability to obtain the outcome 1 (e.g. a coin):
+
+$$
+    P(X = 1) = p \; \text{and} \; P(X=0) = 1 - p 
+$$
+$$P(X=x) = p^x \, (1-p)^{1-x}$$
+$$\mathbb{E}[X] = p$$
+
+* The **Multinouilli** or **categorical** distribution is a discrete distribution with $k$ realizations (e.g. a dice). Each realization $x_i$ is associated with a parameter $p_i &gt;0$ representing its probability. We have $\sum_i p_i = 1$.
+
+$$P(X = x_i) = p_i$$
+
+
+* The **uniform distribution** has an equal and constant probability of returning values between $a$ and $b$, never outside this range. It is parameterized by the start of the range $a$ and the end of the range $b$. Its support is $[a, b]$. The pdf of the uniform distribution $\mathcal{U}(a, b)$ is defined on $[a, b]$ as:
+
+$$
+    f(x; a, b) = \frac{1}{b - a}
+$$
+
+* The **normal distribution** is the most frequently encountered continuous distribution. It is parameterized by two parameters: the mean $\mu$ and the variance $\sigma^2$ (or standard deviation $\sigma$). Its support is $\Re$. The pdf of the normal distribution $\mathcal{N}(\mu, \sigma)$ is defined on $\Re$ as:
+
+$$
+    f(x; \mu, \sigma) = \frac{1}{\sqrt{2\,\pi\,\sigma^2}} \, e^{-\displaystyle\frac{(x - \mu)^2}{2\,\sigma^2}}
+$$
+
+
+* The **exponential distribution** is the probability distribution of the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate. It is parameterized by one parameter: the rate $\lambda$. Its support is $\Re^+$ ($x &gt; 0$).
+The pdf of the exponential distribution is defined on $\Re^+$ as:
+
+$$
+    f(x; \lambda) = \lambda \, e^{-\lambda \, x}
+$$
+
+
+### Joint and conditional probabilities
+
+Let's now suppose that we have two random variables $X$ and $Y$ with different probability distributions $P(X)$ and $P(Y)$.  The **joint probability** $P(X, Y)$ denotes the probability of observing the realizations $x$ **and** $y$ at the same time:
+
+$$P(X=x, Y=y)$$
+
+If the random variables are **independent**, we have:
+
+$$P(X=x, Y=y) = P(X=x) \, P(Y=y)$$
+
+If you know the joint probability, you can compute the **marginal probability distribution** of each variable:
+
+$$P(X=x) = \sum_y P(X=x, Y=y)$$
+
+The same is true for continuous probability distributions:
+
+$$
+    f(x) = \int f(x, y) \, dy
+$$
+
+Some useful information between two random variables is the **conditional probability**. $P(X=x | Y=y)$ is the conditional probability that $X=x$, **given** that $Y=y$ is observed.
+
+* $Y=y$ is not random anymore: it is a **fact** (at least theoretically).
+
+* You wonder what happens to the probability distribution of $X$ now that you know the value of $Y$.
+
+Conditional probabilities are linked to the joint probability by:
+
+$$
+    P(X=x | Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}
+$$
+
+If $X$ and $Y$ are **independent**, we have $P(X=x | Y=y) = P(X=x)$ (knowing $Y$ does not change anything to the probability distribution of $X$). We can use the same notation for the complete probability distributions:
+
+$$
+    P(X | Y) = \frac{P(X, Y)}{P(Y)}
+$$
+
+**Example**
+
+
+```{figure} ../img/conditionalprobability.png
+---
+width: 60%
+---
+Source: &lt;https://www.elevise.co.uk/g-e-m-h-5-u.html&gt;.</code></pre>
+<p>You ask 50 people whether they like cats or dogs:</p>
+<ul>
+<li>18 like both cats and dogs.</li>
+<li>21 like only dogs.</li>
+<li>5 like only cats.</li>
+<li>6 like none of them.</li>
+</ul>
+<p>We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities…). Among the 23 who love cats, which proportion also loves dogs?</p>
+<p>```{dropdown} Answer We have <span class="math inline">\(P(\text{dog}) = \displaystyle\frac{18+21}{50}= \displaystyle\frac{39}{50}\)</span> and <span class="math inline">\(P(\text{cat}) = \displaystyle\frac{18+5}{50} = \frac{23}{50}\)</span>.</p>
+<p>The joint probability of loving both cats and dogs is <span class="math inline">\(P(\text{cat}, \text{dog}) = \displaystyle\frac{18}{50}\)</span>.</p>
+<p>The conditional probability of loving dogs given one loves cats is:</p>
+<p><span class="math display">\[P(\text{dog} | \text{cat}) = \displaystyle\frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}\]</span></p>
+<pre><code>
+
+### Bayes' rule
+
+Noticing that the definition of conditional probabilities is symmetric:
+
+$$
+    P(X, Y) = P(X | Y) \, P(Y) = P(Y | X) \, P(X)
+$$
+
+we can obtain the **Bayes' rule**:
+
+$$
+    P(Y | X) = \frac{P(X|Y) \, P(Y)}{P(X)}
+$$
+
+It is very useful when you already know $P(X|Y)$ and want to obtain $P(Y|X)$ (**Bayesian inference**).
+
+* $P(Y | X)$ is called the **posterior probability**.
+
+* $P(X | Y)$ is called the **likelihood**.
+
+* $P(Y)$ is called the **prior probability** (belief).
+
+* $P(X)$ is called the **model evidence** or **marginal likelihood**.
+
+
+**Example**
+
+Let's consider a disease $D$ (binary random variable) and a medical test $T$ (also binary). The disease affects 10% of the general population: 
+
+$$P(D=1)= 0.1 \qquad \qquad P(D=0)=0.9$$
+
+When a patient has the disease, the test is positive 80% of the time (true positives):
+
+$$P(T=1 | D=1) = 0.8 \qquad \qquad P(T=0 | D=1) = 0.2$$
+
+When a patient does not have the disease, the test is still positive 10% of the time (false positives):
+
+$$P(T=1 | D=0) = 0.1 \qquad \qquad P(T=0 | D=0) = 0.9$$
+
+Given that the test is positive, what is the probability that the patient is ill?
+
+
+```{dropdown} Answer
+$$
+\begin{aligned}
+    P(D=1|T=1) &amp;= \frac{P(T=1 | D=1) \, P(D=1)}{P(T=1)} \\
+               &amp;\\
+               &amp;= \frac{P(T=1 | D=1) \, P(D=1)}{P(T=1 | D=1) \, P(D=1) + P(T=1 | D=0) \, P(D=0)} \\
+               &amp;\\
+               &amp;= \frac{0.8 \times 0.1}{0.8 \times 0.1 + 0.1 \times 0.9} \\
+               &amp;\\
+               &amp; = 0.47 \\
+\end{aligned}
+$$</code></pre>
+</section>
+</section>
+<section id="statistics" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="statistics"><span class="header-section-number">2.4</span> Statistics</h2>
+<div class="embed-container">
+<iframe src="https://www.youtube.com/embed/Q7u_iMZ89K8" frameborder="0" allowfullscreen="">
+</iframe>
+</div>
+<section id="monte-carlo-sampling" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="monte-carlo-sampling"><span class="header-section-number">2.4.1</span> Monte Carlo sampling</h3>
+<p><strong>Random sampling</strong> or <strong>Monte Carlo sampling</strong> (MC) consists of taking <span class="math inline">\(N\)</span> samples <span class="math inline">\(x_i\)</span> out of the distribution <span class="math inline">\(X\)</span> (discrete or continuous) and computing the <strong>sample average</strong>:</p>
+<p><span class="math display">\[
+    \mathbb{E}[X] = \mathbb{E}_{x \sim X} [x] \approx \frac{1}{N} \, \sum_{i=1}^N x_i
+\]</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/normaldistribution.svg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>Samples taken from a normal distribution will mostly be around the mean.</p>
+<pre><code>
+More samples will be obtained where $f(x)$ is high ($x$ is probable), so the average of the sampled data will be close to the expected value of the distribution.
+
+**Law of big numbers**
+
+&gt; As the number of identically distributed, randomly generated variables increases, their sample mean (average) approaches their theoretical mean.
+
+
+MC estimates are only correct when: 
+
+* the samples are **i.i.d** (independent and identically distributed):
+
+    * independent: the samples must be unrelated with each other.
+
+    * identically distributed: the samples must come from the same distribution $X$.
+
+* the number of samples is large enough. Usually $N &gt; 30$ for simple distributions.
+
+One can estimate any function of the random variable with random sampling:
+
+$$
+    \mathbb{E}[f(X)] = \mathbb{E}_{x \sim X} [f(x)] \approx \frac{1}{N} \, \sum_{i=1}^N f(x_i)
+$$
+
+```{figure} ../img/montecarlo.svg
+---
+width: 100%
+---
+Sampling can be used to estimate $\pi$: when sampling $x$ and $y$ uniformly in $[0, 1]$, the proportion of points with a norm smaller than tends to $\pi/4$. Source: &lt;https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694&gt;</code></pre>
+</section>
+<section id="central-limit-theorem" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="central-limit-theorem"><span class="header-section-number">2.4.2</span> Central limit theorem</h3>
+<p>Suppose we have an unknown distribution <span class="math inline">\(X\)</span> with expected value <span class="math inline">\(\mu = \mathbb{E}[X]\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. We can take randomly <span class="math inline">\(N\)</span> samples from <span class="math inline">\(X\)</span> to compute the sample average:</p>
+<p><span class="math display">\[
+    S_N = \frac{1}{N} \, \sum_{i=1}^N x_i
+\]</span></p>
+<p>The <strong>Central Limit Theorem</strong> (CLT) states that:</p>
+<blockquote class="blockquote">
+<p>The distribution of sample averages is normally distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\frac{\sigma^2}{N}\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[S_N \sim \mathcal{N}(\mu, \frac{\sigma}{\sqrt{N}})\]</span></p>
+<p>If we perform the sampling multiple times, even with few samples, the average of the sampling averages will be very close to the expected value. The more samples we get, the smaller the variance of the estimates. Although the distribution <span class="math inline">\(X\)</span> can be anything, the sampling averages are normally distributed.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/IllustrationCentralTheorem.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 100%</td>
+</tr>
+</tbody>
+</table>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Central_limit_theorem" class="uri">https://en.wikipedia.org/wiki/Central_limit_theorem</a></p>
+<pre><code>
+### Estimators
+
+CLT shows that the sampling average is an **unbiased estimator** of the expected value of a distribution:
+
+$$\mathbb{E}[S_N] = \mathbb{E}[X]$$
+
+An estimator is a random variable used to measure parameters of a distribution (e.g. its expectation). The problem is that estimators can generally be **biased**.
+
+Take the example of a thermometer $M$ measuring the temperature $T$. $T$ is a random variable (normally distributed with $\mu=20$ and $\sigma=10$) and the measurements $M$ relate to the temperature with the relation:
+
+$$
+    M = 0.95 \, T + 0.65
+$$
+
+```{figure} ../img/estimators-temperature.png
+---
+width: 100%
+---
+Left: measurement as a function of the temperature. Right: distribution of temperature.</code></pre>
+<p>The thermometer is not perfect, but do random measurements allow us to estimate the expected value of the temperature?</p>
+<p>We could repeatedly take 100 random samples of the thermometer and see how the distribution of sample averages look like:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/estimators-temperature2.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 60%</td>
+</tr>
+</tbody>
+</table>
+<p>Sampled measurements.</p>
+<pre><code>
+But, as the expectation is linear, we actually have:
+
+$$
+    \mathbb{E}[M] = \mathbb{E}[0.95 \, T + 0.65] = 0.95 \, \mathbb{E}[T] + 0.65 = 19.65 \neq \mathbb{E}[T]
+$$
+
+The thermometer is a **biased estimator** of the temperature.
+
+Let's note $\theta$ a parameter of a probability distribution $X$ that we want to estimate (it does not have to be its mean). An **estimator** $\hat{\theta}$ is a random variable mapping the sample space of $X$ to a set of sample estimates.
+
+* The **bias** of an estimator is the mean error made by the estimator:
+
+$$
+    \mathcal{B}(\hat{\theta}) = \mathbb{E}[\hat{\theta} - \theta] = \mathbb{E}[\hat{\theta}] - \theta
+$$
+
+* The **variance** of an estimator is the deviation of the samples around the expected value:
+
+$$
+    \text{Var}(\hat{\theta}) = \mathbb{E}[(\hat{\theta} - \mathbb{E}[\hat{\theta}] )^2]
+$$
+
+Ideally, we would like estimators with:
+
+* **low bias**: the estimations are correct on average (= equal to the true parameter).
+
+* **low variance**: we do not need many estimates to get a correct estimate (CLT: $\frac{\sigma}{\sqrt{N}}$)
+
+
+```{figure} ../img/biasvariance3.png
+---
+width: 60%
+---
+Bias-variance trade-off.</code></pre>
+<p>Unfortunately, the perfect estimator does not exist in practice. One usually talks of a <strong>bias/variance</strong> trade-off: if you have a small bias, you will have a high variance, or vice versa. In machine learning, bias corresponds to underfitting, variance to overfitting.</p>
+</section>
+</section>
+<section id="information-theory" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="information-theory"><span class="header-section-number">2.5</span> Information theory</h2>
+<div class="embed-container">
+<iframe src="https://www.youtube.com/embed/-WZKHdKDtTY" frameborder="0" allowfullscreen="">
+</iframe>
+</div>
+<section id="entropy" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="entropy"><span class="header-section-number">2.5.1</span> Entropy</h3>
+<p><strong>Information theory</strong> (a field founded by Claude Shannon) asks how much information is contained in a probability distribution. Information is related to <strong>surprise</strong> or <strong>uncertainty</strong>: are the outcomes of a random variable surprising?</p>
+<ul>
+<li><p>Almost certain outcomes (<span class="math inline">\(P \sim 1\)</span>) are not surprising because they happen all the time.</p></li>
+<li><p>Almost impossible outcomes (<span class="math inline">\(P \sim 0\)</span>) are very surprising because they are very rare.</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/selfinformation.png</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 80%</td>
+</tr>
+</tbody>
+</table>
+<p>Self-information.</p>
+<pre><code>
+A useful measurement of how surprising is an outcome $x$ is the **self-information**:
+
+$$
+    I (x) = - \log P(X = x)
+$$
+
+Depending on which log is used, self-information has different units, but it is just a rescaling, the base never matters:
+
+* $\log_2$: bits or shannons.
+* $\log_e = \ln$: nats.
+
+
+The **entropy** (or Shannon entropy) of a probability distribution is the expected value of the self-information of its outcomes:
+
+$$
+    H(X) = \mathbb{E}_{x \sim X} [I(x)] = \mathbb{E}_{x \sim X} [- \log P(X = x)] 
+$$
+
+It measures the **uncertainty**, **randomness** or **information content** of the random variable.
+
+In the discrete case:
+
+$$
+    H(X) = - \sum_x P(x) \, \log P(x)
+$$
+
+In the continuous case:
+
+$$
+    H(X) = - \int_x f(x) \, \log f(x) \, dx
+$$
+
+The entropy of a Bernouilli variable is maximal when both outcomes are **equiprobable**. If a variable is **deterministic**, its entropy is minimal and equal to zero.
+
+
+```{figure} ../img/entropy-binomial.png
+---
+width: 80%
+---
+The entropy of a Bernouilli distribution is maximal when the two outcomes are equiprobable.</code></pre>
+<p>The <strong>joint entropy</strong> of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined by:</p>
+<p><span class="math display">\[
+    H(X, Y) = \mathbb{E}_{x \sim X, y \sim Y} [- \log P(X=x, Y=y)]
+\]</span></p>
+<p>The <strong>conditional entropy</strong> of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined by:</p>
+<p><span class="math display">\[
+    H(X | Y) = \mathbb{E}_{x \sim X, y \sim Y} [- \log P(X=x | Y=y)]  = \mathbb{E}_{x \sim X, y \sim Y} [- \log \frac{P(X=x , Y=y)}{P(Y=y)}]
+\]</span></p>
+<p>If the variables are <strong>independent</strong>, we have:</p>
+<p><span class="math display">\[
+    H(X, Y) = H(X) + H(Y)
+\]</span> <span class="math display">\[
+    H(X | Y) = H(X)
+\]</span></p>
+<p>Both are related by:</p>
+<p><span class="math display">\[
+    H(X | Y) = H(X, Y) - H(Y)
+\]</span></p>
+<p>The equivalent of Bayes’ rule is:</p>
+<p><span class="math display">\[
+    H(Y |X) = H(X |Y) + H(Y) - H(X)
+\]</span></p>
+</section>
+<section id="mutual-information-cross-entropy-and-kullback-leibler-divergence" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="mutual-information-cross-entropy-and-kullback-leibler-divergence"><span class="header-section-number">2.5.2</span> Mutual Information, cross-entropy and Kullback-Leibler divergence</h3>
+<p>The most important information measurement between two variables is the <strong>mutual information</strong> MI (or information gain):</p>
+<p><span class="math display">\[
+    I(X, Y) = H(X) - H(X | Y) = H(Y) - H(Y | X)
+\]</span></p>
+<p>It measures how much information the variable <span class="math inline">\(X\)</span> holds on <span class="math inline">\(Y\)</span>:</p>
+<ul>
+<li>If the two variables are <strong>independent</strong>, the MI is 0 : <span class="math inline">\(X\)</span> is as random, whether you know <span class="math inline">\(Y\)</span> or not.</li>
+</ul>
+<p><span class="math display">\[
+        I (X, Y) = 0
+\]</span></p>
+<ul>
+<li>If the two variables are <strong>dependent</strong>, knowing <span class="math inline">\(Y\)</span> gives you information on <span class="math inline">\(X\)</span>, which becomes less random, i.e.&nbsp;less uncertain / surprising.</li>
+</ul>
+<p><span class="math display">\[
+        I (X, Y) &gt; 0
+\]</span></p>
+<p>If you can fully predict <span class="math inline">\(X\)</span> when you know <span class="math inline">\(Y\)</span>, it becomes deterministic (<span class="math inline">\(H(X|Y)=0\)</span>) so the mutual information is maximal (<span class="math inline">\(I(X, Y) = H(X)\)</span>).</p>
+<p>The <strong>cross-entropy</strong> between two distributions <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as:</p>
+<p><span class="math display">\[
+    H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
+\]</span></p>
+<pre class="{note}"><code>Beware that the notation $H(X, Y)$ is the same as the joint entropy, but it is a different concept!</code></pre>
+<table class="table">
+<thead>
+<tr class="header">
+<th>```{figure} ../img/crossentropy.svg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>width: 100%</td>
+</tr>
+</tbody>
+</table>
+<p>The cross-entropy measures the overlap between two probability distributions.</p>
+<pre><code>
+The cross-entropy measures the **negative log-likelihood** that a sample $x$ taken from the distribution $X$ could also come from the distribution $Y$. More exactly, it measures how many bits of information one would need to distinguish the two distributions $X$ and $Y$.
+
+$$
+    H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
+$$
+
+If the two distributions are the same *almost anywhere*, one cannot distinguish samples from the two distributions, the cross-entropy is the same as the entropy of $X$. If the two distributions are completely different, one can tell whether a sample $Z$ comes from $X$ or $Y$, the cross-entropy is higher than the entropy of $X$.
+
+
+In practice, the **Kullback-Leibler divergence** $\text{KL}(X ||Y)$ is a better measurement of the similarity (statistical distance) between two probability distributions:
+
+$$
+    \text{KL}(X ||Y) = \mathbb{E}_{x \sim X}[- \log \frac{P(Y=x)}{P(X=x)}]
+$$
+
+It is linked to the cross-entropy by:
+
+$$
+    \text{KL}(X ||Y) = H(X, Y) - H(X)
+$$
+
+If the two distributions are the same *almost anywhere*, the KL divergence is zero. If the two distributions are different, the KL divergence is positive. Minimizing the KL between two distributions is the same as making the two distributions "equal". But remember: the KL is not a metric, as it is not symmetric.
+
+
+
+```{note}
+Refer 
+&lt;https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a&gt; for nice visual explanantions of the cross-entropy.</code></pre>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../src/1.1-Introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../src/1.3-Neurons.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
