@@ -377,6 +377,7 @@
 <li><p>If <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b &lt; 0\)</span>, the point is below the hyperplane.</p></li>
 <li><p>If <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b = 0\)</span>, the point is on the hyperplane.</p></li>
 </ul></li>
+<li><p>By looking at the <strong>sign</strong> of <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b\)</span>, we can predict the class of the input:</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -386,10 +387,7 @@
 </div>
 </div>
 </div>
-<ul>
-<li>By looking at the <strong>sign</strong> of <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b\)</span>, we can predict the class.</li>
-</ul>
-<p><span class="math display">\[\text{sign}(x) = \begin{cases} +1 \; \text{if} \; x \geq 0 \\ -1 \; \text{if} \; x &lt; 0 \\ \end{cases}\]</span></p>
+<p><span class="math display">\[\text{sign}(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b) = \begin{cases} +1 \; \text{if} \; \langle \mathbf{w} \cdot \mathbf{x} \rangle +b \geq 0 \\ -1 \; \text{if} \; \langle \mathbf{w} \cdot \mathbf{x} \rangle +b &lt; 0 \\ \end{cases}\]</span></p>
 </section>
 
 <section id="binary-linear-classification-2" class="title-slide slide level1 center">
@@ -400,9 +398,6 @@
 <p><span class="math display">\[
 y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mathbf{x} \rangle +b )  = \text{sign} ( \sum_{j=1}^d w_j \, x_j +b )
 \]</span></p>
-<ul>
-<li><span class="math inline">\(\mathbf{w}\)</span> is the weight vector and <span class="math inline">\(b\)</span> is the bias.</li>
-</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -416,30 +411,11 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 <p><img data-src="img/artificialneuron.svg"></p>
 </figure>
 </div>
+<ul>
+<li><span class="math inline">\(\mathbf{w}\)</span> is the weight vector and <span class="math inline">\(b\)</span> is the bias.</li>
+</ul>
 </div>
 </div>
-<!-- #  Functional margin
-
-
-* $y_i = f_{\mathbf{w}, b}(\mathbf{x}_i) = \text{sign}( \langle \mathbf{w} . \mathbf{x}_i \rangle +b)$ is the **predicted output** for the input $\mathbf{x}_i$ by the hyperplane $(\mathbf{w}, b)$.
-
-* We can determine how well the example is classified by the hyperplane by computing its **functional margin** $\hat{\gamma}_i$:
-
-$$ \hat{\gamma}_i = t_i \, (\langle \mathbf{w} . \mathbf{x}_i \rangle +b) $$
-
-* If $\hat{\gamma}_i > 0$, the example is well classified ($t_i$ and $\langle \mathbf{w} . \mathbf{x}_i \rangle +b$ have the same sign).
-
-* If $\hat{\gamma}_i < 0$, the example is badly classified.
-
-* The highest $|\hat{\gamma}_i|$, the further away from the hyperplane
-    is the example.
-
-* A good linear classifier is an hyperplane where each example in the training set has a positive functional margin.
-
-$$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \mathbf{x}_i \rangle +b) > 0$$
-
-* $\hat{\gamma}$ is called the **functional margin** of the training set with respect to the hyperplane.
- -->
 </section>
 
 <section id="linearly-separable-datasets" class="title-slide slide level1 center">
@@ -463,10 +439,11 @@ $$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \ma
 <li><p>We can apply gradient descent to find this minimum.</p></li>
 </ul>
 <p><span class="math display">\[
-    \Delta \mathbf{w} = - \eta \, \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b)
-\]</span></p>
-<p><span class="math display">\[
-    \Delta b = - \eta \, \nabla_b \, \mathcal{L}(\mathbf{w}, b)
+\begin{cases}
+    \Delta \mathbf{w} = - \eta \, \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b)\\
+    \\
+    \Delta b = - \eta \, \nabla_b \, \mathcal{L}(\mathbf{w}, b)\\
+\end{cases}
 \]</span></p>
 </section>
 
@@ -517,10 +494,11 @@ $$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \ma
 <li>The update rule for the weight vector <span class="math inline">\(\mathbf{w}\)</span> and the bias <span class="math inline">\(b\)</span> is therefore the same as in linear regression:</li>
 </ul>
 <p><span class="math display">\[
-    \Delta \mathbf{w} =  \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i
-\]</span></p>
-<p><span class="math display">\[
-    \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )
+\begin{cases}
+    \Delta \mathbf{w} =  \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i\\
+    \\
+    \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )\\
+\end{cases}
 \]</span></p>
 </section>
 
@@ -529,10 +507,15 @@ $$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \ma
 <ul>
 <li>By applying gradient descent on the quadratic error function, one obtains the following algorithm:</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:20%;">
-
-</div><div class="column" style="width:80%;">
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Batch linear classification</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
 <ul>
@@ -547,6 +530,7 @@ $$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \ma
 <li><p><span class="math inline">\(\Delta b = \eta \, \frac{1}{N} \, db\)</span></p></li>
 </ul></li>
 </ul>
+</div>
 </div>
 </div>
 <ul>
@@ -570,10 +554,15 @@ $$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \ma
 <ul>
 <li>The <strong>Perceptron algorithm</strong> was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:20%;">
-
-</div><div class="column" style="width:80%;">
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Perceptron algorithm</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
 <ul>
@@ -585,15 +574,7 @@ $$\hat{\gamma} = \min_i \hat{\gamma}_i = \min_i t_i \, (\langle \mathbf{w} . \ma
 </ul></li>
 </ul></li>
 </ul>
-<!-- $\textbf{while } \hat{\gamma} = \min_i t_i \, (\langle \mathbf{w} . \mathbf{x}_i \rangle + b) \leq 0 :$
-
-$\qquad \textbf{forall } \text{examples } (\mathbf{x}_i, t_i) :$
-
-$\qquad \qquad y_i =  \text{sign}( \langle \mathbf{w} . \mathbf{x}_i \rangle + b)$
-
-$\qquad \qquad \mathbf{w} \gets \mathbf{w} + \eta \, (t_i - y_i) \, \mathbf{x}_i$
-
-$\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
+</div>
 </div>
 </div>
 <ul>
@@ -921,13 +902,13 @@ $\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
    P(t_i = 1 | \mathbf{x}_i; \mathbf{w}, b) = y_i ; \qquad P(t_i = 0 | \mathbf{x}_i; \mathbf{w}, b) = 1 - y_i
 \]</span></p>
 <ul>
-<li>We minimize the <strong>negative log-likelihood</strong> loss function:</li>
+<li>We minimize the <strong>negative log-likelihood</strong> loss function using gradient descent:</li>
 </ul>
 <p><span class="math display">\[
     \mathcal{L}(\mathbf{w}, b) =  - \sum_{i=1}^{N} [t_i \, \log y_i + (1 - t_i) \, \log( 1- y_i)]
 \]</span></p>
 <ul>
-<li>Gradient descent leads to the delta learning rule, using the class as a target and the probability as a prediction:</li>
+<li>We obtain the delta learning rule, using the class as a target and the probability as a prediction:</li>
 </ul>
 <p><span class="math display">\[
     \begin{cases}
@@ -936,16 +917,21 @@ $\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
     \Delta b = \eta \, ( t_i - y_i ) \\
     \end{cases}
 \]</span></p>
-<ul>
-<li>Note that the derivative of the logistic function disappeared.</li>
-</ul>
 </section>
 
 <section id="logistic-regression" class="title-slide slide level1 center">
 <h1>Logistic regression</h1>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p><strong>Algorithm</strong></p>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Logistic regression</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p><span class="math inline">\(\mathbf{w} = 0 \qquad b = 0\)</span></p></li>
 <li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
@@ -958,6 +944,14 @@ $\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
 </ul></li>
 </ul></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/sigmoid.png"></p>
+</figure>
+</div>
 </div><div class="column" style="width:60%;">
 <ul>
 <li><p>Logistic regression works just like linear classification, except in the way the prediction is done.</p></li>
@@ -976,7 +970,7 @@ $\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
 </div>
 </section>
 
-<section id="logistic-regression-1" class="title-slide slide level1 center">
+<section id="logistic-regression-2" class="title-slide slide level1 center">
 <h1>Logistic regression</h1>
 
 <img data-src="img/logisticregression-animation.gif" class="r-stretch quarto-figure-center"></section>
@@ -1019,6 +1013,7 @@ $\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
   <script src="2.3-LinearClassification_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="2.3-LinearClassification_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="2.3-LinearClassification_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="2.3-LinearClassification_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
   <script src="2.3-LinearClassification_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -1212,7 +1207,7 @@ $\qquad \qquad b \gets b + \eta \, (t_i - y_i)$ -->
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
           RevealMath,
           RevealNotes,

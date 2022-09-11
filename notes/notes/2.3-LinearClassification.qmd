@@ -1,38 +1,23 @@
 # Linear classification
 
-Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.4-LinearClassification.pdf)
+Slides: [html](../slides/2.3-LinearClassification.html){target="_blank"} [pdf](../slides/pdf/2.3-LinearClassification.pdf){target="_blank"}
 
 
 ##  Hard linear classification
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/jZoJHIHi6Qw' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  jZoJHIHi6Qw >}}
 
 The training data $\mathcal{D}$ is composed of $N$ examples $(\mathbf{x}_i, t_i)_{i=1..N}$ , with a d-dimensional input vector $\mathbf{x}_i \in \Re^d$ and a binary output $t_i \in \{-1, +1\}$. The data points where $t = + 1$ are called the **positive class**, the other the **negative class**.
 
-```{figure} ../img/classification-animation1.png
----
-width: 80%
----
-Binary linear classification of 2D data.
-```
+![Binary linear classification of 2D data.](../slides/img/classification-animation1.png){width=80%}
 
 For example, the inputs $\mathbf{x}_i$ can be images (one dimension per pixel) and the positive class corresponds to cats ($t_i = +1$), the negative class to dogs ($t_i = -1$).
 
-```{figure} ../img/cats-dogs.jpg
----
-width: 100%
----
-Binary linear classification of cats vs. dogs images. Source: <http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe>
-```
+![Binary linear classification of cats vs. dogs images. Source: <http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe>](../slides/img/cats-dogs.jpg){width=100%}
 
 We want to find the hyperplane $(\mathbf{w}, b)$ of $\Re^d$ that correctly separates the two classes.
 
-```{figure} ../img/classification-animation2.png
----
-width: 80%
----
-The hyperplane separates the input space into two regions.
-```
+![The hyperplane separates the input space into two regions.](../slides/img/classification-animation2.png){width=80%}
 
 For a point $\mathbf{x} \in \mathcal{D}$, $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b$  is the projection of $\mathbf{x}$  onto the hyperplane $(\mathbf{w}, b)$.
 
@@ -45,16 +30,11 @@ For a point $\mathbf{x} \in \mathcal{D}$, $\langle \mathbf{w} \cdot \mathbf{x} \
 * If $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b = 0$, the point is
     on the hyperplane.
 
-```{figure} ../img/projection.svg
----
-width: 80%
----
-Projection on an hyperplane.
-```
+![Projection on an hyperplane.](../slides/img/projection.svg){width=80%}
 
-By looking at the **sign** of $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b$, we can predict the class.
+By looking at the **sign** of $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b$, we can predict the class of the input.
 
-$$\text{sign}(x) = \begin{cases} +1 \; \text{if} \; x \geq 0 \\ -1 \; \text{if} \; x < 0 \\ \end{cases}$$
+$$\text{sign}(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b) = \begin{cases} +1 \; \text{if} \; \langle \mathbf{w} \cdot \mathbf{x} \rangle +b \geq 0 \\ -1 \; \text{if} \; \langle \mathbf{w} \cdot \mathbf{x} \rangle +b < 0 \\ \end{cases}$$
 
 Binary linear classification can therefore be made by a single **artificial neuron** using the sign transfer function.
 
@@ -67,12 +47,7 @@ $\mathbf{w}$ is the weight vector and $b$ is the bias.
 
 Linear classification is the process of finding an hyperplane $(\mathbf{w}, b)$ that correctly separates the two classes. If such an hyperplane can be found, the training set is said **linearly separable**. Otherwise, the problem is **non-linearly separable** and other methods have to be applied (MLP, SVM...).
 
-```{figure} ../img/linearlyseparable.png
----
-width: 100%
----
-Linearly and non-linearly spearable datasets.
-```
+![Linearly and non-linearly separable datasets.](../slides/img/linearlyseparable.png){width=100%}
 
 ### Perceptron algorithm
 
@@ -83,11 +58,11 @@ $$\mathcal{L}(\mathbf{w}, b) = \mathbb{E}_\mathcal{D} [(t_i - y_i)^2] \approx \f
 When the prediction $y_i$ is the same as the data $t_i$ for all examples in the training set (perfect classification), the mse is minimal and equal to 0. We can apply gradient descent to find this minimum.
 
 $$
-    \Delta \mathbf{w} = - \eta \, \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b)
-$$
-
-$$
-    \Delta b = - \eta \, \nabla_b \, \mathcal{L}(\mathbf{w}, b)
+\begin{cases}
+    \Delta \mathbf{w} = - \eta \, \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b)\\
+    \\
+    \Delta b = - \eta \, \nabla_b \, \mathcal{L}(\mathbf{w}, b)\\
+\end{cases}
 $$
 
 Let's search for the partial derivative of the quadratic error function with respect to the weight vector:
@@ -127,7 +102,8 @@ $$
 
 By applying gradient descent on the quadratic error function, one obtains the following algorithm:
 
-```{admonition} Batch perceptron
+:::{.callout-tip} 
+## Batch perceptron
 
 * **for** $M$ epochs:
 
@@ -144,21 +120,17 @@ By applying gradient descent on the quadratic error function, one obtains the fo
     * $\Delta \mathbf{w} = \eta \, \frac{1}{N} \, \mathbf{dw}$
 
     * $\Delta b = \eta \, \frac{1}{N} \, db$
-```
+:::
 
 This is called the **batch** version of the Perceptron algorithm. If the data is linearly separable and $\eta$ is well chosen, it converges to the minimum of the mean square error.
 
 
-```{figure} ../img/classification-animation.gif
----
-width: 80%
----
-Batch perceptron algorithm.
-```
+![Batch perceptron algorithm.](../slides/img/classification-animation.gif){width=80%}
 
 The **Perceptron algorithm** was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.
 
-```{admonition} Online perceptron algorithm
+:::{.callout-tip} 
+## Online perceptron algorithm
 
 * **for** $M$ epochs:
 
@@ -169,16 +141,11 @@ The **Perceptron algorithm** was invented by the psychologist Frank Rosenblatt i
         * $\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i$
 
         * $\Delta b = \eta \, (t_i - y_i)$
-```
+:::
 
 This algorithm iterates over all examples of the training set and applies the **delta learning rule** to each of them immediately, not at the end on the whole training set. One could check whether there are still classification errors on the training set at the end of each epoch and stop the algorithm. The delta learning rule depends as always on the learning rate $\eta$, the error made by the prediction ($t_i - y_i$) and the input $\mathbf{x}_i$.
 
-```{figure} ../img/classification-animation-online.gif
----
-width: 80%
----
-Online perceptron algorithm.
-```
+![Online perceptron algorithm.](../slides/img/classification-animation-online.gif){width=80%}
 
 ### Stochastic Gradient descent
 
@@ -216,13 +183,13 @@ $$
 
 If the **batch size** is well chosen, SGD is as stable as batch learning and as fast as online learning. The minibatches are randomly selected at each epoch (i.i.d).
 
-```{note}
+:::{.callout-note}
 Online learning is a stochastic gradient descent with a batch size of 1.
-```
+:::
 
 ## Maximum Likelihood Estimation
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/9Hw6nLMiPiI' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  9Hw6nLMiPiI >}}
 
 Let's consider $N$ **samples** $\{x_i\}_{i=1}^N$ independently taken from a **normal distribution** $X$. The probability density function (pdf) of a normal distribution is:
 
@@ -233,12 +200,7 @@ $$
 where $\mu$ is the mean of the distribution and $\sigma$ its standard deviation.
 
 
-```{figure} ../img/MLE2.png
----
-width: 80%
----
-Normal distributions with different parameters $\mu$ and $\sigma$ explain the data with different likelihoods.
-```
+![Normal distributions with different parameters $\mu$ and $\sigma$ explain the data with different likelihoods.](../slides/img/MLE2.png){width=80%}
 
 The problem is to find the values of $\mu$ and $\sigma$ which explain best the observations $\{x_i\}_{i=1}^N$.
 
@@ -310,7 +272,7 @@ The same principle can be applied to estimate the parameters of any distribution
 
 ## Soft linear classification : Logistic regression
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/_Zc-k9pXVvE' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  _Zc-k9pXVvE >}}
 
 In logistic regression, we want to perform a regression, but where the targets $t_i$ are bounded betwen 0 and 1. We can use a logistic function instead of a linear function in order to transform the net activation into an output:
 
@@ -398,7 +360,8 @@ $$
     \end{cases}
 $$
 
-```{admonition} Logistic regression
+:::{.callout-tip} 
+## Logistic regression
 
 * $\mathbf{w} = 0 \qquad b = 0$
 
@@ -411,7 +374,7 @@ $$
         * $\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i$
 
         * $\Delta b = \eta \, (t_i - y_i)$
-```
+:::
 
 Logistic regression works just like linear classification, except in the way the prediction is done. To know to which class $\mathbf{x}_i$ belongs, simply draw a random number between 0 and 1:
 
@@ -424,12 +387,7 @@ Alternatively, you can put a **hard limit** at 0.5:
 * if $y_i < 0.5$ then the class is negative.
 
 
-```{figure} ../img/logisticregression-animation.gif
----
-width: 80%
----
-Logistic regression for soft classification. The confidence scores tells how certain the classification is.
-```
+![Logistic regression for soft classification. The confidence scores tells how certain the classification is.](../slides/img/logisticregression-animation.gif){width=80%}
 
 
 Logistic regression also provides a **confidence score**:  the closer $y$ is from 0 or 1, the more confident we can be that the classification is correct. This is particularly important in **safety critical** applications: if you detect the positive class but with a confidence of 0.51, you should perhaps not trust the prediction. If the confidence score is 0.99, you can probably trust the prediction.

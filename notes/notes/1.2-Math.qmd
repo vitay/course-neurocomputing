@@ -6,7 +6,7 @@ This chapter is not part of the course itself (there will not be questions at th
 
 It is not supposed to replace any course in mathematics (we won't show any proof and will skip what we do not need) but rather to provide a high-level understanding of the most important concepts and set the notations. Nothing should be really new to you, but it may be useful to have everything summarized at the same place.
 
-**References:** Part I of @Goodfellow2016. Any mathematics textbook can be used in addition.
+**References:** Part I of [@Goodfellow2016]. Any mathematics textbook can be used in addition.
 
 
 ## Linear algebra
@@ -94,12 +94,8 @@ The dot product is an indirect measurement of the **angle** $\theta$ between two
 
 $$\langle \mathbf{x} \cdot \mathbf{y} \rangle = ||\mathbf{x}||_2 \, ||\mathbf{y}||_2 \, \cos(\theta)$$
 
-```{figure} ../img/dotproduct.png
----
-width: 50%
----
-The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: <https://en.wikipedia.org/wiki/Dot_product>
-```
+
+![The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: <https://mathinsight.org/image/dot_product_projection_unit_vector>](../slides/img/dot_product_projection_unit_vector.png)
 
 If you normalize the two vectors by dividing them by their norm (which is a scalar), we indeed have the cosine of the angle between them: The higher the normalized dot product, the more the two vectors point towards the same direction (**cosine distance** between two vectors).
 
@@ -154,9 +150,9 @@ $$\alpha \, A + \beta \, B = \begin{bmatrix}
 \alpha\, a_{41} + \beta \, b_{41} & \alpha\, a_{42} + \beta \, b_{42} & \alpha\, a_{43} + \beta \, b_{43} \\
 \end{bmatrix}$$
 
-```{note}
+:::{.callout-note}
 Beware, you can only add matrices of the same dimensions $m\times n$. You cannot add a $2\times 3$ matrix to a $5 \times 4$ one.
-```
+:::
 
 The **transpose** $A^T$ of a $m \times n$ matrix $A$ is a $n \times m$ matrix, where the row and column indices are swapped:
 
@@ -215,16 +211,11 @@ where each element $c_{ij}$ is the dot product of the $i$th row of $A$ and $j$th
 $$c_{ij} = \langle A_{i, :} \cdot B_{:, j} \rangle = a_{i1}b_{1j} + a_{i2}b_{2j} +\cdots + a_{in}b_{nj}= \sum_{k=1}^n a_{ik}b_{kj}$$
 
 
-```{note}
+:::{.callout-note}
 $n$, the number of columns of $A$ and rows of $B$, must be the same!
-```
+:::
 
-```{figure} ../img/matrixmultiplication.jpg
----
-width: 60%
----
-The element $c_{ij}$ of $C = A \times B$ is the dot product between the $i$th row of $A$ and the $j$th column of $B$. Source: <https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication> CC BY-NC-SA; Marcia Levitus
-```
+![The element $c_{ij}$ of $C = A \times B$ is the dot product between the $i$th row of $A$ and the $j$th column of $B$. Source: [CC BY-NC-SA; Marcia Levitus](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication)](../slides/img/matrixmultiplication.jpg){width=60%}
 
 Thinking of vectors as $n \times 1$ matrices, we can multiply a matrix $m \times n$ with a vector:
 
@@ -239,12 +230,7 @@ $$
 
 The result $\mathbf{y}$ is a vector of size $m$. In that sense, a matrix $A$ can transform a vector of size $n$ into a vector of size $m$: $A$ represents a **projection** from $\Re^n$ to $\Re^m$.
 
-```{figure} ../img/projection.png
----
-width: 60%
----
-A $2 \times 3$ projection matrix allows to project any 3D vector onto a 2D plane. This is for example what happens inside a camera. Source: <https://en.wikipedia.org/wiki/Homogeneous_coordinate>
-```
+![A $2 \times 3$ projection matrix allows to project any 3D vector onto a 2D plane. This is for example what happens inside a camera. Source: <https://en.wikipedia.org/wiki/Homogeneous_coordinate>](../slides/img/projection.png){width=60%}
 
 Note that the **dot product** between two vectors of size $n$ is the matrix multiplication between the transpose of the first vector and the second one:
 
@@ -277,7 +263,7 @@ $$\mathbf{x} = A^{-1} \times \mathbf{b}$$
 
 ## Calculus
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/RsQVNOTgYwk' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  RsQVNOTgYwk >}}
 
 ### Functions
 
@@ -286,15 +272,12 @@ A **univariate function** $f$ associates to any real number $x \in \Re$ (or a su
 $$
 \begin{align}
 f\colon \quad \Re &\to \Re\\
-x &\mapsto f(x),\end{align}
+x &\mapsto f(x)
+\end{align}
 $$
 
-```{figure} ../img/function.png
----
-width: 60%
----
-Example of univariate function, here the quadratic function $f(x) = x^2 - 2 \, x + 1$.
-```
+
+![Example of univariate function, here the quadratic function $f(x) = x^2 - 2 \, x + 1$.](../slides/img/function.png){width=60%}
 
 
 A **multivariate function** $f$ associates to any vector $\mathbf{x} \in \Re^n$ (or a subset) a real number $f(\mathbf{x})$:
@@ -302,7 +285,8 @@ A **multivariate function** $f$ associates to any vector $\mathbf{x} \in \Re^n$ 
 $$
 \begin{align}
 f\colon \quad \Re^n &\to \Re\\
-\mathbf{x} &\mapsto f(\mathbf{x}),\end{align}
+\mathbf{x} &\mapsto f(\mathbf{x})
+\end{align}
 $$
 
 The variables of the function are the elements of the vector. For low-dimensional vector spaces, it is possible to represent each element explicitly, for example:
@@ -313,12 +297,7 @@ f\colon \quad\Re^3 &\to \Re\\
 x, y, z &\mapsto f(x, y, z),\end{align}
 $$
 
-```{figure} ../img/multivariatefunction.png
----
-width: 60%
----
-Example of a multivariate function $f(x_1, x_2)$ mapping $\Re^2$ to $\Re$. Source: <https://en.wikipedia.org/wiki/Function_of_several_real_variables>
-```
+![Example of a multivariate function $f(x_1, x_2)$ mapping $\Re^2$ to $\Re$. Source: <https://en.wikipedia.org/wiki/Function_of_several_real_variables>](../slides/img/multivariatefunction.png){width=50%}
 
 
 **Vector fields** associate to any vector $\mathbf{x} \in \Re^n$ (or a subset) another vector (possibly of different size):
@@ -329,16 +308,11 @@ $$
 \mathbf{x} &\mapsto \overrightarrow{f}(\mathbf{x}),\end{align}
 $$
 
-```{figure} ../img/vectorfield.png
----
-width: 40%
----
-Vector field associating to each point of $\Re^2$ another vector. Source: <https://en.wikipedia.org/wiki/Vector_field>
-```
+![Vector field associating to each point of $\Re^2$ another vector. Source: <https://en.wikipedia.org/wiki/Vector_field>](../slides/img/vectorfield.png){width=40%}
 
-```{note}
+:::{.callout-note}
 The matrix-vector multiplication $\mathbf{y} = A \times \mathbf{x}$ is a linear vector field, mapping any vector $\mathbf{x}$ into another vector $\mathbf{y}$.
-```
+:::
 
 ### Differentiation
 
@@ -354,12 +328,7 @@ $$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
 
 The line passing through the points $(x, f(x))$ and $(x + h, f(x + h))$ becomes tangent to the function when $h$ becomes very small:
 
-```{figure} ../img/derivative-approx.png
----
-width: 60%
----
-The derivative of the function $f(x)$ can be approximated by the slope of the line passing through $(x, f(x))$ and $(x + h, f(x + h))$ when $h$ becomes very small.
-```
+![The derivative of the function $f(x)$ can be approximated by the slope of the line passing through $(x, f(x))$ and $(x + h, f(x + h))$ when $h$ becomes very small.](../slides/img/derivative-approx.png){width=60%}
 
 The sign of the derivative tells you how the function behaves locally:
 
@@ -370,11 +339,11 @@ It basically allows you to measure the local influence of $x$ on $f(x)$: if I ch
 
 A special case is when the derivative is equal to 0 in $x$. $x$ is then called an **extremum** (or optimum) of the function, i.e. it can be a maximum or minimum. 
 
-```{note}
+:::{.callout-note}
 If you differentiate $f'(x)$ itself, you obtain the **second-order derivative** $f''(x)$. You can repeat that process and obtain higher order derivatives. 
 
 For example, if $x(t)$ represents the position $x$ of an object depending on time $t$, the first-order derivative $x'(t)$ denotes the **speed** of the object and the second-order derivative $x''(t)$ its **acceleration**.
-```
+:::
 
 You can tell whether an extremum is a maximum or a minimum by looking at its second-order derivative:
 
@@ -382,12 +351,7 @@ You can tell whether an extremum is a maximum or a minimum by looking at its sec
 * If $f''(x) < 0$, the extremum is a **maximum**.
 * If $f''(x) = 0$, the extremum is a **saddle point**.
 
-```{figure} ../img/optimization-example.png
----
-width: 80%
----
-Quadratic functions have only one extremum (here a minimum in -1), as their derivative is linear and is equal to zero for only one value.
-```
+![Quadratic functions have only one extremum (here a minimum in -1), as their derivative is linear and is equal to zero for only one value.](../slides/img/optimization-example.png){width=80%}
 
 The derivative of a **multivariate function** $f(\mathbf{x})$ is a vector of partial derivatives called the **gradient of the function** $\nabla_\mathbf{x} \, f(\mathbf{x})$:
 
@@ -413,7 +377,8 @@ $$\begin{cases}
 \displaystyle\frac{\partial f(x, y)}{\partial x} = 2 \, x + 3\, y + 4 \, y^2 \\
 \\
 \displaystyle\frac{\partial f(x, y)}{\partial y} = 3 \, x + 8\, x \, y
-\end{cases}$$
+\end{cases}
+$$
 
 The gradient can be generalized to **vector fields**, where the **Jacobian** or **Jacobi matrix** is a matrix containing all partial derivatives.
 
@@ -430,23 +395,13 @@ $$
 
 The analytical form of the derivative of most standard mathematical functions is known. The following table lists the most useful ones in this course:
 
-```{list-table}
-:header-rows: 1
-:name: example-table
-
-* - $f(x)$
-  - $f'(x)$
-* - $x$
-  - $1$
-* - $x^p$
-  - $p \, x^{p-1}$
-* - $\displaystyle\frac{1}{x}$
-  - $- \displaystyle\frac{1}{x^2}$
-* - $e^x$
-  - $e^x$
-* - $\ln x$
-  - $\displaystyle\frac{1}{x}$
-```
+| Function $f(x)$  | Derivative $f'(x)$ |
+|---|---|
+| $x$ | $1$ |
+| $x^p$ | $p \, x^{p-1}$ |
+|$\displaystyle\frac{1}{x}$ | $- \displaystyle\frac{1}{x^2}$ |
+| $e^x$ | $e^x$ |
+|$\ln x$ | $\displaystyle\frac{1}{x}$ |
 
 Differentiation is linear, which means that if we define the function:
 
@@ -461,11 +416,12 @@ A product of functions can also be differentiated analytically:
 $$(f(x) \times g(x))' = f'(x) \times g(x) + f(x) \times g'(x)$$
 
 
-```{admonition} Example
+:::{.callout-tip}
+## Example
 $$f(x) = x^2 \, e^x$$
 
 $$f'(x) = 2 \, x \, e^x + x^2 \cdot e^x$$
-```
+:::
 
 #### Chain rule
 
@@ -487,7 +443,9 @@ By posing $y = g(x)$ as an intermediary variable, it becomes:
 $$\frac{d f(y)}{dx} = \frac{d f(y)}{dy} \times \frac{dy}{dx}$$
 
 
-```{admonition} Example
+:::{.callout-tip}
+## Example
+
 The function :
 
 $$h(x) = \frac{1}{2 \, x + 1}$$
@@ -500,7 +458,7 @@ $$f'(x) = -\displaystyle\frac{1}{x^2}$$
 Its derivative according to the **chain rule** is:
 
 $$h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2$$
-```
+:::
 
 The chain rule also applies to partial derivatives:
 
@@ -530,21 +488,11 @@ The most important to understand for now is maybe that the integral of a functio
 
 $$\mathcal{S} = \int_a^b f(x) \, dx$$
 
-```{figure} ../img/riemann-sum1.svg
----
-width: 60%
----
-The integral of $f$ on $[a, b]$ is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on $[a, b]$. Source: <https://www.math24.net/riemann-sums-definite-integral/>
-```
+![The integral of $f$ on $[a, b]$ is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on $[a, b]$. Source: <https://www.math24.net/riemann-sums-definite-integral/>](../slides/img/riemann-sum1.svg){width=60%}
 
 One way to approximate this surface is to split the interval $[a, b]$ into $n$ intervals of width $dx$ with the points $x_1, x_2, \ldots, x_n$. This defines $n$ rectangles of width $dx$ and height $f(x_i)$, so their surface is $f(x_i) \, dx$. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.
 
-```{figure} ../img/riemann-sum.svg
----
-width: 60%
----
-The interval$[a, b]$ can be split in $n$ small intervals of width $dx$, defining $n$ rectangles whose sum is close to the area under the curve. Source: <https://www.math24.net/riemann-sums-definite-integral/>
-```
+![The interval$[a, b]$ can be split in $n$ small intervals of width $dx$, defining $n$ rectangles whose sum is close to the area under the curve. Source: <https://www.math24.net/riemann-sums-definite-integral/>](../slides/img/riemann-sum.svg){width=60%}
 
 When $n \to \infty$, or equivalently $dx \to 0$, the sum of these rectangular areas (called the Riemann sum) becomes exactly the area under the curve. This is the definition of the definite integral:
 
@@ -555,7 +503,7 @@ Very roughly speaking, the integral can be considered as the equivalent of a sum
 
 ## Probability theory
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/X5uSbrFe82Q' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  X5uSbrFe82Q >}}
 
 ### Discrete probability distributions
 
@@ -620,12 +568,7 @@ $$
 
 **Continuous random variables** can take infinitely many values in a continuous interval, e.g. $\Re$ or some subset. The closed set of values they can take is called the **support** $\mathcal{D}_X$ of the probability distribution. The probability distribution is described by a **probability density function** (pdf) $f(x)$.
 
-```{figure} ../img/normaldistribution.png
----
-width: 60%
----
-Normal distributions are continuous distributions. The area under the curve is always 1.
-```
+![Normal distributions are continuous distributions. The area under the curve is always 1.](../slides/img/normaldistribution.png){width=60%}
 
 The pdf of a distribution must be positive ($f(x) \geq 0 \, \forall x \in \mathcal{D}_X$) and its integral (area under the curve) must be equal to 1:
 
@@ -752,12 +695,7 @@ $$
 **Example**
 
 
-```{figure} ../img/conditionalprobability.png
----
-width: 60%
----
-Source: <https://www.elevise.co.uk/g-e-m-h-5-u.html>.
-```
+![Source: <https://www.elevise.co.uk/g-e-m-h-5-u.html>.](../slides/img/conditionalprobability.png){width=60%}
 
 You ask 50 people whether they like cats or dogs:
 
@@ -768,7 +706,10 @@ You ask 50 people whether they like cats or dogs:
 
 We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities...). Among the 23 who love cats, which proportion also loves dogs?
 
-```{dropdown} Answer
+
+:::{.callout-tip}
+## Answer 
+
 We have $P(\text{dog}) = \displaystyle\frac{18+21}{50}= \displaystyle\frac{39}{50}$ and $P(\text{cat}) = \displaystyle\frac{18+5}{50} = \frac{23}{50}$.
 
 The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog}) = \displaystyle\frac{18}{50}$.
@@ -776,7 +717,7 @@ The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog})
 The conditional probability of loving dogs given one loves cats is:
 
 $$P(\text{dog} | \text{cat}) = \displaystyle\frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}$$
-```
+:::
 
 
 ### Bayes' rule
@@ -821,7 +762,8 @@ $$P(T=1 | D=0) = 0.1 \qquad \qquad P(T=0 | D=0) = 0.9$$
 Given that the test is positive, what is the probability that the patient is ill?
 
 
-```{dropdown} Answer
+:::{.callout-tip}
+## Answer
 $$
 \begin{aligned}
     P(D=1|T=1) &= \frac{P(T=1 | D=1) \, P(D=1)}{P(T=1)} \\
@@ -833,11 +775,11 @@ $$
                & = 0.47 \\
 \end{aligned}
 $$
-```
+:::
 
 ## Statistics
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/Q7u_iMZ89K8' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  Q7u_iMZ89K8 >}}
 
 ### Monte Carlo sampling
 
@@ -847,12 +789,7 @@ $$
     \mathbb{E}[X] = \mathbb{E}_{x \sim X} [x] \approx \frac{1}{N} \, \sum_{i=1}^N x_i
 $$
 
-```{figure} ../img/normaldistribution.svg
----
-width: 60%
----
-Samples taken from a normal distribution will mostly be around the mean.
-```
+![Samples taken from a normal distribution will mostly be around the mean.](../slides/img/normaldistribution.svg){width=60%}
 
 More samples will be obtained where $f(x)$ is high ($x$ is probable), so the average of the sampled data will be close to the expected value of the distribution.
 
@@ -877,12 +814,7 @@ $$
     \mathbb{E}[f(X)] = \mathbb{E}_{x \sim X} [f(x)] \approx \frac{1}{N} \, \sum_{i=1}^N f(x_i)
 $$
 
-```{figure} ../img/montecarlo.svg
----
-width: 100%
----
-Sampling can be used to estimate $\pi$: when sampling $x$ and $y$ uniformly in $[0, 1]$, the proportion of points with a norm smaller than tends to $\pi/4$. Source: <https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694>
-```
+![Sampling can be used to estimate $\pi$: when sampling $x$ and $y$ uniformly in $[0, 1]$, the proportion of points with a norm smaller than tends to $\pi/4$. Source: <https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694>](img/montecarlo.svg){width=100%}
 
 
 ### Central limit theorem
@@ -901,12 +833,7 @@ $$S_N \sim \mathcal{N}(\mu, \frac{\sigma}{\sqrt{N}})$$
 
 If we perform the sampling multiple times, even with few samples, the average of the sampling averages will be very close to the expected value. The more samples we get, the smaller the variance of the estimates. Although the distribution $X$ can be anything, the sampling averages are normally distributed.
 
-```{figure} ../img/IllustrationCentralTheorem.png
----
-width: 100%
----
-Source: <https://en.wikipedia.org/wiki/Central_limit_theorem>
-```
+![Source: <https://en.wikipedia.org/wiki/Central_limit_theorem>](../slides/img/IllustrationCentralTheorem.png){width=100%}
 
 ### Estimators
 
@@ -922,23 +849,13 @@ $$
     M = 0.95 \, T + 0.65
 $$
 
-```{figure} ../img/estimators-temperature.png
----
-width: 100%
----
-Left: measurement as a function of the temperature. Right: distribution of temperature.
-```
+![Left: measurement as a function of the temperature. Right: distribution of temperature.](../slides/img/estimators-temperature.png){width=100%}
 
 The thermometer is not perfect, but do random measurements allow us to estimate the expected value of the temperature?
 
 We could repeatedly take 100 random samples of the thermometer and see how the distribution of sample averages look like:
 
-```{figure} ../img/estimators-temperature2.png
----
-width: 60%
----
-Sampled measurements.
-```
+![Sampled measurements.](../slides/img/estimators-temperature2.png){width=60%}
 
 But, as the expectation is linear, we actually have:
 
@@ -969,12 +886,7 @@ Ideally, we would like estimators with:
 * **low variance**: we do not need many estimates to get a correct estimate (CLT: $\frac{\sigma}{\sqrt{N}}$)
 
 
-```{figure} ../img/biasvariance3.png
----
-width: 60%
----
-Bias-variance trade-off.
-```
+![Bias-variance trade-off.](../slides/img/biasvariance3.png){width=60%}
 
 Unfortunately, the perfect estimator does not exist in practice.  One usually talks of a **bias/variance** trade-off: if you have a small bias, you will have a high variance, or vice versa. In machine learning, bias corresponds to underfitting, variance to overfitting.
 
@@ -982,7 +894,7 @@ Unfortunately, the perfect estimator does not exist in practice.  One usually ta
 
 ## Information theory
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/-WZKHdKDtTY' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  -WZKHdKDtTY >}}
 
 
 ### Entropy
@@ -993,12 +905,7 @@ Unfortunately, the perfect estimator does not exist in practice.  One usually ta
 
 * Almost impossible outcomes ($P \sim 0$) are very surprising because they are very rare.
 
-```{figure} ../img/selfinformation.png
----
-width: 80%
----
-Self-information.
-```
+![Self-information.](../slides/img/selfinformation.png){width=80%}
 
 A useful measurement of how surprising is an outcome $x$ is the **self-information**:
 
@@ -1035,12 +942,7 @@ $$
 The entropy of a Bernouilli variable is maximal when both outcomes are **equiprobable**. If a variable is **deterministic**, its entropy is minimal and equal to zero.
 
 
-```{figure} ../img/entropy-binomial.png
----
-width: 80%
----
-The entropy of a Bernouilli distribution is maximal when the two outcomes are equiprobable.
-```
+![The entropy of a Bernouilli distribution is maximal when the two outcomes are equiprobable.](../slides/img/entropy-binomial.png){width=80%}
 
 The **joint entropy** of two random variables $X$ and $Y$ is defined by:
 
@@ -1107,16 +1009,11 @@ $$
     H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
 $$
 
-```{note}
+:::{.callout-note}
 Beware that the notation $H(X, Y)$ is the same as the joint entropy, but it is a different concept!
-```
+:::
 
-```{figure} ../img/crossentropy.svg
----
-width: 100%
----
-The cross-entropy measures the overlap between two probability distributions.
-```
+![The cross-entropy measures the overlap between two probability distributions.](../slides/img/crossentropy.svg){width=100%}
 
 The cross-entropy measures the **negative log-likelihood** that a sample $x$ taken from the distribution $X$ could also come from the distribution $Y$. More exactly, it measures how many bits of information one would need to distinguish the two distributions $X$ and $Y$.
 
@@ -1141,7 +1038,7 @@ $$
 
 If the two distributions are the same *almost anywhere*, the KL divergence is zero. If the two distributions are different, the KL divergence is positive. Minimizing the KL between two distributions is the same as making the two distributions "equal". But remember: the KL is not a metric, as it is not symmetric.
 
-```{note}
+:::{.callout-note}
 Refer 
-<https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a> for nice visual explanantions of the cross-entropy.
-```
+<https://towardsdatascience.com/entropy-cross-entropy-and-kl-divergence-explained-b09cdae917a> for nice visual explanations of the cross-entropy.
+:::

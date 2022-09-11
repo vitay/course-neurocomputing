@@ -16,3 +16,9 @@ clean:
 	mkdir docs/slides
 	quarto render slides --to revealjs
 	quarto render notes --to html
+
+export: clean
+	git add *
+	git commit -a -m "`date`"
+	git push origin master
+	

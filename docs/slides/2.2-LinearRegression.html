@@ -625,8 +625,16 @@
 <li><p>The parameter changes have to be applied multiple times (<strong>epochs</strong>) in order for the parameters to converge.</p></li>
 <li><p>One can stop when the parameters do not change much, or after a fixed number of epochs.</p></li>
 </ul>
-</div><div class="column" style="width:40%;">
-<p><strong>LMS algorithm</strong></p>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Least Mean Squares algorithm</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p><span class="math inline">\(w=0 \quad;\quad b=0\)</span></p></li>
 <li><p><strong>for</strong> M epochs:</p>
@@ -642,6 +650,9 @@
 <li><p><span class="math inline">\(\Delta b = \eta \, \frac{1}{N} db\)</span></p></li>
 </ul></li>
 </ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -667,19 +678,22 @@
 <li>LMS is very slow, because it changes the weights only after the whole training set has been evaluated.</li>
 </ul>
 <p><span class="math display">\[
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-\]</span> <span class="math display">\[
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
+\begin{cases}
+    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 \]</span></p>
-<ul>
-<li><p>It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>:</p>
-<ul>
-<li><p><span class="math inline">\(\Delta w = \eta \, (t_i - y_i) \, x_i\)</span></p></li>
-<li><p><span class="math inline">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:50%;">
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
 <p><strong>Online version of LMS : delta learning rule</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p><span class="math inline">\(w=0 \quad;\quad b=0\)</span></p></li>
 <li><p><strong>for</strong> M epochs:</p>
@@ -694,6 +708,19 @@
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
+<ul>
+<li>It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+\Delta w = \eta \, (t_i - y_i) \, x_i \\
+\\
+\Delta b = \eta \, (t_i - y_i)\\
+\end{cases}
+\]</span></p>
 <ul>
 <li>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch.</li>
 </ul>
@@ -1416,7 +1443,17 @@ x_1 &amp; x_2 \\
 <ul>
 <li><p>Let’s suppose we dispose of <span class="math inline">\(m\)</span> models <span class="math inline">\(\mathcal{M} = \{ M_1, ..., M_m\}\)</span> that could be used to fit (or classify) some data <span class="math inline">\(\mathcal{D} = \{x_i, t_i\}_{i=1}^N\)</span>.</p></li>
 <li><p>Such a class could be the ensemble of polynomes with different orders, different algorithms (NN, SVM) or the same algorithm with different values for the hyperparameters (learning rate, regularization parameters…).</p></li>
-<li><p>The naive and <strong>wrong</strong> method to find the best hypothesis would be:</p>
+<li><p>The naive and <strong>wrong</strong> method to find the best hypothesis would be:</p></li>
+</ul>
+<div class="callout callout-warning callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Wrong method!</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p>For all models <span class="math inline">\(M_i\)</span>:</p>
 <ul>
@@ -1427,8 +1464,12 @@ x_1 &amp; x_2 \\
       \epsilon_\mathcal{D}(h_i) =  \mathbb{E}_{(\mathbf{x}, t) \in \mathcal{D}} [(h_i(\mathbf{x}) - t)^2]
   \]</span></p></li>
 <li><p>Select the hypothesis <span class="math inline">\(h_{i}^*\)</span> with the minimal training error : <span class="math inline">\(h_{i}^* = \text{argmin}_{h_i \in \mathcal{M}} \quad \epsilon_\mathcal{D}(h_i)\)</span></p></li>
-</ul></li>
-<li><p>This method leads to <strong>overfitting</strong>, as only the training error is used.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>This method leads to <strong>overfitting</strong>, as only the training error is used.</li>
 </ul>
 </section>
 
@@ -1458,8 +1499,15 @@ x_1 &amp; x_2 \\
 
 <section id="simple-hold-out-cross-validation" class="title-slide slide level1 center">
 <h1>Simple hold-out cross-validation</h1>
-<ul>
-<li><p><strong>Algorithm:</strong></p>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Algorithm</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p>Split the training data <span class="math inline">\(\mathcal{D}\)</span> into <span class="math inline">\(\mathcal{S}_{\text{train}}\)</span> and <span class="math inline">\(\mathcal{S}_{\text{test}}\)</span>.</p></li>
 <li><p>For all models <span class="math inline">\(M_i\)</span>:</p>
@@ -1469,8 +1517,12 @@ x_1 &amp; x_2 \\
 </ul>
 <p><span class="math display">\[\epsilon_{\text{test}}(h_i) = \mathbb{E}_{(\mathbf{x}, t) \in  \mathcal{S}_{\text{test}}} [(h_i(\mathbf{x}) - t)^2]\]</span></p></li>
 <li><p>Select the hypothesis <span class="math inline">\(h_{i}^*\)</span> with the minimal empirical error : <span class="math inline">\(h_{i}^* = \text{argmin}_{h_i \in \mathcal{M}} \quad \epsilon_{\text{test}}(h_i)\)</span></p></li>
-</ul></li>
-<li><p>Disadvantage: 20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>Disadvantage: 20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.</li>
 </ul>
 </section>
 
@@ -1492,8 +1544,15 @@ x_1 &amp; x_2 \\
 
 <section id="k-fold-cross-validation-1" class="title-slide slide level1 center">
 <h1>k-fold cross-validation</h1>
-<ul>
-<li><p><strong>Algorithm:</strong></p>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Algorithm</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li><p>Randomly split the data <span class="math inline">\(\mathcal{D}\)</span> into <span class="math inline">\(k\)</span> subsets of <span class="math inline">\(\frac{N}{k}\)</span> examples <span class="math inline">\(\{ \mathcal{S}_{1}, \dots , \mathcal{S}_{k}\}\)</span></p></li>
 <li><p>For all models <span class="math inline">\(M_i\)</span>:</p>
@@ -1509,7 +1568,11 @@ x_1 &amp; x_2 \\
   \]</span></p></li>
 </ul></li>
 <li><p>Select the model <span class="math inline">\(M_{i}^*\)</span> with the minimal empirical error on <span class="math inline">\(\mathcal{D}\)</span>.</p></li>
-</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
 <li><p>In general <span class="math inline">\(k=10\)</span>. Extreme cases take <span class="math inline">\(k=N\)</span>: <strong>leave-one-out cross-validation</strong>.</p></li>
 <li><p>k-fold cross-validation works well, but needs a lot of repeated learning.</p></li>
 </ul>
@@ -1753,6 +1816,9 @@ x_1 &amp; x_2 \\
 </section>
 <section class="slide level2">
 
+<ul>
+<li>LASSO allows <strong>feature selection</strong>: features with a zero weight can be removed from the training set.</li>
+</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Linear regression</strong></p>
@@ -1770,9 +1836,6 @@ x_1 &amp; x_2 \\
 </div>
 </div>
 </div>
-<ul>
-<li>LASSO allows <strong>feature selection</strong>: features with a zero weight can be removed from the training set.</li>
-</ul>
 <div class="footer">
 <p><a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></p>
 </div>
@@ -1803,6 +1866,9 @@ x_1 &amp; x_2 \\
 <ul>
 <li>It combines the advantages of Ridge and LASSO, at the cost of having now two regularization parameters to determine.</li>
 </ul>
+<div class="footer">
+<p><a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></p>
+</div>
 <div class="footer footer-default">
 
 </div>
@@ -1818,6 +1884,7 @@ x_1 &amp; x_2 \\
   <script src="2.2-LinearRegression_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="2.2-LinearRegression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="2.2-LinearRegression_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="2.2-LinearRegression_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
   <script src="2.2-LinearRegression_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -2011,7 +2078,7 @@ x_1 &amp; x_2 \\
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
           RevealMath,
           RevealNotes,

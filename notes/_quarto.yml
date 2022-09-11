@@ -5,24 +5,25 @@ project:
 book:
   title: "Neurocomputing"
   author: "Julien Vitay"
+  repo-url: https://github.com/vitay/course-neurocomputing
   search: true
   sidebar:
     style: docked
     background: dark
-  number-depth: 0
-  number-sections: false
+  execute: 
+    enabled: false
   chapters:
     - index.qmd
     - part: "Introduction"
       chapters:
       - notes/1.1-Introduction.qmd
       - notes/1.2-Math.qmd
-      #- notes/1.3-Neurons.qmd
+      - notes/1.3-Neurons.qmd
     - part: "Linear algorithms"
-      #chapters:
-      #- notes/2.1-Optimization.qmd
-      #- notes/2.2-LinearRegression.qmd
-      #- notes/2.3-LinearClassification.qmd
+      chapters:
+      - notes/2.1-Optimization.qmd
+      - notes/2.2-LinearRegression.qmd
+      - notes/2.3-LinearClassification.qmd
       #- notes/2.4-Multiclassification.qmd
       #- notes/2.5-LearningTheory.qmd
     - part: "Neural networks"
@@ -43,6 +44,11 @@ csl: frontiers.csl
 format:
   html:
     theme: cosmo
+    page-layout: full
+    number-depth: 1
+    number-sections: false
+    toc: true
+    smooth-scroll: true
   pdf:
     documentclass: scrreprt
 

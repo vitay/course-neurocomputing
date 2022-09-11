@@ -1,52 +1,33 @@
 # Neurons
 
-Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.3-Neurons.pdf)
+
+Slides: [html](../slides/1.3-Neurons.html){target="_blank"} [pdf](../slides/pdf/1.3-Neurons.pdf){target="_blank"}
 
 ## Biological neurons
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/ALBRu-AK53I' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  ALBRu-AK53I >}}
 
 
 The human brain is composed of 100 billion **neurons**. A biological neuron is a cell, composed of a cell body (**soma**), multiple **dendrites** and an **axon**. The axon of a neuron can contact the dendrites of another through **synapses** to transmit information. There are hundreds of different types of neurons, each with different properties.
 
-```{figure} ../img/biologicalneuron.png
----
-width: 100%
----
-Biological neuron. Source: <https://en.wikipedia.org/wiki/Neuron>
-```
+![Biological neuron. Source: <https://en.wikipedia.org/wiki/Neuron>](../slides/img/biologicalneuron.png){width=100%}
 
 Neurons are negatively charged: they have a resting potential at around -70 mV. When a neuron receives enough input currents, its **membrane potential** can exceed a threshold and the neuron emits an **action potential** (or **spike**) along its axon. 
 
 
-```{figure} ../img/actionpotential.gif
----
-width: 100%
----
-Propagation of an action potential along the axon. Source: <https://en.wikipedia.org/wiki/Action_potential>
-```
+![Propagation of an action potential along the axon. Source: <https://en.wikipedia.org/wiki/Action_potential>](../slides/img/actionpotential.gif){width=100%}
 
 A spike has a very small duration (1 or 2 ms) and its amplitude is rather constant. It is followed by a **refractory period** where the neuron is hyperpolarized, limiting the number of spikes per second to 200.
 
-```{figure} ../img/actionpotential.png
----
-width: 50%
----
-Action potential or spike. Source: <https://en.wikipedia.org/wiki/Action_potential>
-```
+![Action potential or spike. Source: <https://en.wikipedia.org/wiki/Action_potential>](../slides/img/actionpotential.png){width=50%}
 
 The action potential arrives at the synapses and releases **neurotransmitters** in the synaptic cleft: glutamate (AMPA, NMDA), GABA, dopamine, serotonin, nicotin, etc...
 Neurotransmitters can enter the receiving neuron through **receptors** and change its potential: the neuron may emit a spike too. Synaptic currents change the membrane potential of the post.synaptic neuron. The change depends on the strength of the synapse called the **synaptic efficiency** or **weight**. Some synapses are stronger than others, and have a larger influence on the post-synaptic cell.
 
-```{figure} ../img/chemicalsynapse.jpg
----
-width: 60%
----
-Neurotransmitter release at the synapse. Source: <https://en.wikipedia.org/wiki/Neuron>
-```
+![Neurotransmitter release at the synapse. Source: <https://en.wikipedia.org/wiki/Neuron>](../slides/img/chemicalsynapse.jpg){width=60%}
 
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/WCqNn9PEELw' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  WCqNn9PEELw >}}
 
 
 The two important dimensions of the information exchanged by neurons are:
@@ -56,12 +37,7 @@ The two important dimensions of the information exchanged by neurons are:
 * The precise **timing** of the spike trains.
 
 
-```{figure} ../img/oscillations.png
----
-width: 80%
----
-Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <https://en.wikipedia.org/wiki/Neural_oscillation>
-```
+![Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <https://en.wikipedia.org/wiki/Neural_oscillation>](../slides/img/oscillations.png){width=80%}
 
 The shape of the spike (amplitude, duration) does not matter much for synaptic transission: spikes can be considered as binary signals (0 or 1) occuring at precise moments of time.
 
@@ -70,7 +46,7 @@ Some neuron models called **rate-coded models** only represent the firing rate o
 
 ## Hodgkin-Huxley neurons
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/WAfOUZW4rq8' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  WAfOUZW4rq8 >}}
 
 
 Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential $V$ of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a **capacitance** $C$ that models the dynamics of the membrane (time constant). The **conductance** $g_L$ allows the membrane potential to relax back to its resting potential $E_L$ in the absence of external currents.  External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential. 
@@ -109,12 +85,7 @@ $$
 These equations allow to describe very precisely how an action potential is created from external currents.
 
 
-```{figure} ../img/hodgkinhuxley-data.png
----
-width: 100%
----
-Action potential for a Hodgkin-Huxley neuron.
-```
+![Action potential for a Hodgkin-Huxley neuron.](../slides/img/hodgkinhuxley-data.png){width=100%}
 
 
 ## Spiking neurons
@@ -133,16 +104,11 @@ $$
 $$
 
 
-```{figure} ../img/LIF-data.png
----
-width: 70%
----
-Spike emission for a LIF neuron.
-```
+![Spike emission for a LIF neuron.](../slides/img/LIF-data.png){width=70%}
 
 Other well-known spiking neuron models include:
 
-* Izhikevich quadratic IF {cite}`Izhikevich2003`, using a quadratic function of the membrane potential and an adaptation variable $u$.
+* Izhikevich quadratic IF [@Izhikevich2003], using a quadratic function of the membrane potential and an adaptation variable $u$.
 
 $$
     \frac{dv}{dt} = 0.04 \, v^2 + 5 \, v + 140 - u + I 
@@ -151,7 +117,7 @@ $$
     \frac{du}{dt} = a \, (b \, v - u)
 $$
 
-* Adaptive exponential IF (AdEx, {cite}`Brette2005`), using an exponential function.
+* Adaptive exponential IF (AdEx, [@Brette2005]), using an exponential function.
 
 $$
 \begin{aligned}
@@ -163,37 +129,22 @@ $$
     \tau_w \, \frac{dw}{dt} = a \, (v - E_L) - w
 $$
 
-```{figure} ../img/LIF-Izhi-AdEx.png
----
-width: 100%
----
-Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron models.
-```
+![Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron models.](../slides/img/LIF-Izhi-AdEx.png){width=100%}
 
 Contrary to the simple LIF model, these realistic neuron models can reproduce a variety of dynamics, as biological neurons do not all respond the same to an input current. Some fire regularly, some slow down with time, while others emit bursts of spikes. Modern spiking neuron models allow to recreate these variety of dynamics by changing a few parameters.
 
 
-```{figure} ../img/adex.png
----
-width: 100%
----
-Different parameters of the AdEx neuron model produce different spiking patterns.
-```
+![Different parameters of the AdEx neuron model produce different spiking patterns.](../slides/img/adex.png){width=100%}
 
 
 ## Rate-coded neurons
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/AFzYj1VUnCg' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  AFzYj1VUnCg >}}
 
 
 At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the **firing rate** of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the **firing rate** of (a population of) neuron(s): the **rate-coded** neuron.
 
-```{figure} ../img/ratecoded-izhikevich.png
----
-width: 60%
----
-The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.
-```
+![The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.](../slides/img/ratecoded-izhikevich.png){width=60%}
 
 A rate-coded neuron is represented by two time-dependent variables:
 
@@ -210,21 +161,11 @@ $$
 $$
 
 
-```{figure} ../img/ratecoded-neuron.svg
----
-width: 70%
----
-Rate-coded neuron.
-```
+![Rate-coded neuron.](../slides/img/ratecoded-neuron.svg){width=70%}
 
 The membrane potential uses a weighted sum of inputs (the firing rates $r_i(t)$ of other neurons) by multiplying each rate with a **weight** $w_i$ and adds a constant value $b$ (the **bias**). The activation function can be any non-linear function, usually making sure that the firing rate is positive.
 
-```{figure} ../img/ratecoded-simple.png
----
-width: 70%
----
-Firing rate of a rate-coded neuron for a step input.
-```
+![Firing rate of a rate-coded neuron for a step input.](../slides/img/ratecoded-simple.png){width=70%}
 
 **Remarks on ODEs**
 
@@ -247,23 +188,13 @@ $$
 When $v(t)$ is quite different from $I(t)$, the membrane potential "accelerates" to reduce the difference. When $v(t)$ is similar to $I(t)$, the membrane potential stays constant.
 
 
-```{figure} ../img/ratecoded-simple-multiple.png
----
-width: 70%
----
-The time constant $\tau$ of a rate-coded neuron influences the speed at which it reacts to inputs.
-```
+![The time constant $\tau$ of a rate-coded neuron influences the speed at which it reacts to inputs.](../slides/img/ratecoded-simple-multiple.png){width=70%}
 
 The membrane potential follows an exponential function which tries to "match" its input with a speed determined by the **time constant** $\tau$. The time constant $\tau$ determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.
 
 There exists a significant number of transfer functions that can be used:
 
-```{figure} ../img/ratecoded-transferfunctions.png
----
-width: 70%
----
-Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..
-```
+![Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..](../slides/img/ratecoded-transferfunctions.png){width=70%}
 
 When using the rectifier activation function (ReLU):
 
@@ -273,12 +204,7 @@ $$
 
 the membrane potential $v(t)$ can take any value, but the firing rate $r(t)$ is only positive.
 
-```{figure} ../img/ratecoded-simple2.png
----
-width: 80%
----
-The rectifier function only keeps the positive part of the membrane potential.
-```
+![The rectifier function only keeps the positive part of the membrane potential.](../slides/img/ratecoded-simple2.png){width=80%}
 
 When using the logistic (or sigmoid) activation function:
 
@@ -288,26 +214,16 @@ $$
 
 the firing rate $r(t)$ is bounded between 0 and 1, but responds for negative membrane potentials.
 
-```{figure} ../img/ratecoded-simple3.png
----
-width: 80%
----
-The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.
-```
+![The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.](../slides/img/ratecoded-simple3.png){width=80%}
 
 ## Artificial neurons
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/NVj17dve8B8' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  NVj17dve8B8 >}}
 
 
 By omitting the dynamics of the rate-coded neuron, one obtains the very simple **artificial neuron** (McCulloch and Pitts, 1943):
 
-```{figure} ../img/artificialneuron.svg
----
-width: 70%
----
-Artificial neuron.
-```
+![Artificial neuron.](../slides/img/artificialneuron.svg){width=70%}
 
 An artificial neuron sums its inputs $x_1, \ldots, x_d$ by multiplying them with weights $w_1, \ldots, w_d$, adds a bias $b$ and transforms the result into an output $y$ using an activation function $f$.
 
@@ -332,22 +248,12 @@ $$
 
 
 
-```{figure} ../img/artificialneuron-simple.png
----
-width: 50%
----
-The net activation represents an hyperplane in 2D.
-```
+![The net activation represents an hyperplane in 2D.](../slides/img/artificialneuron-simple.png){width=50%}
 
 
 The net activation is a line in 2D, a plane in 3D, etc. Generally, the net activation describes an **hyperplane** in the input space with $d$ dimensions $(x_1, x_2, \ldots, x_d)$.  An hyperplane has one dimension less than the space.
 
-```{figure} ../img/hyperplane.gif
----
-width: 50%
----
-Hyperplane in 3D. Source: <https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif>
-```
+![Hyperplane in 3D. Source: <https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif>](../slides/img/hyperplane.gif){width=50%}
 
 
 We can write the net activation using a **weight vector** $\mathbf{w}$ and a **bias** $b$:
@@ -364,7 +270,7 @@ $$
 
 $\langle \cdot \rangle$ is the **dot product** (aka inner product, scalar product) between the **input vector** $\mathbf{x}$ and the weight vector $\mathbf{w}$.
 
-The weight vector is orthogonal to the hyperplane $(\mathbf{w}, b)$ and defines its orientation. $b$ is the "distance" between the hyperplane and the origin. The hyperplane separates the input space into two parts:
+The weight vector is orthogonal to the hyperplane $(\mathbf{w}, b)$ and defines its orientation. $b$ is the "signed distance" between the hyperplane and the origin. The hyperplane separates the input space into two parts:
 
 * $\langle\mathbf{w} \cdot \mathbf{x} \rangle + b > 0$ for all points $\mathbf{x}$ **above** the hyperplane.
 
@@ -373,9 +279,4 @@ The weight vector is orthogonal to the hyperplane $(\mathbf{w}, b)$ and defines 
 By looking at the **sign** of the net activation, we can separate the input space into two classes. This will be the main principle of **linear classification**.
 
 
-```{figure} ../img/projection.svg
----
-width: 80%
----
-The sign of the projection of an input $\mathbf{x}$ on the hyperplane tells whether the input is above or below the hyperplane.
-```
+![The sign of the projection of an input $\mathbf{x}$ on the hyperplane tells whether the input is above or below the hyperplane.](../slides/img/projection.svg){width=80%}

@@ -60,6 +60,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -71,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Optimization</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -79,12 +80,15 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -96,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Course description</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -109,17 +113,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a>
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></a>
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
   </div>
 </li>
       </ul>
@@ -134,27 +138,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></a>
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.4-Multiclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-class classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.5-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Learning theory</span></a>
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
   </div>
 </li>
       </ul>
@@ -178,7 +172,19 @@ ul.task-list li input[type="checkbox"] {
       <span class="sidebar-item-text sidebar-link text-start">Outlook</span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">Exercises</span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -194,20 +200,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#analytic-optimization" id="toc-analytic-optimization" class="nav-link active" data-scroll-target="#analytic-optimization"><span class="toc-section-number">4.1</span>  Analytic optimization</a></li>
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent"><span class="toc-section-number">4.2</span>  Gradient descent</a>
+  <li><a href="#analytic-optimization" id="toc-analytic-optimization" class="nav-link active" data-scroll-target="#analytic-optimization">Analytic optimization</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">Gradient descent</a></li>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization">Regularization</a>
   <ul class="collapse">
-  <li><a href="#l1---regularization" id="toc-l1---regularization" class="nav-link" data-scroll-target="#l1---regularization"><span class="toc-section-number">4.2.1</span>  L1 - Regularization</a></li>
+  <li><a href="#l2---regularization" id="toc-l2---regularization" class="nav-link" data-scroll-target="#l2---regularization">L2 - Regularization</a></li>
+  <li><a href="#l1---regularization" id="toc-l1---regularization" class="nav-link" data-scroll-target="#l1---regularization">L1 - Regularization</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Optimization</span></h1>
 </div>
 
 
@@ -221,13 +229,10 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Slides: <a href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.1-Optimization.pdf">pdf</a></p>
-<section id="analytic-optimization" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="analytic-optimization"><span class="header-section-number">4.1</span> Analytic optimization</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/1_sPEA6nnIA" frameborder="0" allowfullscreen="">
-</iframe>
-</div>
+<p>Slides: <a href="../slides/2.1-Optimization.html" target="_blank">html</a> <a href="../slides/pdf/2.1-Optimization.pdf" target="_blank">pdf</a></p>
+<section id="analytic-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="analytic-optimization">Analytic optimization</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/1_sPEA6nnIA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Machine learning is all about optimization:</p>
 <ul>
 <li>Supervised learning minimizes the error between the prediction and the data.</li>
@@ -243,109 +248,73 @@ ul.task-list li input[type="checkbox"] {
     x^* = \max_x f(x) \Leftrightarrow f'(x^*) = 0 \; \text{and} \; f''(x^*) &lt; 0
 \]</span></p>
 <p>The sign of the second order derivative tells us whether it is a maximum or minimum. There can be multiple minima or maxima (or none) depending on the function. The “best” minimum (with the lowest value among all minima) is called the <strong>global minimum</strong>. The others are called <strong>local minima</strong>.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/localminimum.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 60%</td>
-</tr>
-</tbody>
-</table>
-<p>Functions (may) have one global minimum but several local minima.</p>
-<pre><code>
-
-**Multivariate functions**
-
-A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. A point $(x^*, y^*)$ is an optimum of $f$ if all partial derivatives are zero:
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/localminimum.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Functions (may) have one global minimum but several local minima.</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Multivariate functions</strong></p>
+<p>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">\(f(x, y)\)</span>. A point <span class="math inline">\((x^*, y^*)\)</span> is an optimum of <span class="math inline">\(f\)</span> if all partial derivatives are zero:</p>
+<p><span class="math display">\[
     \begin{cases}
         \dfrac{\partial f(x^*, y^*)}{\partial x} = 0 \\
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
-$$
-
-The vector of partial derivatives is called the **gradient of the function**:
-
-$$
+\]</span></p>
+<p>The vector of partial derivatives is called the <strong>gradient of the function</strong>:</p>
+<p><span class="math display">\[
     \nabla_{x, y} \, f(x^*, y^*) = \begin{bmatrix} \dfrac{\partial f(x^*, y^*)}{\partial x} \\ \dfrac{\partial f(x^*, y^*)}{\partial y} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
-$$
-
-```{figure} ../img/optimization-example-multivariate.png
----
-width: 80%
----
-Multivariate optimization of $f(x, y) = (x - 1)^2 + y^2 + 1$. The minimum is in $(1, 0)$.</code></pre>
-</section>
-<section id="gradient-descent" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="gradient-descent"><span class="header-section-number">4.2</span> Gradient descent</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/UpJL2M6GKog" frameborder="0" allowfullscreen="">
-</iframe>
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/optimization-example-multivariate.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Multivariate optimization of <span class="math inline">\(f(x, y) = (x - 1)^2 + y^2 + 1\)</span>. The minimum is in <span class="math inline">\((1, 0)\)</span>.</figcaption><p></p>
+</figure>
 </div>
+</section>
+<section id="gradient-descent" class="level2">
+<h2 class="anchored" data-anchor-id="gradient-descent">Gradient descent</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/UpJL2M6GKog" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>In machine learning, we generally do not have access to the analytical form of the objective function. We can not therefore get its derivative and search where it is 0. However, we have access to its value (and derivative) for certain values, for example:</p>
 <p><span class="math display">\[
     f(0, 1) = 2 \qquad f'(0, 1) = -1.5
 \]</span></p>
 <p>We can “ask” the model for as many values as we want, but we never get its analytical form. For most useful problems, the function would be too complex to differentiate anyway.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/derivative-approx.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 60%</td>
-</tr>
-</tbody>
-</table>
-<p>Euler method: the derivative of a function is the slope of its tangent.</p>
-<pre><code>
-Let's remember the definition of the derivative of a function. The derivative $f'(x)$ is defined by the slope of the tangent of the function:
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/derivative-approx.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Euler method: the derivative of a function is the slope of its tangent.</figcaption><p></p>
+</figure>
+</div>
+<p>Let’s remember the definition of the derivative of a function. The derivative <span class="math inline">\(f'(x)\)</span> is defined by the slope of the tangent of the function:</p>
+<p><span class="math display">\[
     f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{x + h - x} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
-$$
-
-If we take $h$ small enough, we have the following approximation:
-
-$$
+\]</span></p>
+<p>If we take <span class="math inline">\(h\)</span> small enough, we have the following approximation:</p>
+<p><span class="math display">\[
     f(x + h) - f(x) \approx h \, f'(x)
-$$
-
-If we want $x+h$ to be closer to the minimum than $x$, we want:
-
-$$
+\]</span></p>
+<p>If we want <span class="math inline">\(x+h\)</span> to be closer to the minimum than <span class="math inline">\(x\)</span>, we want:</p>
+<p><span class="math display">\[
     f(x + h) &lt; f(x)
-$$
-
-or:
-
-$$
+\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[
     f(x + h) - f(x) &lt; 0
-$$
-
-We therefore want that:
-
-$$
+\]</span></p>
+<p>We therefore want that:</p>
+<p><span class="math display">\[
     h \, f'(x) &lt; 0
-$$
-
-The **change** $h$ in the value of $x$ must have the opposite sign of $f'(x)$ in order to get closer to the minimum. If the function is increasing in $x$, the minimum is smaller (to the left) than $x$. If the function is decreasing in $x$, the minimum is bigger than $x$ (to the right).
-
-
-**Gradient descent** (GD) is a first-order method to iteratively find the minimum of a function $f(x)$. It starts with a random estimate $x_0$ and iteratively changes its value so that it becomes closer to the minimum.
-
-```{figure} ../img/gradient.png
----
-width: 70%
----
-Gradient descent iteratively modifies the estimate $x_n$ in the opposite direction of the derivative.</code></pre>
+\]</span></p>
+<p>The <strong>change</strong> <span class="math inline">\(h\)</span> in the value of <span class="math inline">\(x\)</span> must have the opposite sign of <span class="math inline">\(f'(x)\)</span> in order to get closer to the minimum. If the function is increasing in <span class="math inline">\(x\)</span>, the minimum is smaller (to the left) than <span class="math inline">\(x\)</span>. If the function is decreasing in <span class="math inline">\(x\)</span>, the minimum is bigger than <span class="math inline">\(x\)</span> (to the right).</p>
+<p><strong>Gradient descent</strong> (GD) is a first-order method to iteratively find the minimum of a function <span class="math inline">\(f(x)\)</span>. It starts with a random estimate <span class="math inline">\(x_0\)</span> and iteratively changes its value so that it becomes closer to the minimum.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Gradient descent iteratively modifies the estimate <span class="math inline">\(x_n\)</span> in the opposite direction of the derivative.</figcaption><p></p>
+</figure>
+</div>
 <p>It creates a series of estimates <span class="math inline">\([x_0, x_1, x_2, \ldots]\)</span> that converge to a local minimum of <span class="math inline">\(f\)</span>. Each element of the series is calculated based on the previous element and the derivative of the function in that element:</p>
 <p><span class="math display">\[
     x_{n+1} = x_n + \Delta x =  x_n - \eta \, f'(x_n)
@@ -364,97 +333,65 @@ Gradient descent iteratively modifies the estimate $x_n$ in the opposite directi
   \]</span></p></li>
 </ul>
 <p>There is theoretically no end to the GD algorithm: we iterate forever and always get closer to the minimum. The algorithm can be stopped when the change <span class="math inline">\(\Delta x\)</span> is below a threshold.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/gradient-descent-animation.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Visualization of Gradient Descent on a quadratic function. Notice how the speed of convergence slows down when approaching the minimum.</p>
-<pre><code>
-
-Gradient descent can be applied to multivariate functions:
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation.gif" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Visualization of Gradient Descent on a quadratic function. Notice how the speed of convergence slows down when approaching the minimum.</figcaption><p></p>
+</figure>
+</div>
+<p>Gradient descent can be applied to multivariate functions:</p>
+<p><span class="math display">\[
     \min_{x, y, z} \qquad f(x, y, z)
-$$
-
-Each variable is updated independently using partial derivatives:
-
-$$
+\]</span></p>
+<p>Each variable is updated independently using partial derivatives:</p>
+<p><span class="math display">\[
     \Delta x = x_{n+1} - x_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial x}
-$$
-$$
+\]</span> <span class="math display">\[
     \Delta y = y_{n+1} - y_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial y}
-$$
-$$
+\]</span> <span class="math display">\[
     \Delta z = z_{n+1} - z_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial z}
-$$
-
-We can also use the vector notation to use the **gradient operator**:
-
-$$
+\]</span></p>
+<p>We can also use the vector notation to use the <strong>gradient operator</strong>:</p>
+<p><span class="math display">\[
     \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} f(\mathbf{x}) = \begin{bmatrix} \frac{\partial f(x, y, z)}{\partial x} \\ \frac{\partial f(x, y, z)}{\partial y} \\ \frac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
     \qquad \rightarrow \qquad \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} f(\mathbf{x}_n)
-$$
-
-The change in the estimation is in the **opposite direction of the gradient**, hence the name **gradient descent**.
-
-
-```{figure} ../img/gradient-descent-animation-multivariate.gif
----
-width: 100%
----
-Visualization of Gradient Descent on a multivariate function in 2 dimensions.</code></pre>
+\]</span></p>
+<p>The change in the estimation is in the <strong>opposite direction of the gradient</strong>, hence the name <strong>gradient descent</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-multivariate.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Visualization of Gradient Descent on a multivariate function in 2 dimensions.</figcaption><p></p>
+</figure>
+</div>
 <p>The choice of the learning rate <span class="math inline">\(\eta\)</span> is critical:</p>
 <ul>
 <li>If it is too small, the algorithm will need a lot of iterations to converge.</li>
 <li>If it is too big, the algorithm can oscillate around the desired values without ever converging.</li>
 </ul>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/gradient-descent-learningrate.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Influence of the learning on convergence: too small (red) and it takes forever, too high (green) and convergence is unstable. Finding its optimal value (blue) is hard as it depends on the function itself.</p>
-<pre><code>
-Gradient descent is not optimal: it always finds a local minimum, but there is no guarantee that it is the global minimum. The found solution depends on the initial choice of $x_0$. If you initialize the parameters near to the global minimum, you are lucky. But how? This will be a big issue in neural networks.
-
-
-## Regularization
-
-&lt;div class='embed-container'&gt;&lt;iframe src='https://www.youtube.com/embed/LI5ExC4d9Js' frameborder='0' allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-
-### L2 - Regularization
-
-Most of the time, there are many minima to a function, if not an infinity. As GD only converges to the "closest" local minimum, you are never sure that you get a good solution. Consider the following function:
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-learningrate.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Influence of the learning on convergence: too small (red) and it takes forever, too high (green) and convergence is unstable. Finding its optimal value (blue) is hard as it depends on the function itself.</figcaption><p></p>
+</figure>
+</div>
+<p>Gradient descent is not optimal: it always finds a local minimum, but there is no guarantee that it is the global minimum. The found solution depends on the initial choice of <span class="math inline">\(x_0\)</span>. If you initialize the parameters near to the global minimum, you are lucky. But how? This will be a big issue in neural networks.</p>
+</section>
+<section id="regularization" class="level2">
+<h2 class="anchored" data-anchor-id="regularization">Regularization</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/LI5ExC4d9Js" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="l2---regularization" class="level3">
+<h3 class="anchored" data-anchor-id="l2---regularization">L2 - Regularization</h3>
+<p>Most of the time, there are many minima to a function, if not an infinity. As GD only converges to the “closest” local minimum, you are never sure that you get a good solution. Consider the following function:</p>
+<p><span class="math display">\[
     f(x, y) = (x -1)^2
-$$
-
-As it does not depend on $y$, whatever initial value $y_0$ will be considered as a solution. As we will see later, this is something we do not want.
-
-
-```{figure} ../img/gradient-descent-animation-regularization1.gif
----
-width: 100%
----
-Function with an infinity of minima: as long as $x=1$, each point on the vertical line is a minimum.</code></pre>
+\]</span></p>
+<p>As it does not depend on <span class="math inline">\(y\)</span>, whatever initial value <span class="math inline">\(y_0\)</span> will be considered as a solution. As we will see later, this is something we do not want.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-regularization1.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Function with an infinity of minima: as long as <span class="math inline">\(x=1\)</span>, each point on the vertical line is a minimum.</figcaption><p></p>
+</figure>
+</div>
 <p>To obtain a single solution, we may want to put the additional <strong>constraint</strong> that both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> should be as small as possible. One possibility is to also minimize the <strong>Euclidian norm</strong> (or <strong>L2-norm</strong>) of the vector <span class="math inline">\(\mathbf{x} = [x, y]\)</span>.</p>
 <p><span class="math display">\[
     \min_{x, y} ||\mathbf{x}||^2 = x^2 + y^2
@@ -471,47 +408,32 @@ Function with an infinity of minima: as long as $x=1$, each point on the vertica
 <p><span class="math display">\[
     \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 \]</span></p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/gradient-descent-animation-regularization2.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Gradient descent with L2 regularization, using <span class="math inline">\(\lambda = 0.1\)</span>.</p>
-<pre><code>
-You may notice that the result of the optimization is a bit off, it is not exactly $(1, 0)$. This is because we do not optimize $f(x, y)$ directly, but $\mathcal{L}(x, y)$. Let's have a look at the landscape of the loss function:
-
-```{figure} ../img/gradient-descent-animation-regularization3.gif
----
-width: 100%
----
-Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)$ with $\lambda = 0.1$.</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-regularization2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Gradient descent with L2 regularization, using <span class="math inline">\(\lambda = 0.1\)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>You may notice that the result of the optimization is a bit off, it is not exactly <span class="math inline">\((1, 0)\)</span>. This is because we do not optimize <span class="math inline">\(f(x, y)\)</span> directly, but <span class="math inline">\(\mathcal{L}(x, y)\)</span>. Let’s have a look at the landscape of the loss function:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-regularization3.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Landscape of the loss function <span class="math inline">\(\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)\)</span> with <span class="math inline">\(\lambda = 0.1\)</span>.</figcaption><p></p>
+</figure>
+</div>
 <p>The optimization with GD indeed works, it is just that the function is different. The constraint on the Euclidian norm “attracts” or “distorts” the function towards <span class="math inline">\((0, 0)\)</span>. This may seem counter-intuitive, but we will see with deep networks that we can live with it. Let’s now look at what happens when we increase <span class="math inline">\(\lambda\)</span> to 5:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/gradient-descent-animation-regularization4.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Gradient descent with L2 regularization, using <span class="math inline">\(\lambda = 5\)</span>.</p>
-<pre><code>
-```{figure} ../img/gradient-descent-animation-regularization5.gif
----
-width: 100%
----
-Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)$ with $\lambda = 5$.</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-regularization4.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Gradient descent with L2 regularization, using <span class="math inline">\(\lambda = 5\)</span>.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-regularization5.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Landscape of the loss function <span class="math inline">\(\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)\)</span> with <span class="math inline">\(\lambda = 5\)</span>.</figcaption><p></p>
+</figure>
+</div>
 <p>Now the result of the optimization is totally wrong: the constraint on the norm completely dominates the optimization process.</p>
 <p><span class="math display">\[
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)
@@ -522,22 +444,32 @@ Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + 
 <li><p>When <span class="math inline">\(\lambda\)</span> is big, <span class="math inline">\(x^2 + y^2\)</span> dominates, the result will be very small but <span class="math inline">\(f(x, y)\)</span> will have any value.</p></li>
 </ul>
 <p>The right value for <span class="math inline">\(\lambda\)</span> is hard to find. We will see later methods to experimentally find its most adequate value.</p>
-<pre class="{note}"><code>Regularization is a form of **constrained optimization**. What we actually want to solve is the constrained optimization problem:
-
-$$
-    \min_{x, y} \qquad f(x, y) \\
-    \text{so that} \qquad x^2 + y^2 &lt; \delta
-$$
-
-i.e. minimize $f(x, y)$ while keeping the norm of $[x, y]$ below a threshold $\delta$. **Lagrange optimization** (technically KKT optimization; see the course Introduction to AI) allows to solve that problem by searching the minimum of the generalized Lagrange function:
-
-$$
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Regularization is a form of <strong>constrained optimization</strong>. What we actually want to solve is the constrained optimization problem:</p>
+<p><span class="math display">\[
+    \min_{x, y} \qquad f(x, y)
+\]</span> so that: <span class="math display">\[
+    x^2 + y^2 &lt; \delta
+\]</span></p>
+<p>i.e.&nbsp;minimize <span class="math inline">\(f(x, y)\)</span> while keeping the norm of <span class="math inline">\([x, y]\)</span> below a threshold <span class="math inline">\(\delta\)</span>. <strong>Lagrange optimization</strong> (technically KKT optimization; see the course Introduction to AI) allows to solve that problem by searching the minimum of the generalized Lagrange function:</p>
+<p><span class="math display">\[
     \mathcal{L}(x, y, \lambda) = f(x, y) + \lambda \, (x^2 + y^2 - \delta)
-$$
-
-Regularization is a special case of Lagrange optimization, as it considers $\lambda$ to be fixed, while it is an additional variable in Lagrange optimization. When differentiating this function, $\delta$ disappears anyway, so it is equivalent to our regularized loss function.</code></pre>
-<section id="l1---regularization" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="l1---regularization"><span class="header-section-number">4.2.1</span> L1 - Regularization</h3>
+\]</span></p>
+<p>Regularization is a special case of Lagrange optimization, as it considers <span class="math inline">\(\lambda\)</span> to be fixed, while it is an additional variable in Lagrange optimization. When differentiating this function, <span class="math inline">\(\delta\)</span> disappears anyway, so it is equivalent to our regularized loss function.</p>
+</div>
+</div>
+</section>
+<section id="l1---regularization" class="level3">
+<h3 class="anchored" data-anchor-id="l1---regularization">L1 - Regularization</h3>
 <p>Another form of regularization is <strong>L1 - regularization</strong> using the L1-norm (absolute values):</p>
 <p><span class="math display">\[
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (|x| + |y|)
@@ -547,19 +479,12 @@ Regularization is a special case of Lagrange optimization, as it considers $\lam
     \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \frac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
 \]</span></p>
 <p>It tends to lead to <strong>sparser</strong> value of <span class="math inline">\((x, y)\)</span>, i.e.&nbsp;either <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> will be close or equal to 0.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/gradient-descent-animation-regularization6.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Gradient descent with L1 regularization, using <span class="math inline">\(\lambda = 0.1\)</span>. ```</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gradient-descent-animation-regularization6.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Gradient descent with L1 regularization, using <span class="math inline">\(\lambda = 0.1\)</span>.</figcaption><p></p>
+</figure>
+</div>
 <p>Both L1 and L2 regularization can be used in neural networks depending on the desired effect.</p>
 
 
@@ -665,15 +590,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../notes/1.3-Neurons.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Neurons</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notes/2.2-LinearRegression.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Linear regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -681,4 +606,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

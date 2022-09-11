@@ -20,6 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -60,6 +79,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -71,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Neurons</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -79,12 +99,15 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -96,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Course description</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -109,17 +132,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a>
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></a>
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Neurons</span></a>
   </div>
 </li>
       </ul>
@@ -134,27 +157,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></a>
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.4-Multiclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-class classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.5-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Learning theory</span></a>
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
   </div>
 </li>
       </ul>
@@ -178,7 +191,19 @@ ul.task-list li input[type="checkbox"] {
       <span class="sidebar-item-text sidebar-link text-start">Outlook</span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">Exercises</span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -194,18 +219,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#biological-neurons" id="toc-biological-neurons" class="nav-link active" data-scroll-target="#biological-neurons"><span class="toc-section-number">3.1</span>  Biological neurons</a></li>
-  <li><a href="#spiking-neurons" id="toc-spiking-neurons" class="nav-link" data-scroll-target="#spiking-neurons"><span class="toc-section-number">3.2</span>  Spiking neurons</a></li>
-  <li><a href="#artificial-neurons" id="toc-artificial-neurons" class="nav-link" data-scroll-target="#artificial-neurons"><span class="toc-section-number">3.3</span>  Artificial neurons</a></li>
+  <li><a href="#biological-neurons" id="toc-biological-neurons" class="nav-link active" data-scroll-target="#biological-neurons">Biological neurons</a></li>
+  <li><a href="#hodgkin-huxley-neurons" id="toc-hodgkin-huxley-neurons" class="nav-link" data-scroll-target="#hodgkin-huxley-neurons">Hodgkin-Huxley neurons</a></li>
+  <li><a href="#spiking-neurons" id="toc-spiking-neurons" class="nav-link" data-scroll-target="#spiking-neurons">Spiking neurons</a></li>
+  <li><a href="#rate-coded-neurons" id="toc-rate-coded-neurons" class="nav-link" data-scroll-target="#rate-coded-neurons">Rate-coded neurons</a></li>
+  <li><a href="#artificial-neurons" id="toc-artificial-neurons" class="nav-link" data-scroll-target="#artificial-neurons">Artificial neurons</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Neurons</span></h1>
 </div>
 
 
@@ -219,104 +246,64 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Slides: <a href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/1.3-Neurons.pdf">pdf</a></p>
-<section id="biological-neurons" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="biological-neurons"><span class="header-section-number">3.1</span> Biological neurons</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/ALBRu-AK53I" frameborder="0" allowfullscreen="">
-</iframe>
-</div>
+<p>Slides: <a href="../slides/1.3-Neurons.html" target="_blank">html</a> <a href="../slides/pdf/1.3-Neurons.pdf" target="_blank">pdf</a></p>
+<section id="biological-neurons" class="level2">
+<h2 class="anchored" data-anchor-id="biological-neurons">Biological neurons</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/ALBRu-AK53I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The human brain is composed of 100 billion <strong>neurons</strong>. A biological neuron is a cell, composed of a cell body (<strong>soma</strong>), multiple <strong>dendrites</strong> and an <strong>axon</strong>. The axon of a neuron can contact the dendrites of another through <strong>synapses</strong> to transmit information. There are hundreds of different types of neurons, each with different properties.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/biologicalneuron.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Biological neuron. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></p>
-<pre><code>
-Neurons are negatively charged: they have a resting potential at around -70 mV. When a neuron receives enough input currents, its **membrane potential** can exceed a threshold and the neuron emits an **action potential** (or **spike**) along its axon. 
-
-
-```{figure} ../img/actionpotential.gif
----
-width: 100%
----
-Propagation of an action potential along the axon. Source: &lt;https://en.wikipedia.org/wiki/Action_potential&gt;</code></pre>
-<p>A spike has a very small duration (1 or 2 ms) and its amplitude is rather constant. It is followed by a <strong>refractory period</strong> where the neuron is hyperpolarized, limiting the number of spikes per second to 200.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/actionpotential.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 50%</td>
-</tr>
-</tbody>
-</table>
-<p>Action potential or spike. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></p>
-<pre><code>
-The action potential arrives at the synapses and releases **neurotransmitters** in the synaptic cleft: glutamate (AMPA, NMDA), GABA, dopamine, serotonin, nicotin, etc...
-Neurotransmitters can enter the receiving neuron through **receptors** and change its potential: the neuron may emit a spike too. Synaptic currents change the membrane potential of the post.synaptic neuron. The change depends on the strength of the synapse called the **synaptic efficiency** or **weight**. Some synapses are stronger than others, and have a larger influence on the post-synaptic cell.
-
-```{figure} ../img/chemicalsynapse.jpg
----
-width: 60%
----
-Neurotransmitter release at the synapse. Source: &lt;https://en.wikipedia.org/wiki/Neuron&gt;</code></pre>
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/WCqNn9PEELw" frameborder="0" allowfullscreen="">
-</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/biologicalneuron.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Biological neuron. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption><p></p>
+</figure>
 </div>
+<p>Neurons are negatively charged: they have a resting potential at around -70 mV. When a neuron receives enough input currents, its <strong>membrane potential</strong> can exceed a threshold and the neuron emits an <strong>action potential</strong> (or <strong>spike</strong>) along its axon.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/actionpotential.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Propagation of an action potential along the axon. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></figcaption><p></p>
+</figure>
+</div>
+<p>A spike has a very small duration (1 or 2 ms) and its amplitude is rather constant. It is followed by a <strong>refractory period</strong> where the neuron is hyperpolarized, limiting the number of spikes per second to 200.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/actionpotential.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Action potential or spike. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></figcaption><p></p>
+</figure>
+</div>
+<p>The action potential arrives at the synapses and releases <strong>neurotransmitters</strong> in the synaptic cleft: glutamate (AMPA, NMDA), GABA, dopamine, serotonin, nicotin, etc… Neurotransmitters can enter the receiving neuron through <strong>receptors</strong> and change its potential: the neuron may emit a spike too. Synaptic currents change the membrane potential of the post.synaptic neuron. The change depends on the strength of the synapse called the <strong>synaptic efficiency</strong> or <strong>weight</strong>. Some synapses are stronger than others, and have a larger influence on the post-synaptic cell.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/chemicalsynapse.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Neurotransmitter release at the synapse. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption><p></p>
+</figure>
+</div>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WCqNn9PEELw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The two important dimensions of the information exchanged by neurons are:</p>
 <ul>
 <li><p>The instantaneous <strong>frequency</strong> or <strong>firing rate</strong>: number of spikes per second (Hz).</p></li>
 <li><p>The precise <strong>timing</strong> of the spike trains.</p></li>
 </ul>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/oscillations.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <a href="https://en.wikipedia.org/wiki/Neural_oscillation" class="uri">https://en.wikipedia.org/wiki/Neural_oscillation</a></p>
-<pre><code>
-The shape of the spike (amplitude, duration) does not matter much for synaptic transission: spikes can be considered as binary signals (0 or 1) occuring at precise moments of time.
-
-Some neuron models called **rate-coded models** only represent the firing rate of a neuron and ignore spike timing at all. Other models called **spiking models** represent explicitly the spiking behavior.
-
-
-## Hodgkin-Huxley neurons
-
-&lt;div class='embed-container'&gt;&lt;iframe src='https://www.youtube.com/embed/WAfOUZW4rq8' frameborder='0' allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-
-Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential $V$ of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a **capacitance** $C$ that models the dynamics of the membrane (time constant). The **conductance** $g_L$ allows the membrane potential to relax back to its resting potential $E_L$ in the absence of external currents.  External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential. 
-
-Their neuron model include:
-
-* An ordinary differential equation (ODE) for the membrane potential $v$.
-
-* Three ODEs for $n$, $m$ and $h$ representing potassium channel activation, sodium channel activation, and sodium channel inactivation.
-
-* Several parameters determined experimentally.
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/oscillations.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <a href="https://en.wikipedia.org/wiki/Neural_oscillation" class="uri">https://en.wikipedia.org/wiki/Neural_oscillation</a></figcaption><p></p>
+</figure>
+</div>
+<p>The shape of the spike (amplitude, duration) does not matter much for synaptic transission: spikes can be considered as binary signals (0 or 1) occuring at precise moments of time.</p>
+<p>Some neuron models called <strong>rate-coded models</strong> only represent the firing rate of a neuron and ignore spike timing at all. Other models called <strong>spiking models</strong> represent explicitly the spiking behavior.</p>
+</section>
+<section id="hodgkin-huxley-neurons" class="level2">
+<h2 class="anchored" data-anchor-id="hodgkin-huxley-neurons">Hodgkin-Huxley neurons</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WAfOUZW4rq8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential <span class="math inline">\(V\)</span> of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a <strong>capacitance</strong> <span class="math inline">\(C\)</span> that models the dynamics of the membrane (time constant). The <strong>conductance</strong> <span class="math inline">\(g_L\)</span> allows the membrane potential to relax back to its resting potential <span class="math inline">\(E_L\)</span> in the absence of external currents. External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential.</p>
+<p>Their neuron model include:</p>
+<ul>
+<li><p>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">\(v\)</span>.</p></li>
+<li><p>Three ODEs for <span class="math inline">\(n\)</span>, <span class="math inline">\(m\)</span> and <span class="math inline">\(h\)</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</p></li>
+<li><p>Several parameters determined experimentally.</p></li>
+</ul>
+<p><span class="math display">\[
 \begin{aligned}
     a_n &amp;= 0.01 \, (v + 60) / (1.0 - \exp(-0.1\, (v + 60) ) ) \\
     a_m &amp;= 0.1 \, (v + 45) / (1.0 - \exp (- 0.1 \, ( v + 45 ))) \\
@@ -329,27 +316,23 @@ $$
     \frac{dm}{dt} &amp;= a_m \, (1 - m) - b_m \, m  \\
     \frac{dh}{dt} &amp;= a_h \, (1 - h) - b_h \, h  \\
 \end{aligned}
-$$
-
-$$
+\]</span></p>
+<p><span class="math display">\[
 \begin{aligned}
     C \, \frac{dv}{dt} = g_L \, (V_L - v) &amp;+ g_K \, n^4 \, (V_K - v) \\
         &amp; + g_\text{Na} \, m^3 \, h \, (V_\text{Na} - v) + I \\
 \end{aligned}
-$$
-
-
-These equations allow to describe very precisely how an action potential is created from external currents.
-
-
-```{figure} ../img/hodgkinhuxley-data.png
----
-width: 100%
----
-Action potential for a Hodgkin-Huxley neuron.</code></pre>
+\]</span></p>
+<p>These equations allow to describe very precisely how an action potential is created from external currents.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/hodgkinhuxley-data.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Action potential for a Hodgkin-Huxley neuron.</figcaption><p></p>
+</figure>
+</div>
 </section>
-<section id="spiking-neurons" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="spiking-neurons"><span class="header-section-number">3.2</span> Spiking neurons</h2>
+<section id="spiking-neurons" class="level2">
+<h2 class="anchored" data-anchor-id="spiking-neurons">Spiking neurons</h2>
 <p>As action potentials are stereotypical, it is a waste of computational resources to model their generation precisely. What actually matters are the <strong>sub-threshold dynamics</strong>, i.e.&nbsp;what happens before the spike is emitted.</p>
 <p>The <strong>leaky integrate-and-fire</strong> (LIF; Lapicque, 1907) neuron integrates its input current and emits a spike if the membrane potential exceeds a threshold.</p>
 <p><span class="math display">\[
@@ -358,76 +341,56 @@ Action potential for a Hodgkin-Huxley neuron.</code></pre>
 <p><span class="math display">\[
     \text{if} \; v &gt; V_T \; \text{emit a spike and reset.}
 \]</span></p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/LIF-data.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 70%</td>
-</tr>
-</tbody>
-</table>
-<p>Spike emission for a LIF neuron.</p>
-<pre><code>
-Other well-known spiking neuron models include:
-
-* Izhikevich quadratic IF {cite}`Izhikevich2003`, using a quadratic function of the membrane potential and an adaptation variable $u$.
-
-$$
-    \frac{dv}{dt} = 0.04 \, v^2 + 5 \, v + 140 - u + I 
-$$
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/LIF-data.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Spike emission for a LIF neuron.</figcaption><p></p>
+</figure>
+</div>
+<p>Other well-known spiking neuron models include:</p>
+<ul>
+<li>Izhikevich quadratic IF <span class="citation" data-cites="Izhikevich2003">(<a href="../references.html#ref-Izhikevich2003" role="doc-biblioref">Izhikevich, 2003</a>)</span>, using a quadratic function of the membrane potential and an adaptation variable <span class="math inline">\(u\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+    \frac{dv}{dt} = 0.04 \, v^2 + 5 \, v + 140 - u + I
+\]</span> <span class="math display">\[
     \frac{du}{dt} = a \, (b \, v - u)
-$$
-
-* Adaptive exponential IF (AdEx, {cite}`Brette2005`), using an exponential function.
-
-$$
+\]</span></p>
+<ul>
+<li>Adaptive exponential IF (AdEx, <span class="citation" data-cites="Brette2005">(<a href="../references.html#ref-Brette2005" role="doc-biblioref">Brette and Gerstner, 2005</a>)</span>), using an exponential function.</li>
+</ul>
+<p><span class="math display">\[
 \begin{aligned}
     C \, \frac{dv}{dt} = -g_L \ (v - E_L) + &amp; g_L \, \Delta_T \, \exp(\frac{v - v_T}{\Delta_T}) \\
                                             &amp; + I - w
 \end{aligned}
-$$
-$$
+\]</span> <span class="math display">\[
     \tau_w \, \frac{dw}{dt} = a \, (v - E_L) - w
-$$
-
-```{figure} ../img/LIF-Izhi-AdEx.png
----
-width: 100%
----
-Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron models.</code></pre>
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/LIF-Izhi-AdEx.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron models.</figcaption><p></p>
+</figure>
+</div>
 <p>Contrary to the simple LIF model, these realistic neuron models can reproduce a variety of dynamics, as biological neurons do not all respond the same to an input current. Some fire regularly, some slow down with time, while others emit bursts of spikes. Modern spiking neuron models allow to recreate these variety of dynamics by changing a few parameters.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/adex.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Different parameters of the AdEx neuron model produce different spiking patterns.</p>
-<pre><code>
-
-## Rate-coded neurons
-
-&lt;div class='embed-container'&gt;&lt;iframe src='https://www.youtube.com/embed/AFzYj1VUnCg' frameborder='0' allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-
-At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the **firing rate** of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the **firing rate** of (a population of) neuron(s): the **rate-coded** neuron.
-
-```{figure} ../img/ratecoded-izhikevich.png
----
-width: 60%
----
-The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/adex.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Different parameters of the AdEx neuron model produce different spiking patterns.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="rate-coded-neurons" class="level2">
+<h2 class="anchored" data-anchor-id="rate-coded-neurons">Rate-coded neurons</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AFzYj1VUnCg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the <strong>firing rate</strong> of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the <strong>firing rate</strong> of (a population of) neuron(s): the <strong>rate-coded</strong> neuron.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-izhikevich.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.</figcaption><p></p>
+</figure>
+</div>
 <p>A rate-coded neuron is represented by two time-dependent variables:</p>
 <ul>
 <li>The <strong>“membrane potential”</strong> <span class="math inline">\(v(t)\)</span> which evolves over time using an ODE.</li>
@@ -441,27 +404,19 @@ The spiking pattern (raster plot) of a population of interconnected neurons can 
 <p><span class="math display">\[
     r(t) = f(v(t))
 \]</span></p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/ratecoded-neuron.svg</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 70%</td>
-</tr>
-</tbody>
-</table>
-<p>Rate-coded neuron.</p>
-<pre><code>
-The membrane potential uses a weighted sum of inputs (the firing rates $r_i(t)$ of other neurons) by multiplying each rate with a **weight** $w_i$ and adds a constant value $b$ (the **bias**). The activation function can be any non-linear function, usually making sure that the firing rate is positive.
-
-```{figure} ../img/ratecoded-simple.png
----
-width: 70%
----
-Firing rate of a rate-coded neuron for a step input.</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-neuron.svg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Rate-coded neuron.</figcaption><p></p>
+</figure>
+</div>
+<p>The membrane potential uses a weighted sum of inputs (the firing rates <span class="math inline">\(r_i(t)\)</span> of other neurons) by multiplying each rate with a <strong>weight</strong> <span class="math inline">\(w_i\)</span> and adds a constant value <span class="math inline">\(b\)</span> (the <strong>bias</strong>). The activation function can be any non-linear function, usually making sure that the firing rate is positive.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-simple.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Firing rate of a rate-coded neuron for a step input.</figcaption><p></p>
+</figure>
+</div>
 <p><strong>Remarks on ODEs</strong></p>
 <p>Let’s consider a simple rate-coded neuron taking a step signal <span class="math inline">\(I(t)\)</span> as input:</p>
 <p><span class="math display">\[
@@ -475,157 +430,109 @@ Firing rate of a rate-coded neuron for a step input.</code></pre>
     \frac{d v(t)}{dt} = \frac{I(t) - v(t)}{\tau}
 \]</span></p>
 <p>When <span class="math inline">\(v(t)\)</span> is quite different from <span class="math inline">\(I(t)\)</span>, the membrane potential “accelerates” to reduce the difference. When <span class="math inline">\(v(t)\)</span> is similar to <span class="math inline">\(I(t)\)</span>, the membrane potential stays constant.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/ratecoded-simple-multiple.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 70%</td>
-</tr>
-</tbody>
-</table>
-<p>The time constant <span class="math inline">\(\tau\)</span> of a rate-coded neuron influences the speed at which it reacts to inputs.</p>
-<pre><code>
-The membrane potential follows an exponential function which tries to "match" its input with a speed determined by the **time constant** $\tau$. The time constant $\tau$ determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.
-
-There exists a significant number of transfer functions that can be used:
-
-```{figure} ../img/ratecoded-transferfunctions.png
----
-width: 70%
----
-Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-simple-multiple.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">The time constant <span class="math inline">\(\tau\)</span> of a rate-coded neuron influences the speed at which it reacts to inputs.</figcaption><p></p>
+</figure>
+</div>
+<p>The membrane potential follows an exponential function which tries to “match” its input with a speed determined by the <strong>time constant</strong> <span class="math inline">\(\tau\)</span>. The time constant <span class="math inline">\(\tau\)</span> determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.</p>
+<p>There exists a significant number of transfer functions that can be used:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-transferfunctions.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..</figcaption><p></p>
+</figure>
+</div>
 <p>When using the rectifier activation function (ReLU):</p>
 <p><span class="math display">\[
     f(x) = \max(0, x)
 \]</span></p>
 <p>the membrane potential <span class="math inline">\(v(t)\)</span> can take any value, but the firing rate <span class="math inline">\(r(t)\)</span> is only positive.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/ratecoded-simple2.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>The rectifier function only keeps the positive part of the membrane potential.</p>
-<pre><code>
-When using the logistic (or sigmoid) activation function:
-
-$$
-    f(x) = \frac{1}{1 + \exp(-x)}
-$$
-
-the firing rate $r(t)$ is bounded between 0 and 1, but responds for negative membrane potentials.
-
-```{figure} ../img/ratecoded-simple3.png
----
-width: 80%
----
-The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.</code></pre>
-</section>
-<section id="artificial-neurons" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="artificial-neurons"><span class="header-section-number">3.3</span> Artificial neurons</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/NVj17dve8B8" frameborder="0" allowfullscreen="">
-</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-simple2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">The rectifier function only keeps the positive part of the membrane potential.</figcaption><p></p>
+</figure>
 </div>
+<p>When using the logistic (or sigmoid) activation function:</p>
+<p><span class="math display">\[
+    f(x) = \frac{1}{1 + \exp(-x)}
+\]</span></p>
+<p>the firing rate <span class="math inline">\(r(t)\)</span> is bounded between 0 and 1, but responds for negative membrane potentials.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ratecoded-simple3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="artificial-neurons" class="level2">
+<h2 class="anchored" data-anchor-id="artificial-neurons">Artificial neurons</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/NVj17dve8B8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>By omitting the dynamics of the rate-coded neuron, one obtains the very simple <strong>artificial neuron</strong> (McCulloch and Pitts, 1943):</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/artificialneuron.svg</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 70%</td>
-</tr>
-</tbody>
-</table>
-<p>Artificial neuron.</p>
-<pre><code>
-An artificial neuron sums its inputs $x_1, \ldots, x_d$ by multiplying them with weights $w_1, \ldots, w_d$, adds a bias $b$ and transforms the result into an output $y$ using an activation function $f$.
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Artificial neuron.</figcaption><p></p>
+</figure>
+</div>
+<p>An artificial neuron sums its inputs <span class="math inline">\(x_1, \ldots, x_d\)</span> by multiplying them with weights <span class="math inline">\(w_1, \ldots, w_d\)</span>, adds a bias <span class="math inline">\(b\)</span> and transforms the result into an output <span class="math inline">\(y\)</span> using an activation function <span class="math inline">\(f\)</span>.</p>
+<p><span class="math display">\[
     y = f( \sum_{i=1}^d w_i \, x_i + b)
-$$
-
-
-The output $y$ directly reflects the input, without temporal integration. The weighted sum of inputs + bias $\sum_{i=1}^d w_i \, x_i + b$ is called the **net activation**. 
-
-This overly simplified neuron model is the basic unit of the **artificial neural networks** (ANN) used in machine learning / deep learning.
-
-**Artificial neurons and hyperplanes**
-
-Let's consider an artificial neuron with only two inputs $x_1$ and $x_2$.
-
-The net activation $w_1 \, x_1 + w_2 \, x_2 + b$ is the equation of a line in the space $(x_1, x_2)$. 
-
-$$
+\]</span></p>
+<p>The output <span class="math inline">\(y\)</span> directly reflects the input, without temporal integration. The weighted sum of inputs + bias <span class="math inline">\(\sum_{i=1}^d w_i \, x_i + b\)</span> is called the <strong>net activation</strong>.</p>
+<p>This overly simplified neuron model is the basic unit of the <strong>artificial neural networks</strong> (ANN) used in machine learning / deep learning.</p>
+<p><strong>Artificial neurons and hyperplanes</strong></p>
+<p>Let’s consider an artificial neuron with only two inputs <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p>
+<p>The net activation <span class="math inline">\(w_1 \, x_1 + w_2 \, x_2 + b\)</span> is the equation of a line in the space <span class="math inline">\((x_1, x_2)\)</span>.</p>
+<p><span class="math display">\[
     w_1 \, x_1 + w_2 \, x_2 + b = 0 \Leftrightarrow x_2 = - \frac{w_1}{w_2} \, x_1 - \frac{b}{w_2}
-$$
-
-
-
-```{figure} ../img/artificialneuron-simple.png
----
-width: 50%
----
-The net activation represents an hyperplane in 2D.</code></pre>
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/artificialneuron-simple.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">The net activation represents an hyperplane in 2D.</figcaption><p></p>
+</figure>
+</div>
 <p>The net activation is a line in 2D, a plane in 3D, etc. Generally, the net activation describes an <strong>hyperplane</strong> in the input space with <span class="math inline">\(d\)</span> dimensions <span class="math inline">\((x_1, x_2, \ldots, x_d)\)</span>. An hyperplane has one dimension less than the space.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/hyperplane.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 50%</td>
-</tr>
-</tbody>
-</table>
-<p>Hyperplane in 3D. Source: <a href="https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif" class="uri">https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif</a></p>
-<pre><code>
-
-We can write the net activation using a **weight vector** $\mathbf{w}$ and a **bias** $b$:
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/hyperplane.gif" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Hyperplane in 3D. Source: <a href="https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif" class="uri">https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif</a></figcaption><p></p>
+</figure>
+</div>
+<p>We can write the net activation using a <strong>weight vector</strong> <span class="math inline">\(\mathbf{w}\)</span> and a <strong>bias</strong> <span class="math inline">\(b\)</span>:</p>
+<p><span class="math display">\[
     \sum_{i=1}^d w_i \, x_i + b  = \langle\mathbf{w} \cdot \mathbf{x} \rangle + b
-$$
-
-with:
-
-$$
+\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
     \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \\ \ldots \\ w_d \end{bmatrix} \qquad \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \ldots \\ x_d \end{bmatrix}
-$$
-
-$\langle \cdot \rangle$ is the **dot product** (aka inner product, scalar product) between the **input vector** $\mathbf{x}$ and the weight vector $\mathbf{w}$.
-
-The weight vector is orthogonal to the hyperplane $(\mathbf{w}, b)$ and defines its orientation. $b$ is the "distance" between the hyperplane and the origin. The hyperplane separates the input space into two parts:
-
-* $\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &gt; 0$ for all points $\mathbf{x}$ **above** the hyperplane.
-
-* $\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &lt; 0$ for all points $\mathbf{x}$ **below** the hyperplane.
-
-By looking at the **sign** of the net activation, we can separate the input space into two classes. This will be the main principle of **linear classification**.
-
-
-```{figure} ../img/projection.svg
----
-width: 80%
----
-The sign of the projection of an input $\mathbf{x}$ on the hyperplane tells whether the input is above or below the hyperplane.</code></pre>
+\]</span></p>
+<p><span class="math inline">\(\langle \cdot \rangle\)</span> is the <strong>dot product</strong> (aka inner product, scalar product) between the <strong>input vector</strong> <span class="math inline">\(\mathbf{x}\)</span> and the weight vector <span class="math inline">\(\mathbf{w}\)</span>.</p>
+<p>The weight vector is orthogonal to the hyperplane <span class="math inline">\((\mathbf{w}, b)\)</span> and defines its orientation. <span class="math inline">\(b\)</span> is the “signed distance” between the hyperplane and the origin. The hyperplane separates the input space into two parts:</p>
+<ul>
+<li><p><span class="math inline">\(\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &gt; 0\)</span> for all points <span class="math inline">\(\mathbf{x}\)</span> <strong>above</strong> the hyperplane.</p></li>
+<li><p><span class="math inline">\(\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &lt; 0\)</span> for all points <span class="math inline">\(\mathbf{x}\)</span> <strong>below</strong> the hyperplane.</p></li>
+</ul>
+<p>By looking at the <strong>sign</strong> of the net activation, we can separate the input space into two classes. This will be the main principle of <strong>linear classification</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/projection.svg" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">The sign of the projection of an input <span class="math inline">\(\mathbf{x}\)</span> on the hyperplane tells whether the input is above or below the hyperplane.</figcaption><p></p>
+</figure>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Brette2005" class="csl-entry" role="doc-biblioentry">
+Brette, R., and Gerstner, W. (2005). Adaptive <span class="nocase">Exponential Integrate-and-Fire Model</span> as an <span>Effective Description</span> of <span>Neuronal Activity</span>. <em>Journal of Neurophysiology</em> 94, 3637–3642. doi:<a href="https://doi.org/10.1152/jn.00686.2005">10.1152/jn.00686.2005</a>.
+</div>
+<div id="ref-Izhikevich2003" class="csl-entry" role="doc-biblioentry">
+Izhikevich, E. M. (2003). Simple model of spiking neurons. <em>IEEE transactions on neural networks</em> 14, 1569–72. doi:<a href="https://doi.org/10.1109/TNN.2003.820440">10.1109/TNN.2003.820440</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -727,15 +634,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../notes/1.2-Math.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Math basics (optional)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notes/2.1-Optimization.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Optimization</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -743,4 +650,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

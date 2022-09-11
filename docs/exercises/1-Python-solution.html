@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 3&nbsp; Introduction To Python</title>
+<title>Neurocomputing - 7&nbsp; Introduction To Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../references.html" rel="next">
-<link href="../notes/1.2-Math.html" rel="prev">
+<link href="../notes/2.3-LinearClassification.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,6 +123,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 </head>
@@ -133,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction To Python</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Introduction To Python</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -141,12 +142,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -158,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Course description</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -171,18 +175,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a>
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">Linear algorithms</span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">Neural networks</span>
@@ -212,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
       </ul>
@@ -231,36 +262,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation"><span class="toc-section-number">3.1</span>  Installation</a></li>
-  <li><a href="#working-with-python" id="toc-working-with-python" class="nav-link" data-scroll-target="#working-with-python"><span class="toc-section-number">3.2</span>  Working With Python</a>
+  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#working-with-python" id="toc-working-with-python" class="nav-link" data-scroll-target="#working-with-python">Working With Python</a>
   <ul class="collapse">
-  <li><a href="#python-interpreter" id="toc-python-interpreter" class="nav-link" data-scroll-target="#python-interpreter"><span class="toc-section-number">3.2.1</span>  Python Interpreter</a></li>
-  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts"><span class="toc-section-number">3.2.2</span>  Scripts</a></li>
-  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks"><span class="toc-section-number">3.2.3</span>  Jupyter Notebooks</a></li>
+  <li><a href="#python-interpreter" id="toc-python-interpreter" class="nav-link" data-scroll-target="#python-interpreter">Python Interpreter</a></li>
+  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts">Scripts</a></li>
+  <li><a href="#jupyter-notebooks" id="toc-jupyter-notebooks" class="nav-link" data-scroll-target="#jupyter-notebooks">Jupyter Notebooks</a></li>
   </ul></li>
-  <li><a href="#basics-in-python" id="toc-basics-in-python" class="nav-link" data-scroll-target="#basics-in-python"><span class="toc-section-number">3.3</span>  Basics In Python</a>
+  <li><a href="#basics-in-python" id="toc-basics-in-python" class="nav-link" data-scroll-target="#basics-in-python">Basics In Python</a>
   <ul class="collapse">
-  <li><a href="#print-statement" id="toc-print-statement" class="nav-link" data-scroll-target="#print-statement"><span class="toc-section-number">3.3.1</span>  Print Statement</a></li>
-  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types"><span class="toc-section-number">3.3.2</span>  Data Types</a></li>
-  <li><a href="#assignment-statement-and-operators" id="toc-assignment-statement-and-operators" class="nav-link" data-scroll-target="#assignment-statement-and-operators"><span class="toc-section-number">3.3.3</span>  Assignment Statement And Operators</a></li>
-  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings"><span class="toc-section-number">3.3.4</span>  Strings</a></li>
-  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists"><span class="toc-section-number">3.3.5</span>  Lists</a></li>
-  <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries"><span class="toc-section-number">3.3.6</span>  Dictionaries</a></li>
-  <li><a href="#if-statement" id="toc-if-statement" class="nav-link" data-scroll-target="#if-statement"><span class="toc-section-number">3.3.7</span>  If Statement</a></li>
-  <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops"><span class="toc-section-number">3.3.8</span>  For loops</a></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="toc-section-number">3.3.9</span>  Functions</a></li>
-  <li><a href="#classes" id="toc-classes" class="nav-link" data-scroll-target="#classes"><span class="toc-section-number">3.3.10</span>  Classes</a></li>
+  <li><a href="#print-statement" id="toc-print-statement" class="nav-link" data-scroll-target="#print-statement">Print Statement</a></li>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">Data Types</a></li>
+  <li><a href="#assignment-statement-and-operators" id="toc-assignment-statement-and-operators" class="nav-link" data-scroll-target="#assignment-statement-and-operators">Assignment Statement And Operators</a></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings">Strings</a></li>
+  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">Lists</a></li>
+  <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries">Dictionaries</a></li>
+  <li><a href="#if-statement" id="toc-if-statement" class="nav-link" data-scroll-target="#if-statement">If Statement</a></li>
+  <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">For loops</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a></li>
+  <li><a href="#classes" id="toc-classes" class="nav-link" data-scroll-target="#classes">Classes</a></li>
   </ul></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="toc-section-number">3.4</span>  Exercise</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction To Python</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Introduction To Python</span></h1>
 </div>
 
 
@@ -274,6 +305,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>Notebook: <a href="https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/1-Python.ipynb" download="1-Python.ipynb">download .ipynb</a> or <a href="https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/1-Python.ipynb" target="_blank">run on colab</a>.</p>
+<p>Solution: <a href="https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/1-Python-solution.ipynb" download="">download .ipynb</a> or <a href="https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/1-Python-solution.ipynb" target="_blank">run on colab</a>.</p>
 <p>Python is a powerful, flexible programming language widely used for scientific computing, in web/Internet development, to write desktop graphical user interfaces (GUIs), create games, and much more. It became the <em>de facto</em> standard for machine learning, with a huge variety of specialized libraries such as:</p>
 <ul>
 <li><code>scikit-learn</code> <a href="https://scikit-learn.org/" class="uri">https://scikit-learn.org/</a>, a toolbox with a multitude of ML algorithms already implemented.</li>
@@ -292,8 +325,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>An Introduction to Interactive Programming in Python on <a href="https://www.coursera.org/course/interactivepython">Coursera</a>.</li>
 </ul>
 <p>This notebook only introduces you to the basics, so feel free to study additional resources if you want to master Python programming.</p>
-<section id="installation" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">3.1</span> Installation</h2>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>Python should be already installed if you use Linux, a very old version if you use MacOS, and probably nothing under Windows. Moreover, Python 2.7 became obsolete in December 2019 but is still the default on some distributions.</p>
 <p>For these reasons, we strongly recommend installing Python 3 using the Anaconda distribution:</p>
 <p><a href="https://www.anaconda.com/products/individual" class="uri">https://www.anaconda.com/products/individual</a></p>
@@ -306,11 +339,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://colab.research.google.com/" class="uri">https://colab.research.google.com/</a></p>
 <p>Colab has all major ML packages already installed, so you do not have to care about anything. Under conditions, you can also use a GPU for free (but for maximally 24 hours in a row).</p>
 </section>
-<section id="working-with-python" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="working-with-python"><span class="header-section-number">3.2</span> Working With Python</h2>
+<section id="working-with-python" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-python">Working With Python</h2>
 <p>There are basically three ways to program in Python: the interpreter for small commands, scripts for longer programs and notebooks (as here) for interactive programming.</p>
-<section id="python-interpreter" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="python-interpreter"><span class="header-section-number">3.2.1</span> Python Interpreter</h3>
+<section id="python-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="python-interpreter">Python Interpreter</h3>
 <p>To start the Python interpreter, simply type its name in a terminal under Linux:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@machine</span> ~ $ python</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Python <span class="fl">3.7.4</span> (default, Jul <span class="dv">16</span> <span class="dv">2019</span>, <span class="dv">0</span><span class="er">7</span>:<span class="dv">12</span>:<span class="dv">58</span>) </span>
@@ -323,8 +356,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To exit Python call the <code>exit()</code> function (or <code>Ctrl+d</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> exit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="scripts" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="scripts"><span class="header-section-number">3.2.2</span> Scripts</h3>
+<section id="scripts" class="level3">
+<h3 class="anchored" data-anchor-id="scripts">Scripts</h3>
 <p>Instead of using the interpreter, you can run scripts which can be executed sequentially. Simply edit a text file called <code>MyScript.py</code> containing for example:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MyScript.py</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Implements the Hello World example.</span></span>
@@ -336,8 +369,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> MyScript.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As it is a scripted language, each instruction in the script is executed from the beginning to the end, except for the declared functions or classes which can be used later.</p>
 </section>
-<section id="jupyter-notebooks" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="jupyter-notebooks"><span class="header-section-number">3.2.3</span> Jupyter Notebooks</h3>
+<section id="jupyter-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h3>
 <p>A third recent (but very useful) option is to use Jupyter notebooks (formerly IPython notebooks).</p>
 <p>Jupyter notebooks allow you to edit Python code in your browser (but also Julia, R, Scala…) and run it locally.</p>
 <p>To launch a Jupyter notebook, type in a terminal:</p>
@@ -386,10 +419,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Take a moment to explore the options in the menu (Insert cells, Run cells, Download as Python, etc).</p>
 </section>
 </section>
-<section id="basics-in-python" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="basics-in-python"><span class="header-section-number">3.3</span> Basics In Python</h2>
-<section id="print-statement" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="print-statement"><span class="header-section-number">3.3.1</span> Print Statement</h3>
+<section id="basics-in-python" class="level2">
+<h2 class="anchored" data-anchor-id="basics-in-python">Basics In Python</h2>
+<section id="print-statement" class="level3">
+<h3 class="anchored" data-anchor-id="print-statement">Print Statement</h3>
 <p>In Python 3, the <code>print()</code> function is a regular function:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(value1, value2, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can give it as many arguments as you want (of whatever type), they will be printed one after another separated by spaces.</p>
@@ -404,8 +437,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="data-types" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="data-types"><span class="header-section-number">3.3.2</span> Data Types</h3>
+<section id="data-types" class="level3">
+<h3 class="anchored" data-anchor-id="data-types">Data Types</h3>
 <p>As Python is an interpreted language, variables can be assigned without specifying their type: it will be inferred at execution time.</p>
 <p>The only thing that counts is how you initialize them and which operations you perform on them.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">42</span>          <span class="co"># Integer</span></span>
@@ -436,10 +469,10 @@ Value of e is True , Type of e is: &lt;class 'bool'&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="assignment-statement-and-operators" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="assignment-statement-and-operators"><span class="header-section-number">3.3.3</span> Assignment Statement And Operators</h3>
-<section id="assignment-statement" class="level4" data-number="3.3.3.1">
-<h4 data-number="3.3.3.1" class="anchored" data-anchor-id="assignment-statement"><span class="header-section-number">3.3.3.1</span> Assignment Statement</h4>
+<section id="assignment-statement-and-operators" class="level3">
+<h3 class="anchored" data-anchor-id="assignment-statement-and-operators">Assignment Statement And Operators</h3>
+<section id="assignment-statement" class="level4">
+<h4 class="anchored" data-anchor-id="assignment-statement">Assignment Statement</h4>
 <p>The assignment can be done for a single variable, or for a tuple of variables separated by commas:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">7</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -458,8 +491,8 @@ Value of e is True , Type of e is: &lt;class 'bool'&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="operators" class="level4" data-number="3.3.3.2">
-<h4 data-number="3.3.3.2" class="anchored" data-anchor-id="operators"><span class="header-section-number">3.3.3.2</span> Operators</h4>
+<section id="operators" class="level4">
+<h4 class="anchored" data-anchor-id="operators">Operators</h4>
 <p>Most usual operators are available:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> , <span class="op">-</span> , <span class="op">*</span> , <span class="op">**</span> , <span class="op">/</span> , <span class="op">//</span> , <span class="op">%</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="op">==</span> , <span class="op">!=</span> , <span class="op">&lt;&gt;</span> , <span class="op">&gt;</span> , <span class="op">&gt;=</span> , <span class="op">&lt;</span> , <span class="op">&lt;=</span></span>
@@ -483,8 +516,8 @@ Value of e is True , Type of e is: &lt;class 'bool'&gt;</code></pre>
 </div>
 </section>
 </section>
-<section id="strings" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="strings"><span class="header-section-number">3.3.4</span> Strings</h3>
+<section id="strings" class="level3">
+<h3 class="anchored" data-anchor-id="strings">Strings</h3>
 <p>A string in Python can be surrounded by either single or double quotes (no difference as long as they match). Three double quotes allow to print new lines directly (equivalent of <code>\n</code> in C).</p>
 <p><strong>Q:</strong> Use the function <code>print()</code> to see the results of the following statements:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="st">'abc'</span></span>
@@ -530,8 +563,8 @@ ccc</code></pre>
 </div>
 </div>
 </section>
-<section id="lists" class="level3" data-number="3.3.5">
-<h3 data-number="3.3.5" class="anchored" data-anchor-id="lists"><span class="header-section-number">3.3.5</span> Lists</h3>
+<section id="lists" class="level3">
+<h3 class="anchored" data-anchor-id="lists">Lists</h3>
 <p>Python knows a number of compound data types, used to group together other values. The most versatile is the list, which can be written as a list of comma-separated values (items) between square brackets <code>[]</code>. List items need not all to have the same type.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="st">'spam'</span>, <span class="st">'eggs'</span>, <span class="dv">100</span>, <span class="dv">1234</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Q:</strong> Define a list of various variables and print it:</p>
@@ -636,8 +669,8 @@ b : [9, 2, 3]</code></pre>
 </div>
 </div>
 </section>
-<section id="dictionaries" class="level3" data-number="3.3.6">
-<h3 data-number="3.3.6" class="anchored" data-anchor-id="dictionaries"><span class="header-section-number">3.3.6</span> Dictionaries</h3>
+<section id="dictionaries" class="level3">
+<h3 class="anchored" data-anchor-id="dictionaries">Dictionaries</h3>
 <p>Another useful data type built into Python is the dictionary. Unlike lists, which are indexed by a range of numbers from 0 to length -1, dictionaries are indexed by keys, which can be any <em>immutable</em> type; strings and numbers can always be keys.</p>
 <p>Dictionaries can be defined by curly braces <code>{}</code> instead of square brackets. The content is defined by <code>key:item</code> pairs, the item can be of any type:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>tel <span class="op">=</span> {</span>
@@ -682,8 +715,8 @@ dict_values([4098, 4139, 4127])</code></pre>
 </div>
 </div>
 </section>
-<section id="if-statement" class="level3" data-number="3.3.7">
-<h3 data-number="3.3.7" class="anchored" data-anchor-id="if-statement"><span class="header-section-number">3.3.7</span> If Statement</h3>
+<section id="if-statement" class="level3">
+<h3 class="anchored" data-anchor-id="if-statement">If Statement</h3>
 <p>Perhaps the most well-known conditional statement type is the <code>if</code> statement. For example:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">0</span> :</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'x ='</span>, x, <span class="st">'is negative'</span>)</span>
@@ -742,8 +775,8 @@ dict_values([4098, 4139, 4127])</code></pre>
 <span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    has_zero <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note the use of the <code>in</code> keyword to know if an element exists in a list.</p>
 </section>
-<section id="for-loops" class="level3" data-number="3.3.8">
-<h3 data-number="3.3.8" class="anchored" data-anchor-id="for-loops"><span class="header-section-number">3.3.8</span> For loops</h3>
+<section id="for-loops" class="level3">
+<h3 class="anchored" data-anchor-id="for-loops">For loops</h3>
 <p>The for statement in Python differs a bit from what you may be used to in C, Java or Pascal.</p>
 <p>Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving the user the ability to define both the iteration step and halting condition (as C), Python’s for statement iterates over the items of any sequence (a list or a string), in the order they appear in the sequence.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>list_words <span class="op">=</span> [<span class="st">'cat'</span>, <span class="st">'window'</span>, <span class="st">'defenestrate'</span>]</span>
@@ -821,8 +854,8 @@ guido 4127</code></pre>
 </div>
 </div>
 </section>
-<section id="functions" class="level3" data-number="3.3.9">
-<h3 data-number="3.3.9" class="anchored" data-anchor-id="functions"><span class="header-section-number">3.3.9</span> Functions</h3>
+<section id="functions" class="level3">
+<h3 class="anchored" data-anchor-id="functions">Functions</h3>
 <p>As in most procedural languages, you can define functions. Functions are defined by the keyword <code>def</code>. Only the parameters of the function are specified (without type), not the return values.</p>
 <p>The content of the function has to be incremented as with for loops.</p>
 <p>Return values can be specified with the <code>return</code> keywork. It is possible to return several values at the same time, separated by commas.</p>
@@ -917,8 +950,8 @@ Hello Jack! I am Julien!</code></pre>
 </div>
 </div>
 </section>
-<section id="classes" class="level3" data-number="3.3.10">
-<h3 data-number="3.3.10" class="anchored" data-anchor-id="classes"><span class="header-section-number">3.3.10</span> Classes</h3>
+<section id="classes" class="level3">
+<h3 class="anchored" data-anchor-id="classes">Classes</h3>
 <p>Classes are structures allowing to:</p>
 <ol type="1">
 <li>Store information in an object.</li>
@@ -1012,8 +1045,8 @@ Hello Jack! I am Julien!</code></pre>
 </div>
 </section>
 </section>
-<section id="exercise" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="exercise"><span class="header-section-number">3.4</span> Exercise</h2>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
 <p>In cryptography, a Caesar cipher is a very simple encryption technique in which each letter in the plain text is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it to communicate with his generals. ROT-13 (“rotate by 13 places”) is a widely used example of a Caesar cipher where the shift is 13. In Python, the key for ROT-13 may be represented by means of the following dictionary:</p>
 <div class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>code <span class="op">=</span> {<span class="st">'a'</span>:<span class="st">'n'</span>, <span class="st">'b'</span>:<span class="st">'o'</span>, <span class="st">'c'</span>:<span class="st">'p'</span>, <span class="st">'d'</span>:<span class="st">'q'</span>, <span class="st">'e'</span>:<span class="st">'r'</span>, <span class="st">'f'</span>:<span class="st">'s'</span>,</span>
@@ -1150,10 +1183,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../notes/1.2-Math.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></span>
+      <a href="../notes/2.3-LinearClassification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Linear classification</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1166,4 +1199,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

@@ -1,11 +1,10 @@
 # Optimization
 
-
-Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.1-Optimization.pdf)
+Slides: [html](../slides/2.1-Optimization.html){target="_blank"} [pdf](../slides/pdf/2.1-Optimization.pdf){target="_blank"}
 
 ## Analytic optimization
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/1_sPEA6nnIA' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  1_sPEA6nnIA >}}
 
 Machine learning is all about optimization:
 
@@ -27,12 +26,7 @@ $$
 
 The sign of the second order derivative tells us whether it is a maximum or minimum. There can be multiple minima or maxima (or none) depending on the function. The "best" minimum (with the lowest value among all minima) is called the **global minimum**. The others are called **local minima**.
 
-```{figure} ../img/localminimum.png
----
-width: 60%
----
-Functions (may) have one global minimum but several local minima.
-```
+![Functions (may) have one global minimum but several local minima.](../slides/img/localminimum.png){width=60%}
 
 
 **Multivariate functions**
@@ -52,16 +46,11 @@ $$
     \nabla_{x, y} \, f(x^*, y^*) = \begin{bmatrix} \dfrac{\partial f(x^*, y^*)}{\partial x} \\ \dfrac{\partial f(x^*, y^*)}{\partial y} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
 $$
 
-```{figure} ../img/optimization-example-multivariate.png
----
-width: 80%
----
-Multivariate optimization of $f(x, y) = (x - 1)^2 + y^2 + 1$. The minimum is in $(1, 0)$.
-```
+![Multivariate optimization of $f(x, y) = (x - 1)^2 + y^2 + 1$. The minimum is in $(1, 0)$.](../slides/img/optimization-example-multivariate.png){width=80%}
 
 ## Gradient descent
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/UpJL2M6GKog' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  UpJL2M6GKog >}}
 
 In machine learning, we generally do not have access to the analytical form of the objective function. We can not therefore get its derivative and search where it is 0. However, we have access to its value (and derivative) for certain values, for example:
 
@@ -72,12 +61,7 @@ $$
 We can "ask" the model for as many values as we want, but we never get its analytical form. For most useful problems, the function would be too complex to differentiate anyway.
 
 
-```{figure} ../img/derivative-approx.png
----
-width: 60%
----
-Euler method: the derivative of a function is the slope of its tangent.
-```
+![Euler method: the derivative of a function is the slope of its tangent.](../slides/img/derivative-approx.png){width=60%}
 
 Let's remember the definition of the derivative of a function. The derivative $f'(x)$ is defined by the slope of the tangent of the function:
 
@@ -114,12 +98,7 @@ The **change** $h$ in the value of $x$ must have the opposite sign of $f'(x)$ in
 
 **Gradient descent** (GD) is a first-order method to iteratively find the minimum of a function $f(x)$. It starts with a random estimate $x_0$ and iteratively changes its value so that it becomes closer to the minimum.
 
-```{figure} ../img/gradient.png
----
-width: 70%
----
-Gradient descent iteratively modifies the estimate $x_n$ in the opposite direction of the derivative.
-```
+![Gradient descent iteratively modifies the estimate $x_n$ in the opposite direction of the derivative.](../slides/img/gradient.png){width=70%}
 
 It creates a series of estimates $[x_0, x_1, x_2, \ldots]$ that converge to a local minimum of $f$. Each element of the series is calculated based on the previous element and the derivative of the function in that element:
 
@@ -146,12 +125,7 @@ If the function is locally increasing (resp. decreasing), the new estimate shoul
 
 There is theoretically no end to the GD algorithm: we iterate forever and always get closer to the minimum. The algorithm can be stopped when the change $\Delta x$ is below a threshold.
 
-```{figure} ../img/gradient-descent-animation.gif
----
-width: 80%
----
-Visualization of Gradient Descent on a quadratic function. Notice how the speed of convergence slows down when approaching the minimum.
-```
+![Visualization of Gradient Descent on a quadratic function. Notice how the speed of convergence slows down when approaching the minimum.](../slides/img/gradient-descent-animation.gif){width=80%}
 
 
 Gradient descent can be applied to multivariate functions:
@@ -182,31 +156,21 @@ $$
 The change in the estimation is in the **opposite direction of the gradient**, hence the name **gradient descent**.
 
 
-```{figure} ../img/gradient-descent-animation-multivariate.gif
----
-width: 100%
----
-Visualization of Gradient Descent on a multivariate function in 2 dimensions.
-```
+![Visualization of Gradient Descent on a multivariate function in 2 dimensions.](../slides/img/gradient-descent-animation-multivariate.gif){width=100%}
 
 The choice of the learning rate $\eta$ is critical:
 
 * If it is too small, the algorithm will need a lot of iterations to converge.
 * If it is too big, the algorithm can oscillate around the desired values without ever converging.
 
-```{figure} ../img/gradient-descent-learningrate.gif
----
-width: 100%
----
-Influence of the learning on convergence: too small (red) and it takes forever, too high (green) and convergence is unstable. Finding its optimal value (blue) is hard as it depends on the function itself.
-```
+![Influence of the learning on convergence: too small (red) and it takes forever, too high (green) and convergence is unstable. Finding its optimal value (blue) is hard as it depends on the function itself.](../slides/img/gradient-descent-learningrate.gif){width=100%}
 
 Gradient descent is not optimal: it always finds a local minimum, but there is no guarantee that it is the global minimum. The found solution depends on the initial choice of $x_0$. If you initialize the parameters near to the global minimum, you are lucky. But how? This will be a big issue in neural networks.
 
 
 ## Regularization
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/LI5ExC4d9Js' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  LI5ExC4d9Js >}}
 
 
 ### L2 - Regularization
@@ -220,12 +184,7 @@ $$
 As it does not depend on $y$, whatever initial value $y_0$ will be considered as a solution. As we will see later, this is something we do not want.
 
 
-```{figure} ../img/gradient-descent-animation-regularization1.gif
----
-width: 100%
----
-Function with an infinity of minima: as long as $x=1$, each point on the vertical line is a minimum.
-```
+![Function with an infinity of minima: as long as $x=1$, each point on the vertical line is a minimum.](../slides/img/gradient-descent-animation-regularization1.gif){width=100%}
 
 To obtain a single solution, we may want to put the additional **constraint** that both $x$ and $y$ should be as small as possible. One possibility is to also minimize the **Euclidian norm** (or **L2-norm**) of the vector $\mathbf{x} = [x, y]$.
 
@@ -252,37 +211,17 @@ $$
 $$
 
 
-```{figure} ../img/gradient-descent-animation-regularization2.gif
----
-width: 100%
----
-Gradient descent with L2 regularization, using $\lambda = 0.1$.
-```
+![Gradient descent with L2 regularization, using $\lambda = 0.1$.](../slides/img/gradient-descent-animation-regularization2.gif){width=100%}
 
 You may notice that the result of the optimization is a bit off, it is not exactly $(1, 0)$. This is because we do not optimize $f(x, y)$ directly, but $\mathcal{L}(x, y)$. Let's have a look at the landscape of the loss function:
 
-```{figure} ../img/gradient-descent-animation-regularization3.gif
----
-width: 100%
----
-Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)$ with $\lambda = 0.1$.
-```
+![Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)$ with $\lambda = 0.1$.](../slides/img/gradient-descent-animation-regularization3.gif){width=100%}
 
 The optimization with GD indeed works, it is just that the function is different. The constraint on the Euclidian norm "attracts" or "distorts" the function towards $(0, 0)$. This may seem counter-intuitive, but we will see with deep networks that we can live with it. Let's now look at what happens when we increase $\lambda$ to 5:
 
-```{figure} ../img/gradient-descent-animation-regularization4.gif
----
-width: 100%
----
-Gradient descent with L2 regularization, using $\lambda = 5$.
-```
+![Gradient descent with L2 regularization, using $\lambda = 5$.](../slides/img/gradient-descent-animation-regularization4.gif){width=100%}
 
-```{figure} ../img/gradient-descent-animation-regularization5.gif
----
-width: 100%
----
-Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)$ with $\lambda = 5$.
-```
+![Landscape of the loss function $\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)$ with $\lambda = 5$.](../slides/img/gradient-descent-animation-regularization5.gif){width=100%}
 
 Now the result of the optimization is totally wrong: the constraint on the norm completely dominates the optimization process.
 
@@ -299,12 +238,15 @@ $\lambda$ controls which of the two objectives, $f(x, y)$ or $x^2 + y^2$, has th
 The right value for $\lambda$ is hard to find. We will see later methods to experimentally find its most adequate value.
 
 
-```{note}
+:::{.callout-note}
 Regularization is a form of **constrained optimization**. What we actually want to solve is the constrained optimization problem:
 
 $$
-    \min_{x, y} \qquad f(x, y) \\
-    \text{so that} \qquad x^2 + y^2 < \delta
+    \min_{x, y} \qquad f(x, y)
+$$
+so that:
+$$
+    x^2 + y^2 < \delta
 $$
 
 i.e. minimize $f(x, y)$ while keeping the norm of $[x, y]$ below a threshold $\delta$. **Lagrange optimization** (technically KKT optimization; see the course Introduction to AI) allows to solve that problem by searching the minimum of the generalized Lagrange function:
@@ -314,7 +256,7 @@ $$
 $$
 
 Regularization is a special case of Lagrange optimization, as it considers $\lambda$ to be fixed, while it is an additional variable in Lagrange optimization. When differentiating this function, $\delta$ disappears anyway, so it is equivalent to our regularized loss function.
-```
+:::
 
 ### L1 - Regularization
 
@@ -332,11 +274,6 @@ $$
 
 It tends to lead to **sparser** value of $(x, y)$, i.e. either $x$ or $y$ will be close or equal to 0.
 
-```{figure} ../img/gradient-descent-animation-regularization6.gif
----
-width: 100%
----
-Gradient descent with L1 regularization, using $\lambda = 0.1$.
-```
+![Gradient descent with L1 regularization, using $\lambda = 0.1$.](../slides/img/gradient-descent-animation-regularization6.gif){width=100%}
 
 Both L1 and L2 regularization can be used in neural networks depending on the desired effect.

@@ -8,6 +8,9 @@ format:
     chalkboard: 
       buttons: false
 
+    revealjs-plugins:
+      - pointer
+
 title-slide-attributes:
     data-background-image: "img/tuc.svg"
     data-background-size: 30%

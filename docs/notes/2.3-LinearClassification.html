@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notes/2.4-Multiclassification.html" rel="next">
+<link href="../exercises/1-Python-solution.html" rel="next">
 <link href="../notes/2.2-LinearRegression.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -60,6 +60,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -71,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Linear classification</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -79,12 +80,15 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -96,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Course description</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -109,17 +113,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a>
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></a>
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
   </div>
 </li>
       </ul>
@@ -134,27 +138,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></a>
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.4-Multiclassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-class classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/2.5-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Learning theory</span></a>
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Linear classification</span></a>
   </div>
 </li>
       </ul>
@@ -178,7 +172,19 @@ ul.task-list li input[type="checkbox"] {
       <span class="sidebar-item-text sidebar-link text-start">Outlook</span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">Exercises</span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -194,17 +200,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hard-linear-classification" id="toc-hard-linear-classification" class="nav-link active" data-scroll-target="#hard-linear-classification"><span class="toc-section-number">6.1</span>  Hard linear classification</a></li>
-  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="toc-section-number">6.2</span>  Maximum Likelihood Estimation</a></li>
+  <li><a href="#hard-linear-classification" id="toc-hard-linear-classification" class="nav-link active" data-scroll-target="#hard-linear-classification">Hard linear classification</a>
+  <ul class="collapse">
+  <li><a href="#perceptron-algorithm" id="toc-perceptron-algorithm" class="nav-link" data-scroll-target="#perceptron-algorithm">Perceptron algorithm</a></li>
+  <li><a href="#stochastic-gradient-descent" id="toc-stochastic-gradient-descent" class="nav-link" data-scroll-target="#stochastic-gradient-descent">Stochastic Gradient descent</a></li>
+  </ul></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">Maximum Likelihood Estimation</a></li>
+  <li><a href="#soft-linear-classification-logistic-regression" id="toc-soft-linear-classification-logistic-regression" class="nav-link" data-scroll-target="#soft-linear-classification-logistic-regression">Soft linear classification : Logistic regression</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Linear classification</span></h1>
 </div>
 
 
@@ -218,387 +229,293 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Slides: <a href="https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/2.4-LinearClassification.pdf">pdf</a></p>
-<section id="hard-linear-classification" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="hard-linear-classification"><span class="header-section-number">6.1</span> Hard linear classification</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/jZoJHIHi6Qw" frameborder="0" allowfullscreen="">
-</iframe>
-</div>
+<p>Slides: <a href="../slides/2.3-LinearClassification.html" target="_blank">html</a> <a href="../slides/pdf/2.3-LinearClassification.pdf" target="_blank">pdf</a></p>
+<section id="hard-linear-classification" class="level2">
+<h2 class="anchored" data-anchor-id="hard-linear-classification">Hard linear classification</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/jZoJHIHi6Qw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The training data <span class="math inline">\(\mathcal{D}\)</span> is composed of <span class="math inline">\(N\)</span> examples <span class="math inline">\((\mathbf{x}_i, t_i)_{i=1..N}\)</span> , with a d-dimensional input vector <span class="math inline">\(\mathbf{x}_i \in \Re^d\)</span> and a binary output <span class="math inline">\(t_i \in \{-1, +1\}\)</span>. The data points where <span class="math inline">\(t = + 1\)</span> are called the <strong>positive class</strong>, the other the <strong>negative class</strong>.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/classification-animation1.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Binary linear classification of 2D data.</p>
-<pre><code>
-For example, the inputs $\mathbf{x}_i$ can be images (one dimension per pixel) and the positive class corresponds to cats ($t_i = +1$), the negative class to dogs ($t_i = -1$).
-
-```{figure} ../img/cats-dogs.jpg
----
-width: 100%
----
-Binary linear classification of cats vs. dogs images. Source: &lt;http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe&gt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/classification-animation1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Binary linear classification of 2D data.</figcaption><p></p>
+</figure>
+</div>
+<p>For example, the inputs <span class="math inline">\(\mathbf{x}_i\)</span> can be images (one dimension per pixel) and the positive class corresponds to cats (<span class="math inline">\(t_i = +1\)</span>), the negative class to dogs (<span class="math inline">\(t_i = -1\)</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cats-dogs.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Binary linear classification of cats vs.&nbsp;dogs images. Source: <a href="http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe" class="uri">http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe</a></figcaption><p></p>
+</figure>
+</div>
 <p>We want to find the hyperplane <span class="math inline">\((\mathbf{w}, b)\)</span> of <span class="math inline">\(\Re^d\)</span> that correctly separates the two classes.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/classification-animation2.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>The hyperplane separates the input space into two regions.</p>
-<pre><code>
-For a point $\mathbf{x} \in \mathcal{D}$, $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b$  is the projection of $\mathbf{x}$  onto the hyperplane $(\mathbf{w}, b)$.
-
-* If $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b &gt; 0$, the point is
-    above the hyperplane.
-
-* If $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b &lt; 0$, the point is
-    below the hyperplane.
-
-* If $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b = 0$, the point is
-    on the hyperplane.
-
-```{figure} ../img/projection.svg
----
-width: 80%
----
-Projection on an hyperplane.</code></pre>
-<p>By looking at the <strong>sign</strong> of <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b\)</span>, we can predict the class.</p>
-<p><span class="math display">\[\text{sign}(x) = \begin{cases} +1 \; \text{if} \; x \geq 0 \\ -1 \; \text{if} \; x &lt; 0 \\ \end{cases}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/classification-animation2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">The hyperplane separates the input space into two regions.</figcaption><p></p>
+</figure>
+</div>
+<p>For a point <span class="math inline">\(\mathbf{x} \in \mathcal{D}\)</span>, <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b\)</span> is the projection of <span class="math inline">\(\mathbf{x}\)</span> onto the hyperplane <span class="math inline">\((\mathbf{w}, b)\)</span>.</p>
+<ul>
+<li><p>If <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b &gt; 0\)</span>, the point is above the hyperplane.</p></li>
+<li><p>If <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b &lt; 0\)</span>, the point is below the hyperplane.</p></li>
+<li><p>If <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b = 0\)</span>, the point is on the hyperplane.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/projection.svg" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Projection on an hyperplane.</figcaption><p></p>
+</figure>
+</div>
+<p>By looking at the <strong>sign</strong> of <span class="math inline">\(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b\)</span>, we can predict the class of the input.</p>
+<p><span class="math display">\[\text{sign}(\langle \mathbf{w} \cdot \mathbf{x} \rangle +b) = \begin{cases} +1 \; \text{if} \; \langle \mathbf{w} \cdot \mathbf{x} \rangle +b \geq 0 \\ -1 \; \text{if} \; \langle \mathbf{w} \cdot \mathbf{x} \rangle +b &lt; 0 \\ \end{cases}\]</span></p>
 <p>Binary linear classification can therefore be made by a single <strong>artificial neuron</strong> using the sign transfer function.</p>
 <p><span class="math display">\[
 y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mathbf{x} \rangle +b )  = \text{sign} ( \sum_{j=1}^d w_j \, x_j +b )
 \]</span></p>
 <p><span class="math inline">\(\mathbf{w}\)</span> is the weight vector and <span class="math inline">\(b\)</span> is the bias.</p>
 <p>Linear classification is the process of finding an hyperplane <span class="math inline">\((\mathbf{w}, b)\)</span> that correctly separates the two classes. If such an hyperplane can be found, the training set is said <strong>linearly separable</strong>. Otherwise, the problem is <strong>non-linearly separable</strong> and other methods have to be applied (MLP, SVM…).</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/linearlyseparable.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 100%</td>
-</tr>
-</tbody>
-</table>
-<p>Linearly and non-linearly spearable datasets.</p>
-<pre><code>
-### Perceptron algorithm
-
-The Perceptron algorithm tries to find the weights and biases minimizing the **mean square error** (*mse*) or **quadratic loss**:
-
-$$\mathcal{L}(\mathbf{w}, b) = \mathbb{E}_\mathcal{D} [(t_i - y_i)^2] \approx \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i)^2$$
-
-When the prediction $y_i$ is the same as the data $t_i$ for all examples in the training set (perfect classification), the mse is minimal and equal to 0. We can apply gradient descent to find this minimum.
-
-$$
-    \Delta \mathbf{w} = - \eta \, \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b)
-$$
-
-$$
-    \Delta b = - \eta \, \nabla_b \, \mathcal{L}(\mathbf{w}, b)
-$$
-
-Let's search for the partial derivative of the quadratic error function with respect to the weight vector:
-
-$$
-    \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b) = \nabla_\mathbf{w} \,  \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2 = \frac{1}{N} \, \sum_{i=1}^{N} \nabla_\mathbf{w} \,  (t_i - y_i )^2 = \frac{1}{N} \, \sum_{i=1}^{N} \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b)
-$$
-
-
-Everything is similar to linear regression until we get:
-
-$$
-    \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b) = - 2 \, (t_i - y_i) \, \nabla_\mathbf{w} \, \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle +b)
-$$
-
-In order to continue with the chain rule, we would need to differentiate $\text{sign}(x)$.
-
-$$
-    \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b) = - 2 \, (t_i - y_i) \, \text{sign}'( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle +b) \,  \mathbf{x}_i 
-$$
-
-But the sign function is **not** differentiable... We will simply pretend that the sign() function is linear, with a derivative of 1:
-
-$$
-    \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b) = - 2 \, (t_i - y_i) \,   \mathbf{x}_i 
-$$
-
-The update rule for the weight vector $\mathbf{w}$ and the bias $b$ is therefore the same as in linear regression:
-
-$$
-    \Delta \mathbf{w} =  \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i
-$$
-
-$$
-    \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )
-$$
-
-By applying gradient descent on the quadratic error function, one obtains the following algorithm:
-
-```{admonition} Batch perceptron
-
-* **for** $M$ epochs:
-
-    * $\mathbf{dw} = 0 \qquad db = 0$
-
-    * **for** each sample $(\mathbf{x}_i, t_i)$:
-
-        * $y_i =  \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)$
-
-        * $\mathbf{dw} = \mathbf{dw} + (t_i - y_i) \, \mathbf{x}_i$
-
-        * $db = db + (t_i - y_i)$
-
-    * $\Delta \mathbf{w} = \eta \, \frac{1}{N} \, \mathbf{dw}$
-
-    * $\Delta b = \eta \, \frac{1}{N} \, db$</code></pre>
-<p>This is called the <strong>batch</strong> version of the Perceptron algorithm. If the data is linearly separable and <span class="math inline">\(\eta\)</span> is well chosen, it converges to the minimum of the mean square error.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/classification-animation.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Batch perceptron algorithm.</p>
-<pre><code>
-The **Perceptron algorithm** was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.
-
-```{admonition} Online perceptron algorithm
-
-* **for** $M$ epochs:
-
-    * **for** each sample $(\mathbf{x}_i, t_i)$:
-
-        * $y_i =  \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)$
-
-        * $\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i$
-
-        * $\Delta b = \eta \, (t_i - y_i)$</code></pre>
-<p>This algorithm iterates over all examples of the training set and applies the <strong>delta learning rule</strong> to each of them immediately, not at the end on the whole training set. One could check whether there are still classification errors on the training set at the end of each epoch and stop the algorithm. The delta learning rule depends as always on the learning rate <span class="math inline">\(\eta\)</span>, the error made by the prediction (<span class="math inline">\(t_i - y_i\)</span>) and the input <span class="math inline">\(\mathbf{x}_i\)</span>.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/classification-animation-online.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Online perceptron algorithm.</p>
-<pre><code>
-### Stochastic Gradient descent
-
-The mean square error is defined as the **expectation** over the data:
-
-$$\mathcal{L}(\mathbf{w}, b) = \mathbb{E}_\mathcal{D} [(t_i - y_i)^2]$$
-
-**Batch learning** uses the whole training set as samples to estimate the mse:
-
-$$\mathcal{L}(\mathbf{w}, b) \approx \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i)^2$$
-
-
-$$
-    \Delta \mathbf{w} = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i ) \, \mathbf{x_i}
-$$
-
-**Online learning** uses a single sample to estimate the mse:
-
-$$\mathcal{L}(\mathbf{w}, b) \approx (t_i - y_i)^2$$
-
-
-$$
-    \Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x_i}
-$$
-
-Batch learning has less bias (central limit theorem) and is less sensible to noise in the data, but is very slow. Online learning converges faster, but can be instable and overfits (high variance). 
-
-In practice, we use a trade-off between batch and online learning called **Stochastic Gradient Descent (SGD)** or **Minibatch Gradient Descent**.
-
-The training set is randomly split at each epoch into small chunks of data (a **minibatch**, usually 32 or 64 examples) and the batch learning rule is applied on each chunk.
-
-$$
-    \Delta \mathbf{w} = \eta \, \frac{1}{K} \sum_{i=1}^{K} (t_i - y_i) \, \mathbf{x_i}
-$$
-
-If the **batch size** is well chosen, SGD is as stable as batch learning and as fast as online learning. The minibatches are randomly selected at each epoch (i.i.d).
-
-
-
-```{note}
-Online learning is a stochastic gradient descent with a batch size of 1.</code></pre>
-</section>
-<section id="maximum-likelihood-estimation" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">6.2</span> Maximum Likelihood Estimation</h2>
-<div class="embed-container">
-<iframe src="https://www.youtube.com/embed/9Hw6nLMiPiI" frameborder="0" allowfullscreen="">
-</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/linearlyseparable.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Linearly and non-linearly separable datasets.</figcaption><p></p>
+</figure>
 </div>
+<section id="perceptron-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="perceptron-algorithm">Perceptron algorithm</h3>
+<p>The Perceptron algorithm tries to find the weights and biases minimizing the <strong>mean square error</strong> (<em>mse</em>) or <strong>quadratic loss</strong>:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{w}, b) = \mathbb{E}_\mathcal{D} [(t_i - y_i)^2] \approx \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i)^2\]</span></p>
+<p>When the prediction <span class="math inline">\(y_i\)</span> is the same as the data <span class="math inline">\(t_i\)</span> for all examples in the training set (perfect classification), the mse is minimal and equal to 0. We can apply gradient descent to find this minimum.</p>
+<p><span class="math display">\[
+\begin{cases}
+    \Delta \mathbf{w} = - \eta \, \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b)\\
+    \\
+    \Delta b = - \eta \, \nabla_b \, \mathcal{L}(\mathbf{w}, b)\\
+\end{cases}
+\]</span></p>
+<p>Let’s search for the partial derivative of the quadratic error function with respect to the weight vector:</p>
+<p><span class="math display">\[
+    \nabla_\mathbf{w} \, \mathcal{L}(\mathbf{w}, b) = \nabla_\mathbf{w} \,  \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2 = \frac{1}{N} \, \sum_{i=1}^{N} \nabla_\mathbf{w} \,  (t_i - y_i )^2 = \frac{1}{N} \, \sum_{i=1}^{N} \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b)
+\]</span></p>
+<p>Everything is similar to linear regression until we get:</p>
+<p><span class="math display">\[
+    \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b) = - 2 \, (t_i - y_i) \, \nabla_\mathbf{w} \, \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle +b)
+\]</span></p>
+<p>In order to continue with the chain rule, we would need to differentiate <span class="math inline">\(\text{sign}(x)\)</span>.</p>
+<p><span class="math display">\[
+    \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b) = - 2 \, (t_i - y_i) \, \text{sign}'( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle +b) \,  \mathbf{x}_i
+\]</span></p>
+<p>But the sign function is <strong>not</strong> differentiable… We will simply pretend that the sign() function is linear, with a derivative of 1:</p>
+<p><span class="math display">\[
+    \nabla_\mathbf{w} \,  \mathcal{l}_i (\mathbf{w}, b) = - 2 \, (t_i - y_i) \,   \mathbf{x}_i
+\]</span></p>
+<p>The update rule for the weight vector <span class="math inline">\(\mathbf{w}\)</span> and the bias <span class="math inline">\(b\)</span> is therefore the same as in linear regression:</p>
+<p><span class="math display">\[
+    \Delta \mathbf{w} =  \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i
+\]</span></p>
+<p><span class="math display">\[
+    \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )
+\]</span></p>
+<p>By applying gradient descent on the quadratic error function, one obtains the following algorithm:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Batch perceptron
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{dw} = 0 \qquad db = 0\)</span></p></li>
+<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(y_i = \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{dw} = \mathbf{dw} + (t_i - y_i) \, \mathbf{x}_i\)</span></p></li>
+<li><p><span class="math inline">\(db = db + (t_i - y_i)\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(\Delta \mathbf{w} = \eta \, \frac{1}{N} \, \mathbf{dw}\)</span></p></li>
+<li><p><span class="math inline">\(\Delta b = \eta \, \frac{1}{N} \, db\)</span></p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>This is called the <strong>batch</strong> version of the Perceptron algorithm. If the data is linearly separable and <span class="math inline">\(\eta\)</span> is well chosen, it converges to the minimum of the mean square error.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/classification-animation.gif" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Batch perceptron algorithm.</figcaption><p></p>
+</figure>
+</div>
+<p>The <strong>Perceptron algorithm</strong> was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Online perceptron algorithm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(y_i = \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)\)</span></p></li>
+<li><p><span class="math inline">\(\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i\)</span></p></li>
+<li><p><span class="math inline">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>This algorithm iterates over all examples of the training set and applies the <strong>delta learning rule</strong> to each of them immediately, not at the end on the whole training set. One could check whether there are still classification errors on the training set at the end of each epoch and stop the algorithm. The delta learning rule depends as always on the learning rate <span class="math inline">\(\eta\)</span>, the error made by the prediction (<span class="math inline">\(t_i - y_i\)</span>) and the input <span class="math inline">\(\mathbf{x}_i\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/classification-animation-online.gif" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Online perceptron algorithm.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="stochastic-gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-gradient-descent">Stochastic Gradient descent</h3>
+<p>The mean square error is defined as the <strong>expectation</strong> over the data:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{w}, b) = \mathbb{E}_\mathcal{D} [(t_i - y_i)^2]\]</span></p>
+<p><strong>Batch learning</strong> uses the whole training set as samples to estimate the mse:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{w}, b) \approx \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i)^2\]</span></p>
+<p><span class="math display">\[
+    \Delta \mathbf{w} = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i ) \, \mathbf{x_i}
+\]</span></p>
+<p><strong>Online learning</strong> uses a single sample to estimate the mse:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{w}, b) \approx (t_i - y_i)^2\]</span></p>
+<p><span class="math display">\[
+    \Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x_i}
+\]</span></p>
+<p>Batch learning has less bias (central limit theorem) and is less sensible to noise in the data, but is very slow. Online learning converges faster, but can be instable and overfits (high variance).</p>
+<p>In practice, we use a trade-off between batch and online learning called <strong>Stochastic Gradient Descent (SGD)</strong> or <strong>Minibatch Gradient Descent</strong>.</p>
+<p>The training set is randomly split at each epoch into small chunks of data (a <strong>minibatch</strong>, usually 32 or 64 examples) and the batch learning rule is applied on each chunk.</p>
+<p><span class="math display">\[
+    \Delta \mathbf{w} = \eta \, \frac{1}{K} \sum_{i=1}^{K} (t_i - y_i) \, \mathbf{x_i}
+\]</span></p>
+<p>If the <strong>batch size</strong> is well chosen, SGD is as stable as batch learning and as fast as online learning. The minibatches are randomly selected at each epoch (i.i.d).</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Online learning is a stochastic gradient descent with a batch size of 1.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="maximum-likelihood-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/9Hw6nLMiPiI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s consider <span class="math inline">\(N\)</span> <strong>samples</strong> <span class="math inline">\(\{x_i\}_{i=1}^N\)</span> independently taken from a <strong>normal distribution</strong> <span class="math inline">\(X\)</span>. The probability density function (pdf) of a normal distribution is:</p>
 <p><span class="math display">\[
     f(x ; \mu, \sigma) =  \frac{1}{\sqrt{2\pi \sigma^2}} \, \exp{- \frac{(x - \mu)^2}{2\sigma^2}}
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean of the distribution and <span class="math inline">\(\sigma\)</span> its standard deviation.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/MLE2.png</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Normal distributions with different parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> explain the data with different likelihoods.</p>
-<pre><code>
-The problem is to find the values of $\mu$ and $\sigma$ which explain best the observations $\{x_i\}_{i=1}^N$.
-
-The idea of MLE is to maximize the joint density function for all observations. This function is expressed by the **likelihood function**:
-
-$$
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/MLE2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Normal distributions with different parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> explain the data with different likelihoods.</figcaption><p></p>
+</figure>
+</div>
+<p>The problem is to find the values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> which explain best the observations <span class="math inline">\(\{x_i\}_{i=1}^N\)</span>.</p>
+<p>The idea of MLE is to maximize the joint density function for all observations. This function is expressed by the <strong>likelihood function</strong>:</p>
+<p><span class="math display">\[
     L(\mu, \sigma) = P( x ; \mu , \sigma  )  = \prod_{i=1}^{N} f(x_i ; \mu, \sigma )
-$$
-
-When the pdf takes high values for all samples, it is quite likely that the samples come from this particular distribution. The likelihood function reflects the probability that the parameters $\mu$ and $\sigma$ explain the observations $\{x_i\}_{i=1}^N$.
-
-We therefore search for the values $\mu$ and $\sigma$ which **maximize** the likelihood function.
-
-$$
+\]</span></p>
+<p>When the pdf takes high values for all samples, it is quite likely that the samples come from this particular distribution. The likelihood function reflects the probability that the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> explain the observations <span class="math inline">\(\{x_i\}_{i=1}^N\)</span>.</p>
+<p>We therefore search for the values <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> which <strong>maximize</strong> the likelihood function.</p>
+<p><span class="math display">\[
     \text{max}_{\mu, \sigma} \quad L(\mu, \sigma) = \prod_{i=1}^{N} f(x_i ; \mu, \sigma )
-$$
-
-
-For the normal distribution, the likelihood function is:
-
-$$
+\]</span></p>
+<p>For the normal distribution, the likelihood function is:</p>
+<p><span class="math display">\[
 \begin{aligned}
     L(\mu, \sigma) &amp; = \prod_{i=1}^{N} f(x_i ; \mu, \sigma ) \\
                    &amp; = \prod_{i=1}^{N} \frac{1}{\sqrt{2\pi \sigma^2}} \, \exp{- \frac{(x_i - \mu)^2}{2\sigma^2}}\\
                    &amp; =  (\frac{1}{\sqrt{2\pi \sigma^2}})^N \, \prod_{i=1}^{N} \exp{- \frac{(x_i - \mu)^2}{2\sigma^2}}\\
                    &amp; =  (\frac{1}{\sqrt{2\pi \sigma^2}})^N \, \exp{- \frac{\sum_{i=1}^{N}(x_i - \mu)^2}{2\sigma^2}}\\
 \end{aligned}
-$$
-
-To find the maximum of $L(\mu, \sigma)$, we need to search where the gradient is equal to zero:
-
-$$
+\]</span></p>
+<p>To find the maximum of <span class="math inline">\(L(\mu, \sigma)\)</span>, we need to search where the gradient is equal to zero:</p>
+<p><span class="math display">\[
 \begin{cases}
     \dfrac{\partial L(\mu, \sigma)}{\partial \mu} = 0 \\
     \dfrac{\partial L(\mu, \sigma)}{\partial \sigma} = 0 \\
 \end{cases}
-$$
-
-The likelihood function is complex to differentiate, so we consider its logarithm $l(\mu, \sigma) = \log(L(\mu, \sigma))$ which has a maximum for the same value of $(\mu, \sigma)$ as the log function is monotonic.
-
-$$
+\]</span></p>
+<p>The likelihood function is complex to differentiate, so we consider its logarithm <span class="math inline">\(l(\mu, \sigma) = \log(L(\mu, \sigma))\)</span> which has a maximum for the same value of <span class="math inline">\((\mu, \sigma)\)</span> as the log function is monotonic.</p>
+<p><span class="math display">\[
 \begin{aligned}
     l(\mu, \sigma) &amp; = \log(L(\mu, \sigma)) \\
                    &amp; =  \log \left((\frac{1}{\sqrt{2\pi \sigma^2}})^N \, \exp{- \frac{\sum_{i=1}^{N}(x_i - \mu)^2}{2\sigma^2}} \right)\\
                    &amp; =  - \frac{N}{2} \log (2\pi \sigma^2) - \frac{\sum_{i=1}^{N}(x_i - \mu)^2}{2\sigma^2}\\
 \end{aligned}
-$$
-
-$l(\mu, \sigma)$ is called the **log-likelihood** function. The maximum of the log-likelihood function respects:
-
-$$
+\]</span></p>
+<p><span class="math inline">\(l(\mu, \sigma)\)</span> is called the <strong>log-likelihood</strong> function. The maximum of the log-likelihood function respects:</p>
+<p><span class="math display">\[
 \begin{aligned}
     \frac{\partial l(\mu, \sigma)}{\partial \mu} &amp; = \frac{\sum_{i=1}^{N}(x_i - \mu)}{\sigma^2} = 0 \\
     \frac{\partial l(\mu, \sigma)}{\partial \sigma} &amp; = - \frac{N}{2} \frac{4 \pi \sigma}{2 \pi \sigma^2} + \frac{\sum_{i=1}^{N}(x_i - \mu)^2}{\sigma^3} \\
                                                     &amp; = - \frac{N}{\sigma} + \frac{\sum_{i=1}^{N}(x_i - \mu)^2}{\sigma^3} = 0\\
 \end{aligned}
-$$
-
-We obtain:
-
-$$
+\]</span></p>
+<p>We obtain:</p>
+<p><span class="math display">\[
     \mu = \frac{1}{N} \sum_{i=1}^{N} x_i  \qquad\qquad    \sigma^2 = \frac{1}{N} \sum_{i=1}^{N}(x_i - \mu)^2
-$$
-
-Unsurprisingly, the mean and variance of the normal distribution which best explains the data are the mean and variance of the data...
-
-The same principle can be applied to estimate the parameters of any distribution: normal, exponential, Bernouilli, Poisson, etc... When a machine learning method has an probabilistic interpretation (i.e. it outputs probabilities), MLE can be used to find its parameters. One can use global optimization like here, or gradient descent to estimate the parameters iteratively.
-
-
-## Soft linear classification : Logistic regression
-
-&lt;div class='embed-container'&gt;&lt;iframe src='https://www.youtube.com/embed/_Zc-k9pXVvE' frameborder='0' allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-In logistic regression, we want to perform a regression, but where the targets $t_i$ are bounded betwen 0 and 1. We can use a logistic function instead of a linear function in order to transform the net activation into an output:
-
-$$
+\]</span></p>
+<p>Unsurprisingly, the mean and variance of the normal distribution which best explains the data are the mean and variance of the data…</p>
+<p>The same principle can be applied to estimate the parameters of any distribution: normal, exponential, Bernouilli, Poisson, etc… When a machine learning method has an probabilistic interpretation (i.e.&nbsp;it outputs probabilities), MLE can be used to find its parameters. One can use global optimization like here, or gradient descent to estimate the parameters iteratively.</p>
+</section>
+<section id="soft-linear-classification-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="soft-linear-classification-logistic-regression">Soft linear classification : Logistic regression</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/_Zc-k9pXVvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>In logistic regression, we want to perform a regression, but where the targets <span class="math inline">\(t_i\)</span> are bounded betwen 0 and 1. We can use a logistic function instead of a linear function in order to transform the net activation into an output:</p>
+<p><span class="math display">\[
 \begin{aligned}
     y = \sigma(w \, x + b )  = \frac{1}{1+\exp(-w \, x - b )}
 \end{aligned}
-$$
-
-Logistic regression can be used in binary classification if we consider $y = \sigma(w \, x + b )$ as the probability that the example belongs to the positive class ($t=1$).
-
-$$
+\]</span></p>
+<p>Logistic regression can be used in binary classification if we consider <span class="math inline">\(y = \sigma(w \, x + b )\)</span> as the probability that the example belongs to the positive class (<span class="math inline">\(t=1\)</span>).</p>
+<p><span class="math display">\[
     P(t = 1 | x; w, b) = y ; \qquad P(t = 0 | x; w, b) = 1 - y
-$$
-
-The output $t$ therefore comes from a Bernouilli distribution $\mathcal{B}$ of parameter $p = y = f_{w, b}(x)$. The probability density function (pdf) is:
-
-$$f(t | x; w, b) = y^t \, (1- y)^{1-t}$$
-
-
-If we consider our training samples $(x_i, t_i)$ as independently taken from this distribution, our task is to find the parameterized distribution that best explains the data, which means to find the parameters $w$ and $b$ maximizing the **likelihood** that the samples $t$ come from a Bernouilli distribution when $x$, $w$  and $b$ are given. We only need to apply **Maximum Likelihood Estimation** (MLE) on this Bernouilli distribution!
-
-The likelihood function for logistic regression is :
-
-$$
+\]</span></p>
+<p>The output <span class="math inline">\(t\)</span> therefore comes from a Bernouilli distribution <span class="math inline">\(\mathcal{B}\)</span> of parameter <span class="math inline">\(p = y = f_{w, b}(x)\)</span>. The probability density function (pdf) is:</p>
+<p><span class="math display">\[f(t | x; w, b) = y^t \, (1- y)^{1-t}\]</span></p>
+<p>If we consider our training samples <span class="math inline">\((x_i, t_i)\)</span> as independently taken from this distribution, our task is to find the parameterized distribution that best explains the data, which means to find the parameters <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> maximizing the <strong>likelihood</strong> that the samples <span class="math inline">\(t\)</span> come from a Bernouilli distribution when <span class="math inline">\(x\)</span>, <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> are given. We only need to apply <strong>Maximum Likelihood Estimation</strong> (MLE) on this Bernouilli distribution!</p>
+<p>The likelihood function for logistic regression is :</p>
+<p><span class="math display">\[
 \begin{aligned}
     L( w, b) &amp;= P( t | x; w,  b )  = \prod_{i=1}^{N} f(t_i | x_i;  w,  b ) \\
     &amp;= \prod_{i=1}^{N}  y_i^{t_i} \, (1- y_i)^{1-t_i}
 \end{aligned}
-$$
-
-The likelihood function is quite hard to differentiate, so we take the **log-likelihood** function:
-
-$$
+\]</span></p>
+<p>The likelihood function is quite hard to differentiate, so we take the <strong>log-likelihood</strong> function:</p>
+<p><span class="math display">\[
 \begin{aligned}
     l( w, b) &amp;= \log L( w, b) \\
     &amp;=  \sum_{i=1}^{N} [t_i \, \log y_i + (1 - t_i) \, \log( 1- y_i)]\\
 \end{aligned}
-$$
-
-or even better: the **negative log-likelihood** which will be minimized using gradient descent:
-
-$$
+\]</span></p>
+<p>or even better: the <strong>negative log-likelihood</strong> which will be minimized using gradient descent:</p>
+<p><span class="math display">\[
     \mathcal{L}( w, b) =  - \sum_{i=1}^{N} [t_i \, \log y_i + (1 - t_i) \, \log( 1- y_i)]
-$$
-
-We then search for the minimum of the negative log-likelihood function by computing its gradient (here for a single sample):
-
-$$
+\]</span></p>
+<p>We then search for the minimum of the negative log-likelihood function by computing its gradient (here for a single sample):</p>
+<p><span class="math display">\[
 \begin{aligned}
     \frac{\partial \mathcal{l}_i(w, b)}{\partial w}
         &amp;= -\frac{\partial}{\partial w} [ t_i \, \log y_i + (1 - t_i) \, \log( 1- y_i) ] \\
@@ -607,49 +524,51 @@ $$
         &amp;= - t_i \, \frac{y_i \, (1 - y_i) \, x_i}{y_i} + (1 - t_i) \, \frac{y_i \, (1-y_i) \, x_i}{1 - y_i}\\
         &amp;= - ( t_i - y_i ) \, x_i\\
 \end{aligned}
-$$
-
-We obtain the same gradient as the linear perceptron, but with a non-linear output function! Logistic regression is therefore a regression method used for classification. It uses a non-linear transfer function $\sigma(x)=\frac{1}{1+\exp(-x)}$ applied on the net activation:
-
-$$
+\]</span></p>
+<p>We obtain the same gradient as the linear perceptron, but with a non-linear output function! Logistic regression is therefore a regression method used for classification. It uses a non-linear transfer function <span class="math inline">\(\sigma(x)=\frac{1}{1+\exp(-x)}\)</span> applied on the net activation:</p>
+<p><span class="math display">\[
     y_i = \sigma(\langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b )
-$$
-
-The continuous output $y$ is interpreted as the probability of belonging to the positive class.
-
-$$
+\]</span></p>
+<p>The continuous output <span class="math inline">\(y\)</span> is interpreted as the probability of belonging to the positive class.</p>
+<p><span class="math display">\[
    P(t_i = 1 | \mathbf{x}_i; \mathbf{w}, b) = y_i ; \qquad P(t_i = 0 | \mathbf{x}_i; \mathbf{w}, b) = 1 - y_i
-$$
-
-We minimize the **negative log-likelihood** loss function:
-
-$$
+\]</span></p>
+<p>We minimize the <strong>negative log-likelihood</strong> loss function:</p>
+<p><span class="math display">\[
     \mathcal{L}(\mathbf{w}, b) =  - \sum_{i=1}^{N} [t_i \, \log y_i + (1 - t_i) \, \log( 1- y_i)]
-$$
-
-Gradient descent leads to the delta learning rule, using the class as a target and the probability as a prediction:
-
-$$
+\]</span></p>
+<p>Gradient descent leads to the delta learning rule, using the class as a target and the probability as a prediction:</p>
+<p><span class="math display">\[
     \begin{cases}
     \Delta \mathbf{w} = \eta \, ( t_i - y_i ) \, \mathbf{x}_i \\
     \\
     \Delta b = \eta \, ( t_i - y_i ) \\
     \end{cases}
-$$
-
-```{admonition} Logistic regression
-
-* $\mathbf{w} = 0 \qquad b = 0$
-
-* **for** $M$ epochs:
-
-    * **for** each sample $(\mathbf{x}_i, t_i)$:
-
-        * $y_i =  \sigma( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle  + b)$
-
-        * $\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i$
-
-        * $\Delta b = \eta \, (t_i - y_i)$</code></pre>
+\]</span></p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Logistic regression
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><span class="math inline">\(\mathbf{w} = 0 \qquad b = 0\)</span></p></li>
+<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(y_i = \sigma( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)\)</span></p></li>
+<li><p><span class="math inline">\(\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i\)</span></p></li>
+<li><p><span class="math inline">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
 <p>Logistic regression works just like linear classification, except in the way the prediction is done. To know to which class <span class="math inline">\(\mathbf{x}_i\)</span> belongs, simply draw a random number between 0 and 1:</p>
 <ul>
 <li>if it is smaller than <span class="math inline">\(y_i\)</span> (probability <span class="math inline">\(y_i\)</span>), it belongs to the positive class.</li>
@@ -660,19 +579,12 @@ $$
 <li>if <span class="math inline">\(y_i &gt; 0.5\)</span> then the class is positive.</li>
 <li>if <span class="math inline">\(y_i &lt; 0.5\)</span> then the class is negative.</li>
 </ul>
-<table class="table">
-<thead>
-<tr class="header">
-<th>```{figure} ../img/logisticregression-animation.gif</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>width: 80%</td>
-</tr>
-</tbody>
-</table>
-<p>Logistic regression for soft classification. The confidence scores tells how certain the classification is. ```</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/logisticregression-animation.gif" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Logistic regression for soft classification. The confidence scores tells how certain the classification is.</figcaption><p></p>
+</figure>
+</div>
 <p>Logistic regression also provides a <strong>confidence score</strong>: the closer <span class="math inline">\(y\)</span> is from 0 or 1, the more confident we can be that the classification is correct. This is particularly important in <strong>safety critical</strong> applications: if you detect the positive class but with a confidence of 0.51, you should perhaps not trust the prediction. If the confidence score is 0.99, you can probably trust the prediction.</p>
 
 
@@ -777,15 +689,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../notes/2.2-LinearRegression.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Linear regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../notes/2.4-Multiclassification.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-class classification</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../exercises/1-Python-solution.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Introduction To Python</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -793,4 +705,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
