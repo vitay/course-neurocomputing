@@ -998,6 +998,453 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 </ul>
 </div>
 </div>
+</section>
+
+<section id="multi-class-classification" class="title-slide slide level1 center">
+<h1>4 - Multi-class classification</h1>
+
+</section>
+
+<section id="multi-class-classification-1" class="title-slide slide level1 center">
+<h1>Multi-class classification</h1>
+<ul>
+<li>Can we perform multi-class classification using the previous methods when <span class="math inline">\(t \in \{A, B, C\}\)</span> instead of <span class="math inline">\(t = +1\)</span> or <span class="math inline">\(-1\)</span>?</li>
+</ul>
+
+<img data-src="img/multiclass.png" style="width:50.0%" class="r-stretch quarto-figure-center"></section>
+
+<section id="multi-class-classification-2" class="title-slide slide level1 center">
+<h1>Multi-class classification</h1>
+<p>Two main solutions:</p>
+<ul>
+<li><p><strong>One-vs-All</strong> (or One-vs-the-rest): one trains simultaneously a binary (linear) classifier for each class. The examples belonging to this class form the positive class, all others are the negative class:</p>
+<ul>
+<li>A vs.&nbsp;B and C</li>
+<li>B vs.&nbsp;A and C</li>
+<li>C vs.&nbsp;A and B</li>
+</ul></li>
+</ul>
+<p>If multiple classes are predicted for a single example, ones needs a confidence level for each classifier saying how sure it is of its prediction.</p>
+<ul>
+<li><p><strong>One-vs-One</strong>: one trains a classifier for each pair of class:</p>
+<ul>
+<li>A vs.&nbsp;B</li>
+<li>B vs.&nbsp;C</li>
+<li>C vs.&nbsp;A</li>
+</ul></li>
+</ul>
+<p>A majority vote is then performed to find the correct class.</p>
+</section>
+
+<section id="multi-class-classification-3" class="title-slide slide level1 center">
+<h1>Multi-class classification</h1>
+<ul>
+<li>Example of <strong>One-vs-All</strong> classification: one binary classifier per class.</li>
+</ul>
+
+<img data-src="img/pixelspace.jpg" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></p>
+</div>
+</section>
+
+<section id="softmax-linear-classifier" class="title-slide slide level1 center">
+<h1>Softmax linear classifier</h1>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/linearperceptron-simple.svg"></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<ul>
+<li><p>Suppose we have <span class="math inline">\(C\)</span> classes (dog vs.&nbsp;cat vs.&nbsp;ship vs…).</p></li>
+<li><p>The One-vs-All scheme involves <span class="math inline">\(C\)</span> binary classifiers <span class="math inline">\((\mathbf{w}_i, b_i)\)</span>, each with a weight vector and a bias, working on the same input <span class="math inline">\(\mathbf{x}\)</span>.</p></li>
+</ul>
+<p><span class="math display">\[y_i = f(\langle \mathbf{w}_i \cdot \mathbf{x} \rangle + b_i)\]</span></p>
+<ul>
+<li>Putting all neurons together, we obtain a <strong>linear perceptron</strong> similar to multiple linear regression:</li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
+\]</span></p>
+<ul>
+<li>The <span class="math inline">\(C\)</span> weight vectors form a <span class="math inline">\(d\times C\)</span> <strong>weight matrix</strong> <span class="math inline">\(W\)</span>, the biases form a vector <span class="math inline">\(\mathbf{b}\)</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="softmax-linear-classifier-1" class="title-slide slide level1 center">
+<h1>Softmax linear classifier</h1>
+
+<img data-src="img/imagemap.jpg" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<li>The net activations form a vector <span class="math inline">\(\mathbf{z}\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{z} = f_{W, \mathbf{b}}(\mathbf{x}) = W \times \mathbf{x} + \mathbf{b}
+\]</span></p>
+<ul>
+<li><p>Each element <span class="math inline">\(z_j\)</span> of the vector <span class="math inline">\(\mathbf{z}\)</span> is called the <strong>logit score</strong> of the class:</p>
+<ul>
+<li>the higher the score, the more likely the input belongs to this class.</li>
+</ul></li>
+<li><p>The logit scores are not probabilities, as they can be negative and do not sum to 1.</p></li>
+</ul>
+<div class="footer">
+<p>Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></p>
+</div>
+</section>
+
+<section id="one-hot-encoding" class="title-slide slide level1 center">
+<h1>One-hot encoding</h1>
+<ul>
+<li><p>How do we represent the ground truth <span class="math inline">\(\mathbf{t}\)</span> for each neuron?</p></li>
+<li><p>The target vector <span class="math inline">\(\mathbf{t}\)</span> is represented using <strong>one-hot encoding</strong>.</p></li>
+</ul>
+
+<img data-src="img/one-hot.png" class="r-stretch quarto-figure-center"><ul>
+<li><p>The binary vector has one element per class: only one element is 1, the others are 0.</p></li>
+<li><p>Example:</p></li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [0, 1, 0, 0, 0]
+\]</span></p>
+</section>
+
+<section id="one-hot-encoding-1" class="title-slide slide level1 center">
+<h1>One-hot encoding</h1>
+<ul>
+<li><p>The labels can be seen as a <strong>probability distribution</strong> over the training set, in this case a <strong>multinomial</strong> distribution (a dice with <span class="math inline">\(C\)</span> sides).</p></li>
+<li><p>For a given image <span class="math inline">\(\mathbf{x}\)</span> (e.g.&nbsp;a picture of a dog), the conditional pmf is defined by the one-hot encoded vector <span class="math inline">\(\mathbf{t}\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[P(\mathbf{t} | \mathbf{x}) = [P(\text{cat}| \mathbf{x}), P(\text{dog}| \mathbf{x}), P(\text{ship}| \mathbf{x}), P(\text{house}| \mathbf{x}), P(\text{car}| \mathbf{x})] = [0, 1, 0, 0, 0]\]</span></p>
+
+<img data-src="img/softmax-transformation.png" class="r-stretch quarto-figure-center"><ul>
+<li>We need to transform the logit score <span class="math inline">\(\mathbf{z}\)</span> into a <strong>probability distribution</strong> <span class="math inline">\(P(\mathbf{y} | \mathbf{x})\)</span> that should be as close as possible from <span class="math inline">\(P(\mathbf{t} | \mathbf{x})\)</span>.</li>
+</ul>
+</section>
+
+<section id="softmax-linear-classifier-2" class="title-slide slide level1 center">
+<h1>Softmax linear classifier</h1>
+<ul>
+<li>The <strong>softmax</strong> operator makes sure that the sum of the outputs <span class="math inline">\(\mathbf{y} = \{y_i\}\)</span> over all classes is 1.</li>
+</ul>
+<p><span class="math display">\[
+    y_j = P(\text{class = j} | \mathbf{x}) = \mathcal{S}(z_j) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</span></p>
+
+<img data-src="img/softmax-comp.png" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<li><p>The higher <span class="math inline">\(z_j\)</span>, the higher the probability that the example belongs to class <span class="math inline">\(j\)</span>.</p></li>
+<li><p>This is very similar to logistic regression for soft classification, except that we have multiple classes.</p></li>
+</ul>
+<div class="footer">
+<p>Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></p>
+</div>
+</section>
+
+<section id="cross-entropy-loss-function" class="title-slide slide level1 center">
+<h1>Cross-entropy loss function</h1>
+<ul>
+<li>We cannot use the mse as a loss function, as the softmax function would be hard to differentiate:</li>
+</ul>
+<p><span class="math display">\[
+    \text{mse}(W, \mathbf{b}) = \sum_j (t_{j} - \frac{\exp(z_j)}{\sum_k \exp(z_k)})^2
+\]</span></p>
+
+<img data-src="img/softmax-transformation.png" class="r-stretch quarto-figure-center"><ul>
+<li><p>We actually want to minimize the statistical distance netween two distributions:</p>
+<ul>
+<li><p>The model outputs a multinomial probability distribution <span class="math inline">\(\mathbf{y}\)</span> for an input <span class="math inline">\(\mathbf{x}\)</span>: <span class="math inline">\(P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})\)</span>.</p></li>
+<li><p>The one-hot encoded classes also come from a multinomial probability distribution <span class="math inline">\(P(\mathbf{t} | \mathbf{x})\)</span>.</p></li>
+</ul></li>
+<li><p>We search which parameters <span class="math inline">\((W, \mathbf{b})\)</span> make the two distributions <span class="math inline">\(P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})\)</span> and <span class="math inline">\(P(\mathbf{t} | \mathbf{x})\)</span> close.</p></li>
+</ul>
+</section>
+
+<section id="cross-entropy-loss-function-1" class="title-slide slide level1 center">
+<h1>Cross-entropy loss function</h1>
+<ul>
+<li><p>The training data <span class="math inline">\(\{\mathbf{x}_i, \mathbf{t}_i\}\)</span> represents samples from <span class="math inline">\(P(\mathbf{t} | \mathbf{x})\)</span>.</p></li>
+<li><p><span class="math inline">\(P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})\)</span> is a good model of the data when the two distributions are close, i.e.&nbsp;when the <strong>negative log-likelihood</strong> of each sample under the model is small.</p></li>
+</ul>
+
+<img data-src="img/crossentropy.svg" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<li>For an input <span class="math inline">\(\mathbf{x}\)</span>, we minimize the <strong>cross-entropy</strong> between the target distribution and the predicted outputs:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})]
+\]</span></p>
+</section>
+
+<section id="cross-entropy-and-negative-log-likelihood" class="title-slide slide level1 center">
+<h1>Cross-entropy and negative log-likelihood</h1>
+
+<img data-src="img/softmax-transformation.png" class="r-stretch quarto-figure-center"><ul>
+<li>The cross-entropy samples from <span class="math inline">\(\mathbf{t} | \mathbf{x}\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})]
+\]</span></p>
+<ul>
+<li>For a given input <span class="math inline">\(\mathbf{x}\)</span>, <span class="math inline">\(\mathbf{t}\)</span> is non-zero only for the correct class <span class="math inline">\(t^*\)</span>, as <span class="math inline">\(\mathbf{t}\)</span> is a one-hot encoded vector <span class="math inline">\([0, 1, 0, 0, 0]\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{l}(W, \mathbf{b}) =  - \log P(\mathbf{y} = t^* | \mathbf{x})
+\]</span></p>
+<ul>
+<li>If we note <span class="math inline">\(j^*\)</span> the index of the correct class <span class="math inline">\(t^*\)</span>, the cross entropy is simply:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{l}(W, \mathbf{b}) =  - \log y_{j^*}
+\]</span></p>
+</section>
+
+<section id="cross-entropy-and-negative-log-likelihood-1" class="title-slide slide level1 center">
+<h1>Cross-entropy and negative log-likelihood</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/negative-loglikelihood.png"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>As only one element of <span class="math inline">\(\mathbf{t}\)</span> is non-zero, the cross-entropy is the same as the <strong>negative log-likelihood</strong> of the prediction for the true label:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{l}(W, \mathbf{b}) =  - \log y_{j^*}
+\]</span></p>
+<ul>
+<li><p>The minimum of <span class="math inline">\(- \log y\)</span> is obtained when <span class="math inline">\(y =1\)</span>:</p>
+<ul>
+<li>We want to classifier to output a probability 1 for the true label.</li>
+</ul></li>
+<li><p>Because of the softmax activation function, the probability for the other classes should become closer from 0.</p></li>
+</ul>
+<p><span class="math display">\[
+    y_j = P(\text{class = j}) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</span></p>
+</div>
+</div>
+<ul>
+<li>Minimizing the cross-entropy / negative log-likelihood pushes the output distribution <span class="math inline">\(\mathbf{y} | \mathbf{x}\)</span> to be as close as possible to the target distribution <span class="math inline">\(\mathbf{t} | \mathbf{x}\)</span>.</li>
+</ul>
+</section>
+
+<section id="cross-entropy-loss-function-2" class="title-slide slide level1 center">
+<h1>Cross-entropy loss function</h1>
+
+<img data-src="img/crossentropy-animation.gif" class="r-stretch quarto-figure-center"></section>
+
+<section id="cross-entropy-loss-function-3" class="title-slide slide level1 center">
+<h1>Cross-entropy loss function</h1>
+<ul>
+<li>As <span class="math inline">\(\mathbf{t}\)</span> is a binary vector <span class="math inline">\([0, 1, 0, 0, 0]\)</span>, the cross-entropy / negative log-likelihood can also be noted as the dot product between <span class="math inline">\(\mathbf{t}\)</span> and <span class="math inline">\(\log \mathbf{y}\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{l}(W, \mathbf{b}) = - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle = - \sum_{j=1}^C t_j \, \log y_j =  - \log y_{j^*}
+\]</span></p>
+
+<img data-src="img/softmaxclassifier.svg" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
+<li>The <strong>cross-entropy loss function</strong> is then the expectation over the training set of the individual cross-entropies:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [- \langle \mathbf{t} \cdot \log \mathbf{y} \rangle ] \approx \frac{1}{N} \sum_{i=1}^N - \langle \mathbf{t}_i \cdot \log \mathbf{y}_i \rangle
+\]</span></p>
+</section>
+
+<section id="cross-entropy-loss-function-4" class="title-slide slide level1 center">
+<h1>Cross-entropy loss function</h1>
+<ul>
+<li>The nice thing with the <strong>cross-entropy</strong> loss function, when used on a softmax activation function, is that the partial derivative w.r.t the logit score <span class="math inline">\(\mathbf{z}\)</span> is simple:</li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+    \frac{\partial {l}(W, \mathbf{b})}{\partial z_i} &amp; = - \sum_j \frac{\partial}{\partial z_i}  t_j \log(y_j)=
+- \sum_j t_j \frac{\partial \log(y_j)}{\partial z_i} = - \sum_j t_j \frac{1}{y_j} \frac{\partial y_j}{\partial z_i} \\
+&amp; = - \frac{t_i}{y_i} \frac{\partial y_i}{\partial z_i} - \sum_{j \neq i}^C \frac{t_j}{y_j} \frac{\partial y_j}{\partial z_i}
+= - \frac{t_i}{y_i} y_i (1-y_i) - \sum_{j \neq i}^C \frac{t_j}{y_i} (-y_j \, y_i) \\
+&amp; = - t_i + t_i \, y_i + \sum_{j \neq i}^C t_j \, y_i = - t_i + \sum_{j = 1}^C t_j y_i
+= -t_i + y_i \sum_{j = 1}^C t_j \\
+&amp; = - (t_i - y_i)
+\end{split}
+\]</span></p>
+<p>i.e.&nbsp;the same as with the mse in linear regression!</p>
+<ul>
+<li>Vector notation:</li>
+</ul>
+<p><span class="math display">\[
+    \frac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{z}} =  -  (\mathbf{t} - \mathbf{y} )
+\]</span></p>
+<div class="footer">
+<p>See <a href="https://peterroelants.github.io/posts/cross-entropy-softmax/" class="uri">https://peterroelants.github.io/posts/cross-entropy-softmax/</a> for more explanations on the differentiation.</p>
+</div>
+</section>
+
+<section id="cross-entropy-loss-function-5" class="title-slide slide level1 center">
+<h1>Cross-entropy loss function</h1>
+<ul>
+<li>As:</li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{z} = W \times \mathbf{x} + \mathbf{b}
+\]</span></p>
+<p>we can obtain the partial derivatives:</p>
+<p><span class="math display">\[
+\begin{cases}
+    \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial W} = \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{z}} \times \dfrac{\partial \mathbf{z}}{\partial W} = - (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{b}} = \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial \mathbf{z}} \times \dfrac{\partial \mathbf{z}}{\partial \mathbf{b}} = - (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\]</span></p>
+<ul>
+<li>So gradient descent leads to the <strong>delta learning rule</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+    \Delta W = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\]</span></p>
+</section>
+
+<section id="softmax-linear-classifier-3" class="title-slide slide level1 center">
+<h1>Softmax linear classifier</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/softmaxclassifier.svg"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>We first compute the <strong>logit scores</strong> <span class="math inline">\(\mathbf{z}\)</span> using a linear layer:</li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{z} = W \times \mathbf{x} + \mathbf{b}
+\]</span></p>
+<ul>
+<li>We turn them into probabilities <span class="math inline">\(\mathbf{y}\)</span> using the <strong>softmax activation function</strong>:</li>
+</ul>
+<p><span class="math display">\[
+    y_j = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</span></p>
+</div>
+</div>
+<ul>
+<li>We minimize the <strong>cross-entropy</strong> / <strong>negative log-likelihood</strong> on the training set:</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]
+\]</span></p>
+<p>which simplifies into the <strong>delta learning rule</strong>:</p>
+<p><span class="math display">\[
+\begin{cases}
+    \Delta W = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\]</span></p>
+</section>
+
+<section id="comparison-of-linear-classification-and-regression" class="title-slide slide level1 center">
+<h1>Comparison of linear classification and regression</h1>
+<ul>
+<li><p>Classification and regression differ in the nature of their outputs: in classification they are discrete, in regression they are continuous values.</p></li>
+<li><p>However, when trying to minimize the mismatch between a model <span class="math inline">\(\mathbf{y}\)</span> and the real data <span class="math inline">\(\mathbf{t}\)</span>, we have found the same <strong>delta learning rule</strong>:</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+    \Delta W = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{x}^T \\
+    \\
+    \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
+\end{cases}
+\]</span></p>
+<ul>
+<li><p>Regression and classification are in the end the same problem for us. The only things that needs to be adapted is the activation function of the output and the <strong>loss function</strong>:</p>
+<ul>
+<li>For regression, we use regular activation functions and the <strong>mean square error</strong> (mse):</li>
+</ul>
+<p><span class="math display">\[
+  \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \in \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
+  \]</span></p>
+<ul>
+<li>For classification, we use the softmax activation function and the <strong>cross-entropy</strong> (negative log-likelihood) loss function:</li>
+</ul>
+<p><span class="math display">\[\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]\]</span></p></li>
+</ul>
+</section>
+
+<section id="multi-label-classification" class="title-slide slide level1 center">
+<h1>5 - Multi-label classification</h1>
+
+</section>
+
+<section id="multi-label-classification-1" class="title-slide slide level1 center">
+<h1>Multi-label classification</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/catdog2.jpg"></p>
+<p></p><figcaption>GK Hart/Vikki Hart/Getty Images</figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li><p>What if there is more than one label on the image?</p></li>
+<li><p>The target vector <span class="math inline">\(\mathbf{t}\)</span> does not represent a probability distribution anymore:</p></li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [1, 1, 0, 0, 0]
+\]</span></p>
+<ul>
+<li>Normalizing the vector does not help: it is not a dog <strong>or</strong> a cat, it is a dog <strong>and</strong> a cat.</li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [0.5, 0.5, 0, 0, 0]
+\]</span></p>
+</div>
+</div>
+</section>
+
+<section id="multi-label-classification-2" class="title-slide slide level1 center">
+<h1>Multi-label classification</h1>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/linearperceptron-simple.svg"></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<ul>
+<li>For multi-label classification, we can simply use the <strong>logistic</strong> activation function for the output neurons:</li>
+</ul>
+<p><span class="math display">\[
+    \mathbf{y} = \sigma(W \times \mathbf{x} + \mathbf{b})
+\]</span></p>
+<ul>
+<li>The outputs are between 0 and 1, but they do not sum to one. Each output neuron performs <strong>logistic regression for soft classification</strong> on their class:</li>
+</ul>
+<p><span class="math display">\[y_j = P(\text{class} = j | \mathbf{x})\]</span></p>
+<ul>
+<li>Each output neuron <span class="math inline">\(y_j\)</span> has a binary target <span class="math inline">\(t_j\)</span> (one-vs-the-rest) and has to minimize the negative log-likelihood:</li>
+</ul>
+<p><span class="math display">\[
+\mathcal{l}_j(W, \mathbf{b}) =  - t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)
+\]</span></p>
+</div>
+</div>
+<ul>
+<li>The <strong>binary cross-entropy</strong> loss for the whole network is the sum of the negative log-likelihood for each class: <span class="math display">\[
+\mathcal{L}(W, \mathbf{b}) =  \mathbb{E}_{\mathcal{D}} [- \sum_{j=1}^C t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)]
+\]</span></li>
+</ul>
 <div class="footer footer-default">
 
 </div>

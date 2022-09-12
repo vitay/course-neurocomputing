@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.175">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 35&nbsp; Recurrent neural networks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../references.html" rel="next">
+<link href="../exercises/12-VAE-solution.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Recurrent neural networks</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Recurrent neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Self-supervised learning</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Outlook</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link active" data-scroll-target="#sentiment-analysis">Sentiment analysis</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data preparation</a></li>
+  <li><a href="#training-the-lstm" id="toc-training-the-lstm" class="nav-link" data-scroll-target="#training-the-lstm">Training the LSTM</a></li>
+  </ul></li>
+  <li><a href="#time-series-prediction" id="toc-time-series-prediction" class="nav-link" data-scroll-target="#time-series-prediction">Time series prediction</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Recurrent neural networks</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>The goal is to learn to use LSTM layers in keras for sentiment analysis and time series prediction. The code for sentiment analysis is adapted from <a href="https://victorzhou.com/blog/intro-to-rnns/" class="uri">https://victorzhou.com/blog/intro-to-rnns/</a>. The code for time series prediction is adapted from <a href="https://www.tensorflow.org/tutorials/structured_data/time_series" class="uri">https://www.tensorflow.org/tutorials/structured_data/time_series</a>.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="sentiment-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment-analysis">Sentiment analysis</h2>
+<p>The goal to use recurrent neural networks (LSTM) to perform <strong>sentiment analysis</strong> on short sentences, i.e.&nbsp;to predict whether the sentence has a positive or negative meaning.</p>
+<p>The following cells represent your training and test data. They are lists of lists, where the first element is the sentence as a string, and the second a boolean, with <code>True</code> for positive sentences, <code>False</code> for negative ones.</p>
+<p>Notice how some sentences are ambiguous (if you do not notice the “not”, the sentiment might be very different).</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train_data <span class="op">=</span> [</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'good'</span>, <span class="va">True</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'bad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'happy'</span>, <span class="va">True</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'sad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'not good'</span>, <span class="va">False</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'not bad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'not happy'</span>, <span class="va">False</span>],</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'not sad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'very good'</span>, <span class="va">True</span>],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'very bad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'very happy'</span>, <span class="va">True</span>],</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'very sad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am happy'</span>, <span class="va">True</span>],</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is good'</span>, <span class="va">True</span>],</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am bad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is bad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am sad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is sad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not happy'</span>, <span class="va">False</span>],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not good'</span>, <span class="va">False</span>],</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not bad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not sad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am very happy'</span>, <span class="va">True</span>],</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very good'</span>, <span class="va">True</span>],</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am very bad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very sad'</span>, <span class="va">False</span>],</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very happy'</span>, <span class="va">True</span>],</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am good not bad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is good not bad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am bad not good'</span>, <span class="va">False</span>],</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am good and happy'</span>, <span class="va">True</span>],</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not good and not happy'</span>, <span class="va">False</span>],</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not at all good'</span>, <span class="va">False</span>],</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not at all bad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not at all happy'</span>, <span class="va">False</span>],</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not at all sad'</span>, <span class="va">True</span>],</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not at all happy'</span>, <span class="va">False</span>],</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am good right now'</span>, <span class="va">True</span>],</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am bad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is bad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am sad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was good earlier'</span>, <span class="va">True</span>],</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was happy earlier'</span>, <span class="va">True</span>],</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was bad earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was sad earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am very bad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very good right now'</span>, <span class="va">True</span>],</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very sad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was bad earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was very good earlier'</span>, <span class="va">True</span>],</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was very bad earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was very happy earlier'</span>, <span class="va">True</span>],</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was very sad earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was good and not bad earlier'</span>, <span class="va">True</span>],</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was not good and not happy earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not at all bad or sad right now'</span>, <span class="va">True</span>],</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not at all good or happy right now'</span>, <span class="va">False</span>],</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was not happy and not good earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>test_data <span class="op">=</span> [</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is happy'</span>, <span class="va">True</span>],</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am good'</span>, <span class="va">True</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not happy'</span>, <span class="va">False</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not good'</span>, <span class="va">False</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not bad'</span>, <span class="va">True</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not sad'</span>, <span class="va">True</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am very good'</span>, <span class="va">True</span>],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very bad'</span>, <span class="va">False</span>],</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am very sad'</span>, <span class="va">False</span>],</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is bad not good'</span>, <span class="va">False</span>],</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is good and happy'</span>, <span class="va">True</span>],</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not good and not happy'</span>, <span class="va">False</span>],</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i am not at all sad'</span>, <span class="va">True</span>],</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not at all good'</span>, <span class="va">False</span>],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is not at all bad'</span>, <span class="va">True</span>],</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is good right now'</span>, <span class="va">True</span>],</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is sad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this is very bad right now'</span>, <span class="va">False</span>],</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'this was good earlier'</span>, <span class="va">True</span>],</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'i was not happy and not good earlier'</span>, <span class="va">False</span>],</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'earlier i was good and not bad'</span>, <span class="va">True</span>],</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="1dc753ca-ade2-4723-ae3b-e2cd75bff941" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N_train <span class="op">=</span> <span class="bu">len</span>(train_data)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>N_test <span class="op">=</span> <span class="bu">len</span>(test_data)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(N_train, <span class="st">"training sentences."</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(N_test, <span class="st">"test sentences."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>58 training sentences.
+21 test sentences.</code></pre>
+</div>
+</div>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">Data preparation</h3>
+<p>The most boring part when training LSTMs on text is to prepare the data correctly. Sentences are sequences of words (possibly a huge number of words), with a variable length (some sentences are shorter than others).</p>
+<p>What neural networks expect as input is a fixed-length sequence of numerical vectors <span class="math inline">\(\{\mathbf{x}_t\}_{t=0}^T\)</span>, i.e.&nbsp;they must have a fixed size. So we need to transform each sentence into this format.</p>
+<p>The first thing to do is to identify the vocabulary, i.e.&nbsp;the <strong>unique</strong> words in the training set (fortunately, the test set uses the same exact words) as well as the maximal number of words in each sentence (again, the test set does not have longer sentences).</p>
+<p><strong>Q:</strong> Create a list <code>vocabulary</code> of unique words in the training set and compute the maximal length <code>nb_words</code> of a sentence.</p>
+<p>To extract the words in each sentence, the <code>split()</code> method of Python strings might come handy:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">"I fear this exercise will be difficult"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sentence.split(<span class="st">" "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will also find the <code>set</code> Python object useful to identify unique works. Check the doc. But there are many ways to do that (for loops), just do it the way you prefer.</p>
+<div class="cell" data-outputid="0f8ec1f4-7f7e-43e9-ecef-d8a07e822e7d" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vocabulary <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>([w <span class="cf">for</span> pair <span class="kw">in</span> train_data <span class="cf">for</span> w <span class="kw">in</span> pair[<span class="dv">0</span>].split(<span class="st">' '</span>)]))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Unique words found'</span>, <span class="bu">len</span>(vocabulary)) <span class="co"># 18 unique words found</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>nb_words <span class="op">=</span> np.<span class="bu">max</span>([<span class="bu">len</span>(pair[<span class="dv">0</span>].split(<span class="st">' '</span>)) <span class="cf">for</span> pair <span class="kw">in</span> train_data])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Maximum sequence length:"</span>, nb_words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unique words found 18
+Maximum sequence length: 10</code></pre>
+</div>
+</div>
+<p>Now that we have found our list of 18 unique words, we need to able to perform <strong>one-hot encoding</strong> of each word, i.e.&nbsp;write a method <code>def one_hot_encoding(word, vocabulary)</code> that takes a word (e.g.&nbsp;“good”) and the vocabulary, and returns a vector of size 18, with mostly zeros, except for a <code>1.0</code> at the location of the word in the vocabulary.</p>
+<p>For example, if your vocabulary is <code>["I", "love", "you"]</code>, the one-hot encoding of “I” should be <code>np.array([1., 0., 0.])</code>, the one of “love” is <code>np.array([0., 1., 0.])</code>, etc.</p>
+<p><strong>Q:</strong> Implement the <code>one_hot_encoding()</code> method for single words.</p>
+<p><em>Hint:</em> you might find the method <code>index()</code> of list objects interesting.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> one_hot_encoding(word, vocabulary):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> np.zeros(<span class="bu">len</span>(vocabulary))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    r[vocabulary.index(word)] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Q:</strong> You can now create the training set <code>X_train, T_train</code> and the test set <code>X_test, T_test</code>.</p>
+<p>The training input data <code>X_train</code> should be a numpy array with 3 dimensions:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> X_train <span class="op">=</span> np.zeros((N_train, nb_words, <span class="bu">len</span>(vocabulary)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first index corresponds to each sentence. The second index represents the index of each word in the sentence (maximally <code>nb_words=10</code>). The third index is for the one-hot encoding (18 elements).</p>
+<p><strong>Beware:</strong> most sentences are shorter than <code>nb_words=10</code>. In that case, the words should be set <strong>at the end of the sequence</strong>, i.e.&nbsp;you prepend zero vectors.</p>
+<p>For example, “I love you” should be encoded as:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"you"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>not as:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">"I"</span>, <span class="st">"love"</span>, <span class="st">"you"</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The reason for that is that the LSTM will get the words one by one and only respond “positive” or “negative” after the last word has been seen. If the words are provided at the beginning of the sequence, vanishing gradients might delete them.</p>
+<p>The same holds for the test set, it only has less sentences.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prepare_data(data, vocabulary, nb_words):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.zeros((N, nb_words, <span class="bu">len</span>(vocabulary)))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    T <span class="op">=</span> np.zeros((N, ))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over the data</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        x, t <span class="op">=</span> data[i]</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transform the sentence</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        words <span class="op">=</span> x.split(<span class="st">" "</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(words)):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            word <span class="op">=</span> words[j]</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>            encoding <span class="op">=</span> one_hot_encoding(word, vocabulary)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>            X[i, <span class="op">-</span><span class="bu">len</span>(words) <span class="op">+</span> j, :] <span class="op">=</span> encoding</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transform the output</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        T[i] <span class="op">=</span> <span class="bu">int</span>(t)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="b1ae06a2-4531-4679-955c-cc9defec40e3" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X_train, T_train <span class="op">=</span> prepare_data(train_data, vocabulary, nb_words)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X_test, T_test <span class="op">=</span> prepare_data(test_data, vocabulary, nb_words)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(T_train.shape)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_test.shape)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(T_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(58, 10, 18)
+(58,)
+(21, 10, 18)
+(21,)</code></pre>
+</div>
+</div>
+</section>
+<section id="training-the-lstm" class="level3">
+<h3 class="anchored" data-anchor-id="training-the-lstm">Training the LSTM</h3>
+<p>Now we just have to provide the data to a recurrent network. The problem is not very complicated, so we will need a single LSTM layer, followed by a single output neuron (with the logistic transfer function) whose role is to output 1 for the positive class, 0 for the negative one.</p>
+<p><strong>Q:</strong> Check the documentation for the LSTM layer of <code>keras</code>: <a href="https://keras.io/api/layers/recurrent_layers/lstm/" class="uri">https://keras.io/api/layers/recurrent_layers/lstm/</a>. It has many parameters:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tf.keras.layers.LSTM(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    units, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    activation<span class="op">=</span><span class="st">'tanh'</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    recurrent_activation<span class="op">=</span><span class="st">'sigmoid'</span>, </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    use_bias<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    kernel_initializer<span class="op">=</span><span class="st">'glorot_uniform'</span>, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    recurrent_initializer<span class="op">=</span><span class="st">'orthogonal'</span>, </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    bias_initializer<span class="op">=</span><span class="st">'zeros'</span>, </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    unit_forget_bias<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    kernel_regularizer<span class="op">=</span><span class="va">None</span>, </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    recurrent_regularizer<span class="op">=</span><span class="va">None</span>, bias_regularizer<span class="op">=</span><span class="va">None</span>, </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    activity_regularizer<span class="op">=</span><span class="va">None</span>, kernel_constraint<span class="op">=</span><span class="va">None</span>, </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    recurrent_constraint<span class="op">=</span><span class="va">None</span>, bias_constraint<span class="op">=</span><span class="va">None</span>, </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    dropout<span class="op">=</span><span class="fl">0.0</span>, recurrent_dropout<span class="op">=</span><span class="fl">0.0</span>, </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    implementation<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    return_sequences<span class="op">=</span><span class="va">False</span>, return_state<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    go_backwards<span class="op">=</span><span class="va">False</span>, stateful<span class="op">=</span><span class="va">False</span>, unroll<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The default value for the parameters is the vanilla LSTM seen in the lectures, but you have the possibility to change the activation functions for the inputs and outputs (not the gates, it must be a sigmoid!), initialize the weights differently, add regularization or dropout, use biases or not, etc. That’s a lot to play with. For this exercise, stick to the default parameters at the beginning. The only thing you need to define is the number of neurons <code>units</code> of the layer.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tf.keras.layers.LSTM(units<span class="op">=</span>N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that an important parameter is <code>return_sequences</code>. When set to False (the default), the LSTM layer will process the complete sequence of 10 word vectors, and output a single vector of <span class="math inline">\(N\)</span> values (the number of units). When set to True, the layer would return a sequence of 10 vectors of size <span class="math inline">\(N\)</span>.</p>
+<p>Here, we only want the LSTM layer to encode the sentence and feed a single vector to the output layer, so we can leave it to False. If we wanted to stack two LSTM layers on top of each other, we would need to set <code>return_sequences</code> to True for the first layer and False for the second one (you can try that later):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tf.keras.layers.LSTM(N, return_sequences<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tf.keras.layers.LSTM(M, return_sequences<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Q:</strong> Create a model with one LSTM layer (with enough units) and one output layer with one neuron (<code>'sigmoid'</code> activation function). Choose an optimizer (SGD, RMSprop, Adam, etc) and a good learning rate. When compiling the model, use the <code>'binary_crossentropy'</code> loss function as it is a binary classification.</p>
+<p>The input layer of the network must take a <code>(nb_words, len(vocabulary))</code> matrix as input, i.e.&nbsp;(window, nb_features).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tf.keras.layers.Input((nb_words, <span class="bu">len</span>(vocabulary)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>When training the model with <code>model.fit()</code>, you can pass the test set as validation data, as we do not have too many examples:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, T_train, validation_data<span class="op">=</span>(X_test, T_test), ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Train the model for enough epochs, using a batch size big enough but not too big. In other terms: do the hyperparameter search yourself ;).</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> small_model():</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    tf.keras.backend.clear_session()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> tf.keras.models.Sequential()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.Input((nb_words, <span class="bu">len</span>(vocabulary))))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.LSTM(<span class="dv">10</span>))</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    optimizer <span class="op">=</span> tf.keras.optimizers.Adam(lr<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>, optimizer<span class="op">=</span>optimizer, metrics<span class="op">=</span>[<span class="st">'binary_accuracy'</span>])</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model.summary())</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="a9ddd445-da18-4420-d478-6928551907f8" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> small_model()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, T_train, validation_data<span class="op">=</span>(X_test, T_test), epochs<span class="op">=</span><span class="dv">30</span>, batch_size<span class="op">=</span><span class="dv">10</span>, callbacks<span class="op">=</span>[history])</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'binary_accuracy'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_binary_accuracy'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm (LSTM)                  (None, 10)                1160      
+_________________________________________________________________
+dense (Dense)                (None, 1)                 11        
+=================================================================
+Total params: 1,171
+Trainable params: 1,171
+Non-trainable params: 0
+_________________________________________________________________
+None
+Epoch 1/30
+6/6 [==============================] - 4s 114ms/step - loss: 0.6982 - binary_accuracy: 0.4164 - val_loss: 0.6966 - val_binary_accuracy: 0.5238
+Epoch 2/30
+6/6 [==============================] - 0s 10ms/step - loss: 0.6710 - binary_accuracy: 0.6405 - val_loss: 0.7026 - val_binary_accuracy: 0.4762
+Epoch 3/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6980 - binary_accuracy: 0.5057 - val_loss: 0.6954 - val_binary_accuracy: 0.4762
+Epoch 4/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6846 - binary_accuracy: 0.5564 - val_loss: 0.6934 - val_binary_accuracy: 0.4762
+Epoch 5/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6814 - binary_accuracy: 0.5319 - val_loss: 0.6898 - val_binary_accuracy: 0.4762
+Epoch 6/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6605 - binary_accuracy: 0.6392 - val_loss: 0.6916 - val_binary_accuracy: 0.5238
+Epoch 7/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6487 - binary_accuracy: 0.5997 - val_loss: 0.6900 - val_binary_accuracy: 0.5714
+Epoch 8/30
+6/6 [==============================] - 0s 10ms/step - loss: 0.6536 - binary_accuracy: 0.6133 - val_loss: 0.6799 - val_binary_accuracy: 0.4762
+Epoch 9/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6062 - binary_accuracy: 0.7737 - val_loss: 0.6733 - val_binary_accuracy: 0.5238
+Epoch 10/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.6316 - binary_accuracy: 0.6892 - val_loss: 0.6538 - val_binary_accuracy: 0.5238
+Epoch 11/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.5812 - binary_accuracy: 0.6942 - val_loss: 0.6212 - val_binary_accuracy: 0.5714
+Epoch 12/30
+6/6 [==============================] - 0s 8ms/step - loss: 0.5466 - binary_accuracy: 0.7803 - val_loss: 0.5744 - val_binary_accuracy: 0.7619
+Epoch 13/30
+6/6 [==============================] - 0s 28ms/step - loss: 0.5181 - binary_accuracy: 0.7368 - val_loss: 0.4873 - val_binary_accuracy: 0.8095
+Epoch 14/30
+6/6 [==============================] - 0s 10ms/step - loss: 0.4618 - binary_accuracy: 0.8465 - val_loss: 0.4202 - val_binary_accuracy: 0.7619
+Epoch 15/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.3706 - binary_accuracy: 0.8382 - val_loss: 0.3515 - val_binary_accuracy: 0.8095
+Epoch 16/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.2915 - binary_accuracy: 0.8628 - val_loss: 0.2920 - val_binary_accuracy: 0.9524
+Epoch 17/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.2362 - binary_accuracy: 0.9731 - val_loss: 0.2651 - val_binary_accuracy: 0.9524
+Epoch 18/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.1909 - binary_accuracy: 0.9306 - val_loss: 0.2213 - val_binary_accuracy: 0.9524
+Epoch 19/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.1888 - binary_accuracy: 0.9767 - val_loss: 0.1791 - val_binary_accuracy: 1.0000
+Epoch 20/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.1485 - binary_accuracy: 1.0000 - val_loss: 0.1478 - val_binary_accuracy: 1.0000
+Epoch 21/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.1104 - binary_accuracy: 1.0000 - val_loss: 0.1258 - val_binary_accuracy: 1.0000
+Epoch 22/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.1032 - binary_accuracy: 1.0000 - val_loss: 0.1074 - val_binary_accuracy: 1.0000
+Epoch 23/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0974 - binary_accuracy: 1.0000 - val_loss: 0.0922 - val_binary_accuracy: 1.0000
+Epoch 24/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0590 - binary_accuracy: 1.0000 - val_loss: 0.0757 - val_binary_accuracy: 1.0000
+Epoch 25/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0511 - binary_accuracy: 1.0000 - val_loss: 0.0619 - val_binary_accuracy: 1.0000
+Epoch 26/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0432 - binary_accuracy: 1.0000 - val_loss: 0.0517 - val_binary_accuracy: 1.0000
+Epoch 27/30
+6/6 [==============================] - 0s 10ms/step - loss: 0.0445 - binary_accuracy: 1.0000 - val_loss: 0.0449 - val_binary_accuracy: 1.0000
+Epoch 28/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0360 - binary_accuracy: 1.0000 - val_loss: 0.0386 - val_binary_accuracy: 1.0000
+Epoch 29/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0370 - binary_accuracy: 1.0000 - val_loss: 0.0353 - val_binary_accuracy: 1.0000
+Epoch 30/30
+6/6 [==============================] - 0s 9ms/step - loss: 0.0296 - binary_accuracy: 1.0000 - val_loss: 0.0307 - val_binary_accuracy: 1.0000
+Test loss: 0.030699074268341064
+Test accuracy: 1.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="13-RNN-solution_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>A:</strong> It works easily.</p>
+<p><strong>Q.</strong> Once you have been able to successfully train the network, vary the different parts of the model to understand their influence: learning rate, number of units, optimizer, etc. Add another LSTM layer to see what happens. Exchange the LSTM layer with the GRU layer.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> big_model():</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    tf.keras.backend.clear_session()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> tf.keras.models.Sequential()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.Input((nb_words, <span class="bu">len</span>(vocabulary))))</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.LSTM(<span class="dv">20</span>, return_sequences<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.LSTM(<span class="dv">10</span>, return_sequences<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    model.add(tf.keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>))</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    optimizer <span class="op">=</span> tf.keras.optimizers.Adam(lr<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>, optimizer<span class="op">=</span>optimizer, metrics<span class="op">=</span>[<span class="st">'binary_accuracy'</span>])</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model.summary())</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="eb7ec0fd-589c-41ec-9a3e-3eae2525372b" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> big_model()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, T_train, validation_data<span class="op">=</span>(X_test, T_test), epochs<span class="op">=</span><span class="dv">30</span>, batch_size<span class="op">=</span><span class="dv">10</span>, callbacks<span class="op">=</span>[history])</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'binary_accuracy'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_binary_accuracy'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm (LSTM)                  (None, 10, 20)            3120      
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 10)                1240      
+_________________________________________________________________
+dense (Dense)                (None, 1)                 11        
+=================================================================
+Total params: 4,371
+Trainable params: 4,371
+Non-trainable params: 0
+_________________________________________________________________
+None
+Epoch 1/30
+6/6 [==============================] - 3s 126ms/step - loss: 0.6949 - binary_accuracy: 0.6490 - val_loss: 0.7004 - val_binary_accuracy: 0.4762
+Epoch 2/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.6915 - binary_accuracy: 0.5153 - val_loss: 0.6925 - val_binary_accuracy: 0.4762
+Epoch 3/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.6813 - binary_accuracy: 0.5579 - val_loss: 0.6919 - val_binary_accuracy: 0.4762
+Epoch 4/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.6781 - binary_accuracy: 0.5419 - val_loss: 0.6874 - val_binary_accuracy: 0.4762
+Epoch 5/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.6644 - binary_accuracy: 0.5853 - val_loss: 0.6798 - val_binary_accuracy: 0.4762
+Epoch 6/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.6725 - binary_accuracy: 0.6397 - val_loss: 0.6461 - val_binary_accuracy: 0.7619
+Epoch 7/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.6507 - binary_accuracy: 0.7549 - val_loss: 0.6170 - val_binary_accuracy: 0.7619
+Epoch 8/30
+6/6 [==============================] - 0s 12ms/step - loss: 0.6102 - binary_accuracy: 0.7229 - val_loss: 0.5384 - val_binary_accuracy: 0.7619
+Epoch 9/30
+6/6 [==============================] - 0s 12ms/step - loss: 0.5777 - binary_accuracy: 0.7188 - val_loss: 0.5100 - val_binary_accuracy: 0.7619
+Epoch 10/30
+6/6 [==============================] - 0s 13ms/step - loss: 0.4356 - binary_accuracy: 0.8078 - val_loss: 0.4245 - val_binary_accuracy: 0.7619
+Epoch 11/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.3224 - binary_accuracy: 0.8566 - val_loss: 0.3798 - val_binary_accuracy: 0.7619
+Epoch 12/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.2309 - binary_accuracy: 0.9162 - val_loss: 0.3239 - val_binary_accuracy: 0.8095
+Epoch 13/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.1888 - binary_accuracy: 0.8865 - val_loss: 0.2813 - val_binary_accuracy: 0.8095
+Epoch 14/30
+6/6 [==============================] - 0s 12ms/step - loss: 0.2265 - binary_accuracy: 0.8508 - val_loss: 0.2611 - val_binary_accuracy: 0.8095
+Epoch 15/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.1821 - binary_accuracy: 0.8974 - val_loss: 0.2211 - val_binary_accuracy: 0.8095
+Epoch 16/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.1445 - binary_accuracy: 0.9070 - val_loss: 0.1734 - val_binary_accuracy: 1.0000
+Epoch 17/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.1258 - binary_accuracy: 1.0000 - val_loss: 0.1343 - val_binary_accuracy: 1.0000
+Epoch 18/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0961 - binary_accuracy: 1.0000 - val_loss: 0.1001 - val_binary_accuracy: 1.0000
+Epoch 19/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0575 - binary_accuracy: 1.0000 - val_loss: 0.0631 - val_binary_accuracy: 1.0000
+Epoch 20/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0367 - binary_accuracy: 1.0000 - val_loss: 0.0423 - val_binary_accuracy: 1.0000
+Epoch 21/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0290 - binary_accuracy: 1.0000 - val_loss: 0.0247 - val_binary_accuracy: 1.0000
+Epoch 22/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0100 - binary_accuracy: 1.0000 - val_loss: 0.0123 - val_binary_accuracy: 1.0000
+Epoch 23/30
+6/6 [==============================] - 0s 12ms/step - loss: 0.0091 - binary_accuracy: 1.0000 - val_loss: 0.0070 - val_binary_accuracy: 1.0000
+Epoch 24/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0045 - binary_accuracy: 1.0000 - val_loss: 0.0053 - val_binary_accuracy: 1.0000
+Epoch 25/30
+6/6 [==============================] - 0s 10ms/step - loss: 0.0042 - binary_accuracy: 1.0000 - val_loss: 0.0043 - val_binary_accuracy: 1.0000
+Epoch 26/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0023 - binary_accuracy: 1.0000 - val_loss: 0.0031 - val_binary_accuracy: 1.0000
+Epoch 27/30
+6/6 [==============================] - 0s 10ms/step - loss: 0.0026 - binary_accuracy: 1.0000 - val_loss: 0.0026 - val_binary_accuracy: 1.0000
+Epoch 28/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0021 - binary_accuracy: 1.0000 - val_loss: 0.0022 - val_binary_accuracy: 1.0000
+Epoch 29/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0018 - binary_accuracy: 1.0000 - val_loss: 0.0021 - val_binary_accuracy: 1.0000
+Epoch 30/30
+6/6 [==============================] - 0s 11ms/step - loss: 0.0013 - binary_accuracy: 1.0000 - val_loss: 0.0019 - val_binary_accuracy: 1.0000
+Test loss: 0.0019315623212605715
+Test accuracy: 1.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="13-RNN-solution_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="time-series-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-prediction">Time series prediction</h2>
+<p>Another useful function of RNNs is forecasting, i.e.&nbsp;predicting the rest of a sequence (financial markets, weather, etc.) based on its history.</p>
+<p>Let’s generate a dummy one-dimensional signal with 10000 points:</p>
+<div class="cell" data-outputid="c882753f-9b17-45a8-c91b-b6f226e76122" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>time_axis <span class="op">=</span> np.arange(N)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>signal <span class="op">=</span> <span class="fl">0.8</span><span class="op">*</span>np.sin(time_axis<span class="op">/</span><span class="dv">700</span>) <span class="op">+</span> <span class="fl">0.15</span><span class="op">*</span>np.sin(time_axis<span class="op">/</span><span class="dv">40</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>plt.plot(signal)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="13-RNN-solution_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We are going to use a small window (50 points) to feed the LSTM. The goal will be to perform <strong>one-step ahead prediction</strong>: given the last 50 points, what will be the next one?</p>
+<p>The following cell prepares the data for the problem. Check that the data is what you expect.</p>
+<div class="cell" data-outputid="417d1c94-5aab-4092-e56f-4931aad70e88" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    [signal[t: t<span class="op">+</span> window] <span class="cf">for</span> t <span class="kw">in</span> time_axis[:<span class="op">-</span>window]]</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> signal[time_axis[<span class="dv">1</span>:<span class="op">-</span>window<span class="op">+</span><span class="dv">1</span>]]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(9950, 50)
+(9950,)</code></pre>
+</div>
+</div>
+<p>We now split the signal into training and test sets. The training set consists of the 9000 first points, while the test set consists of the remaining 1000 points (the future). Note that the test set is not exactly contained in the training set as the function is not periodic, but quite.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nb_train <span class="op">=</span> <span class="dv">9000</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X[:nb_train]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>T_train <span class="op">=</span> t[:nb_train]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X[nb_train:]</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>T_test <span class="op">=</span> t[nb_train:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Q:</strong> Create a neural network taking a <code>(window, 1)</code> input, with one LSTM layer and one output neuron using the tanh activation function (as the targets are between -1 and 1). Train it on the data as a regression problem (use many epochs). Track the mean average error (<code>metrics=['mae']</code>) in addition to the mse, as it indicates better the prediction error. After training, plot the prediction for the test set and compare it to the ground truth.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_model(window):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    tf.keras.backend.clear_session()</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> tf.keras.layers.Input((window, <span class="dv">1</span>))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> tf.keras.layers.LSTM(<span class="dv">20</span>)(inputs)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> tf.keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"tanh"</span>)(x)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> tf.keras.models.Model(inputs, output)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    optimizer <span class="op">=</span> tf.keras.optimizers.Adam(lr<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'mse'</span>, optimizer<span class="op">=</span>optimizer, metrics<span class="op">=</span>[<span class="st">'mae'</span>])</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model.summary())</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-outputid="2a839b39-1fd6-4186-f0d6-8a23d6a4366d" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> create_model(window)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, T_train, validation_data<span class="op">=</span>(X_test, T_test), epochs<span class="op">=</span><span class="dv">50</span>, batch_size<span class="op">=</span><span class="dv">64</span>, callbacks<span class="op">=</span>[history])</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'mae'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_mae'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Mean Average Error'</span>)</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model: "model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         [(None, 50, 1)]           0         
+_________________________________________________________________
+lstm (LSTM)                  (None, 20)                1760      
+_________________________________________________________________
+dense (Dense)                (None, 1)                 21        
+=================================================================
+Total params: 1,781
+Trainable params: 1,781
+Non-trainable params: 0
+_________________________________________________________________
+None
+Epoch 1/50
+141/141 [==============================] - 2s 7ms/step - loss: 0.0321 - mae: 0.1348 - val_loss: 0.0260 - val_mae: 0.1357
+Epoch 2/50
+141/141 [==============================] - 1s 5ms/step - loss: 0.0095 - mae: 0.0818 - val_loss: 0.0052 - val_mae: 0.0596
+Epoch 3/50
+141/141 [==============================] - 1s 5ms/step - loss: 0.0039 - mae: 0.0510 - val_loss: 0.0020 - val_mae: 0.0384
+Epoch 4/50
+141/141 [==============================] - 1s 5ms/step - loss: 8.8932e-04 - mae: 0.0237 - val_loss: 2.3679e-04 - val_mae: 0.0132
+Epoch 5/50
+141/141 [==============================] - 1s 5ms/step - loss: 2.3213e-04 - mae: 0.0122 - val_loss: 4.4895e-04 - val_mae: 0.0187
+Epoch 6/50
+141/141 [==============================] - 1s 5ms/step - loss: 4.5989e-04 - mae: 0.0159 - val_loss: 3.8623e-04 - val_mae: 0.0158
+Epoch 7/50
+141/141 [==============================] - 1s 5ms/step - loss: 2.5193e-04 - mae: 0.0126 - val_loss: 1.4829e-04 - val_mae: 0.0103
+Epoch 8/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.9236e-04 - mae: 0.0107 - val_loss: 1.1680e-04 - val_mae: 0.0089
+Epoch 9/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.5906e-04 - mae: 0.0099 - val_loss: 1.0358e-04 - val_mae: 0.0085
+Epoch 10/50
+141/141 [==============================] - 1s 5ms/step - loss: 8.3204e-05 - mae: 0.0072 - val_loss: 6.3628e-04 - val_mae: 0.0238
+Epoch 11/50
+141/141 [==============================] - 1s 5ms/step - loss: 2.3202e-04 - mae: 0.0123 - val_loss: 8.6499e-05 - val_mae: 0.0071
+Epoch 12/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.5292e-04 - mae: 0.0098 - val_loss: 1.8333e-04 - val_mae: 0.0125
+Epoch 13/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.3011e-04 - mae: 0.0090 - val_loss: 1.2432e-04 - val_mae: 0.0092
+Epoch 14/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.2748e-04 - mae: 0.0090 - val_loss: 7.3832e-05 - val_mae: 0.0074
+Epoch 15/50
+141/141 [==============================] - 1s 5ms/step - loss: 8.2734e-05 - mae: 0.0072 - val_loss: 5.1241e-05 - val_mae: 0.0058
+Epoch 16/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.0381e-04 - mae: 0.0081 - val_loss: 2.6565e-05 - val_mae: 0.0044
+Epoch 17/50
+141/141 [==============================] - 1s 5ms/step - loss: 6.0350e-05 - mae: 0.0061 - val_loss: 4.3032e-05 - val_mae: 0.0056
+Epoch 18/50
+141/141 [==============================] - 1s 5ms/step - loss: 7.3179e-05 - mae: 0.0070 - val_loss: 2.6526e-04 - val_mae: 0.0147
+Epoch 19/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.5532e-04 - mae: 0.0098 - val_loss: 4.6380e-05 - val_mae: 0.0058
+Epoch 20/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.8684e-04 - mae: 0.0104 - val_loss: 7.1898e-05 - val_mae: 0.0077
+Epoch 21/50
+141/141 [==============================] - 1s 5ms/step - loss: 2.7324e-05 - mae: 0.0042 - val_loss: 2.1653e-05 - val_mae: 0.0038
+Epoch 22/50
+141/141 [==============================] - 1s 5ms/step - loss: 3.3472e-05 - mae: 0.0046 - val_loss: 1.3280e-05 - val_mae: 0.0029
+Epoch 23/50
+141/141 [==============================] - 1s 5ms/step - loss: 5.0352e-05 - mae: 0.0055 - val_loss: 1.3503e-05 - val_mae: 0.0030
+Epoch 24/50
+141/141 [==============================] - 1s 5ms/step - loss: 5.2304e-05 - mae: 0.0054 - val_loss: 3.2720e-04 - val_mae: 0.0172
+Epoch 25/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.6084e-04 - mae: 0.0098 - val_loss: 4.7370e-05 - val_mae: 0.0061
+Epoch 26/50
+141/141 [==============================] - 1s 5ms/step - loss: 3.0319e-05 - mae: 0.0044 - val_loss: 1.1324e-04 - val_mae: 0.0081
+Epoch 27/50
+141/141 [==============================] - 1s 6ms/step - loss: 4.3116e-05 - mae: 0.0051 - val_loss: 1.7483e-04 - val_mae: 0.0121
+Epoch 28/50
+141/141 [==============================] - 1s 5ms/step - loss: 6.8618e-05 - mae: 0.0061 - val_loss: 1.2294e-04 - val_mae: 0.0096
+Epoch 29/50
+141/141 [==============================] - 1s 5ms/step - loss: 4.5403e-05 - mae: 0.0052 - val_loss: 6.6824e-06 - val_mae: 0.0021
+Epoch 30/50
+141/141 [==============================] - 1s 5ms/step - loss: 5.2677e-04 - mae: 0.0155 - val_loss: 1.3084e-05 - val_mae: 0.0028
+Epoch 31/50
+141/141 [==============================] - 1s 5ms/step - loss: 4.1677e-05 - mae: 0.0050 - val_loss: 1.2648e-05 - val_mae: 0.0030
+Epoch 32/50
+141/141 [==============================] - 1s 5ms/step - loss: 2.1466e-05 - mae: 0.0037 - val_loss: 7.2209e-06 - val_mae: 0.0022
+Epoch 33/50
+141/141 [==============================] - 1s 5ms/step - loss: 8.8189e-06 - mae: 0.0024 - val_loss: 9.4702e-06 - val_mae: 0.0026
+Epoch 34/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.6518e-05 - mae: 0.0031 - val_loss: 4.7648e-06 - val_mae: 0.0018
+Epoch 35/50
+141/141 [==============================] - 1s 5ms/step - loss: 6.3752e-05 - mae: 0.0055 - val_loss: 8.0761e-06 - val_mae: 0.0023
+Epoch 36/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.2616e-05 - mae: 0.0025 - val_loss: 4.8663e-06 - val_mae: 0.0019
+Epoch 37/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.1288e-04 - mae: 0.0075 - val_loss: 1.8049e-05 - val_mae: 0.0038
+Epoch 38/50
+141/141 [==============================] - 1s 5ms/step - loss: 4.6925e-05 - mae: 0.0053 - val_loss: 7.7753e-06 - val_mae: 0.0024
+Epoch 39/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.5035e-05 - mae: 0.0031 - val_loss: 4.5659e-06 - val_mae: 0.0018
+Epoch 40/50
+141/141 [==============================] - 1s 5ms/step - loss: 5.1643e-05 - mae: 0.0039 - val_loss: 6.4413e-04 - val_mae: 0.0217
+Epoch 41/50
+141/141 [==============================] - 1s 5ms/step - loss: 3.4189e-04 - mae: 0.0120 - val_loss: 5.2492e-06 - val_mae: 0.0019
+Epoch 42/50
+141/141 [==============================] - 1s 5ms/step - loss: 9.2156e-06 - mae: 0.0024 - val_loss: 2.2826e-05 - val_mae: 0.0040
+Epoch 43/50
+141/141 [==============================] - 1s 5ms/step - loss: 9.4703e-06 - mae: 0.0024 - val_loss: 5.3999e-06 - val_mae: 0.0020
+Epoch 44/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.5472e-05 - mae: 0.0031 - val_loss: 1.2471e-05 - val_mae: 0.0030
+Epoch 45/50
+141/141 [==============================] - 1s 5ms/step - loss: 9.6372e-06 - mae: 0.0024 - val_loss: 1.6067e-05 - val_mae: 0.0037
+Epoch 46/50
+141/141 [==============================] - 1s 5ms/step - loss: 1.1083e-05 - mae: 0.0022 - val_loss: 3.5924e-04 - val_mae: 0.0182
+Epoch 47/50
+141/141 [==============================] - 1s 5ms/step - loss: 8.1012e-05 - mae: 0.0068 - val_loss: 4.1036e-05 - val_mae: 0.0057
+Epoch 48/50
+141/141 [==============================] - 1s 5ms/step - loss: 4.1891e-05 - mae: 0.0048 - val_loss: 2.2498e-06 - val_mae: 0.0012
+Epoch 49/50
+141/141 [==============================] - 1s 5ms/step - loss: 4.7253e-06 - mae: 0.0017 - val_loss: 1.5864e-06 - val_mae: 9.7631e-04
+Epoch 50/50
+141/141 [==============================] - 1s 5ms/step - loss: 2.3313e-06 - mae: 0.0012 - val_loss: 2.7683e-06 - val_mae: 0.0012
+Test loss: 2.7682647214533063e-06
+Test accuracy: 0.0012316412758082151</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="13-RNN-solution_files/figure-html/cell-18-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-outputid="e6b36a65-1837-4afd-bf82-d661f2ea54ce" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>plt.plot(T_test, label<span class="op">=</span><span class="st">"Ground truth"</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>plt.plot(y[:, <span class="dv">0</span>], label<span class="op">=</span><span class="st">"Prediction"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="13-RNN-solution_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It seems possible to get a high precision on the test set, but there is a trick. The sequence fed as an input when testing consists of <strong>real</strong> measurements. The network has only learned to predict the next data point. Can we use that model to predict the next 1000 points without seeing the true data?</p>
+<p>For that, we need to build an <strong>auto-regressive model</strong>, i.e.&nbsp;to feed inputs to the network consisting of predictions, not of real data points. We need a structure that can represent a fixed-size window of data points, where we can append predictions one by one. The following cell provides you with a simple implementation:</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Buffer:</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Fixed size buffer allowing to append predictions."</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, window, data):</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.window <span class="op">=</span> window</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data  <span class="op">=</span> data.reshape((<span class="dv">1</span>, window))</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> append(<span class="va">self</span>, value):</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> deque([x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">list</span>(<span class="va">self</span>.data[<span class="dv">0</span>, :])])</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        d.popleft()</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>        d.append(value)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> np.array(d).reshape((<span class="dv">1</span>, <span class="va">self</span>.window))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can create the buffer by intializing it with the first test sample consisting of 50 real data points:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="bu">buffer</span> <span class="op">=</span> Buffer(window, X_test[<span class="dv">0</span>, :])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>buffer.data</code> can be passed directly to the model in order to make a prediction:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> model.predict(<span class="bu">buffer</span>.data)[<span class="dv">0</span>, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This prediction can be appended to the buffer, which can be used as the next input to the model:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">buffer</span>.append(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Q:</strong> Make recursive prediction using your trained model. Does it work?</p>
+<div class="cell" data-outputid="bb4d7496-55e3-4e7c-d2ab-48e581a3e864" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> []</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">buffer</span> <span class="op">=</span> Buffer(window, X_test[<span class="dv">0</span>, :])</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make a prediction using the current buffer</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> model.predict(<span class="bu">buffer</span>.data)[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store the prediction</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    predictions.append(y)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Append the prediction to buffer</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">buffer</span>.append(y)</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>plt.plot(T_test[:<span class="dv">100</span>], label<span class="op">=</span><span class="st">"Ground truth"</span>)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>plt.plot(predictions, label<span class="op">=</span><span class="st">"Prediction"</span>)</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="13-RNN-solution_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>A:</strong> No.&nbsp;The slightest imprecision in the prediction accumulates in the input. After a while, the input to the model does not correspond to something that has been learned, and the output stops making sense. RNN do not have their own dynamics and are quite bad at predicting time series unless you have a lot of training data. With little data, reservoir computing is a much better solution.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../exercises/12-VAE-solution.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Variational autoencoder</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

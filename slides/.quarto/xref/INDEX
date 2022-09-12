@@ -143,5 +143,35 @@
   },
   "2.5-LearningTheory.md": {
     "2.5-LearningTheory.html": "9ddc47f0"
+  },
+  "2.4-LearningTheory.md": {
+    "2.4-LearningTheory.html": "5249b983"
+  },
+  "outdated/9.5-Hebbian.md": {
+    "9.5-Hebbian.html": "6bbffcef"
+  },
+  "outdated/9.6-Spiking.md": {
+    "9.6-Spiking.html": "43c0a3f7"
+  },
+  "outdated/9.2-Hopfield.md": {
+    "9.2-Hopfield.html": "356b392b"
+  },
+  "outdated/9.1-SOM.md": {
+    "9.1-SOM.html": "6ae6670c"
+  },
+  "outdated/9.3-NeuralFields.md": {
+    "9.3-NeuralFields.html": "ddcda30e"
+  },
+  "outdated/9.7-SVM.md": {
+    "9.7-SVM.html": "79c5cd14"
+  },
+  "outdated/9.4-Reservoir.md": {
+    "9.4-Reservoir.html": "db68e44e"
+  },
+  "6.2-Attention.md": {
+    "6.2-Attention.html": "a775904b"
+  },
+  "8.2-Beyond.md": {
+    "8.2-Beyond.html": "d72f6adf"
   }
 }

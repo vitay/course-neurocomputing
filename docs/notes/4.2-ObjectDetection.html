@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.175">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 11&nbsp; Object detection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notes/4.3-SemanticSegmentation.html" rel="next">
+<link href="../notes/4.1-CNN.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Object detection</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Recurrent neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Self-supervised learning</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Outlook</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#object-detection" id="toc-object-detection" class="nav-link active" data-scroll-target="#object-detection">Object detection</a></li>
+  <li><a href="#r-cnn-regions-with-cnn-features" id="toc-r-cnn-regions-with-cnn-features" class="nav-link" data-scroll-target="#r-cnn-regions-with-cnn-features">R-CNN : Regions with CNN features</a></li>
+  <li><a href="#fast-r-cnn" id="toc-fast-r-cnn" class="nav-link" data-scroll-target="#fast-r-cnn">Fast R-CNN</a></li>
+  <li><a href="#faster-r-cnn" id="toc-faster-r-cnn" class="nav-link" data-scroll-target="#faster-r-cnn">Faster R-CNN</a></li>
+  <li><a href="#yolo" id="toc-yolo" class="nav-link" data-scroll-target="#yolo">YOLO</a>
+  <ul class="collapse">
+  <li><a href="#architecture-of-the-cnn" id="toc-architecture-of-the-cnn" class="nav-link" data-scroll-target="#architecture-of-the-cnn">Architecture of the CNN</a></li>
+  <li><a href="#confidence-score" id="toc-confidence-score" class="nav-link" data-scroll-target="#confidence-score">Confidence score</a></li>
+  <li><a href="#intersection-over-union-iou" id="toc-intersection-over-union-iou" class="nav-link" data-scroll-target="#intersection-over-union-iou">Intersection over Union (IoU)</a></li>
+  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions">Loss functions</a></li>
+  <li><a href="#yolo-trained-on-pascal-voc" id="toc-yolo-trained-on-pascal-voc" class="nav-link" data-scroll-target="#yolo-trained-on-pascal-voc">YOLO trained on PASCAL VOC</a></li>
+  </ul></li>
+  <li><a href="#ssd" id="toc-ssd" class="nav-link" data-scroll-target="#ssd">SSD</a></li>
+  <li><a href="#d-object-detection" id="toc-d-object-detection" class="nav-link" data-scroll-target="#d-object-detection">3D object detection</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Object detection</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/4.2-ObjectDetection.html" target="_blank">html</a> <a href="../slides/pdf/4.2-ObjectDetection.pdf" target="_blank">pdf</a></p>
+<section id="object-detection" class="level2">
+<h2 class="anchored" data-anchor-id="object-detection">Object detection</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/arzmgsxmpRw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>Contrary to object classification/recognition which assigns a single label to an image, <strong>object detection</strong> requires to both classify object and report their position and size on the image (bounding box).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/dnn_classification_vs_detection.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Object recognition vs.&nbsp;detection. Source: <a href="https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4" class="uri">https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4</a></figcaption><p></p>
+</figure>
+</div>
+<p>A naive and very expensive method is to use a trained CNN as a high-level filter. The CNN is trained on small images and convolved on bigger images. The output is a <strong>heatmap</strong> of the probability that a particular object is present.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/objectdetection.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Using a pretrained CNN to generate heatmaps. Source: <a href="https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4" class="uri">https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4</a></figcaption><p></p>
+</figure>
+</div>
+<p>Object detection is both a:</p>
+<ul>
+<li><strong>Classification</strong> problem, as one has to recognize an object.</li>
+<li><strong>Regression</strong> problem, as one has to predict the coordinates <span class="math inline">\((x, y, w, h)\)</span> of the bounding box.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/localization.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Object detection is both a classification and regression task. Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption><p></p>
+</figure>
+</div>
+<p>The main datasets for object detection are the <strong>PASCAL</strong> Visual Object Classes Challenge (20 classes, ~10K images, ~25K annotated objects, <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2008/" class="uri">http://host.robots.ox.ac.uk/pascal/VOC/voc2008/</a>) and the MS COCO dataset (Common Objects in COntext, 330k images, 80 labels, <a href="http://cocodataset.org" class="uri">http://cocodataset.org</a>)</p>
+</section>
+<section id="r-cnn-regions-with-cnn-features" class="level2">
+<h2 class="anchored" data-anchor-id="r-cnn-regions-with-cnn-features">R-CNN : Regions with CNN features</h2>
+<p>R-CNN <span class="citation" data-cites="Girshick2014">(<a href="../references.html#ref-Girshick2014" role="doc-biblioref">Girshick et al., 2014</a>)</span> was one of the first CNN-based architectures allowing object detection.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rcnn.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">R-CNN <span class="citation" data-cites="Girshick2014">(<a href="../references.html#ref-Girshick2014" role="doc-biblioref">Girshick et al., 2014</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>It is a pipeline of 4 steps:</p>
+<ol type="1">
+<li>Bottom-up region proposals by searching bounding boxes based on pixel info (selective search <a href="https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf" class="uri">https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf</a>).</li>
+<li>Feature extraction using a pre-trained CNN (AlexNet).</li>
+<li>Classification using a SVM (object or not; if yes, which one?)</li>
+<li>If an object is found, linear regression on the region proposal to generate tighter bounding box coordinates.</li>
+</ol>
+<p>Each region proposal is processed by the CNN, followed by a SVM and a bounding box regressor.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rcnn-detail.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">R-CNN <span class="citation" data-cites="Girshick2014">(<a href="../references.html#ref-Girshick2014" role="doc-biblioref">Girshick et al., 2014</a>)</span>. Source: <a href="https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf" class="uri">https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf</a></figcaption><p></p>
+</figure>
+</div>
+<p>The CNN is pre-trained on ImageNet and fine-tuned on Pascal VOC (transfer learning).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rcnn-training.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">R-CNN <span class="citation" data-cites="Girshick2014">(<a href="../references.html#ref-Girshick2014" role="doc-biblioref">Girshick et al., 2014</a>)</span>. Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="fast-r-cnn" class="level2">
+<h2 class="anchored" data-anchor-id="fast-r-cnn">Fast R-CNN</h2>
+<p>The main drawback of R-CNN is that each of the 2000 region proposals have to go through the CNN: extremely slow. The idea behind <strong>Fast R-CNN</strong> <span class="citation" data-cites="Girshick2015">(<a href="../references.html#ref-Girshick2015" role="doc-biblioref">Girshick, 2015</a>)</span> is to extract region proposals in higher feature maps and to use transfer learning.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/fast-rcnn.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">Fast R-CNN <span class="citation" data-cites="Girshick2015">(<a href="../references.html#ref-Girshick2015" role="doc-biblioref">Girshick, 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>The network first processes the whole image with several convolutional and max pooling layers to produce a feature map. Each object proposal is projected to the feature map, where a region of interest (RoI) pooling layer extracts a fixed-length feature vector. Each feature vector is fed into a sequence of FC layers that finally branch into two sibling output layers:</p>
+<ul>
+<li>a softmax probability estimate over the K classes plus a catch-all “background” class.</li>
+<li>a regression layer that outputs four real-valued numbers for each class.</li>
+</ul>
+<p>The loss function to minimize is a composition of different losses and penalty terms:</p>
+<p><span class="math display">\[
+    \mathcal{L}(\theta) = \lambda_1 \, \mathcal{L}_\text{classification}(\theta) + \lambda_2 \, \mathcal{L}_\text{regression}(\theta) + \lambda_3 \, \mathcal{L}_\text{regularization}(\theta)
+\]</span></p>
+</section>
+<section id="faster-r-cnn" class="level2">
+<h2 class="anchored" data-anchor-id="faster-r-cnn">Faster R-CNN</h2>
+<p>Both R-CNN and Fast R-CNN use selective search to find out the region proposals: slow and time-consuming. Faster R-CNN <span class="citation" data-cites="Ren2016">(<a href="../references.html#ref-Ren2016" role="doc-biblioref">Ren et al., 2016</a>)</span> introduces an object detection algorithm that lets the network learn the region proposals. The image is passed through a pretrained CNN to obtain a convolutional feature map. A separate network is used to predict the region proposals. The predicted region proposals are then reshaped using a RoI (region-of-interest) pooling layer which is then used to classify the object and predict the bounding box.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/faster-rcnn.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Faster R-CNN <span class="citation" data-cites="Ren2016">(<a href="../references.html#ref-Ren2016" role="doc-biblioref">Ren et al., 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="yolo" class="level2">
+<h2 class="anchored" data-anchor-id="yolo">YOLO</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/EuAb0UdUnUM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>(Fast(er)) R-CNN perform classification for each region proposal sequentially: slow. YOLO (You Only Look Once) <span class="citation" data-cites="Redmon2016">(<a href="../references.html#ref-Redmon2016" role="doc-biblioref">Redmon and Farhadi, 2016</a>)</span> applies a single neural network to the full image to predict all possible boxes and the corresponding classes. YOLO divides the image into a SxS grid of cells.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">YOLO <span class="citation" data-cites="Redmon2016">(<a href="../references.html#ref-Redmon2016" role="doc-biblioref">Redmon and Farhadi, 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>Each grid cell predicts a single object, with the corresponding <span class="math inline">\(C\)</span> <strong>class probabilities</strong> (softmax). It also predicts the coordinates of <span class="math inline">\(B\)</span> possible <strong>bounding boxes</strong> (x, y, w, h) as well as a box <strong>confidence score</strong>. The SxSxB predicted boxes are then pooled together to form the final prediction.</p>
+<p>In the figure below, the yellow box predicts the presence of a <strong>person</strong> (the class) as well as a candidate <strong>bounding box</strong> (it may be bigger than the grid cell itself).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo1.jpeg" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">Each cell predicts a class (e.g.&nbsp;person) and the (x, y, w, h) coordinates of the bounding box. Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></figcaption><p></p>
+</figure>
+</div>
+<p>In the original YOLO implementation, each grid cell proposes 2 bounding boxes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo2.jpeg" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">Each cell predicts two bounding boxes per object. Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></figcaption><p></p>
+</figure>
+</div>
+<p>Each grid cell predicts a probability for each of the 20 classes, two bounding boxes (4 coordinates per bounding box) and their confidence scores. This makes C + B * 5 = 30 values to predict for each cell.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo3.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Each cell outputs 30 values: 20 for the classes and 5 for each bounding box, including the confidence score. Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></figcaption><p></p>
+</figure>
+</div>
+<section id="architecture-of-the-cnn" class="level3">
+<h3 class="anchored" data-anchor-id="architecture-of-the-cnn">Architecture of the CNN</h3>
+<p>YOLO uses a CNN with 24 convolutional layers and 4 max-pooling layers to obtain a 7x7 grid. The last convolution layer outputs a tensor with shape (7, 7, 1024). The tensor is then flattened and passed through 2 fully connected layers. The output is a tensor of shape (7, 7, 30), i.e.&nbsp;7x7 grid cells, 20 classes and 2 boundary box predictions per cell.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo-cnn.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Architecture of the CNN used in YOLO <span class="citation" data-cites="Redmon2016">(<a href="../references.html#ref-Redmon2016" role="doc-biblioref">Redmon and Farhadi, 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="confidence-score" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-score">Confidence score</h3>
+<p>The 7x7 grid cells predict 2 bounding boxes each: maximum of 98 bounding boxes on the whole image. Only the bounding boxes with the <strong>highest class confidence score</strong> are kept.</p>
+<p><span class="math display">\[
+    \text{class confidence score = box confidence score * class probability}
+\]</span></p>
+<p>In practice, the class confidence score should be above 0.25.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo4.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Only the bounding boxes with the highest class confidence scores are kept among the 98 possible ones. Source: <span class="citation" data-cites="Redmon2016">(<a href="../references.html#ref-Redmon2016" role="doc-biblioref">Redmon and Farhadi, 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="intersection-over-union-iou" class="level3">
+<h3 class="anchored" data-anchor-id="intersection-over-union-iou">Intersection over Union (IoU)</h3>
+<p>To ensure specialization, only one bounding box per grid cell should be responsible for detecting an object. During learning, we select the bounding box with the biggest overlap with the object. This can be measured by the <strong>Intersection over the Union</strong> (IoU).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/iou1.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">The Intersection over Union (IoU) measures the overlap between bounding boxes. Source: <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" class="uri">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/iou2.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">The Intersection over Union (IoU) measures the overlap between bounding boxes. Source: <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" class="uri">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="loss-functions" class="level3">
+<h3 class="anchored" data-anchor-id="loss-functions">Loss functions</h3>
+<p>The output of the network is a 7x7x30 tensor, representing for each cell:</p>
+<ul>
+<li>the probability that an object of a given class is present.</li>
+<li>the position of two bounding boxes.</li>
+<li>the confidence that the proposed bounding boxes correspond to a real object (the IoU).</li>
+</ul>
+<p>We are going to combine three different loss functions:</p>
+<ol type="1">
+<li>The <strong>categorization loss</strong>: each cell should predict the correct class.</li>
+<li>The <strong>localization loss</strong>: error between the predicted boundary box and the ground truth for each object.</li>
+<li>The <strong>confidence loss</strong>: do the predicted bounding boxes correspond to real objects?</li>
+</ol>
+<p><strong>Classification loss</strong></p>
+<p>The classification loss is the <strong>mse</strong> between:</p>
+<ul>
+<li><span class="math inline">\(\hat{p}_i(c)\)</span>: the one-hot encoded class <span class="math inline">\(c\)</span> of the object present under each cell <span class="math inline">\(i\)</span>, and</li>
+<li><span class="math inline">\(p_i(c)\)</span>: the predicted class probabilities of cell <span class="math inline">\(i\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{L}_\text{classification}(\theta) =  \sum_{i=0}^{S^2} \mathbb{1}_i^\text{obj} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
+\]</span></p>
+<p>where <span class="math inline">\(\mathbb{1}_i^\text{obj}\)</span> is 1 when there actually is an object behind the cell <span class="math inline">\(i\)</span>, 0 otherwise (background).</p>
+<p>They could also have used the cross-entropy loss, but the output layer is not a regular softmax layer. Using mse is also more compatible with the other losses.</p>
+<p><strong>Localization loss</strong></p>
+<p>For all bounding boxes matching a real object, we want to minimize the <strong>mse</strong> between:</p>
+<ul>
+<li><span class="math inline">\((\hat{x}_i, \hat{y}_i, \hat{w}_i, \hat{h}_i)\)</span>: the coordinates of the ground truth bounding box, and</li>
+<li><span class="math inline">\((x_i, y_i, w_i, h_i)\)</span>: the coordinates of the predicted bounding box.</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2] \\
+    \qquad\qquad\qquad\qquad + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
+\]</span></p>
+<p>where <span class="math inline">\(\mathbb{1}_{ij}^\text{obj}\)</span> is 1 when the bounding box <span class="math inline">\(j\)</span> of cell <span class="math inline">\(i\)</span> “matches” with an object (IoU). The root square of the width and height of the bounding boxes is used. This allows to penalize more the errors on small boxes than on big boxes.</p>
+<p><strong>Confidence loss</strong></p>
+<p>Finally, we need to learn the confidence score of each bounding box, by minimizing the <strong>mse</strong> between:</p>
+<ul>
+<li><span class="math inline">\(C_i\)</span>: the predicted confidence score of cell <span class="math inline">\(i\)</span>, and</li>
+<li><span class="math inline">\(\hat{C}_i\)</span>: the IoU between the ground truth bounding box and the predicted one.</li>
+</ul>
+<p><span class="math display">\[
+    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
+    \qquad\qquad\qquad\qquad + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
+\]</span></p>
+<p>Two cases are considered:</p>
+<ol type="1">
+<li>There was a real object at that location (<span class="math inline">\(\mathbb{1}_{ij}^\text{obj} = 1\)</span>): the confidences should be updated fully.</li>
+<li>There was no real object (<span class="math inline">\(\mathbb{1}_{ij}^\text{noobj} = 1\)</span>): the confidences should only be moderately updated (<span class="math inline">\(\lambda^\text{noobj} = 0.5\)</span>)</li>
+</ol>
+<p>This is to deal with <strong>class imbalance</strong>: there are much more cells on the background than on real objects.</p>
+<p>Put together, the loss function to minimize is:</p>
+<p><span class="math display">\[
+\begin{align}
+    \mathcal{L}(\theta) &amp; = \mathcal{L}_\text{classification}(\theta) + \lambda_\text{coord} \, \mathcal{L}_\text{localization}(\theta) + \mathcal{L}_\text{confidence}(\theta) \\
+              &amp; = \sum_{i=0}^{S^2} \mathbb{1}_i^\text{obj} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2 \\
+              &amp; + \lambda_\text{coord} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2] \\
+              &amp; + \lambda_\text{coord} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2] \\
+              &amp; + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
+              &amp; + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2 \\
+\end{align}
+\]</span></p>
+</section>
+<section id="yolo-trained-on-pascal-voc" class="level3">
+<h3 class="anchored" data-anchor-id="yolo-trained-on-pascal-voc">YOLO trained on PASCAL VOC</h3>
+<p>YOLO was trained on PASCAL VOC (natural images) but generalizes well to other datasets (paintings…). YOLO runs in real-time (60 fps) on a NVIDIA Titan X. Faster and more accurate versions of YOLO have been developed: YOLO9000 <span class="citation" data-cites="Redmon2016a">(<a href="../references.html#ref-Redmon2016a" role="doc-biblioref">Redmon et al., 2016</a>)</span>, YOLOv3 <span class="citation" data-cites="Redmon2018">(<a href="../references.html#ref-Redmon2018" role="doc-biblioref">Redmon and Farhadi, 2018</a>)</span>, YOLOv5 (<a href="https://github.com/ultralytics/yolov5" class="uri">https://github.com/ultralytics/yolov5</a>)…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/yolo-result2.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Performance of YOLO compared to the state of the art. Source: <span class="citation" data-cites="Redmon2016">(<a href="../references.html#ref-Redmon2016" role="doc-biblioref">Redmon and Farhadi, 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>Refer to the website of the authors for additional information: <a href="https://pjreddie.com/darknet/yolo/" class="uri">https://pjreddie.com/darknet/yolo/</a></p>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/MPU2HistivI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</section>
+</section>
+<section id="ssd" class="level2">
+<h2 class="anchored" data-anchor-id="ssd">SSD</h2>
+<p>The idea of SSD (Single-Shot Detector, <span class="citation" data-cites="Liu2016">(<a href="../references.html#ref-Liu2016" role="doc-biblioref">Liu et al., 2016</a>)</span>) is similar to YOLO, but:</p>
+<ul>
+<li>faster</li>
+<li>more accurate</li>
+<li>not limited to 98 objects per scene</li>
+<li>multi-scale</li>
+</ul>
+<p>Contrary to YOLO, all convolutional layers are used to predict a bounding box, not just the final tensor: <strong>skip connections</strong>. This allows to detect boxes at multiple scales (pyramid).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ssd.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Single-Shot Detector, <span class="citation" data-cites="Liu2016">(<a href="../references.html#ref-Liu2016" role="doc-biblioref">Liu et al., 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="d-object-detection" class="level2">
+<h2 class="anchored" data-anchor-id="d-object-detection">3D object detection</h2>
+<p>It is also possible to use <strong>depth</strong> information (e.g.&nbsp;from a Kinect) as an additional channel of the R-CNN. The depth information provides more information on the structure of the object, allowing to disambiguate certain situations (segmentation).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rcnn-rgbd.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Learning Rich Features from RGB-D Images for Object Detection, <span class="citation" data-cites="Gupta2014">(<a href="../references.html#ref-Gupta2014" role="doc-biblioref">Gupta et al., 2014</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>Lidar point clouds can also be used for detecting objects, for example <strong>VoxelNet</strong> <span class="citation" data-cites="Zhou2017">(<a href="../references.html#ref-Zhou2017" role="doc-biblioref">Zhou and Tuzel, 2017</a>)</span> trained in the KITTI dataset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/voxelnet.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">VoxelNet <span class="citation" data-cites="Zhou2017">(<a href="../references.html#ref-Zhou2017" role="doc-biblioref">Zhou and Tuzel, 2017</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/voxelnet-result.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">VoxelNet <span class="citation" data-cites="Zhou2017">(<a href="../references.html#ref-Zhou2017" role="doc-biblioref">Zhou and Tuzel, 2017</a>)</span>. Source: <a href="https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a" class="uri">https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a</a></figcaption><p></p>
+</figure>
+</div>
+<p>```{admonition} Additional resources on object detection</p>
+<p><a href="https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852" class="uri">https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852</a></p>
+<p><a href="https://medium.com/@smallfishbigsea/faster-r-cnn-explained-864d4fb7e3f8" class="uri">https://medium.com/@smallfishbigsea/faster-r-cnn-explained-864d4fb7e3f8</a></p>
+<p><a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></p>
+<p><a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p>
+<p><a href="https://medium.com/@jonathan_hui/ssd-object-detection-single-shot-multibox-detector-for-real-time-processing-9bd8deac0e06" class="uri">https://medium.com/@jonathan_hui/ssd-object-detection-single-shot-multibox-detector-for-real-time-processing-9bd8deac0e06</a></p>
+<p><a href="https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea" class="uri">https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea</a> ```</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Girshick2015" class="csl-entry" role="doc-biblioentry">
+Girshick, R. (2015). Fast <span>R-CNN</span>. <em>arXiv:1504.08083 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1504.08083">https://arxiv.org/abs/1504.08083</a>.
+</div>
+<div id="ref-Girshick2014" class="csl-entry" role="doc-biblioentry">
+Girshick, R., Donahue, J., Darrell, T., and Malik, J. (2014). Rich feature hierarchies for accurate object detection and semantic segmentation. <em>arXiv:1311.2524 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1311.2524">https://arxiv.org/abs/1311.2524</a>.
+</div>
+<div id="ref-Gupta2014" class="csl-entry" role="doc-biblioentry">
+Gupta, S., Girshick, R., Arbeláez, P., and Malik, J. (2014). Learning <span>Rich Features</span> from <span>RGB-D Images</span> for <span>Object Detection</span> and <span>Segmentation</span>. <em>arXiv:1407.5736 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1407.5736">https://arxiv.org/abs/1407.5736</a>.
+</div>
+<div id="ref-Liu2016" class="csl-entry" role="doc-biblioentry">
+Liu, W., Anguelov, D., Erhan, D., Szegedy, C., Reed, S., Fu, C.-Y., et al. (2016). <span>SSD</span>: <span>Single Shot MultiBox Detector</span>. <em>arXiv:1512.02325 [cs]</em> 9905, 21–37. doi:<a href="https://doi.org/10.1007/978-3-319-46448-0_2">10.1007/978-3-319-46448-0_2</a>.
+</div>
+<div id="ref-Redmon2016a" class="csl-entry" role="doc-biblioentry">
+Redmon, J., Divvala, S., Girshick, R., and Farhadi, A. (2016). You <span>Only Look Once</span>: <span>Unified</span>, <span>Real-Time Object Detection</span>. <em>arXiv:1506.02640 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1506.02640">https://arxiv.org/abs/1506.02640</a>.
+</div>
+<div id="ref-Redmon2016" class="csl-entry" role="doc-biblioentry">
+Redmon, J., and Farhadi, A. (2016). <span>YOLO9000</span>: <span>Better</span>, <span>Faster</span>, <span>Stronger</span>. <em>arXiv:1612.08242 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1612.08242">https://arxiv.org/abs/1612.08242</a>.
+</div>
+<div id="ref-Redmon2018" class="csl-entry" role="doc-biblioentry">
+Redmon, J., and Farhadi, A. (2018). <span>YOLOv3</span>: <span>An Incremental Improvement</span>. <em>arXiv:1804.02767 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1804.02767">https://arxiv.org/abs/1804.02767</a>.
+</div>
+<div id="ref-Ren2016" class="csl-entry" role="doc-biblioentry">
+Ren, S., He, K., Girshick, R., and Sun, J. (2016). Faster <span>R-CNN</span>: <span>Towards Real-Time Object Detection</span> with <span>Region Proposal Networks</span>. <em>arXiv:1506.01497 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1506.01497">https://arxiv.org/abs/1506.01497</a>.
+</div>
+<div id="ref-Zhou2017" class="csl-entry" role="doc-biblioentry">
+Zhou, Y., and Tuzel, O. (2017). <span>VoxelNet</span>: <span class="nocase">End-to-End Learning</span> for <span>Point Cloud Based 3D Object Detection</span>. <em>arXiv:1711.06396 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1711.06396">https://arxiv.org/abs/1711.06396</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/4.1-CNN.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Convolutional neural networks</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notes/4.3-SemanticSegmentation.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Semantic segmentation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.175">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 7&nbsp; Learning theory</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notes/3.1-NeuralNetworks.html" rel="next">
+<link href="../notes/2.3-LinearClassification.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Learning theory</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Recurrent neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Self-supervised learning</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Outlook</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#error-measurements" id="toc-error-measurements" class="nav-link active" data-scroll-target="#error-measurements">Error measurements</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-validation</a></li>
+  <li><a href="#vapnik-chervonenkis-dimension" id="toc-vapnik-chervonenkis-dimension" class="nav-link" data-scroll-target="#vapnik-chervonenkis-dimension">Vapnik-Chervonenkis dimension</a></li>
+  <li><a href="#structural-risk-minimization" id="toc-structural-risk-minimization" class="nav-link" data-scroll-target="#structural-risk-minimization">Structural risk minimization</a></li>
+  <li><a href="#feature-space" id="toc-feature-space" class="nav-link" data-scroll-target="#feature-space">Feature space</a>
+  <ul class="collapse">
+  <li><a href="#polynomial-features" id="toc-polynomial-features" class="nav-link" data-scroll-target="#polynomial-features">Polynomial features</a></li>
+  <li><a href="#radial-basis-function-networks" id="toc-radial-basis-function-networks" class="nav-link" data-scroll-target="#radial-basis-function-networks">Radial-basis function networks</a></li>
+  <li><a href="#kernel-perceptron" id="toc-kernel-perceptron" class="nav-link" data-scroll-target="#kernel-perceptron">Kernel perceptron</a></li>
+  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines">Support vector machines</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Learning theory</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/2.4-LearningTheory.html" target="_blank">html</a> <a href="../slides/pdf/2.4-LearningTheory.pdf" target="_blank">pdf</a></p>
+<section id="error-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="error-measurements">Error measurements</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WNGmapP2JL8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>The <strong>training error</strong> is the error made on the training set. It is easy to measure for classification as the number of misclassified examples divided by the total number of examples.</p>
+<p><span class="math display">\[\epsilon_\mathcal{D} = \dfrac{\text{Number of misclassifications}}{\text{Total number of examples}}\]</span></p>
+<p>The training error is totally irrelevant on usage: reading the training set has a training error of 0%. What matters is the <strong>generalization error</strong>, which is the error that will be made on new examples (not used during learning). It is much harder to measure (potentially infinite number of new examples, what is the correct answer?). The generalization error is often approximated by the <strong>empirical error</strong>: one keeps a number of training examples out of the learning phase and one tests the performance on them.</p>
+<p>Classification errors can also depend on the class:</p>
+<ul>
+<li><strong>False Positive</strong> errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.</li>
+<li><strong>False Negative</strong> errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.</li>
+<li><strong>True Positive</strong> (TP) and <strong>True Negative</strong> (TN) are correctly classified examples.</li>
+</ul>
+<p>Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?</p>
+<p>Some other metrics:</p>
+<ul>
+<li>Accuracy (1 - error)</li>
+</ul>
+<p><span class="math display">\[
+    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+\]</span></p>
+<ul>
+<li>Recall (hit rate, sensitivity)</li>
+</ul>
+<p><span class="math display">\[
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
+\]</span></p>
+<ul>
+<li>Precision (specificity)</li>
+</ul>
+<p><span class="math display">\[
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+\]</span></p>
+<ul>
+<li>F1 score = harmonic mean of precision and recall</li>
+</ul>
+<p><span class="math display">\[
+    \text{F1} = \frac{2\, P \, R}{P + R}
+\]</span></p>
+<p>For multiclass classification problems, the <strong>confusion matrix</strong> tells how many examples are correctly classified and where confusion happens. One axis is the predicted class, the other is the target class. Each element of the matrix tells how many examples are classified or misclassified. The matrix should be as diagonal as possible.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/confusionmatrix.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Confusion matrix.</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using <code>scikit-learn</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> confusion_matrix(t, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="cross-validation">Cross-validation</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/underfitting-overfitting.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Overfitting in regression.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/underfitting-overfitting-classification.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Overfitting in classification.</figcaption><p></p>
+</figure>
+</div>
+<p>In classification too, <strong>cross-validation</strong> has to be used to prevent overfitting. The classifier is trained on the <strong>training set</strong> and tested on the <strong>test set</strong>. Optionally, a third <strong>validation set</strong> can be used to track overfitting during training.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/validationset.svg" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Training, validation and test sets. Source: <a href="https://developers.google.com/machine-learning/crash-course/validation/another-partition" class="uri">https://developers.google.com/machine-learning/crash-course/validation/another-partition</a></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Beware: the test data must come from the same distribution as the training data, otherwise it makes no sense.</p>
+</div>
+</div>
+</section>
+<section id="vapnik-chervonenkis-dimension" class="level2">
+<h2 class="anchored" data-anchor-id="vapnik-chervonenkis-dimension">Vapnik-Chervonenkis dimension</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/w3drWJ-tFH8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>How many data examples can be correctly classified by a linear model in <span class="math inline">\(\Re^d\)</span>? In <span class="math inline">\(\Re^2\)</span>, all dichotomies of three non-aligned examples can be correctly classified by a linear model (<span class="math inline">\(y = w_1 \, x_1 + w_2 \, x_2 + b\)</span>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vc4.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">A linear classifier in 2D can classify any configuration of three points.</figcaption><p></p>
+</figure>
+</div>
+<p>However, there exists sets of four examples in <span class="math inline">\(\Re^2\)</span> which can NOT be correctly classified by a linear model, i.e.&nbsp;they are not linearly separable.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vc6.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">There exists configurations of four points in 2D that cannot be linearly classified.</figcaption><p></p>
+</figure>
+</div>
+<p>The XOR function in <span class="math inline">\(\Re^2\)</span> is for example not linearly separable, i.e.&nbsp;the Perceptron algorithm can not converge.</p>
+<p>The probability that a set of 3 (non-aligned) points in <span class="math inline">\(\Re^2\)</span> is linearly separable is 1, but the probability that a set of four points is linearly separable is smaller than 1 (but not zero). When a class of hypotheses <span class="math inline">\(\mathcal{H}\)</span> can correctly classify all points of a training set <span class="math inline">\(\mathcal{D}\)</span>, we say that <span class="math inline">\(\mathcal{H}\)</span> <strong>shatters</strong> <span class="math inline">\(\mathcal{D}\)</span>.</p>
+<p>The <strong>Vapnik-Chervonenkis dimension</strong> <span class="math inline">\(\text{VC}_\text{dim} (\mathcal{H})\)</span> of an hypothesis class <span class="math inline">\(\mathcal{H}\)</span> is defined as the maximal number of training examples that <span class="math inline">\(\mathcal{H}\)</span> can shatter. We saw that in <span class="math inline">\(\Re^2\)</span>, this dimension is 3:</p>
+<p><span class="math display">\[\text{VC}_\text{dim} (\text{Linear}(\Re^2) ) = 3\]</span></p>
+<p>This can be generalized to linear classifiers in <span class="math inline">\(\Re^d\)</span>:</p>
+<p><span class="math display">\[\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1\]</span></p>
+<p>This corresponds to the number of <strong>free parameters</strong> of the linear classifier: <span class="math inline">\(d\)</span> parameters for the weight vector, 1 for the bias. Given any set of <span class="math inline">\((d+1)\)</span> examples in <span class="math inline">\(\Re^d\)</span>, there exists a linear classifier able to classify them perfectly. For other types of (non-linear) hypotheses, the VC dimension is generally proportional to the <strong>number of free parameters</strong>, but <strong>regularization</strong> reduces the VC dimension of the classifier.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Vapnik-Chervonenkis theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The generalization error <span class="math inline">\(\epsilon(h)\)</span> of an hypothesis <span class="math inline">\(h\)</span> taken from a class <span class="math inline">\(\mathcal{H}\)</span> of finite VC dimension and trained on <span class="math inline">\(N\)</span> samples of <span class="math inline">\(\mathcal{S}\)</span> is bounded by the sum of the training error <span class="math inline">\(\hat{\epsilon}_{\mathcal{S}}(h)\)</span> and the VC complexity term:</p>
+<p><span class="math display">\[
+    \epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}}(h) + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}
+\]</span></p>
+<p>with probability <span class="math inline">\(1-\delta\)</span>, if <span class="math inline">\(\text{VC}_\text{dim} (\mathcal{H}) &lt;&lt; N\)</span>.</p>
+<p>Vapnik, Vladimir (2000). The nature of statistical learning theory. Springer.</p>
+</div>
+</div>
+</section>
+<section id="structural-risk-minimization" class="level2">
+<h2 class="anchored" data-anchor-id="structural-risk-minimization">Structural risk minimization</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/srm.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Structural risk minimization.</figcaption><p></p>
+</figure>
+</div>
+<p>The generalization error increases with the VC dimension, while the training error decreases. Structural risk minimization is an alternative method to cross-validation. The VC dimensions of various classes of hypothesis are already known (~ number of free parameters). The VC bounds tells how many training samples are needed by a given hypothesis class in order to obtain a satisfying generalization error.</p>
+<p><span class="math display">\[\epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}(h)} + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}\]</span></p>
+<p><strong>The more complex the model, the more training data you will need to get a good generalization error!</strong></p>
+<p>Rule of thumb:</p>
+<p><span class="math display">\[
+        \epsilon(h) \approx \frac{\text{VC}_\text{dim} (\mathcal{H})}{N}
+\]</span></p>
+<p>A learning algorithm should only try to minimize the training error, as the VC complexity term only depends on the model. This term is only an upper bound: most of the time, the real bound is usually 100 times smaller.</p>
+<p>The VC dimension of linear classifiers in <span class="math inline">\(\Re^d\)</span> is:</p>
+<p><span class="math display">\[\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1\]</span></p>
+<p>Given any set of <span class="math inline">\((d+1)\)</span> examples in <span class="math inline">\(\Re^d\)</span>, there exists a linear classifier able to classify them perfectly. For <span class="math inline">\(N &gt;&gt; d\)</span> the probability of having training errors becomes huge (the data is generally not linearly separable).</p>
+<blockquote class="blockquote">
+<p><strong>If we project the input data onto a space with sufficiently high dimensions, it becomes then possible to find a linear classifier on this projection space that is able to classify the data!</strong></p>
+</blockquote>
+<p>However, if the space has too many dimensions, the VC dimension will increase and the generalization error will increase. This is the basic principle of all non-linear ML methods: multi-layer perceptron, radial-basis-function networks, support-vector machines…</p>
+</section>
+<section id="feature-space" class="level2">
+<h2 class="anchored" data-anchor-id="feature-space">Feature space</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/KXCcZBFuk08" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Cover’s theorem on the separability of patterns (1965)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A complex pattern-classification problem, cast in a high dimensional space non-linearly, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/featurespace.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Projection to a feature space.</figcaption><p></p>
+</figure>
+</div>
+<p>The highly dimensional space where the input data is projected is called the <strong>feature space</strong> When the number of dimensions of the feature space increases, the training error decreases (the pattern is more likely linearly separable) but the generalization error increases (the VC dimension increases).</p>
+<section id="polynomial-features" class="level3">
+<h3 class="anchored" data-anchor-id="polynomial-features">Polynomial features</h3>
+<p>For the polynomial regression of order <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 + \ldots + w_p \, x^p + b\]</span></p>
+<p>the vector <span class="math inline">\(\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix}\)</span> defines a feature space for the input <span class="math inline">\(x\)</span>. The elements of the feature space are called <strong>polynomial features</strong>. We can define polynomial features of more than one variable, e.g.&nbsp;<span class="math inline">\(x^2 \, y\)</span>, <span class="math inline">\(x^3 \, y^4\)</span>, etc. We then apply multiple <strong>linear</strong> regression (MLR) on the polynomial feature space to find the parameters:</p>
+<p><span class="math display">\[\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}\]</span></p>
+</section>
+<section id="radial-basis-function-networks" class="level3">
+<h3 class="anchored" data-anchor-id="radial-basis-function-networks">Radial-basis function networks</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rbf.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Radial basis function network. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+</figure>
+</div>
+<p>Radial-basis function (<strong>RBF</strong>) networks samples a subset of <span class="math inline">\(K\)</span> training examples and form the feature space using a <strong>gaussian kernel</strong>:</p>
+<p><span class="math display">\[\phi(\mathbf{x}) = \begin{bmatrix} \varphi(\mathbf{x} - \mathbf{x}_1) \\ \varphi(\mathbf{x} - \mathbf{x}_2) \\ \ldots \\ \varphi(\mathbf{x} - \mathbf{x}_K) \end{bmatrix}\]</span></p>
+<p>with <span class="math inline">\(\varphi(\mathbf{x} - \mathbf{x}_i) = \exp - \beta \, ||\mathbf{x} - \mathbf{x}_i||^2\)</span> decreasing with the distance between the vectors.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rbf2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Selection of protypes among the training data. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rbf4.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Gaussian kernel. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+</figure>
+</div>
+<p>By applying a linear classification algorithm on the RBF feature space:</p>
+<p><span class="math display">\[\mathbf{y} = f(W \times \phi(\mathbf{x}) + \mathbf{b})\]</span></p>
+<p>we obtain a smooth <strong>non-linear</strong> partition of the input space. The width of the gaussian kernel allows distance-based <strong>generalization</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/rbf3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">RBF networks learn linearly smooth transitions between the training examples. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="kernel-perceptron" class="level3">
+<h3 class="anchored" data-anchor-id="kernel-perceptron">Kernel perceptron</h3>
+<p>What happens during online Perceptron learning?</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Primal form of the online Perceptron algorithm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(y_i = \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)\)</span></p></li>
+<li><p><span class="math inline">\(\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i\)</span></p></li>
+<li><p><span class="math inline">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>If an example <span class="math inline">\(\mathbf{x}_i\)</span> is correctly classified (<span class="math inline">\(y_i = t_i\)</span>), the weight vector does not change.</p>
+<p><span class="math display">\[\mathbf{w} \leftarrow \mathbf{w}\]</span></p>
+<p>If an example <span class="math inline">\(\mathbf{x}_i\)</span> is miscorrectly classified (<span class="math inline">\(y_i \neq t_i\)</span>), the weight vector is increased from <span class="math inline">\(t_i \, \mathbf{x}_i\)</span>.</p>
+<p><span class="math display">\[\mathbf{w} \leftarrow \mathbf{w} + 2 \, \eta \, t_i \, \mathbf{x}_i\]</span></p>
+<p>If you initialize the weight vector to 0, its final value will therefore be a <strong>linear combination</strong> of the input samples:</p>
+<p><span class="math display">\[\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i\]</span></p>
+<p>The coefficients <span class="math inline">\(\alpha_i\)</span> represent the <strong>embedding strength</strong> of each example, i.e.&nbsp;how often they were misclassified.</p>
+<p>With <span class="math inline">\(\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i\)</span>, the prediction for an input <span class="math inline">\(\mathbf{x}\)</span> only depends on the training samples and their <span class="math inline">\(\alpha_i\)</span> value:</p>
+<p><span class="math display">\[y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)\]</span></p>
+<p>To make a prediction <span class="math inline">\(y\)</span>, we need the dot product between the input <span class="math inline">\(\mathbf{x}\)</span> and all training examples <span class="math inline">\(\mathbf{x}_i\)</span>. We ignore the bias here, but it can be added back.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Dual form of the online Perceptron algorithm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, \langle \mathbf{x}_j \cdot \mathbf{x}_i \rangle)\)</span></p></li>
+<li><p><strong>if</strong> <span class="math inline">\(y_i \neq t_i\)</span> :</p>
+<ul>
+<li><span class="math inline">\(\alpha_i \leftarrow \alpha_i + 1\)</span></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>This <strong>dual form</strong> of the Perceptron algorithm is strictly equivalent to its primal form. It needs one parameter <span class="math inline">\(\alpha_i\)</span> per training example instead of a weight vector (<span class="math inline">\(N &gt;&gt; d\)</span>), but relies on dot products between vectors.</p>
+<p>Why is it interesting to have an algorithm relying on dot products? You can project the inputs <span class="math inline">\(\mathbf{x}\)</span> to a <strong>feature space</strong> <span class="math inline">\(\phi(\mathbf{x})\)</span> and apply the same algorithm:</p>
+<p><span class="math display">\[y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle)\]</span></p>
+<p>But you do not need to compute the dot product in the feature space, all you need to know is its result.</p>
+<p><span class="math display">\[K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Kernel trick:</strong> A kernel <span class="math inline">\(K(\mathbf{x}, \mathbf{z})\)</span> allows to compute the dot product between the feature space representation of two vectors without ever computing these representations!</p>
+</blockquote>
+<p>Let’s consider the quadratic kernel in <span class="math inline">\(\Re^3\)</span>:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 &amp;&amp; \\
+&amp;&amp; \\
+  K(\mathbf{x}, \mathbf{z}) &amp;=&amp; ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
+                                            &amp;=&amp;  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
+                                            &amp;=&amp;  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
+                                            &amp;=&amp;  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
+\end{eqnarray*}\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
+  \phi(\mathbf{x}) = \begin{bmatrix}
+                            x_1 \cdot x_1 \\
+                            x_1 \cdot x_2 \\
+                            x_1 \cdot x_3 \\
+                            x_2 \cdot x_1 \\
+                            x_2 \cdot x_2 \\
+                            x_2 \cdot x_3 \\
+                            x_3 \cdot x_1 \\
+                            x_3 \cdot x_2 \\
+                            x_3 \cdot x_3 \end{bmatrix}
+\]</span></p>
+<p>The quadratic kernel implicitely transforms an input space with three dimensions into a feature space of 9 dimensions.</p>
+<p>More generally, the polynomial kernel in <span class="math inline">\(\Re^d\)</span> of degree <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[
+\begin{align*}
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^d \times \Re^d \qquad  K(\mathbf{x}, \mathbf{z}) &amp;= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^p \\
+                                            &amp;=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
+\end{align*}
+\]</span></p>
+<p>transforms the input from a space with <span class="math inline">\(d\)</span> dimensions into a feature space of <span class="math inline">\(d^p\)</span> dimensions.</p>
+<p>While the inner product in the feature space would require <span class="math inline">\(O(d^p)\)</span> operations, the calculation of the kernel directly in the input space only requires <span class="math inline">\(O(d)\)</span> operations. This is called the <strong>kernel trick</strong>: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.</p>
+<p>The <strong>kernel perceptron</strong> is the dual form of the Perceptron algorithm using a kernel:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Kernel perceptron
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<ul>
+<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, K(\mathbf{x}_j, \mathbf{x}_i))\)</span></p></li>
+<li><p><strong>if</strong> <span class="math inline">\(y_i \neq t_i\)</span> :</p>
+<ul>
+<li><span class="math inline">\(\alpha_i \leftarrow \alpha_i + 1\)</span></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>Depending on the kernel, the implicit dimensionality of the feature space can even be infinite! Some kernels:</p>
+<ul>
+<li><strong>Linear kernel</strong>: dimension of the feature space = <span class="math inline">\(d\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+K(\mathbf{x},\mathbf{z}) = \langle \mathbf{x} \cdot \mathbf{z} \rangle
+\]</span></p>
+<ul>
+<li><strong>Polynomial kernel</strong>: dimension of the feature space = <span class="math inline">\(d^p\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+K(\mathbf{x},\mathbf{z}) = (\langle \mathbf{x} \cdot \mathbf{z} \rangle)^p
+\]</span></p>
+<ul>
+<li><strong>Gaussian kernel</strong> (or RBF kernel): dimension of the feature space= <span class="math inline">\(\infty\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+K(\mathbf{x},\mathbf{z}) = \exp(-\frac{\| \mathbf{x} - \mathbf{z} \|^2}{2\sigma^2})
+\]</span></p>
+<ul>
+<li><strong>Hyperbolic tangent kernel</strong>: dimension of the feature space = <span class="math inline">\(\infty\)</span></li>
+</ul>
+<p><span class="math display">\[
+k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangle +c)
+\]</span></p>
+<p>In practice, the choice of the kernel family depends more on the nature of data (text, image…) and its distribution than on the complexity of the learning problem. RBF kernels tend to “group” positive examples together. Polynomial kernels are more like “distorted” hyperplanes. Kernels have parameters (<span class="math inline">\(p\)</span>, <span class="math inline">\(\sigma\)</span>…) which have to found using cross-validation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/kernels.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Different kernels lead to different decision functions. Source: <a href="http://beta.cambridgespark.com/courses/jpm/05-module.html" class="uri">http://beta.cambridgespark.com/courses/jpm/05-module.html</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="support-vector-machines" class="level3">
+<h3 class="anchored" data-anchor-id="support-vector-machines">Support vector machines</h3>
+<p><strong>Support vector machines</strong> (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier. Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the “safety zone” (geometric margin) between the classifier and the training examples. It also tries to reduce the number of non-zero <span class="math inline">\(\alpha_i\)</span> coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:</p>
+<p><span class="math display">\[
+\mathbf{y} = \text{sign}(\sum_{i=1}^{N_{SV}} \alpha_i \, t_i \, K(\mathbf{x}_i, \mathbf{x}) + b)
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/supportvectors.svg" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Support-vectors are the closest examples to the hyperplane. They have a non-zero <span class="math inline">\(\alpha\)</span> coefficient.</figcaption><p></p>
+</figure>
+</div>
+<p>Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting. SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/2.3-LinearClassification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Linear classification</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notes/3.1-NeuralNetworks.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Multi-layer perceptron</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

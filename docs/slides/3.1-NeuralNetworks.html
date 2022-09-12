@@ -436,7 +436,6 @@
 </div>
 <div class="columns">
 <div class="column" style="width:30%;">
-<!-- ![](img/fc.png) -->
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/mlp.svg"></p>
@@ -484,7 +483,7 @@
 <section id="softmax-activation-function" class="title-slide slide level1 center">
 <h1>Softmax activation function</h1>
 
-<img data-src="img/softmax-comp.png" style="width:60.0%" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/softmax-comp.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></p><ul>
 <li>For classification problems, the <strong>softmax</strong> activation function can be used in the output layer to make sure that the sum of the outputs <span class="math inline">\(\mathbf{y} = \{y_j\}\)</span> over all output neurons is one.</li>
 </ul>
 <p><span class="math display">\[
@@ -494,9 +493,6 @@
 <li><p>The higher the net activation <span class="math inline">\(\text{net}_j\)</span>, the higher the probability that the example belongs to class <span class="math inline">\(j\)</span>.</p></li>
 <li><p>Softmax is not <em>per se</em> a transfer function (not local to each neuron), but the idea is similar.</p></li>
 </ul>
-<div class="footer">
-<p>Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></p>
-</div>
 </section>
 
 <section id="why-non-linear-activation-functions" class="title-slide slide level1 center">
@@ -510,7 +506,7 @@
     \mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2
 \]</span></p>
 <ul>
-<li>We would have:</li>
+<li>The equivalent function would be linear…</li>
 </ul>
 <p><span class="math display">\[
 \begin{align*}
@@ -519,13 +515,14 @@
                &amp;= W \, \mathbf{x} + \mathbf{b} \\
 \end{align*}
 \]</span></p>
-<p>so the equivalent function would be linear…</p>
 <ul>
-<li><p>Remember Cover’s theorem:</p>
+<li>Remember Cover’s theorem:</li>
+</ul>
+<blockquote>
+<p>A complex pattern-classification problem, cast in a high dimensional space <strong>non-linearly</strong>, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.</p>
+</blockquote>
 <ul>
-<li>A complex pattern-classification problem, cast in a high dimensional space <strong>non-linearly</strong>, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.</li>
-</ul></li>
-<li><p>In practice it does not matter how non-linear the function is (e.g PReLU is almost linear), but there must be at least one non-linearity.</p></li>
+<li>In practice it does not matter how non-linear the function is (e.g PReLU is almost linear), but there must be at least one non-linearity.</li>
 </ul>
 </section>
 
@@ -913,14 +910,26 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 
 <section id="mlp-the-universal-approximation-theorem" class="title-slide slide level1 center">
 <h1>MLP: the universal approximation theorem</h1>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Universal approximation theorem</strong></p>
+</div>
+<div class="callout-content">
 <p><strong>Cybenko, 1989</strong></p>
-<p><em>Let <span class="math inline">\(\varphi()\)</span> be a nonconstant, bounded, and monotonically-increasing continuous function. Let <span class="math inline">\(I_{m_0}\)</span> denote the <span class="math inline">\(m_0\)</span>-dimensional unit hypercube <span class="math inline">\([0,1]^{m_0}\)</span>. The space of continuous functions on <span class="math inline">\(I_{m_0}\)</span> is denoted by <span class="math inline">\(C(I_{m_0})\)</span>. Then, given any function <span class="math inline">\(f \in C(I_{m_0})\)</span> and <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math inline">\(m_1\)</span> and sets of real constants <span class="math inline">\(\alpha_i, b_i\)</span> and <span class="math inline">\(w_{ij} \in \Re\)</span>, where <span class="math inline">\(i = 1, ..., m_1\)</span> and <span class="math inline">\(j = 1, ..., m_0\)</span> such that we may define:</em></p>
+<p>Let <span class="math inline">\(\varphi()\)</span> be a nonconstant, bounded, and monotonically-increasing continuous function. Let <span class="math inline">\(I_{m_0}\)</span> denote the <span class="math inline">\(m_0\)</span>-dimensional unit hypercube <span class="math inline">\([0,1]^{m_0}\)</span>. The space of continuous functions on <span class="math inline">\(I_{m_0}\)</span> is denoted by <span class="math inline">\(C(I_{m_0})\)</span>. Then, given any function <span class="math inline">\(f \in C(I_{m_0})\)</span> and <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math inline">\(m_1\)</span> and sets of real constants <span class="math inline">\(\alpha_i, b_i\)</span> and <span class="math inline">\(w_{ij} \in \Re\)</span>, where <span class="math inline">\(i = 1, ..., m_1\)</span> and <span class="math inline">\(j = 1, ..., m_0\)</span> such that we may define:</p>
 <p><span class="math display">\[
     F(\mathbf{x}) = \sum_{i=1}^{m_1} \alpha_i \cdot \varphi \left( \sum_{j=1}^{m_0} w_{ij} \cdot x_j + b_i \right)
 \]</span></p>
-<p><em>as an approximate realization of the function f; that is,</em></p>
+<p>as an approximate realization of the function f; that is,</p>
 <p><span class="math display">\[ | F(\mathbf{x}) - f(\mathbf{x})| &lt; \epsilon\]</span></p>
-<p><em>for all <span class="math inline">\(x \in I_m\)</span>.</em></p>
+<p>for all <span class="math inline">\(x \in I_m\)</span>.</p>
+</div>
+</div>
+</div>
 <ul>
 <li>This theorem shows that for <strong>any</strong> input/output mapping function <span class="math inline">\(f\)</span> in supervised learning, there exists a MLP with <span class="math inline">\(m_1\)</span> neurons in the hidden layer which is able to approximate it with a desired precision!</li>
 </ul>
@@ -962,7 +971,7 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/deepforward.png" style="width:50.0%"></p>
+<p><img data-src="img/deepforward.png" style="width:40.0%"></p>
 </figure>
 </div>
 <ul>
@@ -970,15 +979,12 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/deepbackward.png" style="width:70.0%"></p>
+<p><img data-src="img/deepbackward.png" style="width:55.0%"></p>
 </figure>
 </div>
 <ul>
 <li><strong>Backpropagation</strong> is simply an efficient implementation of the chain rule: the partial derivatives are iteratively reused in the backwards phase.</li>
 </ul>
-<blockquote>
-
-</blockquote>
 <div class="footer">
 <p>Source: David Silver, Tutorial: Deep Reinforcement Learning</p>
 </div>
@@ -1131,7 +1137,6 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 <li><p><strong>CNTK</strong> <a href="https://github.com/Microsoft/CNTK" class="uri">https://github.com/Microsoft/CNTK</a> (Microsoft Cognitive Toolkit) is a <strong>free</strong> library by Microsoft!</p></li>
 <li><p><strong>MxNet</strong> <a href="https://github.com/apache/incubator-mxnet" class="uri">https://github.com/apache/incubator-mxnet</a> from Apache became the DL framework at Amazon.</p></li>
 </ul>
-<!-- * **Gluon** <https://github.com/gluon-api/gluon-api> is a high-level API over MxNet. -->
 </section>
 
 <section id="example-of-a-shallow-neural-network-with-keras" class="title-slide slide level1 center">

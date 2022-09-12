@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.175">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 10&nbsp; Convolutional neural networks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notes/4.2-ObjectDetection.html" rel="next">
+<link href="../notes/3.2-DNN.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Convolutional neural networks</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Recurrent neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Self-supervised learning</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Outlook</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#convolutional-neural-networks" id="toc-convolutional-neural-networks" class="nav-link active" data-scroll-target="#convolutional-neural-networks">Convolutional neural networks</a>
+  <ul class="collapse">
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  <li><a href="#the-convolutional-layer" id="toc-the-convolutional-layer" class="nav-link" data-scroll-target="#the-convolutional-layer">The convolutional layer</a></li>
+  <li><a href="#max-pooling-layer" id="toc-max-pooling-layer" class="nav-link" data-scroll-target="#max-pooling-layer">Max-pooling layer</a></li>
+  <li><a href="#convolution-with-strides" id="toc-convolution-with-strides" class="nav-link" data-scroll-target="#convolution-with-strides">Convolution with strides</a></li>
+  <li><a href="#dilated-convolutions" id="toc-dilated-convolutions" class="nav-link" data-scroll-target="#dilated-convolutions">Dilated convolutions</a></li>
+  <li><a href="#backpropagation-through-a-convolutional-layer" id="toc-backpropagation-through-a-convolutional-layer" class="nav-link" data-scroll-target="#backpropagation-through-a-convolutional-layer">Backpropagation through a convolutional layer</a></li>
+  <li><a href="#backpropagation-through-a-max-pooling-layer" id="toc-backpropagation-through-a-max-pooling-layer" class="nav-link" data-scroll-target="#backpropagation-through-a-max-pooling-layer">Backpropagation through a max-pooling layer</a></li>
+  <li><a href="#convolutional-neural-networks-1" id="toc-convolutional-neural-networks-1" class="nav-link" data-scroll-target="#convolutional-neural-networks-1">Convolutional Neural Networks</a></li>
+  </ul></li>
+  <li><a href="#ensemble-learning" id="toc-ensemble-learning" class="nav-link" data-scroll-target="#ensemble-learning">Ensemble learning</a>
+  <ul class="collapse">
+  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging">Bagging</a></li>
+  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting">Boosting</a></li>
+  <li><a href="#stacking" id="toc-stacking" class="nav-link" data-scroll-target="#stacking">Stacking</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Convolutional neural networks</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/4.1-CNN.html" target="_blank">html</a> <a href="../slides/pdf/4.1-CNN.pdf" target="_blank">pdf</a></p>
+<section id="convolutional-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="convolutional-neural-networks">Convolutional neural networks</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/2KASQi7avYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>The different layers of a deep network extract increasingly complex features.</p>
+<blockquote class="blockquote">
+<p>edges <span class="math inline">\(\rightarrow\)</span> contours <span class="math inline">\(\rightarrow\)</span> shapes <span class="math inline">\(\rightarrow\)</span> objects</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/deeplearning.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Using full images as inputs leads to an explosion of the number of weights to be learned: A moderately big 800 * 600 image has 480,000 pixels with RGB values. The number of dimensions of the input space is 800 * 600 * 3 = 1.44 million. Even if you take only 1000 neurons in the first hidden layer, you get 1.44 <strong>billion</strong> weights to learn, just for the first layer. To obtain a generalization error in the range of 10%, you would need at least 14 billion training examples…</p>
+<p><span class="math display">\[\epsilon \approx \frac{\text{VC}_\text{dim}}{N}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/fullyconnected.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Fully-connected layers require a lot of weights in images.</figcaption><p></p>
+</figure>
+</div>
+<p>Early features (edges) are usually local, there is no need to learn weights from the whole image. Natural images are stationary: the statistics of the pixel in a small patch are the same, regardless the position on the image. <strong>Idea:</strong> One only needs to extract features locally and <strong>share the weights</strong> between the different locations. This is a <strong>convolution operation</strong>: a filter/kernel is applied on small patches and slided over the whole image.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/convolutional.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Convolutional layers share weights along the image dimensions.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="the-convolutional-layer" class="level3">
+<h3 class="anchored" data-anchor-id="the-convolutional-layer">The convolutional layer</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/convolution-anim2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Principle of a convolution. Source: <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" class="uri">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></figcaption><p></p>
+</figure>
+</div>
+<p>In a <strong>convolutional layer</strong>, <span class="math inline">\(d\)</span> filters are defined with very small sizes (3x3, 5x5…). Each filter is convoluted over the input image (or the previous layer) to create a <strong>feature map</strong>. The set of <span class="math inline">\(d\)</span> feature maps becomes a new 3D structure: a <strong>tensor</strong>.</p>
+<p><span class="math display">\[\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/depthcol.jpeg" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Convolutional layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
+</figure>
+</div>
+<p>If the input image is 32x32x3, the resulting tensor will be 32x32xd. The convolutional layer has only very few parameters: each feature map has 3x3x3 values in the filter plus a bias, i.e.&nbsp;28 parameters. As in image processing, a padding method must be chosen (what to do when a pixel is outside the image).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/same_padding_no_strides.gif" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Convolution with stride 1. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="max-pooling-layer" class="level3">
+<h3 class="anchored" data-anchor-id="max-pooling-layer">Max-pooling layer</h3>
+<p>The number of elements in a convolutional layer is still too high. We need to reduce the spatial dimension of a convolutional layer by <strong>downsampling</strong> it. For each feature, a <strong>max-pooling</strong> layer takes the maximum value of a feature for each subregion of the image (generally 2x2).Mean-pooling layers are also possible, but they are not used anymore. Pooling allows translation invariance: the same input pattern will be detected whatever its position in the input image.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/pooling.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Pooling layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/maxpooling.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Pooling layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="convolution-with-strides" class="level3">
+<h3 class="anchored" data-anchor-id="convolution-with-strides">Convolution with strides</h3>
+<p>Convolution with strides <span class="citation" data-cites="Springenberg2015">(<a href="../references.html#ref-Springenberg2015" role="doc-biblioref">Springenberg et al., 2015</a>)</span> is an alternative to max-pooling layers. The convolution simply “jumps” one pixel when sliding over the image (stride 2). This results in a smaller feature map, using much less operations than a convolution with stride 1 followed by max-pooling, for the same performance. They are particularly useful for generative models (VAE, GAN, etc).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/padding_strides.gif" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Convolution with stride 2. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="dilated-convolutions" class="level3">
+<h3 class="anchored" data-anchor-id="dilated-convolutions">Dilated convolutions</h3>
+<p>A <strong>dilated convolution</strong> is a convolution with holes (à trous). The filter has a bigger spatial extent than its number of values.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/dilation.gif" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Convolution à trous. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="backpropagation-through-a-convolutional-layer" class="level3">
+<h3 class="anchored" data-anchor-id="backpropagation-through-a-convolutional-layer">Backpropagation through a convolutional layer</h3>
+<p>But how can we do backpropagation through a convolutional layer?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/convolutional-forward.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Forward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
+</figure>
+</div>
+<p>In the example above, the four neurons of the feature map will receive a gradient from the upper layers. How can we use it to learn the filter values and pass the gradient to the lower layers?</p>
+<p>The answer is simply by convolving the output gradients with the flipped filter!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/convolutional-backward.gif" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Backward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
+</figure>
+</div>
+<p>The filter just has to be flipped (<span class="math inline">\(180^o\)</span> symmetry) before the convolution.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/convolution-flipped.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Flipping the filter. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
+</figure>
+</div>
+<p>The convolution operation is differentiable, so we can apply backpropagation and learn the filters.</p>
+<p><span class="math display">\[\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k\]</span></p>
+<p><span class="math display">\[\frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = W_k^F \ast \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}\]</span></p>
+</section>
+<section id="backpropagation-through-a-max-pooling-layer" class="level3">
+<h3 class="anchored" data-anchor-id="backpropagation-through-a-max-pooling-layer">Backpropagation through a max-pooling layer</h3>
+<p>We can also use backpropagation through a max-pooling layer. We need to remember which location was the winning location in order to backpropagate the gradient. A max-pooling layer has no parameter, we do not need to learn anything, just to pass the gradient backwards.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/max-pooling-backprop.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Backpropagation through a max-pooling layer. Source: <a href="https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/" class="uri">https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="convolutional-neural-networks-1" class="level3">
+<h3 class="anchored" data-anchor-id="convolutional-neural-networks-1">Convolutional Neural Networks</h3>
+<p>A <strong>convolutional neural network</strong> (CNN) is a cascade of convolution and pooling operations, extracting layer by layer increasingly complex features. The spatial dimensions decrease after each pooling operation, but the number of extracted features increases after each convolution. One usually stops when the spatial dimensions are around 7x7. The last layers are fully connected (classical MLP). Training a CNN uses backpropagation all along: the convolution and pooling operations are differentiable.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/lenet.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Convolutional Neural Network. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>````{admonition} Implementing a CNN in keras</p>
+<p>Convolutional and max-pooling layers are regular objects in keras/tensorflow/pytorch/etc. You do not need to care about their implementation, they are designed to run fast on GPUs. You have to apply to the CNN all the usual tricks: optimizers, dropout, batch normalization, etc.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Sequential()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model.add(Input(X_train.shape[<span class="dv">1</span>:]))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>model.add(Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>, <span class="dv">3</span>), padding<span class="op">=</span><span class="st">'same'</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>model.add(Activation(<span class="st">'relu'</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>model.add(Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>, <span class="dv">3</span>)))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>model.add(Activation(<span class="st">'relu'</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>model.add(MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>model.add(Dropout(<span class="fl">0.25</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>model.add(Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>), padding<span class="op">=</span><span class="st">'same'</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>model.add(Activation(<span class="st">'relu'</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>model.add(Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>)))L</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>model.add(Activation(<span class="st">'relu'</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>model.add(MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>model.add(Dropout(<span class="fl">0.25</span>))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>model.add(Flatten())</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>model.add(Dense(<span class="dv">512</span>))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>model.add(Activation(<span class="st">'relu'</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>model.add(Dropout(<span class="fl">0.5</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>model.add(Dense(num_classes))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>model.add(Activation(<span class="st">'softmax'</span>))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>opt <span class="op">=</span> RMSprop(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    lr<span class="op">=</span><span class="fl">0.0001</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    decay<span class="op">=</span><span class="fl">1e-6</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span><span class="st">'categorical_crossentropy'</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>opt,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>[<span class="st">'accuracy'</span>]</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>
+## Some famous convolutional networks
+
+
+
+
+
+
+
+
+
+### Neocognitron
+
+The **Neocognitron** (Fukushima, 1980 [@Fukushima1980]) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.
+
+![Neocognitron. [@Fukushima1980]. Source: &lt;https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg&gt;](../slides/img/Neocognitron.jpg){width=80%}
+
+
+### LeNet
+
+**LeNet** (1998, Yann LeCun at AT&amp;T labs [@LeCun1998]) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two **mean**-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).
+
+![LeNet5. [@LeCun1998].](../slides/img/lenet.png){width=100%}
+### AlexNet
+
+**AlexNet** (2012, Toronto University [@Krizhevsky2012]) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU,  max-pooling, dropout, SGD with momentum, L2 regularization.
+
+![Alexnet [@Krizhevsky2012].](../slides/img/alexnet.png){width=100%}
+
+
+### VGG-16
+
+**VGG-16** (2014, Visual Geometry Group, Oxford [@Simonyan2015]) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.
+
+![VGG-16 [@Simonyan2015].](../slides/img/vgg16.png){width=70%}
+
+
+### GoogLeNet - Inception v1
+
+
+**GoogLeNet** (2014, Google Brain [@Szegedy2015]) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.
+
+![GoogLeNet [@Szegedy2015].](../slides/img/googlenet-arch.jpg){width=100%}
+
+Inside GoogleNet, each **Inception** module learns features at different resolutions using convolutions and max poolings of different sizes. 1x1 convolutions are **shared MLPS**: they transform a $(w, h, d_1)$ tensor into $(w, h, d_2)$ pixel per pixel. The resulting feature maps are concatenated along the feature dimension and passed to the next module.
+
+![Inception module [@Szegedy2015].](../slides/img/inception.png){width=100%}
+
+Three softmax layers predict the classes at different levels of the network. The combined loss is:
+
+$$\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]$$
+
+Only the deeper softmax layer matters for the prediction. The additional losses improve convergence by fight vanishing gradients: the early layers get useful gradients from the lower softmax layers.
+
+Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception... Xception [@Chollet2017b] has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in `keras`:
+
+```python
+tf.keras.applications.Xception(include_top=True, weights="imagenet")
+```
+
+![Inception v3 [@Chollet2017b]. Source: &lt;https://cloud.google.com/tpu/docs/inception-v3-advanced&gt;](../slides/img/inceptionv3.png){width=100%}
+
+### ResNet
+
+**ResNet** (2015, Microsoft [@He2015]) won ImageNet 2015. Instead of learning to transform an input directly with $\mathbf{h}_n = f_W(\mathbf{h}_{n-1})$, a **residual layer** learns to represent the residual between the output and the input:
+
+$$
+    \mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}  \quad \rightarrow \quad f_W(\mathbf{h}_{n-1}) = \mathbf{h}_n - \mathbf{h}_{n-1}
+$$
+
+![Residual layer with skip connections  [@He2015].](../slides/img/resnetlayer.jpg){width=60%}
+
+These **skip connections** allow the network to decide how deep it has to be. If the layer is not needed, the residual layer learns to output 0.
+
+![ResNet  [@He2015].](../slides/img/resnet2.png){width=20%}
+
+Skip connections help overcome the **vanishing gradients** problem, as the contribution of bypassed layers to the backpropagated gradient is 1.
+
+$$\mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}$$
+
+$$\frac{\partial \mathbf{h}_n}{\partial \mathbf{h}_{n-1}} = \frac{\partial f_W(\mathbf{h}_{n-1})}{\partial \mathbf{h}_{n-1}} + 1$$
+
+The norm of the gradient stays roughly around one, limiting vanishing. Skip connections even can bypass whole blocks of layers. ResNet can have many layers without vanishing gradients. The most popular variants are: 
+
+* ResNet-50.
+* ResNet-101.
+* ResNet-152.
+
+It was the first network to make an heavy use of **batch normalization**.
+
+![Residual block  [@He2015].](../slides/img/resnet-block.png){width=40%}
+
+### HighNets: Highway networks
+
+**Highway networks** (IDSIA [@Srivastava2015]) are residual networks which also learn to balance inputs with feature extraction:
+
+$$
+    \mathbf{h}_n = T_{W'} \, f_W(h_{n-1}) + (1 -  T_{W'}) \, h_{n-1}
+$$
+
+The balance between the **primary** pathway and the **skip** pathway adapts to the task. It has been used up to 1000 layers and improved state-of-the-art accuracy on MNIST and CIFAR-10.
+
+![Highway network  [@Srivastava2015].](../slides/img/highway.png){width=100%}
+
+
+### DenseNets: Dense networks
+
+
+**Dense networks** (Cornell University &amp; Facebook AI [@Huang2018]) are residual networks that can learn **bypasses** between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.
+
+![Dense network  [@Huang2018].](../slides/img/densenetworks.png){width=100%}
+
+### Model zoos
+
+These famous models are described in their respective papers, you could reimplement them and train them on ImageNet. Fortunately, their code is often released on Github by the authors or reimplemented by others. Most frameworks maintain **model zoos** of the most popular networks. Some models also have **pretrained weights** available, mostly on ImageNet. Very useful for **transfer learning** (see later).
+
+* Overview website:
+
+&lt;https://modelzoo.co&gt;
+
+* Caffe:
+
+&lt;https://github.com/BVLC/caffe/wiki/Model-Zoo&gt;
+
+* Tensorflow:
+
+&lt;https://github.com/tensorflow/models&gt;
+
+* Pytorch:
+
+&lt;https://pytorch.org/docs/stable/torchvision/models.html&gt;
+
+* Papers with code:
+
+&lt;https://paperswithcode.com/&gt;
+
+
+Several criteria have to be considered when choosing an architecture:
+
+* Accuracy on ImageNet.
+* Number of parameters (RAM consumption).
+* Speed (flops).
+
+![Speed-accuracy trade-off of state-of-the-art CNNs. Source: &lt;https://dataconomy.com/2017/04/history-neural-networks&gt;](../slides/img/deepnets-comparison.png){width=100%}
+
+## Applications of CNN
+
+
+
+
+
+
+
+
+
+### Object recognition
+
+**Object recognition** has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like **ImageNet** (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.
+
+
+![Object recognition on ImageNet. Source [@Krizhevsky2012]. ](../slides/img/objrecog.png){width=70%}
+
+### Facial recognition
+
+Facebook used 4.4 million annotated faces from 4030 users to train **DeepFace** [@Taigman2014]. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).
+
+![DeepFace. Source [@Taigman2014]. ](../slides/img/deepface.png){width=100%}
+
+### Pose estimation
+
+**PoseNet** [@Kendall2016] is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.
+
+
+![PoseNet [@Kendall2016]. Source:  &lt;https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html&gt;](../slides/img/posnet-face.gif){width=60%}
+
+### Speech recognition
+
+To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. **DeepSpeech** [@Hannun2014] from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.
+
+![DeepSpeech. Source [@Hannun2014]. ](../slides/img/deepspeech.png){width=60%}
+
+### Sentiment analysis
+
+It is also possible to apply convolutions on text. **Sentiment analysis** assigns a positive or negative judgment to sentences. Each word is represented by a vector of values (word2vec). The convolutional layer can slide over all over words to find out the sentiment of the sentence.
+
+![Sentiment analysis. Source [@Kim2014]. ](../slides/img/sentimentanalysis.png){width=100%}
+
+
+### Wavenet : text-to-speech synthesis
+
+**Text-To-Speech** (TTS) is also possible using CNNs. Google Home relies on **Wavenet** [@Oord2016], a complex CNN using *dilated convolutions* to grasp long-term dependencies.
+
+![Wavenet [@Oord2016].  Source: &lt;https://deepmind.com/blog/wavenet-generative-model-raw-audio/&gt;](../slides/img/wavenet.png){width=100%}
+
+![Dilated convolutions in Wavenet [@Oord2016].  Source: &lt;https://deepmind.com/blog/wavenet-generative-model-raw-audio/&gt;](../slides/img/wavenet-dilated.gif){width=70%}
+
+
+## Transfer learning
+
+
+
+
+
+
+
+
+
+**Myth:** ones needs at least one million labeled examples to use deep learning. This is true if you train the CNN **end-to-end** with randomly initialized weights. But there are alternatives:
+
+1. **Unsupervised learning** (autoencoders) may help extract useful representations using only images.
+2. **Transfer learning** allows to re-use weights obtained from a related task/domain.
+
+![Transfer learning.  Source: &lt;http://imatge-upc.github.io/telecombcn-2016-dlcv&gt;](../slides/img/transferlearning2.jpg){width=70%}
+
+Take a classical network (VGG-16, Inception, ResNet, etc.) trained on ImageNet (if your task is object recognition).
+
+**Off-the-shelf**
+
+* Cut the network before the last layer and use directly the high-level feature representation.
+
+* Use a shallow classifier directly on these representations (not obligatorily NN).
+
+![Off-the-shelf transfer learning.  Source: &lt;http://imatge-upc.github.io/telecombcn-2016-dlcv&gt;](../slides/img/transferlearning3.jpg){width=90%}
+
+**Fine-tuning**
+
+* Use the trained weights as initial weight values and re-train the network on your data (often only the last layers, the early ones are frozen).
+
+![Fine-tuned transfer learning.  Source: &lt;http://imatge-upc.github.io/telecombcn-2016-dlcv&gt;](../slides/img/transferlearning4.jpg){width=50%}
+
+```{admonition} Example of transfer learning
+
+![](../slides/img/snowleopard.png)
+
+Microsoft wanted a system to automatically detect **snow leopards** into the wild, but there were not enough labelled images to train a deep network **end-to-end**. They used a pretrained **ResNet50** as a feature extractor for a simple **logistic regression** classifier.
+
+Source: &lt;https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/&gt;
+```
+
+````{admonition} Transfer learning in keras
+
+Keras provides pre-trained CNNs that can be used as feature extractors:
+
+
+```python
+from tf.keras.applications.vgg16 import VGG16
+
+# Download VGG without the FC layers
+model = VGG16(include_top=False, 
+              input_shape=(300, 300, 3))
+
+# Freeze learning in VGG16
+for layer in model.layers:
+    layer.trainable = False
+
+# Add a fresh MLP on top
+flat1 = Flatten()(model.layers[-1].output)
+class1 = Dense(1024, activation='relu')(flat1)
+output = Dense(10, activation='softmax')(class1)
+
+# New model
+model = Model(
+    inputs=model.inputs, outputs=output)
+```
+
+See &lt;https://keras.io/api/applications/&gt; for the full list of pretrained networks.</code></pre>
+</section>
+</section>
+<section id="ensemble-learning" class="level2">
+<h2 class="anchored" data-anchor-id="ensemble-learning">Ensemble learning</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WVNqiUnHRPA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>Since 2016, only ensembles of existing networks win the competitions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ensemble-scores.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Top networks on the ImageNet 2016 competition. Source <a href="http://image-net.org/challenges/LSVRC/2016/results" class="uri">http://image-net.org/challenges/LSVRC/2016/results</a></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Ensemble learning</strong> is the process of combining multiple independent classifiers together, in order to obtain a better performance. As long the individual classifiers do not make mistakes for the same examples, a simple majority vote might be enough to get better approximations.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/ensemble-example.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Ensemble of pre-trained CNNs. Source <a href="https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html" class="uri">https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>Let’s consider we have three <strong>independent</strong> binary classifiers, each with an accuracy of 70% (P = 0.7 of being correct). When using a majority vote, we get the following cases:</p>
+<ol type="1">
+<li><p>all three models are correct:</p>
+<p>P = 0.7 * 0.7 * 0.7 = 0.3492</p></li>
+<li><p>two models are correct</p>
+<p>P = (0.7 * 0.7 * 0.3) + (0.7 * 0.3 * 0.7) + (0.3 * 0.7 * 0.7) = 0.4409</p></li>
+<li><p>two models are wrong</p>
+<p>P = (0.3 * 0.3 * 0.7) + (0.3 * 0.7 * 0.3) + (0.7 * 0.3 * 0.3) = 0.189</p></li>
+<li><p>all three models are wrong</p>
+<p>P = 0.3 * 0.3 * 0.3 = 0.027</p></li>
+</ol>
+<p>The majority vote is correct with a probability of P = 0.3492 + 0.4409 = <strong>0.78 !</strong> The individual learners only have to be slightly better than chance, but they <strong>must</strong> be as independent as possible.</p>
+<section id="bagging" class="level3">
+<h3 class="anchored" data-anchor-id="bagging">Bagging</h3>
+<p>Bagging methods (bootstrap aggregation) trains multiple classifiers on randomly sampled subsets of the data. A <strong>random forest</strong> is for example a bagging method for decision trees, where the data and features are sampled.. One can use majority vote, unweighted average, weighted average or even a meta-learner to form the final decision.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/bagging.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Bagging. Source: <a href="http://www.sciencedirect.com/science/article/pii/S0957417409008781" class="uri">http://www.sciencedirect.com/science/article/pii/S0957417409008781</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="boosting" class="level3">
+<h3 class="anchored" data-anchor-id="boosting">Boosting</h3>
+<p>Bagging algorithms aim to reduce the complexity of models that overfit the training data. <strong>Boosting</strong> is an approach to increase the complexity of models that suffer from high bias, that is, models that underfit the training data. Algorithms: Adaboost, XGBoost (gradient boosting)…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/boosting.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Boosting. Source: <a href="https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/" class="uri">https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/</a></figcaption><p></p>
+</figure>
+</div>
+<p>Boosting is not very useful with deep networks (overfitting), but there are some approaches like SelfieBoost (<a href="https://arxiv.org/pdf/1411.3436.pdf" class="uri">https://arxiv.org/pdf/1411.3436.pdf</a>).</p>
+</section>
+<section id="stacking" class="level3">
+<h3 class="anchored" data-anchor-id="stacking">Stacking</h3>
+<p><strong>Stacking</strong> is an ensemble learning technique that combines multiple models via a meta-classifier. The meta-model is trained on the outputs of the basic models as features. Winning approach of ImageNet 2016 and 2017. See <a href="https://blog.statsbot.co/ensemble-learning-d1dcd548e936" class="uri">https://blog.statsbot.co/ensemble-learning-d1dcd548e936</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/stacking.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Stacking. Source: <a href="doi:10.1371/journal.pone.0024386.g005" class="uri">doi:10.1371/journal.pone.0024386.g005</a></figcaption><p></p>
+</figure>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-LeCun1998" class="csl-entry" role="doc-biblioentry">
+LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). Gradient <span>Based Learning Applied</span> to <span>Document Recognition</span>. <em>Proceedings of the IEEE</em> 86, 2278–2324. doi:<a href="https://doi.org/10.1109/5.726791">10.1109/5.726791</a>.
+</div>
+<div id="ref-Springenberg2015" class="csl-entry" role="doc-biblioentry">
+Springenberg, J. T., Dosovitskiy, A., Brox, T., and Riedmiller, M. (2015). Striving for <span>Simplicity</span>: <span>The All Convolutional Net</span>. <em>arXiv:1412.6806 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1412.6806">https://arxiv.org/abs/1412.6806</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/3.2-DNN.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Modern neural networks</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notes/4.2-ObjectDetection.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Object detection</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,7 +1,8 @@
 all: notes slides
 
 slides_targets := $(wildcard slides/*.md)
-slides: $(slides_targets)
+notebook_targets := $(wildcard slides/exercises/*.ipynb)
+slides: $(slides_targets) $(notebook_targets)
 	quarto render $? --to revealjs
 
 

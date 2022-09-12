@@ -1,10 +1,11 @@
 # Recurrent neural networks
 
-Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.9-RNN.pdf)
+Slides: [html](../slides/6.1-RNN.html){target="_blank"} [pdf](../slides/pdf/6.1-RNN.pdf){target="_blank"}
+
 
 ## Recurrent neural networks
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/IIeWpVMgriI' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  IIeWpVMgriI >}}
 
 
 ### Problem with feedforward neural networks
@@ -52,12 +53,7 @@ $\sigma$ is a transfer function, usually logistic or tanh. The input $\mathbf{x}
 * $W_x$ is the input weight matrix.
 * $W_h$ is the recurrent weight matrix.
 
-```{figure} ../img/RNN-rolled.png
----
-width: 30%
----
-Recurrent neural network. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Recurrent neural network. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/RNN-rolled.png){width=30%}
 
 One can **unroll** a recurrent network: the output $\mathbf{h}_t$ depends on the whole history of inputs from $\mathbf{x}_0$ to $\mathbf{x}_t$.
 
@@ -73,12 +69,7 @@ $$
 
 A RNN is considered as part of **deep learning**, as there are many layers of weights between the first input $\mathbf{x}_0$ and the output $\mathbf{h}_t$. The only difference with a DNN is that the weights $W_x$ and $W_h$ are **reused** at each time step.
 
-```{figure} ../img/RNN-unrolled.png
----
-width: 100%
----
-Recurrent neural network unrolled. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Recurrent neural network unrolled. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/RNN-unrolled.png){width=100%}
 
 ### BPTT: Backpropagation through time
 
@@ -160,35 +151,20 @@ before computing the gradients iteratively, starting from time $t$ and accumulat
 In practice, going back to $t=0$ at each time step requires too many computations, which may not be needed. **Truncated BPTT** only updates the gradients up to $T$ steps before: the gradients are computed backwards from $t$ to $t-T$. The partial derivative in $t-T-1$ is considered 0. This limits the **horizon** of BPTT: dependencies longer than $T$ will not be learned, so it has to be chosen carefully for the task. $T$ becomes yet another hyperparameter of your algorithm...
 
 
-```{figure} ../img/truncated_backprop.png
----
-width: 80%
----
-Truncated backpropagation through time. Source: <https://r2rt.com/styles-of-truncated-backpropagation.html>.
-```
+![Truncated backpropagation through time. Source: <https://r2rt.com/styles-of-truncated-backpropagation.html>.](../slides/img/truncated_backprop.png){width=80%}
 
 ### Vanishing gradients
 
 BPTT is able to find **short-term dependencies** between inputs and outputs: perceiving the inputs $\mathbf{x}_0$ and $\mathbf{x}_1$ allows to respond correctly at $t = 3$.
 
-```{figure} ../img/RNN-shorttermdependencies.png
----
-width: 100%
----
-RNN can learn short-term dependencies. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![RNN can learn short-term dependencies. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/RNN-shorttermdependencies.png){width=100%}
 
 But it fails to detect **long-term dependencies** because of:
 
 * the truncated horizon $T$ (for computational reasons).
-* the **vanishing gradient problem** {cite}`Hochreiter1991`.
+* the **vanishing gradient problem** [@Hochreiter1991].
 
-```{figure} ../img/RNN-longtermdependencies.png
----
-width: 100%
----
-RNN cannot learn long-term dependencies. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![RNN cannot learn long-term dependencies. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/RNN-longtermdependencies.png){width=100%}
 
 Let's look at the gradient w.r.t to the input weights:
 
@@ -224,29 +200,19 @@ This is the idea behind **long short-term memory** (LSTM) networks.
 
 ## Long short-term memory networks - LSTM
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/jvBOgXSebV0' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  jvBOgXSebV0 >}}
 
-```{note}
+:::{.callout-note}
 All figures in this section are taken from this great blog post by Christopher Olah, which is worth a read:
 
 <http://colah.github.io/posts/2015-08-Understanding-LSTMs>
-```
+:::
 
-```{figure} ../img/LSTM3-SimpleRNN.png
----
-width: 100%
----
-RNN layer. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![RNN layer. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-SimpleRNN.png){width=100%}
 
-```{figure} ../img/LSTM3-chain.png
----
-width: 100%
----
-LSTM layer. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![LSTM layer. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-chain.png){width=100%}
 
-A **LSTM layer**  {cite}`Hochreiter1997` is a RNN layer with the ability to control what it memorizes. In addition to the input $\mathbf{x}_t$ and output $\mathbf{h}_t$, it also has a **state** $\mathbf{C}_t$ which is maintained over time. The state is the memory of the layer (sometimes called context). It also contains three multiplicative **gates**:
+A **LSTM layer**  [@Hochreiter1997] is a RNN layer with the ability to control what it memorizes. In addition to the input $\mathbf{x}_t$ and output $\mathbf{h}_t$, it also has a **state** $\mathbf{C}_t$ which is maintained over time. The state is the memory of the layer (sometimes called context). It also contains three multiplicative **gates**:
 
 * The **input gate** controls which inputs should enter the memory.
     * *are they worth remembering?*
@@ -260,30 +226,15 @@ The gates **learn** to open and close through learnable weights.
 
 ### State conveyor belt
 
-```{figure} ../img/LSTM3-C-line.png
----
-width: 100%
----
-State conveyor belt. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![State conveyor belt. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-C-line.png){width=100%}
 
 By default, the cell state $\mathbf{C}_t$ stays the same over time (*conveyor belt*). It can have the same number of dimensions as the output $\mathbf{h}_t$, but does not have to. Its content can be erased by multiplying it with a vector of 0s, or preserved by multiplying it by a vector of 1s. We can use a **sigmoid** to achieve this:
 
-```{figure} ../img/LSTM3-gate.png
----
-width: 30%
----
-Element-wise multiplication with a vector using using the logistic/sigmoid function. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Element-wise multiplication with a vector using using the logistic/sigmoid function. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-gate.png){width=30%}
 
 ### Forget gate
 
-```{figure} ../img/LSTM3-focus-f.png
----
-width: 100%
----
-Forget gate. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Forget gate. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-focus-f.png){width=100%}
 
 Forget weights $W_f$ and a sigmoid function are used to decide if the state should be preserved or not.
 
@@ -295,12 +246,7 @@ $[\mathbf{h}_{t-1}; \mathbf{x}_t]$ is simply the concatenation of the two vector
 
 ### Input gate
 
-```{figure} ../img/LSTM3-focus-i.png
----
-width: 100%
----
-Input gate. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Input gate. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-focus-i.png){width=100%}
 
 Similarly, the input gate uses a sigmoid function to decide if the state should be updated or not.
 
@@ -317,12 +263,7 @@ $$
 
 ### Candidate state
 
-```{figure} ../img/LSTM3-focus-C.png
----
-width: 100%
----
-Candidate state. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Candidate state. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-focus-C.png){width=100%}
 
 The new state $\mathbf{C}_t$ is computed as a part of the previous state $\mathbf{C}_{t-1}$ (element-wise multiplication with the forget gate $\mathbf{f}_t$) plus a part of the candidate state $\tilde{\mathbf{C}}_t$ (element-wise multiplication with the input gate $\mathbf{i}_t$).
 
@@ -334,12 +275,7 @@ Depending on the gates, the new state can be equal to the previous state (gates 
 
 ### Output gate
 
-```{figure} ../img/LSTM3-focus-o.png
----
-width: 100%
----
-Output gate. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Output gate. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-focus-o.png){width=100%}
 
 The output gate decides which part of the new state will be used for the output.
 
@@ -358,12 +294,7 @@ $$
 
 The function between $\mathbf{x}_t$ and $\mathbf{h}_t$ is quite complicated, with many different weights, but everything is differentiable: BPTT can be applied.
 
-```{figure} ../img/LSTM-cell2.png
----
-width: 60%
----
-LSTM layer. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![LSTM layer. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM-cell2.png){width=60%}
 
 **Equations:**
 
@@ -410,14 +341,9 @@ The gates also have a bias, which can be fixed (but hard to find). LSTM layers c
 
 ### Peephole connections
 
-```{figure} ../img/LSTM3-var-peepholes.png
----
-width: 100%
----
-Peephole connections. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Peephole connections. Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-var-peepholes.png){width=100%}
 
-A popular variant of LSTM adds **peephole connections** {cite}`Gers2000`, where the three gates have additionally access to the state $\mathbf{C}_{t-1}$.
+A popular variant of LSTM adds **peephole connections** [@Gers2000], where the three gates have additionally access to the state $\mathbf{C}_{t-1}$.
 
 \begin{align}
     \mathbf{f}_t &= \sigma(W_f \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f) \\
@@ -431,14 +357,9 @@ It usually works better, but adds more weights.
 
 ### GRU: Gated Recurrent Unit
 
-```{figure} ../img/LSTM3-var-GRU.png
----
-width: 100%
----
-Gated recurrent unit (GRU). Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.
-```
+![Gated recurrent unit (GRU). Source: <http://colah.github.io/posts/2015-08-Understanding-LSTMs>.](../slides/img/LSTM3-var-GRU.png){width=100%}
 
-Another variant is called the **Gated Recurrent Unit** (GRU) {cite}`Chung2014`.
+Another variant is called the **Gated Recurrent Unit** (GRU) [@Chung2014].
 It uses directly the output $\mathbf{h}_t$ as a state, and the forget and input gates are merged into a single gate $\mathbf{r}_t$.
 
 \begin{align}
@@ -465,27 +386,17 @@ A **bidirectional LSTM** learns to predict the output in two directions:
 
 The two state vectors are then concatenated at each time step to produce the output. Only possible offline, as the future inputs must be known. Works better than LSTM on many problems, but slower.
 
-```{figure} ../img/bi_lstm.jpg
----
-width: 60%
----
-Bidirectional LSTM. Source: <http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html>.
-```
+![Bidirectional LSTM. Source: <http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html>.](../slides/img/bi_lstm.jpg){width=60%}
 
 ## word2vec
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/8ub1oavRfIE' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  8ub1oavRfIE >}}
 
 The most famous application of RNNs is **Natural Language Processing** (NLP): text understanding, translation, etc... Each word of a sentence has to be represented as a vector $\mathbf{x}_t$ in order to be fed to a LSTM. Which representation should we use?
 
 The naive solution is to use **one-hot encoding**, one element of the vector corresponding to one word of the dictionary.
 
-```{figure} ../img/onehotvec.png
----
-width: 60%
----
-One-hot encoding of words. Source: <https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png>.
-```
+![One-hot encoding of words. Source: <https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png>.](../slides/img/onehotvec.png){width=60%}
 
 
 One-hot encoding is not a good representation for words:
@@ -499,23 +410,13 @@ One-hot encoding is not a good representation for words:
 * Semantically related words have completely different representations ("endure" and "tolerate").
 * The representation is extremely **sparse** (a lot of useless zeros).
 
-```{figure} ../img/audio-image-text.png
----
-width: 100%
----
-Audio and image data are dense, i.e. each input dimension carries information. One-hot encoded sentences are sparse. Source: <https://www.tensorflow.org/tutorials/representation/word2vec>.
-```
+![Audio and image data are dense, i.e. each input dimension carries information. One-hot encoded sentences are sparse. Source: <https://www.tensorflow.org/tutorials/representation/word2vec>.](../slides/img/audio-image-text.png){width=100%}
 
-**word2vec** {cite}`Mikolov2013` learns word **embeddings** by trying to predict the current word based on the context (CBOW, continuous bag-of-words) or the context based on the current word (skip-gram). See <https://code.google.com/archive/p/word2vec/> and  <https://www.tensorflow.org/tutorials/representation/word2vec> for more information.
+**word2vec** [@Mikolov2013] learns word **embeddings** by trying to predict the current word based on the context (CBOW, continuous bag-of-words) or the context based on the current word (skip-gram). See <https://code.google.com/archive/p/word2vec/> and  <https://www.tensorflow.org/tutorials/representation/word2vec> for more information.
 
 It uses a three-layer autoencoder-like NN, where the hidden layer (latent space) will learn to represent the one-hot encoded words in a dense manner.
 
-```{figure} ../img/word2vec-training.png
----
-width: 100%
----
-Word2vec is an autoencoder trained to reproduce the context of a word using one-hot encoded vectors. Source: <https://jaxenter.com/deep-learning-search-word2vec-147782.html>.
-```
+![Word2vec is an autoencoder trained to reproduce the context of a word using one-hot encoded vectors. Source: <https://jaxenter.com/deep-learning-search-word2vec-147782.html>.](../slides/img/word2vec-training.png){width=100%}
 
 
 **word2vec** has three parameters:
@@ -528,27 +429,17 @@ It is trained on huge datasets of sentences (e.g. Wikipedia). After learning, th
 
 > queen = king + woman - man
 
-```{figure} ../img/linear-relationships.png
----
-width: 100%
----
-Arithmetic operations on word2vec representations. Source: <https://www.tensorflow.org/tutorials/representation/word2vec>.
-```
+![Arithmetic operations on word2vec representations. Source: <https://www.tensorflow.org/tutorials/representation/word2vec>.](../slides/img/linear-relationships.png){width=100%}
 
 ## Applications of RNNs
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/FiSqycJE_i0' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  FiSqycJE_i0 >}}
 
 ### Classification of LSTM architectures
 
 Several architectures are possible using recurrent neural networks:
 
-```{figure} ../img/lstm-diagrams.jpg
----
-width: 100%
----
-Arithmetic operations on word2vec representations. Source: <http://karpathy.github.io/2015/05/21/rnn-effectiveness/>.
-```
+![Arithmetic operations on word2vec representations. Source: <http://karpathy.github.io/2015/05/21/rnn-effectiveness/>.](../slides/img/lstm-diagrams.jpg){width=100%}
 
 
 * **One to One**: classical feedforward network.
@@ -564,32 +455,17 @@ Arithmetic operations on word2vec representations. Source: <http://karpathy.gith
 
 ### Image caption generation
 
-**Show and Tell** {cite}`Vinyals2015` uses the last FC layer of a CNN to feed a LSTM layer and generate words. The pretrained CNN (VGG16, ResNet50) is used as a **feature extractor**. Each word of the sentence is encoded/decoded using word2vec. The output of the LSTM at time $t$ becomes its new input at time $t+1$.
+**Show and Tell** [@Vinyals2015] uses the last FC layer of a CNN to feed a LSTM layer and generate words. The pretrained CNN (VGG16, ResNet50) is used as a **feature extractor**. Each word of the sentence is encoded/decoded using word2vec. The output of the LSTM at time $t$ becomes its new input at time $t+1$.
 
-```{figure} ../img/showtell.jpg
----
-width: 70%
----
-Show and Tell {cite}`Vinyals2015`.
-```
+![Show and Tell [@Vinyals2015].](../slides/img/showtell.jpg){width=70%}
 
 
-**Show, attend and tell** {cite}`Xu2015` uses attention to focus on specific parts of the image when generating the sentence.
+**Show, attend and tell** [@Xu2015] uses attention to focus on specific parts of the image when generating the sentence.
 
 
-```{figure} ../img/showattendtell.png
----
-width: 100%
----
-Show, attend and tell {cite}`Xu2015`.
-```
+![Show, attend and tell [@Xu2015].](../slides/img/showattendtell.png){width=100%}
 
-```{figure} ../img/showattendtell-res.png
----
-width: 100%
----
-Caption generation using Show, attend and tell {cite}`Xu2015`.
-```
+![Caption generation using Show, attend and tell [@Xu2015].](../slides/img/showattendtell-res.png){width=100%}
 
 ### Next character/word prediction
 
@@ -630,7 +506,7 @@ Come, sir, I will make did behold your worship.
 
 ```{admonition} Sunspring SciFi movie
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/LY7x2Ihqjmc' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  LY7x2Ihqjmc >}}
 
 More info: <http://www.thereforefilms.com/sunspring.html>
 ```
@@ -639,35 +515,20 @@ More info: <http://www.thereforefilms.com/sunspring.html>
 
 Sentiment analysis consists of attributing a value (positive or negative) to a text. A 1D convolutional layers "slides" over the text, each word being encoded using word2vec. The bidirectional LSTM computes a state vector for the complete text. A classifier (fully connected layer) learns to predict the sentiment of the text (positive/negative).
 
-```{figure} ../img/sentimentanalysis.jpg
----
-width: 100%
----
-Sentiment analysis using bidirectional LSTMs. Source: <https://offbit.github.io/how-to-read/>.
-```
+![Sentiment analysis using bidirectional LSTMs. Source: <https://offbit.github.io/how-to-read/>.](../slides/img/sentimentanalysis.jpg){width=100%}
 
 ### Question answering / Scene understanding
 
 A LSTM can learn to associate an image (static) plus a question (sequence) with the answer (sequence). The image is abstracted by a CNN pretrained for object recognition.
 
 
-```{figure} ../img/questionanswering.jpg
----
-width: 100%
----
-Question answering. Source: {cite}`Malinowski2015`.
-```
+![Question answering. Source: [@Malinowski2015].](../slides/img/questionanswering.jpg){width=100%}
 
 ### seq2seq
 
-The **state vector** obtained at the end of a sequence can be reused as an initial state for another LSTM. The goal of the **encoder** is to find a compressed representation of a sequence of inputs. The goal of the **decoder** is to generate a sequence from that representation. **Sequence-to-sequence** (seq2seq {cite}`Sutskever2014`) models are recurrent autoencoders.
+The **state vector** obtained at the end of a sequence can be reused as an initial state for another LSTM. The goal of the **encoder** is to find a compressed representation of a sequence of inputs. The goal of the **decoder** is to generate a sequence from that representation. **Sequence-to-sequence** (seq2seq [@Sutskever2014]) models are recurrent autoencoders.
 
-```{figure} ../img/seq2seq.jpeg
----
-width: 100%
----
-seq2seq architecture. Source: {cite}`Sutskever2014`.
-```
+![seq2seq architecture. Source: [@Sutskever2014].](../slides/img/seq2seq.jpeg){width=100%}
 
 
 

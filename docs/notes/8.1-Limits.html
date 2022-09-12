@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.175">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 20&nbsp; Limits of deep learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notes/8.2-Beyond.html" rel="next">
+<link href="../notes/7.2-ContrastiveLearning.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Limits of deep learning</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Recurrent neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Self-supervised learning</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Outlook</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-ai-hype-and-general-artificial-intelligence" id="toc-the-ai-hype-and-general-artificial-intelligence" class="nav-link active" data-scroll-target="#the-ai-hype-and-general-artificial-intelligence">The AI hype and general artificial intelligence</a></li>
+  <li><a href="#current-limitations-of-deep-learning" id="toc-current-limitations-of-deep-learning" class="nav-link" data-scroll-target="#current-limitations-of-deep-learning">Current limitations of deep learning</a>
+  <ul class="collapse">
+  <li><a href="#data-is-never-infinite" id="toc-data-is-never-infinite" class="nav-link" data-scroll-target="#data-is-never-infinite">Data is never infinite</a></li>
+  <li><a href="#computational-power-and-energy" id="toc-computational-power-and-energy" class="nav-link" data-scroll-target="#computational-power-and-energy">Computational power and energy</a></li>
+  <li><a href="#data-is-biased" id="toc-data-is-biased" class="nav-link" data-scroll-target="#data-is-biased">Data is biased</a></li>
+  <li><a href="#adversarial-attacks" id="toc-adversarial-attacks" class="nav-link" data-scroll-target="#adversarial-attacks">Adversarial attacks</a></li>
+  <li><a href="#learning-is-mostly-offline" id="toc-learning-is-mostly-offline" class="nav-link" data-scroll-target="#learning-is-mostly-offline">Learning is mostly offline</a></li>
+  <li><a href="#one-task-at-a-time" id="toc-one-task-at-a-time" class="nav-link" data-scroll-target="#one-task-at-a-time">One task at a time</a></li>
+  <li><a href="#explainable-interpretable-ai" id="toc-explainable-interpretable-ai" class="nav-link" data-scroll-target="#explainable-interpretable-ai">Explainable / interpretable AI</a></li>
+  </ul></li>
+  <li><a href="#what-deep-learning-might-never-be-able-to-do" id="toc-what-deep-learning-might-never-be-able-to-do" class="nav-link" data-scroll-target="#what-deep-learning-might-never-be-able-to-do">What deep learning might never be able to do</a>
+  <ul class="collapse">
+  <li><a href="#no-real-generalization" id="toc-no-real-generalization" class="nav-link" data-scroll-target="#no-real-generalization">No real generalization</a></li>
+  <li><a href="#lack-of-abstraction" id="toc-lack-of-abstraction" class="nav-link" data-scroll-target="#lack-of-abstraction">Lack of abstraction</a></li>
+  <li><a href="#lack-of-common-sense" id="toc-lack-of-common-sense" class="nav-link" data-scroll-target="#lack-of-common-sense">Lack of common sense</a></li>
+  <li><a href="#game-fallacy" id="toc-game-fallacy" class="nav-link" data-scroll-target="#game-fallacy">Game fallacy</a></li>
+  <li><a href="#embodiment" id="toc-embodiment" class="nav-link" data-scroll-target="#embodiment">Embodiment</a></li>
+  <li><a href="#conclusion-on-the-limits-of-deep-learning" id="toc-conclusion-on-the-limits-of-deep-learning" class="nav-link" data-scroll-target="#conclusion-on-the-limits-of-deep-learning">Conclusion on the limits of deep learning</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Limits of deep learning</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/8.1-Limits.html" target="_blank">html</a> <a href="../slides/pdf/8.1-Limits.pdf" target="_blank">pdf</a></p>
+<section id="the-ai-hype-and-general-artificial-intelligence" class="level2">
+<h2 class="anchored" data-anchor-id="the-ai-hype-and-general-artificial-intelligence">The AI hype and general artificial intelligence</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/SG8E98kzoTs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<blockquote class="blockquote">
+<p><em>“Intuition, insight, and learning are no longer exclusive possessions of human beings: any large high-speed computer can be programed to exhibit them also.”</em></p>
+<p><strong>Herbert Simon</strong>, MIT, Nobel Prize, Turing award, <strong>1958</strong>.</p>
+</blockquote>
+<p>It is not the first time in history that the field of Artificial Intelligence pretends to be just a few years away from a true <strong>general artificial intelligence</strong>.</p>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/aygSMgK3BEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>Based on the progress allowed by deep learning, recent declarations are of the same essence:</p>
+<blockquote class="blockquote">
+<p><em>“If a typical person can do a mental task with less than one second of thought, we can probably automate it using AI either now or in the near future.”</em></p>
+<p><strong>Andrew Ng</strong>, Stanford University, Google Brain / Baidu, 2016.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>“The development of full artificial intelligence could spell the end of the human race… It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn’t compete, and would be superseded.”</em></p>
+<p><strong>Stephen Hawking</strong>, Cambridge University, 2014.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>“Artificial intelligence will reach human levels by around 2029. Follow that out further to, say, 2045, we will have multiplied the intelligence, the human biological machine intelligence of our civilization a billion-fold.”</em></p>
+<p><strong>Ray Kurzweil</strong>, Google, 2017.</p>
+</blockquote>
+<p>The reasoning is that if technological progress continues at its current rate, it will increase <strong>exponentially</strong>. Artificial Intelligence will soon reach the human intelligence level: this is the <strong>singularity</strong>. Past that point, <strong>super artificial intelligence</strong> will be infinitely more intelligent than humans. <strong>Skynet</strong> syndrome: Will machines still need us after the singularity? Kurzweil and colleagues argue for <strong>transhumanity</strong>, i.e.&nbsp;the augmentation of human intelligence by super AI.</p>
+<p>The singularity hypothesis relies on an exponential increase of computational power. <strong>Moore’s law</strong> (the number of transistors in a dense integrated circuit doubles about every two years) is the only known physical process following an exponential curve, and it is coming to an end.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/mooreslaw.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Moore’s law. Source: <a href="https://www.alleywatch.com/2017/03/preparing-end-moores-law/" class="uri">https://www.alleywatch.com/2017/03/preparing-end-moores-law/</a></figcaption><p></p>
+</figure>
+</div>
+<p>But is scientific knowledge exponentially increasing?</p>
+<blockquote class="blockquote">
+<p><em>“Max Planck said, ‘Science progresses one funeral at a time.’ The future depends on some graduate student who is deeply suspicious of everything I have said”</em></p>
+<p><strong>Geoffrey Hinton</strong>, Univ. Toronto, 2017.</p>
+</blockquote>
+<p>Is the current deep learning approach taking all the light, at the expense of more promising approaches? Science progresses with <strong>breakthroughs</strong>, which are by definition unpredictable. <strong>Serendipity</strong> (luck + curiosity) is at the heart of scientific discoveries (gravity, microwaves, etc).</p>
+</section>
+<section id="current-limitations-of-deep-learning" class="level2">
+<h2 class="anchored" data-anchor-id="current-limitations-of-deep-learning">Current limitations of deep learning</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/yHnp8JBWbIE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="data-is-never-infinite" class="level3">
+<h3 class="anchored" data-anchor-id="data-is-never-infinite">Data is never infinite</h3>
+<p>Deep networks are very powerful and complex models, which tend to <strong>overfit</strong> (bad interpolation). They learn their parameters from the training data only:</p>
+<p><img src="../slides/img/overfitting1.png" class="img-fluid" style="width:70.0%" data-fig-align="center" alt="Depending on the number of available data, neural networks can generalize well or not."> <img src="../slides/img/overfitting2.png" class="img-fluid" style="width:70.0%" data-fig-align="center" alt="Depending on the number of available data, neural networks can generalize well or not."></p>
+<p>Datasets for deep learning are typically huge:</p>
+<ul>
+<li>ImageNet (14 million images)</li>
+<li>OpenImages (9 million images)</li>
+<li>Machine Translation of Various Languages (30 million sentences)</li>
+<li>Librispeech (1000 hours of speech)</li>
+<li>…</li>
+</ul>
+<p>The deeper your network, the more powerful, but the more data it needs to be useful. Solutions: data augmentation, transfer learning, unsupervised pre-training…</p>
+<p>Deep Reinforcement Learning has the same <strong>sample complexity</strong> problem: it needs many trial-and-errors to find a correct behavior. DQN and its variants need 200 million frames to learn to play Atari games: 38 days of uninterrupted human playing… On December 18th 2018, Google Deepmind defeated the human team “Mana” on Starcraft II, a much more complex game than Go for computers.</p>
+<blockquote class="blockquote">
+<p><em>“The AlphaStar league was run for 14 days, using 16 TPUs for each agent. During training, each agent experienced up to 200 years of real-time StarCraft play.”</em></p>
+<p>Source: <a href="https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/" class="uri">https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/</a></p>
+</blockquote>
+</section>
+<section id="computational-power-and-energy" class="level3">
+<h3 class="anchored" data-anchor-id="computational-power-and-energy">Computational power and energy</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/power.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">The computational power needed by deep architectures has increased exponentially in the last decade. Source : <a href="https://openai.com/blog/ai-and-compute/" class="uri">https://openai.com/blog/ai-and-compute/</a></figcaption><p></p>
+</figure>
+</div>
+<p>The computational power needed by deep networks increases exponentially: more layers, more parameters, more data, more everything. Training modern deep networks is now out of reach of most universities / companies. GPT-3 (OpenAI) was trained on 500B words (Wikipedia, Common Crawl) and has 175B parameters. Training it on a single V100 would take 355 years and cost 4.6 M$ in the cloud.</p>
+<p><strong>Inference times</strong> (making a prediction after training) become prohibitive: it is hard to use deep networks on low-budget hardware such as smartphones or embedded hardware (FPGA, DSP), computations must be deported to the cloud. Can’t we make the networks smaller after training?</p>
+<section id="quantization" class="level4">
+<h4 class="anchored" data-anchor-id="quantization">Quantization</h4>
+<p>NN require single or double-precision floating numbers (32 or 64 bits) to represent weights during learning, as small learning rates are used (e.g.&nbsp;<span class="math inline">\(10^{-5}\)</span>) to add very small quantities to them. After learning, do we need such a high precision? 2.378898437534897932 <span class="math inline">\(\approx\)</span> 2.4</p>
+<p><strong>Quantization</strong> consists of transforming the weights into 8-bits integers or even 1 or 2 bits (binary networks) without losing (too much accuracy). Frameworks such as Tensorflow Lite, TensorRT or PyTorch allow to automatically apply quantization on pretrained networks and embed, or even to use Quantization-aware training (QAT). See <a href="https://arxiv.org/pdf/2004.09602.pdf" class="uri">https://arxiv.org/pdf/2004.09602.pdf</a> for a review.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/quantization.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Principle of quantization. Source: <a href="https://medium.com/@kaustavtamuly/compressing-and-accelerating-high-dimensional-neural-networks-6b501983c0c8" class="uri">https://medium.com/@kaustavtamuly/compressing-and-accelerating-high-dimensional-neural-networks-6b501983c0c8</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="pruning" class="level4">
+<h4 class="anchored" data-anchor-id="pruning">Pruning</h4>
+<p>Another technique to reduce inference times by making the networks smaller is <strong>pruning</strong>: removing weights, filters, neurons or even layers that are not necessary after learning.</p>
+<p>NN need a lot of weights/neurons to find the solution (training), but not obligatorily to implement it. Several metrics or techniques can be used to decide whether or not to keep parameters:</p>
+<ul>
+<li>thresholds</li>
+<li>redundancy</li>
+<li>contribution to loss</li>
+</ul>
+<p>Some methods iteratively re-train the network after pruning, leading to reductions up to 90%. See <a href="https://link.springer.com/article/10.1007/s10462-020-09816-7" class="uri">https://link.springer.com/article/10.1007/s10462-020-09816-7</a> for a review.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/pruning.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Pruning. Source: <a href="https://towardsdatascience.com/pruning-deep-neural-network-56cae1ec5505" class="uri">https://towardsdatascience.com/pruning-deep-neural-network-56cae1ec5505</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="model-distillation" class="level4">
+<h4 class="anchored" data-anchor-id="model-distillation">Model distillation</h4>
+<p>In model distillation <span class="citation" data-cites="Hinton2015">(<a href="../references.html#ref-Hinton2015" role="doc-biblioref">Hinton et al., 2015</a>)</span>, the deep <strong>teacher</strong> learns to perform classification on the <strong>hard</strong> one-hot encoded labels. Its knowledge can be transferred (<strong>distilled</strong>) to a shallower network. The shallow <strong>student</strong> learns to perform <strong>regression</strong> on the logits <span class="math inline">\(\mathbf{z}\)</span> of the softmax output of the teacher, which is easier and leads to the same accuracy!</p>
+<p><span class="math display">\[
+    y_j = P(\text{class = j} | \mathbf{x}) = \mathcal{S}(z_j) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
+\]</span></p>
+<p>Logits carry information about the similarity between classes: cats are closer to dogs than to cars. See <span class="citation" data-cites="Gou2020">(<a href="../references.html#ref-Gou2020" role="doc-biblioref">Gou et al., 2020</a>)</span> for a review.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/distillation.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Model distillation <span class="citation" data-cites="Hinton2015">(<a href="../references.html#ref-Hinton2015" role="doc-biblioref">Hinton et al., 2015</a>)</span>. Source: <span class="citation" data-cites="Gou2020">(<a href="../references.html#ref-Gou2020" role="doc-biblioref">Gou et al., 2020</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="data-is-biased" class="level3">
+<h3 class="anchored" data-anchor-id="data-is-biased">Data is biased</h3>
+<p>Deep networks only learn from data, so if the data is wrong or <strong>biased</strong>, the predictions will reproduce it.</p>
+<ul>
+<li><p><strong>Scenario 1:</strong> you use AI to sort CVs based on how well your previous employees performed.</p>
+<ul>
+<li>If you only hired white middle-aged men in the past, the AI will discard all the others. (Amazon)</li>
+</ul></li>
+<li><p><strong>Scenario 2:</strong> you use AI to predict whether an individual is likely to commit a crime based on population statistics.</p>
+<ul>
+<li>Black people are 37% of the incarcerated population in the US, but only 12% of the population. Black people will be overly tagged as potential criminals. (DoJ)</li>
+</ul></li>
+<li><p><strong>Scenario 3:</strong> You train your speech recognition system on male American voices.</p>
+<ul>
+<li>You will not recognize female voices or foreign accents well (everybody).</li>
+</ul></li>
+<li><p><strong>Scenario 4:</strong> You create an AI chatbot on twitter, “Tay.ai”, learning from conversations with the twitter crowd.</p>
+<ul>
+<li>The chatbot became in hours a horrible sexist, racist, homophobic monster (Microsoft).</li>
+</ul></li>
+</ul>
+<p>AI bias is currently taken very seriously by the major players. Sources: <a href="https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai" class="uri">https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai</a>, <a href="https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/" class="uri">https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/</a></p>
+</section>
+<section id="adversarial-attacks" class="level3">
+<h3 class="anchored" data-anchor-id="adversarial-attacks">Adversarial attacks</h3>
+<p>One major problem of deep networks is that they are easy to fool.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/adversarial1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Adversarial attacks. Source: <a href="https://blog.openai.com/adversarial-example-research" class="uri">https://blog.openai.com/adversarial-example-research</a></figcaption><p></p>
+</figure>
+</div>
+<p>Instead of searching for the weights which produce the right output for a given image (training), you search for the image that produces a different output for a given set of trained weights (<strong>adversarial attacks</strong>, <span class="citation" data-cites="Goodfellow2015">(<a href="../references.html#ref-Goodfellow2015" role="doc-biblioref">Goodfellow et al., 2015</a>)</span>). It turns out that a minimal change on the input image is enough to completely change the output of a trained network. Using neural networks everywhere (self-driving cars, biometric recognition) poses serious security issues which are unsolved as of now. Many different attacks and defenses are currently investigated <a href="https://arxiv.org/pdf/1712.07107.pdf" class="uri">https://arxiv.org/pdf/1712.07107.pdf</a>.</p>
+<p>Let’s suppose we have a network trained to recognize cats from dogs using the loss function <span class="math inline">\(\mathcal{L}(\theta)\)</span>. As an attacker, you want to find a cat-like image <span class="math inline">\(\mathbf{x}'\)</span> that makes the network answer <code>dog</code>. You define an adversarial loss making the network want to answer <code>dog</code> for a cat image:</p>
+<p><span class="math display">\[
+    \mathcal{L}_\text{adversarial}(\mathbf{x}) = \mathbb{E}_{\mathbf{x} \in  \text{cat}} ||\text{dog} - \mathbf{y}(\mathbf{x})||^2
+\]</span></p>
+<p>Starting from a cat image <span class="math inline">\(\mathbf{x}\)</span>, you can apply gradient descent <strong>on the image space</strong> to minimize the adversarial loss:</p>
+<p><span class="math display">\[
+    \Delta \mathbf{x} = - \eta \, \frac{\partial \mathcal{L}_\text{adversarial}(\mathbf{x})}{\partial \mathbf{x}}
+\]</span></p>
+<p>One should add a constraint on <span class="math inline">\(\Delta \mathbf{x}\)</span> to keep it small (Lagrange optimization). You only need access to the output <span class="math inline">\(\mathbf{y}\)</span> to attack the network, not its weights (<strong>blackbox attack</strong>)</p>
+<p>Adversarial attacks work even when printed on paper.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/adversarial2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Adversarial attacks on printed images. Source: <a href="https://blog.openai.com/adversarial-example-research" class="uri">https://blog.openai.com/adversarial-example-research</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/adversarial-dog.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Adversarial attacks on object detection. Source: <a href="https://blog.openai.com/adversarial-example-research" class="uri">https://blog.openai.com/adversarial-example-research</a></figcaption><p></p>
+</figure>
+</div>
+<p>They also work in real life: a couple of stickers are enough to have this stop sign recognized as a speed limit sign by an autonomous car…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/adversarial3.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Real-world adversarial attacks. Source: <a href="https://arxiv.org/abs/1707.08945" class="uri">https://arxiv.org/abs/1707.08945</a></figcaption><p></p>
+</figure>
+</div>
+<p>Face identification is a major issue:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/adversarial-face.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Facial adversarial attacks. When adding adversarial glasses to Reese Witherspoon, the face detector recognizes her as Russel Crowe. Source: <a href="https://arxiv.org/abs/1707.08945" class="uri">https://arxiv.org/abs/1707.08945</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="learning-is-mostly-offline" class="level3">
+<h3 class="anchored" data-anchor-id="learning-is-mostly-offline">Learning is mostly offline</h3>
+<p>NN are prone to <strong>catastrophic forgetting</strong>: if you learn A then B, you forget A.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/forgetting.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Catastrophic forgetting.</figcaption><p></p>
+</figure>
+</div>
+<p>The only solution is to mix A and B during training (<strong>stochastic</strong> gradient descent). <strong>Online learning</strong> or <strong>lifelong learning</strong> is very difficult: you can’t adapt a NN once it has learned. Currently a hot topic of research, but not working yet.</p>
+</section>
+<section id="one-task-at-a-time" class="level3">
+<h3 class="anchored" data-anchor-id="one-task-at-a-time">One task at a time</h3>
+<p>The fact that computers can be better than humans on single tasks should not be worrying: The program written by Jim Slagle for his PhD thesis with Marvin Minsky was already better than MIT students at calculus in <strong>1961</strong>.</p>
+<p>Deep networks are still highly specialized, they do either:</p>
+<ul>
+<li>Computer Vision</li>
+<li>Speech processing</li>
+<li>Natural Language Processing</li>
+<li>Motor Control</li>
+</ul>
+<p>but never two at the same time.</p>
+<p>Some may be able to play different games at the same time (DQN, AlphaZero) but it stays in the same domain. The ability to perform different tasks at the same time is a criteria for <strong>general intelligence</strong>.</p>
+</section>
+<section id="explainable-interpretable-ai" class="level3">
+<h3 class="anchored" data-anchor-id="explainable-interpretable-ai">Explainable / interpretable AI</h3>
+<p>Deep networks do not learns concepts such as cats, dogs, paddles or walls: they merely learn correlations between images and labels. Comparative (animal) psychology sometimes call this phenomenon <strong>overattribution</strong>. We want AI to be intelligent, so we attribute it intelligent features. The only way to verify this is to have deep networks <strong>verbalize</strong> their decisions (not there yet).</p>
+<p>Research on <strong>interpretability</strong> (XAI, explainable AI) may allow to better understand and trust how deep networks take decisions. Neural networks are <strong>black box models</strong>: they are able to learn many things, but one does not know how. Can we really trust their decisions? This is particularly important for safety-critical applications (self-driving cars, nuclear plants, etc).</p>
+<p><strong>Layer-wise relevance propagation</strong> <span class="citation" data-cites="Binder2016">(<a href="../references.html#ref-Binder2016" role="doc-biblioref">Binder et al., 2016</a>)</span> allows to visualize which part of the input is most resposnible for the prediction. It is a form of backpropagation, but from the prediction <span class="math inline">\(\mathbf{y}\)</span> to the input <span class="math inline">\(\mathbf{x}\)</span>, instead of from the loss function <span class="math inline">\(\mathcal{L}(\theta)\)</span> to the parameters <span class="math inline">\(\theta\)</span>. See <a href="http://www.heatmapping.org/" class="uri">http://www.heatmapping.org/</a> for explanations and code.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/LRP.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Layer-wise relevance propagation. Source: <span class="citation" data-cites="Binder2016">(<a href="../references.html#ref-Binder2016" role="doc-biblioref">Binder et al., 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>The results are sometimes surprising <span class="citation" data-cites="Lapuschkin2019">(<a href="../references.html#ref-Lapuschkin2019" role="doc-biblioref">Lapuschkin et al., 2019</a>)</span>. Horse images in Pascal VOC all have a tag in the bottom left. The CNN has learned to detect that tag, not the horse…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cleverhans.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Clever Hans effect: the answer is correct, but for bad reasons… Source: <span class="citation" data-cites="Lapuschkin2019">(<a href="../references.html#ref-Lapuschkin2019" role="doc-biblioref">Lapuschkin et al., 2019</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="what-deep-learning-might-never-be-able-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-deep-learning-might-never-be-able-to-do">What deep learning might never be able to do</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/mkaNS6EFBe0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="no-real-generalization" class="level3">
+<h3 class="anchored" data-anchor-id="no-real-generalization">No real generalization</h3>
+<p>Deep networks can be forced to interpolate with <strong>enough data</strong> (generalization), but cannot <strong>extrapolate</strong>. For example, CNNs do not generalize to different viewpoints, unless you add them to the training data:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/viewpoint.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">NN cann only generalize to rotated images if they have seen examples during training. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lack-of-abstraction" class="level3">
+<h3 class="anchored" data-anchor-id="lack-of-abstraction">Lack of abstraction</h3>
+<blockquote class="blockquote">
+<p>A <strong>schmister</strong> is a sister over the age of 10 but under the age of 21.</p>
+<p>Do you have a schmister?</p>
+</blockquote>
+<p>Deep learning currently lacks a mechanism for learning abstractions through explicit, verbal definition. They would need to experience thousands of sentences with schmister before they can use it.</p>
+<blockquote class="blockquote">
+<p>“Indeed even 7-month old infants can do so, acquiring learned abstract language-like rules from a small number of unlabeled examples, in just two minutes (Marcus, Vijayan, Bandi Rao, &amp; Vishton, 1999).”</p>
+<p>Marcus, G. (2018). Deep Learning: A Critical Appraisal. arXiv:1801.00631.</p>
+</blockquote>
+</section>
+<section id="lack-of-common-sense" class="level3">
+<h3 class="anchored" data-anchor-id="lack-of-common-sense">Lack of common sense</h3>
+<blockquote class="blockquote">
+<p>I stuck a pin in a carrot; when I pulled the pin out, it had a hole.</p>
+<p>What has a hole, the carrot or the pin?</p>
+</blockquote>
+<p>DL models do not have a <strong>model of physics</strong>: if the task (and the data) do not contain physics, it won’t learn it. DL finds <strong>correlations</strong> between the inputs and the outputs, but not the <strong>causation</strong>. Using gigantic datasets as in GPT-3 might give the illusion of reasoning, but it sometimes fails on surprisingly simple tasks. DL has no <strong>theory of mind</strong>: when playing against humans (Go), it does not bother inferring the opponent’s mental state, it just plays his game.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/causation.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Correlations are everywhere, but not causation.</figcaption><p></p>
+</figure>
+</div>
+<p>No DL model to date has been able to show <strong>causal reasoning</strong> (or at least in a generic way). Other AI approaches are better at causal reasoning (hierarchical Bayesian computing, probabilistic graphical models), but they do not mix well with deep learning yet.</p>
+</section>
+<section id="game-fallacy" class="level3">
+<h3 class="anchored" data-anchor-id="game-fallacy">Game fallacy</h3>
+<p>Deep learning has only been successful on relatively “easy” tasks until now. Games like Chess or Go are easy for AI, as the rules are simple, fixed and deterministic. Things get much more complicated when you go in the real-world: think of where the Robocup is.</p>
+<p>Moravec’s paradox (<a href="https://blog.piekniewski.info/2016/11/15/ai-and-the-ludic-fallacy/" class="uri">https://blog.piekniewski.info/2016/11/15/ai-and-the-ludic-fallacy/</a>):</p>
+<blockquote class="blockquote">
+<p>It is comparatively easy to make computers exhibit adult level performance on intelligence tests or playing checkers, and difficult or impossible to give them the skills of a one-year-old when it comes to perception and mobility.</p>
+</blockquote>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/1h5147KLikU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/jxvZ0AdM0SY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</section>
+<section id="embodiment" class="level3">
+<h3 class="anchored" data-anchor-id="embodiment">Embodiment</h3>
+<p>Intelligence and cognition require a <strong>body</strong> to interact with the world. The brain is not an isolated number cruncher. The body <strong>valuates</strong> the world: it provides needs, goals, emotions. It can even be a co-processor of the brain: gut feelings. Emotions are totally absent from the current AI approach. Goals are set externally: so-called AIs do not form their own goals (desirable?). Deep Reinforcement Learning is a first small step in that direction.</p>
+</section>
+<section id="conclusion-on-the-limits-of-deep-learning" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-on-the-limits-of-deep-learning">Conclusion on the limits of deep learning</h3>
+<p>Deep learning methods are very powerful and have not reached yet their full potential for technological applications. However, there are fundamental reasons why deep learning methods may not reach <strong>general intelligence</strong>. End-to-end learning with <strong>backpropagation</strong> works very well, but what if it was the problem?</p>
+<blockquote class="blockquote">
+<p>My view is throw it all away and start again.</p>
+<p><em>Geoffrey Hinton on backpropagation.</em></p>
+</blockquote>
+<p>The only intelligent system we know is the <strong>brain</strong>. By taking inspiration from how the brain works, instead of <strike>stupidly</strike> minimizing loss functions, we <strong>may</strong> be able to reach human intelligence.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Binder2016" class="csl-entry" role="doc-biblioentry">
+Binder, A., Montavon, G., Bach, S., Müller, K.-R., and Samek, W. (2016). Layer-wise <span>Relevance Propagation</span> for <span>Neural Networks</span> with <span>Local Renormalization Layers</span>. <em>arXiv:1604.00825 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1604.00825">https://arxiv.org/abs/1604.00825</a>.
+</div>
+<div id="ref-Goodfellow2015" class="csl-entry" role="doc-biblioentry">
+Goodfellow, I. J., Shlens, J., and Szegedy, C. (2015). Explaining and <span>Harnessing Adversarial Examples</span>. <em>arXiv:1412.6572 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/1412.6572">https://arxiv.org/abs/1412.6572</a>.
+</div>
+<div id="ref-Gou2020" class="csl-entry" role="doc-biblioentry">
+Gou, J., Yu, B., Maybank, S. J., and Tao, D. (2020). Knowledge <span>Distillation</span>: <span>A Survey</span>. <em>arXiv:2006.05525 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/2006.05525">https://arxiv.org/abs/2006.05525</a>.
+</div>
+<div id="ref-Hinton2015" class="csl-entry" role="doc-biblioentry">
+Hinton, G., Vinyals, O., and Dean, J. (2015). Distilling the <span>Knowledge</span> in a <span>Neural Network</span>. <em>arXiv:1503.02531 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/1503.02531">https://arxiv.org/abs/1503.02531</a>.
+</div>
+<div id="ref-Lapuschkin2019" class="csl-entry" role="doc-biblioentry">
+Lapuschkin, S., Wäldchen, S., Binder, A., Montavon, G., Samek, W., and Müller, K.-R. (2019). Unmasking <span>Clever Hans</span> predictors and assessing what machines really learn. <em>Nature Communications</em> 10, 1096. doi:<a href="https://doi.org/10.1038/s41467-019-08987-4">10.1038/s41467-019-08987-4</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/7.2-ContrastiveLearning.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Contrastive Learning</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notes/8.2-Beyond.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Beyond Deep Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

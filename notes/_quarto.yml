@@ -24,17 +24,49 @@ book:
       - notes/2.1-Optimization.qmd
       - notes/2.2-LinearRegression.qmd
       - notes/2.3-LinearClassification.qmd
-      #- notes/2.4-Multiclassification.qmd
-      #- notes/2.5-LearningTheory.qmd
+      - notes/2.4-LearningTheory.qmd
     - part: "Neural networks"
+      chapters:
+      - notes/3.1-NeuralNetworks.qmd
+      - notes/3.2-DNN.qmd
     - part: "Convolutional neural networks"
+      chapters:
+      - notes/4.1-CNN.qmd
+      - notes/4.2-ObjectDetection.qmd
+      - notes/4.3-SemanticSegmentation.qmd
     - part: "Unsupervised learning and generative modeling"
+      chapters:
+      - notes/5.1-Autoencoders.qmd
+      - notes/5.2-RBM.qmd
+      - notes/5.3-GAN.qmd
     - part: "Recurrent neural networks"
+      chapters:
+      - notes/6.1-RNN.qmd
+      - notes/6.2-Attention.qmd
     - part: "Self-supervised learning"
+      chapters:
+      - notes/7.1-Transformers.qmd
+      - notes/7.2-ContrastiveLearning.qmd
     - part: "Outlook"
+      chapters:
+      - notes/8.1-Limits.qmd
+      - notes/8.2-Beyond.qmd
     - part: "Exercises"
       chapters:
+      - exercises/Content.qmd
       - exercises/1-Python-solution.ipynb
+      - exercises/2-Numpy-solution.ipynb
+      - exercises/3-LinearRegression-solution.ipynb
+      - exercises/4-MLR-solution.ipynb
+      - exercises/5-Crossvalidation-solution.ipynb
+      - exercises/6-LinearClassification-solution.ipynb
+      - exercises/7-SoftmaxClassifier-solution.ipynb
+      - exercises/8-MLP-solution.ipynb
+      - exercises/9-MNIST-solution.ipynb
+      - exercises/10-CNN-solution.ipynb
+      - exercises/11-TransferLearning-solution.ipynb
+      - exercises/12-VAE-solution.ipynb
+      - exercises/13-RNN-solution.ipynb
     - references.qmd
 
 
@@ -45,12 +77,12 @@ format:
   html:
     theme: cosmo
     page-layout: full
-    number-depth: 1
+    number-depth: 2
     number-sections: false
     toc: true
     smooth-scroll: true
-  pdf:
-    documentclass: scrreprt
 
-
+filters:
+  - center_images.lua
+  - quarto
 

@@ -1,10 +1,10 @@
 # Autoencoders
 
-Slides: [pdf](https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/lectures/pdf/3.6-Autoencoders.pdf)
+Slides: [html](../slides/5.1-Autoencoders.html){target="_blank"} [pdf](../slides/pdf/5.1-Autoencoders.pdf){target="_blank"}
 
 ## Autoencoders
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/bW2jYMdaPZk' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  bW2jYMdaPZk >}}
 
 
 **Supervised learning** algorithms need a lot of labeled data (with $\mathbf{t}$) in order to learn classification/regression tasks, but labeled data is very expensive to obtain (experts, crowd sourcing). A "bad" algorithm trained with a lot of data will perform better than a "good" algorithm trained with few data. 
@@ -15,12 +15,7 @@ Unlabeled data is only useful for **unsupervised learning**, but very cheap to o
 
 An **autoencoder** is a NN trying to learn the identity function $f(\mathbf{x}) = \mathbf{x}$ using a different number of neurons in the hidden layer than in the input layer.
 
-```{figure} ../img/autoencoder3.png
----
-width: 35%
----
-Architecture of a shallow autoencoder.
-```
+![Architecture of a shallow autoencoder.](../slides/img/autoencoder3.png){width=35%}
 
 An autoencoder minimizes the **reconstruction loss** between the input $\mathbf{x}$ and the reconstruction $\mathbf{x'}$, for example the mse between the two vectors:
 
@@ -32,14 +27,9 @@ An autoencoder uses **unsupervised learning**: the output data used for learning
 
 By forcing the projection of the input data on a feature space with less dimensions (**latent space**), the network has to extract relevant **features** from the training data: Dimensionality reduction, compression.
 
-If the latent space has more dimensions than the input space, we need to **constrain** the autoencoder so that it does not simply learn the identity mapping. Below is an example of a sparse autoencoder trained on natural images {cite}`Olshausen1997`.
+If the latent space has more dimensions than the input space, we need to **constrain** the autoencoder so that it does not simply learn the identity mapping. Below is an example of a sparse autoencoder trained on natural images [@Olshausen1997].
 
-```{figure} ../img/result-autoencoder.png
----
-width: 80%
----
-Sparse autoencoder trained on natural images {cite}`Olshausen1997`.
-```
+![Sparse autoencoder trained on natural images [@Olshausen1997].](../slides/img/result-autoencoder.png){width=80%}
 
 Inputs are taken from random natural images and cut in 10*10 patches. 100 features are extracted in the hidden layer. The autoencoder is said **sparse** because it uses **L1-regularization** to make sure that only a few neurons are active in the hidden layer for a particular image. The learned features look like what the first layer of a CNN would learn, except that there was no labels at all! Can we take advantage of this to pre-train a supervised network?
 
@@ -49,47 +39,27 @@ In supervised learning, deep neural networks suffer from many problems: local mi
 
 Let's try to learn a **stacked autoencoder** by learning *progressively* each feature vector.
 
-```{figure} ../img/stacked-autoencoder.png
----
-width: 80%
----
-Architecture of the stacked autoencoder. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.
-```
+![Architecture of the stacked autoencoder. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.](../slides/img/stacked-autoencoder.png){width=80%}
 
 
 Using unlabeled data, train an autoencoder to extract first-order features, freeze the weights and remove the decoder.
 
-```{figure} ../img/stacked1.png
----
-width: 40%
----
-The first layer is trained using an autoencoder on the inputs. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.
-```
+![The first layer is trained using an autoencoder on the inputs. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.](../slides/img/stacked1.png){width=40%}
 
 Train another autoencoder on the same unlabeled data, but using the previous latent space as input/output.
 
-```{figure} ../img/stacked2.png
----
-width: 40%
----
-The second layer is trained using an autoencoder on the first layer. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.
-```
+![The second layer is trained using an autoencoder on the first layer. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.](../slides/img/stacked2.png){width=40%}
 
 Repeat the operation as often as needed, and finish with a simple classifier using the labeled data.
 
-```{figure} ../img/stacked3.png
----
-width: 40%
----
-The output layer is trained using supervised learning on the last hidden layer. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.
-```
+![The output layer is trained using supervised learning on the last hidden layer. Source: <http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders>.](../slides/img/stacked3.png){width=40%}
 
 This defines a **stacked autoencoder**, trained using **Greedy layer-wise** learning. Each layer progressively learns more and more complex features of the input data (edges - contour - forms - objects): **feature extraction**. This method allows to train a deep network on few labeled data: the network will not overfit, because the weights are already in the right region. It solves **gradient vanishing**, as the weights are already close to the optimal solution and will efficiently transmit the gradient backwards. One can keep the pre-trained weights fixed for the classification task or **fine-tune** all the weights as in a regular DNN.
 
 
 ## Deep autoencoders
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/daBrY1dmvn0' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  daBrY1dmvn0 >}}
 
 ### Semi-supervised learning
 
@@ -107,12 +77,7 @@ $$
     \mathbf{x'} = f_\theta(\mathbf{z})
 $$
 
-```{figure} ../img/autoencoder-architecture.png
----
-width: 100%
----
-Deep autoencoder. Source: <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>.
-```
+![Deep autoencoder. Source: <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>.](../slides/img/autoencoder-architecture.png){width=100%}
 
 The **latent space** is a **bottleneck** layer of lower dimensionality, learning a compressed representation of the input which has to contain enough information in order to **reconstruct** the input. Both the encoder with weights $\phi$ and the decoder with weights $\theta$ try to minimize the **reconstruction loss**:
 
@@ -124,87 +89,52 @@ Learning is **unsupervised**: we only need input data.
 
 The encoder and decoder can be anything: fully-connected, convolutional, recurrent, etc. When using convolutional layers, the decoder has to **upsample** the latent space: max-unpooling or transposed convolutions can be used as in segmentation networks.
 
-```{figure} ../img/convolutionalAE.png
----
-width: 100%
----
-Deep convolutional autoencoder. Source: {cite}`Guo2017`.
-```
+![Deep convolutional autoencoder. Source: [@Guo2017].](../slides/img/convolutionalAE.png){width=100%}
 
 In **semi-supervised** or **self-taught** learning, we can first train an autoencoder on huge amounts of unlabeled data, and then use the latent representations as an input to a shallow classifier on a small supervised dataset.
 
-```{figure} ../img/semisupervised-autoencoder.png
----
-width: 70%
----
-The encoder of an unsupervised autoencoder can be used as a feature extractor for a classifier. Source: <https://doi.org/10.1117/12.2303912>.
-```
+![The encoder of an unsupervised autoencoder can be used as a feature extractor for a classifier. Source: <https://doi.org/10.1117/12.2303912>.](../slides/img/semisupervised-autoencoder.png){width=70%}
 
 A linear classifier might even be enough if the latent space is well trained. The weights of the encoder can be fine-tuned with backpropagation, or remain fixed.
 
 
 ### Denoising autoencoders
 
-A **denoising autoencoder** (DAE, {cite}`Vincent2010`) is trained with noisy inputs (some pixels are dropped) but perfect desired outputs. It learns to suppress that noise.
+A **denoising autoencoder** (DAE, [@Vincent2010]) is trained with noisy inputs (some pixels are dropped) but perfect desired outputs. It learns to suppress that noise.
 
-```{figure} ../img/denoisingautoencoder.png
----
-width: 100%
----
-Denoising autoencoder. Source:  <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>.
-```
+![Denoising autoencoder. Source:  <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>.](../slides/img/denoisingautoencoder.png){width=100%}
 
-```{figure} ../img/denoisingautoencoder-result.png
----
-width: 70%
----
-Denoising autoencoder. Source:  <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>.
-```
+![Denoising autoencoder. Source:  <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>.](../slides/img/denoisingautoencoder-result.png){width=70%}
 
 ### Deep clustering
 
 **Clustering** algorithms (k-means, Gaussian Mixture Models, spectral clustering, etc) can be applied in the latent space to group data points into clusters. If you are lucky, the clusters may even correspond to classes.
 
 
-```{figure} ../img/deepclustering.jpg
----
-width: 90%
----
-Clustering can be applied on the latent representations. Source: <doi:10.1007/978-3-030-32520-6_55>.
-```
+![Clustering can be applied on the latent representations. Source: <doi:10.1007/978-3-030-32520-6_55>.](../slides/img/deepclustering.jpg){width=90%}
 
 ## Variational autoencoders (VAE)
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/XhBI14qOzXg' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  XhBI14qOzXg >}}
 
 ### Motivation
 
 
 Autoencoders are **deterministic**: after learning, the same input $\mathbf{x}$ will generate the same latent code $\mathbf{z}$ and the same reconstruction $\mathbf{\tilde{x}}$. Sampling the latent space generally generates non-sense reconstructions, because an autoencoder only learns data samples, it does not learn the underlying **probability distribution**.
 
-```{figure} ../img/autoencoder-limits.png
----
-width: 100%
----
-Deterministic autoencoders do not regularize their latent space. Source: <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>.
-```
+![Deterministic autoencoders do not regularize their latent space. Source: <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>.](../slides/img/autoencoder-limits.png){width=100%}
 
 The main problem of supervised learning is to get enough annotated data. Being able to generate **new** images similar to the training examples would be extremely useful (data augmentation).
 
 In order for this to work, we need to **regularize** the latent space: Close points in the latent space should correspond to close images.  "Classical" L1 or L2 regularization does not ensure the regularity of the latent space.
 
 
-```{figure} ../img/vae-latentspace.png
----
-width: 100%
----
-Variational autoencoders do regularize their latent space. Source: <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>.
-```
+![Variational autoencoders do regularize their latent space. Source: <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>.](../slides/img/vae-latentspace.png){width=100%}
 
 ### Architecture
 
 
-The **variational autoencoder** (VAE) {cite}`Kingma2013` solves this problem by having the encoder represent the **probability distribution** $q_\phi(\mathbf{z}|\mathbf{x})$ instead of a point $\mathbf{z}$ in the latent space.
+The **variational autoencoder** (VAE) [@Kingma2013] solves this problem by having the encoder represent the **probability distribution** $q_\phi(\mathbf{z}|\mathbf{x})$ instead of a point $\mathbf{z}$ in the latent space.
 
 This probability distribution is then **sampled** to obtain a vector $\mathbf{z}$ that will be passed to the decoder $p_\theta(\mathbf{z})$. The strong hypothesis is that the latent space follows a **normal distribution** with mean $\mathbf{\mu_x}$ and variance $\mathbf{\sigma_x}^2$. 
 
@@ -217,12 +147,7 @@ The two vectors $\mathbf{\mu_x}$ and $\mathbf{\sigma_x}^2$ are the outputs of th
 
 ````{admonition} Sampling from a normal distribution
 
-```{figure} ../img/normaldistribution.svg
----
-width: 70%
----
-Sampling from a normal distribution.
-```
+![Sampling from a normal distribution.](../slides/img/normaldistribution.svg){width=70%}
 
 The normal distribution $\mathcal{N}(\mu, \sigma^2)$ is fully defined by its two parameters:
 
@@ -246,12 +171,7 @@ Architecture of the VAE:
 2. We sample one vector $\mathbf{z}$ from this distribution: $\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$.
 3. The decoder $p_\theta(\mathbf{z})$ reconstructs the input.
 
-```{figure} ../img/vae-structure.png
----
-width: 100%
----
-Architecture of a variational autoencoder. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>
-```
+![Architecture of a variational autoencoder. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-structure.png){width=100%}
 
 
 Open questions:
@@ -272,7 +192,7 @@ The first term is the usual **reconstruction loss** of an autoencoder which depe
 
 $$ \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ ||p_\theta(\mathbf{z}) - \mathbf{x}||^2 ]$$
 
-In the expectation, $\mathbf{x}$ is sampled from the dataset $\mathcal{D}$ while $\mathbf{z}$ is sampled from the encoder $q_\phi(\mathbf{z}|\mathbf{x})$. In {cite}`Kingma2013`, pixels values are normalized between 0 and 1, the decoder uses the logistic activation function for its output layer and the binary cross-entropy loss function is used:
+In the expectation, $\mathbf{x}$ is sampled from the dataset $\mathcal{D}$ while $\mathbf{z}$ is sampled from the encoder $q_\phi(\mathbf{z}|\mathbf{x})$. In [@Kingma2013], pixels values are normalized between 0 and 1, the decoder uses the logistic activation function for its output layer and the binary cross-entropy loss function is used:
 
 $$ \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]$$
 
@@ -293,14 +213,9 @@ $$
 
 By forcing the distributions to be close, we avoid "holes" in the latent space: we can move smoothly from one distribution to another without generating **non-sense** reconstructions.
 
-```{figure} ../img/vae-regularization.png
----
-width: 100%
----
-Regularizing the latent space by minimizing the KL with $\mathcal{N}(0,1)$ makes sure that we can smoothly travel in the latent space. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>
-```
+![Regularizing the latent space by minimizing the KL with $\mathcal{N}(0,1)$ makes sure that we can smoothly travel in the latent space. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-regularization.png){width=100%}
 
-````{note}
+`:::{.callout-note}
 To make $q_\phi(\mathbf{z}|\mathbf{x})$ close from $\mathcal{N}(\mathbf{0}, \mathbf{1})$, one could minimize instead the Euclidian distance in the **parameter space**:
 
 $$
@@ -309,8 +224,8 @@ $$
 
 However, this does not consider the **overlap** between the distributions. The two pairs of distributions below have the same distance between their means (0 and 1) and the same variance (1 and 10 respectively). The distributions on the left are very different from each other, but the distance in the parameter space is the same.
 
-![](../img/naturalgradient.png)
-````
+![](../slides/img/naturalgradient.png)
+:::`
 
 ```{admonition} Kullback-Leibler divergence
 
@@ -320,7 +235,7 @@ $$
     \text{KL}(X ||Y) = \mathbb{E}_{x \sim X}[- \log \frac{P(Y=x)}{P(X=x)}]
 $$
 
-![](../img/crossentropy.svg)
+![](../slides/img/crossentropy.svg)
 
 When the two distributions are equal almost anywhere, the KL divergence is 0. Otherwise it is positive. **Minimizing the KL divergence between two distributions makes them close in the statistical sense**. 
 ```
@@ -347,23 +262,13 @@ See <https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/> for
 
 Regularization tends to create a "gradient" over the information encoded in the latent space.  A point of the latent space sampled between the means of two encoded distributions should be decoded in an image in between the two training images.
 
-```{figure} ../img/vae-regularization2.png
----
-width: 80%
----
-A regularized latent space makes sure that reconstructions always make sense. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>
-```
+![A regularized latent space makes sure that reconstructions always make sense. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-regularization2.png){width=80%}
 
 ### Reparameterization trick
 
 The second problem is that backpropagation does not work through the sampling operation. It is easy to backpropagate the gradient of the loss function through the decoder until the sample $\mathbf{z}$. But how do you backpropagate to the outputs of the encoder: $\mathbf{\mu_x}$ and $\mathbf{\sigma_x}$?
 
-```{figure} ../img/vae-structure.png
----
-width: 100%
----
-Architecture of a variational autoencoder. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>
-```
+![Architecture of a variational autoencoder. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-structure.png){width=100%}
 
 Modifying slightly $\mathbf{\mu_x}$ or $\mathbf{\sigma_x}$ may not change at all the sample $\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$, so you cannot estimate any gradient.
 
@@ -377,21 +282,11 @@ The **reparameterization trick** consists in taking a sample $\xi$ out of $\math
 
 $$\mathbf{z} = \mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi \qquad \text{with} \qquad \xi \sim \mathcal{N}(0, 1)$$
 
-```{figure} ../img/vae-reparameterization.png
----
-width: 100%
----
-Architecture of a variational autoencoder with the reparameterization trick. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>
-```
+![Architecture of a variational autoencoder with the reparameterization trick. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-reparameterization.png){width=100%}
 
 The sampled value $\xi \sim \mathcal{N}(0, 1)$ becomes just another input to the neural network.
 
-```{figure} ../img/vae-reparameterization2.png
----
-width: 100%
----
-Architecture of a variational autoencoder with the reparameterization trick. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>
-```
+![Architecture of a variational autoencoder with the reparameterization trick. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-reparameterization2.png){width=100%}
 
 It allows to transform $\mathbf{\mu_x}$ and $\mathbf{\sigma_x}$ into a sample $\mathbf{z}$ of $\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$:
 
@@ -411,12 +306,7 @@ $$\begin{aligned}
     &= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
 \end{aligned}$$
 
-```{figure} ../img/vae-structure.svg
----
-width: 70%
----
-Principle of a VAE. Source:  <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>
-```
+![Principle of a VAE. Source:  <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>](../slides/img/vae-structure.svg){width=70%}
 
 
 The two main applications of VAEs in **unsupervised learning** are:
@@ -428,24 +318,14 @@ The two main applications of VAEs in **unsupervised learning** are:
 
 #### DeepFake
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/JbzVhzNaTdI' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  JbzVhzNaTdI >}}
 
 DeepFakes now became very easy, you can for example find DeepFace here: <https://github.com/iperov/DeepFaceLab>.
 
-```{figure} ../img/deepfakes_01.png
----
-width: 100%
----
-During training of a deepfake, **one** encoder and **two** decoders learns to reproduce the face of each person. Source:  <https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/>
-```
+![During training of a deepfake, **one** encoder and **two** decoders learns to reproduce the face of each person. Source:  <https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/>](../slides/img/deepfakes_01.png){width=100%}
 
 
-```{figure} ../img/deepfakes_02.png
----
-width: 100%
----
-When generating the deepfake, the decoder of person B is used on the latent representation of person A. Source:  <https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/>
-```
+![When generating the deepfake, the decoder of person B is used on the latent representation of person A. Source:  <https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/>](../slides/img/deepfakes_02.png){width=100%}
 
 
 #### $\beta$-VAE
@@ -460,92 +340,52 @@ $$\begin{aligned}
 
 Using $\beta > 1$ puts emphasis on learning statistically independent latent factors.
 
-The $\beta$-VAE {cite}`Higgins2016` allows to **disentangle** the latent variables, i.e. manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).
+The $\beta$-VAE [@Higgins2016] allows to **disentangle** the latent variables, i.e. manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).
 
 
-```{figure} ../img/betavae-results.png
----
-width: 100%
----
-$\beta$-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. {cite}`Higgins2016`.
-```
+![$\beta$-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. [@Higgins2016].](../slides/img/betavae-results.png){width=100%}
 
-```{note}
+:::{.callout-note}
 See <https://worldmodels.github.io/> for a live demo in the RL context.
-```
+:::
 
 
 #### VQ-VAE
 
-Deepmind researchers proposed VQ-VAE-2 {cite}`Razavi2019`, a hierarchical VAE using vector-quantized priors able to generate high-resolution images.
+Deepmind researchers proposed VQ-VAE-2 [@Razavi2019], a hierarchical VAE using vector-quantized priors able to generate high-resolution images.
 
-```{figure} ../img/vqvae.png
----
-width: 100%
----
-VQ-VAE-2 {cite}`Razavi2019`.
-```
+![VQ-VAE-2 [@Razavi2019].](../slides/img/vqvae.png){width=100%}
 
 
-```{figure} ../img/vqvae-results.png
----
-width: 100%
----
-Faces generated by VQ-VAE-2 {cite}`Razavi2019`.
-```
+![Faces generated by VQ-VAE-2 [@Razavi2019].](../slides/img/vqvae-results.png){width=100%}
 
 #### Conditional variational autoencoder (CVAE)
 
 What if we provide the labels to the encoder and the decoder during training?
 
-```{figure} ../img/cvae-structure.svg
----
-width: 100%
----
-Conditional VAE. Source: <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>
-```
+![Conditional VAE. Source: <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>](../slides/img/cvae-structure.svg){width=100%}
 
-When trained with labels, the **conditional variational autoencoder** (CVAE {cite}`Sohn2015`) becomes able to sample many images of the same class.
+When trained with labels, the **conditional variational autoencoder** (CVAE [@Sohn2015]) becomes able to sample many images of the same class.
 
-```{figure} ../img/cvae-generation.svg
----
-width: 100%
----
-Conditional VAE. Source: <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>
-```
+![Conditional VAE. Source: <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>](../slides/img/cvae-generation.svg){width=100%}
 
 CVAE allows to sample as many samples of a given class as we want: **data augmentation**.
 
-```{figure} ../img/cvae-mnist.png
----
-width: 60%
----
-MNIST digits generated by a Conditional VAE. Source: <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>
-```
+![MNIST digits generated by a Conditional VAE. Source: <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>](../slides/img/cvae-mnist.png){width=60%}
 
 The condition does not need to be a label, it can be a shape or another image (passed through another encoder).
 
-```{figure} ../img/cvae-shape.png
----
-width: 60%
----
-CVAE conditioned on shapes. Source:  <https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation>
-```
+![CVAE conditioned on shapes. Source:  <https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation>](../slides/img/cvae-shape.png){width=60%}
 
 ## Variational inference (optional)
 
-<div class='embed-container'><iframe src='https://www.youtube.com/embed/IP8YqRBBCP8' frameborder='0' allowfullscreen></iframe></div>
+{{< youtube  IP8YqRBBCP8 >}}
 
 ### Learning probability distributions from samples
 
 The input data $X$ comes from an unknown distribution $P(X)$. The training set $\mathcal{D}$ is formed by **samples** of that distribution. Learning the distribution of the data means learning a **parameterized distribution** $p_\theta(X)$ that is as close as possible from the true distribution $P(X)$. The parameterized distribution could be a family of known distributions (e.g. normal) or a neural network with a softmax output layer.
 
-```{figure} ../img/kerneldensityestimation.png
----
-width: 80%
----
-Density estimation. Source: <https://machinelearningmastery.com/probability-density-estimation/>
-```
+![Density estimation. Source: <https://machinelearningmastery.com/probability-density-estimation/>](../slides/img/kerneldensityestimation.png){width=80%}
 
 This means that we want to minimize the KL between the two distributions:
 
@@ -592,12 +432,7 @@ is indeed the log-likelihood of the model on the data that we maximized in **max
 The problem is that images are **highly-dimensional** (one dimension per pixel), so we would need astronomical numbers of samples to estimate the gradient (once): **curse of dimensionality**. 
 
 
-```{figure} ../img/cursedimensionality.png
----
-width: 100%
----
-Curse of dimensionality. Source: <https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html>
-```
+![Curse of dimensionality. Source: <https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html>](../slides/img/cursedimensionality.png){width=100%}
 
 MLE does not work well in high-dimensional spaces. We need to work in a much lower-dimensional space.
 
@@ -609,21 +444,11 @@ Images are not random samples of the pixel space: **natural images** are embedde
 If we have a **generative model** telling us how a point on the manifold $z$ maps to the image space ($P(X | z)$), we would only need to learn the distribution of the data in the lower-dimensional **latent space**.
 
 
-```{figure} ../img/manifold.png
----
-width: 50%
----
-Manifold. Source: <https://en.wikipedia.org/wiki/Manifold>
-```
+![Manifold. Source: <https://en.wikipedia.org/wiki/Manifold>](../slides/img/manifold.png){width=50%}
 
 The low-dimensional **latent variables** $z$ are the actual cause for the observations $X$. Given a sample $z$ on the manifold, we can train a **generative model** $p_\theta(X | z)$ to recreate the input $X$. $p_\theta(X | z)$ is the **decoder**: given a latent representation $z$, what is the corresponding observation $X$?
 
-```{figure} ../img/latentvariable.png
----
-width: 40%
----
-Latent variable. Source: <https://blog.evjang.com/2016/08/variational-bayes.html>
-```
+![Latent variable. Source: <https://blog.evjang.com/2016/08/variational-bayes.html>](../slides/img/latentvariable.png){width=40%}
 
 If we learn the distribution $p_\theta(z)$ of the manifold (latent space), we can infer the distribution of the data $p_\theta(X)$ using that model:
 
@@ -654,12 +479,7 @@ $$p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\the
 
 **Variational inference** proposes to approximate the true encoder $p_\theta(z | x)$ by another parameterized distribution $q_\phi(z|x)$. 
 
-```{figure} ../img/VAE-graphical-model.png
----
-width: 100%
----
-Variational inference approximates the encoder with another parameterized distribution. Source: <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>
-```
+![Variational inference approximates the encoder with another parameterized distribution. Source: <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>](../slides/img/VAE-graphical-model.png){width=100%}
 
 The decoder $p_\theta(x |z)$ generates observations $x$ from a latent representation $x$ with parameters $\theta$. The encoder $q_\phi(z|x)$ estimates the latent representation $z$ of a generated observation $x$. It should approximate $p_\theta(z | x)$ with parameters $\phi$.
 
