@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -102,12 +117,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -199,7 +214,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -224,7 +239,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,7 +277,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +322,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -458,7 +478,7 @@ div.csl-indent {
 <p>Object detection is both a:</p>
 <ul>
 <li><strong>Classification</strong> problem, as one has to recognize an object.</li>
-<li><strong>Regression</strong> problem, as one has to predict the coordinates <span class="math inline">\((x, y, w, h)\)</span> of the bounding box.</li>
+<li><strong>Regression</strong> problem, as one has to predict the coordinates <span class="math inline">(x, y, w, h)</span> of the bounding box.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -514,9 +534,9 @@ div.csl-indent {
 <li>a regression layer that outputs four real-valued numbers for each class.</li>
 </ul>
 <p>The loss function to minimize is a composition of different losses and penalty terms:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(\theta) = \lambda_1 \, \mathcal{L}_\text{classification}(\theta) + \lambda_2 \, \mathcal{L}_\text{regression}(\theta) + \lambda_3 \, \mathcal{L}_\text{regularization}(\theta)
-\]</span></p>
+</span></p>
 </section>
 <section id="faster-r-cnn" class="level2">
 <h2 class="anchored" data-anchor-id="faster-r-cnn">Faster R-CNN</h2>
@@ -538,7 +558,7 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">YOLO <span class="citation" data-cites="Redmon2016">(<a href="../references.html#ref-Redmon2016" role="doc-biblioref">Redmon and Farhadi, 2016</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<p>Each grid cell predicts a single object, with the corresponding <span class="math inline">\(C\)</span> <strong>class probabilities</strong> (softmax). It also predicts the coordinates of <span class="math inline">\(B\)</span> possible <strong>bounding boxes</strong> (x, y, w, h) as well as a box <strong>confidence score</strong>. The SxSxB predicted boxes are then pooled together to form the final prediction.</p>
+<p>Each grid cell predicts a single object, with the corresponding <span class="math inline">C</span> <strong>class probabilities</strong> (softmax). It also predicts the coordinates of <span class="math inline">B</span> possible <strong>bounding boxes</strong> (x, y, w, h) as well as a box <strong>confidence score</strong>. The SxSxB predicted boxes are then pooled together to form the final prediction.</p>
 <p>In the figure below, the yellow box predicts the presence of a <strong>person</strong> (the class) as well as a candidate <strong>bounding box</strong> (it may be bigger than the grid cell itself).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -573,9 +593,9 @@ div.csl-indent {
 <section id="confidence-score" class="level3">
 <h3 class="anchored" data-anchor-id="confidence-score">Confidence score</h3>
 <p>The 7x7 grid cells predict 2 bounding boxes each: maximum of 98 bounding boxes on the whole image. Only the bounding boxes with the <strong>highest class confidence score</strong> are kept.</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{class confidence score = box confidence score * class probability}
-\]</span></p>
+</span></p>
 <p>In practice, the class confidence score should be above 0.25.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -617,43 +637,43 @@ div.csl-indent {
 <p><strong>Classification loss</strong></p>
 <p>The classification loss is the <strong>mse</strong> between:</p>
 <ul>
-<li><span class="math inline">\(\hat{p}_i(c)\)</span>: the one-hot encoded class <span class="math inline">\(c\)</span> of the object present under each cell <span class="math inline">\(i\)</span>, and</li>
-<li><span class="math inline">\(p_i(c)\)</span>: the predicted class probabilities of cell <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\hat{p}_i(c)</span>: the one-hot encoded class <span class="math inline">c</span> of the object present under each cell <span class="math inline">i</span>, and</li>
+<li><span class="math inline">p_i(c)</span>: the predicted class probabilities of cell <span class="math inline">i</span>.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}_\text{classification}(\theta) =  \sum_{i=0}^{S^2} \mathbb{1}_i^\text{obj} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
-\]</span></p>
-<p>where <span class="math inline">\(\mathbb{1}_i^\text{obj}\)</span> is 1 when there actually is an object behind the cell <span class="math inline">\(i\)</span>, 0 otherwise (background).</p>
+</span></p>
+<p>where <span class="math inline">\mathbb{1}_i^\text{obj}</span> is 1 when there actually is an object behind the cell <span class="math inline">i</span>, 0 otherwise (background).</p>
 <p>They could also have used the cross-entropy loss, but the output layer is not a regular softmax layer. Using mse is also more compatible with the other losses.</p>
 <p><strong>Localization loss</strong></p>
 <p>For all bounding boxes matching a real object, we want to minimize the <strong>mse</strong> between:</p>
 <ul>
-<li><span class="math inline">\((\hat{x}_i, \hat{y}_i, \hat{w}_i, \hat{h}_i)\)</span>: the coordinates of the ground truth bounding box, and</li>
-<li><span class="math inline">\((x_i, y_i, w_i, h_i)\)</span>: the coordinates of the predicted bounding box.</li>
+<li><span class="math inline">(\hat{x}_i, \hat{y}_i, \hat{w}_i, \hat{h}_i)</span>: the coordinates of the ground truth bounding box, and</li>
+<li><span class="math inline">(x_i, y_i, w_i, h_i)</span>: the coordinates of the predicted bounding box.</li>
 </ul>
-<p><span class="math display">\[
-    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2] \\
-    \qquad\qquad\qquad\qquad + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
-\]</span></p>
-<p>where <span class="math inline">\(\mathbb{1}_{ij}^\text{obj}\)</span> is 1 when the bounding box <span class="math inline">\(j\)</span> of cell <span class="math inline">\(i\)</span> “matches” with an object (IoU). The root square of the width and height of the bounding boxes is used. This allows to penalize more the errors on small boxes than on big boxes.</p>
+<p><span class="math display">
+    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2]
+     + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
+</span></p>
+<p>where <span class="math inline">\mathbb{1}_{ij}^\text{obj}</span> is 1 when the bounding box <span class="math inline">j</span> of cell <span class="math inline">i</span> “matches” with an object (IoU). The root square of the width and height of the bounding boxes is used. This allows to penalize more the errors on small boxes than on big boxes.</p>
 <p><strong>Confidence loss</strong></p>
 <p>Finally, we need to learn the confidence score of each bounding box, by minimizing the <strong>mse</strong> between:</p>
 <ul>
-<li><span class="math inline">\(C_i\)</span>: the predicted confidence score of cell <span class="math inline">\(i\)</span>, and</li>
-<li><span class="math inline">\(\hat{C}_i\)</span>: the IoU between the ground truth bounding box and the predicted one.</li>
+<li><span class="math inline">C_i</span>: the predicted confidence score of cell <span class="math inline">i</span>, and</li>
+<li><span class="math inline">\hat{C}_i</span>: the IoU between the ground truth bounding box and the predicted one.</li>
 </ul>
-<p><span class="math display">\[
-    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
-    \qquad\qquad\qquad\qquad + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
-\]</span></p>
+<p><span class="math display">
+    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  
+     + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
+</span></p>
 <p>Two cases are considered:</p>
 <ol type="1">
-<li>There was a real object at that location (<span class="math inline">\(\mathbb{1}_{ij}^\text{obj} = 1\)</span>): the confidences should be updated fully.</li>
-<li>There was no real object (<span class="math inline">\(\mathbb{1}_{ij}^\text{noobj} = 1\)</span>): the confidences should only be moderately updated (<span class="math inline">\(\lambda^\text{noobj} = 0.5\)</span>)</li>
+<li>There was a real object at that location (<span class="math inline">\mathbb{1}_{ij}^\text{obj} = 1</span>): the confidences should be updated fully.</li>
+<li>There was no real object (<span class="math inline">\mathbb{1}_{ij}^\text{noobj} = 1</span>): the confidences should only be moderately updated (<span class="math inline">\lambda^\text{noobj} = 0.5</span>)</li>
 </ol>
 <p>This is to deal with <strong>class imbalance</strong>: there are much more cells on the background than on real objects.</p>
 <p>Put together, the loss function to minimize is:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align}
     \mathcal{L}(\theta) &amp; = \mathcal{L}_\text{classification}(\theta) + \lambda_\text{coord} \, \mathcal{L}_\text{localization}(\theta) + \mathcal{L}_\text{confidence}(\theta) \\
               &amp; = \sum_{i=0}^{S^2} \mathbb{1}_i^\text{obj} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2 \\
@@ -662,7 +682,7 @@ div.csl-indent {
               &amp; + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
               &amp; + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2 \\
 \end{align}
-\]</span></p>
+</span></p>
 </section>
 <section id="yolo-trained-on-pascal-voc" class="level3">
 <h3 class="anchored" data-anchor-id="yolo-trained-on-pascal-voc">YOLO trained on PASCAL VOC</h3>
@@ -716,42 +736,53 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">VoxelNet <span class="citation" data-cites="Zhou2017">(<a href="../references.html#ref-Zhou2017" role="doc-biblioref">Zhou and Tuzel, 2017</a>)</span>. Source: <a href="https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a" class="uri">https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a</a></figcaption><p></p>
 </figure>
 </div>
-<p>```{admonition} Additional resources on object detection</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional resources on object detection
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><a href="https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852" class="uri">https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852</a></p>
 <p><a href="https://medium.com/@smallfishbigsea/faster-r-cnn-explained-864d4fb7e3f8" class="uri">https://medium.com/@smallfishbigsea/faster-r-cnn-explained-864d4fb7e3f8</a></p>
 <p><a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></p>
 <p><a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p>
 <p><a href="https://medium.com/@jonathan_hui/ssd-object-detection-single-shot-multibox-detector-for-real-time-processing-9bd8deac0e06" class="uri">https://medium.com/@jonathan_hui/ssd-object-detection-single-shot-multibox-detector-for-real-time-processing-9bd8deac0e06</a></p>
-<p><a href="https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea" class="uri">https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea</a> ```</p>
+<p><a href="https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea" class="uri">https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea</a></p>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Girshick2015" class="csl-entry" role="doc-biblioentry">
-Girshick, R. (2015). Fast <span>R-CNN</span>. <em>arXiv:1504.08083 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1504.08083">https://arxiv.org/abs/1504.08083</a>.
+Girshick, R. (2015). Fast <span>R-CNN</span>. Available at: <a href="http://arxiv.org/abs/1504.08083">http://arxiv.org/abs/1504.08083</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Girshick2014" class="csl-entry" role="doc-biblioentry">
-Girshick, R., Donahue, J., Darrell, T., and Malik, J. (2014). Rich feature hierarchies for accurate object detection and semantic segmentation. <em>arXiv:1311.2524 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1311.2524">https://arxiv.org/abs/1311.2524</a>.
+Girshick, R., Donahue, J., Darrell, T., and Malik, J. (2014). Rich feature hierarchies for accurate object detection and semantic segmentation. Available at: <a href="http://arxiv.org/abs/1311.2524">http://arxiv.org/abs/1311.2524</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Gupta2014" class="csl-entry" role="doc-biblioentry">
-Gupta, S., Girshick, R., Arbeláez, P., and Malik, J. (2014). Learning <span>Rich Features</span> from <span>RGB-D Images</span> for <span>Object Detection</span> and <span>Segmentation</span>. <em>arXiv:1407.5736 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1407.5736">https://arxiv.org/abs/1407.5736</a>.
+Gupta, S., Girshick, R., Arbeláez, P., and Malik, J. (2014). Learning <span>Rich Features</span> from <span>RGB-D Images</span> for <span>Object Detection</span> and <span>Segmentation</span>. Available at: <a href="http://arxiv.org/abs/1407.5736">http://arxiv.org/abs/1407.5736</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Liu2016" class="csl-entry" role="doc-biblioentry">
-Liu, W., Anguelov, D., Erhan, D., Szegedy, C., Reed, S., Fu, C.-Y., et al. (2016). <span>SSD</span>: <span>Single Shot MultiBox Detector</span>. <em>arXiv:1512.02325 [cs]</em> 9905, 21–37. doi:<a href="https://doi.org/10.1007/978-3-319-46448-0_2">10.1007/978-3-319-46448-0_2</a>.
+Liu, W., Anguelov, D., Erhan, D., Szegedy, C., Reed, S., Fu, C.-Y., et al. (2016). <span>SSD</span>: <span>Single Shot MultiBox Detector</span>. 9905, 21–37. doi:<a href="https://doi.org/10.1007/978-3-319-46448-0_2">10.1007/978-3-319-46448-0_2</a>.
 </div>
 <div id="ref-Redmon2016a" class="csl-entry" role="doc-biblioentry">
-Redmon, J., Divvala, S., Girshick, R., and Farhadi, A. (2016). You <span>Only Look Once</span>: <span>Unified</span>, <span>Real-Time Object Detection</span>. <em>arXiv:1506.02640 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1506.02640">https://arxiv.org/abs/1506.02640</a>.
+Redmon, J., Divvala, S., Girshick, R., and Farhadi, A. (2016). You <span>Only Look Once</span>: <span>Unified</span>, <span>Real-Time Object Detection</span>. Available at: <a href="http://arxiv.org/abs/1506.02640">http://arxiv.org/abs/1506.02640</a> [Accessed September 17, 2020].
 </div>
 <div id="ref-Redmon2016" class="csl-entry" role="doc-biblioentry">
-Redmon, J., and Farhadi, A. (2016). <span>YOLO9000</span>: <span>Better</span>, <span>Faster</span>, <span>Stronger</span>. <em>arXiv:1612.08242 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1612.08242">https://arxiv.org/abs/1612.08242</a>.
+Redmon, J., and Farhadi, A. (2016). <span>YOLO9000</span>: <span>Better</span>, <span>Faster</span>, <span>Stronger</span>. Available at: <a href="http://arxiv.org/abs/1612.08242">http://arxiv.org/abs/1612.08242</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Redmon2018" class="csl-entry" role="doc-biblioentry">
-Redmon, J., and Farhadi, A. (2018). <span>YOLOv3</span>: <span>An Incremental Improvement</span>. <em>arXiv:1804.02767 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1804.02767">https://arxiv.org/abs/1804.02767</a>.
+Redmon, J., and Farhadi, A. (2018). <span>YOLOv3</span>: <span>An Incremental Improvement</span>. Available at: <a href="http://arxiv.org/abs/1804.02767">http://arxiv.org/abs/1804.02767</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Ren2016" class="csl-entry" role="doc-biblioentry">
-Ren, S., He, K., Girshick, R., and Sun, J. (2016). Faster <span>R-CNN</span>: <span>Towards Real-Time Object Detection</span> with <span>Region Proposal Networks</span>. <em>arXiv:1506.01497 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1506.01497">https://arxiv.org/abs/1506.01497</a>.
+Ren, S., He, K., Girshick, R., and Sun, J. (2016). Faster <span>R-CNN</span>: <span>Towards Real-Time Object Detection</span> with <span>Region Proposal Networks</span>. Available at: <a href="http://arxiv.org/abs/1506.01497">http://arxiv.org/abs/1506.01497</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Zhou2017" class="csl-entry" role="doc-biblioentry">
-Zhou, Y., and Tuzel, O. (2017). <span>VoxelNet</span>: <span class="nocase">End-to-End Learning</span> for <span>Point Cloud Based 3D Object Detection</span>. <em>arXiv:1711.06396 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1711.06396">https://arxiv.org/abs/1711.06396</a>.
+Zhou, Y., and Tuzel, O. (2017). <span>VoxelNet</span>: <span class="nocase">End-to-End Learning</span> for <span>Point Cloud Based 3D Object Detection</span>. Available at: <a href="http://arxiv.org/abs/1711.06396">http://arxiv.org/abs/1711.06396</a> [Accessed November 29, 2020].
 </div>
 </div>
 </section>
@@ -868,6 +899,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

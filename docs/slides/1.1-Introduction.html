@@ -7,7 +7,7 @@
 <link href="1.1-Introduction_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="1.1-Introduction_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="1.1-Introduction_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="1.1-Introduction_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="1.1-Introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="1.1-Introduction_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="1.1-Introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Introduction</p>
   <p class="author">Julien Vitay</p>
@@ -465,34 +481,32 @@
 <section id="supervised-learning-1" class="title-slide slide level1 center">
 <h1>Supervised Learning</h1>
 <div class="columns">
-<div class="column" style="width:35%;">
+<div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/supervisedlearning.png"></p>
 <p></p><figcaption>Source: Andrew Ng, Stanford CS229, <a href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf" class="uri">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></figcaption><p></p>
 </figure>
 </div>
-</div><div class="column" style="width:65%;">
+</div><div class="column" style="width:70%;">
 <ul>
-<li><strong>Supervised learning</strong> consists in presenting a dataset of input and output <strong>samples</strong> (or examples) <span class="math inline">\((x_i, t_i)_{i=1}^N\)</span> to a parameterized model.</li>
+<li><strong>Supervised learning</strong> consists in presenting a dataset of input and output <strong>samples</strong> (or examples) <span class="math inline">(x_i, t_i)_{i=1}^N</span> to a parameterized model.</li>
 </ul>
-<p><span class="math display">\[y_i = f_\theta(x_i)\]</span></p>
+<p><span class="math display">y_i = f_\theta(x_i)</span></p>
 <ul>
-<li>The goal of learning is to adapt the parameters <span class="math inline">\(\theta\)</span>, so that the model reduces its <strong>prediction error</strong> on the training data.</li>
+<li>The goal of learning is to adapt the parameters <span class="math inline">\theta</span>, so that the model reduces its <strong>prediction error</strong> on the training data.</li>
 </ul>
-<p><span class="math display">\[\theta^* = \text{argmin} \sum_{i=1}^N || t_i - y_i||\]</span></p>
-<ul>
-<li>When learning is successful, the model can be used on novel examples (<strong>generalisation</strong>).</li>
-</ul>
+<p><span class="math display">\theta^* = \text{argmin} \sum_{i=1}^N || t_i - y_i||</span></p>
 </div>
 </div>
 <ul>
+<li><p>When learning is successful, the model can be used on novel examples (<strong>generalisation</strong>).</p></li>
 <li><p>The modality of the inputs and outputs does not really matter:</p>
 <ul>
-<li>Image <span class="math inline">\(\rightarrow\)</span> Label : <strong>image classification</strong></li>
-<li>Image <span class="math inline">\(\rightarrow\)</span> Image : <strong>semantic segmentation</strong></li>
-<li>Speech <span class="math inline">\(\rightarrow\)</span> Text : <strong>speech recognition</strong></li>
-<li>Text <span class="math inline">\(\rightarrow\)</span> Speech : <strong>speech synthesis</strong></li>
+<li>Image <span class="math inline">\rightarrow</span> Label : <strong>image classification</strong></li>
+<li>Image <span class="math inline">\rightarrow</span> Image : <strong>semantic segmentation</strong></li>
+<li>Speech <span class="math inline">\rightarrow</span> Text : <strong>speech recognition</strong></li>
+<li>Text <span class="math inline">\rightarrow</span> Speech : <strong>speech synthesis</strong></li>
 </ul></li>
 </ul>
 </section>
@@ -533,11 +547,11 @@
 <li>A single artificial neuron is able to solve linear classification/regression problems:</li>
 </ul>
 
-<img data-src="img/artificialneuron.svg" style="width:50.0%" class="r-stretch quarto-figure-center"><p><span class="math display">\[
+<img data-src="img/artificialneuron.svg" style="width:50.0%" class="r-stretch quarto-figure-center"><p><span class="math display">
     y = f( \sum_{i=1}^d w_i \, x_i + b)
-\]</span></p>
+</span></p>
 <ul>
-<li>A neuron integrates inputs <span class="math inline">\(x_i\)</span> by multiplying them with weights <span class="math inline">\(w_i\)</span>, adds a bias <span class="math inline">\(b\)</span> and transforms the result into an output <span class="math inline">\(y\)</span> using a transfer function (or activation function) <span class="math inline">\(f\)</span>.</li>
+<li>A neuron integrates inputs <span class="math inline">x_i</span> by multiplying them with weights <span class="math inline">w_i</span>, adds a bias <span class="math inline">b</span> and transforms the result into an output <span class="math inline">y</span> using a transfer function (or activation function) <span class="math inline">f</span>.</li>
 </ul>
 </section>
 
@@ -546,8 +560,14 @@
 <ul>
 <li>A <strong>neural network</strong> (NN) is able to solve non-linear classification/regression problems by combining many artificial neurons.</li>
 </ul>
-
-<img data-src="img/deepnetwork-simple.svg" style="width:50.0%" class="r-stretch quarto-figure-center"></section>
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/deepnetwork-simple.svg" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</section>
 
 <section id="classical-approach-to-pattern-recognition" class="title-slide slide level1 center">
 <h1>Classical approach to pattern recognition</h1>
@@ -1105,9 +1125,9 @@ Come, sir, I will make did behold your worship.</code></pre>
 </ul></li>
 <li><p>Both compete to reach a Nash equilibrium:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D \, V(D, G) = \mathbb{E}_{x \sim P_\text{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim P_z(z)} [\log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <div class="footer">
 <p>Goodfellow IJ, Pouget-Abadie J, Mirza M, Xu B, Warde-Farley D, Ozair S, Courville A, Bengio Y. 2014. Generative Adversarial Networks. arXiv:1406.2661.</p>
 </div>
@@ -1190,13 +1210,13 @@ Come, sir, I will make did behold your worship.</code></pre>
 <ul>
 <li><p><strong>Supervised learning</strong> allows to learn complex input/output mappings, given there is enough data.</p></li>
 <li><p>Sometimes we do not know the correct output, only whether the proposed output is correct or not (<em>partial feedback</em>).</p></li>
-<li><p><strong>Reinforcement Learning</strong> (RL) can be used to learn by <strong>trial and error</strong> an optimal policy <span class="math inline">\(\pi(s,a)\)</span>.</p></li>
+<li><p><strong>Reinforcement Learning</strong> (RL) can be used to learn by <strong>trial and error</strong> an optimal policy <span class="math inline">\pi(s,a)</span>.</p></li>
 <li><p>Each action (=output) is associated to a <strong>reward</strong>.</p></li>
 <li><p>The goal of the system is to find a policy that maximizes the sum of the rewards on the <strong>long-term</strong> (return).</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     R(s_t, a_t) = \sum_{k=0}^\infty \gamma^k\, r_{t+k+1}
-\]</span></p>
+</span></p>
 <ul>
 <li>See the deep reinforcement learning course:</li>
 </ul>
@@ -1395,7 +1415,6 @@ Come, sir, I will make did behold your worship.</code></pre>
   <script src="1.1-Introduction_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="1.1-Introduction_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="1.1-Introduction_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="1.1-Introduction_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1564,27 +1583,9 @@ Come, sir, I will make did behold your worship.</code></pre>
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

@@ -138,7 +138,7 @@ $$
 The gradient of the log-likelihood is the difference between the initial explanation of $\mathbf{v}$ by the model, and its explanation after $k$ iterations (relaxation). If the model is good, the reconstruction $\mathbf{v}^*$ is the same as the input $\mathbf{v}$, so the gradient is zero. An input $\mathbf{v}$ is likely under the RBM model if it is able to reconstruct it, i.e. when it is not surprising (the free energy is low). In practice, $k=1$ gives surprisingly good results, but RBMs are very painful to train (hyperparameters)...
 
 
-### Deep Belief Networks = stacked RBMs
+## Deep Belief Networks = stacked RBMs
 
 A **Deep Belief Network** (DBN) is a simple stack of RBMS, trained using greedy layer-wise learning. The "bottom" parts of the DBM become unidirectional when learning the top part.
 

@@ -7,7 +7,7 @@
 <link href="3.1-NeuralNetworks_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="3.1-NeuralNetworks_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="3.1-NeuralNetworks_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -94,6 +94,22 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="3.1-NeuralNetworks_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="3.1-NeuralNetworks_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="3.1-NeuralNetworks_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="3.1-NeuralNetworks_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -389,9 +405,9 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
-  <p class="subtitle">Artificial neural networks</p>
+  <p class="subtitle">Multi-layer Perceptron</p>
   <p class="author">Julien Vitay</p>
   <p class="institute">Professur für Künstliche Intelligenz - Fakultät für Informatik</p>
   <p class="date"><a href="https://tu-chemnitz.de/informatik/KI/edu/neurocomputing" class="uri">https://tu-chemnitz.de/informatik/KI/edu/neurocomputing</a></p>
@@ -415,13 +431,13 @@
 <ul>
 <li><p>A <strong>Multi-Layer Perceptron</strong> (MLP) or <strong>feedforward neural network</strong> is composed of:</p>
 <ul>
-<li><p>an input layer for the input vector <span class="math inline">\(\mathbf{x}\)</span></p></li>
-<li><p>one or several hidden layers allowing to project non-linearly the input into a space of higher dimensions <span class="math inline">\(\mathbf{h}_1, \mathbf{h}_2, \mathbf{h}_3, \ldots\)</span>.</p></li>
-<li><p>an output layer for the output <span class="math inline">\(\mathbf{y}\)</span>.</p></li>
+<li><p>an input layer for the input vector <span class="math inline">\mathbf{x}</span></p></li>
+<li><p>one or several hidden layers allowing to project non-linearly the input into a space of higher dimensions <span class="math inline">\mathbf{h}_1, \mathbf{h}_2, \mathbf{h}_3, \ldots</span>.</p></li>
+<li><p>an output layer for the output <span class="math inline">\mathbf{y}</span>.</p></li>
 </ul></li>
-<li><p>If there is a single hidden layer <span class="math inline">\(\mathbf{h}\)</span>, it corresponds to the feature space.</p></li>
+<li><p>If there is a single hidden layer <span class="math inline">\mathbf{h}</span>, it corresponds to the feature space.</p></li>
 <li><p>Each layer takes inputs from the previous layer.</p></li>
-<li><p>If the hidden layer is adequately chosen, the output neurons can learn to replicate the desired output <span class="math inline">\(\mathbf{t}\)</span>.</p></li>
+<li><p>If the hidden layer is adequately chosen, the output neurons can learn to replicate the desired output <span class="math inline">\mathbf{t}</span>.</p></li>
 </ul>
 </div>
 </div>
@@ -431,7 +447,7 @@
 <h1>Fully-connected layer</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/matrixvector.png" style="width:60.0%"></p>
+<p><img data-src="img/matrixvector.png" style="width:50.0%"></p>
 </figure>
 </div>
 <div class="columns">
@@ -445,13 +461,13 @@
 <ul>
 <li>The operation performed by each layer can be written in the form of a <strong>matrix-vector</strong> multiplication:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h} = f(\textbf{net}_\mathbf{h}) = f(W^1 \, \mathbf{x} + \mathbf{b}^1)
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
-\]</span></p>
+</span></p>
 <ul>
-<li><p><strong>Fully-connected layers</strong> (FC) transform an input vector <span class="math inline">\(\mathbf{x}\)</span> into a new vector <span class="math inline">\(\mathbf{h}\)</span> by multiplying it by a <strong>weight matrix</strong> <span class="math inline">\(W\)</span> and adding a <strong>bias vector</strong> <span class="math inline">\(\mathbf{b}\)</span>.</p></li>
+<li><p><strong>Fully-connected layers</strong> (FC) transform an input vector <span class="math inline">\mathbf{x}</span> into a new vector <span class="math inline">\mathbf{h}</span> by multiplying it by a <strong>weight matrix</strong> <span class="math inline">W</span> and adding a <strong>bias vector</strong> <span class="math inline">\mathbf{b}</span>.</p></li>
 <li><p>A non-linear <strong>activation function</strong> transforms each element of the net activation.</p></li>
 </ul>
 </div>
@@ -469,28 +485,28 @@
 <img data-src="img/prelu.ppm" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
 <li>Rectified linear function - ReLU (output is continuous and positive).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \text{otherwise.} \end{cases}
-\]</span></p>
+</span></p>
 <ul>
 <li>Parametric Rectifier Linear Unit - PReLU (output is continuous).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ \alpha \, x  \quad \text{otherwise.}\end{cases}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="softmax-activation-function" class="title-slide slide level1 center">
 <h1>Softmax activation function</h1>
 
 <img data-src="img/softmax-comp.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></p><ul>
-<li>For classification problems, the <strong>softmax</strong> activation function can be used in the output layer to make sure that the sum of the outputs <span class="math inline">\(\mathbf{y} = \{y_j\}\)</span> over all output neurons is one.</li>
+<li>For classification problems, the <strong>softmax</strong> activation function can be used in the output layer to make sure that the sum of the outputs <span class="math inline">\mathbf{y} = \{y_j\}</span> over all output neurons is one.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     y_j = P(\text{class = j}) = \frac{\exp(\text{net}_j)}{\sum_k \exp(\text{net}_k)}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>The higher the net activation <span class="math inline">\(\text{net}_j\)</span>, the higher the probability that the example belongs to class <span class="math inline">\(j\)</span>.</p></li>
+<li><p>The higher the net activation <span class="math inline">\text{net}_j</span>, the higher the probability that the example belongs to class <span class="math inline">j</span>.</p></li>
 <li><p>Softmax is not <em>per se</em> a transfer function (not local to each neuron), but the idea is similar.</p></li>
 </ul>
 </section>
@@ -498,23 +514,23 @@
 <section id="why-non-linear-activation-functions" class="title-slide slide level1 center">
 <h1>Why non-linear activation functions?</h1>
 <ul>
-<li>Why not use the linear function <span class="math inline">\(f(x) = x\)</span> in the hidden layer?</li>
+<li>Why not use the linear function <span class="math inline">f(x) = x</span> in the hidden layer?</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h} = W^1 \, \mathbf{x} + \mathbf{b}^1
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2
-\]</span></p>
+</span></p>
 <ul>
 <li>The equivalent function would be linear…</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align*}
     \mathbf{y} &amp;= W^2 \, (W^1 \, \mathbf{x} + \mathbf{b}^1) + \mathbf{b}^2 \\
                &amp;= (W^2 \, W^1) \, \mathbf{x} + (W^2 \, \mathbf{b}^1 + \mathbf{b}^2) \\
                &amp;= W \, \mathbf{x} + \mathbf{b} \\
 \end{align*}
-\]</span></p>
+</span></p>
 <ul>
 <li>Remember Cover’s theorem:</li>
 </ul>
@@ -529,22 +545,22 @@
 <section id="training-a-mlp-loss-functions" class="title-slide slide level1 center">
 <h1>Training a MLP : loss functions</h1>
 <ul>
-<li><p>We have a training set composed of N input/output pairs <span class="math inline">\((\mathbf{x}_i, \mathbf{t}_i)_{i=1..N}\)</span>.</p></li>
+<li><p>We have a training set composed of N input/output pairs <span class="math inline">(\mathbf{x}_i, \mathbf{t}_i)_{i=1..N}</span>.</p></li>
 <li><p><strong>Optimization problem:</strong></p>
 <ul>
-<li>What are the free parameters <span class="math inline">\(\theta\)</span> (weights <span class="math inline">\(W^1, W^2\)</span> and biases <span class="math inline">\(\textbf{b}^1, \textbf{b}^2\)</span>) making the prediction <span class="math inline">\(\mathbf{y}\)</span> as close as possible from the desired output <span class="math inline">\(\mathbf{t}\)</span>?</li>
+<li>What are the free parameters <span class="math inline">\theta</span> (weights <span class="math inline">W^1, W^2</span> and biases <span class="math inline">\textbf{b}^1, \textbf{b}^2</span>) making the prediction <span class="math inline">\mathbf{y}</span> as close as possible from the desired output <span class="math inline">\mathbf{t}</span>?</li>
 </ul></li>
-<li><p>We define a <strong>loss function</strong> <span class="math inline">\(\mathcal{L}(\theta)\)</span> of the free parameters which should be minimized:</p>
+<li><p>We define a <strong>loss function</strong> <span class="math inline">\mathcal{L}(\theta)</span> of the free parameters which should be minimized:</p>
 <ul>
 <li>For <strong>regression</strong> problems, we take the <strong>mean square error</strong> (mse):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
   \mathcal{L}_\text{reg}(\theta) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \in \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
-  \]</span></p>
+  </span></p>
 <ul>
 <li>For <strong>classification</strong> problems, we take the <strong>cross-entropy</strong> or <strong>negative log-likelihood</strong> on a softmax output layer:</li>
 </ul>
-<p><span class="math display">\[\mathcal{L}_\text{class}(\theta) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]\]</span></p></li>
+<p><span class="math display">\mathcal{L}_\text{class}(\theta) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]</span></p></li>
 </ul>
 </section>
 
@@ -553,7 +569,7 @@
 <ul>
 <li>To minimize the chosen loss function, we are going to use <strong>stochastic gradient descent</strong> iteratively until the network converges:</li>
 </ul>
-<p><span class="math display">\[\begin{cases}
+<p><span class="math display">\begin{cases}
     \Delta W^1 = - \eta \, \nabla_{W^1} \, \mathcal{L}(\theta) \\
     \\
     \Delta \mathbf{b}^1 = - \eta \, \nabla_{\mathbf{b}^1} \, \mathcal{L}(\theta) \\
@@ -562,7 +578,7 @@
     \\
     \Delta \mathbf{b}^2 = - \eta \, \nabla_{\mathbf{b}^2} \, \mathcal{L}(\theta)\\
 \end{cases}
-\]</span></p>
+</span></p>
 <ul>
 <li><p>We will see later that other optimizers than SGD can be used.</p></li>
 <li><p>The question is now how to compute efficiently these <strong>gradients</strong> w.r.t all the weights and biases.</p></li>
@@ -588,31 +604,31 @@
 </figure>
 </div>
 </div><div class="column" style="width:65%;">
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h} = f(\textbf{net}_\mathbf{h}) = f(W^1 \, \mathbf{x} + \mathbf{b}^1)
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
-\]</span></p>
+</span></p>
 <ul>
 <li>The chain rule gives us for the parameters of the output layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial W^2} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial W^2}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}^2} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{b}^2}
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
 <li>and for the hidden layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial W^1} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial W^1}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}^1} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial \mathbf{b}^1}
-\]</span></p>
+</span></p>
 <ul>
 <li>If we can compute all these partial derivatives / gradients individually, the problem is solved.</li>
 </ul>
@@ -621,20 +637,20 @@
 <section id="gradient-of-the-loss-function" class="title-slide slide level1 center">
 <h1>Gradient of the loss function</h1>
 <ul>
-<li><p>We have already seen for the linear algorithms that the derivative of the loss function w.r.t the net activation of the output <span class="math inline">\(\textbf{net}_\mathbf{y}\)</span> is proportional to the <strong>prediction error</strong> <span class="math inline">\(\mathbf{t} - \mathbf{y}\)</span>:</p>
+<li><p>We have already seen for the linear algorithms that the derivative of the loss function w.r.t the net activation of the output <span class="math inline">\textbf{net}_\mathbf{y}</span> is proportional to the <strong>prediction error</strong> <span class="math inline">\mathbf{t} - \mathbf{y}</span>:</p>
 <ul>
 <li>mse for regression:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
       \mathbf{\delta_y} = - \frac{\partial \mathcal{l}_\text{reg}(\theta)}{\partial \textbf{net}_\mathbf{y}} = - \frac{\partial \mathcal{l}_\text{reg}(\theta)}{\partial \mathbf{y}} \times \frac{\partial \mathbf{y}}{\partial \textbf{net}_\mathbf{y}} = 2 \, (\mathbf{t} - \mathbf{y}) \, f'(\textbf{net}_\mathbf{y})
-  \]</span></p>
+  </span></p>
 <ul>
 <li>cross-entropy using a softmax output layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
       \mathbf{\delta_y} = - \frac{\partial \mathcal{l}_\text{class}(\theta)}{\partial \textbf{net}_\mathbf{y}} = (\mathbf{t} - \mathbf{y})
-  \]</span></p></li>
-<li><p><span class="math inline">\(\mathbf{\delta_y} = - \dfrac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}\)</span> is called the output error.</p></li>
+  </span></p></li>
+<li><p><span class="math inline">\mathbf{\delta_y} = - \dfrac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}</span> is called the output error.</p></li>
 <li><p>The output error is going to appear in all partial derivatives, i.e.&nbsp;in all learning rules.</p></li>
 <li><p>The backpropagation algorithm is sometimes called <strong>backpropagation of the error</strong>.</p></li>
 </ul>
@@ -645,80 +661,80 @@
 <ul>
 <li>We now have everything we need to train the output layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial W^2} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}  \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial W^2} = - \mathbf{\delta_y}  \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial W^2}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^2} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}}  \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{b}^2} = - \mathbf{\delta_y} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{b}^2}
-\]</span></p>
+</span></p>
 <ul>
-<li>As <span class="math inline">\(\textbf{net}_\mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2\)</span>, we get for the cross-entropy loss:</li>
+<li>As <span class="math inline">\textbf{net}_\mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2</span>, we get for the cross-entropy loss:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial W^2} = - \mathbf{\delta_y} \times \mathbf{h}^T
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^2} = - \mathbf{\delta_y}
-\]</span></p>
-<p>i.e.&nbsp;exactly the same delta learning rule as a softmax linear classifier or multiple linear regression using the vector <span class="math inline">\(\mathbf{h}\)</span> as an input.</p>
-<p><span class="math display">\[
+</span></p>
+<p>i.e.&nbsp;exactly the same delta learning rule as a softmax linear classifier or multiple linear regression using the vector <span class="math inline">\mathbf{h}</span> as an input.</p>
+<p><span class="math display">
 \begin{cases}
     \Delta W^2 = \eta \, \mathbf{\delta_y} \times \mathbf{h}^T = \eta \,  (\mathbf{t} - \mathbf{y} ) \times \mathbf{h}^T \\
     \\
     \Delta \mathbf{b}^2 = \eta \,  \mathbf{\delta_y} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
 \end{cases}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="gradient-in-the-hidden-layer" class="title-slide slide level1 center">
 <h1>Gradient in the hidden layer</h1>
 <ul>
-<li>Let’s note <span class="math inline">\(\mathbf{\delta_h}\)</span> the <strong>hidden error</strong>, i.e.&nbsp;minus the gradient of the loss function w.r.t the net activation of the hidden layer:</li>
+<li>Let’s note <span class="math inline">\mathbf{\delta_h}</span> the <strong>hidden error</strong>, i.e.&nbsp;minus the gradient of the loss function w.r.t the net activation of the hidden layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{\delta_h} = - \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}} = - \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}}  = \mathbf{\delta_y} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}}
-\]</span></p>
+</span></p>
 <ul>
-<li>Using this hidden error, we can compute the gradients w.r.t <span class="math inline">\(W^1\)</span> and <span class="math inline">\(\mathbf{b}^1\)</span>:</li>
+<li>Using this hidden error, we can compute the gradients w.r.t <span class="math inline">W^1</span> and <span class="math inline">\mathbf{b}^1</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial W^1} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial W^1} = - \mathbf{\delta_h} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial W^1}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^1} = \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial \mathbf{b}^1} = - \mathbf{\delta_h} \times \frac{\partial \textbf{net}_\mathbf{h}}{\partial \mathbf{b}^1}
-\]</span></p>
+</span></p>
 <ul>
-<li>As <span class="math inline">\(\textbf{net}_\mathbf{h} = W^1 \, \mathbf{x} + \mathbf{b}^1\)</span>, we get:</li>
+<li>As <span class="math inline">\textbf{net}_\mathbf{h} = W^1 \, \mathbf{x} + \mathbf{b}^1</span>, we get:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial W^1} =  - \mathbf{\delta_h} \times \mathbf{x}^T
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^1} =  - \mathbf{\delta_h}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="gradient-in-the-hidden-layer-1" class="title-slide slide level1 center">
 <h1>Gradient in the hidden layer</h1>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial W^1} =  - \mathbf{\delta_h} \times \mathbf{x}^T
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^1} =  - \mathbf{\delta_h}
-\]</span></p>
+</span></p>
 <ul>
-<li>If we know the <strong>hidden error</strong> <span class="math inline">\(\mathbf{\delta_h}\)</span>, the update rules for the input weights <span class="math inline">\(W^1\)</span> and <span class="math inline">\(\mathbf{b}^1\)</span> also take the form of the delta learning rule:</li>
+<li>If we know the <strong>hidden error</strong> <span class="math inline">\mathbf{\delta_h}</span>, the update rules for the input weights <span class="math inline">W^1</span> and <span class="math inline">\mathbf{b}^1</span> also take the form of the delta learning rule:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{cases}
     \Delta W^1 = \eta \,   \mathbf{\delta_h} \times \mathbf{x}^T \\
     \\
     \Delta \mathbf{b}^1 = \eta \,  \mathbf{\delta_h} \\
 \end{cases}
-\]</span></p>
+</span></p>
 <ul>
 <li><p>This is the classical form eta * error * input.</p></li>
-<li><p>All we need to know is the <strong>backpropagated error</strong> <span class="math inline">\(\mathbf{\delta_h}\)</span> and we can apply the delta learning rule!</p></li>
+<li><p>All we need to know is the <strong>backpropagated error</strong> <span class="math inline">\mathbf{\delta_h}</span> and we can apply the delta learning rule!</p></li>
 </ul>
 </section>
 
@@ -733,25 +749,25 @@
 </div>
 </div><div class="column" style="width:65%;">
 <ul>
-<li>The backpropagated error <span class="math inline">\(\mathbf{\delta_h}\)</span> is a vector assigning an error to each of the hidden neurons:</li>
+<li>The backpropagated error <span class="math inline">\mathbf{\delta_h}</span> is a vector assigning an error to each of the hidden neurons:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{\delta_h} = - \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{h}}  = \mathbf{\delta_y} \times \frac{\partial \textbf{net}_\mathbf{y}}{\partial \mathbf{h}} \times \frac{\partial \mathbf{h}}{\partial \textbf{net}_\mathbf{h}}
-\]</span></p>
+</span></p>
 <ul>
 <li>As :</li>
 </ul>
-<p><span class="math display">\[\textbf{net}_\mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2\]</span></p>
-<p><span class="math display">\[\mathbf{h} = f(\textbf{net}_\mathbf{h})\]</span></p>
+<p><span class="math display">\textbf{net}_\mathbf{y} = W^2 \, \mathbf{h} + \mathbf{b}^2</span></p>
+<p><span class="math display">\mathbf{h} = f(\textbf{net}_\mathbf{h})</span></p>
 <p>we obtain:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{\delta_h} = f'(\textbf{net}_\mathbf{h}) \, (W^2)^T \times \mathbf{\delta_y}
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
-<li><p>If <span class="math inline">\(\mathbf{h}\)</span> and <span class="math inline">\(\mathbf{\delta_h}\)</span> have <span class="math inline">\(K\)</span> elements and <span class="math inline">\(\mathbf{y}\)</span> and <span class="math inline">\(\mathbf{\delta_y}\)</span> have <span class="math inline">\(C\)</span> elements, the matrix <span class="math inline">\(W^2\)</span> is <span class="math inline">\(C \times K\)</span> as <span class="math inline">\(W^2 \times \mathbf{h}\)</span> must be a vector with <span class="math inline">\(C\)</span> elements.</p></li>
-<li><p><span class="math inline">\((W^2)^T \times \mathbf{\delta_y}\)</span> is therefore a vector with <span class="math inline">\(K\)</span> elements, which is then multiplied element-wise with the derivative of the transfer function to obtain <span class="math inline">\(\mathbf{\delta_h}\)</span>.</p></li>
+<li><p>If <span class="math inline">\mathbf{h}</span> and <span class="math inline">\mathbf{\delta_h}</span> have <span class="math inline">K</span> elements and <span class="math inline">\mathbf{y}</span> and <span class="math inline">\mathbf{\delta_y}</span> have <span class="math inline">C</span> elements, the matrix <span class="math inline">W^2</span> is <span class="math inline">C \times K</span> as <span class="math inline">W^2 \times \mathbf{h}</span> must be a vector with <span class="math inline">C</span> elements.</p></li>
+<li><p><span class="math inline">(W^2)^T \times \mathbf{\delta_y}</span> is therefore a vector with <span class="math inline">K</span> elements, which is then multiplied element-wise with the derivative of the transfer function to obtain <span class="math inline">\mathbf{\delta_h}</span>.</p></li>
 </ul>
 </section>
 
@@ -768,59 +784,58 @@
 <ul>
 <li>For a shallow MLP with one hidden layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h} = f(\textbf{net}_\mathbf{h}) = f(W^1 \, \mathbf{x} + \mathbf{b}^1)
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
-\]</span></p>
+</span></p>
 <p>the output error:</p>
-<p><span class="math display">\[
+<p><span class="math display">
         \mathbf{\delta_y} = - \frac{\partial \mathcal{l}(\theta)}{\partial \textbf{net}_\mathbf{y}} = (\mathbf{t} - \mathbf{y})
-    \]</span></p>
+    </span></p>
 <p>is <strong>backpropagated</strong> to the hidden layer:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{\delta_h} = f'(\textbf{net}_\mathbf{h}) \, (W^2)^T \times \mathbf{\delta_y}
-\]</span></p>
+</span></p>
 </div>
 </div>
 <p>what allows to apply the delta learning rule to all parameters:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{cases}
     \Delta W^2 = \eta \, \mathbf{\delta_y} \times \mathbf{h}^T \\
     \Delta \mathbf{b}^2 = \eta \,  \mathbf{\delta_y} \\
     \Delta W^1 = \eta \, \mathbf{\delta_h}  \times  \mathbf{x}^T \\
     \Delta \mathbf{b}^1 = \eta \, \mathbf{\delta_h}  \\
 \end{cases}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="derivative-of-the-activation-functions" class="title-slide slide level1 center">
 <h1>Derivative of the activation functions</h1>
-<p>The usual transfer functions are easy to derive (that is why they are chosen…).</p>
 <ul>
 <li>Threshold and sign functions are not differentiable, we simply consider the derivative is 1.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 f(x) = \begin{cases} 1 \quad \text{if} \quad x \geq 0 \\ 0 \text{ or } 1 \quad \text{otherwise.} \end{cases} \qquad \rightarrow \qquad f'(x) = 1
-\]</span></p>
+</span></p>
 <ul>
 <li>The logistic or sigmoid function has the nice property that its derivative can be expressed as a function of itself:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 f(x) = \frac{1}{1+\exp(-x)} \qquad \rightarrow \qquad f'(x) = f(x) \, (1 - f(x))
-\]</span></p>
+</span></p>
 <ul>
 <li>The hyperbolic tangent function too:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 f(x) = \tanh(x) \qquad \rightarrow \qquad f'(x) = 1 - f(x)^2
-\]</span></p>
+</span></p>
 <ul>
 <li>ReLU is even simpler:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \text{otherwise.} \end{cases} \qquad \rightarrow \qquad f'(x) = \begin{cases} 1 \quad \text{if} \quad x \geq 0 \\ 0 \quad \text{otherwise.}\end{cases}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="what-is-backpropagated" class="title-slide slide level1 center">
@@ -835,17 +850,17 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </div><div class="column" style="width:50%;">
 <ul>
 <li><p>Let’s have a closer look at what is backpropagated using single neurons and weights.</p></li>
-<li><p>The output neuron <span class="math inline">\(y_k\)</span> computes:</p></li>
+<li><p>The output neuron <span class="math inline">y_k</span> computes:</p></li>
 </ul>
-<p><span class="math display">\[y_k = f(\sum_{j=1}^K W^2_{jk} \, h_j + b^2_k)\]</span></p>
+<p><span class="math display">y_k = f(\sum_{j=1}^K W^2_{jk} \, h_j + b^2_k)</span></p>
 <ul>
-<li>All output weights <span class="math inline">\(W^2_{jk}\)</span> are updated proportionally to the output error of the neuron <span class="math inline">\(y_k\)</span>:</li>
+<li>All output weights <span class="math inline">W^2_{jk}</span> are updated proportionally to the output error of the neuron <span class="math inline">y_k</span>:</li>
 </ul>
-<p><span class="math display">\[\Delta W^2_{jk} = \eta \, \delta_{{y}_k} \, h_j = \eta \, (t_k - y_k) \, h_j\]</span></p>
+<p><span class="math display">\Delta W^2_{jk} = \eta \, \delta_{{y}_k} \, h_j = \eta \, (t_k - y_k) \, h_j</span></p>
 </div>
 </div>
 <ul>
-<li>This is possible because we know the output error directly from the data <span class="math inline">\(t_k\)</span>.</li>
+<li>This is possible because we know the output error directly from the data <span class="math inline">t_k</span>.</li>
 </ul>
 </section>
 
@@ -860,15 +875,15 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>The hidden neuron <span class="math inline">\(h_j\)</span> computes:</li>
+<li>The hidden neuron <span class="math inline">h_j</span> computes:</li>
 </ul>
-<p><span class="math display">\[h_j = f(\sum_{i=1}^d W^1_{ij} \, x_i + b^1_j)\]</span></p>
+<p><span class="math display">h_j = f(\sum_{i=1}^d W^1_{ij} \, x_i + b^1_j)</span></p>
 <ul>
-<li>We want to learn the hidden weights <span class="math inline">\(W^1_{ij}\)</span> using the delta learning rule:</li>
+<li>We want to learn the hidden weights <span class="math inline">W^1_{ij}</span> using the delta learning rule:</li>
 </ul>
-<p><span class="math display">\[\Delta W^1_{ij} = \eta \, \delta_{{h}_j} \, x_i\]</span></p>
+<p><span class="math display">\Delta W^1_{ij} = \eta \, \delta_{{h}_j} \, x_i</span></p>
 <p>but we do not know the ground truth of the hidden neuron in the data:</p>
-<p><span class="math display">\[\delta_{{h}_j} = (? - h_j)\]</span></p>
+<p><span class="math display">\delta_{{h}_j} = (? - h_j)</span></p>
 </div>
 </div>
 <ul>
@@ -879,31 +894,31 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 <section id="what-is-backpropagated-2" class="title-slide slide level1 center">
 <h1>What is backpropagated?</h1>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/mlp.svg" style="width:70.0%"></p>
+<p><img data-src="img/mlp.svg" style="width:100.0%"></p>
 </figure>
 </div>
-</div><div class="column" style="width:50%;">
-<p><span class="math display">\[
+</div><div class="column" style="width:60%;">
+<p><span class="math display">
     \mathbf{\delta_h} = f'(\textbf{net}_\mathbf{h}) \, (W^2)^T \times \mathbf{\delta_y}
-\]</span></p>
+</span></p>
 <ul>
-<li>If we omit the derivative of the transfer function, the backpropagated error for the hidden neuron <span class="math inline">\(h_j\)</span> is:</li>
+<li>If we omit the derivative of the transfer function, the backpropagated error for the hidden neuron <span class="math inline">h_j</span> is:</li>
 </ul>
-<p><span class="math display">\[\delta_{{h}_j} = - \sum_{k=1}^C W^2_{jk} \, \delta_{{y}_k}\]</span></p>
+<p><span class="math display">\delta_{{h}_j} = - \sum_{k=1}^C W^2_{jk} \, \delta_{{y}_k}</span></p>
 <ul>
-<li>The backpropagated error is an <strong>average</strong> of the output errors <span class="math inline">\(\delta_{{y}_k}\)</span>, weighted by the output weights between the hidden neuron <span class="math inline">\(h_j\)</span> and the output neurons <span class="math inline">\(y_k\)</span>.</li>
+<li>The backpropagated error is an <strong>average</strong> of the output errors <span class="math inline">\delta_{{y}_k}</span>, weighted by the output weights between the hidden neuron <span class="math inline">h_j</span> and the output neurons <span class="math inline">y_k</span>.</li>
 </ul>
 </div>
 </div>
 <ul>
-<li><p>The backpropagated error is the <strong>contribution</strong> of each hidden neuron <span class="math inline">\(h_j\)</span> to the output error:</p>
+<li><p>The backpropagated error is the <strong>contribution</strong> of each hidden neuron <span class="math inline">h_j</span> to the output error:</p>
 <ul>
 <li><p>If there is no output error, there is no hidden error.</p></li>
-<li><p>If a hidden neuron sends <strong>strong weights</strong> <span class="math inline">\(|W^2_{jk}|\)</span> to an output neuron <span class="math inline">\(y_k\)</span> with a strong prediction error <span class="math inline">\(\delta_{{y}_k}\)</span>, this means that it participates strongly to the output error and should learn from it.</p></li>
-<li><p>If the weight <span class="math inline">\(|W^2_{jk}|\)</span> is small, it means that the hidden neuron does not take part in the output error.</p></li>
+<li><p>If a hidden neuron sends <strong>strong weights</strong> <span class="math inline">|W^2_{jk}|</span> to an output neuron <span class="math inline">y_k</span> with a strong prediction error <span class="math inline">\delta_{{y}_k}</span>, this means that it participates strongly to the output error and should learn from it.</p></li>
+<li><p>If the weight <span class="math inline">|W^2_{jk}|</span> is small, it means that the hidden neuron does not take part in the output error.</p></li>
 </ul></li>
 </ul>
 </section>
@@ -920,34 +935,34 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </div>
 <div class="callout-content">
 <p><strong>Cybenko, 1989</strong></p>
-<p>Let <span class="math inline">\(\varphi()\)</span> be a nonconstant, bounded, and monotonically-increasing continuous function. Let <span class="math inline">\(I_{m_0}\)</span> denote the <span class="math inline">\(m_0\)</span>-dimensional unit hypercube <span class="math inline">\([0,1]^{m_0}\)</span>. The space of continuous functions on <span class="math inline">\(I_{m_0}\)</span> is denoted by <span class="math inline">\(C(I_{m_0})\)</span>. Then, given any function <span class="math inline">\(f \in C(I_{m_0})\)</span> and <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists an integer <span class="math inline">\(m_1\)</span> and sets of real constants <span class="math inline">\(\alpha_i, b_i\)</span> and <span class="math inline">\(w_{ij} \in \Re\)</span>, where <span class="math inline">\(i = 1, ..., m_1\)</span> and <span class="math inline">\(j = 1, ..., m_0\)</span> such that we may define:</p>
-<p><span class="math display">\[
+<p>Let <span class="math inline">\varphi()</span> be a nonconstant, bounded, and monotonically-increasing continuous function. Let <span class="math inline">I_{m_0}</span> denote the <span class="math inline">m_0</span>-dimensional unit hypercube <span class="math inline">[0,1]^{m_0}</span>. The space of continuous functions on <span class="math inline">I_{m_0}</span> is denoted by <span class="math inline">C(I_{m_0})</span>. Then, given any function <span class="math inline">f \in C(I_{m_0})</span> and <span class="math inline">\epsilon &gt; 0</span>, there exists an integer <span class="math inline">m_1</span> and sets of real constants <span class="math inline">\alpha_i, b_i</span> and <span class="math inline">w_{ij} \in \Re</span>, where <span class="math inline">i = 1, ..., m_1</span> and <span class="math inline">j = 1, ..., m_0</span> such that we may define:</p>
+<p><span class="math display">
     F(\mathbf{x}) = \sum_{i=1}^{m_1} \alpha_i \cdot \varphi \left( \sum_{j=1}^{m_0} w_{ij} \cdot x_j + b_i \right)
-\]</span></p>
+</span></p>
 <p>as an approximate realization of the function f; that is,</p>
-<p><span class="math display">\[ | F(\mathbf{x}) - f(\mathbf{x})| &lt; \epsilon\]</span></p>
-<p>for all <span class="math inline">\(x \in I_m\)</span>.</p>
+<p><span class="math display"> | F(\mathbf{x}) - f(\mathbf{x})| &lt; \epsilon</span></p>
+<p>for all <span class="math inline">x \in I_m</span>.</p>
 </div>
 </div>
 </div>
 <ul>
-<li>This theorem shows that for <strong>any</strong> input/output mapping function <span class="math inline">\(f\)</span> in supervised learning, there exists a MLP with <span class="math inline">\(m_1\)</span> neurons in the hidden layer which is able to approximate it with a desired precision!</li>
+<li>This theorem shows that for <strong>any</strong> input/output mapping function <span class="math inline">f</span> in supervised learning, there exists a MLP with <span class="math inline">m_1</span> neurons in the hidden layer which is able to approximate it with a desired precision!</li>
 </ul>
 </section>
 
 <section id="properties-of-mlp" class="title-slide slide level1 center">
 <h1>Properties of MLP</h1>
 <ul>
-<li><p>The universal approximation theorem only proves the existence of a shallow MLP with <span class="math inline">\(m_1\)</span> neurons in the hidden layer that can approximate any function, but it does not tell how to find this number.</p></li>
+<li><p>The universal approximation theorem only proves the existence of a shallow MLP with <span class="math inline">m_1</span> neurons in the hidden layer that can approximate any function, but it does not tell how to find this number.</p></li>
 <li><p>A rule of thumb to find this number is that the generalization error is empirically close to:</p></li>
 </ul>
-<p><span class="math display">\[ \epsilon = \frac{\text{VC}_{\text{dim}}(\text{MLP})}{N}
-\]</span></p>
-<p>where <span class="math inline">\(\text{VC}_{\text{dim}}(\text{MLP})\)</span> is the total number of weights and biases in the model, and <span class="math inline">\(N\)</span> the number of training samples.</p>
+<p><span class="math display"> \epsilon = \frac{\text{VC}_{\text{dim}}(\text{MLP})}{N}
+</span></p>
+<p>where <span class="math inline">\text{VC}_{\text{dim}}(\text{MLP})</span> is the total number of weights and biases in the model, and <span class="math inline">N</span> the number of training samples.</p>
 <ul>
 <li><p>The more neurons in the hidden layer, the better the training error, but the worse the generalization error (overfitting).</p></li>
 <li><p>The optimal number should be found with cross-validation methods.</p></li>
-<li><p>For most functions, the optimal number <span class="math inline">\(m_1\)</span> is high and becomes quickly computationally untractable. We need to go deep!</p></li>
+<li><p>For most functions, the optimal number <span class="math inline">m_1</span> is high and becomes quickly computationally untractable. We need to go deep!</p></li>
 </ul>
 </section>
 
@@ -967,7 +982,7 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 <section id="backpropagation-for-deep-neural-networks" class="title-slide slide level1 center">
 <h1>Backpropagation for deep neural networks</h1>
 <ul>
-<li>Backpropagation still works if we have many hidden layers <span class="math inline">\(\mathbf{h}_1, \ldots, \mathbf{h}_n\)</span>:</li>
+<li>Backpropagation still works if we have many hidden layers <span class="math inline">\mathbf{h}_1, \ldots, \mathbf{h}_n</span>:</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -975,7 +990,7 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </figure>
 </div>
 <ul>
-<li>If each layer is differentiable, i.e.&nbsp;one can compute its gradient <span class="math inline">\(\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}\)</span>, we can chain <strong>backwards</strong> each partial derivatives to know how to update each layer:</li>
+<li>If each layer is differentiable, i.e.&nbsp;one can compute its gradient <span class="math inline">\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}</span>, we can chain <strong>backwards</strong> each partial derivatives to know how to update each layer:</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -992,28 +1007,37 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 
 <section id="gradient-of-a-fully-connected-layer" class="title-slide slide level1 center">
 <h1>Gradient of a fully connected layer</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li>A fully connected layer transforms an input vector <span class="math inline">\(\mathbf{h}_{k-1}\)</span> into an output vector <span class="math inline">\(\mathbf{h}_{k}\)</span> using a weight matrix <span class="math inline">\(W^k\)</span>, a bias vector <span class="math inline">\(\mathbf{b}^k\)</span> and a non-linear activation function <span class="math inline">\(f\)</span>:</li>
+<li>A fully connected layer transforms an input vector <span class="math inline">\mathbf{h}_{k-1}</span> into an output vector <span class="math inline">\mathbf{h}_{k}</span> using a weight matrix <span class="math inline">W^k</span>, a bias vector <span class="math inline">\mathbf{b}^k</span> and a non-linear activation function <span class="math inline">f</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h}_{k} = f(\textbf{net}_{\mathbf{h}^k}) = f(W^k \, \mathbf{h}_{k-1} + \mathbf{b}^k)
-\]</span></p>
-
-<img data-src="img/matrixvector.png" style="width:40.0%" class="r-stretch quarto-figure-center"><ul>
-<li>The gradient of its output w.r.t the input <span class="math inline">\(\mathbf{h}_{k-1}\)</span> is (using the chain rule):</li>
-</ul>
-<p><span class="math display">\[
-\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}} = f'(\textbf{net}_{\mathbf{h}^k}) \, W^k
-\]</span></p>
+</span></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/matrixvector.png"></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
-<li>The gradients of its output w.r.t the free parameters <span class="math inline">\(W^k\)</span> and <span class="math inline">\(\mathbf{b}_{k}\)</span> are:</li>
+<li>The gradient of its output w.r.t the input <span class="math inline">\mathbf{h}_{k-1}</span> is (using the chain rule):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
+\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}} = f'(\textbf{net}_{\mathbf{h}^k}) \, W^k
+</span></p>
+<ul>
+<li>The gradients of its output w.r.t the free parameters <span class="math inline">W^k</span> and <span class="math inline">\mathbf{b}_{k}</span> are:</li>
+</ul>
+<p><span class="math display">
 \frac{\partial \mathbf{h}_{k}}{\partial W^{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \mathbf{h}_{k-1}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 \frac{\partial \mathbf{h}_{k}}{\partial \mathbf{b}_{k}} =  f'(\textbf{net}_{\mathbf{h}^k})
-\]</span></p>
+</span></p>
 </section>
 
 <section id="gradient-of-a-fully-connected-layer-1" class="title-slide slide level1 center">
@@ -1027,28 +1051,28 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>A fully connected layer <span class="math inline">\(\mathbf{h}_{k} = f(W^k \, \mathbf{h}_{k-1} + \mathbf{b}^k)\)</span> receives the gradient of the loss function w.r.t. its output <span class="math inline">\(\mathbf{h}_{k}\)</span> from the layer above:</li>
+<li>A fully connected layer <span class="math inline">\mathbf{h}_{k} = f(W^k \, \mathbf{h}_{k-1} + \mathbf{b}^k)</span> receives the gradient of the loss function w.r.t. its output <span class="math inline">\mathbf{h}_{k}</span> from the layer above:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
 <li>It adds to this gradient its own contribution and transmits it to the previous layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \times \frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}} = f'(\textbf{net}_{\mathbf{h}^k}) \, (W^k)^T \times \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}
-\]</span></p>
+</span></p>
 <ul>
-<li>It then updates its parameters <span class="math inline">\(W^k\)</span> and <span class="math inline">\(\mathbf{b}_{k}\)</span> with:</li>
+<li>It then updates its parameters <span class="math inline">W^k</span> and <span class="math inline">\mathbf{b}_{k}</span> with:</li>
 </ul>
-<p><span class="math display">\[\begin{cases}
+<p><span class="math display">\begin{cases}
 \dfrac{\partial \mathcal{L}(\theta)}{\partial W^{k}} = \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \dfrac{\partial \mathbf{h}_{k}}{\partial W^{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \mathbf{h}_{k-1}^T \\
 \\
 \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}_{k}}  = \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \dfrac{\partial \mathbf{h}_{k}}{\partial \mathbf{b}_{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \\
 \end{cases}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="training-a-deep-neural-network-with-backpropagation" class="title-slide slide level1 center">
@@ -1056,22 +1080,22 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 <ul>
 <li>A <strong>feedforward</strong> neural network is an acyclic graph of differentiable and parameterized layers.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{x} \rightarrow \mathbf{h}_1 \rightarrow \mathbf{h}_2 \rightarrow \ldots \rightarrow  \mathbf{h}_n \rightarrow \mathbf{y}
-\]</span></p>
+</span></p>
 <ul>
-<li>The <strong>backpropagation</strong> algorithm is used to assign the gradient of the loss function <span class="math inline">\(\mathcal{L}(\theta)\)</span> to each layer using backward chaining:</li>
+<li>The <strong>backpropagation</strong> algorithm is used to assign the gradient of the loss function <span class="math inline">\mathcal{L}(\theta)</span> to each layer using backward chaining:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \times \frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}
-\]</span></p>
+</span></p>
 
 <img data-src="img/deepbackward.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
 <li><strong>Stochastic gradient descent</strong> is then used to update the parameters of each layer:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \Delta W^k = - \eta \, \frac{\partial \mathcal{L}(\theta)}{\partial W^{k}} = - \eta \, \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \times \frac{\partial \mathbf{h}_{k}}{\partial W^{k}}
-\]</span></p>
+</span></p>
 <div class="footer">
 <p>Rumelhart, Hinton, Williams (1986). “Learning representations by back-propagating errors”. Nature.</p>
 </div>
@@ -1103,7 +1127,7 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 <ul>
 <li><p>We can create a shallow MLP with:</p>
 <ul>
-<li><p>Two input neurons <span class="math inline">\(x_1, x_2\)</span> for the two input variables.</p></li>
+<li><p>Two input neurons <span class="math inline">x_1, x_2</span> for the two input variables.</p></li>
 <li><p>Enough hidden neurons (e.g.&nbsp;20), with a sigmoid or ReLU activation function.</p></li>
 <li><p>One output neuron with the logistic activation function.</p></li>
 <li><p>The cross-entropy (negative log-likelihood) loss function.</p></li>
@@ -1186,7 +1210,7 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 <section id="example-of-a-shallow-neural-network-with-keras-2" class="title-slide slide level1 center">
 <h1>Example of a shallow neural network with keras</h1>
 <ul>
-<li>We now choose an optimizer (SGD) with a learning rate <span class="math inline">\(\eta = 0.001\)</span>:</li>
+<li>We now choose an optimizer (SGD) with a learning rate <span class="math inline">\eta = 0.001</span>:</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(lr<span class="op">=</span><span class="fl">0.001</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
@@ -1258,7 +1282,6 @@ None</code></pre>
   <script src="3.1-NeuralNetworks_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="3.1-NeuralNetworks_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="3.1-NeuralNetworks_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="3.1-NeuralNetworks_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1427,27 +1450,9 @@ None</code></pre>
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

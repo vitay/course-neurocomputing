@@ -1,5 +1,7 @@
 # Limits of deep learning
 
+**Work in progress.**
+
 Slides: [html](../slides/8.1-Limits.html){target="_blank"} [pdf](../slides/pdf/8.1-Limits.pdf){target="_blank"}
 
 ## The AI hype and general artificial intelligence
@@ -205,11 +207,8 @@ Deep networks are still highly specialized, they do either:
 * Natural Language Processing
 * Motor Control
 
-but never two at the same time.
-
-
-Some may be able to play different games at the same time (DQN, AlphaZero) but it stays in the same domain.
-The ability to perform different tasks at the same time is a criteria for **general intelligence**.
+but not two at the same time. Some may be able to play different games at the same time (DQN, AlphaZero) but it stays in the same domain.
+The ability to perform different tasks at the same time is a criteria for **general intelligence**. See Gato [@Reed2022] and MIA [@Abramson2022a] from Deepmind.
 
 
 
@@ -308,3 +307,15 @@ Deep learning methods are very powerful and have not reached yet their full pote
 
 The only intelligent system we know is the **brain**. 
 By taking inspiration from how the brain works, instead of <strike>stupidly</strike> minimizing loss functions, we **may** be able to reach human intelligence.
+
+::: {.callout-tip}
+## Some references on the limitations of deep learning
+
+* Marcus, G. (2018). Deep Learning: A Critical Appraisal. arXiv:1801.00631. Available at: <http://arxiv.org/abs/1801.00631>.
+* Marcus, G. (2018). In defense of skepticism about deep learning. Available at: <https://medium.com/@GaryMarcus/in-defense-of-skepticism-about-deep-learning-6e8bfd5ae0f1>.
+* Piekniewski, F. (2018). AI winter is well on its way. Piekniewski’s blog. Available at: <https://blog.piekniewski.info/2018/05/28/ai-winter-is-well-on-its-way>.
+* Brooks, R. (2019). Predictions Scorecard, 2019 January 01. Available at: <http://rodneybrooks.com/predictions-scorecard-2019-january-01>.
+* Richbourg, R. (2018). ‘It’s Either a Panda or a Gibbon’: AI Winters and the Limits of Deep Learning. Available at: <https://warontherocks.com/2018/05/its-either-a-panda-or-a-gibbon-ai-winters-and-the-limits-of-deep-learning>.
+* Seif, G. (2019). Is Deep Learning Already Hitting its Limitations? Available at: <https://towardsdatascience.com/is-deep-learning-already-hitting-its-limitations-c81826082ac3>.
+* Hawkins, J (2015). The Terminator Is Not Coming. The Future Will Thank Us. Available at: <https://www.recode.net/2015/3/2/11559576/the-terminator-is-not-coming-the-future-will-thank-us>.
+:::

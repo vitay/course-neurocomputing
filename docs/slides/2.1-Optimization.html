@@ -7,7 +7,7 @@
 <link href="2.1-Optimization_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="2.1-Optimization_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="2.1-Optimization_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="2.1-Optimization_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="2.1-Optimization_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="2.1-Optimization_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="2.1-Optimization_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Optimization</p>
   <p class="author">Julien Vitay</p>
@@ -368,14 +384,14 @@
 <section id="analytical-optimization" class="title-slide slide level1 center">
 <h1>Analytical optimization</h1>
 <ul>
-<li>The easiest method to find the extremum of a function <span class="math inline">\(f(x)\)</span> is to look where its first derivative is equal to 0:</li>
+<li>The easiest method to find the extremum of a function <span class="math inline">f(x)</span> is to look where its first derivative is equal to 0:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     x^* = \min_x f(x) \Leftrightarrow f'(x^*) = 0 \; \text{and} \; f''(x^*) &gt; 0
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     x^* = \max_x f(x) \Leftrightarrow f'(x^*) = 0 \; \text{and} \; f''(x^*) &lt; 0
-\]</span></p>
+</span></p>
 <ul>
 <li><p>The sign of the second order derivative tells us whether it is a maximum or minimum.</p></li>
 <li><p>There can be multiple minima or maxima (or none) depending on the function.</p>
@@ -389,27 +405,27 @@
 <section id="multivariate-optimization" class="title-slide slide level1 center">
 <h1>Multivariate optimization</h1>
 <ul>
-<li><p>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">\(f(x, y)\)</span>.</p></li>
-<li><p>A point <span class="math inline">\((x^*, y^*)\)</span> is an extremum of <span class="math inline">\(f\)</span> if all partial derivatives are zero:</p></li>
+<li><p>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>.</p></li>
+<li><p>A point <span class="math inline">(x^*, y^*)</span> is an extremum of <span class="math inline">f</span> if all partial derivatives are zero:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \begin{cases}
         \dfrac{\partial f(x^*, y^*)}{\partial x} = 0 \\
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
-\]</span></p>
+</span></p>
 <ul>
 <li>The vector of partial derivatives is called the <strong>gradient of the function</strong>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} \\ \frac{\partial f(x, y)}{\partial y} \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
-<li>Finding the extremum of <span class="math inline">\(f\)</span> is searching for the values of <span class="math inline">\((x, y)\)</span> where the gradient of the function is zero:</li>
+<li>Finding the extremum of <span class="math inline">f</span> is searching for the values of <span class="math inline">(x, y)</span> where the gradient of the function is zero:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_{x, y} \, f(x^*, y^*) = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="multivariate-optimization-example" class="title-slide slide level1 center">
@@ -419,26 +435,26 @@
 <ul>
 <li>Let’s consider this function:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x, y) = (x - 1)^2 + y^2 + 1
-\]</span></p>
+</span></p>
 <ul>
 <li>Its gradient is:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_{x, y} \, f(x, y) = \begin{bmatrix} 2 (x -1) \\ 2 y \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
 <li>The gradient is equal to 0 when:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \begin{cases}
         2 \, (x -1) = 0 \\
         2 \, y = 0 \\
     \end{cases}
-\]</span></p>
+</span></p>
 <ul>
-<li><span class="math inline">\(\begin{bmatrix} 1 \\ 0 \end{bmatrix}\)</span> is the minimum of <span class="math inline">\(f\)</span>.</li>
+<li><span class="math inline">\begin{bmatrix} 1 \\ 0 \end{bmatrix}</span> is the minimum of <span class="math inline">f</span>.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -465,9 +481,9 @@
 <li><p>We can not therefore get its derivative and search where it is 0.</p></li>
 <li><p>However, we have access to its value (and derivative) for certain values, for example:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(0, 1) = 2 \qquad f'(0, 1) = -1.5
-\]</span></p>
+</span></p>
 <ul>
 <li><p>We can “ask” the model for as many values as we want, but we never get its analytical form.</p></li>
 <li><p>For most useful problems, the function would be too complex to differentiate anyway.</p></li>
@@ -485,22 +501,22 @@
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>Let’s remember the definition of the derivative of a function. The derivative <span class="math inline">\(f'(x)\)</span> is defined by the slope of the tangent of the function:</li>
+<li>Let’s remember the definition of the derivative of a function. The derivative <span class="math inline">f'(x)</span> is defined by the slope of the tangent of the function:</li>
 </ul>
-<p><span class="math display">\[\begin{aligned}
+<p><span class="math display">\begin{aligned}
     f'(x) &amp; = \lim_{h \to 0} \frac{f(x + h) - f(x)}{x + h - x} \\
         &amp;\\
         &amp;= \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
-<li>If we take <span class="math inline">\(h\)</span> small enough, we have the following approximation:</li>
+<li>If we take <span class="math inline">h</span> small enough, we have the following approximation:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x + h) - f(x) \approx h \, f'(x)
-\]</span></p>
+</span></p>
 <ul>
-<li>We are making an error, but it is negligible if <span class="math inline">\(h\)</span> is small enough (Taylor series).</li>
+<li>We are making an error, but it is negligible if <span class="math inline">h</span> is small enough (Taylor series).</li>
 </ul>
 </div>
 </div>
@@ -519,26 +535,26 @@
 <ul>
 <li>First order approximation:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x + h) - f(x) \approx h \, f'(x)
-\]</span></p>
+</span></p>
 <ul>
-<li>If we want <span class="math inline">\(x+h\)</span> to be closer to the minimum than <span class="math inline">\(x\)</span>, we want:</li>
+<li>If we want <span class="math inline">x+h</span> to be closer to the minimum than <span class="math inline">x</span>, we want:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x + h) &lt; f(x)
-\]</span></p>
+</span></p>
 <ul>
 <li>We therefore want that:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     h \, f'(x) &lt; 0
-\]</span></p>
+</span></p>
 <ul>
-<li><p>The <strong>change</strong> in the value of <span class="math inline">\(x\)</span> must have the opposite sign of <span class="math inline">\(f'(x)\)</span>.</p>
+<li><p>The <strong>change</strong> in the value of <span class="math inline">x</span> must have the opposite sign of <span class="math inline">f'(x)</span>.</p>
 <ul>
-<li><p>If the function is increasing in <span class="math inline">\(x\)</span>, the minimum is smaller than <span class="math inline">\(x\)</span>.</p></li>
-<li><p>If the function is decreasing in <span class="math inline">\(x\)</span>, the minimum is bigger than <span class="math inline">\(x\)</span>.</p></li>
+<li><p>If the function is increasing in <span class="math inline">x</span>, the minimum is smaller than <span class="math inline">x</span>.</p></li>
+<li><p>If the function is decreasing in <span class="math inline">x</span>, the minimum is bigger than <span class="math inline">x</span>.</p></li>
 </ul></li>
 </ul>
 </div>
@@ -548,18 +564,18 @@
 <section id="gradient-descent-1" class="title-slide slide level1 center">
 <h1>Gradient descent</h1>
 <ul>
-<li><strong>Gradient descent</strong> (GD) is a first-order method to iteratively find the minimum of a function <span class="math inline">\(f(x)\)</span>.</li>
+<li><strong>Gradient descent</strong> (GD) is a first-order method to iteratively find the minimum of a function <span class="math inline">f(x)</span>.</li>
 </ul>
 
 <img data-src="img/gradient.png" style="width:45.0%" class="r-stretch quarto-figure-center"><ul>
-<li><p>It creates a series of estimates <span class="math inline">\([x_0, x_1, x_2, \ldots]\)</span> that converge to a local minimum of <span class="math inline">\(f\)</span>.</p></li>
+<li><p>It creates a series of estimates <span class="math inline">[x_0, x_1, x_2, \ldots]</span> that converge to a local minimum of <span class="math inline">f</span>.</p></li>
 <li><p>Each element of the series is calculated based on the previous element and the derivative of the function in that element:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     x_{n+1} = x_n + \Delta x =  x_n - \eta \, f'(x_n)
-\]</span></p>
+</span></p>
 <ul>
-<li><span class="math inline">\(\eta\)</span> is a small parameter between 0 and 1 called the <strong>learning rate</strong>.</li>
+<li><span class="math inline">\eta</span> is a small parameter between 0 and 1 called the <strong>learning rate</strong>.</li>
 </ul>
 </section>
 
@@ -575,22 +591,22 @@
 </div>
 <div class="callout-content">
 <ul>
-<li><p>We start with an initially wrong estimate of <span class="math inline">\(x\)</span>: <span class="math inline">\(x_0\)</span></p></li>
-<li><p>for <span class="math inline">\(n \in [0, \infty]\)</span>:</p>
+<li><p>We start with an initially wrong estimate of <span class="math inline">x</span>: <span class="math inline">x_0</span></p></li>
+<li><p>for <span class="math inline">n \in [0, \infty]</span>:</p>
 <ul>
-<li><p>We compute or estimate the derivative of the loss function in <span class="math inline">\(x_{n}\)</span>: <span class="math inline">\(f'(x_{n})\)</span></p></li>
-<li><p>We compute a new value <span class="math inline">\(x_{n+1}\)</span> for the estimate using the <strong>gradient descent update rule</strong>:</p></li>
+<li><p>We compute or estimate the derivative of the loss function in <span class="math inline">x_{n}</span>: <span class="math inline">f'(x_{n})</span></p></li>
+<li><p>We compute a new value <span class="math inline">x_{n+1}</span> for the estimate using the <strong>gradient descent update rule</strong>:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
       \Delta x = x_{n+1} - x_n =  - \eta \, f'(x_n)
-  \]</span></p></li>
+  </span></p></li>
 </ul>
 </div>
 </div>
 </div>
 <ul>
 <li><p>There is theoretically no end to the GD algorithm: we iterate forever and always get closer to the minimum.</p></li>
-<li><p>The algorithm can be stopped when the change <span class="math inline">\(\Delta x\)</span> is below a threshold.</p></li>
+<li><p>The algorithm can be stopped when the change <span class="math inline">\Delta x</span> is below a threshold.</p></li>
 </ul>
 </section>
 
@@ -604,19 +620,19 @@
 <ul>
 <li>Gradient descent can be applied to multivariate functions:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_{x, y, z} \qquad f(x, y, z)
-\]</span></p>
+</span></p>
 <ul>
 <li>Each variable is updated independently using partial derivatives:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \Delta x = x_{n+1} - x_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial x}
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \Delta y = y_{n+1} - y_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial y}
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \Delta z = z_{n+1} - z_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial z}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="multivariate-gradient-descent-1" class="title-slide slide level1 center">
@@ -624,10 +640,10 @@
 <ul>
 <li>We can also use the vector notation to use the <strong>gradient operator</strong>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix} \frac{\partial f(x, y, z)}{\partial x} \\ \frac{\partial f(x, y, z)}{\partial y} \\ \frac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
     \qquad \rightarrow \qquad \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} \, f(\mathbf{x}_n)
-\]</span></p>
+</span></p>
 </section>
 
 <section id="multivariate-gradient-descent-2" class="title-slide slide level1 center">
@@ -639,8 +655,8 @@
 <h1>Influence of the learning rate</h1>
 
 <img data-src="img/gradient-descent-learningrate.gif" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
-<li><p>The parameter <span class="math inline">\(\eta\)</span> is called the learning rate (or step size) and regulates the speed of convergence.</p></li>
-<li><p>The choice of the learning rate <span class="math inline">\(\eta\)</span> is critical:</p>
+<li><p>The parameter <span class="math inline">\eta</span> is called the learning rate (or step size) and regulates the speed of convergence.</p></li>
+<li><p>The choice of the learning rate <span class="math inline">\eta</span> is critical:</p>
 <ul>
 <li><p>If it is too small, the algorithm will need a lot of iterations to converge.</p></li>
 <li><p>If it is too big, the algorithm can oscillate around the desired values without ever converging.</p></li>
@@ -653,7 +669,7 @@
 
 <img data-src="img/localminimum.png" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
 <li><p>Gradient descent is not optimal: it always finds a local minimum, but there is no guarantee that it is the global minimum.</p></li>
-<li><p>The found solution depends on the initial choice of <span class="math inline">\(x_0\)</span>. If you initialize the parameters near to the global minimum, you are lucky. But how?</p></li>
+<li><p>The found solution depends on the initial choice of <span class="math inline">x_0</span>. If you initialize the parameters near to the global minimum, you are lucky. But how?</p></li>
 <li><p>This will be a big issue in neural networks.</p></li>
 </ul>
 </section>
@@ -670,11 +686,11 @@
 <li><p>As GD only converges to the “closest” local minimum, you are never sure that you get a good solution.</p></li>
 <li><p>Consider the following function:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x, y) = (x -1)^2
-\]</span></p>
+</span></p>
 <ul>
-<li><p>As it does not depend on <span class="math inline">\(y\)</span>, whatever initial value <span class="math inline">\(y_0\)</span> will be considered as a solution.</p></li>
+<li><p>As it does not depend on <span class="math inline">y</span>, whatever initial value <span class="math inline">y_0</span> will be considered as a solution.</p></li>
 <li><p>As we will see later, this is something we do not want.</p></li>
 </ul>
 </section>
@@ -687,39 +703,39 @@
 <section id="l2---regularization" class="title-slide slide level1 center">
 <h1>L2 - Regularization</h1>
 <ul>
-<li><p>We may want to put the additional <strong>constraint</strong> that <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> should be as small as possible.</p></li>
-<li><p>One possibility is to also minimize the <strong>Euclidian norm</strong> (or <strong>L2-norm</strong>) of the vector <span class="math inline">\(\mathbf{x} = [x, y]\)</span>.</p></li>
+<li><p>We may want to put the additional <strong>constraint</strong> that <span class="math inline">x</span> and <span class="math inline">y</span> should be as small as possible.</p></li>
+<li><p>One possibility is to also minimize the <strong>Euclidian norm</strong> (or <strong>L2-norm</strong>) of the vector <span class="math inline">\mathbf{x} = [x, y]</span>.</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_{x, y} ||\mathbf{x}||^2 = x^2 + y^2
-\]</span></p>
+</span></p>
 <ul>
-<li><p>Note that this objective is in contradiction with the original objective: <span class="math inline">\((0, 0)\)</span> minimizes the norm, but not the function <span class="math inline">\(f(x, y)\)</span>.</p></li>
-<li><p>We construct a new function as the sum of <span class="math inline">\(f(x, y)\)</span> and the norm of <span class="math inline">\(\mathbf{x}\)</span>, weighted by the <strong>regularization parameter</strong> <span class="math inline">\(\lambda\)</span>:</p></li>
+<li><p>Note that this objective is in contradiction with the original objective: <span class="math inline">(0, 0)</span> minimizes the norm, but not the function <span class="math inline">f(x, y)</span>.</p></li>
+<li><p>We construct a new function as the sum of <span class="math inline">f(x, y)</span> and the norm of <span class="math inline">\mathbf{x}</span>, weighted by the <strong>regularization parameter</strong> <span class="math inline">\lambda</span>:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)
-\]</span></p>
+</span></p>
 </section>
 
 <section id="l2---regularization-1" class="title-slide slide level1 center">
 <h1>L2 - Regularization</h1>
 <ul>
-<li>For a fixed value of <span class="math inline">\(\lambda\)</span>, for example 0.1, we now minimize using gradient descent the following loss function function:</li>
+<li>For a fixed value of <span class="math inline">\lambda</span>, for example 0.1, we now minimize using gradient descent the following loss function function:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)
-\]</span></p>
+</span></p>
 <ul>
 <li>We just need to compute its gradient:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
-\]</span></p>
+</span></p>
 <p>and apply gradient descent iteratively:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="l2---regularization-2" class="title-slide slide level1 center">
@@ -730,13 +746,13 @@
 <section id="l2---regularization-3" class="title-slide slide level1 center">
 <h1>L2 - Regularization</h1>
 <ul>
-<li><p>You may notice that the result of the optimization is a bit off, it is not exactly <span class="math inline">\((1, 0)\)</span>.</p></li>
-<li><p>This is because we do not optimize <span class="math inline">\(f(x, y)\)</span> directly, but <span class="math inline">\(\mathcal{L}(x, y)\)</span>.</p></li>
+<li><p>You may notice that the result of the optimization is a bit off, it is not exactly <span class="math inline">(1, 0)</span>.</p></li>
+<li><p>This is because we do not optimize <span class="math inline">f(x, y)</span> directly, but <span class="math inline">\mathcal{L}(x, y)</span>.</p></li>
 <li><p>Let’s look at the real landscape of the function.</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)
-\]</span></p>
+</span></p>
 </section>
 
 <section id="l2---regularization-4" class="title-slide slide level1 center">
@@ -748,9 +764,9 @@
 <h1>L2 - Regularization</h1>
 <ul>
 <li><p>The optimization with GD works, it is just that the function is different.</p></li>
-<li><p>The constraint on the Euclidian norm “attracts” or “distorts” the function towards <span class="math inline">\((0, 0)\)</span>.</p></li>
+<li><p>The constraint on the Euclidian norm “attracts” or “distorts” the function towards <span class="math inline">(0, 0)</span>.</p></li>
 <li><p>This may seem counter-intuitive, but we will see with deep networks that we can live with it.</p></li>
-<li><p>Let’s now look at what happens when we increase <span class="math inline">\(\lambda\)</span> (to 5.0).</p></li>
+<li><p>Let’s now look at what happens when we increase <span class="math inline">\lambda</span> (to 5.0).</p></li>
 </ul>
 </section>
 
@@ -769,16 +785,16 @@
 <ul>
 <li>Now the result of the optimization is totally wrong: the constraint on the norm completely dominates the optimization process.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)
-\]</span></p>
+</span></p>
 <ul>
-<li><p><span class="math inline">\(\lambda\)</span> controls which of the two objectives, <span class="math inline">\(f(x, y)\)</span> or <span class="math inline">\(x^2 + y^2\)</span>, has the priority:</p>
+<li><p><span class="math inline">\lambda</span> controls which of the two objectives, <span class="math inline">f(x, y)</span> or <span class="math inline">x^2 + y^2</span>, has the priority:</p>
 <ul>
-<li><p>When <span class="math inline">\(\lambda\)</span> is small, <span class="math inline">\(f(x, y)\)</span> dominates and the norm of <span class="math inline">\(\mathbf{x}\)</span> can be anything.</p></li>
-<li><p>When <span class="math inline">\(\lambda\)</span> is big, <span class="math inline">\(x^2 + y^2\)</span> dominates, the result will be very small but <span class="math inline">\(f(x, y)\)</span> will have any value.</p></li>
+<li><p>When <span class="math inline">\lambda</span> is small, <span class="math inline">f(x, y)</span> dominates and the norm of <span class="math inline">\mathbf{x}</span> can be anything.</p></li>
+<li><p>When <span class="math inline">\lambda</span> is big, <span class="math inline">x^2 + y^2</span> dominates, the result will be very small but <span class="math inline">f(x, y)</span> will have any value.</p></li>
 </ul></li>
-<li><p>The right value for <span class="math inline">\(\lambda\)</span> is hard to find. We will see later methods to experimentally find its most adequate value.</p></li>
+<li><p>The right value for <span class="math inline">\lambda</span> is hard to find. We will see later methods to experimentally find its most adequate value.</p></li>
 </ul>
 </section>
 
@@ -787,17 +803,17 @@
 <ul>
 <li>Another form of regularization is <strong>L1 - regularization</strong> using the L1-norm (absolute values):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(x, y) = f(x, y) + \lambda \, (|x| + |y|)
-\]</span></p>
+</span></p>
 <ul>
-<li>Its gradient only depend on the sign of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>:</li>
+<li>Its gradient only depend on the sign of <span class="math inline">x</span> and <span class="math inline">y</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \frac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
-<li>It tends to lead to <strong>sparser</strong> value of <span class="math inline">\((x, y)\)</span>, i.e.&nbsp;either <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> will be 0.</li>
+<li>It tends to lead to <strong>sparser</strong> value of <span class="math inline">(x, y)</span>, i.e.&nbsp;either <span class="math inline">x</span> or <span class="math inline">y</span> will be 0.</li>
 </ul>
 </section>
 
@@ -826,7 +842,6 @@
   <script src="2.1-Optimization_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="2.1-Optimization_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="2.1-Optimization_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="2.1-Optimization_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -995,27 +1010,9 @@
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

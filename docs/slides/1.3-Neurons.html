@@ -7,7 +7,7 @@
 <link href="1.3-Neurons_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="1.3-Neurons_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="1.3-Neurons_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="1.3-Neurons_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="1.3-Neurons_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="1.3-Neurons_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="1.3-Neurons_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Neurons</p>
   <p class="author">Julien Vitay</p>
@@ -471,9 +487,9 @@
 </div><div class="column" style="width:60%;">
 <ul>
 <li><p>Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron.</p></li>
-<li><p>The membrane potential <span class="math inline">\(V\)</span> of the neuron is governed by an electrical circuit, including sodium and potassium channels.</p></li>
-<li><p>The membrane has a <strong>capacitance</strong> <span class="math inline">\(C\)</span> that models the dynamics of the membrane (time constant).</p></li>
-<li><p>The <strong>conductance</strong> <span class="math inline">\(g_L\)</span> allows the membrane potential to relax back to its resting potential <span class="math inline">\(E_L\)</span> in the absence of external currents.</p></li>
+<li><p>The membrane potential <span class="math inline">V</span> of the neuron is governed by an electrical circuit, including sodium and potassium channels.</p></li>
+<li><p>The membrane has a <strong>capacitance</strong> <span class="math inline">C</span> that models the dynamics of the membrane (time constant).</p></li>
+<li><p>The <strong>conductance</strong> <span class="math inline">g_L</span> allows the membrane potential to relax back to its resting potential <span class="math inline">E_L</span> in the absence of external currents.</p></li>
 <li><p>For electrical engineers: it is a simple RC network…</p></li>
 <li><p>External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential.</p></li>
 </ul>
@@ -488,14 +504,14 @@
 <ul>
 <li><p>Their model include:</p>
 <ul>
-<li><p>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">\(v\)</span>.</p></li>
-<li><p>Three ODEs for <span class="math inline">\(n\)</span>, <span class="math inline">\(m\)</span> and <span class="math inline">\(h\)</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</p></li>
+<li><p>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">v</span>.</p></li>
+<li><p>Three ODEs for <span class="math inline">n</span>, <span class="math inline">m</span> and <span class="math inline">h</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</p></li>
 <li><p>Several parameters determined experimentally.</p></li>
 </ul></li>
 <li><p>Not only did they design experiments to find the parameters, but they designed the equations themselves.</p></li>
 </ul>
 </div><div class="column" style="width:60%;">
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     a_n &amp;= 0.01 \, (v + 60) / (1.0 - \exp(-0.1\, (v + 60) ) ) \\
     a_m &amp;= 0.1 \, (v + 45) / (1.0 - \exp (- 0.1 \, ( v + 45 ))) \\
@@ -508,13 +524,13 @@
     \frac{dm}{dt} &amp;= a_m \, (1 - m) - b_m \, m  \\
     \frac{dh}{dt} &amp;= a_h \, (1 - h) - b_h \, h  \\
 \end{aligned}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 \begin{aligned}
     C \, \frac{dv}{dt} = g_L \, (V_L - v) &amp;+ g_K \, n^4 \, (V_K - v) \\
         &amp; + g_\text{Na} \, m^3 \, h \, (V_\text{Na} - v) + I \\
 \end{aligned}
-\]</span></p>
+</span></p>
 </div>
 </div>
 </section>
@@ -536,12 +552,12 @@
 <li><p>What actually matters are the <strong>sub-threshold dynamics</strong>, i.e.&nbsp;what happens before the spike is emitted.</p></li>
 <li><p>The <strong>leaky integrate-and-fire</strong> (LIF) neuron integrates its input current and emits a spike if the membrane potential exceeds a threshold.</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     C \, \frac{dv}{dt} = - g_L \, (v - V_L) + I
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \text{if} \; v &gt; V_T \; \text{emit a spike and reset.}
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -559,23 +575,23 @@
 <ul>
 <li>Izhikevich quadratic IF (Izhikevich, 2001).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{dv}{dt} = 0.04 \, v^2 + 5 \, v + 140 - u + I
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \frac{du}{dt} = a \, (b \, v - u)
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:55%;">
 <ul>
 <li>Adaptive exponential IF (AdEx, Brette and Gerstner, 2005).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     C \, \frac{dv}{dt} = -g_L \ (v - E_L) + &amp; g_L \, \Delta_T \, \exp(\frac{v - v_T}{\Delta_T}) \\
                                             &amp; + I - w
 \end{aligned}
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \tau_w \, \frac{dw}{dt} = a \, (v - E_L) - w
-\]</span></p>
+</span></p>
 </div>
 </div>
 
@@ -631,8 +647,8 @@
 <ul>
 <li><p>A rate-coded neuron is represented by two time-dependent variables:</p>
 <ul>
-<li><p>The <strong>“membrane potential”</strong> <span class="math inline">\(v(t)\)</span> which evolves over time using an ODE.</p></li>
-<li><p>The <strong>firing rate</strong> <span class="math inline">\(r(t)\)</span> which transforms the membrane potential into a single continuous value using a <strong>transfer function</strong> or <strong>activation function</strong>.</p></li>
+<li><p>The <strong>“membrane potential”</strong> <span class="math inline">v(t)</span> which evolves over time using an ODE.</p></li>
+<li><p>The <strong>firing rate</strong> <span class="math inline">r(t)</span> which transforms the membrane potential into a single continuous value using a <strong>transfer function</strong> or <strong>activation function</strong>.</p></li>
 </ul></li>
 </ul>
 <div class="columns">
@@ -644,16 +660,16 @@
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>Rate-coded neuron</strong></p>
-<p><span class="math display">\[
+<p><span class="math display">
     \tau \, \frac{d v(t)}{dt} + v(t) = \sum_{i=1}^d w_{i, j} \, r_i(t) + b
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     r(t) = f(v(t))
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
-<li>The membrane potential uses a weighted sum of inputs (the firing rates <span class="math inline">\(r_i(t)\)</span> of other neurons) by multiplying each rate with a <strong>weight</strong> <span class="math inline">\(w_i\)</span> and adds a constant value <span class="math inline">\(b\)</span> (the <strong>bias</strong>). The activation function can be any non-linear function, usually making sure that the firing rate is positive.</li>
+<li>The membrane potential uses a weighted sum of inputs (the firing rates <span class="math inline">r_i(t)</span> of other neurons) by multiplying each rate with a <strong>weight</strong> <span class="math inline">w_i</span> and adds a constant value <span class="math inline">b</span> (the <strong>bias</strong>). The activation function can be any non-linear function, usually making sure that the firing rate is positive.</li>
 </ul>
 </section>
 
@@ -668,25 +684,25 @@
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>Let’s consider a simple rate-coded neuron taking a step signal <span class="math inline">\(I(t)\)</span> as input:</li>
+<li>Let’s consider a simple rate-coded neuron taking a step signal <span class="math inline">I(t)</span> as input:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \tau \, \frac{d v(t)}{dt} + v(t) = I(t)
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     r(t) = (v(t))^+
-\]</span></p>
+</span></p>
 <ul>
-<li>The “speed” of <span class="math inline">\(v(t)\)</span> is given by its temporal derivative:</li>
+<li>The “speed” of <span class="math inline">v(t)</span> is given by its temporal derivative:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{d v(t)}{dt} = \frac{I(t) - v(t)}{\tau}
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
-<li><p>When <span class="math inline">\(v(t)\)</span> is quite different from <span class="math inline">\(I(t)\)</span>, the membrane potential “accelerates” to reduce the difference.</p></li>
-<li><p>When <span class="math inline">\(v(t)\)</span> is similar to <span class="math inline">\(I(t)\)</span>, the membrane potential stays constant.</p></li>
+<li><p>When <span class="math inline">v(t)</span> is quite different from <span class="math inline">I(t)</span>, the membrane potential “accelerates” to reduce the difference.</p></li>
+<li><p>When <span class="math inline">v(t)</span> is similar to <span class="math inline">I(t)</span>, the membrane potential stays constant.</p></li>
 </ul>
 </section>
 
@@ -701,8 +717,8 @@
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>The membrane potential follows an exponential function which tries to “match” its input with a speed determined by the <strong>time constant</strong> <span class="math inline">\(\tau\)</span>.</p></li>
-<li><p>The time constant <span class="math inline">\(\tau\)</span> determines how fast the rate-coded neuron matches its inputs.</p></li>
+<li><p>The membrane potential follows an exponential function which tries to “match” its input with a speed determined by the <strong>time constant</strong> <span class="math inline">\tau</span>.</p></li>
+<li><p>The time constant <span class="math inline">\tau</span> determines how fast the rate-coded neuron matches its inputs.</p></li>
 <li><p>Biological neurons have time constants between 5 and 30 ms depending on the cell type.</p></li>
 </ul>
 </div>
@@ -719,10 +735,10 @@
 <ul>
 <li>When using the rectifier activation function</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \max(0, x)
-\]</span></p>
-<p>the membrane potential <span class="math inline">\(v(t)\)</span> can take any value, but the firing rate <span class="math inline">\(r(t)\)</span> is only positive.</p>
+</span></p>
+<p>the membrane potential <span class="math inline">v(t)</span> can take any value, but the firing rate <span class="math inline">r(t)</span> is only positive.</p>
 
 <img data-src="img/ratecoded-simple2.png" class="r-stretch quarto-figure-center"></section>
 
@@ -731,10 +747,10 @@
 <ul>
 <li>When using the logistic (or sigmoid) activation function</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \frac{1}{1 + \exp(-x)}
-\]</span></p>
-<p>the firing rate <span class="math inline">\(r(t)\)</span> is bounded between 0 and 1, but responds for negative membrane potentials.</p>
+</span></p>
+<p>the firing rate <span class="math inline">r(t)</span> is bounded between 0 and 1, but responds for negative membrane potentials.</p>
 
 <img data-src="img/ratecoded-simple3.png" class="r-stretch quarto-figure-center"></section>
 
@@ -743,12 +759,12 @@
 <ul>
 <li>Networks of interconnected rate-coded neurons can exhibit very complex dynamics (e.g.&nbsp;<strong>reservoir computing</strong>).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \tau \frac{dv(t)}{dt} + v(t) = \sum_\text{input} w^\text{I} \, I(t) + g \,  \sum_\text{rec} w^\text{R} \, r(t) + \xi(t)
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     r(t) = \tanh(v(t))
-\]</span></p>
+</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -780,17 +796,17 @@
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>Artificial neuron</strong></p>
-<p><span class="math display">\[
+<p><span class="math display">
     y = f( \sum_{i=1}^d w_i \, x_i + b)
-\]</span></p>
+</span></p>
 <ul>
-<li><p>An artificial neuron sums its inputs <span class="math inline">\(x_1, \ldots, x_d\)</span> by multiplying them with weights <span class="math inline">\(w_1, \ldots, w_d\)</span>, adds a bias <span class="math inline">\(b\)</span> and transforms the result into an output <span class="math inline">\(y\)</span> using an activation function <span class="math inline">\(f\)</span>.</p></li>
-<li><p>The output <span class="math inline">\(y\)</span> directly reflects the input, without temporal integration.</p></li>
+<li><p>An artificial neuron sums its inputs <span class="math inline">x_1, \ldots, x_d</span> by multiplying them with weights <span class="math inline">w_1, \ldots, w_d</span>, adds a bias <span class="math inline">b</span> and transforms the result into an output <span class="math inline">y</span> using an activation function <span class="math inline">f</span>.</p></li>
+<li><p>The output <span class="math inline">y</span> directly reflects the input, without temporal integration.</p></li>
 </ul>
 </div>
 </div>
 <ul>
-<li><p>The <strong>weighted sum of inputs + bias</strong> <span class="math inline">\(\sum_{i=1}^d w_i \, x_i + b\)</span> is called the <strong>net activation</strong>.</p></li>
+<li><p>The <strong>weighted sum of inputs + bias</strong> <span class="math inline">\sum_{i=1}^d w_i \, x_i + b</span> is called the <strong>net activation</strong>.</p></li>
 <li><p>This overly simplified neuron model is the basic unit of the <strong>artificial neural networks</strong> (ANN) used in machine learning / deep learning.</p></li>
 </ul>
 </section>
@@ -798,12 +814,12 @@
 <section id="artificial-neurons-and-hyperplanes" class="title-slide slide level1 center">
 <h1>Artificial neurons and hyperplanes</h1>
 <ul>
-<li><p>Let’s consider an artificial neuron with only two inputs <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p></li>
-<li><p>The net activation <span class="math inline">\(w_1 \, x_1 + w_2 \, x_2 + b\)</span> is the equation of a line in the space <span class="math inline">\((x_1, x_2)\)</span>.</p></li>
+<li><p>Let’s consider an artificial neuron with only two inputs <span class="math inline">x_1</span> and <span class="math inline">x_2</span>.</p></li>
+<li><p>The net activation <span class="math inline">w_1 \, x_1 + w_2 \, x_2 + b</span> is the equation of a line in the space <span class="math inline">(x_1, x_2)</span>.</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     w_1 \, x_1 + w_2 \, x_2 + b = 0 \Leftrightarrow x_2 = - \frac{w_1}{w_2} \, x_1 - \frac{b}{w_2}
-\]</span></p>
+</span></p>
 
 <img data-src="img/artificialneuron-simple.png" style="width:50.0%" class="r-stretch quarto-figure-center"></section>
 
@@ -819,23 +835,23 @@
 </div>
 <ul>
 <li><p>The net activation is a line in 2D, a plane in 3D, etc.</p></li>
-<li><p>Generally, the net activation describes an <strong>hyperplane</strong> in the input space with <span class="math inline">\(d\)</span> dimensions <span class="math inline">\((x_1, x_2, \ldots, x_d)\)</span>.</p></li>
+<li><p>Generally, the net activation describes an <strong>hyperplane</strong> in the input space with <span class="math inline">d</span> dimensions <span class="math inline">(x_1, x_2, \ldots, x_d)</span>.</p></li>
 <li><p>An hyperplane has one dimension less than the space.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>We can write the net activation using a <strong>weight vector</strong> <span class="math inline">\(\mathbf{w}\)</span> and a <strong>bias</strong> <span class="math inline">\(b\)</span>:</li>
+<li>We can write the net activation using a <strong>weight vector</strong> <span class="math inline">\mathbf{w}</span> and a <strong>bias</strong> <span class="math inline">b</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \sum_{i=1}^d w_i \, x_i + b  = \langle\mathbf{w} \cdot \mathbf{x} \rangle + b
-\]</span></p>
+</span></p>
 <p>with:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \\ \ldots \\ w_d \end{bmatrix} \qquad \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \ldots \\ x_d \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
-<li><p><span class="math inline">\(\langle \cdot \rangle\)</span> is the <strong>dot product</strong> (aka inner product, scalar product) between the <strong>input vector</strong> <span class="math inline">\(\mathbf{x}\)</span> and the weight vector <span class="math inline">\(\mathbf{w}\)</span>.</p></li>
-<li><p>The weight vector is orthogonal to the hyperplane <span class="math inline">\((\mathbf{w}, b)\)</span> and defines its orientation. <span class="math inline">\(b\)</span> is the “signed distance” between the hyperplane and the origin.</p></li>
+<li><p><span class="math inline">\langle \cdot \rangle</span> is the <strong>dot product</strong> (aka inner product, scalar product) between the <strong>input vector</strong> <span class="math inline">\mathbf{x}</span> and the weight vector <span class="math inline">\mathbf{w}</span>.</p></li>
+<li><p>The weight vector is orthogonal to the hyperplane <span class="math inline">(\mathbf{w}, b)</span> and defines its orientation. <span class="math inline">b</span> is the “signed distance” between the hyperplane and the origin.</p></li>
 </ul>
 </div>
 </div>
@@ -846,8 +862,8 @@
 <ul>
 <li><p>The hyperplane separates the input space into two parts:</p>
 <ul>
-<li><p><span class="math inline">\(\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &gt; 0\)</span> for all points <span class="math inline">\(\mathbf{x}\)</span> <strong>above</strong> the hyperplane.</p></li>
-<li><p><span class="math inline">\(\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &lt; 0\)</span> for all points <span class="math inline">\(\mathbf{x}\)</span> <strong>below</strong> the hyperplane.</p></li>
+<li><p><span class="math inline">\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &gt; 0</span> for all points <span class="math inline">\mathbf{x}</span> <strong>above</strong> the hyperplane.</p></li>
+<li><p><span class="math inline">\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &lt; 0</span> for all points <span class="math inline">\mathbf{x}</span> <strong>below</strong> the hyperplane.</p></li>
 </ul></li>
 <li><p>By looking at the <strong>sign</strong> of the net activation, we can separate the input space into two classes.</p></li>
 </ul>
@@ -884,7 +900,6 @@
   <script src="1.3-Neurons_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="1.3-Neurons_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="1.3-Neurons_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="1.3-Neurons_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1053,27 +1068,9 @@
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

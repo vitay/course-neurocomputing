@@ -3,17 +3,6 @@
 Slides: [html](../slides/7.1-Transformers.html){target="_blank"} [pdf](../slides/pdf/7.1-Transformers.pdf){target="_blank"}
 
 
-:::{.callout-note}
-Most figures and all videos in this chapter are taken from a series of great blog posts by Jay Alammar:
-
-<http://jalammar.github.io/illustrated-transformer/>
-
-<https://jalammar.github.io/illustrated-bert/>
-
-<https://jalammar.github.io/illustrated-gpt2/>
-:::
-
-
 ## Transformers
 
 

@@ -1,6 +1,6 @@
 all: notes slides
 
-slides_targets := $(wildcard slides/*.md)
+slides_targets := $(wildcard slides/*.qmd)
 notebook_targets := $(wildcard slides/exercises/*.ipynb)
 slides: $(slides_targets) $(notebook_targets)
 	quarto render $? --to revealjs
@@ -18,7 +18,7 @@ clean:
 	quarto render slides --to revealjs
 	quarto render notes --to html
 
-export: clean
+export: 
 	git add *
 	git commit -a -m "`date`"
 	git push origin master

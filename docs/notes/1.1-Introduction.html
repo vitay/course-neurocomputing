@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -102,12 +117,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -199,7 +214,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -224,7 +239,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,7 +277,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +322,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -499,11 +519,11 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <a href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf" class="uri">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></figcaption><p></p>
 </figure>
 </div>
-<p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math inline">\(N\)</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math inline">\(\mathbf{x}_i\)</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math inline">\(t_i\)</span>.</p>
-<p>What we want to learn is <strong>parameterized model</strong> <span class="math inline">\(y_i = f_\theta (\mathbf{x}_i)\)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math inline">\(\theta\)</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e.&nbsp;the discrepancy between the prediction <span class="math inline">\(y_i = f_\theta (\mathbf{x}_i)\)</span> and the desired output <span class="math inline">\(t_i\)</span>.</p>
-<p>Depending on the nature of the outputs <span class="math inline">\(t\)</span>, we have two different supervised problems:</p>
+<p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math inline">N</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math inline">\mathbf{x}_i</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math inline">t_i</span>.</p>
+<p>What we want to learn is <strong>parameterized model</strong> <span class="math inline">y_i = f_\theta (\mathbf{x}_i)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math inline">\theta</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e.&nbsp;the discrepancy between the prediction <span class="math inline">y_i = f_\theta (\mathbf{x}_i)</span> and the desired output <span class="math inline">t_i</span>.</p>
+<p>Depending on the nature of the outputs <span class="math inline">t</span>, we have two different supervised problems:</p>
 <ul>
-<li>In <strong>regression</strong> tasks, the outputs can take an infinity of values (e.g.&nbsp;real numbers). The following figure shows how examples of flat surfaces (input <span class="math inline">\(x_i\)</span>) and prices (output <span class="math inline">\(t_i\)</span>) collected in the neighborhood can be used to predict the price of a new flat. After collecting enough samples, a model is trained to minimize its prediction error. Here, a linear model is used (black line) as we perform <strong>linear regression</strong>, but any other type of function could be used. The parameters of the line (slope and intercept) are adapted so that the line lies close to the data: the predicted price <span class="math inline">\(y_i\)</span> is never far from the ground truth <span class="math inline">\(t_i\)</span>. Using that line after learning, we can predict that a 60 square meters flat should be rented around 550 euros/month.</li>
+<li>In <strong>regression</strong> tasks, the outputs can take an infinity of values (e.g.&nbsp;real numbers). The following figure shows how examples of flat surfaces (input <span class="math inline">x_i</span>) and prices (output <span class="math inline">t_i</span>) collected in the neighborhood can be used to predict the price of a new flat. After collecting enough samples, a model is trained to minimize its prediction error. Here, a linear model is used (black line) as we perform <strong>linear regression</strong>, but any other type of function could be used. The parameters of the line (slope and intercept) are adapted so that the line lies close to the data: the predicted price <span class="math inline">y_i</span> is never far from the ground truth <span class="math inline">t_i</span>. Using that line after learning, we can predict that a 60 square meters flat should be rented around 550 euros/month.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -511,7 +531,7 @@ div.csl-indent {
 </figure>
 </div>
 <ul>
-<li>In <strong>classification</strong> tasks, the outputs are discrete, i.e.&nbsp;take only a finite number of different values (called classes or labels). When there are only two classes, they are called the positive and negative classes and the problem is a <strong>binary classification</strong>. The two classes can represent yes/no binary values, such as when when a test is positive or negative. When there are more than two classes, they can for example represent different objects (car / bike / dog / cat…) that can be recognized on an image. The following figure depicts a binary classifiation problem, where two input features <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> (temperature and blood pressure) are used to predict the occurence of an illness (yes = ill, no = sane). The linear model is a line that separates the input space into two separate regions: all points above the line are categorized (classified) as ill, all points below as sane, even if they were not in the training data.</li>
+<li>In <strong>classification</strong> tasks, the outputs are discrete, i.e.&nbsp;take only a finite number of different values (called classes or labels). When there are only two classes, they are called the positive and negative classes and the problem is a <strong>binary classification</strong>. The two classes can represent yes/no binary values, such as when when a test is positive or negative. When there are more than two classes, they can for example represent different objects (car / bike / dog / cat…) that can be recognized on an image. The following figure depicts a binary classifiation problem, where two input features <span class="math inline">x_1</span> and <span class="math inline">x_2</span> (temperature and blood pressure) are used to predict the occurence of an illness (yes = ill, no = sane). The linear model is a line that separates the input space into two separate regions: all points above the line are categorized (classified) as ill, all points below as sane, even if they were not in the training data.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -522,7 +542,7 @@ div.csl-indent {
 <section id="feedforward-neural-networks" class="level4">
 <h4 class="anchored" data-anchor-id="feedforward-neural-networks">Feedforward neural networks</h4>
 <p>As we will see later, an <strong>artificial neuron</strong> is a mathematical model able to perform <strong>linear</strong> classification or regression using weighted sums of inputs:</p>
-<p><span class="math display">\[y = f(\sum_{i=1}^d w_i \, x_i + b)\]</span></p>
+<p><span class="math display">y = f(\sum_{i=1}^d w_i \, x_i + b)</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
@@ -586,7 +606,7 @@ div.csl-indent {
 <section id="unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised learning</h3>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/uIrBgz4OPlM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>In supervised learning, we use <strong>annotated data</strong>, i.e.&nbsp;pairs <span class="math inline">\((x_i, t_i)\)</span> of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it.</p>
+<p>In supervised learning, we use <strong>annotated data</strong>, i.e.&nbsp;pairs <span class="math inline">(x_i, t_i)</span> of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it.</p>
 <p>In <strong>unsupervised learning</strong>, we only have inputs. The goal of the algorithms is to make sense out of the data: extract regularities, model the underlying distribution, group examples into clusters, etc… It may seem much harder than supervised learning, as there is no ground truth to measure performance, but data is very cheap to obtain.</p>
 <section id="clustering-and-feature-extraction" class="level4">
 <h4 class="anchored" data-anchor-id="clustering-and-feature-extraction">Clustering and feature extraction</h4>
@@ -645,14 +665,14 @@ div.csl-indent {
 <p>Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:</p>
 <p><a href="https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/" class="uri">https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/</a></p>
 <p>but it has recently gained a lot of importance when coupled with deep learning principles. Here we just present a couple of application of <strong>deep reinforcement learning</strong> to motivate you to also assist to this course.</p>
-<p>RL models the sequential interaction between an <strong>agent</strong> (algorithm, robot) and its <strong>environment</strong>. At each time step <span class="math inline">\(t\)</span>, the agent is a state <span class="math inline">\(s_t\)</span> and selects an action <span class="math inline">\(a_t\)</span> according to its policy (or strategy) <span class="math inline">\(\pi\)</span>. This brings the agent in a new state <span class="math inline">\(s_{t+1}\)</span> and provides a reward <span class="math inline">\(r_{t+1}\)</span>. The reward is the only feedback that the agent receives about its action: when it is positive, it is good; when it is negative, it is bad. The goal of the of the agent is to maximize the sum of rewards that it receives <strong>on the long-term</strong>. For example in a video game, the states would correspond to each video frame, the actions are joystick movements and the rewards are scores increases and decreases. The goal is to move the joystick correctly so that the final cumulated score is maximal.</p>
+<p>RL models the sequential interaction between an <strong>agent</strong> (algorithm, robot) and its <strong>environment</strong>. At each time step <span class="math inline">t</span>, the agent is a state <span class="math inline">s_t</span> and selects an action <span class="math inline">a_t</span> according to its policy (or strategy) <span class="math inline">\pi</span>. This brings the agent in a new state <span class="math inline">s_{t+1}</span> and provides a reward <span class="math inline">r_{t+1}</span>. The reward is the only feedback that the agent receives about its action: when it is positive, it is good; when it is negative, it is bad. The goal of the of the agent is to maximize the sum of rewards that it receives <strong>on the long-term</strong>. For example in a video game, the states would correspond to each video frame, the actions are joystick movements and the rewards are scores increases and decreases. The goal is to move the joystick correctly so that the final cumulated score is maximal.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rl-loop.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Agent-environment interaction in RL. Source: <a href="https://ieeexplore.ieee.org/document/7839568" class="uri">https://ieeexplore.ieee.org/document/7839568</a></figcaption><p></p>
 </figure>
 </div>
-<p>In deep RL, the policy <span class="math inline">\(\pi\)</span> is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let’s have a look at some applications:</p>
+<p>In deep RL, the policy <span class="math inline">\pi</span> is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let’s have a look at some applications:</p>
 <ul>
 <li>The first achievement of deep RL was the <strong>deep Q-network (DQN)</strong> of Deepmind able to solve a multitude of old Atari games from scratch using raw video inputs:</li>
 </ul>
@@ -686,34 +706,34 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Badrinarayanan2016" class="csl-entry" role="doc-biblioentry">
-Badrinarayanan, V., Kendall, A., and Cipolla, R. (2016). <span>SegNet</span>: <span>A Deep Convolutional Encoder-Decoder Architecture</span> for <span>Image Segmentation</span>. <em>arXiv:1511.00561 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1511.00561">https://arxiv.org/abs/1511.00561</a>.
+Badrinarayanan, V., Kendall, A., and Cipolla, R. (2016). <span>SegNet</span>: <span>A Deep Convolutional Encoder-Decoder Architecture</span> for <span>Image Segmentation</span>. Available at: <a href="http://arxiv.org/abs/1511.00561">http://arxiv.org/abs/1511.00561</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Bojarski2016" class="csl-entry" role="doc-biblioentry">
-Bojarski, M., Del Testa, D., Dworakowski, D., Firner, B., Flepp, B., Goyal, P., et al. (2016). End to <span>End Learning</span> for <span>Self-Driving Cars</span>. <em>arXiv:1604.07316 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1604.07316">https://arxiv.org/abs/1604.07316</a>.
+Bojarski, M., Del Testa, D., Dworakowski, D., Firner, B., Flepp, B., Goyal, P., et al. (2016). End to <span>End Learning</span> for <span>Self-Driving Cars</span>. Available at: <a href="http://arxiv.org/abs/1604.07316">http://arxiv.org/abs/1604.07316</a> [Accessed September 17, 2020].
 </div>
 <div id="ref-Goodfellow2014" class="csl-entry" role="doc-biblioentry">
-Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., et al. (2014). Generative <span>Adversarial Networks</span>. <em>arXiv:1406.2661 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1406.2661">https://arxiv.org/abs/1406.2661</a>.
+Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., et al. (2014). Generative <span>Adversarial Networks</span>. Available at: <a href="http://arxiv.org/abs/1406.2661">http://arxiv.org/abs/1406.2661</a>.
 </div>
 <div id="ref-He2018" class="csl-entry" role="doc-biblioentry">
-He, K., Gkioxari, G., Dollár, P., and Girshick, R. (2018). Mask <span>R-CNN</span>. <em>arXiv:1703.06870 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1703.06870">https://arxiv.org/abs/1703.06870</a>.
+He, K., Gkioxari, G., Dollár, P., and Girshick, R. (2018). Mask <span>R-CNN</span>. Available at: <a href="http://arxiv.org/abs/1703.06870">http://arxiv.org/abs/1703.06870</a> [Accessed September 17, 2020].
 </div>
 <div id="ref-Hochreiter1997" class="csl-entry" role="doc-biblioentry">
-Hochreiter, S., and Schmidhuber, J. (1997). Long short-term memory. <em>Neural computation</em> 9, 1735–80.
+Hochreiter, S., and Schmidhuber, J. (1997). Long short-term memory. <em>Neural computation</em> 9, 1735–80. Available at: <a href="https://www.ncbi.nlm.nih.gov/pubmed/9377276">https://www.ncbi.nlm.nih.gov/pubmed/9377276</a>.
 </div>
 <div id="ref-Kingma2013" class="csl-entry" role="doc-biblioentry">
-Kingma, D. P., and Welling, M. (2013). Auto-<span>Encoding Variational Bayes</span>. <em>arXiv:1312.6114 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1312.6114">https://arxiv.org/abs/1312.6114</a>.
+Kingma, D. P., and Welling, M. (2013). Auto-<span>Encoding Variational Bayes</span>. Available at: <a href="http://arxiv.org/abs/1312.6114">http://arxiv.org/abs/1312.6114</a>.
 </div>
 <div id="ref-Krizhevsky2012" class="csl-entry" role="doc-biblioentry">
-Krizhevsky, A., Sutskever, I., and Hinton, G. E. (2012). <span>ImageNet Classification</span> with <span>Deep Convolutional Neural Networks</span>. in <em>Advances in <span>Neural Information Processing Systems</span> (<span>NIPS</span>)</em>.
+Krizhevsky, A., Sutskever, I., and Hinton, G. E. (2012). <span>ImageNet Classification</span> with <span>Deep Convolutional Neural Networks</span>. in <em>Advances in <span>Neural Information Processing Systems</span> (<span>NIPS</span>)</em> Available at: <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf</a>.
 </div>
 <div id="ref-LeCun1998" class="csl-entry" role="doc-biblioentry">
 LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). Gradient <span>Based Learning Applied</span> to <span>Document Recognition</span>. <em>Proceedings of the IEEE</em> 86, 2278–2324. doi:<a href="https://doi.org/10.1109/5.726791">10.1109/5.726791</a>.
 </div>
 <div id="ref-McInnes2020" class="csl-entry" role="doc-biblioentry">
-McInnes, L., Healy, J., and Melville, J. (2020). <span>UMAP</span>: <span>Uniform Manifold Approximation</span> and <span>Projection</span> for <span>Dimension Reduction</span>. <em>arXiv:1802.03426 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/1802.03426">https://arxiv.org/abs/1802.03426</a>.
+McInnes, L., Healy, J., and Melville, J. (2020). <span>UMAP</span>: <span>Uniform Manifold Approximation</span> and <span>Projection</span> for <span>Dimension Reduction</span>. Available at: <a href="http://arxiv.org/abs/1802.03426">http://arxiv.org/abs/1802.03426</a> [Accessed September 23, 2020].
 </div>
 <div id="ref-Redmon2016" class="csl-entry" role="doc-biblioentry">
-Redmon, J., and Farhadi, A. (2016). <span>YOLO9000</span>: <span>Better</span>, <span>Faster</span>, <span>Stronger</span>. <em>arXiv:1612.08242 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1612.08242">https://arxiv.org/abs/1612.08242</a>.
+Redmon, J., and Farhadi, A. (2016). <span>YOLO9000</span>: <span>Better</span>, <span>Faster</span>, <span>Stronger</span>. Available at: <a href="http://arxiv.org/abs/1612.08242">http://arxiv.org/abs/1612.08242</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Rumelhart1986a" class="csl-entry" role="doc-biblioentry">
 Rumelhart, D. E., Hinton, G. E., and Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em> 323, 533–536. doi:<a href="https://doi.org/10.1038/323533a0">10.1038/323533a0</a>.
@@ -833,6 +853,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

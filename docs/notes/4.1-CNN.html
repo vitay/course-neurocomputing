@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -144,7 +144,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -165,12 +180,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -262,7 +277,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -287,7 +302,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -325,7 +340,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -365,7 +385,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -475,6 +495,28 @@ div.csl-indent {
   <li><a href="#backpropagation-through-a-max-pooling-layer" id="toc-backpropagation-through-a-max-pooling-layer" class="nav-link" data-scroll-target="#backpropagation-through-a-max-pooling-layer">Backpropagation through a max-pooling layer</a></li>
   <li><a href="#convolutional-neural-networks-1" id="toc-convolutional-neural-networks-1" class="nav-link" data-scroll-target="#convolutional-neural-networks-1">Convolutional Neural Networks</a></li>
   </ul></li>
+  <li><a href="#some-famous-convolutional-networks" id="toc-some-famous-convolutional-networks" class="nav-link" data-scroll-target="#some-famous-convolutional-networks">Some famous convolutional networks</a>
+  <ul class="collapse">
+  <li><a href="#neocognitron" id="toc-neocognitron" class="nav-link" data-scroll-target="#neocognitron">Neocognitron</a></li>
+  <li><a href="#lenet" id="toc-lenet" class="nav-link" data-scroll-target="#lenet">LeNet</a></li>
+  <li><a href="#alexnet" id="toc-alexnet" class="nav-link" data-scroll-target="#alexnet">AlexNet</a></li>
+  <li><a href="#vgg-16" id="toc-vgg-16" class="nav-link" data-scroll-target="#vgg-16">VGG-16</a></li>
+  <li><a href="#googlenet---inception-v1" id="toc-googlenet---inception-v1" class="nav-link" data-scroll-target="#googlenet---inception-v1">GoogLeNet - Inception v1</a></li>
+  <li><a href="#resnet" id="toc-resnet" class="nav-link" data-scroll-target="#resnet">ResNet</a></li>
+  <li><a href="#highnets-highway-networks" id="toc-highnets-highway-networks" class="nav-link" data-scroll-target="#highnets-highway-networks">HighNets: Highway networks</a></li>
+  <li><a href="#densenets-dense-networks" id="toc-densenets-dense-networks" class="nav-link" data-scroll-target="#densenets-dense-networks">DenseNets: Dense networks</a></li>
+  <li><a href="#model-zoos" id="toc-model-zoos" class="nav-link" data-scroll-target="#model-zoos">Model zoos</a></li>
+  </ul></li>
+  <li><a href="#applications-of-cnn" id="toc-applications-of-cnn" class="nav-link" data-scroll-target="#applications-of-cnn">Applications of CNN</a>
+  <ul class="collapse">
+  <li><a href="#object-recognition" id="toc-object-recognition" class="nav-link" data-scroll-target="#object-recognition">Object recognition</a></li>
+  <li><a href="#facial-recognition" id="toc-facial-recognition" class="nav-link" data-scroll-target="#facial-recognition">Facial recognition</a></li>
+  <li><a href="#pose-estimation" id="toc-pose-estimation" class="nav-link" data-scroll-target="#pose-estimation">Pose estimation</a></li>
+  <li><a href="#speech-recognition" id="toc-speech-recognition" class="nav-link" data-scroll-target="#speech-recognition">Speech recognition</a></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment analysis</a></li>
+  <li><a href="#wavenet-text-to-speech-synthesis" id="toc-wavenet-text-to-speech-synthesis" class="nav-link" data-scroll-target="#wavenet-text-to-speech-synthesis">Wavenet : text-to-speech synthesis</a></li>
+  </ul></li>
+  <li><a href="#transfer-learning" id="toc-transfer-learning" class="nav-link" data-scroll-target="#transfer-learning">Transfer learning</a></li>
   <li><a href="#ensemble-learning" id="toc-ensemble-learning" class="nav-link" data-scroll-target="#ensemble-learning">Ensemble learning</a>
   <ul class="collapse">
   <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging">Bagging</a></li>
@@ -511,7 +553,7 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>The different layers of a deep network extract increasingly complex features.</p>
 <blockquote class="blockquote">
-<p>edges <span class="math inline">\(\rightarrow\)</span> contours <span class="math inline">\(\rightarrow\)</span> shapes <span class="math inline">\(\rightarrow\)</span> objects</p>
+<p>edges <span class="math inline">\rightarrow</span> contours <span class="math inline">\rightarrow</span> shapes <span class="math inline">\rightarrow</span> objects</p>
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -519,7 +561,7 @@ div.csl-indent {
 </figure>
 </div>
 <p>Using full images as inputs leads to an explosion of the number of weights to be learned: A moderately big 800 * 600 image has 480,000 pixels with RGB values. The number of dimensions of the input space is 800 * 600 * 3 = 1.44 million. Even if you take only 1000 neurons in the first hidden layer, you get 1.44 <strong>billion</strong> weights to learn, just for the first layer. To obtain a generalization error in the range of 10%, you would need at least 14 billion training examples…</p>
-<p><span class="math display">\[\epsilon \approx \frac{\text{VC}_\text{dim}}{N}\]</span></p>
+<p><span class="math display">\epsilon \approx \frac{\text{VC}_\text{dim}}{N}</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/fullyconnected.png" class="img-fluid figure-img" style="width:50.0%"></p>
@@ -542,8 +584,8 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">Principle of a convolution. Source: <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" class="uri">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></figcaption><p></p>
 </figure>
 </div>
-<p>In a <strong>convolutional layer</strong>, <span class="math inline">\(d\)</span> filters are defined with very small sizes (3x3, 5x5…). Each filter is convoluted over the input image (or the previous layer) to create a <strong>feature map</strong>. The set of <span class="math inline">\(d\)</span> feature maps becomes a new 3D structure: a <strong>tensor</strong>.</p>
-<p><span class="math display">\[\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k\]</span></p>
+<p>In a <strong>convolutional layer</strong>, <span class="math inline">d</span> filters are defined with very small sizes (3x3, 5x5…). Each filter is convoluted over the input image (or the previous layer) to create a <strong>feature map</strong>. The set of <span class="math inline">d</span> feature maps becomes a new 3D structure: a <strong>tensor</strong>.</p>
+<p><span class="math display">\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/depthcol.jpeg" class="img-fluid figure-img" style="width:50.0%"></p>
@@ -611,7 +653,7 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">Backward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
 </figure>
 </div>
-<p>The filter just has to be flipped (<span class="math inline">\(180^o\)</span> symmetry) before the convolution.</p>
+<p>The filter just has to be flipped (<span class="math inline">180^o</span> symmetry) before the convolution.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolution-flipped.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -619,8 +661,8 @@ div.csl-indent {
 </figure>
 </div>
 <p>The convolution operation is differentiable, so we can apply backpropagation and learn the filters.</p>
-<p><span class="math display">\[\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k\]</span></p>
-<p><span class="math display">\[\frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = W_k^F \ast \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}\]</span></p>
+<p><span class="math display">\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k</span></p>
+<p><span class="math display">\frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = W_k^F \ast \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}</span></p>
 </section>
 <section id="backpropagation-through-a-max-pooling-layer" class="level3">
 <h3 class="anchored" data-anchor-id="backpropagation-through-a-max-pooling-layer">Backpropagation through a max-pooling layer</h3>
@@ -641,7 +683,16 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">Convolutional Neural Network. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<p>````{admonition} Implementing a CNN in keras</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Implementing a CNN in keras
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Convolutional and max-pooling layers are regular objects in keras/tensorflow/pytorch/etc. You do not need to care about their implementation, they are designed to run fast on GPUs. You have to apply to the CNN all the usual tricks: optimizers, dropout, batch normalization, etc.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Sequential()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model.add(Input(X_train.shape[<span class="dv">1</span>:]))</span>
@@ -677,273 +728,336 @@ div.csl-indent {
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>opt,</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>[<span class="st">'accuracy'</span>]</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>
-## Some famous convolutional networks
-
-
-
-
-
-
-
-
-
-### Neocognitron
-
-The **Neocognitron** (Fukushima, 1980 [@Fukushima1980]) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.
-
-![Neocognitron. [@Fukushima1980]. Source: &lt;https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg&gt;](../slides/img/Neocognitron.jpg){width=80%}
-
-
-### LeNet
-
-**LeNet** (1998, Yann LeCun at AT&amp;T labs [@LeCun1998]) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two **mean**-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).
-
-![LeNet5. [@LeCun1998].](../slides/img/lenet.png){width=100%}
-### AlexNet
-
-**AlexNet** (2012, Toronto University [@Krizhevsky2012]) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU,  max-pooling, dropout, SGD with momentum, L2 regularization.
-
-![Alexnet [@Krizhevsky2012].](../slides/img/alexnet.png){width=100%}
-
-
-### VGG-16
-
-**VGG-16** (2014, Visual Geometry Group, Oxford [@Simonyan2015]) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.
-
-![VGG-16 [@Simonyan2015].](../slides/img/vgg16.png){width=70%}
-
-
-### GoogLeNet - Inception v1
-
-
-**GoogLeNet** (2014, Google Brain [@Szegedy2015]) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.
-
-![GoogLeNet [@Szegedy2015].](../slides/img/googlenet-arch.jpg){width=100%}
-
-Inside GoogleNet, each **Inception** module learns features at different resolutions using convolutions and max poolings of different sizes. 1x1 convolutions are **shared MLPS**: they transform a $(w, h, d_1)$ tensor into $(w, h, d_2)$ pixel per pixel. The resulting feature maps are concatenated along the feature dimension and passed to the next module.
-
-![Inception module [@Szegedy2015].](../slides/img/inception.png){width=100%}
-
-Three softmax layers predict the classes at different levels of the network. The combined loss is:
-
-$$\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]$$
-
-Only the deeper softmax layer matters for the prediction. The additional losses improve convergence by fight vanishing gradients: the early layers get useful gradients from the lower softmax layers.
-
-Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception... Xception [@Chollet2017b] has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in `keras`:
-
-```python
-tf.keras.applications.Xception(include_top=True, weights="imagenet")
-```
-
-![Inception v3 [@Chollet2017b]. Source: &lt;https://cloud.google.com/tpu/docs/inception-v3-advanced&gt;](../slides/img/inceptionv3.png){width=100%}
-
-### ResNet
-
-**ResNet** (2015, Microsoft [@He2015]) won ImageNet 2015. Instead of learning to transform an input directly with $\mathbf{h}_n = f_W(\mathbf{h}_{n-1})$, a **residual layer** learns to represent the residual between the output and the input:
-
-$$
-    \mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}  \quad \rightarrow \quad f_W(\mathbf{h}_{n-1}) = \mathbf{h}_n - \mathbf{h}_{n-1}
-$$
-
-![Residual layer with skip connections  [@He2015].](../slides/img/resnetlayer.jpg){width=60%}
-
-These **skip connections** allow the network to decide how deep it has to be. If the layer is not needed, the residual layer learns to output 0.
-
-![ResNet  [@He2015].](../slides/img/resnet2.png){width=20%}
-
-Skip connections help overcome the **vanishing gradients** problem, as the contribution of bypassed layers to the backpropagated gradient is 1.
-
-$$\mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}$$
-
-$$\frac{\partial \mathbf{h}_n}{\partial \mathbf{h}_{n-1}} = \frac{\partial f_W(\mathbf{h}_{n-1})}{\partial \mathbf{h}_{n-1}} + 1$$
-
-The norm of the gradient stays roughly around one, limiting vanishing. Skip connections even can bypass whole blocks of layers. ResNet can have many layers without vanishing gradients. The most popular variants are: 
-
-* ResNet-50.
-* ResNet-101.
-* ResNet-152.
-
-It was the first network to make an heavy use of **batch normalization**.
-
-![Residual block  [@He2015].](../slides/img/resnet-block.png){width=40%}
-
-### HighNets: Highway networks
-
-**Highway networks** (IDSIA [@Srivastava2015]) are residual networks which also learn to balance inputs with feature extraction:
-
-$$
-    \mathbf{h}_n = T_{W'} \, f_W(h_{n-1}) + (1 -  T_{W'}) \, h_{n-1}
-$$
-
-The balance between the **primary** pathway and the **skip** pathway adapts to the task. It has been used up to 1000 layers and improved state-of-the-art accuracy on MNIST and CIFAR-10.
-
-![Highway network  [@Srivastava2015].](../slides/img/highway.png){width=100%}
-
-
-### DenseNets: Dense networks
-
-
-**Dense networks** (Cornell University &amp; Facebook AI [@Huang2018]) are residual networks that can learn **bypasses** between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.
-
-![Dense network  [@Huang2018].](../slides/img/densenetworks.png){width=100%}
-
-### Model zoos
-
-These famous models are described in their respective papers, you could reimplement them and train them on ImageNet. Fortunately, their code is often released on Github by the authors or reimplemented by others. Most frameworks maintain **model zoos** of the most popular networks. Some models also have **pretrained weights** available, mostly on ImageNet. Very useful for **transfer learning** (see later).
-
-* Overview website:
-
-&lt;https://modelzoo.co&gt;
-
-* Caffe:
-
-&lt;https://github.com/BVLC/caffe/wiki/Model-Zoo&gt;
-
-* Tensorflow:
-
-&lt;https://github.com/tensorflow/models&gt;
-
-* Pytorch:
-
-&lt;https://pytorch.org/docs/stable/torchvision/models.html&gt;
-
-* Papers with code:
-
-&lt;https://paperswithcode.com/&gt;
-
-
-Several criteria have to be considered when choosing an architecture:
-
-* Accuracy on ImageNet.
-* Number of parameters (RAM consumption).
-* Speed (flops).
-
-![Speed-accuracy trade-off of state-of-the-art CNNs. Source: &lt;https://dataconomy.com/2017/04/history-neural-networks&gt;](../slides/img/deepnets-comparison.png){width=100%}
-
-## Applications of CNN
-
-
-
-
-
-
-
-
-
-### Object recognition
-
-**Object recognition** has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like **ImageNet** (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.
-
-
-![Object recognition on ImageNet. Source [@Krizhevsky2012]. ](../slides/img/objrecog.png){width=70%}
-
-### Facial recognition
-
-Facebook used 4.4 million annotated faces from 4030 users to train **DeepFace** [@Taigman2014]. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).
-
-![DeepFace. Source [@Taigman2014]. ](../slides/img/deepface.png){width=100%}
-
-### Pose estimation
-
-**PoseNet** [@Kendall2016] is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.
-
-
-![PoseNet [@Kendall2016]. Source:  &lt;https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html&gt;](../slides/img/posnet-face.gif){width=60%}
-
-### Speech recognition
-
-To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. **DeepSpeech** [@Hannun2014] from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.
-
-![DeepSpeech. Source [@Hannun2014]. ](../slides/img/deepspeech.png){width=60%}
-
-### Sentiment analysis
-
-It is also possible to apply convolutions on text. **Sentiment analysis** assigns a positive or negative judgment to sentences. Each word is represented by a vector of values (word2vec). The convolutional layer can slide over all over words to find out the sentiment of the sentence.
-
-![Sentiment analysis. Source [@Kim2014]. ](../slides/img/sentimentanalysis.png){width=100%}
-
-
-### Wavenet : text-to-speech synthesis
-
-**Text-To-Speech** (TTS) is also possible using CNNs. Google Home relies on **Wavenet** [@Oord2016], a complex CNN using *dilated convolutions* to grasp long-term dependencies.
-
-![Wavenet [@Oord2016].  Source: &lt;https://deepmind.com/blog/wavenet-generative-model-raw-audio/&gt;](../slides/img/wavenet.png){width=100%}
-
-![Dilated convolutions in Wavenet [@Oord2016].  Source: &lt;https://deepmind.com/blog/wavenet-generative-model-raw-audio/&gt;](../slides/img/wavenet-dilated.gif){width=70%}
-
-
-## Transfer learning
-
-
-
-
-
-
-
-
-
-**Myth:** ones needs at least one million labeled examples to use deep learning. This is true if you train the CNN **end-to-end** with randomly initialized weights. But there are alternatives:
-
-1. **Unsupervised learning** (autoencoders) may help extract useful representations using only images.
-2. **Transfer learning** allows to re-use weights obtained from a related task/domain.
-
-![Transfer learning.  Source: &lt;http://imatge-upc.github.io/telecombcn-2016-dlcv&gt;](../slides/img/transferlearning2.jpg){width=70%}
-
-Take a classical network (VGG-16, Inception, ResNet, etc.) trained on ImageNet (if your task is object recognition).
-
-**Off-the-shelf**
-
-* Cut the network before the last layer and use directly the high-level feature representation.
-
-* Use a shallow classifier directly on these representations (not obligatorily NN).
-
-![Off-the-shelf transfer learning.  Source: &lt;http://imatge-upc.github.io/telecombcn-2016-dlcv&gt;](../slides/img/transferlearning3.jpg){width=90%}
-
-**Fine-tuning**
-
-* Use the trained weights as initial weight values and re-train the network on your data (often only the last layers, the early ones are frozen).
-
-![Fine-tuned transfer learning.  Source: &lt;http://imatge-upc.github.io/telecombcn-2016-dlcv&gt;](../slides/img/transferlearning4.jpg){width=50%}
-
-```{admonition} Example of transfer learning
-
-![](../slides/img/snowleopard.png)
-
-Microsoft wanted a system to automatically detect **snow leopards** into the wild, but there were not enough labelled images to train a deep network **end-to-end**. They used a pretrained **ResNet50** as a feature extractor for a simple **logistic regression** classifier.
-
-Source: &lt;https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/&gt;
-```
-
-````{admonition} Transfer learning in keras
-
-Keras provides pre-trained CNNs that can be used as feature extractors:
-
-
-```python
-from tf.keras.applications.vgg16 import VGG16
-
-# Download VGG without the FC layers
-model = VGG16(include_top=False, 
-              input_shape=(300, 300, 3))
-
-# Freeze learning in VGG16
-for layer in model.layers:
-    layer.trainable = False
-
-# Add a fresh MLP on top
-flat1 = Flatten()(model.layers[-1].output)
-class1 = Dense(1024, activation='relu')(flat1)
-output = Dense(10, activation='softmax')(class1)
-
-# New model
-model = Model(
-    inputs=model.inputs, outputs=output)
-```
-
-See &lt;https://keras.io/api/applications/&gt; for the full list of pretrained networks.</code></pre>
+</div>
+</div>
 </section>
+</section>
+<section id="some-famous-convolutional-networks" class="level2">
+<h2 class="anchored" data-anchor-id="some-famous-convolutional-networks">Some famous convolutional networks</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/pw-sFY3UqG4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="neocognitron" class="level3">
+<h3 class="anchored" data-anchor-id="neocognitron">Neocognitron</h3>
+<p>The <strong>Neocognitron</strong> (Fukushima, 1980 <span class="citation" data-cites="Fukushima1980">(<a href="../references.html#ref-Fukushima1980" role="doc-biblioref">Fukushima, 1980</a>)</span>) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/Neocognitron.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Neocognitron. <span class="citation" data-cites="Fukushima1980">(<a href="../references.html#ref-Fukushima1980" role="doc-biblioref">Fukushima, 1980</a>)</span>. Source: <a href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg" class="uri">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lenet" class="level3">
+<h3 class="anchored" data-anchor-id="lenet">LeNet</h3>
+<p><strong>LeNet</strong> (1998, Yann LeCun at AT&amp;T labs <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>) was one of the first CNN able to learn from raw data using backpropagation. It has two convolutional layers, two <strong>mean</strong>-pooling layers, two fully-connected layers and an output layer. It uses tanh as the activation function and works on CPU only. Used for handwriting recognition (for example ZIP codes).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/lenet.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">LeNet5. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="alexnet" class="level3">
+<h3 class="anchored" data-anchor-id="alexnet">AlexNet</h3>
+<p><strong>AlexNet</strong> (2012, Toronto University <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>) started the DL revolution by winning ImageNet 2012. I has a similar architecture to LeNet, but is trained on two GPUs using augmented data. It uses ReLU, max-pooling, dropout, SGD with momentum, L2 regularization.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/alexnet.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Alexnet <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="vgg-16" class="level3">
+<h3 class="anchored" data-anchor-id="vgg-16">VGG-16</h3>
+<p><strong>VGG-16</strong> (2014, Visual Geometry Group, Oxford <span class="citation" data-cites="Simonyan2015">(<a href="../references.html#ref-Simonyan2015" role="doc-biblioref">Simonyan and Zisserman, 2015</a>)</span>) placed second at ImageNet 2014. It went much deeper than AlexNet with 16 parameterized layers (a VGG-19 version is also available with 19 layers). Its main novelty is that two convolutions are made successively before the max-pooling, implicitly increasing the receptive field (2 consecutive 3x3 filters cover 5x5 pixels). Drawback: 140M parameters (mostly from the last convolutional layer to the first fully connected) quickly fill up the memory of the GPU.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vgg16.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">VGG-16 <span class="citation" data-cites="Simonyan2015">(<a href="../references.html#ref-Simonyan2015" role="doc-biblioref">Simonyan and Zisserman, 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="googlenet---inception-v1" class="level3">
+<h3 class="anchored" data-anchor-id="googlenet---inception-v1">GoogLeNet - Inception v1</h3>
+<p><strong>GoogLeNet</strong> (2014, Google Brain <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>) used Inception modules (Network-in-Network) to further complexify each stage It won ImageNet 2014 with 22 layers. Dropout, SGD with Nesterov momentum.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/googlenet-arch.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">GoogLeNet <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>Inside GoogleNet, each <strong>Inception</strong> module learns features at different resolutions using convolutions and max poolings of different sizes. 1x1 convolutions are <strong>shared MLPS</strong>: they transform a <span class="math inline">(w, h, d_1)</span> tensor into <span class="math inline">(w, h, d_2)</span> pixel per pixel. The resulting feature maps are concatenated along the feature dimension and passed to the next module.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/inception.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Inception module <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>Three softmax layers predict the classes at different levels of the network. The combined loss is:</p>
+<p><span class="math display">\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]</span></p>
+<p>Only the deeper softmax layer matters for the prediction. The additional losses improve convergence by fight vanishing gradients: the early layers get useful gradients from the lower softmax layers.</p>
+<p>Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception… Xception <span class="citation" data-cites="Chollet2017b">(<a href="../references.html#ref-Chollet2017b" role="doc-biblioref">Chollet, 2017</a>)</span> has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB). Pretrained weights are available in <code>keras</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tf.keras.applications.Xception(include_top<span class="op">=</span><span class="va">True</span>, weights<span class="op">=</span><span class="st">"imagenet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/inceptionv3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Inception v3 <span class="citation" data-cites="Chollet2017b">(<a href="../references.html#ref-Chollet2017b" role="doc-biblioref">Chollet, 2017</a>)</span>. Source: <a href="https://cloud.google.com/tpu/docs/inception-v3-advanced" class="uri">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="resnet" class="level3">
+<h3 class="anchored" data-anchor-id="resnet">ResNet</h3>
+<p><strong>ResNet</strong> (2015, Microsoft <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>) won ImageNet 2015. Instead of learning to transform an input directly with <span class="math inline">\mathbf{h}_n = f_W(\mathbf{h}_{n-1})</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p>
+<p><span class="math display">
+    \mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}  \quad \rightarrow \quad f_W(\mathbf{h}_{n-1}) = \mathbf{h}_n - \mathbf{h}_{n-1}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/resnetlayer.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">Residual layer with skip connections <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>These <strong>skip connections</strong> allow the network to decide how deep it has to be. If the layer is not needed, the residual layer learns to output 0.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/resnet2.png" class="img-fluid figure-img" style="width:20.0%"></p>
+<p></p><figcaption class="figure-caption">ResNet <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>Skip connections help overcome the <strong>vanishing gradients</strong> problem, as the contribution of bypassed layers to the backpropagated gradient is 1.</p>
+<p><span class="math display">\mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}</span></p>
+<p><span class="math display">\frac{\partial \mathbf{h}_n}{\partial \mathbf{h}_{n-1}} = \frac{\partial f_W(\mathbf{h}_{n-1})}{\partial \mathbf{h}_{n-1}} + 1</span></p>
+<p>The norm of the gradient stays roughly around one, limiting vanishing. Skip connections even can bypass whole blocks of layers. ResNet can have many layers without vanishing gradients. The most popular variants are:</p>
+<ul>
+<li>ResNet-50.</li>
+<li>ResNet-101.</li>
+<li>ResNet-152.</li>
+</ul>
+<p>It was the first network to make an heavy use of <strong>batch normalization</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/resnet-block.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Residual block <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="highnets-highway-networks" class="level3">
+<h3 class="anchored" data-anchor-id="highnets-highway-networks">HighNets: Highway networks</h3>
+<p><strong>Highway networks</strong> (IDSIA <span class="citation" data-cites="Srivastava2015">(<a href="../references.html#ref-Srivastava2015" role="doc-biblioref">Srivastava et al., 2015</a>)</span>) are residual networks which also learn to balance inputs with feature extraction:</p>
+<p><span class="math display">
+    \mathbf{h}_n = T_{W'} \, f_W(h_{n-1}) + (1 -  T_{W'}) \, h_{n-1}
+</span></p>
+<p>The balance between the <strong>primary</strong> pathway and the <strong>skip</strong> pathway adapts to the task. It has been used up to 1000 layers and improved state-of-the-art accuracy on MNIST and CIFAR-10.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/highway.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Highway network <span class="citation" data-cites="Srivastava2015">(<a href="../references.html#ref-Srivastava2015" role="doc-biblioref">Srivastava et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="densenets-dense-networks" class="level3">
+<h3 class="anchored" data-anchor-id="densenets-dense-networks">DenseNets: Dense networks</h3>
+<p><strong>Dense networks</strong> (Cornell University &amp; Facebook AI <span class="citation" data-cites="Huang2018">(<a href="../references.html#ref-Huang2018" role="doc-biblioref">Huang et al., 2018</a>)</span>) are residual networks that can learn <strong>bypasses</strong> between any layer of the network (up to 5). It has 100 layers altogether and improved state-of-the-art accuracy on five major benchmarks.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/densenetworks.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Dense network <span class="citation" data-cites="Huang2018">(<a href="../references.html#ref-Huang2018" role="doc-biblioref">Huang et al., 2018</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="model-zoos" class="level3">
+<h3 class="anchored" data-anchor-id="model-zoos">Model zoos</h3>
+<p>These famous models are described in their respective papers, you could reimplement them and train them on ImageNet. Fortunately, their code is often released on Github by the authors or reimplemented by others. Most frameworks maintain <strong>model zoos</strong> of the most popular networks. Some models also have <strong>pretrained weights</strong> available, mostly on ImageNet. Very useful for <strong>transfer learning</strong> (see later).</p>
+<ul>
+<li>Overview website:</li>
+</ul>
+<p><a href="https://modelzoo.co" class="uri">https://modelzoo.co</a></p>
+<ul>
+<li>Caffe:</li>
+</ul>
+<p><a href="https://github.com/BVLC/caffe/wiki/Model-Zoo" class="uri">https://github.com/BVLC/caffe/wiki/Model-Zoo</a></p>
+<ul>
+<li>Tensorflow:</li>
+</ul>
+<p><a href="https://github.com/tensorflow/models" class="uri">https://github.com/tensorflow/models</a></p>
+<ul>
+<li>Pytorch:</li>
+</ul>
+<p><a href="https://pytorch.org/docs/stable/torchvision/models.html" class="uri">https://pytorch.org/docs/stable/torchvision/models.html</a></p>
+<ul>
+<li>Papers with code:</li>
+</ul>
+<p><a href="https://paperswithcode.com/" class="uri">https://paperswithcode.com/</a></p>
+<p>Several criteria have to be considered when choosing an architecture:</p>
+<ul>
+<li>Accuracy on ImageNet.</li>
+<li>Number of parameters (RAM consumption).</li>
+<li>Speed (flops).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/deepnets-comparison.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Speed-accuracy trade-off of state-of-the-art CNNs. Source: <a href="https://dataconomy.com/2017/04/history-neural-networks" class="uri">https://dataconomy.com/2017/04/history-neural-networks</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="applications-of-cnn" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-cnn">Applications of CNN</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/n7U9pywhQYM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="object-recognition" class="level3">
+<h3 class="anchored" data-anchor-id="object-recognition">Object recognition</h3>
+<p><strong>Object recognition</strong> has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like <strong>ImageNet</strong> (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/objrecog.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Object recognition on ImageNet. Source <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="facial-recognition" class="level3">
+<h3 class="anchored" data-anchor-id="facial-recognition">Facial recognition</h3>
+<p>Facebook used 4.4 million annotated faces from 4030 users to train <strong>DeepFace</strong> <span class="citation" data-cites="Taigman2014">(<a href="../references.html#ref-Taigman2014" role="doc-biblioref">Taigman et al., 2014</a>)</span>. Accuracy of 97.35% for recognizing faces, on par with humans. Used now to recognize new faces from single examples (transfer learning, one-shot learning).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/deepface.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">DeepFace. Source <span class="citation" data-cites="Taigman2014">(<a href="../references.html#ref-Taigman2014" role="doc-biblioref">Taigman et al., 2014</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="pose-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="pose-estimation">Pose estimation</h3>
+<p><strong>PoseNet</strong> <span class="citation" data-cites="Kendall2016">(<a href="../references.html#ref-Kendall2016" role="doc-biblioref">Kendall et al., 2016</a>)</span> is a Inception-based CNN able to predict 3D information from 2D images. It can be for example the calibration matrix of a camera, 3D coordinates of joints or facial features. There is a free tensorflow.js implementation that can be used in the browser.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/posnet-face.gif" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">PoseNet <span class="citation" data-cites="Kendall2016">(<a href="../references.html#ref-Kendall2016" role="doc-biblioref">Kendall et al., 2016</a>)</span>. Source: <a href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html" class="uri">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="speech-recognition" class="level3">
+<h3 class="anchored" data-anchor-id="speech-recognition">Speech recognition</h3>
+<p>To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g.&nbsp;mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. <strong>DeepSpeech</strong> <span class="citation" data-cites="Hannun2014">(<a href="../references.html#ref-Hannun2014" role="doc-biblioref">Hannun et al., 2014</a>)</span> from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/deepspeech.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">DeepSpeech. Source <span class="citation" data-cites="Hannun2014">(<a href="../references.html#ref-Hannun2014" role="doc-biblioref">Hannun et al., 2014</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="sentiment-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="sentiment-analysis">Sentiment analysis</h3>
+<p>It is also possible to apply convolutions on text. <strong>Sentiment analysis</strong> assigns a positive or negative judgment to sentences. Each word is represented by a vector of values (word2vec). The convolutional layer can slide over all over words to find out the sentiment of the sentence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/sentimentanalysis.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Sentiment analysis. Source <span class="citation" data-cites="Kim2014">(<a href="../references.html#ref-Kim2014" role="doc-biblioref">Kim, 2014</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="wavenet-text-to-speech-synthesis" class="level3">
+<h3 class="anchored" data-anchor-id="wavenet-text-to-speech-synthesis">Wavenet : text-to-speech synthesis</h3>
+<p><strong>Text-To-Speech</strong> (TTS) is also possible using CNNs. Google Home relies on <strong>Wavenet</strong> <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>, a complex CNN using <em>dilated convolutions</em> to grasp long-term dependencies.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/wavenet.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Wavenet <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>. Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/wavenet-dilated.gif" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Dilated convolutions in Wavenet <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>. Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="transfer-learning" class="level2">
+<h2 class="anchored" data-anchor-id="transfer-learning">Transfer learning</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/12ohNYgDHvY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p><strong>Myth:</strong> ones needs at least one million labeled examples to use deep learning. This is true if you train the CNN <strong>end-to-end</strong> with randomly initialized weights. But there are alternatives:</p>
+<ol type="1">
+<li><strong>Unsupervised learning</strong> (autoencoders) may help extract useful representations using only images.</li>
+<li><strong>Transfer learning</strong> allows to re-use weights obtained from a related task/domain.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/transferlearning2.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+</figure>
+</div>
+<p>Take a classical network (VGG-16, Inception, ResNet, etc.) trained on ImageNet (if your task is object recognition).</p>
+<p><strong>Off-the-shelf</strong></p>
+<ul>
+<li><p>Cut the network before the last layer and use directly the high-level feature representation.</p></li>
+<li><p>Use a shallow classifier directly on these representations (not obligatorily NN).</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/transferlearning3.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption class="figure-caption">Off-the-shelf transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Fine-tuning</strong></p>
+<ul>
+<li>Use the trained weights as initial weight values and re-train the network on your data (often only the last layers, the early ones are frozen).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/transferlearning4.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Fine-tuned transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Example of transfer learning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/snowleopard.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Microsoft wanted a system to automatically detect <strong>snow leopards</strong> into the wild, but there were not enough labelled images to train a deep network <strong>end-to-end</strong>. They used a pretrained <strong>ResNet50</strong> as a feature extractor for a simple <strong>logistic regression</strong> classifier.</p>
+<p>Source: <a href="https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/" class="uri">https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/</a></p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Transfer learning in keras
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keras provides pre-trained CNNs that can be used as feature extractors:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tf.keras.applications.vgg16 <span class="im">import</span> VGG16</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download VGG without the FC layers</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> VGG16(include_top<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>              input_shape<span class="op">=</span>(<span class="dv">300</span>, <span class="dv">300</span>, <span class="dv">3</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Freeze learning in VGG16</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> layer <span class="kw">in</span> model.layers:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    layer.trainable <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a fresh MLP on top</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>flat1 <span class="op">=</span> Flatten()(model.layers[<span class="op">-</span><span class="dv">1</span>].output)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>class1 <span class="op">=</span> Dense(<span class="dv">1024</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(flat1)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)(class1)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># New model</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>output</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See <a href="https://keras.io/api/applications/" class="uri">https://keras.io/api/applications/</a> for the full list of pretrained networks.</p>
+</div>
+</div>
 </section>
 <section id="ensemble-learning" class="level2">
 <h2 class="anchored" data-anchor-id="ensemble-learning">Ensemble learning</h2>
@@ -1007,11 +1121,50 @@ See &lt;https://keras.io/api/applications/&gt; for the full list of pretrained n
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Chollet2017b" class="csl-entry" role="doc-biblioentry">
+Chollet, F. (2017). Xception: <span>Deep Learning</span> with <span>Depthwise Separable Convolutions</span>. Available at: <a href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a> [Accessed November 20, 2020].
+</div>
+<div id="ref-Fukushima1980" class="csl-entry" role="doc-biblioentry">
+Fukushima, K. (1980). Neocognitron: <span>A</span> self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. <em>Biol. Cybernetics</em> 36, 193–202. doi:<a href="https://doi.org/10.1007/BF00344251">10.1007/BF00344251</a>.
+</div>
+<div id="ref-Hannun2014" class="csl-entry" role="doc-biblioentry">
+Hannun, A., Case, C., Casper, J., Catanzaro, B., Diamos, G., Elsen, E., et al. (2014). Deep <span>Speech</span>: <span>Scaling</span> up end-to-end speech recognition. Available at: <a href="http://arxiv.org/abs/1412.5567">http://arxiv.org/abs/1412.5567</a> [Accessed November 22, 2020].
+</div>
+<div id="ref-He2015" class="csl-entry" role="doc-biblioentry">
+He, K., Zhang, X., Ren, S., and Sun, J. (2015). Deep <span>Residual Learning</span> for <span>Image Recognition</span>. Available at: <a href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.
+</div>
+<div id="ref-Huang2018" class="csl-entry" role="doc-biblioentry">
+Huang, G., Liu, Z., van der Maaten, L., and Weinberger, K. Q. (2018). Densely <span>Connected Convolutional Networks</span>. Available at: <a href="http://arxiv.org/abs/1608.06993">http://arxiv.org/abs/1608.06993</a> [Accessed November 22, 2020].
+</div>
+<div id="ref-Kendall2016" class="csl-entry" role="doc-biblioentry">
+Kendall, A., Grimes, M., and Cipolla, R. (2016). <span>PoseNet</span>: <span>A Convolutional Network</span> for <span>Real-Time</span> 6-<span>DOF Camera Relocalization</span>. Available at: <a href="http://arxiv.org/abs/1505.07427">http://arxiv.org/abs/1505.07427</a> [Accessed November 27, 2020].
+</div>
+<div id="ref-Kim2014" class="csl-entry" role="doc-biblioentry">
+Kim, Y. (2014). Convolutional <span>Neural Networks</span> for <span>Sentence Classification</span>. Available at: <a href="http://arxiv.org/abs/1408.5882">http://arxiv.org/abs/1408.5882</a> [Accessed November 22, 2020].
+</div>
+<div id="ref-Krizhevsky2012" class="csl-entry" role="doc-biblioentry">
+Krizhevsky, A., Sutskever, I., and Hinton, G. E. (2012). <span>ImageNet Classification</span> with <span>Deep Convolutional Neural Networks</span>. in <em>Advances in <span>Neural Information Processing Systems</span> (<span>NIPS</span>)</em> Available at: <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf</a>.
+</div>
 <div id="ref-LeCun1998" class="csl-entry" role="doc-biblioentry">
 LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). Gradient <span>Based Learning Applied</span> to <span>Document Recognition</span>. <em>Proceedings of the IEEE</em> 86, 2278–2324. doi:<a href="https://doi.org/10.1109/5.726791">10.1109/5.726791</a>.
 </div>
+<div id="ref-Oord2016" class="csl-entry" role="doc-biblioentry">
+Oord, A. van den, Dieleman, S., Zen, H., Simonyan, K., Vinyals, O., Graves, A., et al. (2016). <span>WaveNet</span>: <span>A Generative Model</span> for <span>Raw Audio</span>. Available at: <a href="http://arxiv.org/abs/1609.03499">http://arxiv.org/abs/1609.03499</a> [Accessed November 22, 2020].
+</div>
+<div id="ref-Simonyan2015" class="csl-entry" role="doc-biblioentry">
+Simonyan, K., and Zisserman, A. (2015). Very <span>Deep Convolutional Networks</span> for <span>Large-Scale Image Recognition</span>. <em>International Conference on Learning Representations (ICRL)</em>, 1–14. doi:<a href="https://doi.org/10.1016/j.infsof.2008.09.005">10.1016/j.infsof.2008.09.005</a>.
+</div>
 <div id="ref-Springenberg2015" class="csl-entry" role="doc-biblioentry">
-Springenberg, J. T., Dosovitskiy, A., Brox, T., and Riedmiller, M. (2015). Striving for <span>Simplicity</span>: <span>The All Convolutional Net</span>. <em>arXiv:1412.6806 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1412.6806">https://arxiv.org/abs/1412.6806</a>.
+Springenberg, J. T., Dosovitskiy, A., Brox, T., and Riedmiller, M. (2015). Striving for <span>Simplicity</span>: <span>The All Convolutional Net</span>. Available at: <a href="http://arxiv.org/abs/1412.6806">http://arxiv.org/abs/1412.6806</a> [Accessed November 22, 2020].
+</div>
+<div id="ref-Srivastava2015" class="csl-entry" role="doc-biblioentry">
+Srivastava, R. K., Greff, K., and Schmidhuber, J. (2015). Highway <span>Networks</span>. Available at: <a href="http://arxiv.org/abs/1505.00387">http://arxiv.org/abs/1505.00387</a> [Accessed November 22, 2020].
+</div>
+<div id="ref-Szegedy2015" class="csl-entry" role="doc-biblioentry">
+Szegedy, C., Vanhoucke, V., Ioffe, S., Shlens, J., and Wojna, Z. (2015). Rethinking the <span>Inception Architecture</span> for <span>Computer Vision</span>. Available at: <a href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a> [Accessed November 20, 2020].
+</div>
+<div id="ref-Taigman2014" class="csl-entry" role="doc-biblioentry">
+Taigman, Y., Yang, M., Ranzato, M., and Wolf, L. (2014). <span>DeepFace</span>: <span>Closing</span> the <span>Gap</span> to <span>Human-Level Performance</span> in <span>Face Verification</span>. in <em>2014 <span>IEEE Conference</span> on <span>Computer Vision</span> and <span>Pattern Recognition</span></em> (<span>Columbus, OH, USA</span>: <span>IEEE</span>), 1701–1708. doi:<a href="https://doi.org/10.1109/CVPR.2014.220">10.1109/CVPR.2014.220</a>.
 </div>
 </div>
 </section>
@@ -1129,6 +1282,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

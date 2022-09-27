@@ -145,7 +145,8 @@ $$
 The two vectors $\mathbf{\mu_x}$ and $\mathbf{\sigma_x}^2$ are the outputs of the encoder.
 
 
-````{admonition} Sampling from a normal distribution
+::: {.callout-tip}
+## Sampling from a normal distribution
 
 ![Sampling from a normal distribution.](../slides/img/normaldistribution.svg){width=70%}
 
@@ -163,7 +164,7 @@ $$
 A sample $x$ will likely be close to $\mu$, with a deviation defined by $\sigma^2$. It can be obtained using a sample of the **standard normal distribution** $\mathcal{N}(0, 1)$:
 
 $$x = \mu + \sigma \, \xi \; \; \text{with} \; \xi \sim \mathcal{N}(0, 1)$$
-````
+:::
 
 Architecture of the VAE:
 
@@ -215,7 +216,7 @@ By forcing the distributions to be close, we avoid "holes" in the latent space: 
 
 ![Regularizing the latent space by minimizing the KL with $\mathcal{N}(0,1)$ makes sure that we can smoothly travel in the latent space. Source:  <https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73>](../slides/img/vae-regularization.png){width=100%}
 
-`:::{.callout-note}
+:::{.callout-note}
 To make $q_\phi(\mathbf{z}|\mathbf{x})$ close from $\mathcal{N}(\mathbf{0}, \mathbf{1})$, one could minimize instead the Euclidian distance in the **parameter space**:
 
 $$
@@ -225,9 +226,10 @@ $$
 However, this does not consider the **overlap** between the distributions. The two pairs of distributions below have the same distance between their means (0 and 1) and the same variance (1 and 10 respectively). The distributions on the left are very different from each other, but the distance in the parameter space is the same.
 
 ![](../slides/img/naturalgradient.png)
-:::`
+:::
 
-```{admonition} Kullback-Leibler divergence
+:::{.callout-tip}
+## Kullback-Leibler divergence
 
 The **KL divergence** between two random distributions $X$ and $Y$ measures the **statistical distance** between them. It describes, on average, how likely a sample from $X$ could come from $Y$:
 
@@ -238,7 +240,7 @@ $$
 ![](../slides/img/crossentropy.svg)
 
 When the two distributions are equal almost anywhere, the KL divergence is 0. Otherwise it is positive. **Minimizing the KL divergence between two distributions makes them close in the statistical sense**. 
-```
+:::
 
 The advantage of minimizing the KL of $q_\phi(\mathbf{z}|\mathbf{x})$ with $\mathcal{N}(0, 1)$ is that the KL takes a **closed form**, i.e. there is no need to compute the expectation over all possible latent representations $\mathbf{z}$:
 
@@ -299,12 +301,12 @@ We do not need to backpropagate through $\xi$, as there is no parameter to learn
 
 A variational autoencoder is an autoencoder where the latent space represents a probability distribution $q_\phi(\mathbf{z} | \mathbf{x})$ using the mean $\mathbf{\mu_x}$ and standard deviation $\mathbf{\sigma_x}$ of a normal distribution. The latent space can be sampled to generate new images using the decoder $p_\theta(\mathbf{z})$. KL regularization and the reparameterization trick are essential to VAE.
 
-VAE loss:
-
-$$\begin{aligned}
+$$
+\begin{aligned}
     \mathcal{L}(\theta, \phi) &= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi) \\
     &= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
-\end{aligned}$$
+\end{aligned}
+$$
 
 ![Principle of a VAE. Source:  <https://ijdykeman.github.io/ml/2016/12/21/cvae.html>](../slides/img/vae-structure.svg){width=70%}
 
@@ -333,10 +335,12 @@ DeepFakes now became very easy, you can for example find DeepFace here: <https:/
 
 VAE does not use a regularization parameter to balance the reconstruction and regularization losses. What happens if you do?
 
-$$\begin{aligned}
+$$
+\begin{aligned}
     \mathcal{L}(\theta, \phi) &= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \beta \, \mathcal{L}_\text{regularization}(\phi) \\
     &= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
-\end{aligned}$$
+\end{aligned}
+$$
 
 Using $\beta > 1$ puts emphasis on learning statistically independent latent factors.
 
@@ -403,7 +407,8 @@ $$\begin{aligned}
 \text{KL}(P(T | X) || p_\theta(T | X)) &= \mathbb{E}_{x, t \sim \mathcal{D}} [- \log p_\theta(T=t | X=x)]  - \mathbb{E}_{x, t \sim \mathcal{D}} [- \log P(T=t | X=x)] \\
 &\\
     & = H(P(T | X), p_\theta(T |X)) - H(P(T|X)) \\
-\end{aligned}$$
+\end{aligned}
+$$
 
 When we minimize the KL by applying gradient descent on the parameters $\theta$, only the cross-entropy will change, as the data does not depends on the model:
 
@@ -413,7 +418,8 @@ $$\begin{aligned}
      & = \nabla_\theta \, H(P(T | X), p_\theta(T |X)) \\
      & \\
      & = \nabla_\theta \, \mathbb{E}_{x, t \sim \mathcal{D}} [-  \log p_\theta(T=t | X=x) ]\\
-\end{aligned}$$
+\end{aligned}
+$$
 
 Minimizing the cross-entropy (negative log likelihood) of the model on the data is the same as minimizing the KL between the two distributions in supervised learning! We were actually minimizing the KL all along.
 
@@ -488,7 +494,8 @@ To make $q_\phi(z| X)$ close from $p_\theta(z | X)$, we minimize their KL diverg
 
 $$\begin{aligned}
 \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &= \mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(z | X)}{q_\phi(z|X)}]\\
-\end{aligned}$$
+\end{aligned}
+$$
 
 Note that we sample the latent representations from the learned encoder $q_\phi(z|X)$ (imagination). As $p_\theta(z | X) = p_\theta(X |z) \, \dfrac{p_\theta(z)}{p_\theta(X)}$, we get:
 
@@ -496,19 +503,22 @@ $$\begin{aligned}
 \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &= \mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(X | z) \, p_\theta(z)}{q_\phi(z|X) \, p_\theta(X)}]\\
 &=\mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(z)}{q_\phi(z|X)}] - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X)]  \\
 &+ \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]\\
-\end{aligned}$$
+\end{aligned}
+$$
 
 $p_\theta(X)$ does not depend on $z$, so its expectation w.r.t $z$ is constant:
 
 $$\begin{aligned}
 \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &= \text{KL}(q_\phi(z|X) || p_\theta(z)) + \log p_\theta(X) + \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]\\
-\end{aligned}$$
+\end{aligned}
+$$
 
 We rearrange the terms:
 
 $$\begin{aligned}
 \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &=  - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] - \text{KL}(q_\phi(z|X) || p_\theta(z))\\
-\end{aligned}$$
+\end{aligned}
+$$
 
 * Training the **encoder** means that we **minimize** $\text{KL}(q_\phi(z|X) || p_\theta(z | X) )$.
 * Training the **decoder** means that we **maximize** $\log p_\theta(X)$ (log-likelihood of the model).
@@ -526,7 +536,8 @@ $$\begin{aligned}
 \text{ELBO}(\theta, \phi) &=  \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) \\
 &\\
 &= - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] - \text{KL}(q_\phi(z|X) || p_\theta(z))
-\end{aligned}$$
+\end{aligned}
+$$
 
 What happens when we **minimize** the negative ELBO? 
 
@@ -546,16 +557,18 @@ $$\begin{aligned}
     \mathcal{L}(\theta, \phi) &= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi) \\
     &\\
     &= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})] + \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1}))\\
-\end{aligned}$$
+\end{aligned}
+$$
 
 The reparameterization trick and the fact that the KL between normal distributions has a closed form allow us to use backpropagation end-to-end. The encoder $q_\phi(z|X)$ and decoder $p_\theta(X | z)$ are neural networks in a VAE, but other parametrized distributions can be used (e.g. in physics).
 
 
-```{admonition} Sources
+::: {.callout-tip}
+## Sources
 * <https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/>
 * <https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html>
 * <https://blog.evjang.com/2016/08/variational-bayes.html>
 * <https://jonathan-hui.medium.com/machine-learning-variational-inference-273d8e6480bb>
-```
+:::
 
 

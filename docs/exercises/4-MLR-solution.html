@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 26&nbsp; Multiple linear regression</title>
+<title>Neurocomputing - 27&nbsp; Multiple linear regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,7 +125,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -146,12 +161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -243,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -268,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -306,7 +321,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -346,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -470,13 +490,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Let’s now investigate <strong>multiple linear regression</strong> (MLR), where several output depends on more than one input variable:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{cases}
 y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
 \\
 y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
 \end{cases}
-\]</span></p>
+</span></p>
 <p>The Boston Housing Dataset consists of price of houses in various places in Boston. Alongside with price, the dataset also provide information such as the crime rate (CRIM), the proportion of non-retail business acres per town (INDUS), the proportion of owner-occupied units built prior to 1940 (AGE) and several other attributes. It is available here : <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/housing" class="uri">https://archive.ics.uci.edu/ml/machine-learning-databases/housing</a>.</p>
 <p>The Boston dataset can be directly downloaded from scikit-learn:</p>
 <div class="cell" data-execution_count="1">
@@ -573,7 +593,7 @@ problems.
 </div>
 <section id="linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression">Linear regression</h2>
-<p><strong>Q:</strong> Apply MLR on the Boston data using the same <code>LinearRegression</code> method of <code>scikit-learn</code> as last time. Print the mse and visualize the prediction <span class="math inline">\(y\)</span> against the true value <span class="math inline">\(t\)</span> for each sample as before. Does it work?</p>
+<p><strong>Q:</strong> Apply MLR on the Boston data using the same <code>LinearRegression</code> method of <code>scikit-learn</code> as last time. Print the mse and visualize the prediction <span class="math inline">y</span> against the true value <span class="math inline">t</span> for each sample as before. Does it work?</p>
 <p>You will also plot the weights of the model (<code>reg.coef_</code>) and conclude on the relative importance of the different features: which feature has the stronger weight and why?</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
@@ -893,6 +913,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

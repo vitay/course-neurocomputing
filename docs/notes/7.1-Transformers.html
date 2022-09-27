@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 18&nbsp; Transformers</title>
+<title>Neurocomputing - 19&nbsp; Transformers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../notes/7.2-ContrastiveLearning.html" rel="next">
-<link href="../notes/6.2-Attention.html" rel="prev">
+<link href="../notes/6.3-Attention.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,7 +144,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -165,12 +180,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -262,7 +277,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -287,7 +302,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -325,7 +340,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -365,7 +385,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -510,22 +530,6 @@ div.csl-indent {
 </header>
 
 <p>Slides: <a href="../slides/7.1-Transformers.html" target="_blank">html</a> <a href="../slides/pdf/7.1-Transformers.pdf" target="_blank">pdf</a></p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Most figures and all videos in this chapter are taken from a series of great blog posts by Jay Alammar:</p>
-<p><a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p>
-<p><a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p>
-<p><a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p>
-</div>
-</div>
 <section id="transformers" class="level2">
 <h2 class="anchored" data-anchor-id="transformers">Transformers</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AO-gqXNCEx0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
@@ -545,17 +549,17 @@ Note
 <p></p><figcaption class="figure-caption">Encoder-decoder structure of the Transformer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>Each layer of the encoder processes the <span class="math inline">\(n\)</span> words of the input sentence <strong>in parallel</strong>. Word embeddings (as in word2vec) of dimension 512 are used as inputs (but learned end-to-end).</p>
+<p>Each layer of the encoder processes the <span class="math inline">n</span> words of the input sentence <strong>in parallel</strong>. Word embeddings (as in word2vec) of dimension 512 are used as inputs (but learned end-to-end).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/encoder_with_tensors.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>Two operations are performed on each word embedding <span class="math inline">\(\mathbf{x}_i\)</span>:</p>
+<p>Two operations are performed on each word embedding <span class="math inline">\mathbf{x}_i</span>:</p>
 <ul>
-<li>self-attention vector <span class="math inline">\(\mathbf{z}_i\)</span> depending on the other words.</li>
-<li>a regular feedforward layer to obtain a new representation <span class="math inline">\(\mathbf{r}_i\)</span> (shared among all words).</li>
+<li>self-attention vector <span class="math inline">\mathbf{z}_i</span> depending on the other words.</li>
+<li>a regular feedforward layer to obtain a new representation <span class="math inline">\mathbf{r}_i</span> (shared among all words).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -566,11 +570,11 @@ Note
 </section>
 <section id="self-attention" class="level3">
 <h3 class="anchored" data-anchor-id="self-attention">Self-attention</h3>
-<p>The first step of self-attention is to compute for each word three vectors of length <span class="math inline">\(d_k = 64\)</span> from the embeddings <span class="math inline">\(\mathbf{x}_i\)</span> or previous representations <span class="math inline">\(\mathbf{r}_i\)</span> (d = 512).</p>
+<p>The first step of self-attention is to compute for each word three vectors of length <span class="math inline">d_k = 64</span> from the embeddings <span class="math inline">\mathbf{x}_i</span> or previous representations <span class="math inline">\mathbf{r}_i</span> (d = 512).</p>
 <ul>
-<li>The <strong>query</strong> <span class="math inline">\(\mathbf{q}_i\)</span> using <span class="math inline">\(W^Q\)</span>.</li>
-<li>The <strong>key</strong> <span class="math inline">\(\mathbf{k}_i\)</span> using <span class="math inline">\(W^K\)</span>.</li>
-<li>The <strong>value</strong> <span class="math inline">\(\mathbf{v}_i\)</span> using <span class="math inline">\(W^V\)</span>.</li>
+<li>The <strong>query</strong> <span class="math inline">\mathbf{q}_i</span> using <span class="math inline">W^Q</span>.</li>
+<li>The <strong>key</strong> <span class="math inline">\mathbf{k}_i</span> using <span class="math inline">W^K</span>.</li>
+<li>The <strong>value</strong> <span class="math inline">\mathbf{v}_i</span> using <span class="math inline">W^V</span>.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -605,28 +609,28 @@ Note
 <p></p><figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></figcaption><p></p>
 </figure>
 </div>
-<p>Each word <span class="math inline">\(\mathbf{x}_i\)</span> of the sentence generates its query <span class="math inline">\(\mathbf{q}_i\)</span>, key <span class="math inline">\(\mathbf{k}_i\)</span> and value <span class="math inline">\(\mathbf{v}_i\)</span>.</p>
-<p>For all other words <span class="math inline">\(\mathbf{x}_j\)</span>, we compute the <strong>match</strong> between the query <span class="math inline">\(\mathbf{q}_i\)</span> and the keys <span class="math inline">\(\mathbf{k}_j\)</span> with a dot product:</p>
-<p><span class="math display">\[e_{i, j} = \mathbf{q}_i^T \, \mathbf{k}_j\]</span></p>
-<p>We normalize the scores by dividing by <span class="math inline">\(\sqrt{d_k} = 8\)</span> and apply a softmax:</p>
-<p><span class="math display">\[a_{i, j} = \text{softmax}(\dfrac{\mathbf{q}_i^T \, \mathbf{k}_j}{\sqrt{d_k}})\]</span></p>
-<p>The new representation <span class="math inline">\(\mathbf{z}_i\)</span> of the word <span class="math inline">\(\mathbf{x}_i\)</span> is a weighted sum of the values of all other words, weighted by the attention score:</p>
-<p><span class="math display">\[\mathbf{z}_i = \sum_{j} a_{i, j} \, \mathbf{v}_j\]</span></p>
+<p>Each word <span class="math inline">\mathbf{x}_i</span> of the sentence generates its query <span class="math inline">\mathbf{q}_i</span>, key <span class="math inline">\mathbf{k}_i</span> and value <span class="math inline">\mathbf{v}_i</span>.</p>
+<p>For all other words <span class="math inline">\mathbf{x}_j</span>, we compute the <strong>match</strong> between the query <span class="math inline">\mathbf{q}_i</span> and the keys <span class="math inline">\mathbf{k}_j</span> with a dot product:</p>
+<p><span class="math display">e_{i, j} = \mathbf{q}_i^T \, \mathbf{k}_j</span></p>
+<p>We normalize the scores by dividing by <span class="math inline">\sqrt{d_k} = 8</span> and apply a softmax:</p>
+<p><span class="math display">a_{i, j} = \text{softmax}(\dfrac{\mathbf{q}_i^T \, \mathbf{k}_j}{\sqrt{d_k}})</span></p>
+<p>The new representation <span class="math inline">\mathbf{z}_i</span> of the word <span class="math inline">\mathbf{x}_i</span> is a weighted sum of the values of all other words, weighted by the attention score:</p>
+<p><span class="math display">\mathbf{z}_i = \sum_{j} a_{i, j} \, \mathbf{v}_j</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-attention-output.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Summary of self-attention on two words. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>If we concatenate the word embeddings into a <span class="math inline">\(n\times d\)</span> matrix <span class="math inline">\(X\)</span>, self-attention only implies matrix multiplications and a row-based softmax:</p>
-<p><span class="math display">\[
+<p>If we concatenate the word embeddings into a <span class="math inline">n\times d</span> matrix <span class="math inline">X</span>, self-attention only implies matrix multiplications and a row-based softmax:</p>
+<p><span class="math display">
 \begin{cases}
     Q = X \times W^Q \\
     K = X \times W^K \\
     V = X \times W^V \\
     Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V \\
 \end{cases}
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-attention-matrix-calculation-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -634,33 +638,33 @@ Note
 </figure>
 </div>
 <p>Note 1: everything is differentiable, backpropagation will work.</p>
-<p>Note 2: the weight matrices do not depend on the length <span class="math inline">\(n\)</span> of the sentence.</p>
+<p>Note 2: the weight matrices do not depend on the length <span class="math inline">n</span> of the sentence.</p>
 </section>
 <section id="multi-headed-self-attention" class="level3">
 <h3 class="anchored" data-anchor-id="multi-headed-self-attention">Multi-headed self-attention</h3>
 <p>In the sentence <em>The animal didn’t cross the street because it was too tired.</em>, the new representation for the word <code>it</code> will hopefully contain features of the word <code>animal</code> after training.</p>
-<p>But what if the sentence was <em>The animal didn’t cross the street because it was too <strong>wide</strong>.</em>? The representation of <code>it</code> should be linked to <code>street</code> in that context. This is not possible with a single set of matrices <span class="math inline">\(W^Q\)</span>, <span class="math inline">\(W^K\)</span> and <span class="math inline">\(W^V\)</span>, as they would average every possible context and end up being useless.</p>
+<p>But what if the sentence was <em>The animal didn’t cross the street because it was too <strong>wide</strong>.</em>? The representation of <code>it</code> should be linked to <code>street</code> in that context. This is not possible with a single set of matrices <span class="math inline">W^Q</span>, <span class="math inline">W^K</span> and <span class="math inline">W^V</span>, as they would average every possible context and end up being useless.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer-needforheads.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></figcaption><p></p>
 </figure>
 </div>
-<p>The solution is to use <strong>multiple attention heads</strong> (<span class="math inline">\(h=8\)</span>) with their own matrices <span class="math inline">\(W^Q_k\)</span>, <span class="math inline">\(W^K_k\)</span> and <span class="math inline">\(W^V_k\)</span>.</p>
+<p>The solution is to use <strong>multiple attention heads</strong> (<span class="math inline">h=8</span>) with their own matrices <span class="math inline">W^Q_k</span>, <span class="math inline">W^K_k</span> and <span class="math inline">W^V_k</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_qkv.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>Each <strong>attention head</strong> will output a vector <span class="math inline">\(\mathbf{z}_i\)</span> of size <span class="math inline">\(d=512\)</span> for each word. How do we combine them?</p>
+<p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d=512</span> for each word. How do we combine them?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_z.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>The proposed solution is based on <strong>ensemble learning</strong> (stacking): let another matrix <span class="math inline">\(W^O\)</span> decide which attention head to trust… <span class="math inline">\(8 \times 512\)</span> rows, 512 columns.</p>
+<p>The proposed solution is based on <strong>ensemble learning</strong> (stacking): let another matrix <span class="math inline">W^O</span> decide which attention head to trust… <span class="math inline">8 \times 512</span> rows, 512 columns.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_weight_matrix_o.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -683,13 +687,13 @@ Note
 </section>
 <section id="encoder-layer" class="level3">
 <h3 class="anchored" data-anchor-id="encoder-layer">Encoder layer</h3>
-<p>Multi-headed self-attention produces a vector <span class="math inline">\(\mathbf{z}_i\)</span> for each word of the sentence. A regular feedforward MLP transforms it into a new representation <span class="math inline">\(\mathbf{r}_i\)</span>.</p>
+<p>Multi-headed self-attention produces a vector <span class="math inline">\mathbf{z}_i</span> for each word of the sentence. A regular feedforward MLP transforms it into a new representation <span class="math inline">\mathbf{r}_i</span>.</p>
 <ul>
 <li>one input layer with 512 neurons.</li>
 <li>one hidden layer with 2048 neurons and a ReLU activation function.</li>
 <li>one output layer with 512 neurons.</li>
 </ul>
-<p>The same NN is applied on all words, it does not depend on the length <span class="math inline">\(n\)</span> of the sentence.</p>
+<p>The same NN is applied on all words, it does not depend on the length <span class="math inline">n</span> of the sentence.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/encoder_with_tensors_2.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -704,14 +708,14 @@ Note
 <p>street was animal tired the the because it cross too didn’t</p>
 </blockquote>
 <p>We need to explicitly provide that information in the <strong>input</strong> using positional encoding.</p>
-<p>A simple method would be to append an index <span class="math inline">\(i = 1, 2, \ldots, n\)</span> to the word embeddings, but it is not very robust.</p>
+<p>A simple method would be to append an index <span class="math inline">i = 1, 2, \ldots, n</span> to the word embeddings, but it is not very robust.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_positional_encoding_vectors.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Positional encoding. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>If the elements of the 512-d embeddings are numbers between 0 and 1, concatenating an integer between 1 and <span class="math inline">\(n\)</span> will unbalance the dimensions. Normalizing that integer between 0 and 1 requires to know <span class="math inline">\(n\)</span> in advance, this introduces a maximal sentence length…</p>
+<p>If the elements of the 512-d embeddings are numbers between 0 and 1, concatenating an integer between 1 and <span class="math inline">n</span> will unbalance the dimensions. Normalizing that integer between 0 and 1 requires to know <span class="math inline">n</span> in advance, this introduces a maximal sentence length…</p>
 <p>How about we append the binary code of that integer?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -734,12 +738,12 @@ Note
 </figure>
 </div>
 <p>In practice, a 512-d vector is created using sine and cosine functions.</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \begin{cases}
         t(\text{pos}, 2i) = \sin(\dfrac{\text{pos}}{10000^{2 i / 512}})\\
         t(\text{pos}, 2i + 1) = \cos(\dfrac{\text{pos}}{10000^{2 i / 512}})\\
     \end{cases}
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/attention-is-all-you-need-positional-encoding.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -747,7 +751,7 @@ Note
 </figure>
 </div>
 <p>The positional encoding vector is <strong>added</strong> element-wise to the embedding, not concatenated!</p>
-<p><span class="math display">\[\mathbf{x}_{i} = \mathbf{x}^\text{embed}_{i} + \mathbf{t}_i\]</span></p>
+<p><span class="math display">\mathbf{x}_{i} = \mathbf{x}^\text{embed}_{i} + \mathbf{t}_i</span></p>
 </section>
 <section id="layer-normalization" class="level3">
 <h3 class="anchored" data-anchor-id="layer-normalization">Layer normalization</h3>
@@ -756,10 +760,10 @@ Note
 <li>skip connections (residual layer)</li>
 <li>layer normalization</li>
 </ul>
-<p>The input <span class="math inline">\(X\)</span> is added to the output of the multi-headed self-attention and normalized (zero mean, unit variance).</p>
+<p>The input <span class="math inline">X</span> is added to the output of the multi-headed self-attention and normalized (zero mean, unit variance).</p>
 <p><strong>Layer normalization</strong> <span class="citation" data-cites="Ba2016">(<a href="../references.html#ref-Ba2016" role="doc-biblioref">Ba et al., 2016</a>)</span> is an alternative to batch normalization, where the mean and variance are computed over single vectors, not over a minibatch:</p>
-<p><span class="math display">\[\mathbf{z} \leftarrow \dfrac{\mathbf{z} - \mu}{\sigma}\]</span></p>
-<p>with <span class="math inline">\(\mu = \dfrac{1}{d} \displaystyle\sum_{i=1}^d z_i\)</span> and <span class="math inline">\(\sigma = \dfrac{1}{d} \displaystyle\sum_{i=1}^d (z_i - \mu)^2\)</span>.</p>
+<p><span class="math display">\mathbf{z} \leftarrow \dfrac{\mathbf{z} - \mu}{\sigma}</span></p>
+<p>with <span class="math inline">\mu = \dfrac{1}{d} \displaystyle\sum_{i=1}^d z_i</span> and <span class="math inline">\sigma = \dfrac{1}{d} \displaystyle\sum_{i=1}^d (z_i - \mu)^2</span>.</p>
 <p>The feedforward network also uses a skip connection and layer normalization.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -851,7 +855,7 @@ Note
 </div>
 <section id="bert" class="level3">
 <h3 class="anchored" data-anchor-id="bert">BERT</h3>
-<p>BERT <span class="citation" data-cites="Devlin2019">(<a href="../references.html#ref-Devlin2019" role="doc-biblioref">Devlin et al., 2019</a>)</span> only uses the encoder of the transformer (12 layers, 12 attention heads, <span class="math inline">\(d = 768\)</span>). BERT is pretrained on two different unsupervised tasks before being fine-tuned on supervised tasks.</p>
+<p>BERT <span class="citation" data-cites="Devlin2019">(<a href="../references.html#ref-Devlin2019" role="doc-biblioref">Devlin et al., 2019</a>)</span> only uses the encoder of the transformer (12 layers, 12 attention heads, <span class="math inline">d = 768</span>). BERT is pretrained on two different unsupervised tasks before being fine-tuned on supervised tasks.</p>
 <ul>
 <li>Task 1: Masked language model. Sentences from BooksCorpus and Wikipedia (3.3G words) are presented to BERT during pre-training, with 15% of the words masked. The goal is to predict the masked words from the final representations using a shallow FNN.</li>
 </ul>
@@ -1027,7 +1031,7 @@ Note
 </figure>
 </div>
 <p>The student tries to imitate the output of the teacher, by minimizing the <strong>cross-entropy</strong> (or KL divergence) between the two probability distributions. The teacher slowly integrates the weights of the student (momentum or exponentially moving average ema):</p>
-<p><span class="math display">\[\theta_\text{teacher} \leftarrow \beta \, \theta_\text{teacher} + (1 - \beta) \, \theta_\text{student}\]</span></p>
+<p><span class="math display">\theta_\text{teacher} \leftarrow \beta \, \theta_\text{teacher} + (1 - \beta) \, \theta_\text{student}</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/DINO-architecture2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -1064,25 +1068,25 @@ Note
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Atito2021" class="csl-entry" role="doc-biblioentry">
-Atito, S., Awais, M., and Kittler, J. (2021). <span>SiT</span>: <span class="nocase">Self-supervised vIsion Transformer</span>. <em>arXiv:2104.03602 [cs]</em>. Available at: <a href="https://arxiv.org/abs/2104.03602">https://arxiv.org/abs/2104.03602</a>.
+Atito, S., Awais, M., and Kittler, J. (2021). <span>SiT</span>: <span class="nocase">Self-supervised vIsion Transformer</span>. Available at: <a href="http://arxiv.org/abs/2104.03602">http://arxiv.org/abs/2104.03602</a> [Accessed December 26, 2021].
 </div>
 <div id="ref-Ba2016" class="csl-entry" role="doc-biblioentry">
-Ba, J. L., Kiros, J. R., and Hinton, G. E. (2016). Layer <span>Normalization</span>. <em>arXiv:1607.06450 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/1607.06450">https://arxiv.org/abs/1607.06450</a>.
+Ba, J. L., Kiros, J. R., and Hinton, G. E. (2016). Layer <span>Normalization</span>. Available at: <a href="http://arxiv.org/abs/1607.06450">http://arxiv.org/abs/1607.06450</a> [Accessed November 23, 2020].
 </div>
 <div id="ref-Caron2021" class="csl-entry" role="doc-biblioentry">
-Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., et al. (2021). Emerging <span>Properties</span> in <span>Self-Supervised Vision Transformers</span>. <em>arXiv:2104.14294 [cs]</em>. Available at: <a href="https://arxiv.org/abs/2104.14294">https://arxiv.org/abs/2104.14294</a>.
+Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., et al. (2021). Emerging <span>Properties</span> in <span>Self-Supervised Vision Transformers</span>. Available at: <a href="http://arxiv.org/abs/2104.14294">http://arxiv.org/abs/2104.14294</a> [Accessed December 29, 2021].
 </div>
 <div id="ref-Devlin2019" class="csl-entry" role="doc-biblioentry">
-Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K. (2019). <span>BERT</span>: <span class="nocase">Pre-training</span> of <span>Deep Bidirectional Transformers</span> for <span>Language Understanding</span>. <em>arXiv:1810.04805 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a>.
+Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K. (2019). <span>BERT</span>: <span class="nocase">Pre-training</span> of <span>Deep Bidirectional Transformers</span> for <span>Language Understanding</span>. Available at: <a href="http://arxiv.org/abs/1810.04805">http://arxiv.org/abs/1810.04805</a> [Accessed December 5, 2019].
 </div>
 <div id="ref-Dosovitskiy2021" class="csl-entry" role="doc-biblioentry">
-Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., et al. (2021). An <span>Image</span> is <span>Worth</span> 16x16 <span>Words</span>: <span>Transformers</span> for <span>Image Recognition</span> at <span>Scale</span>. <em>arXiv:2010.11929 [cs]</em>. Available at: <a href="https://arxiv.org/abs/2010.11929">https://arxiv.org/abs/2010.11929</a>.
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., et al. (2021). An <span>Image</span> is <span>Worth</span> 16x16 <span>Words</span>: <span>Transformers</span> for <span>Image Recognition</span> at <span>Scale</span>. Available at: <a href="http://arxiv.org/abs/2010.11929">http://arxiv.org/abs/2010.11929</a> [Accessed November 29, 2021].
 </div>
 <div id="ref-Vaswani2017" class="csl-entry" role="doc-biblioentry">
-Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al. (2017). Attention <span>Is All You Need</span>. <em>arXiv:1706.03762 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a>.
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al. (2017). Attention <span>Is All You Need</span>. Available at: <a href="http://arxiv.org/abs/1706.03762">http://arxiv.org/abs/1706.03762</a> [Accessed August 25, 2019].
 </div>
 <div id="ref-Wu2020" class="csl-entry" role="doc-biblioentry">
-Wu, N., Green, B., Ben, X., and O’Banion, S. (2020). Deep <span>Transformer Models</span> for <span>Time Series Forecasting</span>: <span>The Influenza Prevalence Case</span>. <em>arXiv:2001.08317 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/2001.08317">https://arxiv.org/abs/2001.08317</a>.
+Wu, N., Green, B., Ben, X., and O’Banion, S. (2020). Deep <span>Transformer Models</span> for <span>Time Series Forecasting</span>: <span>The Influenza Prevalence Case</span>. Available at: <a href="http://arxiv.org/abs/2001.08317">http://arxiv.org/abs/2001.08317</a> [Accessed February 16, 2021].
 </div>
 </div>
 </section>
@@ -1188,7 +1192,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../notes/6.2-Attention.html" class="pagination-link">
+      <a href="../notes/6.3-Attention.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Attentional neural networks</span></span>
       </a>          
   </div>
@@ -1199,6 +1203,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

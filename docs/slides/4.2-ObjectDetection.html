@@ -7,7 +7,7 @@
 <link href="4.2-ObjectDetection_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="4.2-ObjectDetection_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="4.2-ObjectDetection_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="4.2-ObjectDetection_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="4.2-ObjectDetection_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="4.2-ObjectDetection_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="4.2-ObjectDetection_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Object detection</p>
   <p class="author">Julien Vitay</p>
@@ -336,10 +352,7 @@
 <section id="object-recognition-vs.-object-detection" class="title-slide slide level1 center">
 <h1>Object recognition vs.&nbsp;object detection</h1>
 
-<img data-src="img/dnn_classification_vs_detection.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4" class="uri">https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4</a></p>
-</div>
-</section>
+<img data-src="img/dnn_classification_vs_detection.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4" class="uri">https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4</a></p></section>
 
 <section id="object-detection-with-heatmaps" class="title-slide slide level1 center">
 <h1>Object detection with heatmaps</h1>
@@ -349,10 +362,7 @@
 <li><p>The output is a heatmap of the probability that a particular object is present.</p></li>
 </ul>
 
-<img data-src="img/objectdetection.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4" class="uri">https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4</a></p>
-</div>
-</section>
+<img data-src="img/objectdetection.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4" class="uri">https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4</a></p></section>
 
 <section id="pascal-visual-object-classes-challenge" class="title-slide slide level1 center">
 <h1>PASCAL Visual Object Classes Challenge</h1>
@@ -361,6 +371,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pascal-cow.jpg"></p>
+<p></p><figcaption>Source: <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2008/" class="uri">http://host.robots.ox.ac.uk/pascal/VOC/voc2008/</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -374,7 +385,7 @@
 <li><p>It is both a:</p>
 <ul>
 <li><p><strong>Classification</strong> problem, as one has to recognize an object.</p></li>
-<li><p><strong>Regression</strong> problem, as one has to predict the coordinates <span class="math inline">\((x, y, w, h)\)</span> of the bounding box.</p></li>
+<li><p><strong>Regression</strong> problem, as one has to predict the coordinates <span class="math inline">(x, y, w, h)</span> of the bounding box.</p></li>
 </ul></li>
 </ul>
 </div>
@@ -382,29 +393,37 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/localization.png"></p>
+<p></p><figcaption>Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Sources: <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2008/" class="uri">http://host.robots.ox.ac.uk/pascal/VOC/voc2008/</a> <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></p>
 </div>
 </section>
 
 <section id="ms-coco-dataset-common-objects-in-context" class="title-slide slide level1 center">
 <h1>MS COCO dataset (Common Objects in COntext)</h1>
-
-<img data-src="img/mscoco.png" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/mscoco.png" style="width:80.0%"></p>
+<p></p><figcaption>Source: <a href="http://cocodataset.org" class="uri">http://cocodataset.org</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+<ul>
 <li><p>330K images, 80 labels.</p></li>
 <li><p>Also contains data for semantic segmentation, caption generation, etc.</p></li>
 </ul>
-<div class="footer">
-<p><a href="http://cocodataset.org" class="uri">http://cocodataset.org</a></p>
-</div>
 </section>
 
 <section id="r-cnn-regions-with-cnn-features" class="title-slide slide level1 center">
 <h1>R-CNN : Regions with CNN features</h1>
-
-<img data-src="img/rcnn.png" style="width:80.0%" class="r-stretch quarto-figure-center"><ol type="1">
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/rcnn.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<ol type="1">
 <li><p>Bottom-up region proposals (selective search) by searching bounding boxes based on pixel info.</p></li>
 <li><p>Feature extraction using a pre-trained CNN (AlexNet).</p></li>
 <li><p>Classification using a SVM (object or not; if yes, which one?)</p></li>
@@ -413,8 +432,18 @@
 <div class="footer">
 <p>Girshick, Donahue, Darrell and Malik (2014). Rich feature hierarchies for accurate object detection and semantic segmentation. CVPR.</p>
 </div>
-<div class="footer">
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
 <p>Selective search: <a href="https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf" class="uri">https://ivi.fnwi.uva.nl/isis/publications/2013/UijlingsIJCV2013/UijlingsIJCV2013.pdf</a></p>
+</div>
+</div>
 </div>
 </section>
 
@@ -428,6 +457,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/rcnn-detail.png"></p>
+<p></p><figcaption>Source: <a href="https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf" class="uri">https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:55%;">
@@ -437,15 +467,10 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/rcnn-training.png"></p>
+<p></p><figcaption>Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption><p></p>
 </figure>
 </div>
 </div>
-</div>
-<div class="footer">
-<p><a href="https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf" class="uri">https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf</a></p>
-</div>
-<div class="footer">
-<p><a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></p>
 </div>
 </section>
 
@@ -475,9 +500,9 @@
 </ul></li>
 <li><p>The loss function to minimize is a composition of different losses and penalty terms:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(\theta) = \lambda_1 \, \mathcal{L}_\text{classification}(\theta) + \lambda_2 \, \mathcal{L}_\text{regression}(\theta) + \lambda_3 \, \mathcal{L}_\text{regularization}(\theta)
-\]</span></p>
+</span></p>
 <div class="footer">
 <p>Girschick (2015). Fast R-CNN. arxiv:1504.08083</p>
 </div>
@@ -525,8 +550,8 @@
 </div>
 </div>
 <ul>
-<li><p>Each grid cell predicts a single object, with the corresponding <span class="math inline">\(C\)</span> <strong>class probabilities</strong> (softmax).</p></li>
-<li><p>It also predicts the coordinates of <span class="math inline">\(B\)</span> possible <strong>bounding boxes</strong> (x, y, w, h) as well as a box <strong>confidence score</strong>.</p></li>
+<li><p>Each grid cell predicts a single object, with the corresponding <span class="math inline">C</span> <strong>class probabilities</strong> (softmax).</p></li>
+<li><p>It also predicts the coordinates of <span class="math inline">B</span> possible <strong>bounding boxes</strong> (x, y, w, h) as well as a box <strong>confidence score</strong>.</p></li>
 <li><p>The SxSxB predicted boxes are then pooled together to form the final prediction.</p></li>
 </ul>
 <div class="footer">
@@ -540,10 +565,7 @@
 <li>The yellow box predicts the presence of a <strong>person</strong> (the class) as well as a candidate <strong>bounding box</strong> (it may be bigger than the grid cell itself).</li>
 </ul>
 
-<img data-src="img/yolo1.jpeg" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p>
-</div>
-</section>
+<img data-src="img/yolo1.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p></section>
 
 <section id="yolo-you-only-look-once-2" class="title-slide slide level1 center">
 <h1>YOLO (You Only Look Once)</h1>
@@ -551,10 +573,7 @@
 <li>We will suppose here that each grid cell proposes 2 bounding boxes.</li>
 </ul>
 
-<img data-src="img/yolo2.jpeg" style="width:50.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p>
-</div>
-</section>
+<img data-src="img/yolo2.jpeg" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p></section>
 
 <section id="yolo-you-only-look-once-3" class="title-slide slide level1 center">
 <h1>YOLO (You Only Look Once)</h1>
@@ -563,10 +582,7 @@
 <li><p>This makes C + B * 5 = 30 values to predict for each cell.</p></li>
 </ul>
 
-<img data-src="img/yolo3.jpeg" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p>
-</div>
-</section>
+<img data-src="img/yolo3.jpeg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088" class="uri">https://medium.com/@jonathan_hui/real-time-object-detection-with-yolo-yolov2-28b1b93e2088</a></p></section>
 
 <section id="yolo-cnn-architecture" class="title-slide slide level1 center">
 <h1>YOLO : CNN architecture</h1>
@@ -587,9 +603,9 @@
 <li><p>The 7x7 grid cells predict 2 bounding boxes each: maximum of 98 bounding boxes on the whole image.</p></li>
 <li><p>Only the bounding boxes with the <strong>highest class confidence score</strong> are kept.</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{class confidence score = box confidence score * class probability}
-\]</span></p>
+</span></p>
 <ul>
 <li>In practice, the class confidence score should be above 0.25 to be retained.</li>
 </ul>
@@ -611,6 +627,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/iou1.jpg"></p>
+<p></p><figcaption>Source: <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" class="uri">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -620,9 +637,6 @@
 </figure>
 </div>
 </div>
-</div>
-<div class="footer">
-<p>Source: <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" class="uri">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></p>
 </div>
 </section>
 
@@ -652,14 +666,14 @@
 <ul>
 <li><p>The classification loss is the <strong>mse</strong> between:</p>
 <ul>
-<li><p><span class="math inline">\(\hat{p}_i(c)\)</span>: the one-hot encoded class <span class="math inline">\(c\)</span> of the object present under each cell <span class="math inline">\(i\)</span>, and</p></li>
-<li><p><span class="math inline">\(p_i(c)\)</span>: the predicted class probabilities of cell <span class="math inline">\(i\)</span>.</p></li>
+<li><p><span class="math inline">\hat{p}_i(c)</span>: the one-hot encoded class <span class="math inline">c</span> of the object present under each cell <span class="math inline">i</span>, and</p></li>
+<li><p><span class="math inline">p_i(c)</span>: the predicted class probabilities of cell <span class="math inline">i</span>.</p></li>
 </ul></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}_\text{classification}(\theta) =  \sum_{i=0}^{S^2} \mathbb{1}_i^\text{obj} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
-\]</span></p>
-<p>where <span class="math inline">\(\mathbb{1}_i^\text{obj}\)</span> is 1 when there actually is an object behind the cell <span class="math inline">\(i\)</span>, 0 otherwise (background).</p>
+</span></p>
+<p>where <span class="math inline">\mathbb{1}_i^\text{obj}</span> is 1 when there actually is an object behind the cell <span class="math inline">i</span>, 0 otherwise (background).</p>
 <ul>
 <li><p>They could also have used the cross-entropy loss, but the output layer is not a softmax layer.</p></li>
 <li><p>Using mse is also more compatible with the other losses.</p></li>
@@ -674,15 +688,14 @@
 <ul>
 <li><p>For all bounding boxes matching a real object, we want to minimize the <strong>mse</strong> between:</p>
 <ul>
-<li><p><span class="math inline">\((\hat{x}_i, \hat{y}_i, \hat{w}_i, \hat{h}_i)\)</span>: the coordinates of the ground truth bounding box, and</p></li>
-<li><p><span class="math inline">\((x_i, y_i, w_i, h_i)\)</span>: the coordinates of the predicted bounding box.</p></li>
+<li><p><span class="math inline">(\hat{x}_i, \hat{y}_i, \hat{w}_i, \hat{h}_i)</span>: the coordinates of the ground truth bounding box, and</p></li>
+<li><p><span class="math inline">(x_i, y_i, w_i, h_i)</span>: the coordinates of the predicted bounding box.</p></li>
 </ul></li>
 </ul>
-<p><span class="math display">\[
-    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2] \\
-    \qquad\qquad\qquad\qquad + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
-\]</span></p>
-<p>where <span class="math inline">\(\mathbb{1}_{ij}^\text{obj}\)</span> is 1 when the bounding box <span class="math inline">\(j\)</span> of cell <span class="math inline">\(i\)</span> “matches” with an object (IoU).</p>
+<p><span class="math display">
+    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2]  + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
+</span></p>
+<p>where <span class="math inline">\mathbb{1}_{ij}^\text{obj}</span> is 1 when the bounding box <span class="math inline">j</span> of cell <span class="math inline">i</span> “matches” with an object (IoU).</p>
 <ul>
 <li><p>The root square of the width and height of the bounding boxes is used.</p></li>
 <li><p>This allows to penalize more the errors on small boxes than on big boxes.</p></li>
@@ -697,19 +710,18 @@
 <ul>
 <li><p>Finally, we need to learn the confidence score of each bounding box, by minimizing the <strong>mse</strong> between:</p>
 <ul>
-<li><p><span class="math inline">\(C_i\)</span>: the predicted confidence score of cell <span class="math inline">\(i\)</span>, and</p></li>
-<li><p><span class="math inline">\(\hat{C}_i\)</span>: the IoU between the ground truth bounding box and the predicted one.</p></li>
+<li><p><span class="math inline">C_i</span>: the predicted confidence score of cell <span class="math inline">i</span>, and</p></li>
+<li><p><span class="math inline">\hat{C}_i</span>: the IoU between the ground truth bounding box and the predicted one.</p></li>
 </ul></li>
 </ul>
-<p><span class="math display">\[
-    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
-    \qquad\qquad\qquad\qquad + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
-\]</span></p>
+<p><span class="math display">
+    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
+</span></p>
 <ul>
 <li><p>Two cases are considered:</p>
 <ol type="1">
-<li><p>There was a real object at that location (<span class="math inline">\(\mathbb{1}_{ij}^\text{obj} = 1\)</span>): the confidences should be updated fully.</p></li>
-<li><p>There was no real object (<span class="math inline">\(\mathbb{1}_{ij}^\text{noobj} = 1\)</span>): the confidences should only be moderately updated (<span class="math inline">\(\lambda^\text{noobj} = 0.5\)</span>)</p></li>
+<li><p>There was a real object at that location (<span class="math inline">\mathbb{1}_{ij}^\text{obj} = 1</span>): the confidences should be updated fully.</p></li>
+<li><p>There was no real object (<span class="math inline">\mathbb{1}_{ij}^\text{noobj} = 1</span>): the confidences should only be moderately updated (<span class="math inline">\lambda^\text{noobj} = 0.5</span>)</p></li>
 </ol></li>
 <li><p>This is to deal with <strong>class imbalance</strong>: there are much more cells on the background than on real objects.</p></li>
 </ul>
@@ -723,7 +735,7 @@
 <ul>
 <li>Put together, the loss function to minimize is:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align}
     \mathcal{L}(\theta) &amp; = \mathcal{L}_\text{classification}(\theta) + \lambda_\text{coord} \, \mathcal{L}_\text{localization}(\theta) + \mathcal{L}_\text{confidence}(\theta) \\
               &amp; = \sum_{i=0}^{S^2} \mathbb{1}_i^\text{obj} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2 \\
@@ -732,7 +744,7 @@
               &amp; + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
               &amp; + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2 \\
 \end{align}
-\]</span></p>
+</span></p>
 <div class="footer">
 <p>Redmon et al.&nbsp;(2015). You Only Look Once: Unified, Real-Time Object Detection. arxiv:1506.02640</p>
 </div>
@@ -743,7 +755,7 @@
 <h1>YOLO : Training on PASCAL VOC</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/yolo-result.png"></p>
+<p><img data-src="img/yolo-result.png" style="width:70.0%"></p>
 </figure>
 </div>
 <div class="columns">
@@ -764,10 +776,9 @@
 </section>
 <section class="slide level2">
 
-<video src="videos/yolov3.mp4" style="display:block; margin: 0 auto 10px 10px;" controls="" allow="autoplay loop">
-</video>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/MPU2HistivI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="footer">
-<p><a href="https://pjreddie.com/darknet/yolo/" class="uri">https://pjreddie.com/darknet/yolo/</a> <a href="https://www.youtube.com/watch?v=MPU2HistivI" class="uri">https://www.youtube.com/watch?v=MPU2HistivI</a></p>
+<p><a href="https://pjreddie.com/darknet/yolo/" class="uri">https://pjreddie.com/darknet/yolo/</a></p>
 </div>
 </section></section>
 <section id="ssd-single-shot-detector" class="title-slide slide level1 center">
@@ -825,10 +836,7 @@
 <section id="voxelnet-1" class="title-slide slide level1 center">
 <h1>VoxelNet</h1>
 
-<img data-src="img/voxelnet-result.png" style="width:100.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a" class="uri">https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a</a></p>
-</div>
-</section>
+<img data-src="img/voxelnet-result.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a" class="uri">https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a</a></p></section>
 
 <section id="additional-resources-on-object-detection" class="title-slide slide level1 center">
 <h1>Additional resources on object detection</h1>
@@ -862,7 +870,6 @@
   <script src="4.2-ObjectDetection_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="4.2-ObjectDetection_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="4.2-ObjectDetection_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="4.2-ObjectDetection_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1031,27 +1038,9 @@
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

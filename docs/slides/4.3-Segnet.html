@@ -7,7 +7,7 @@
 <link href="4.3-Segnet_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="4.3-Segnet_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="4.3-Segnet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="4.3-Segnet_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="4.3-Segnet_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="4.3-Segnet_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="4.3-Segnet_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Semantic segmentation</p>
   <p class="author">Julien Vitay</p>
@@ -339,13 +355,10 @@
 <li><strong>Semantic segmentation</strong> is a class of segmentation methods where you use knowledge about the identity of objects to partition the image pixel-per-pixel.</li>
 </ul>
 
-<img data-src="img/semanticsegmentation-example.png" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/semanticsegmentation-example.png" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></p><ul>
 <li><p>Classical segmentation methods only rely on the similarity between neighboring pixels, they do not use class information.</p></li>
 <li><p>The output of a semantic segmentation is another image, where each pixel represents the class.</p></li>
 </ul>
-<div class="footer">
-<p>Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></p>
-</div>
 </section>
 
 <section id="semantic-segmentation-1" class="title-slide slide level1 center">
@@ -359,10 +372,8 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/segmentation-virtualbackground.gif" style="width:60.0%"></p>
+<p></p><figcaption>Source: <a href="https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html" class="uri">https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html" class="uri">https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html</a></p>
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
@@ -373,10 +384,10 @@
 <p><img data-src="img/semanticsegmentation-clothes.png"></p>
 </figure>
 </div>
+</div>
+</div>
 <div class="footer">
 <p>Wang B, Zheng H, Liang X, Chen Y, Lin L, Yang M. (2018). Toward Characteristic-Preserving Image-based Virtual Try-On Network. arXiv:180707688.</p>
-</div>
-</div>
 </div>
 </section>
 
@@ -404,10 +415,7 @@
 <li>Each pixel of the input image is associated to a label (as in classification).</li>
 </ul>
 
-<img data-src="img/segnet-encoding.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></p>
-</div>
-</section>
+<img data-src="img/segnet-encoding.png" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></p></section>
 
 <section id="output-encoding-1" class="title-slide slide level1 center">
 <h1>Output encoding</h1>
@@ -415,10 +423,7 @@
 <li>A <strong>one-hot encoding</strong> of the segmented image is therefore a tensor:</li>
 </ul>
 
-<img data-src="img/segnet-encoding2.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></p>
-</div>
-</section>
+<img data-src="img/segnet-encoding2.png" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></p></section>
 
 <section id="fully-convolutional-network" class="title-slide slide level1 center">
 <h1>Fully convolutional network</h1>
@@ -426,14 +431,11 @@
 <li><p>A <strong>fully convolutional network</strong> only has convolutional layers and learns to predict the output tensor.</p></li>
 <li><p>The last layer has a pixel-wise softmax activation. We minimize the <strong>pixel-wise cross-entropy loss</strong></p></li>
 </ul>
-<p><span class="math display">\[\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \sum_\text{pixels} \sum_\text{classes} t_i \, \log y_i]\]</span></p>
+<p><span class="math display">\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \sum_\text{pixels} \sum_\text{classes} t_i \, \log y_i]</span></p>
 
-<img data-src="img/fullyconvolutional.png" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/fullyconvolutional.png" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></p><ul>
 <li>Downside: the image size is preserved throughout the network: computationally expensive. It is therefore difficult to increase the number of features in each convolutional layer.</li>
 </ul>
-<div class="footer">
-<p>Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></p>
-</div>
 </section>
 
 <section id="segnet-segmentation-network" class="title-slide slide level1 center">
@@ -455,10 +457,7 @@
 <li><p>In SegNet, max-unpooling uses the information of the corresponding max-pooling layer in the encoder to place pixels adequately.</p></li>
 </ul>
 
-<img data-src="img/max-pooling-inverse.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></p>
-</div>
-</section>
+<img data-src="img/max-pooling-inverse.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></p></section>
 
 <section id="upsampling-transposed-convolution" class="title-slide slide level1 center">
 <h1>Upsampling: transposed convolution</h1>
@@ -523,8 +522,14 @@
 <li><p>For many applications, segmenting the background is useless. A two-stage approach can save computations.</p></li>
 <li><p><strong>Mask R-CNN</strong> uses faster R-CNN to extract bounding boxes around interesting objects, followed by the prediction of a <strong>mask</strong> to segment the object.</p></li>
 </ul>
-
-<img data-src="img/mask-r-cnn.png" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/mask-r-cnn.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="footer">
 <p>He K, Gkioxari G, Dollár P, Girshick R. 2018. Mask R-CNN. arXiv:170306870</p>
 </div>
 </section>
@@ -539,11 +544,7 @@
 
 <section id="mask-r-cnn-2" class="title-slide slide level1 center">
 <h1>Mask R-CNN</h1>
-<video src="videos/segnet.mp4" style="display:block; margin: 0 auto 10px 10px;" controls="" allow="autoplay loop">
-</video>
-<div class="footer">
-<p><a href="https://www.youtube.com/watch?v=OOT3UIXZztE" class="uri">https://www.youtube.com/watch?v=OOT3UIXZztE</a></p>
-</div>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/OOT3UIXZztE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="footer footer-default">
 
 </div>
@@ -566,7 +567,6 @@
   <script src="4.3-Segnet_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="4.3-Segnet_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="4.3-Segnet_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="4.3-Segnet_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -735,27 +735,9 @@
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

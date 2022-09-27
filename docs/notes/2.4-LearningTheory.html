@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -125,7 +125,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -146,12 +161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -243,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -268,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -306,7 +321,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -346,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -483,7 +503,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="error-measurements">Error measurements</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WNGmapP2JL8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The <strong>training error</strong> is the error made on the training set. It is easy to measure for classification as the number of misclassified examples divided by the total number of examples.</p>
-<p><span class="math display">\[\epsilon_\mathcal{D} = \dfrac{\text{Number of misclassifications}}{\text{Total number of examples}}\]</span></p>
+<p><span class="math display">\epsilon_\mathcal{D} = \dfrac{\text{Number of misclassifications}}{\text{Total number of examples}}</span></p>
 <p>The training error is totally irrelevant on usage: reading the training set has a training error of 0%. What matters is the <strong>generalization error</strong>, which is the error that will be made on new examples (not used during learning). It is much harder to measure (potentially infinite number of new examples, what is the correct answer?). The generalization error is often approximated by the <strong>empirical error</strong>: one keeps a number of training examples out of the learning phase and one tests the performance on them.</p>
 <p>Classification errors can also depend on the class:</p>
 <ul>
@@ -496,27 +516,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Accuracy (1 - error)</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
-\]</span></p>
+</span></p>
 <ul>
 <li>Recall (hit rate, sensitivity)</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     R = \frac{\text{TP}}{\text{TP} + \text{FN}}
-\]</span></p>
+</span></p>
 <ul>
 <li>Precision (specificity)</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P = \frac{\text{TP}}{\text{TP} + \text{FP}}
-\]</span></p>
+</span></p>
 <ul>
 <li>F1 score = harmonic mean of precision and recall</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{F1} = \frac{2\, P \, R}{P + R}
-\]</span></p>
+</span></p>
 <p>For multiclass classification problems, the <strong>confusion matrix</strong> tells how many examples are correctly classified and where confusion happens. One axis is the predicted class, the other is the target class. Each element of the matrix tells how many examples are classified or misclassified. The matrix should be as diagonal as possible.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -579,27 +599,27 @@ Note
 <section id="vapnik-chervonenkis-dimension" class="level2">
 <h2 class="anchored" data-anchor-id="vapnik-chervonenkis-dimension">Vapnik-Chervonenkis dimension</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/w3drWJ-tFH8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>How many data examples can be correctly classified by a linear model in <span class="math inline">\(\Re^d\)</span>? In <span class="math inline">\(\Re^2\)</span>, all dichotomies of three non-aligned examples can be correctly classified by a linear model (<span class="math inline">\(y = w_1 \, x_1 + w_2 \, x_2 + b\)</span>).</p>
+<p>How many data examples can be correctly classified by a linear model in <span class="math inline">\Re^d</span>? In <span class="math inline">\Re^2</span>, all dichotomies of three non-aligned examples can be correctly classified by a linear model (<span class="math inline">y = w_1 \, x_1 + w_2 \, x_2 + b</span>).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vc4.png" class="img-fluid figure-img" style="width:60.0%"></p>
 <p></p><figcaption class="figure-caption">A linear classifier in 2D can classify any configuration of three points.</figcaption><p></p>
 </figure>
 </div>
-<p>However, there exists sets of four examples in <span class="math inline">\(\Re^2\)</span> which can NOT be correctly classified by a linear model, i.e.&nbsp;they are not linearly separable.</p>
+<p>However, there exists sets of four examples in <span class="math inline">\Re^2</span> which can NOT be correctly classified by a linear model, i.e.&nbsp;they are not linearly separable.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vc6.png" class="img-fluid figure-img" style="width:60.0%"></p>
 <p></p><figcaption class="figure-caption">There exists configurations of four points in 2D that cannot be linearly classified.</figcaption><p></p>
 </figure>
 </div>
-<p>The XOR function in <span class="math inline">\(\Re^2\)</span> is for example not linearly separable, i.e.&nbsp;the Perceptron algorithm can not converge.</p>
-<p>The probability that a set of 3 (non-aligned) points in <span class="math inline">\(\Re^2\)</span> is linearly separable is 1, but the probability that a set of four points is linearly separable is smaller than 1 (but not zero). When a class of hypotheses <span class="math inline">\(\mathcal{H}\)</span> can correctly classify all points of a training set <span class="math inline">\(\mathcal{D}\)</span>, we say that <span class="math inline">\(\mathcal{H}\)</span> <strong>shatters</strong> <span class="math inline">\(\mathcal{D}\)</span>.</p>
-<p>The <strong>Vapnik-Chervonenkis dimension</strong> <span class="math inline">\(\text{VC}_\text{dim} (\mathcal{H})\)</span> of an hypothesis class <span class="math inline">\(\mathcal{H}\)</span> is defined as the maximal number of training examples that <span class="math inline">\(\mathcal{H}\)</span> can shatter. We saw that in <span class="math inline">\(\Re^2\)</span>, this dimension is 3:</p>
-<p><span class="math display">\[\text{VC}_\text{dim} (\text{Linear}(\Re^2) ) = 3\]</span></p>
-<p>This can be generalized to linear classifiers in <span class="math inline">\(\Re^d\)</span>:</p>
-<p><span class="math display">\[\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1\]</span></p>
-<p>This corresponds to the number of <strong>free parameters</strong> of the linear classifier: <span class="math inline">\(d\)</span> parameters for the weight vector, 1 for the bias. Given any set of <span class="math inline">\((d+1)\)</span> examples in <span class="math inline">\(\Re^d\)</span>, there exists a linear classifier able to classify them perfectly. For other types of (non-linear) hypotheses, the VC dimension is generally proportional to the <strong>number of free parameters</strong>, but <strong>regularization</strong> reduces the VC dimension of the classifier.</p>
+<p>The XOR function in <span class="math inline">\Re^2</span> is for example not linearly separable, i.e.&nbsp;the Perceptron algorithm can not converge.</p>
+<p>The probability that a set of 3 (non-aligned) points in <span class="math inline">\Re^2</span> is linearly separable is 1, but the probability that a set of four points is linearly separable is smaller than 1 (but not zero). When a class of hypotheses <span class="math inline">\mathcal{H}</span> can correctly classify all points of a training set <span class="math inline">\mathcal{D}</span>, we say that <span class="math inline">\mathcal{H}</span> <strong>shatters</strong> <span class="math inline">\mathcal{D}</span>.</p>
+<p>The <strong>Vapnik-Chervonenkis dimension</strong> <span class="math inline">\text{VC}_\text{dim} (\mathcal{H})</span> of an hypothesis class <span class="math inline">\mathcal{H}</span> is defined as the maximal number of training examples that <span class="math inline">\mathcal{H}</span> can shatter. We saw that in <span class="math inline">\Re^2</span>, this dimension is 3:</p>
+<p><span class="math display">\text{VC}_\text{dim} (\text{Linear}(\Re^2) ) = 3</span></p>
+<p>This can be generalized to linear classifiers in <span class="math inline">\Re^d</span>:</p>
+<p><span class="math display">\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1</span></p>
+<p>This corresponds to the number of <strong>free parameters</strong> of the linear classifier: <span class="math inline">d</span> parameters for the weight vector, 1 for the bias. Given any set of <span class="math inline">(d+1)</span> examples in <span class="math inline">\Re^d</span>, there exists a linear classifier able to classify them perfectly. For other types of (non-linear) hypotheses, the VC dimension is generally proportional to the <strong>number of free parameters</strong>, but <strong>regularization</strong> reduces the VC dimension of the classifier.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -610,11 +630,11 @@ Vapnik-Chervonenkis theorem
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The generalization error <span class="math inline">\(\epsilon(h)\)</span> of an hypothesis <span class="math inline">\(h\)</span> taken from a class <span class="math inline">\(\mathcal{H}\)</span> of finite VC dimension and trained on <span class="math inline">\(N\)</span> samples of <span class="math inline">\(\mathcal{S}\)</span> is bounded by the sum of the training error <span class="math inline">\(\hat{\epsilon}_{\mathcal{S}}(h)\)</span> and the VC complexity term:</p>
-<p><span class="math display">\[
+<p>The generalization error <span class="math inline">\epsilon(h)</span> of an hypothesis <span class="math inline">h</span> taken from a class <span class="math inline">\mathcal{H}</span> of finite VC dimension and trained on <span class="math inline">N</span> samples of <span class="math inline">\mathcal{S}</span> is bounded by the sum of the training error <span class="math inline">\hat{\epsilon}_{\mathcal{S}}(h)</span> and the VC complexity term:</p>
+<p><span class="math display">
     \epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}}(h) + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}
-\]</span></p>
-<p>with probability <span class="math inline">\(1-\delta\)</span>, if <span class="math inline">\(\text{VC}_\text{dim} (\mathcal{H}) &lt;&lt; N\)</span>.</p>
+</span></p>
+<p>with probability <span class="math inline">1-\delta</span>, if <span class="math inline">\text{VC}_\text{dim} (\mathcal{H}) &lt;&lt; N</span>.</p>
 <p>Vapnik, Vladimir (2000). The nature of statistical learning theory. Springer.</p>
 </div>
 </div>
@@ -628,16 +648,16 @@ Vapnik-Chervonenkis theorem
 </figure>
 </div>
 <p>The generalization error increases with the VC dimension, while the training error decreases. Structural risk minimization is an alternative method to cross-validation. The VC dimensions of various classes of hypothesis are already known (~ number of free parameters). The VC bounds tells how many training samples are needed by a given hypothesis class in order to obtain a satisfying generalization error.</p>
-<p><span class="math display">\[\epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}(h)} + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}\]</span></p>
+<p><span class="math display">\epsilon(h) \leq \hat{\epsilon}_{\mathcal{S}(h)} + \sqrt{\frac{\text{VC}_\text{dim} (\mathcal{H}) \cdot (1 + \log(\frac{2\cdot N}{\text{VC}_\text{dim} (\mathcal{H})})) - \log(\frac{\delta}{4})}{N}}</span></p>
 <p><strong>The more complex the model, the more training data you will need to get a good generalization error!</strong></p>
 <p>Rule of thumb:</p>
-<p><span class="math display">\[
+<p><span class="math display">
         \epsilon(h) \approx \frac{\text{VC}_\text{dim} (\mathcal{H})}{N}
-\]</span></p>
+</span></p>
 <p>A learning algorithm should only try to minimize the training error, as the VC complexity term only depends on the model. This term is only an upper bound: most of the time, the real bound is usually 100 times smaller.</p>
-<p>The VC dimension of linear classifiers in <span class="math inline">\(\Re^d\)</span> is:</p>
-<p><span class="math display">\[\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1\]</span></p>
-<p>Given any set of <span class="math inline">\((d+1)\)</span> examples in <span class="math inline">\(\Re^d\)</span>, there exists a linear classifier able to classify them perfectly. For <span class="math inline">\(N &gt;&gt; d\)</span> the probability of having training errors becomes huge (the data is generally not linearly separable).</p>
+<p>The VC dimension of linear classifiers in <span class="math inline">\Re^d</span> is:</p>
+<p><span class="math display">\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1</span></p>
+<p>Given any set of <span class="math inline">(d+1)</span> examples in <span class="math inline">\Re^d</span>, there exists a linear classifier able to classify them perfectly. For <span class="math inline">N &gt;&gt; d</span> the probability of having training errors becomes huge (the data is generally not linearly separable).</p>
 <blockquote class="blockquote">
 <p><strong>If we project the input data onto a space with sufficiently high dimensions, it becomes then possible to find a linear classifier on this projection space that is able to classify the data!</strong></p>
 </blockquote>
@@ -668,10 +688,10 @@ Cover’s theorem on the separability of patterns (1965)
 <p>The highly dimensional space where the input data is projected is called the <strong>feature space</strong> When the number of dimensions of the feature space increases, the training error decreases (the pattern is more likely linearly separable) but the generalization error increases (the VC dimension increases).</p>
 <section id="polynomial-features" class="level3">
 <h3 class="anchored" data-anchor-id="polynomial-features">Polynomial features</h3>
-<p>For the polynomial regression of order <span class="math inline">\(p\)</span>:</p>
-<p><span class="math display">\[y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 + \ldots + w_p \, x^p + b\]</span></p>
-<p>the vector <span class="math inline">\(\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix}\)</span> defines a feature space for the input <span class="math inline">\(x\)</span>. The elements of the feature space are called <strong>polynomial features</strong>. We can define polynomial features of more than one variable, e.g.&nbsp;<span class="math inline">\(x^2 \, y\)</span>, <span class="math inline">\(x^3 \, y^4\)</span>, etc. We then apply multiple <strong>linear</strong> regression (MLR) on the polynomial feature space to find the parameters:</p>
-<p><span class="math display">\[\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}\]</span></p>
+<p>For the polynomial regression of order <span class="math inline">p</span>:</p>
+<p><span class="math display">y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 + \ldots + w_p \, x^p + b</span></p>
+<p>the vector <span class="math inline">\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix}</span> defines a feature space for the input <span class="math inline">x</span>. The elements of the feature space are called <strong>polynomial features</strong>. We can define polynomial features of more than one variable, e.g.&nbsp;<span class="math inline">x^2 \, y</span>, <span class="math inline">x^3 \, y^4</span>, etc. We then apply multiple <strong>linear</strong> regression (MLR) on the polynomial feature space to find the parameters:</p>
+<p><span class="math display">\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}</span></p>
 </section>
 <section id="radial-basis-function-networks" class="level3">
 <h3 class="anchored" data-anchor-id="radial-basis-function-networks">Radial-basis function networks</h3>
@@ -681,9 +701,9 @@ Cover’s theorem on the separability of patterns (1965)
 <p></p><figcaption class="figure-caption">Radial basis function network. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
 </figure>
 </div>
-<p>Radial-basis function (<strong>RBF</strong>) networks samples a subset of <span class="math inline">\(K\)</span> training examples and form the feature space using a <strong>gaussian kernel</strong>:</p>
-<p><span class="math display">\[\phi(\mathbf{x}) = \begin{bmatrix} \varphi(\mathbf{x} - \mathbf{x}_1) \\ \varphi(\mathbf{x} - \mathbf{x}_2) \\ \ldots \\ \varphi(\mathbf{x} - \mathbf{x}_K) \end{bmatrix}\]</span></p>
-<p>with <span class="math inline">\(\varphi(\mathbf{x} - \mathbf{x}_i) = \exp - \beta \, ||\mathbf{x} - \mathbf{x}_i||^2\)</span> decreasing with the distance between the vectors.</p>
+<p>Radial-basis function (<strong>RBF</strong>) networks samples a subset of <span class="math inline">K</span> training examples and form the feature space using a <strong>gaussian kernel</strong>:</p>
+<p><span class="math display">\phi(\mathbf{x}) = \begin{bmatrix} \varphi(\mathbf{x} - \mathbf{x}_1) \\ \varphi(\mathbf{x} - \mathbf{x}_2) \\ \ldots \\ \varphi(\mathbf{x} - \mathbf{x}_K) \end{bmatrix}</span></p>
+<p>with <span class="math inline">\varphi(\mathbf{x} - \mathbf{x}_i) = \exp - \beta \, ||\mathbf{x} - \mathbf{x}_i||^2</span> decreasing with the distance between the vectors.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rbf2.png" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -697,7 +717,7 @@ Cover’s theorem on the separability of patterns (1965)
 </figure>
 </div>
 <p>By applying a linear classification algorithm on the RBF feature space:</p>
-<p><span class="math display">\[\mathbf{y} = f(W \times \phi(\mathbf{x}) + \mathbf{b})\]</span></p>
+<p><span class="math display">\mathbf{y} = f(W \times \phi(\mathbf{x}) + \mathbf{b})</span></p>
 <p>we obtain a smooth <strong>non-linear</strong> partition of the input space. The width of the gaussian kernel allows distance-based <strong>generalization</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -720,28 +740,28 @@ Primal form of the online Perceptron algorithm
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<li><p><strong>for</strong> <span class="math inline">M</span> epochs:</p>
 <ul>
-<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<li><p><strong>for</strong> each sample <span class="math inline">(\mathbf{x}_i, t_i)</span>:</p>
 <ul>
-<li><p><span class="math inline">\(y_i = \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)\)</span></p></li>
-<li><p><span class="math inline">\(\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i\)</span></p></li>
-<li><p><span class="math inline">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+<li><p><span class="math inline">y_i = \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)</span></p></li>
+<li><p><span class="math inline">\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i</span></p></li>
+<li><p><span class="math inline">\Delta b = \eta \, (t_i - y_i)</span></p></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<p>If an example <span class="math inline">\(\mathbf{x}_i\)</span> is correctly classified (<span class="math inline">\(y_i = t_i\)</span>), the weight vector does not change.</p>
-<p><span class="math display">\[\mathbf{w} \leftarrow \mathbf{w}\]</span></p>
-<p>If an example <span class="math inline">\(\mathbf{x}_i\)</span> is miscorrectly classified (<span class="math inline">\(y_i \neq t_i\)</span>), the weight vector is increased from <span class="math inline">\(t_i \, \mathbf{x}_i\)</span>.</p>
-<p><span class="math display">\[\mathbf{w} \leftarrow \mathbf{w} + 2 \, \eta \, t_i \, \mathbf{x}_i\]</span></p>
+<p>If an example <span class="math inline">\mathbf{x}_i</span> is correctly classified (<span class="math inline">y_i = t_i</span>), the weight vector does not change.</p>
+<p><span class="math display">\mathbf{w} \leftarrow \mathbf{w}</span></p>
+<p>If an example <span class="math inline">\mathbf{x}_i</span> is miscorrectly classified (<span class="math inline">y_i \neq t_i</span>), the weight vector is increased from <span class="math inline">t_i \, \mathbf{x}_i</span>.</p>
+<p><span class="math display">\mathbf{w} \leftarrow \mathbf{w} + 2 \, \eta \, t_i \, \mathbf{x}_i</span></p>
 <p>If you initialize the weight vector to 0, its final value will therefore be a <strong>linear combination</strong> of the input samples:</p>
-<p><span class="math display">\[\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i\]</span></p>
-<p>The coefficients <span class="math inline">\(\alpha_i\)</span> represent the <strong>embedding strength</strong> of each example, i.e.&nbsp;how often they were misclassified.</p>
-<p>With <span class="math inline">\(\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i\)</span>, the prediction for an input <span class="math inline">\(\mathbf{x}\)</span> only depends on the training samples and their <span class="math inline">\(\alpha_i\)</span> value:</p>
-<p><span class="math display">\[y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)\]</span></p>
-<p>To make a prediction <span class="math inline">\(y\)</span>, we need the dot product between the input <span class="math inline">\(\mathbf{x}\)</span> and all training examples <span class="math inline">\(\mathbf{x}_i\)</span>. We ignore the bias here, but it can be added back.</p>
+<p><span class="math display">\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i</span></p>
+<p>The coefficients <span class="math inline">\alpha_i</span> represent the <strong>embedding strength</strong> of each example, i.e.&nbsp;how often they were misclassified.</p>
+<p>With <span class="math inline">\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i</span>, the prediction for an input <span class="math inline">\mathbf{x}</span> only depends on the training samples and their <span class="math inline">\alpha_i</span> value:</p>
+<p><span class="math display">y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)</span></p>
+<p>To make a prediction <span class="math inline">y</span>, we need the dot product between the input <span class="math inline">\mathbf{x}</span> and all training examples <span class="math inline">\mathbf{x}_i</span>. We ignore the bias here, but it can be added back.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -753,39 +773,41 @@ Dual form of the online Perceptron algorithm
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<li><p><strong>for</strong> <span class="math inline">M</span> epochs:</p>
 <ul>
-<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<li><p><strong>for</strong> each sample <span class="math inline">(\mathbf{x}_i, t_i)</span>:</p>
 <ul>
-<li><p><span class="math inline">\(y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, \langle \mathbf{x}_j \cdot \mathbf{x}_i \rangle)\)</span></p></li>
-<li><p><strong>if</strong> <span class="math inline">\(y_i \neq t_i\)</span> :</p>
+<li><p><span class="math inline">y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, \langle \mathbf{x}_j \cdot \mathbf{x}_i \rangle)</span></p></li>
+<li><p><strong>if</strong> <span class="math inline">y_i \neq t_i</span> :</p>
 <ul>
-<li><span class="math inline">\(\alpha_i \leftarrow \alpha_i + 1\)</span></li>
+<li><span class="math inline">\alpha_i \leftarrow \alpha_i + 1</span></li>
 </ul></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<p>This <strong>dual form</strong> of the Perceptron algorithm is strictly equivalent to its primal form. It needs one parameter <span class="math inline">\(\alpha_i\)</span> per training example instead of a weight vector (<span class="math inline">\(N &gt;&gt; d\)</span>), but relies on dot products between vectors.</p>
-<p>Why is it interesting to have an algorithm relying on dot products? You can project the inputs <span class="math inline">\(\mathbf{x}\)</span> to a <strong>feature space</strong> <span class="math inline">\(\phi(\mathbf{x})\)</span> and apply the same algorithm:</p>
-<p><span class="math display">\[y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle)\]</span></p>
+<p>This <strong>dual form</strong> of the Perceptron algorithm is strictly equivalent to its primal form. It needs one parameter <span class="math inline">\alpha_i</span> per training example instead of a weight vector (<span class="math inline">N &gt;&gt; d</span>), but relies on dot products between vectors.</p>
+<p>Why is it interesting to have an algorithm relying on dot products? You can project the inputs <span class="math inline">\mathbf{x}</span> to a <strong>feature space</strong> <span class="math inline">\phi(\mathbf{x})</span> and apply the same algorithm:</p>
+<p><span class="math display">y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle)</span></p>
 <p>But you do not need to compute the dot product in the feature space, all you need to know is its result.</p>
-<p><span class="math display">\[K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle\]</span></p>
+<p><span class="math display">K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle</span></p>
 <blockquote class="blockquote">
-<p><strong>Kernel trick:</strong> A kernel <span class="math inline">\(K(\mathbf{x}, \mathbf{z})\)</span> allows to compute the dot product between the feature space representation of two vectors without ever computing these representations!</p>
+<p><strong>Kernel trick:</strong> A kernel <span class="math inline">K(\mathbf{x}, \mathbf{z})</span> allows to compute the dot product between the feature space representation of two vectors without ever computing these representations!</p>
 </blockquote>
-<p>Let’s consider the quadratic kernel in <span class="math inline">\(\Re^3\)</span>:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 &amp;&amp; \\
-&amp;&amp; \\
-  K(\mathbf{x}, \mathbf{z}) &amp;=&amp; ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
-                                            &amp;=&amp;  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
-                                            &amp;=&amp;  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
-                                            &amp;=&amp;  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
-\end{eqnarray*}\]</span></p>
+<p>Let’s consider the quadratic kernel in <span class="math inline">\Re^3</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 &amp; \\
+                            &amp; \\
+  K(\mathbf{x}, \mathbf{z}) &amp;= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
+                            &amp;=  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
+                            &amp;=  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
+                            &amp;=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle \\
+\end{aligned}
+</span></p>
 <p>with:</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \phi(\mathbf{x}) = \begin{bmatrix}
                             x_1 \cdot x_1 \\
                             x_1 \cdot x_2 \\
@@ -796,17 +818,17 @@ Dual form of the online Perceptron algorithm
                             x_3 \cdot x_1 \\
                             x_3 \cdot x_2 \\
                             x_3 \cdot x_3 \end{bmatrix}
-\]</span></p>
+</span></p>
 <p>The quadratic kernel implicitely transforms an input space with three dimensions into a feature space of 9 dimensions.</p>
-<p>More generally, the polynomial kernel in <span class="math inline">\(\Re^d\)</span> of degree <span class="math inline">\(p\)</span>:</p>
-<p><span class="math display">\[
+<p>More generally, the polynomial kernel in <span class="math inline">\Re^d</span> of degree <span class="math inline">p</span>:</p>
+<p><span class="math display">
 \begin{align*}
 \forall (\mathbf{x}, \mathbf{z}) \in \Re^d \times \Re^d \qquad  K(\mathbf{x}, \mathbf{z}) &amp;= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^p \\
                                             &amp;=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
 \end{align*}
-\]</span></p>
-<p>transforms the input from a space with <span class="math inline">\(d\)</span> dimensions into a feature space of <span class="math inline">\(d^p\)</span> dimensions.</p>
-<p>While the inner product in the feature space would require <span class="math inline">\(O(d^p)\)</span> operations, the calculation of the kernel directly in the input space only requires <span class="math inline">\(O(d)\)</span> operations. This is called the <strong>kernel trick</strong>: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.</p>
+</span></p>
+<p>transforms the input from a space with <span class="math inline">d</span> dimensions into a feature space of <span class="math inline">d^p</span> dimensions.</p>
+<p>While the inner product in the feature space would require <span class="math inline">O(d^p)</span> operations, the calculation of the kernel directly in the input space only requires <span class="math inline">O(d)</span> operations. This is called the <strong>kernel trick</strong>: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.</p>
 <p>The <strong>kernel perceptron</strong> is the dual form of the Perceptron algorithm using a kernel:</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -819,14 +841,14 @@ Kernel perceptron
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p><strong>for</strong> <span class="math inline">\(M\)</span> epochs:</p>
+<li><p><strong>for</strong> <span class="math inline">M</span> epochs:</p>
 <ul>
-<li><p><strong>for</strong> each sample <span class="math inline">\((\mathbf{x}_i, t_i)\)</span>:</p>
+<li><p><strong>for</strong> each sample <span class="math inline">(\mathbf{x}_i, t_i)</span>:</p>
 <ul>
-<li><p><span class="math inline">\(y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, K(\mathbf{x}_j, \mathbf{x}_i))\)</span></p></li>
-<li><p><strong>if</strong> <span class="math inline">\(y_i \neq t_i\)</span> :</p>
+<li><p><span class="math inline">y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, K(\mathbf{x}_j, \mathbf{x}_i))</span></p></li>
+<li><p><strong>if</strong> <span class="math inline">y_i \neq t_i</span> :</p>
 <ul>
-<li><span class="math inline">\(\alpha_i \leftarrow \alpha_i + 1\)</span></li>
+<li><span class="math inline">\alpha_i \leftarrow \alpha_i + 1</span></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -835,30 +857,30 @@ Kernel perceptron
 </div>
 <p>Depending on the kernel, the implicit dimensionality of the feature space can even be infinite! Some kernels:</p>
 <ul>
-<li><strong>Linear kernel</strong>: dimension of the feature space = <span class="math inline">\(d\)</span>.</li>
+<li><strong>Linear kernel</strong>: <span class="math inline">d</span> dimensions.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 K(\mathbf{x},\mathbf{z}) = \langle \mathbf{x} \cdot \mathbf{z} \rangle
-\]</span></p>
+</span></p>
 <ul>
-<li><strong>Polynomial kernel</strong>: dimension of the feature space = <span class="math inline">\(d^p\)</span>.</li>
+<li><strong>Polynomial kernel</strong>: <span class="math inline">d^p</span> dimensions.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 K(\mathbf{x},\mathbf{z}) = (\langle \mathbf{x} \cdot \mathbf{z} \rangle)^p
-\]</span></p>
+</span></p>
 <ul>
-<li><strong>Gaussian kernel</strong> (or RBF kernel): dimension of the feature space= <span class="math inline">\(\infty\)</span>.</li>
+<li><strong>Gaussian kernel</strong> (or RBF kernel): <span class="math inline">\infty</span> dimensions.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 K(\mathbf{x},\mathbf{z}) = \exp(-\frac{\| \mathbf{x} - \mathbf{z} \|^2}{2\sigma^2})
-\]</span></p>
+</span></p>
 <ul>
-<li><strong>Hyperbolic tangent kernel</strong>: dimension of the feature space = <span class="math inline">\(\infty\)</span></li>
+<li><strong>Hyperbolic tangent kernel</strong>: <span class="math inline">\infty</span> dimensions.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangle +c)
-\]</span></p>
-<p>In practice, the choice of the kernel family depends more on the nature of data (text, image…) and its distribution than on the complexity of the learning problem. RBF kernels tend to “group” positive examples together. Polynomial kernels are more like “distorted” hyperplanes. Kernels have parameters (<span class="math inline">\(p\)</span>, <span class="math inline">\(\sigma\)</span>…) which have to found using cross-validation.</p>
+</span></p>
+<p>In practice, the choice of the kernel family depends more on the nature of data (text, image…) and its distribution than on the complexity of the learning problem. RBF kernels tend to “group” positive examples together. Polynomial kernels are more like “distorted” hyperplanes. Kernels have parameters (<span class="math inline">p</span>, <span class="math inline">\sigma</span>…) which have to found using cross-validation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/kernels.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -868,14 +890,14 @@ k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangl
 </section>
 <section id="support-vector-machines" class="level3">
 <h3 class="anchored" data-anchor-id="support-vector-machines">Support vector machines</h3>
-<p><strong>Support vector machines</strong> (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier. Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the “safety zone” (geometric margin) between the classifier and the training examples. It also tries to reduce the number of non-zero <span class="math inline">\(\alpha_i\)</span> coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:</p>
-<p><span class="math display">\[
+<p><strong>Support vector machines</strong> (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier. Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the “safety zone” (geometric margin) between the classifier and the training examples. It also tries to reduce the number of non-zero <span class="math inline">\alpha_i</span> coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:</p>
+<p><span class="math display">
 \mathbf{y} = \text{sign}(\sum_{i=1}^{N_{SV}} \alpha_i \, t_i \, K(\mathbf{x}_i, \mathbf{x}) + b)
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/supportvectors.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Support-vectors are the closest examples to the hyperplane. They have a non-zero <span class="math inline">\(\alpha\)</span> coefficient.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Support-vectors are the closest examples to the hyperplane. They have a non-zero <span class="math inline">\alpha</span> coefficient.</figcaption><p></p>
 </figure>
 </div>
 <p>Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting. SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.</p>
@@ -996,6 +1018,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

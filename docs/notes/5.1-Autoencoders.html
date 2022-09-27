@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -102,12 +117,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -199,7 +214,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -224,7 +239,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,7 +277,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +322,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -414,6 +434,15 @@ div.csl-indent {
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
   <li><a href="#loss-function-of-a-vae" id="toc-loss-function-of-a-vae" class="nav-link" data-scroll-target="#loss-function-of-a-vae">Loss function of a VAE</a></li>
+  <li><a href="#reparameterization-trick" id="toc-reparameterization-trick" class="nav-link" data-scroll-target="#reparameterization-trick">Reparameterization trick</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#advanced-vae" id="toc-advanced-vae" class="nav-link" data-scroll-target="#advanced-vae">Advanced VAE</a></li>
+  </ul></li>
+  <li><a href="#variational-inference-optional" id="toc-variational-inference-optional" class="nav-link" data-scroll-target="#variational-inference-optional">Variational inference (optional)</a>
+  <ul class="collapse">
+  <li><a href="#learning-probability-distributions-from-samples" id="toc-learning-probability-distributions-from-samples" class="nav-link" data-scroll-target="#learning-probability-distributions-from-samples">Learning probability distributions from samples</a></li>
+  <li><a href="#latent-space" id="toc-latent-space" class="nav-link" data-scroll-target="#latent-space">Latent space</a></li>
+  <li><a href="#variational-inference" id="toc-variational-inference" class="nav-link" data-scroll-target="#variational-inference">Variational inference</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -441,22 +470,22 @@ div.csl-indent {
 <section id="autoencoders" class="level2">
 <h2 class="anchored" data-anchor-id="autoencoders">Autoencoders</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/bW2jYMdaPZk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p><strong>Supervised learning</strong> algorithms need a lot of labeled data (with <span class="math inline">\(\mathbf{t}\)</span>) in order to learn classification/regression tasks, but labeled data is very expensive to obtain (experts, crowd sourcing). A “bad” algorithm trained with a lot of data will perform better than a “good” algorithm trained with few data.</p>
+<p><strong>Supervised learning</strong> algorithms need a lot of labeled data (with <span class="math inline">\mathbf{t}</span>) in order to learn classification/regression tasks, but labeled data is very expensive to obtain (experts, crowd sourcing). A “bad” algorithm trained with a lot of data will perform better than a “good” algorithm trained with few data.</p>
 <blockquote class="blockquote">
 <p>“It is not who has the best algorithm who wins, it is who has the most data.”</p>
 </blockquote>
 <p>Unlabeled data is only useful for <strong>unsupervised learning</strong>, but very cheap to obtain (camera, microphone, search engines). Can we combine efficiently both approaches? <strong>Self-taught learning</strong> or <strong>semi-supervised learning</strong>.</p>
-<p>An <strong>autoencoder</strong> is a NN trying to learn the identity function <span class="math inline">\(f(\mathbf{x}) = \mathbf{x}\)</span> using a different number of neurons in the hidden layer than in the input layer.</p>
+<p>An <strong>autoencoder</strong> is a NN trying to learn the identity function <span class="math inline">f(\mathbf{x}) = \mathbf{x}</span> using a different number of neurons in the hidden layer than in the input layer.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/autoencoder3.png" class="img-fluid figure-img" style="width:35.0%"></p>
 <p></p><figcaption class="figure-caption">Architecture of a shallow autoencoder.</figcaption><p></p>
 </figure>
 </div>
-<p>An autoencoder minimizes the <strong>reconstruction loss</strong> between the input <span class="math inline">\(\mathbf{x}\)</span> and the reconstruction <span class="math inline">\(\mathbf{x'}\)</span>, for example the mse between the two vectors:</p>
-<p><span class="math display">\[
+<p>An autoencoder minimizes the <strong>reconstruction loss</strong> between the input <span class="math inline">\mathbf{x}</span> and the reconstruction <span class="math inline">\mathbf{x'}</span>, for example the mse between the two vectors:</p>
+<p><span class="math display">
     \mathcal{L}_\text{reconstruction}(\theta) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}} [ ||\mathbf{x'} - \mathbf{x}||^2 ]
-\]</span></p>
+</span></p>
 <p>An autoencoder uses <strong>unsupervised learning</strong>: the output data used for learning is the same as the input data: No need for labels!</p>
 <p>By forcing the projection of the input data on a feature space with less dimensions (<strong>latent space</strong>), the network has to extract relevant <strong>features</strong> from the training data: Dimensionality reduction, compression.</p>
 <p>If the latent space has more dimensions than the input space, we need to <strong>constrain</strong> the autoencoder so that it does not simply learn the identity mapping. Below is an example of a sparse autoencoder trained on natural images <span class="citation" data-cites="Olshausen1997">(<a href="../references.html#ref-Olshausen1997" role="doc-biblioref">Olshausen and Field, 1997</a>)</span>.</p>
@@ -508,27 +537,27 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="semi-supervised-learning">Semi-supervised learning</h3>
 <p>Autoencoders are not restricted to a single hidden layer.</p>
 <ul>
-<li>The <strong>encoder</strong> goes from the input space <span class="math inline">\(\mathbf{x}\)</span> to the latent space <span class="math inline">\(\mathbf{z}\)</span>.</li>
+<li>The <strong>encoder</strong> goes from the input space <span class="math inline">\mathbf{x}</span> to the latent space <span class="math inline">\mathbf{z}</span>.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{z} = g_\phi(\mathbf{x})
-\]</span></p>
+</span></p>
 <ul>
-<li>The <strong>decoder</strong> goes from the latent space <span class="math inline">\(\mathbf{z}\)</span> to the output space <span class="math inline">\(\mathbf{x'}\)</span>.</li>
+<li>The <strong>decoder</strong> goes from the latent space <span class="math inline">\mathbf{z}</span> to the output space <span class="math inline">\mathbf{x'}</span>.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{x'} = f_\theta(\mathbf{z})
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/autoencoder-architecture.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Deep autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption><p></p>
 </figure>
 </div>
-<p>The <strong>latent space</strong> is a <strong>bottleneck</strong> layer of lower dimensionality, learning a compressed representation of the input which has to contain enough information in order to <strong>reconstruct</strong> the input. Both the encoder with weights <span class="math inline">\(\phi\)</span> and the decoder with weights <span class="math inline">\(\theta\)</span> try to minimize the <strong>reconstruction loss</strong>:</p>
-<p><span class="math display">\[
+<p>The <strong>latent space</strong> is a <strong>bottleneck</strong> layer of lower dimensionality, learning a compressed representation of the input which has to contain enough information in order to <strong>reconstruct</strong> the input. Both the encoder with weights <span class="math inline">\phi</span> and the decoder with weights <span class="math inline">\theta</span> try to minimize the <strong>reconstruction loss</strong>:</p>
+<p><span class="math display">
 \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}} [ ||f_\theta(g_\phi(\mathbf{x})) - \mathbf{x}||^2 ]
-\]</span></p>
+</span></p>
 <p>Learning is <strong>unsupervised</strong>: we only need input data.</p>
 <p>The encoder and decoder can be anything: fully-connected, convolutional, recurrent, etc. When using convolutional layers, the decoder has to <strong>upsample</strong> the latent space: max-unpooling or transposed convolutions can be used as in segmentation networks.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -578,7 +607,7 @@ div.csl-indent {
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/XhBI14qOzXg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="motivation" class="level3">
 <h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
-<p>Autoencoders are <strong>deterministic</strong>: after learning, the same input <span class="math inline">\(\mathbf{x}\)</span> will generate the same latent code <span class="math inline">\(\mathbf{z}\)</span> and the same reconstruction <span class="math inline">\(\mathbf{\tilde{x}}\)</span>. Sampling the latent space generally generates non-sense reconstructions, because an autoencoder only learns data samples, it does not learn the underlying <strong>probability distribution</strong>.</p>
+<p>Autoencoders are <strong>deterministic</strong>: after learning, the same input <span class="math inline">\mathbf{x}</span> will generate the same latent code <span class="math inline">\mathbf{z}</span> and the same reconstruction <span class="math inline">\mathbf{\tilde{x}}</span>. Sampling the latent space generally generates non-sense reconstructions, because an autoencoder only learns data samples, it does not learn the underlying <strong>probability distribution</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/autoencoder-limits.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -596,35 +625,46 @@ div.csl-indent {
 </section>
 <section id="architecture" class="level3">
 <h3 class="anchored" data-anchor-id="architecture">Architecture</h3>
-<p>The <strong>variational autoencoder</strong> (VAE) <span class="citation" data-cites="Kingma2013">(<a href="../references.html#ref-Kingma2013" role="doc-biblioref">Kingma and Welling, 2013</a>)</span> solves this problem by having the encoder represent the <strong>probability distribution</strong> <span class="math inline">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> instead of a point <span class="math inline">\(\mathbf{z}\)</span> in the latent space.</p>
-<p>This probability distribution is then <strong>sampled</strong> to obtain a vector <span class="math inline">\(\mathbf{z}\)</span> that will be passed to the decoder <span class="math inline">\(p_\theta(\mathbf{z})\)</span>. The strong hypothesis is that the latent space follows a <strong>normal distribution</strong> with mean <span class="math inline">\(\mathbf{\mu_x}\)</span> and variance <span class="math inline">\(\mathbf{\sigma_x}^2\)</span>.</p>
-<p><span class="math display">\[
+<p>The <strong>variational autoencoder</strong> (VAE) <span class="citation" data-cites="Kingma2013">(<a href="../references.html#ref-Kingma2013" role="doc-biblioref">Kingma and Welling, 2013</a>)</span> solves this problem by having the encoder represent the <strong>probability distribution</strong> <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> instead of a point <span class="math inline">\mathbf{z}</span> in the latent space.</p>
+<p>This probability distribution is then <strong>sampled</strong> to obtain a vector <span class="math inline">\mathbf{z}</span> that will be passed to the decoder <span class="math inline">p_\theta(\mathbf{z})</span>. The strong hypothesis is that the latent space follows a <strong>normal distribution</strong> with mean <span class="math inline">\mathbf{\mu_x}</span> and variance <span class="math inline">\mathbf{\sigma_x}^2</span>.</p>
+<p><span class="math display">
     \mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)
-\]</span></p>
-<p>The two vectors <span class="math inline">\(\mathbf{\mu_x}\)</span> and <span class="math inline">\(\mathbf{\sigma_x}^2\)</span> are the outputs of the encoder.</p>
-<p>````{admonition} Sampling from a normal distribution</p>
+</span></p>
+<p>The two vectors <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}^2</span> are the outputs of the encoder.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Sampling from a normal distribution
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/normaldistribution.svg" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Sampling from a normal distribution.</figcaption><p></p>
 </figure>
 </div>
-<p>The normal distribution <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span> is fully defined by its two parameters:</p>
+<p>The normal distribution <span class="math inline">\mathcal{N}(\mu, \sigma^2)</span> is fully defined by its two parameters:</p>
 <ul>
-<li><span class="math inline">\(\mu\)</span> is the mean of the distribution.</li>
-<li><span class="math inline">\(\sigma^2\)</span> is its variance.</li>
+<li><span class="math inline">\mu</span> is the mean of the distribution.</li>
+<li><span class="math inline">\sigma^2</span> is its variance.</li>
 </ul>
 <p>The <strong>probability density function</strong> (pdf) of the normal distribution is defined by the Gaussian function:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x; \mu, \sigma) = \frac{1}{\sqrt{2\,\pi\,\sigma^2}} \, e^{-\displaystyle\frac{(x - \mu)^2}{2\,\sigma^2}}
-\]</span></p>
-<p>A sample <span class="math inline">\(x\)</span> will likely be close to <span class="math inline">\(\mu\)</span>, with a deviation defined by <span class="math inline">\(\sigma^2\)</span>. It can be obtained using a sample of the <strong>standard normal distribution</strong> <span class="math inline">\(\mathcal{N}(0, 1)\)</span>:</p>
-<p><span class="math display">\[x = \mu + \sigma \, \xi \; \; \text{with} \; \xi \sim \mathcal{N}(0, 1)\]</span> ````</p>
+</span></p>
+<p>A sample <span class="math inline">x</span> will likely be close to <span class="math inline">\mu</span>, with a deviation defined by <span class="math inline">\sigma^2</span>. It can be obtained using a sample of the <strong>standard normal distribution</strong> <span class="math inline">\mathcal{N}(0, 1)</span>:</p>
+<p><span class="math display">x = \mu + \sigma \, \xi \; \; \text{with} \; \xi \sim \mathcal{N}(0, 1)</span></p>
+</div>
+</div>
 <p>Architecture of the VAE:</p>
 <ol type="1">
-<li>The encoder <span class="math inline">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> outputs the parameters <span class="math inline">\(\mathbf{\mu_x}\)</span> and <span class="math inline">\(\mathbf{\sigma_x}^2\)</span> of a normal distribution <span class="math inline">\(\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)\)</span>.</li>
-<li>We sample one vector <span class="math inline">\(\mathbf{z}\)</span> from this distribution: <span class="math inline">\(\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)\)</span>.</li>
-<li>The decoder <span class="math inline">\(p_\theta(\mathbf{z})\)</span> reconstructs the input.</li>
+<li>The encoder <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> outputs the parameters <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}^2</span> of a normal distribution <span class="math inline">\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span>.</li>
+<li>We sample one vector <span class="math inline">\mathbf{z}</span> from this distribution: <span class="math inline">\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span>.</li>
+<li>The decoder <span class="math inline">p_\theta(\mathbf{z})</span> reconstructs the input.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -641,386 +681,431 @@ div.csl-indent {
 <section id="loss-function-of-a-vae" class="level3">
 <h3 class="anchored" data-anchor-id="loss-function-of-a-vae">Loss function of a VAE</h3>
 <p>The <strong>loss function</strong> used in a VAE is of the form:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(\theta, \phi) = \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi)
-\]</span></p>
+</span></p>
 <p>The first term is the usual <strong>reconstruction loss</strong> of an autoencoder which depends on both the encoder and the decoder. One could simply compute the <strong>mse</strong> (summed over all pixels) between the input and the reconstruction:</p>
-<p><span class="math display">\[ \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ ||p_\theta(\mathbf{z}) - \mathbf{x}||^2 ]\]</span></p>
-<p>In the expectation, <span class="math inline">\(\mathbf{x}\)</span> is sampled from the dataset <span class="math inline">\(\mathcal{D}\)</span> while <span class="math inline">\(\mathbf{z}\)</span> is sampled from the encoder <span class="math inline">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span>. In <span class="citation" data-cites="Kingma2013">(<a href="../references.html#ref-Kingma2013" role="doc-biblioref">Kingma and Welling, 2013</a>)</span>, pixels values are normalized between 0 and 1, the decoder uses the logistic activation function for its output layer and the binary cross-entropy loss function is used:</p>
-<p><span class="math display">\[ \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]\]</span></p>
+<p><span class="math display"> \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ ||p_\theta(\mathbf{z}) - \mathbf{x}||^2 ]</span></p>
+<p>In the expectation, <span class="math inline">\mathbf{x}</span> is sampled from the dataset <span class="math inline">\mathcal{D}</span> while <span class="math inline">\mathbf{z}</span> is sampled from the encoder <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span>. In <span class="citation" data-cites="Kingma2013">(<a href="../references.html#ref-Kingma2013" role="doc-biblioref">Kingma and Welling, 2013</a>)</span>, pixels values are normalized between 0 and 1, the decoder uses the logistic activation function for its output layer and the binary cross-entropy loss function is used:</p>
+<p><span class="math display"> \mathcal{L}_\text{reconstruction}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]</span></p>
 <p>The justification comes from variational inference and evidence lower-bound optimization (ELBO) but is out of the scope of this lecture.</p>
-<p>The second term is the <strong>regularization term</strong> for the latent space, which only depends on the encoder with weights <span class="math inline">\(\phi\)</span>:</p>
-<p><span class="math display">\[
+<p>The second term is the <strong>regularization term</strong> for the latent space, which only depends on the encoder with weights <span class="math inline">\phi</span>:</p>
+<p><span class="math display">
     \mathcal{L}_\text{regularization}(\phi) = \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1})) = \text{KL}(\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2) || \mathcal{N}(\mathbf{0}, \mathbf{1}))
-\]</span></p>
-<p>It is defined as the <strong>Kullback-Leibler divergence</strong> between the output of the encoder and the standard normal distribution <span class="math inline">\(\mathcal{N}(\mathbf{0}, \mathbf{1})\)</span>. Think of it as a statistical “distance” between the distribution <span class="math inline">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> and the distribution <span class="math inline">\(\mathcal{N}(\mathbf{0}, \mathbf{1})\)</span>. The principle is not very different from L2-regularization, where we want the weights to be as close as possible from 0. Here we want the encoder to be as close as possible from <span class="math inline">\(\mathcal{N}(\mathbf{0}, \mathbf{1})\)</span>.</p>
-<p>Why do we want the latent distributions to be close from <span class="math inline">\(\mathcal{N}(\mathbf{0}, \mathbf{1})\)</span> for <strong>all</strong> inputs <span class="math inline">\(\mathbf{x}\)</span>? <span class="math display">\[
+</span></p>
+<p>It is defined as the <strong>Kullback-Leibler divergence</strong> between the output of the encoder and the standard normal distribution <span class="math inline">\mathcal{N}(\mathbf{0}, \mathbf{1})</span>. Think of it as a statistical “distance” between the distribution <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> and the distribution <span class="math inline">\mathcal{N}(\mathbf{0}, \mathbf{1})</span>. The principle is not very different from L2-regularization, where we want the weights to be as close as possible from 0. Here we want the encoder to be as close as possible from <span class="math inline">\mathcal{N}(\mathbf{0}, \mathbf{1})</span>.</p>
+<p>Why do we want the latent distributions to be close from <span class="math inline">\mathcal{N}(\mathbf{0}, \mathbf{1})</span> for <strong>all</strong> inputs <span class="math inline">\mathbf{x}</span>? <span class="math display">
     \mathcal{L}(\theta, \phi) = \mathcal{L}_\text{reconstruction}(\theta, \phi) + \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1}))
-\]</span></p>
+</span></p>
 <p>By forcing the distributions to be close, we avoid “holes” in the latent space: we can move smoothly from one distribution to another without generating <strong>non-sense</strong> reconstructions.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-regularization.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Regularizing the latent space by minimizing the KL with <span class="math inline">\(\mathcal{N}(0,1)\)</span> makes sure that we can smoothly travel in the latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Regularizing the latent space by minimizing the KL with <span class="math inline">\mathcal{N}(0,1)</span> makes sure that we can smoothly travel in the latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
 </figure>
 </div>
-<p>`:::{.callout-note} To make <span class="math inline">\(q_\phi(\mathbf{z}|\mathbf{x})\)</span> close from <span class="math inline">\(\mathcal{N}(\mathbf{0}, \mathbf{1})\)</span>, one could minimize instead the Euclidian distance in the <strong>parameter space</strong>:</p>
-<p><span class="math display">\[
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To make <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> close from <span class="math inline">\mathcal{N}(\mathbf{0}, \mathbf{1})</span>, one could minimize instead the Euclidian distance in the <strong>parameter space</strong>:</p>
+<p><span class="math display">
     \mathcal{L}(\theta, \phi) = \mathcal{L}_\text{reconstruction}(\theta, \phi) +  (||\mathbf{\mu_x}||^2 + ||\mathbf{\sigma_x} - 1||^2)
-\]</span></p>
+</span></p>
 <p>However, this does not consider the <strong>overlap</strong> between the distributions. The two pairs of distributions below have the same distance between their means (0 and 1) and the same variance (1 and 10 respectively). The distributions on the left are very different from each other, but the distance in the parameter space is the same.</p>
-<p><img src="../slides/img/naturalgradient.png" class="img-fluid" data-fig-align="center"> :::`</p>
-<p>```{admonition} Kullback-Leibler divergence</p>
-<p>The <strong>KL divergence</strong> between two random distributions <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> measures the <strong>statistical distance</strong> between them. It describes, on average, how likely a sample from <span class="math inline">\(X\)</span> could come from <span class="math inline">\(Y\)</span>:</p>
-<p><span class="math display">\[
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/naturalgradient.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Kullback-Leibler divergence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>KL divergence</strong> between two random distributions <span class="math inline">X</span> and <span class="math inline">Y</span> measures the <strong>statistical distance</strong> between them. It describes, on average, how likely a sample from <span class="math inline">X</span> could come from <span class="math inline">Y</span>:</p>
+<p><span class="math display">
     \text{KL}(X ||Y) = \mathbb{E}_{x \sim X}[- \log \frac{P(Y=x)}{P(X=x)}]
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/crossentropy.svg" class="img-fluid figure-img"></p>
 </figure>
 </div>
 <p>When the two distributions are equal almost anywhere, the KL divergence is 0. Otherwise it is positive. <strong>Minimizing the KL divergence between two distributions makes them close in the statistical sense</strong>.</p>
-<pre><code>
-The advantage of minimizing the KL of $q_\phi(\mathbf{z}|\mathbf{x})$ with $\mathcal{N}(0, 1)$ is that the KL takes a **closed form**, i.e. there is no need to compute the expectation over all possible latent representations $\mathbf{z}$:
-
-$$
+</div>
+</div>
+<p>The advantage of minimizing the KL of <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> with <span class="math inline">\mathcal{N}(0, 1)</span> is that the KL takes a <strong>closed form</strong>, i.e.&nbsp;there is no need to compute the expectation over all possible latent representations <span class="math inline">\mathbf{z}</span>:</p>
+<p><span class="math display">
     \mathcal{L}_\text{regularization}(\phi) = \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1})) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})}[- \log \frac{f_{0, 1}(\mathbf{z}|\mathbf{x})}{q_\phi(\mathbf{z}|\mathbf{x})}]
-$$
-
-If $\mathbf{\mu_x}$ and  $\mathbf{\sigma_x}$ have $K$ elements (dimension of the latent space), the KL can be expressed as:
-
-$$
+</span></p>
+<p>If <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span> have <span class="math inline">K</span> elements (dimension of the latent space), the KL can be expressed as:</p>
+<p><span class="math display">
     \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})]
-$$
-
-The KL is very easy to differentiate w.r.t $\mathbf{\mu_x}$ and  $\mathbf{\sigma_x}$, i.e. w.r.t $\phi$! In practice, the encoder predicts the vectors $\mathbf{\mu_x}$ and $\Sigma_\mathbf{x} = \log \mathbf{\sigma_x}$, so the loss becomes:
-
-$$
+</span></p>
+<p>The KL is very easy to differentiate w.r.t <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span>, i.e.&nbsp;w.r.t <span class="math inline">\phi</span>! In practice, the encoder predicts the vectors <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\Sigma_\mathbf{x} = \log \mathbf{\sigma_x}</span>, so the loss becomes:</p>
+<p><span class="math display">
     \mathcal{L}_\text{regularization}(\phi) = \dfrac{1}{2} \, \sum_{k=1}^K (\exp \Sigma_\mathbf{x} + \mathbf{\mu_x}^2 -1 - \Sigma_\mathbf{x})
-$$
-
-See &lt;https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/&gt; for the proof.
-
-Regularization tends to create a "gradient" over the information encoded in the latent space.  A point of the latent space sampled between the means of two encoded distributions should be decoded in an image in between the two training images.
-
-![A regularized latent space makes sure that reconstructions always make sense. Source:  &lt;https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73&gt;](../slides/img/vae-regularization2.png){width=80%}
-
-### Reparameterization trick
-
-The second problem is that backpropagation does not work through the sampling operation. It is easy to backpropagate the gradient of the loss function through the decoder until the sample $\mathbf{z}$. But how do you backpropagate to the outputs of the encoder: $\mathbf{\mu_x}$ and $\mathbf{\sigma_x}$?
-
-![Architecture of a variational autoencoder. Source:  &lt;https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73&gt;](../slides/img/vae-structure.png){width=100%}
-
-Modifying slightly $\mathbf{\mu_x}$ or $\mathbf{\sigma_x}$ may not change at all the sample $\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$, so you cannot estimate any gradient.
-
-$$\frac{\partial \mathbf{z}}{\partial \mathbf{\mu_x}} = \; ?$$
-
-Backpropagation does not work through a **sampling** operation, because it is not differentiable. 
-
-$$\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$$
-
-The **reparameterization trick** consists in taking a sample $\xi$ out of $\mathcal{N}(0, 1)$ and reconstruct $\mathbf{z}$ with:
-
-$$\mathbf{z} = \mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi \qquad \text{with} \qquad \xi \sim \mathcal{N}(0, 1)$$
-
-![Architecture of a variational autoencoder with the reparameterization trick. Source:  &lt;https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73&gt;](../slides/img/vae-reparameterization.png){width=100%}
-
-The sampled value $\xi \sim \mathcal{N}(0, 1)$ becomes just another input to the neural network.
-
-![Architecture of a variational autoencoder with the reparameterization trick. Source:  &lt;https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73&gt;](../slides/img/vae-reparameterization2.png){width=100%}
-
-It allows to transform $\mathbf{\mu_x}$ and $\mathbf{\sigma_x}$ into a sample $\mathbf{z}$ of $\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)$:
-
-$$\mathbf{z} = \mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi$$
-
-We do not need to backpropagate through $\xi$, as there is no parameter to learn! The neural network becomes differentiable end-to-end, backpropagation will work.
-
-
-### Summary
-
-A variational autoencoder is an autoencoder where the latent space represents a probability distribution $q_\phi(\mathbf{z} | \mathbf{x})$ using the mean $\mathbf{\mu_x}$ and standard deviation $\mathbf{\sigma_x}$ of a normal distribution. The latent space can be sampled to generate new images using the decoder $p_\theta(\mathbf{z})$. KL regularization and the reparameterization trick are essential to VAE.
-
-VAE loss:
-
-$$\begin{aligned}
+</span></p>
+<p>See <a href="https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/" class="uri">https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/</a> for the proof.</p>
+<p>Regularization tends to create a “gradient” over the information encoded in the latent space. A point of the latent space sampled between the means of two encoded distributions should be decoded in an image in between the two training images.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vae-regularization2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">A regularized latent space makes sure that reconstructions always make sense. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="reparameterization-trick" class="level3">
+<h3 class="anchored" data-anchor-id="reparameterization-trick">Reparameterization trick</h3>
+<p>The second problem is that backpropagation does not work through the sampling operation. It is easy to backpropagate the gradient of the loss function through the decoder until the sample <span class="math inline">\mathbf{z}</span>. But how do you backpropagate to the outputs of the encoder: <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vae-structure.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+</figure>
+</div>
+<p>Modifying slightly <span class="math inline">\mathbf{\mu_x}</span> or <span class="math inline">\mathbf{\sigma_x}</span> may not change at all the sample <span class="math inline">\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span>, so you cannot estimate any gradient.</p>
+<p><span class="math display">\frac{\partial \mathbf{z}}{\partial \mathbf{\mu_x}} = \; ?</span></p>
+<p>Backpropagation does not work through a <strong>sampling</strong> operation, because it is not differentiable.</p>
+<p><span class="math display">\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span></p>
+<p>The <strong>reparameterization trick</strong> consists in taking a sample <span class="math inline">\xi</span> out of <span class="math inline">\mathcal{N}(0, 1)</span> and reconstruct <span class="math inline">\mathbf{z}</span> with:</p>
+<p><span class="math display">\mathbf{z} = \mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi \qquad \text{with} \qquad \xi \sim \mathcal{N}(0, 1)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vae-reparameterization.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder with the reparameterization trick. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+</figure>
+</div>
+<p>The sampled value <span class="math inline">\xi \sim \mathcal{N}(0, 1)</span> becomes just another input to the neural network.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vae-reparameterization2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder with the reparameterization trick. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+</figure>
+</div>
+<p>It allows to transform <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span> into a sample <span class="math inline">\mathbf{z}</span> of <span class="math inline">\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span>:</p>
+<p><span class="math display">\mathbf{z} = \mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi</span></p>
+<p>We do not need to backpropagate through <span class="math inline">\xi</span>, as there is no parameter to learn! The neural network becomes differentiable end-to-end, backpropagation will work.</p>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>A variational autoencoder is an autoencoder where the latent space represents a probability distribution <span class="math inline">q_\phi(\mathbf{z} | \mathbf{x})</span> using the mean <span class="math inline">\mathbf{\mu_x}</span> and standard deviation <span class="math inline">\mathbf{\sigma_x}</span> of a normal distribution. The latent space can be sampled to generate new images using the decoder <span class="math inline">p_\theta(\mathbf{z})</span>. KL regularization and the reparameterization trick are essential to VAE.</p>
+<p><span class="math display">
+\begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi) \\
     &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
-\end{aligned}$$
-
-![Principle of a VAE. Source:  &lt;https://ijdykeman.github.io/ml/2016/12/21/cvae.html&gt;](../slides/img/vae-structure.svg){width=70%}
-
-
-The two main applications of VAEs in **unsupervised learning** are:
-
-1. **Dimensionality reduction**: projecting high dimensional data (images) onto a smaller space, for example a 2D space for visualization.
-2. **Generative modeling**: generating samples from the same distribution as the training data (data augmentation, deep fakes) by sampling on the manifold.
-
-### Advanced VAE
-
-#### DeepFake
-
-
-
-
-
-
-
-
-
-DeepFakes now became very easy, you can for example find DeepFace here: &lt;https://github.com/iperov/DeepFaceLab&gt;.
-
-![During training of a deepfake, **one** encoder and **two** decoders learns to reproduce the face of each person. Source:  &lt;https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/&gt;](../slides/img/deepfakes_01.png){width=100%}
-
-
-![When generating the deepfake, the decoder of person B is used on the latent representation of person A. Source:  &lt;https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/&gt;](../slides/img/deepfakes_02.png){width=100%}
-
-
-#### $\beta$-VAE
-
-
-VAE does not use a regularization parameter to balance the reconstruction and regularization losses. What happens if you do?
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vae-structure.svg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Principle of a VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>The two main applications of VAEs in <strong>unsupervised learning</strong> are:</p>
+<ol type="1">
+<li><strong>Dimensionality reduction</strong>: projecting high dimensional data (images) onto a smaller space, for example a 2D space for visualization.</li>
+<li><strong>Generative modeling</strong>: generating samples from the same distribution as the training data (data augmentation, deep fakes) by sampling on the manifold.</li>
+</ol>
+</section>
+<section id="advanced-vae" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-vae">Advanced VAE</h3>
+<section id="deepfake" class="level4">
+<h4 class="anchored" data-anchor-id="deepfake">DeepFake</h4>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/JbzVhzNaTdI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>DeepFakes now became very easy, you can for example find DeepFace here: <a href="https://github.com/iperov/DeepFaceLab" class="uri">https://github.com/iperov/DeepFaceLab</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/deepfakes_01.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">During training of a deepfake, <strong>one</strong> encoder and <strong>two</strong> decoders learns to reproduce the face of each person. Source: <a href="https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/" class="uri">https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/deepfakes_02.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">When generating the deepfake, the decoder of person B is used on the latent representation of person A. Source: <a href="https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/" class="uri">https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="beta-vae" class="level4">
+<h4 class="anchored" data-anchor-id="beta-vae"><span class="math inline">\beta</span>-VAE</h4>
+<p>VAE does not use a regularization parameter to balance the reconstruction and regularization losses. What happens if you do?</p>
+<p><span class="math display">
+\begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \beta \, \mathcal{L}_\text{regularization}(\phi) \\
     &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
-\end{aligned}$$
-
-Using $\beta &gt; 1$ puts emphasis on learning statistically independent latent factors.
-
-The $\beta$-VAE [@Higgins2016] allows to **disentangle** the latent variables, i.e. manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).
-
-
-![$\beta$-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. [@Higgins2016].](../slides/img/betavae-results.png){width=100%}
-
-:::{.callout-note}
-See &lt;https://worldmodels.github.io/&gt; for a live demo in the RL context.
-:::
-
-
-#### VQ-VAE
-
-Deepmind researchers proposed VQ-VAE-2 [@Razavi2019], a hierarchical VAE using vector-quantized priors able to generate high-resolution images.
-
-![VQ-VAE-2 [@Razavi2019].](../slides/img/vqvae.png){width=100%}
-
-
-![Faces generated by VQ-VAE-2 [@Razavi2019].](../slides/img/vqvae-results.png){width=100%}
-
-#### Conditional variational autoencoder (CVAE)
-
-What if we provide the labels to the encoder and the decoder during training?
-
-![Conditional VAE. Source: &lt;https://ijdykeman.github.io/ml/2016/12/21/cvae.html&gt;](../slides/img/cvae-structure.svg){width=100%}
-
-When trained with labels, the **conditional variational autoencoder** (CVAE [@Sohn2015]) becomes able to sample many images of the same class.
-
-![Conditional VAE. Source: &lt;https://ijdykeman.github.io/ml/2016/12/21/cvae.html&gt;](../slides/img/cvae-generation.svg){width=100%}
-
-CVAE allows to sample as many samples of a given class as we want: **data augmentation**.
-
-![MNIST digits generated by a Conditional VAE. Source: &lt;https://ijdykeman.github.io/ml/2016/12/21/cvae.html&gt;](../slides/img/cvae-mnist.png){width=60%}
-
-The condition does not need to be a label, it can be a shape or another image (passed through another encoder).
-
-![CVAE conditioned on shapes. Source:  &lt;https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation&gt;](../slides/img/cvae-shape.png){width=60%}
-
-## Variational inference (optional)
-
-
-
-
-
-
-
-
-
-### Learning probability distributions from samples
-
-The input data $X$ comes from an unknown distribution $P(X)$. The training set $\mathcal{D}$ is formed by **samples** of that distribution. Learning the distribution of the data means learning a **parameterized distribution** $p_\theta(X)$ that is as close as possible from the true distribution $P(X)$. The parameterized distribution could be a family of known distributions (e.g. normal) or a neural network with a softmax output layer.
-
-![Density estimation. Source: &lt;https://machinelearningmastery.com/probability-density-estimation/&gt;](../slides/img/kerneldensityestimation.png){width=80%}
-
-This means that we want to minimize the KL between the two distributions:
-
-$$\min_\theta \, \text{KL}(P(X) || p_\theta(X)) = \mathbb{E}_{x \sim P(X)} [- \log \dfrac{p_\theta(X=x)}{P(X=x)}]$$
-
-The problem is that we do not know $P(X)$ as it is what we want to learn, so we cannot estimate the KL directly.
-
-In supervised learning, we are learning the **conditional probability** $P(T | X)$ of the targets given the inputs, i.e. what is the probability of having the label $T=t$ given the input $X=x$. A NN with a softmax output layer represents the parameterized distribution $p_\theta(T | X)$. The KL between the two distributions is:
-
-$$\text{KL}(P(T | X) || p_\theta(T | X)) = \mathbb{E}_{x, t \sim \mathcal{D}} [- \log \dfrac{p_\theta(T=t | X=x)}{P(T=t | X=x)}]$$
-
-With the properties of the log, we know that the KL is the cross-entropy minus the entropy of the data:
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<p>Using <span class="math inline">\beta &gt; 1</span> puts emphasis on learning statistically independent latent factors.</p>
+<p>The <span class="math inline">\beta</span>-VAE <span class="citation" data-cites="Higgins2016">(<a href="../references.html#ref-Higgins2016" role="doc-biblioref">Higgins et al., 2016</a>)</span> allows to <strong>disentangle</strong> the latent variables, i.e.&nbsp;manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/betavae-results.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption"><span class="math inline">\beta</span>-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. <span class="citation" data-cites="Higgins2016">(<a href="../references.html#ref-Higgins2016" role="doc-biblioref">Higgins et al., 2016</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>See <a href="https://worldmodels.github.io/" class="uri">https://worldmodels.github.io/</a> for a live demo in the RL context.</p>
+</div>
+</div>
+</section>
+<section id="vq-vae" class="level4">
+<h4 class="anchored" data-anchor-id="vq-vae">VQ-VAE</h4>
+<p>Deepmind researchers proposed VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>, a hierarchical VAE using vector-quantized priors able to generate high-resolution images.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vqvae.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vqvae-results.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Faces generated by VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="conditional-variational-autoencoder-cvae" class="level4">
+<h4 class="anchored" data-anchor-id="conditional-variational-autoencoder-cvae">Conditional variational autoencoder (CVAE)</h4>
+<p>What if we provide the labels to the encoder and the decoder during training?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cvae-structure.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>When trained with labels, the <strong>conditional variational autoencoder</strong> (CVAE <span class="citation" data-cites="Sohn2015">(<a href="../references.html#ref-Sohn2015" role="doc-biblioref">Sohn et al., 2015</a>)</span>) becomes able to sample many images of the same class.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cvae-generation.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>CVAE allows to sample as many samples of a given class as we want: <strong>data augmentation</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cvae-mnist.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">MNIST digits generated by a Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>The condition does not need to be a label, it can be a shape or another image (passed through another encoder).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cvae-shape.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">CVAE conditioned on shapes. Source: <a href="https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation" class="uri">https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="variational-inference-optional" class="level2">
+<h2 class="anchored" data-anchor-id="variational-inference-optional">Variational inference (optional)</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/IP8YqRBBCP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="learning-probability-distributions-from-samples" class="level3">
+<h3 class="anchored" data-anchor-id="learning-probability-distributions-from-samples">Learning probability distributions from samples</h3>
+<p>The input data <span class="math inline">X</span> comes from an unknown distribution <span class="math inline">P(X)</span>. The training set <span class="math inline">\mathcal{D}</span> is formed by <strong>samples</strong> of that distribution. Learning the distribution of the data means learning a <strong>parameterized distribution</strong> <span class="math inline">p_\theta(X)</span> that is as close as possible from the true distribution <span class="math inline">P(X)</span>. The parameterized distribution could be a family of known distributions (e.g.&nbsp;normal) or a neural network with a softmax output layer.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/kerneldensityestimation.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Density estimation. Source: <a href="https://machinelearningmastery.com/probability-density-estimation/" class="uri">https://machinelearningmastery.com/probability-density-estimation/</a></figcaption><p></p>
+</figure>
+</div>
+<p>This means that we want to minimize the KL between the two distributions:</p>
+<p><span class="math display">\min_\theta \, \text{KL}(P(X) || p_\theta(X)) = \mathbb{E}_{x \sim P(X)} [- \log \dfrac{p_\theta(X=x)}{P(X=x)}]</span></p>
+<p>The problem is that we do not know <span class="math inline">P(X)</span> as it is what we want to learn, so we cannot estimate the KL directly.</p>
+<p>In supervised learning, we are learning the <strong>conditional probability</strong> <span class="math inline">P(T | X)</span> of the targets given the inputs, i.e.&nbsp;what is the probability of having the label <span class="math inline">T=t</span> given the input <span class="math inline">X=x</span>. A NN with a softmax output layer represents the parameterized distribution <span class="math inline">p_\theta(T | X)</span>. The KL between the two distributions is:</p>
+<p><span class="math display">\text{KL}(P(T | X) || p_\theta(T | X)) = \mathbb{E}_{x, t \sim \mathcal{D}} [- \log \dfrac{p_\theta(T=t | X=x)}{P(T=t | X=x)}]</span></p>
+<p>With the properties of the log, we know that the KL is the cross-entropy minus the entropy of the data:</p>
+<p><span class="math display">\begin{aligned}
 \text{KL}(P(T | X) || p_\theta(T | X)) &amp;= \mathbb{E}_{x, t \sim \mathcal{D}} [- \log p_\theta(T=t | X=x)]  - \mathbb{E}_{x, t \sim \mathcal{D}} [- \log P(T=t | X=x)] \\
 &amp;\\
     &amp; = H(P(T | X), p_\theta(T |X)) - H(P(T|X)) \\
-\end{aligned}$$
-
-When we minimize the KL by applying gradient descent on the parameters $\theta$, only the cross-entropy will change, as the data does not depends on the model:
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<p>When we minimize the KL by applying gradient descent on the parameters <span class="math inline">\theta</span>, only the cross-entropy will change, as the data does not depends on the model:</p>
+<p><span class="math display">\begin{aligned}
 \nabla_\theta \, \text{KL}(P(T | X) || p_\theta(T | X))  &amp; = \nabla_\theta \, H(P(T | X), p_\theta(T |X)) - \nabla_\theta \,  H(P(T|X)) \\
     &amp;\\
      &amp; = \nabla_\theta \, H(P(T | X), p_\theta(T |X)) \\
      &amp; \\
      &amp; = \nabla_\theta \, \mathbb{E}_{x, t \sim \mathcal{D}} [-  \log p_\theta(T=t | X=x) ]\\
-\end{aligned}$$
-
-Minimizing the cross-entropy (negative log likelihood) of the model on the data is the same as minimizing the KL between the two distributions in supervised learning! We were actually minimizing the KL all along.
-
-When trying to learn the distribution $P(X)$ of the data directly, we could use the same trick:
-
-$$\nabla_\theta \, \text{KL}(P(X) || p_\theta(X)) = \nabla_\theta \, H(P(X), p_\theta(X))  = \nabla_\theta \, \mathbb{E}_{x \sim X} [- \log p_\theta(X=x)]$$
-
-i.e. maximize the log-likelihood of the model on the data $X$. If we use $N$ data samples to estimate the expectation, we notice that:
-
-$$
+\end{aligned}
+</span></p>
+<p>Minimizing the cross-entropy (negative log likelihood) of the model on the data is the same as minimizing the KL between the two distributions in supervised learning! We were actually minimizing the KL all along.</p>
+<p>When trying to learn the distribution <span class="math inline">P(X)</span> of the data directly, we could use the same trick:</p>
+<p><span class="math display">\nabla_\theta \, \text{KL}(P(X) || p_\theta(X)) = \nabla_\theta \, H(P(X), p_\theta(X))  = \nabla_\theta \, \mathbb{E}_{x \sim X} [- \log p_\theta(X=x)]</span></p>
+<p>i.e.&nbsp;maximize the log-likelihood of the model on the data <span class="math inline">X</span>. If we use <span class="math inline">N</span> data samples to estimate the expectation, we notice that:</p>
+<p><span class="math display">
 \mathbb{E}_{x \sim X} [\log p_\theta(X=x)] \approx \dfrac{1}{N} \, \sum_{i=1}^N \log p_\theta(X=x_i) = \dfrac{1}{N} \, \log \prod_{i=1}^N p_\theta(X=x_i) = \dfrac{1}{N} \, \log L(\theta)
-$$
-
-is indeed the log-likelihood of the model on the data that we maximized in **maximum likelihood estimation**.
-
-The problem is that images are **highly-dimensional** (one dimension per pixel), so we would need astronomical numbers of samples to estimate the gradient (once): **curse of dimensionality**. 
-
-
-![Curse of dimensionality. Source: &lt;https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html&gt;](../slides/img/cursedimensionality.png){width=100%}
-
-MLE does not work well in high-dimensional spaces. We need to work in a much lower-dimensional space.
-
-
-### Latent space
-
-Images are not random samples of the pixel space: **natural images** are embedded in a much lower-dimensional space called a **manifold**. A manifold is a **locally Euclidian** topological space of lower dimension: The surface of the earth is locally flat and 2D, but globally spherical and 3D.
-
-If we have a **generative model** telling us how a point on the manifold $z$ maps to the image space ($P(X | z)$), we would only need to learn the distribution of the data in the lower-dimensional **latent space**.
-
-
-![Manifold. Source: &lt;https://en.wikipedia.org/wiki/Manifold&gt;](../slides/img/manifold.png){width=50%}
-
-The low-dimensional **latent variables** $z$ are the actual cause for the observations $X$. Given a sample $z$ on the manifold, we can train a **generative model** $p_\theta(X | z)$ to recreate the input $X$. $p_\theta(X | z)$ is the **decoder**: given a latent representation $z$, what is the corresponding observation $X$?
-
-![Latent variable. Source: &lt;https://blog.evjang.com/2016/08/variational-bayes.html&gt;](../slides/img/latentvariable.png){width=40%}
-
-If we learn the distribution $p_\theta(z)$ of the manifold (latent space), we can infer the distribution of the data $p_\theta(X)$ using that model:
-
-$$p_\theta(X) = \mathbb{E}_{z \sim p_\theta(z)} [p_\theta(X | z)] = \int_z p_\theta(X | z) \, p_\theta(z) \, dz$$
-
-Problem: we do not know $p_\theta(z)$, as the only data we see is $X$: $z$ is called a **latent variable** because it explains the data but is hidden.
-
-### Variational inference
-
-To estimate $p_\theta(z)$, we could again marginalize over $X$:
-
-
-$$p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(z | x)] = \int_x p_\theta(z | x) \, p_\theta(x) \, dx$$
-
-$p_\theta(z | x)$ is the **encoder**: given an input $x \sim p_\theta(X)$, what is its latent representation $z$? The Bayes rule tells us:
-
-$$p_\theta(z | x) = p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}$$
-
-The posterior probability (encoder) $p_\theta(z | X)$ depends on the model (decoder) $p_\theta(X|z)$, the prior (assumption) $p_\theta(z)$ and the evidence (data) $p_\theta(X)$.
-
-We get: 
-
-$$p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}]$$
-
-The posterior is **untractable** as it would require to integrate over all possible inputs $x \sim p_\theta(X)$:
-
-$$p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}] = \int_x p_\theta(x |z) \, p_\theta(z) \, dx$$
-
-**Variational inference** proposes to approximate the true encoder $p_\theta(z | x)$ by another parameterized distribution $q_\phi(z|x)$. 
-
-![Variational inference approximates the encoder with another parameterized distribution. Source: &lt;https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html&gt;](../slides/img/VAE-graphical-model.png){width=100%}
-
-The decoder $p_\theta(x |z)$ generates observations $x$ from a latent representation $x$ with parameters $\theta$. The encoder $q_\phi(z|x)$ estimates the latent representation $z$ of a generated observation $x$. It should approximate $p_\theta(z | x)$ with parameters $\phi$.
-
-
-To make $q_\phi(z| X)$ close from $p_\theta(z | X)$, we minimize their KL divergence:
-
-$$\begin{aligned}
+</span></p>
+<p>is indeed the log-likelihood of the model on the data that we maximized in <strong>maximum likelihood estimation</strong>.</p>
+<p>The problem is that images are <strong>highly-dimensional</strong> (one dimension per pixel), so we would need astronomical numbers of samples to estimate the gradient (once): <strong>curse of dimensionality</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/cursedimensionality.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Curse of dimensionality. Source: <a href="https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html" class="uri">https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>MLE does not work well in high-dimensional spaces. We need to work in a much lower-dimensional space.</p>
+</section>
+<section id="latent-space" class="level3">
+<h3 class="anchored" data-anchor-id="latent-space">Latent space</h3>
+<p>Images are not random samples of the pixel space: <strong>natural images</strong> are embedded in a much lower-dimensional space called a <strong>manifold</strong>. A manifold is a <strong>locally Euclidian</strong> topological space of lower dimension: The surface of the earth is locally flat and 2D, but globally spherical and 3D.</p>
+<p>If we have a <strong>generative model</strong> telling us how a point on the manifold <span class="math inline">z</span> maps to the image space (<span class="math inline">P(X | z)</span>), we would only need to learn the distribution of the data in the lower-dimensional <strong>latent space</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/manifold.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Manifold. Source: <a href="https://en.wikipedia.org/wiki/Manifold" class="uri">https://en.wikipedia.org/wiki/Manifold</a></figcaption><p></p>
+</figure>
+</div>
+<p>The low-dimensional <strong>latent variables</strong> <span class="math inline">z</span> are the actual cause for the observations <span class="math inline">X</span>. Given a sample <span class="math inline">z</span> on the manifold, we can train a <strong>generative model</strong> <span class="math inline">p_\theta(X | z)</span> to recreate the input <span class="math inline">X</span>. <span class="math inline">p_\theta(X | z)</span> is the <strong>decoder</strong>: given a latent representation <span class="math inline">z</span>, what is the corresponding observation <span class="math inline">X</span>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/latentvariable.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Latent variable. Source: <a href="https://blog.evjang.com/2016/08/variational-bayes.html" class="uri">https://blog.evjang.com/2016/08/variational-bayes.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>If we learn the distribution <span class="math inline">p_\theta(z)</span> of the manifold (latent space), we can infer the distribution of the data <span class="math inline">p_\theta(X)</span> using that model:</p>
+<p><span class="math display">p_\theta(X) = \mathbb{E}_{z \sim p_\theta(z)} [p_\theta(X | z)] = \int_z p_\theta(X | z) \, p_\theta(z) \, dz</span></p>
+<p>Problem: we do not know <span class="math inline">p_\theta(z)</span>, as the only data we see is <span class="math inline">X</span>: <span class="math inline">z</span> is called a <strong>latent variable</strong> because it explains the data but is hidden.</p>
+</section>
+<section id="variational-inference" class="level3">
+<h3 class="anchored" data-anchor-id="variational-inference">Variational inference</h3>
+<p>To estimate <span class="math inline">p_\theta(z)</span>, we could again marginalize over <span class="math inline">X</span>:</p>
+<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(z | x)] = \int_x p_\theta(z | x) \, p_\theta(x) \, dx</span></p>
+<p><span class="math inline">p_\theta(z | x)</span> is the <strong>encoder</strong>: given an input <span class="math inline">x \sim p_\theta(X)</span>, what is its latent representation <span class="math inline">z</span>? The Bayes rule tells us:</p>
+<p><span class="math display">p_\theta(z | x) = p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}</span></p>
+<p>The posterior probability (encoder) <span class="math inline">p_\theta(z | X)</span> depends on the model (decoder) <span class="math inline">p_\theta(X|z)</span>, the prior (assumption) <span class="math inline">p_\theta(z)</span> and the evidence (data) <span class="math inline">p_\theta(X)</span>.</p>
+<p>We get:</p>
+<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}]</span></p>
+<p>The posterior is <strong>untractable</strong> as it would require to integrate over all possible inputs <span class="math inline">x \sim p_\theta(X)</span>:</p>
+<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}] = \int_x p_\theta(x |z) \, p_\theta(z) \, dx</span></p>
+<p><strong>Variational inference</strong> proposes to approximate the true encoder <span class="math inline">p_\theta(z | x)</span> by another parameterized distribution <span class="math inline">q_\phi(z|x)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/VAE-graphical-model.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Variational inference approximates the encoder with another parameterized distribution. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>The decoder <span class="math inline">p_\theta(x |z)</span> generates observations <span class="math inline">x</span> from a latent representation <span class="math inline">x</span> with parameters <span class="math inline">\theta</span>. The encoder <span class="math inline">q_\phi(z|x)</span> estimates the latent representation <span class="math inline">z</span> of a generated observation <span class="math inline">x</span>. It should approximate <span class="math inline">p_\theta(z | x)</span> with parameters <span class="math inline">\phi</span>.</p>
+<p>To make <span class="math inline">q_\phi(z| X)</span> close from <span class="math inline">p_\theta(z | X)</span>, we minimize their KL divergence:</p>
+<p><span class="math display">\begin{aligned}
 \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;= \mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(z | X)}{q_\phi(z|X)}]\\
-\end{aligned}$$
-
-Note that we sample the latent representations from the learned encoder $q_\phi(z|X)$ (imagination). As $p_\theta(z | X) = p_\theta(X |z) \, \dfrac{p_\theta(z)}{p_\theta(X)}$, we get:
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<p>Note that we sample the latent representations from the learned encoder <span class="math inline">q_\phi(z|X)</span> (imagination). As <span class="math inline">p_\theta(z | X) = p_\theta(X |z) \, \dfrac{p_\theta(z)}{p_\theta(X)}</span>, we get:</p>
+<p><span class="math display">\begin{aligned}
 \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;= \mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(X | z) \, p_\theta(z)}{q_\phi(z|X) \, p_\theta(X)}]\\
 &amp;=\mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(z)}{q_\phi(z|X)}] - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X)]  \\
 &amp;+ \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]\\
-\end{aligned}$$
-
-$p_\theta(X)$ does not depend on $z$, so its expectation w.r.t $z$ is constant:
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<p><span class="math inline">p_\theta(X)</span> does not depend on <span class="math inline">z</span>, so its expectation w.r.t <span class="math inline">z</span> is constant:</p>
+<p><span class="math display">\begin{aligned}
 \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;= \text{KL}(q_\phi(z|X) || p_\theta(z)) + \log p_\theta(X) + \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]\\
-\end{aligned}$$
-
-We rearrange the terms:
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<p>We rearrange the terms:</p>
+<p><span class="math display">\begin{aligned}
 \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;=  - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] - \text{KL}(q_\phi(z|X) || p_\theta(z))\\
-\end{aligned}$$
-
-* Training the **encoder** means that we **minimize** $\text{KL}(q_\phi(z|X) || p_\theta(z | X) )$.
-* Training the **decoder** means that we **maximize** $\log p_\theta(X)$ (log-likelihood of the model).
-* Training the encoder and decoder together means that we **maximize**:
-
-$$ \text{ELBO}(\theta, \phi) = \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) )$$
-
-The KL divergence is always positive or equal to 0, so we have:
-
-$$\text{ELBO}(\theta, \phi) \leq \log p_\theta(X)$$
-
-This term is called  the **evidence lower bound** (ELBO): by maximizing it, we also maximize the untractable evidence $\log p_\theta(X)$, which is what we want to do. The trick is that the right-hand term of the equation gives us a tractable definition of the ELBO term:
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<ul>
+<li>Training the <strong>encoder</strong> means that we <strong>minimize</strong> <span class="math inline">\text{KL}(q_\phi(z|X) || p_\theta(z | X) )</span>.</li>
+<li>Training the <strong>decoder</strong> means that we <strong>maximize</strong> <span class="math inline">\log p_\theta(X)</span> (log-likelihood of the model).</li>
+<li>Training the encoder and decoder together means that we <strong>maximize</strong>:</li>
+</ul>
+<p><span class="math display"> \text{ELBO}(\theta, \phi) = \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) )</span></p>
+<p>The KL divergence is always positive or equal to 0, so we have:</p>
+<p><span class="math display">\text{ELBO}(\theta, \phi) \leq \log p_\theta(X)</span></p>
+<p>This term is called the <strong>evidence lower bound</strong> (ELBO): by maximizing it, we also maximize the untractable evidence <span class="math inline">\log p_\theta(X)</span>, which is what we want to do. The trick is that the right-hand term of the equation gives us a tractable definition of the ELBO term:</p>
+<p><span class="math display">\begin{aligned}
 \text{ELBO}(\theta, \phi) &amp;=  \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) \\
 &amp;\\
 &amp;= - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] - \text{KL}(q_\phi(z|X) || p_\theta(z))
-\end{aligned}$$
-
-What happens when we **minimize** the negative ELBO? 
-
-$$ \mathcal{L}(\theta, \phi) = - \text{ELBO}(\theta, \phi) = \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] + \text{KL}(q_\phi(z|X) || p_\theta(z))$$
-
-* $\mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]$ is the **reconstruction loss** of the decoder $p_\theta(X | z)$:
-
-    * Given a sample $z$ of the encoder $q_\phi(z|X)$, minimize the negative log-likelihood of the reconstruction $p_\theta(X | z)$.
-
-* $\text{KL}(q_\phi(z|X) || p_\theta(z))$ is the **regularization loss** for the encoder: 
-
-    * The latent distribution $q_\phi(z|X)$ should be too far from the **prior** $p_\theta(z)$.
-
-**Variational autoencoders** use $\mathcal{N}(0, 1)$ as a prior for the latent space, but any other prior could be used. 
-
-$$\begin{aligned}
+\end{aligned}
+</span></p>
+<p>What happens when we <strong>minimize</strong> the negative ELBO?</p>
+<p><span class="math display"> \mathcal{L}(\theta, \phi) = - \text{ELBO}(\theta, \phi) = \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] + \text{KL}(q_\phi(z|X) || p_\theta(z))</span></p>
+<ul>
+<li><p><span class="math inline">\mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]</span> is the <strong>reconstruction loss</strong> of the decoder <span class="math inline">p_\theta(X | z)</span>:</p>
+<ul>
+<li>Given a sample <span class="math inline">z</span> of the encoder <span class="math inline">q_\phi(z|X)</span>, minimize the negative log-likelihood of the reconstruction <span class="math inline">p_\theta(X | z)</span>.</li>
+</ul></li>
+<li><p><span class="math inline">\text{KL}(q_\phi(z|X) || p_\theta(z))</span> is the <strong>regularization loss</strong> for the encoder:</p>
+<ul>
+<li>The latent distribution <span class="math inline">q_\phi(z|X)</span> should be too far from the <strong>prior</strong> <span class="math inline">p_\theta(z)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>Variational autoencoders</strong> use <span class="math inline">\mathcal{N}(0, 1)</span> as a prior for the latent space, but any other prior could be used.</p>
+<p><span class="math display">\begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi) \\
     &amp;\\
     &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})] + \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1}))\\
-\end{aligned}$$
-
-The reparameterization trick and the fact that the KL between normal distributions has a closed form allow us to use backpropagation end-to-end. The encoder $q_\phi(z|X)$ and decoder $p_\theta(X | z)$ are neural networks in a VAE, but other parametrized distributions can be used (e.g. in physics).
-
-
-```{admonition} Sources
-* &lt;https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/&gt;
-* &lt;https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html&gt;
-* &lt;https://blog.evjang.com/2016/08/variational-bayes.html&gt;
-* &lt;https://jonathan-hui.medium.com/machine-learning-variational-inference-273d8e6480bb&gt;</code></pre>
+\end{aligned}
+</span></p>
+<p>The reparameterization trick and the fact that the KL between normal distributions has a closed form allow us to use backpropagation end-to-end. The encoder <span class="math inline">q_\phi(z|X)</span> and decoder <span class="math inline">p_\theta(X | z)</span> are neural networks in a VAE, but other parametrized distributions can be used (e.g.&nbsp;in physics).</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Sources
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><a href="https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/" class="uri">https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/</a></li>
+<li><a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></li>
+<li><a href="https://blog.evjang.com/2016/08/variational-bayes.html" class="uri">https://blog.evjang.com/2016/08/variational-bayes.html</a></li>
+<li><a href="https://jonathan-hui.medium.com/machine-learning-variational-inference-273d8e6480bb" class="uri">https://jonathan-hui.medium.com/machine-learning-variational-inference-273d8e6480bb</a></li>
+</ul>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Guo2017" class="csl-entry" role="doc-biblioentry">
 Guo, X., Liu, X., Zhu, E., and Yin, J. (2017). Deep <span>Clustering</span> with <span>Convolutional Autoencoders</span>. in <em>Neural <span>Information Processing</span></em> Lecture <span>Notes</span> in <span>Computer Science</span>., eds. D. Liu, S. Xie, Y. Li, D. Zhao, and E.-S. M. El-Alfy (<span>Cham</span>: <span>Springer International Publishing</span>), 373–382. doi:<a href="https://doi.org/10.1007/978-3-319-70096-0_39">10.1007/978-3-319-70096-0_39</a>.
 </div>
+<div id="ref-Higgins2016" class="csl-entry" role="doc-biblioentry">
+Higgins, I., Matthey, L., Pal, A., Burgess, C., Glorot, X., Botvinick, M., et al. (2016). Beta-<span>VAE</span>: <span>Learning Basic Visual Concepts</span> with a <span>Constrained Variational Framework</span>. in <em><span>ICLR</span> 2017</em> Available at: <a href="https://openreview.net/forum?id=Sy2fzU9gl">https://openreview.net/forum?id=Sy2fzU9gl</a> [Accessed December 5, 2020].
+</div>
 <div id="ref-Kingma2013" class="csl-entry" role="doc-biblioentry">
-Kingma, D. P., and Welling, M. (2013). Auto-<span>Encoding Variational Bayes</span>. <em>arXiv:1312.6114 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1312.6114">https://arxiv.org/abs/1312.6114</a>.
+Kingma, D. P., and Welling, M. (2013). Auto-<span>Encoding Variational Bayes</span>. Available at: <a href="http://arxiv.org/abs/1312.6114">http://arxiv.org/abs/1312.6114</a>.
 </div>
 <div id="ref-Olshausen1997" class="csl-entry" role="doc-biblioentry">
 Olshausen, B. A., and Field, D. J. (1997). Sparse coding with an overcomplete basis set: <span>A</span> strategy employed by <span>V1</span>? <em>Vision Research</em> 37, 3311–3325. doi:<a href="https://doi.org/10.1016/S0042-6989(97)00169-7">10.1016/S0042-6989(97)00169-7</a>.
+</div>
+<div id="ref-Razavi2019" class="csl-entry" role="doc-biblioentry">
+Razavi, A., Oord, A. van den, and Vinyals, O. (2019). Generating <span>Diverse High-Fidelity Images</span> with <span>VQ-VAE-2</span>. Available at: <a href="http://arxiv.org/abs/1906.00446">http://arxiv.org/abs/1906.00446</a> [Accessed December 6, 2020].
+</div>
+<div id="ref-Sohn2015" class="csl-entry" role="doc-biblioentry">
+Sohn, K., Lee, H., and Yan, X. (2015). <span>“Learning <span>Structured Output Representation</span> using <span>Deep Conditional Generative Models</span>,”</span> in <em>Advances in <span>Neural Information Processing Systems</span> 28</em>, eds. C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett (<span>Curran Associates, Inc.</span>), 3483–3491. Available at: <a href="http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf">http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf</a> [Accessed October 4, 2019].
 </div>
 <div id="ref-Vincent2010" class="csl-entry" role="doc-biblioentry">
 Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>Journal of Machine Learning Research</em>, 38.
@@ -1141,6 +1226,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

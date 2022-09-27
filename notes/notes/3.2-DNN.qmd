@@ -477,7 +477,7 @@ where $W_\text{max}$ (resp. $W_\text{min}$) is the weight matrix with the highes
 **Exploding gradients** can be solved by **gradient clipping**, i.e. normalizing the backpropagated gradient if its norm exceeds a threshold.
 
 $$
-    || \frac{\partial \mathcal{L}(\theta)}{\partial W^k}|| \gets \min(||\frac{\partial \mathcal{L}(\theta)}{\partial W^k}||, \text{MAX_GRAD})
+    || \frac{\partial \mathcal{L}(\theta)}{\partial W^k}|| \gets \min(||\frac{\partial \mathcal{L}(\theta)}{\partial W^k}||, K)
 $$
 
 **Vanishing gradients** are still the current limitation of deep networks. The solutions include: ReLU activation functions, unsupervised pre-training, batch normalization, **residual networks**...

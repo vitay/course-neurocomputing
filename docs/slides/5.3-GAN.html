@@ -7,7 +7,7 @@
 <link href="5.3-GAN_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="5.3-GAN_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="5.3-GAN_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="5.3-GAN_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="5.3-GAN_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="5.3-GAN_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="5.3-GAN_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Generative Adversarial Networks</p>
   <p class="author">Julien Vitay</p>
@@ -343,19 +359,16 @@
 <ul>
 <li>An autoencoder learns to first encode inputs in a <strong>latent space</strong> and then use a generative model to model the data distribution.</li>
 </ul>
-<p><span class="math display">\[\mathcal{L}_\text{autoencoder}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]\]</span></p>
+<p><span class="math display">\mathcal{L}_\text{autoencoder}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]</span></p>
 <ul>
 <li>Couldn’t we learn a decoder using random noise as input but still learning the distribution of the data?</li>
 </ul>
-<p><span class="math display">\[\mathcal{L}_\text{GAN}(\theta, \phi) = \mathbb{E}_{\mathbf{z} \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{z}) ]\]</span></p>
+<p><span class="math display">\mathcal{L}_\text{GAN}(\theta, \phi) = \mathbb{E}_{\mathbf{z} \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{z}) ]</span></p>
 <ul>
 <li>After all, this is how random numbers are generated: a uniform distribution of pseudo-random numbers is transformed into samples of another distribution using a mathematical formula.</li>
 </ul>
 
-<img data-src="img/generation-distribution.jpeg" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></p>
-</div>
-</section>
+<img data-src="img/generation-distribution.jpeg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></p></section>
 
 <section id="generative-models-1" class="title-slide slide level1 center">
 <h1>Generative models</h1>
@@ -364,10 +377,7 @@
 <li><p>The Maximum Mean Discrepancy (MMD) approach allows to do that, but does not work very well in highly-dimensional spaces.</p></li>
 </ul>
 
-<img data-src="img/gan-principle2.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></p>
-</div>
-</section>
+<img data-src="img/gan-principle2.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></p></section>
 
 <section id="generative-adversarial-network-1" class="title-slide slide level1 center">
 <h1>Generative adversarial network</h1>
@@ -379,11 +389,8 @@
 </ul></li>
 </ul>
 
-<img data-src="img/gan-concept.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<img data-src="img/gan-concept.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f" class="uri">https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f</a></p><div class="footer">
 <p>Goodfellow IJ, Pouget-Abadie J, Mirza M, Xu B, Warde-Farley D, Ozair S, Courville A, Bengio Y. 2014. Generative Adversarial Networks. arXiv:14062661</p>
-</div>
-<div class="footer">
-<p>Source: <a href="https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f" class="uri">https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f</a></p>
 </div>
 </section>
 
@@ -394,58 +401,37 @@
 <li><p>The discriminator gets alternatively real or generated inputs and predicts whether it is real or fake.</p></li>
 </ul>
 
-<img data-src="img/gan-simple2.png" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p>
-</div>
-</section>
+<img data-src="img/gan-simple2.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p></section>
 
 <section id="the-discriminator-should-be-able-to-recognize-false-bills-from-true-ones" class="title-slide slide level1 center">
 <h1>The discriminator should be able to recognize false bills from true ones</h1>
 
-<img data-src="img/gan1.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p>
-</div>
-</section>
+<img data-src="img/gan1.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p></section>
 
 <section id="the-generator-should-be-able-to-generate-realistic-bills" class="title-slide slide level1 center">
 <h1>The generator should be able to generate realistic bills</h1>
 
-<img data-src="img/gan2.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p>
-</div>
-</section>
+<img data-src="img/gan2.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p></section>
 
 <section id="the-generator-is-initially-very-bad" class="title-slide slide level1 center">
 <h1>The generator is initially very bad…</h1>
 
-<img data-src="img/gan3.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p>
-</div>
-</section>
+<img data-src="img/gan3.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p></section>
 
 <section id="but-the-discriminator-too" class="title-slide slide level1 center">
 <h1>… but the discriminator too!</h1>
 
-<img data-src="img/gan4.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p>
-</div>
-</section>
+<img data-src="img/gan4.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p></section>
 
 <section id="after-a-while-the-discriminator-gets-better" class="title-slide slide level1 center">
 <h1>After a while, the discriminator gets better…</h1>
 
-<img data-src="img/gan5.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p>
-</div>
-</section>
+<img data-src="img/gan5.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p></section>
 
 <section id="so-the-generator-also-has-to-improve" class="title-slide slide level1 center">
 <h1>So the generator also has to improve</h1>
 
-<img data-src="img/gan6.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p>
-</div>
-</section>
+<img data-src="img/gan6.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7" class="uri">https://medium.com/@ageitgey/abusing-generative-adversarial-networks-to-make-8-bit-pixel-art-e45d9b96cee7</a></p></section>
 
 <section id="generative-adversarial-network-3" class="title-slide slide level1 center">
 <h1>Generative adversarial network</h1>
@@ -455,23 +441,20 @@
 <li><p>The generator tries to fool the discriminator, without ever seeing the data!</p></li>
 </ul>
 
-<img data-src="img/gan-principle.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></p>
-</div>
-</section>
+<img data-src="img/gan-principle.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></p></section>
 
 <section id="loss-of-the-discriminator" class="title-slide slide level1 center">
 <h1>Loss of the discriminator</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li><p>Let’s define <span class="math inline">\(x \sim P_\text{data}(x)\)</span> as a real image from the dataset and <span class="math inline">\(G(z)\)</span> as an image generated by the generator, where <span class="math inline">\(z \sim P_z(z)\)</span> is a random input.</p></li>
+<li><p>Let’s define <span class="math inline">x \sim P_\text{data}(x)</span> as a real image from the dataset and <span class="math inline">G(z)</span> as an image generated by the generator, where <span class="math inline">z \sim P_z(z)</span> is a random input.</p></li>
 <li><p>The output of the discriminator is a single sigmoid neuron:</p>
 <ul>
-<li><p><span class="math inline">\(D(x) = 1\)</span> for real images.</p></li>
-<li><p><span class="math inline">\(D(G(z)) = 0\)</span> for generated images</p></li>
+<li><p><span class="math inline">D(x) = 1</span> for real images.</p></li>
+<li><p><span class="math inline">D(G(z)) = 0</span> for generated images</p></li>
 </ul></li>
-<li><p>We want both <span class="math inline">\(D(x)\)</span> and <span class="math inline">\(1-D(G(z))\)</span> to be close from 1.</p></li>
+<li><p>We want both <span class="math inline">D(x)</span> and <span class="math inline">1-D(G(z))</span> to be close from 1.</p></li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -484,11 +467,11 @@
 <ul>
 <li>The goal of the discriminator is to <strong>minimize</strong> the negative log-likelihood (cross-entropy) of classifying correctly the data:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{L}(D) = \mathbb{E}_{x \sim P_\text{data}(x)} [ - \log D(x)] + \mathbb{E}_{z \sim P_z(z)} [ - \log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <ul>
-<li>It is similar to logistic regression: <span class="math inline">\(x\)</span> belongs to the positive class, <span class="math inline">\(G(z)\)</span> to the negative class.</li>
+<li>It is similar to logistic regression: <span class="math inline">x</span> belongs to the positive class, <span class="math inline">G(z)</span> to the negative class.</li>
 </ul>
 </section>
 
@@ -497,9 +480,9 @@
 <ul>
 <li>The goal of the generator is to <strong>maximize</strong> the negative log-likelihood of the discriminator being correct on the generated images, i.e.&nbsp;fool it:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{J}(G) = \mathbb{E}_{z \sim P_z(z)} [ - \log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <ul>
 <li>The generator tries to maximize what the discriminator tries to minimize.</li>
 </ul>
@@ -508,6 +491,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/gan-simple2.png"></p>
+<p></p><figcaption>Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
@@ -518,9 +502,6 @@
 </div>
 </div>
 </div>
-<div class="footer">
-<p>Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p>
-</div>
 </section>
 
 <section id="gan-loss" class="title-slide slide level1 center">
@@ -528,40 +509,34 @@
 <ul>
 <li>Putting both objectives together, we obtain the following <strong>minimax</strong> problem:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D \, \mathcal{V}(D, G) = \mathbb{E}_{x \sim P_\text{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim P_z(z)} [\log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <ul>
-<li><p><span class="math inline">\(D\)</span> and <span class="math inline">\(G\)</span> compete on the same objective function: one tries to maximize it, the other to minimize it.</p></li>
-<li><p>Note that the generator <span class="math inline">\(G\)</span> never sees the data <span class="math inline">\(x\)</span>: all it gets is a <strong>backpropagated gradient</strong> through the discriminator:</p></li>
+<li><p><span class="math inline">D</span> and <span class="math inline">G</span> compete on the same objective function: one tries to maximize it, the other to minimize it.</p></li>
+<li><p>Note that the generator <span class="math inline">G</span> never sees the data <span class="math inline">x</span>: all it gets is a <strong>backpropagated gradient</strong> through the discriminator:</p></li>
 </ul>
-<p><span class="math display">\[\nabla_{G(z)} \, \mathcal{V}(D, G) = \nabla_{D(G(z))} \, \mathcal{V}(D, G) \times \nabla_{G(z)} \, D(G(z))\]</span></p>
+<p><span class="math display">\nabla_{G(z)} \, \mathcal{V}(D, G) = \nabla_{D(G(z))} \, \mathcal{V}(D, G) \times \nabla_{G(z)} \, D(G(z))</span></p>
 <ul>
 <li>It informs the generator which <strong>pixels</strong> are the most responsible for an eventual bad decision of the discriminator.</li>
 </ul>
 
-<img data-src="img/gan-simple2.png" style="width:50.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p>
-</div>
-</section>
+<img data-src="img/gan-simple2.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p></section>
 
 <section id="gan-loss-1" class="title-slide slide level1 center">
 <h1>GAN loss</h1>
 <ul>
 <li>This objective function can be optimized when the generator uses gradient descent and the discriminator gradient ascent: just apply a minus sign on the weight updates!</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D V(D, G) = \mathbb{E}_{x \sim P_\text{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim P_z(z)} [\log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <ul>
 <li><p>Both can therefore use the usual <strong>backpropagation</strong> algorithm to adapt their parameters.</p></li>
 <li><p>The discriminator and the generator should reach a <strong>Nash equilibrium</strong>: they try to beat each other, but both become better over time.</p></li>
 </ul>
 
-<img data-src="img/gan-simple2.png" style="width:60.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p>
-</div>
-</section>
+<img data-src="img/gan-simple2.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></p></section>
 
 <section id="generative-adversarial-network-4" class="title-slide slide level1 center">
 <h1>Generative adversarial network</h1>
@@ -569,10 +544,7 @@
 <li>The loss functions reach an equilibrium, it is quite hard to tell when the network has converged.</li>
 </ul>
 
-<img data-src="img/gan-loss.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Research project - Vivek Bakul Maru - TU Chemnitz</p>
-</div>
-</section>
+<img data-src="img/gan-loss.png" class="r-stretch quarto-figure-center"><p class="caption">Research project - Vivek Bakul Maru - TU Chemnitz</p></section>
 
 <section id="dcgan-deep-convolutional-gan" class="title-slide slide level1 center">
 <h1>DCGAN : Deep convolutional GAN</h1>
@@ -581,12 +553,12 @@
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/dcgan-flat.png" style="width:80.0%"></p>
+<p><img data-src="img/dcgan-flat.png" style="width:60.0%"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/dcgan.png"></p>
+<p><img data-src="img/dcgan.png" style="width:60.0%"></p>
 </figure>
 </div>
 <div class="footer">
@@ -608,11 +580,19 @@
 <li><p>But the generator often <strong>collapses</strong>, i.e.&nbsp;outputs non-sense, or always the same image.</p></li>
 <li><p>Hyperparameter tuning is very difficult.</p></li>
 </ul>
-<div class="footer">
-<p>Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, and Xi Chen (2016). Improved techniques for training GANs. In Advances in Neural Information Processing Systems.</p>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="footer">
+<p><strong>References</strong></p>
+</div>
+<div class="callout-content">
+<p>Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, and Xi Chen (2016). Improved techniques for training GANs. In Advances in Neural Information Processing Systems.</p>
 <p>Source: Brundage M, Avin S, Clark J, et al.&nbsp;(2018). The Malicious Use of Artificial Intelligence: Forecasting, Prevention, and Mitigation. arXiv:180207228</p>
+</div>
+</div>
 </div>
 </section>
 
@@ -644,7 +624,7 @@
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>The generator can also get additional <strong>deterministic</strong> information to the latent space, not only the random vector <span class="math inline">\(z\)</span>.</p></li>
+<li><p>The generator can also get additional <strong>deterministic</strong> information to the latent space, not only the random vector <span class="math inline">z</span>.</p></li>
 <li><p>One can for example provide the <strong>label</strong> (class) in the context of supervised learning, allowing to generate many <strong>new</strong> examples of each class: data augmentation.</p></li>
 <li><p>One could also provide the output of a pre-trained CNN (ResNet) to condition on images.</p></li>
 </ul>
@@ -664,12 +644,12 @@
 <h1>cGAN: text-to-image synthesis</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/dcgan_network.jpg"></p>
+<p><img data-src="img/dcgan_network.jpg" style="width:70.0%"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/dcgan-textimage.jpg"></p>
+<p><img data-src="img/dcgan-textimage.jpg" style="width:75.0%"></p>
 </figure>
 </div>
 <div class="footer">
@@ -706,12 +686,10 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pix2pix-generator1.png"></p>
+<p></p><figcaption>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></figcaption><p></p>
 </figure>
 </div>
 </div>
-</div>
-<div class="footer">
-<p>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p>
 </div>
 </section>
 
@@ -730,18 +708,16 @@
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/pix2pix-generator2.png"></p>
+<p><img data-src="img/pix2pix-generator2.png" style="width:70.0%"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pix2pix-generator3.png"></p>
+<p></p><figcaption>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></figcaption><p></p>
 </figure>
 </div>
 </div>
-</div>
-<div class="footer">
-<p>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p>
 </div>
 </section>
 
@@ -766,10 +742,8 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pix2pix-discriminator.png"></p>
+<p></p><figcaption>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p>
 </div>
 </section>
 
@@ -779,24 +753,18 @@
 <li>The discriminator is trained like in a regular GAN by alternating input/target or input/generated pairs.</li>
 </ul>
 
-<img data-src="img/pix2pix-discriminator-training.png" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p>
-</div>
-</section>
+<img data-src="img/pix2pix-discriminator-training.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p></section>
 
 <section id="pix2pix-image-to-image-translation-5" class="title-slide slide level1 center">
 <h1>pix2pix: image-to-image translation</h1>
 <ul>
 <li>The generator is trained by maximizing the GAN loss (using gradients backpropagated through the discriminator) but also by minimizing the L1 distance between the generated image and the target (supervised learning).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D V(D, G) = V_\text{GAN}(D, G) + \lambda \, \mathbb{E}_\mathcal{D} [|T - G|]
-\]</span></p>
+</span></p>
 
-<img data-src="img/pix2pix-generator-training.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p>
-</div>
-</section>
+<img data-src="img/pix2pix-generator-training.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a></p></section>
 
 <section id="cyclegan-neural-style-transfer" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
@@ -817,11 +785,9 @@
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/doge_starrynight.jpg"></p>
+<p><img data-src="img/doge_starrynight.jpg" style="width:80.0%"></p>
+<p></p><figcaption>Source: <a href="https://hardikbansal.github.io/CycleGANBlog/" class="uri">https://hardikbansal.github.io/CycleGANBlog/</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="https://hardikbansal.github.io/CycleGANBlog/" class="uri">https://hardikbansal.github.io/CycleGANBlog/</a></p>
 </div>
 <div class="footer">
 <p>Zhu J-Y, Park T, Isola P, Efros AA. 2020. Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. arXiv:170310593</p>
@@ -854,18 +820,12 @@
 <section id="cyclegan-neural-style-transfer-2" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
 
-<img data-src="img/cyclegan-AB.jpeg" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></p>
-</div>
-</section>
+<img data-src="img/cyclegan-AB.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></p></section>
 
 <section id="cyclegan-neural-style-transfer-3" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
 
-<img data-src="img/cyclegan-BA.jpeg" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></p>
-</div>
-</section>
+<img data-src="img/cyclegan-BA.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></p></section>
 
 <section id="cyclegan-neural-style-transfer-4" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
@@ -874,6 +834,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/cyclegan.jpeg"></p>
+<p></p><figcaption>Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:55%;">
@@ -890,43 +851,28 @@
 </ul>
 </div>
 </div>
-<div class="footer">
-<p>Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></p>
-</div>
 </section>
 
 <section id="cyclegan-neural-style-transfer-5" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
 
-<img data-src="img/cycleGAN2.jpg" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></p>
-</div>
-</section>
+<img data-src="img/cycleGAN2.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></p></section>
 
 <section id="cyclegan-neural-style-transfer-6" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
 
-<img data-src="img/cycleGAN3.jpg" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></p>
-</div>
-</section>
+<img data-src="img/cycleGAN3.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></p></section>
 
 <section id="cyclegan-neural-style-transfer-7" class="title-slide slide level1 center">
 <h1>CycleGAN : Neural Style Transfer</h1>
 
-<img data-src="img/cycleGAN4.jpg" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></p>
-</div>
-</section>
+<img data-src="img/cycleGAN4.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></p></section>
 
 <section id="neural-doodle" class="title-slide slide level1 center">
 <h1>Neural Doodle</h1>
-<div data-align="center">
-<iframe width="854" height="480" src="https://www.youtube.com/embed/fu2fzx4w3mI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
-</iframe>
-</div>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/fu2fzx4w3mI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="footer">
-<p><a href="https://github.com/alexjc/neural-doodle" class="uri">https://github.com/alexjc/neural-doodle</a> <a href="https://www.youtube.com/watch?v=fu2fzx4w3mI" class="uri">https://www.youtube.com/watch?v=fu2fzx4w3mI</a></p>
+<p><a href="https://github.com/alexjc/neural-doodle" class="uri">https://github.com/alexjc/neural-doodle</a></p>
 </div>
 <div class="footer footer-default">
 
@@ -950,7 +896,6 @@
   <script src="5.3-GAN_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="5.3-GAN_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="5.3-GAN_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="5.3-GAN_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1119,27 +1064,9 @@
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

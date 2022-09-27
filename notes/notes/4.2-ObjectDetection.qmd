@@ -161,8 +161,8 @@ For all bounding boxes matching a real object, we want to minimize the **mse** b
 * $(x_i, y_i, w_i, h_i)$: the coordinates of the predicted bounding box.
 
 $$
-    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2] \\
-    \qquad\qquad\qquad\qquad + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
+    \mathcal{L}_\text{localization}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2] 
+     + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} [ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2]
 $$
 
 where $\mathbb{1}_{ij}^\text{obj}$ is 1 when the bounding box $j$ of cell $i$ "matches" with an object (IoU). The root square of the width and height of the bounding boxes is used. This allows to penalize more the errors on small boxes than on big boxes.
@@ -175,8 +175,8 @@ Finally, we need to learn the confidence score of each bounding box, by minimizi
 * $\hat{C}_i$: the IoU between the ground truth bounding box and the predicted one.
 
 $$
-    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  \\
-    \qquad\qquad\qquad\qquad + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
+    \mathcal{L}_\text{confidence}(\theta) = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{obj} (C_{ij} - \hat{C}_{ij})^2  
+     + \lambda^\text{noobj} \, \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^\text{noobj} (C_{ij} - \hat{C}_{ij})^2
 $$
 
 Two cases are considered:
@@ -239,7 +239,8 @@ Lidar point clouds can also be used for detecting objects, for example **VoxelNe
 ![VoxelNet [@Zhou2017]. Source: <https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a>](../slides/img/voxelnet-result.png){width=100%}
 
 
-```{admonition} Additional resources on object detection
+::: {.callout-tip}
+## Additional resources on object detection
 
 <https://medium.com/comet-app/review-of-deep-learning-algorithms-for-object-detection-c1f3d437b852>
 
@@ -252,4 +253,4 @@ Lidar point clouds can also be used for detecting objects, for example **VoxelNe
 <https://medium.com/@jonathan_hui/ssd-object-detection-single-shot-multibox-detector-for-real-time-processing-9bd8deac0e06>
 
 <https://towardsdatascience.com/lidar-3d-object-detection-methods-f34cf3227aea>
-```
+:::

@@ -5,11 +5,12 @@ project:
 book:
   title: "Neurocomputing"
   author: "Julien Vitay"
-  repo-url: https://github.com/vitay/course-neurocomputing
   search: true
   sidebar:
     style: docked
-    background: dark
+    type: light
+    logo: ../slides/img/tuc-new.png
+  page-footer: "Copyright 2022, Julien Vitay - <julien.vitay@informatik.tu-chemnitz.de>" 
   execute: 
     enabled: false
   chapters:
@@ -29,12 +30,12 @@ book:
       chapters:
       - notes/3.1-NeuralNetworks.qmd
       - notes/3.2-DNN.qmd
-    - part: "Convolutional neural networks"
+    - part: "Computer Vision"
       chapters:
       - notes/4.1-CNN.qmd
       - notes/4.2-ObjectDetection.qmd
       - notes/4.3-SemanticSegmentation.qmd
-    - part: "Unsupervised learning and generative modeling"
+    - part: "Generative modeling"
       chapters:
       - notes/5.1-Autoencoders.qmd
       - notes/5.2-RBM.qmd
@@ -42,7 +43,8 @@ book:
     - part: "Recurrent neural networks"
       chapters:
       - notes/6.1-RNN.qmd
-      - notes/6.2-Attention.qmd
+      - notes/6.2-NLP.qmd
+      - notes/6.3-Attention.qmd
     - part: "Self-supervised learning"
       chapters:
       - notes/7.1-Transformers.qmd
@@ -75,12 +77,13 @@ csl: frontiers.csl
 
 format:
   html:
-    theme: cosmo
+    theme: [cosmo, custom.scss]
     page-layout: full
     number-depth: 2
     number-sections: false
     toc: true
     smooth-scroll: true
+    html-math-method: katex
 
 filters:
   - center_images.lua

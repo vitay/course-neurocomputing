@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -101,12 +101,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -198,7 +198,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -223,7 +223,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -261,7 +261,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="./notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -301,7 +306,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="./notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -402,6 +407,11 @@ div.csl-indent {
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
+  <li><a href="#syllabus" id="toc-syllabus" class="nav-link" data-scroll-target="#syllabus">Syllabus</a>
+  <ul class="collapse">
+  <li><a href="#lectures" id="toc-lectures" class="nav-link" data-scroll-target="#lectures">Lectures</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul></li>
   <li><a href="#recommended-readings" id="toc-recommended-readings" class="nav-link" data-scroll-target="#recommended-readings">Recommended readings</a></li>
   </ul></li>
   </ul>
@@ -435,8 +445,95 @@ div.csl-indent {
 <section id="overview" class="level1 unnumbered">
 <h1 class="unnumbered">Overview</h1>
 <p>This website contains the materials for the module <strong>Neurocomputing</strong> taught by Dr.&nbsp;Julien Vitay at the Technische Universität Chemnitz, Faculty of Computer Science, Professorship for Artificial Intelligence.</p>
-<p>Each section/lecture is accompanied by a set of videos, the slides and a written version of the content. Some sections are optional in the sense that no questions will be asked at the exam, but those interested in becoming neural network experts should feel free to study them. The (outdated) videos are integrated in the lecture notes, but you can also access the complete playlist on <a href="https://www.youtube.com/playlist?list=PLIEjdhhAF7ULrnVFYX3Alx3Cv0Wv9ybgU">Youtube</a>.</p>
-<p>Exercises are provided in the form of Jupyter notebooks, allowing to implement in Python at your own pace the algorithms seen in the lectures and learn to use machine learning libraries such as <code>scikit-learn</code>, <code>keras</code> and <code>tensorflow</code>. A notebook to work on (locally or on Colab) and the solution are available in the <a href="./exercises/Content.html">Exercises section</a>.</p>
+<p>Each section/lecture is accompanied by a set of videos, the slides and a written version of the content. Some sections are optional in the sense that no questions will be asked at the exam, but those interested in becoming neural network experts should feel free to study them. The (slightly outdated) videos are integrated in the lecture notes, but you can also access the complete playlist on <a href="https://www.youtube.com/playlist?list=PLIEjdhhAF7ULrnVFYX3Alx3Cv0Wv9ybgU">Youtube</a>.</p>
+<p>Exercises are provided in the form of Jupyter notebooks, allowing to implement in Python at your own pace the algorithms seen in the lectures and to learn to use machine learning libraries such as <code>scikit-learn</code>, <code>keras</code> and <code>tensorflow</code>. A notebook to work on (locally or on Colab) and the solution are available in the <a href="./exercises/Content.html">Exercises section</a>.</p>
+<section id="syllabus" class="level2">
+<h2 class="anchored" data-anchor-id="syllabus">Syllabus</h2>
+<section id="lectures" class="level3">
+<h3 class="anchored" data-anchor-id="lectures">Lectures</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><strong>Introduction</strong>
+<ol type="1">
+<li><a href="./notes/1.1-Introduction.html">Introduction</a></li>
+<li><a href="./notes/1.2-Math.html">Math basics (optional)</a></li>
+<li><a href="./notes/1.3-Neurons.html">Neurons</a></li>
+</ol></li>
+<li><strong>Linear algorithms</strong>
+<ol type="1">
+<li><a href="./notes/2.1-Optimization.html">Optimization</a></li>
+<li><a href="./notes/2.2-LinearRegression.html">Linear regression</a></li>
+<li><a href="./notes/2.3-LinearClassification.html">Linear classification</a></li>
+<li><a href="./notes/2.4-LearningTheory.html">Learning theory</a></li>
+</ol></li>
+<li><strong>Neural networks</strong>
+<ol type="1">
+<li><a href="./notes/3.1-NeuralNetworks.html">Multi-layer perceptron</a></li>
+<li><a href="./notes/3.2-DNN.html">Modern neural networks</a></li>
+</ol></li>
+<li><strong>Computer Vision</strong>
+<ol type="1">
+<li><a href="./notes/4.1-CNN.html">Convolutional neural networks</a></li>
+<li><a href="./notes/4.2-ObjectDetection.html">Object detection</a></li>
+<li><a href="./notes/4.3-SemanticSegmentation.html">Semantic segmentation</a></li>
+</ol></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<ol start="5" type="1">
+<li><strong>Generative modeling</strong>
+<ol type="1">
+<li><a href="./notes/5.1-Autoencoders.html">Autoencoders</a></li>
+<li><a href="./notes/5.2-RBM.html">Restricted Boltzmann machines (optional)</a></li>
+<li><a href="./notes/5.3-GAN.html">Generative adversarial networks</a></li>
+</ol></li>
+<li><strong>Recurrent neural networks</strong>
+<ol type="1">
+<li><a href="./notes/6.1-RNN.html">Recurrent neural networks, LSTM</a></li>
+<li><a href="./notes/6.2-NLP.html">Natural Language Processing</a></li>
+<li><a href="./notes/6.3-Attention.html">Attentional neural networks</a></li>
+</ol></li>
+<li><strong>Self-supervised learning</strong>
+<ol type="1">
+<li><a href="./notes/7.1-Transformers.html">Transformers</a></li>
+<li><a href="./notes/7.2-ContrastiveLearning.html">Contrastive learning</a></li>
+</ol></li>
+<li><strong>Outlook</strong>
+<ol type="1">
+<li><a href="./notes/8.1-Limits.html">Limits of deep learning</a></li>
+<li><a href="./notes/8.2-Beyond.html">Beyond deep learning</a></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+<p>Notebooks and videos are in the <a href="./exercises/Content.html">List of Exercises</a>. Below are links to the rendered solutions.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><a href="./exercises/1-Python-solution.html">Introduction to Python</a></li>
+<li><a href="./exercises/2-Numpy-solution.html">Numpy and Matplotlib</a></li>
+<li><a href="./exercises/3-LinearRegression-solution.html">Linear Regression</a></li>
+<li><a href="./exercises/4-MLR-solution.html">Multiple linear regression</a></li>
+<li><a href="./exercises/5-Crossvalidation-solution.html">Cross-validation</a></li>
+<li><a href="./exercises/6-LinearClassification-solution.html">Linear classification</a></li>
+<li><a href="./exercises/7-SoftmaxClassifier-solution.html">Softmax classification</a></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<ol start="8" type="1">
+<li><a href="./exercises/8-MLP-solution.html">Multi-layer perceptron</a></li>
+<li><a href="./exercises/9-MNIST-solution.html">MNIST classification using keras</a></li>
+<li><a href="./exercises/10-CNN-solution.html">Convolutional neural networks</a></li>
+<li><a href="./exercises/11-TransferLearning-solution.html">Transfer learning</a></li>
+<li><a href="./exercises/12-VAE-solution.html">Variational autoencoder</a></li>
+<li><a href="./exercises/13-RNN-solution.html">Recurrent neural networks</a></li>
+</ol>
+</div>
+</div>
+</section>
+</section>
 <section id="recommended-readings" class="level2">
 <h2 class="anchored" data-anchor-id="recommended-readings">Recommended readings</h2>
 <ul>
@@ -448,13 +545,13 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Chollet2017" class="csl-entry" role="doc-biblioentry">
-Chollet, F. (2017). <em>Deep <span>Learning</span> with <span>Python</span></em>. <span>Manning publications</span>.
+Chollet, F. (2017). <em>Deep <span>Learning</span> with <span>Python</span></em>. <span>Manning publications</span> Available at: <a href="https://www.manning.com/books/deep-learning-with-python">https://www.manning.com/books/deep-learning-with-python</a> [Accessed September 10, 2020].
 </div>
 <div id="ref-Goodfellow2016" class="csl-entry" role="doc-biblioentry">
-Goodfellow, I., Bengio, Y., and Courville, A. (2016). <em>Deep <span>Learning</span></em>. <span>MIT Press</span>.
+Goodfellow, I., Bengio, Y., and Courville, A. (2016). <em>Deep <span>Learning</span></em>. <span>MIT Press</span> Available at: <a href="http://www.deeplearningbook.org">http://www.deeplearningbook.org</a>.
 </div>
 <div id="ref-Haykin2009" class="csl-entry" role="doc-biblioentry">
-Haykin, S. S. (2009). <em>Neural <span>Networks</span> and <span>Learning Machines</span>, 3rd <span>Edition</span></em>. <span>Pearson</span>.
+Haykin, S. S. (2009). <em>Neural <span>Networks</span> and <span>Learning Machines</span>, 3rd <span>Edition</span></em>. <span>Pearson</span> Available at: <a href="http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf">http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf</a> [Accessed September 10, 2020].
 </div>
 </div>
 </section>
@@ -569,6 +666,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

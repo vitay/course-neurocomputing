@@ -7,7 +7,7 @@
 <link href="5.2-RBM_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="5.2-RBM_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="5.2-RBM_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="5.2-RBM_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="5.2-RBM_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="5.2-RBM_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="5.2-RBM_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Restricted Boltzmann Machines</p>
   <p class="author">Julien Vitay</p>
@@ -344,10 +360,10 @@
 <li><p><strong>Restricted Boltzmann Machines</strong> (RBM) are generative stochastic artificial neural networks that can learn a probability distribution of their inputs.</p></li>
 <li><p>Their neurons form a bipartite graph with two groups of reciprocally connected units:</p>
 <ul>
-<li><p>the <strong>visible units</strong> <span class="math inline">\(\mathbf{v}\)</span> (the inputs)</p></li>
-<li><p>the <strong>hidden units</strong> <span class="math inline">\(\mathbf{h}\)</span> (the features or latent space).</p></li>
+<li><p>the <strong>visible units</strong> <span class="math inline">\mathbf{v}</span> (the inputs)</p></li>
+<li><p>the <strong>hidden units</strong> <span class="math inline">\mathbf{h}</span> (the features or latent space).</p></li>
 </ul></li>
-<li><p>Connections are bidirectional between <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{h}\)</span>, but the neurons inside the two groups are independent from each other (<em>restricted</em>).</p></li>
+<li><p>Connections are bidirectional between <span class="math inline">\mathbf{v}</span> and <span class="math inline">\mathbf{h}</span>, but the neurons inside the two groups are independent from each other (<em>restricted</em>).</p></li>
 <li><p>The goal of learning is to find the weights allowing the network to <strong>explain</strong> best the input data.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -356,28 +372,25 @@
 <p><img data-src="img/rbm.jpg"></p>
 </figure>
 </div>
+</div>
+</div>
 <div class="footer">
 <p>Hinton and Salakhutdinov (2006). Reducing the Dimensionality of Data with Neural Networks. Science 28, 504-507.</p>
-</div>
-</div>
 </div>
 </section>
 
 <section id="restricted-boltzmann-machines-1" class="title-slide slide level1 center">
 <h1>Restricted Boltzmann Machines</h1>
 
-<img data-src="img/rbm-autoencoder.png" class="r-stretch quarto-figure-center"><ul>
-<li><p>RBMs are a form of autoencoder where the input <span class="math inline">\(\rightarrow\)</span> feature weight matrix is the same as the feature <span class="math inline">\(\rightarrow\)</span> output matrix.</p></li>
+<img data-src="img/rbm-autoencoder.png" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://www.edureka.co/blog/restricted-boltzmann-machine-tutorial/" class="uri">https://www.edureka.co/blog/restricted-boltzmann-machine-tutorial/</a></p><ul>
+<li><p>RBMs are a form of autoencoder where the input <span class="math inline">\rightarrow</span> feature weight matrix is the same as the feature <span class="math inline">\rightarrow</span> output matrix.</p></li>
 <li><p>There are two steps:</p>
 <ul>
-<li><p>The <strong>forward pass</strong> <span class="math inline">\(P(\mathbf{h} | \mathbf{x})\)</span> propagates the visible units activation to the hidden units.</p></li>
-<li><p>The <strong>backward pass</strong> <span class="math inline">\(P(\mathbf{x} | \mathbf{h})\)</span> reconstructs the visible units from the the hidden units.</p></li>
+<li><p>The <strong>forward pass</strong> <span class="math inline">P(\mathbf{h} | \mathbf{x})</span> propagates the visible units activation to the hidden units.</p></li>
+<li><p>The <strong>backward pass</strong> <span class="math inline">P(\mathbf{x} | \mathbf{h})</span> reconstructs the visible units from the the hidden units.</p></li>
 </ul></li>
 <li><p>If the weight matrix is correctly chosen, the reconstructed input should “match” the original input: the data is explained.</p></li>
 </ul>
-<div class="footer">
-<p>Source : <a href="https://www.edureka.co/blog/restricted-boltzmann-machine-tutorial/" class="uri">https://www.edureka.co/blog/restricted-boltzmann-machine-tutorial/</a></p>
-</div>
 </section>
 
 <section id="restricted-boltzmann-machines-2" class="title-slide slide level1 center">
@@ -393,24 +406,24 @@
 <ul>
 <li>The visible and units are generally <strong>binary units</strong> (0 or 1), with a probability defined by the weights and biases and the logistic function:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(h_j = 1 | \mathbf{v}) = \sigma( \sum_i W_{ij} \, v_i + c_j)
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     P(v_i = 1 | \mathbf{h}) = \sigma(\sum_i W_{ji} \, h_j + b_i )
-\]</span></p>
+</span></p>
 <ul>
-<li>The weight matrix <span class="math inline">\(W\)</span> and the biases <span class="math inline">\(\mathbf{b}, \mathbf{c}\)</span> are the parameters <span class="math inline">\(\theta\)</span> of a <strong>probability distribution</strong> over the activation of the visible and hidden units.</li>
+<li>The weight matrix <span class="math inline">W</span> and the biases <span class="math inline">\mathbf{b}, \mathbf{c}</span> are the parameters <span class="math inline">\theta</span> of a <strong>probability distribution</strong> over the activation of the visible and hidden units.</li>
 </ul>
 </div>
 </div>
 <ul>
-<li><p>The goal is to find the parameters which explain best the data (visible units), i.e.&nbsp;the ones maximizing the <strong>log-likelihood</strong> of the model for the data <span class="math inline">\((\mathbf{v}_1, \ldots, \mathbf{v}_N)\)</span>.</p></li>
+<li><p>The goal is to find the parameters which explain best the data (visible units), i.e.&nbsp;the ones maximizing the <strong>log-likelihood</strong> of the model for the data <span class="math inline">(\mathbf{v}_1, \ldots, \mathbf{v}_N)</span>.</p></li>
 <li><p>We use <strong>maximum likelihood estimation</strong> (MLE) to maximize the log-likelihood of the model:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \max_{\theta} \,  \mathcal{L}(\theta) = \mathbb{E}_{\mathbf{v} \sim \mathcal{D}} [ \log \, P_\theta(\mathbf{v}) ]
-\]</span></p>
+</span></p>
 <div class="footer">
 <p>Hinton and Salakhutdinov (2006). Reducing the Dimensionality of Data with Neural Networks. Science 28, 504-507.</p>
 </div>
@@ -419,25 +432,24 @@
 <section id="restricted-boltzmann-machines-3" class="title-slide slide level1 center">
 <h1>Restricted Boltzmann Machines</h1>
 <ul>
-<li>In practice, MLE is not tractable in a RBM, as we cannot estimate the joint probability <span class="math inline">\(P(\mathbf{v}, \mathbf{h})\)</span> of <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{h}\)</span> (too many combinations are possible).</li>
+<li>In practice, MLE is not tractable in a RBM, as we cannot estimate the joint probability <span class="math inline">P(\mathbf{v}, \mathbf{h})</span> of <span class="math inline">\mathbf{v}</span> and <span class="math inline">\mathbf{h}</span> (too many combinations are possible).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(\mathbf{v}) = \sum_\mathbf{h} P(\mathbf{v}, \mathbf{h})
-\]</span></p>
+</span></p>
 <ul>
-<li>The main trick in <strong>energy-based models</strong> is to rewrite the probabilities using an energy function <span class="math inline">\(E(\mathbf{v}, \mathbf{h})\)</span>:</li>
+<li>The main trick in <strong>energy-based models</strong> is to rewrite the probabilities using an energy function <span class="math inline">E(\mathbf{v}, \mathbf{h})</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(\mathbf{v}) = \sum_\mathbf{h} P(\mathbf{v}, \mathbf{h}) = \dfrac{\sum_\mathbf{h} \exp^{-E(\mathbf{v}, \mathbf{h})}}{\sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})}} = \dfrac{1}{Z} \sum_\mathbf{h} \exp^{-E(\mathbf{v}, \mathbf{h})}
-\]</span></p>
+</span></p>
 <p>where:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mathbf{v}} P(\mathbf{v}) \, \sum_{\mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})}
-\]</span></p>
+</span></p>
 <p>is the <strong>partition function</strong> (a normalizing term).</p>
 <ul>
-<li><p>The probabilities come from a <strong>Gibbs distribution</strong> (or Boltzmann distribution) parameterized by the energy of the system.</p></li>
-<li><p>This is equivalent to a simple <strong>softmax</strong> over the energy…</p></li>
+<li>The probabilities come from a <strong>Gibbs distribution</strong> (or Boltzmann distribution) parameterized by the energy of the system. This is equivalent to a simple <strong>softmax</strong> over the energy…</li>
 </ul>
 <div class="footer">
 <p>Hinton and Salakhutdinov (2006). Reducing the Dimensionality of Data with Neural Networks. Science 28, 504-507.</p>
@@ -449,24 +461,24 @@ Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mat
 <ul>
 <li>Having reformulated the probabilities in terms of energy:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(\mathbf{v}) = \frac{1}{Z} \sum_\mathbf{h} \exp^{-E(\mathbf{v}, \mathbf{h})}
-\]</span></p>
-<p>we can introduce the <strong>free energy</strong> of the model for a sample <span class="math inline">\(\mathbf{v}\)</span> (how surprising is the input <span class="math inline">\(\mathbf{v}\)</span> for the model):</p>
-<p><span class="math display">\[
+</span></p>
+<p>we can introduce the <strong>free energy</strong> of the model for a sample <span class="math inline">\mathbf{v}</span> (how surprising is the input <span class="math inline">\mathbf{v}</span> for the model):</p>
+<p><span class="math display">
     \mathcal{F}(\mathbf{v}) = - \log \, \sum_\mathbf{h} \exp^{-E(\mathbf{v}, \mathbf{h})}
-\]</span></p>
+</span></p>
 <ul>
-<li>The log-likelihood of the model for a sample <span class="math inline">\(\mathbf{v}\)</span> of the training data <span class="math inline">\((\mathbf{v}_1, \ldots, \mathbf{v}_N)\)</span> becomes:</li>
+<li>The log-likelihood of the model for a sample <span class="math inline">\mathbf{v}</span> of the training data <span class="math inline">(\mathbf{v}_1, \ldots, \mathbf{v}_N)</span> becomes:</li>
 </ul>
-<p><span class="math display">\[\log \, P(\mathbf{v}) = \log \, \frac{1}{Z} \sum_\mathbf{h} \exp^{-E(\mathbf{v}, \mathbf{h})} = - \mathcal{F}(\mathbf{v}) + \log Z = - \mathcal{F}(\mathbf{v}) + \sum_{\mathbf{v}} P(\mathbf{v}) \, \mathcal{F}(\mathbf{v})\]</span></p>
+<p><span class="math display">\log \, P(\mathbf{v}) = \log \, \frac{1}{Z} \sum_\mathbf{h} \exp^{-E(\mathbf{v}, \mathbf{h})} = - \mathcal{F}(\mathbf{v}) + \log Z = - \mathcal{F}(\mathbf{v}) + \sum_{\mathbf{v}} P(\mathbf{v}) \, \mathcal{F}(\mathbf{v})</span></p>
 <ul>
-<li><p>Note that the second term sums over all possible inputs <span class="math inline">\(\mathbf{v}\)</span>.</p></li>
+<li><p>Note that the second term sums over all possible inputs <span class="math inline">\mathbf{v}</span>.</p></li>
 <li><p>Maximizing the log-likelihood of the model on the training data can be done using gradient ascent by following this gradient:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_\theta \mathcal{L}(\theta) = \mathbb{E}_{\mathbf{v}} [\nabla_\theta \log \, P(\mathbf{v}_i)] = \mathbb{E}_{\mathbf{v}} [ - \nabla_\theta \mathcal{F}(\mathbf{v}) + \sum_{\mathbf{v}} P(\mathbf{v}) \nabla_\theta  \mathcal{F}(\mathbf{v})]
-\]</span></p>
+</span></p>
 </section>
 
 <section id="restricted-boltzmann-machines-5" class="title-slide slide level1 center">
@@ -474,21 +486,21 @@ Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mat
 <ul>
 <li>The free energy for a RBM with binary neurons is fortunately known analytically:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{F}(\mathbf{v}) = - \sum_i b_i \, v_i - \sum_j \log (1 + \exp^{\sum_i W_{ij} \, v_i + c_j})
-\]</span></p>
-<p>so finding the gradient w.r.t <span class="math inline">\(\theta = (W, \mathbf{b}, \mathbf{c})\)</span> of the first term on the r.h.s (the free energy of the sample) is easy:</p>
-<p><span class="math display">\[
+</span></p>
+<p>so finding the gradient w.r.t <span class="math inline">\theta = (W, \mathbf{b}, \mathbf{c})</span> of the first term on the r.h.s (the free energy of the sample) is easy:</p>
+<p><span class="math display">
     \nabla_\theta \log \, P(\mathbf{v}) = - \nabla_\theta \mathcal{F}(\mathbf{v}) + \sum_{\mathbf{v}} P(\mathbf{v}) \nabla_\theta  \mathcal{F}(\mathbf{v})
-\]</span></p>
+</span></p>
 <ul>
-<li>In particular, the gradient w.r.t the matrix <span class="math inline">\(W\)</span> is the outer product between <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(P(\mathbf{h} | \mathbf{v})\)</span>:</li>
+<li>In particular, the gradient w.r.t the matrix <span class="math inline">W</span> is the outer product between <span class="math inline">\mathbf{v}</span> and <span class="math inline">P(\mathbf{h} | \mathbf{v})</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_W \mathcal{F}(\mathbf{v}) = - \mathbf{v} \times P(\mathbf{h} | \mathbf{v})
-\]</span></p>
+</span></p>
 <ul>
-<li><p>The problem is the second term: we would need to integrate over all possible values of the inputs <span class="math inline">\(\mathbf{v}\)</span>, what is not tractable.</p></li>
+<li><p>The problem is the second term: we would need to integrate over all possible values of the inputs <span class="math inline">\mathbf{v}</span>, what is not tractable.</p></li>
 <li><p>We will therefore make an approximation using <strong>Gibbs sampling</strong> (a variant of <strong>Monte-Carlo Markov Chain</strong> sampling - MCMC) to estimate that second term.</p></li>
 </ul>
 </section>
@@ -496,38 +508,35 @@ Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mat
 <section id="gibbs-sampling" class="title-slide slide level1 center">
 <h1>Gibbs sampling</h1>
 
-<img data-src="img/gibbssampling.png" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
-<li><p>Gibbs sampling consists of repeatedly applying the encoder <span class="math inline">\(P(\mathbf{h} | \mathbf{v})\)</span> and the decoder <span class="math inline">\(P(\mathbf{v} | \mathbf{h})\)</span> on the input.</p>
+<img data-src="img/gibbssampling.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://towardsdatascience.com/deep-learning-meets-physics-restricted-boltzmann-machines-part-i-6df5c4918c15" class="uri">https://towardsdatascience.com/deep-learning-meets-physics-restricted-boltzmann-machines-part-i-6df5c4918c15</a></p><ul>
+<li><p>Gibbs sampling consists of repeatedly applying the encoder <span class="math inline">P(\mathbf{h} | \mathbf{v})</span> and the decoder <span class="math inline">P(\mathbf{v} | \mathbf{h})</span> on the input.</p>
 <ul>
-<li><p>We start by setting <span class="math inline">\(\mathbf{v}_0 = \mathbf{v}\)</span> using a training sample.</p></li>
-<li><p>We obtain <span class="math inline">\(\mathbf{h}_0\)</span> by computing <span class="math inline">\(P(\mathbf{h} | \mathbf{v}_0)\)</span> and sampling it.</p></li>
-<li><p>We obtain <span class="math inline">\(\mathbf{v}_1\)</span> by computing <span class="math inline">\(P(\mathbf{v} | \mathbf{h}_0)\)</span> and sampling it.</p></li>
+<li><p>We start by setting <span class="math inline">\mathbf{v}_0 = \mathbf{v}</span> using a training sample.</p></li>
+<li><p>We obtain <span class="math inline">\mathbf{h}_0</span> by computing <span class="math inline">P(\mathbf{h} | \mathbf{v}_0)</span> and sampling it.</p></li>
+<li><p>We obtain <span class="math inline">\mathbf{v}_1</span> by computing <span class="math inline">P(\mathbf{v} | \mathbf{h}_0)</span> and sampling it.</p></li>
 <li><p>…</p></li>
-<li><p>We obtain <span class="math inline">\(\mathbf{v}_k\)</span> by computing <span class="math inline">\(P(\mathbf{v} | \mathbf{h}_{k-1})\)</span> and sampling it.</p></li>
+<li><p>We obtain <span class="math inline">\mathbf{v}_k</span> by computing <span class="math inline">P(\mathbf{v} | \mathbf{h}_{k-1})</span> and sampling it.</p></li>
 </ul></li>
-<li><p>After enough iterations <span class="math inline">\(k\)</span>, we should have a good estimate of <span class="math inline">\(P(\mathbf{v}, \mathbf{h})\)</span>.</p></li>
-<li><p>The <span class="math inline">\(k\)</span> iterations have generated enough <strong>reconstructions</strong> of <span class="math inline">\(\mathbf{v}\)</span> to cover the distribution of <span class="math inline">\(\mathbf{v}\)</span>.</p></li>
+<li><p>After enough iterations <span class="math inline">k</span>, we should have a good estimate of <span class="math inline">P(\mathbf{v}, \mathbf{h})</span>.</p></li>
+<li><p>The <span class="math inline">k</span> iterations have generated enough <strong>reconstructions</strong> of <span class="math inline">\mathbf{v}</span> to cover the distribution of <span class="math inline">\mathbf{v}</span>.</p></li>
 </ul>
-<div class="footer">
-<p>Source : <a href="https://towardsdatascience.com/deep-learning-meets-physics-restricted-boltzmann-machines-part-i-6df5c4918c15" class="uri">https://towardsdatascience.com/deep-learning-meets-physics-restricted-boltzmann-machines-part-i-6df5c4918c15</a></p>
-</div>
 </section>
 
 <section id="contrastive-divergence" class="title-slide slide level1 center">
 <h1>Contrastive divergence</h1>
 <ul>
-<li><p>We set <span class="math inline">\(\mathbf{v}_0 = \mathbf{v}\)</span> on a training sample and let Gibbs sampling iterate for <span class="math inline">\(k\)</span> iterations until we obtain <span class="math inline">\(\mathbf{v}_k = \mathbf{v}^*\)</span>.</p></li>
-<li><p><strong>Contrastive divergence</strong> (CD-<span class="math inline">\(k\)</span>) shows that the gradient of the log-likelihood can be approximated by:</p></li>
+<li><p>We set <span class="math inline">\mathbf{v}_0 = \mathbf{v}</span> on a training sample and let Gibbs sampling iterate for <span class="math inline">k</span> iterations until we obtain <span class="math inline">\mathbf{v}_k = \mathbf{v}^*</span>.</p></li>
+<li><p><strong>Contrastive divergence</strong> (CD-<span class="math inline">k</span>) shows that the gradient of the log-likelihood can be approximated by:</p></li>
 </ul>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\begin{align}
 \nabla_W \log \, P(\mathbf{v}) &amp; = - \nabla_W \mathcal{F}(\mathbf{v}) + \sum_{\mathbf{v}} P(\mathbf{v}) \nabla_W  \mathcal{F}(\mathbf{v}) \\
     &amp; \approx \mathbf{v} \times P(\mathbf{h} | \mathbf{v}) - \mathbf{v}^* \times P(\mathbf{h} | \mathbf{v}^*) \\
-\end{align}\]</span></p>
+\end{align}</span></p>
 <ul>
-<li><p>The gradient of the log-likelihood is the difference between the initial explanation of <span class="math inline">\(\mathbf{v}\)</span> by the model, and its explanation after <span class="math inline">\(k\)</span> iterations (relaxation).</p></li>
-<li><p>If the model is good, the reconstruction <span class="math inline">\(\mathbf{v}^*\)</span> is the same as the input <span class="math inline">\(\mathbf{v}\)</span>, so the gradient is zero.</p></li>
-<li><p>An input <span class="math inline">\(\mathbf{v}\)</span> is likely under the RBM model if it is able to reconstruct it, i.e.&nbsp;when it is not surprising (the free energy is low).</p></li>
-<li><p>In practice, <span class="math inline">\(k=1\)</span> gives surprisingly good results, but RBMs are very painful to train (hyperparameters)…</p></li>
+<li><p>The gradient of the log-likelihood is the difference between the initial explanation of <span class="math inline">\mathbf{v}</span> by the model, and its explanation after <span class="math inline">k</span> iterations (relaxation).</p></li>
+<li><p>If the model is good, the reconstruction <span class="math inline">\mathbf{v}^*</span> is the same as the input <span class="math inline">\mathbf{v}</span>, so the gradient is zero.</p></li>
+<li><p>An input <span class="math inline">\mathbf{v}</span> is likely under the RBM model if it is able to reconstruct it, i.e.&nbsp;when it is not surprising (the free energy is low).</p></li>
+<li><p>In practice, <span class="math inline">k=1</span> gives surprisingly good results, but RBMs are very painful to train (hyperparameters)…</p></li>
 </ul>
 <div class="footer">
 <p>Hinton GE, Osindero S, Teh YW (2006). “A fast learning algorithm for deep belief nets”. Neural Computation. 18 (7): 1527–54. doi:10.1162/neco.2006.18.7.1527.</p>
@@ -540,8 +549,14 @@ Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mat
 <li><p>A <strong>Deep Belief Network</strong> (DBM) is a simple stack of RBMS, trained using greedy layer-wise learning.</p></li>
 <li><p>The “bottom” parts of the DBM become unidirectional when learning the top part.</p></li>
 </ul>
-
-<img data-src="img/deep_belief_network_example.png" class="r-stretch quarto-figure-center"><div class="footer">
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/deep_belief_network_example.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="footer">
 <p>Hinton GE, Osindero S, Teh YW (2006). “A fast learning algorithm for deep belief nets”. Neural Computation. 18 (7): 1527–54. doi:10.1162/neco.2006.18.7.1527.</p>
 </div>
 </section>
@@ -616,7 +631,6 @@ Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mat
   <script src="5.2-RBM_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="5.2-RBM_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="5.2-RBM_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="5.2-RBM_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -785,27 +799,9 @@ Z = \sum_{\mathbf{v}, \mathbf{h}} \exp^{-E(\mathbf{v}, \mathbf{h})} = \sum_{\mat
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

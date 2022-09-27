@@ -2,10 +2,84 @@
 
 This website contains the materials for the module **Neurocomputing** taught by Dr. Julien Vitay at the Technische Universität Chemnitz, Faculty of Computer Science, Professorship for Artificial Intelligence. 
 
-Each section/lecture is accompanied by a set of videos, the slides and a written version of the content. Some sections are optional in the sense that no questions will be asked at the exam, but those interested in becoming neural network experts should feel free to study them. The (outdated) videos are integrated in the lecture notes, but you can also access the complete playlist on [Youtube](https://www.youtube.com/playlist?list=PLIEjdhhAF7ULrnVFYX3Alx3Cv0Wv9ybgU).
+Each section/lecture is accompanied by a set of videos, the slides and a written version of the content. Some sections are optional in the sense that no questions will be asked at the exam, but those interested in becoming neural network experts should feel free to study them. The (slightly outdated) videos are integrated in the lecture notes, but you can also access the complete playlist on [Youtube](https://www.youtube.com/playlist?list=PLIEjdhhAF7ULrnVFYX3Alx3Cv0Wv9ybgU).
 
-Exercises are provided in the form of Jupyter notebooks, allowing to implement in Python at your own pace the algorithms seen in the lectures and learn to use machine learning libraries such as `scikit-learn`, `keras` and `tensorflow`. A notebook to work on (locally or on Colab) and the solution are available in the [Exercises section](exercises/Content.qmd). 
+Exercises are provided in the form of Jupyter notebooks, allowing to implement in Python at your own pace the algorithms seen in the lectures and to learn to use machine learning libraries such as `scikit-learn`, `keras` and `tensorflow`. A notebook to work on (locally or on Colab) and the solution are available in the [Exercises section](exercises/Content.qmd). 
 
+
+## Syllabus
+
+### Lectures
+
+::: {.columns}
+::: {.column width=50%}
+
+1. **Introduction**
+    1. [Introduction](notes/1.1-Introduction.qmd)
+    2. [Math basics (optional)](notes/1.2-Math.qmd)
+    3. [Neurons](notes/1.3-Neurons.qmd)
+2. **Linear algorithms**
+    1. [Optimization](notes/2.1-Optimization.qmd)
+    2. [Linear regression](notes/2.2-LinearRegression.qmd)
+    3. [Linear classification](notes/2.3-LinearClassification.qmd)
+    4. [Learning theory](notes/2.4-LearningTheory.qmd)
+3. **Neural networks**
+    1. [Multi-layer perceptron](notes/3.1-NeuralNetworks.qmd)
+    2. [Modern neural networks](notes/3.2-DNN.qmd)
+4. **Computer Vision**
+    1. [Convolutional neural networks](notes/4.1-CNN.qmd)
+    2. [Object detection](notes/4.2-ObjectDetection.qmd)
+    3. [Semantic segmentation](notes/4.3-SemanticSegmentation.qmd)
+
+
+:::
+::: {.column width=50%}
+
+5. **Generative modeling**
+    1. [Autoencoders](notes/5.1-Autoencoders.qmd)
+    2. [Restricted Boltzmann machines (optional)](notes/5.2-RBM.qmd)
+    3. [Generative adversarial networks](notes/5.3-GAN.qmd)
+6. **Recurrent neural networks**
+    1. [Recurrent neural networks, LSTM](notes/6.1-RNN.qmd)
+    2. [Natural Language Processing](notes/6.2-NLP.qmd)
+    3. [Attentional neural networks](notes/6.3-Attention.qmd)
+7. **Self-supervised learning**
+    1. [Transformers](notes/7.1-Transformers.qmd)
+    2. [Contrastive learning](notes/7.2-ContrastiveLearning.qmd)
+8. **Outlook**
+    1. [Limits of deep learning](notes/8.1-Limits.qmd)
+    2. [Beyond deep learning](notes/8.2-Beyond.qmd)
+
+:::
+:::
+
+### Exercises
+
+Notebooks and videos are in the [List of Exercises](exercises/Content.qmd). Below are links to the rendered solutions.
+
+::: {.columns}
+::: {.column width=50%}
+
+1. [Introduction to Python](exercises/1-Python-solution.ipynb)
+2. [Numpy and Matplotlib](exercises/2-Numpy-solution.ipynb)
+3. [Linear Regression](exercises/3-LinearRegression-solution.ipynb)
+4. [Multiple linear regression](exercises/4-MLR-solution.ipynb)
+5. [Cross-validation](exercises/5-Crossvalidation-solution.ipynb)
+6. [Linear classification](exercises/6-LinearClassification-solution.ipynb)
+7. [Softmax classification](exercises/7-SoftmaxClassifier-solution.ipynb)
+
+:::
+::: {.column width=50%}
+
+8. [Multi-layer perceptron](exercises/8-MLP-solution.ipynb)
+9. [MNIST classification using keras](exercises/9-MNIST-solution.ipynb)
+10. [Convolutional neural networks](exercises/10-CNN-solution.ipynb)
+11. [Transfer learning](exercises/11-TransferLearning-solution.ipynb)
+12. [Variational autoencoder](exercises/12-VAE-solution.ipynb)
+13. [Recurrent neural networks](exercises/13-RNN-solution.ipynb)
+
+:::
+:::
 
 ## Recommended readings
 

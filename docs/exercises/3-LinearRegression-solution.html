@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 25&nbsp; Linear regression</title>
+<title>Neurocomputing - 26&nbsp; Linear regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,7 +125,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -146,12 +161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -243,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -268,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -306,7 +321,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -346,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -486,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_regression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can now generate the data. We start with the simplest case where the inputs have only one dimension. We will generate 100 samples<span class="math inline">\((x_i, t_i)\)</span> linked by a linear relationship and some noise.</p>
+<p>We can now generate the data. We start with the simplest case where the inputs have only one dimension. We will generate 100 samples<span class="math inline">(x_i, t_i)</span> linked by a linear relationship and some noise.</p>
 <p>The following code generates the data:</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
@@ -518,21 +538,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now is the time to implement the LMS algorithm with numpy.</p>
 <p>Remember the LMS algorithm from the course:</p>
 <ul>
-<li><p><span class="math inline">\(w=0 \quad;\quad b=0\)</span></p></li>
+<li><p><span class="math inline">w=0 \quad;\quad b=0</span></p></li>
 <li><p><strong>for</strong> M epochs:</p>
 <ul>
-<li><p><span class="math inline">\(dw=0 \quad;\quad db=0\)</span></p></li>
-<li><p><strong>for</strong> each sample <span class="math inline">\((x_i, t_i)\)</span>:</p>
+<li><p><span class="math inline">dw=0 \quad;\quad db=0</span></p></li>
+<li><p><strong>for</strong> each sample <span class="math inline">(x_i, t_i)</span>:</p>
 <ul>
-<li><p><span class="math inline">\(y_i = w \, x_i + b\)</span></p></li>
-<li><p><span class="math inline">\(dw = dw + (t_i - y_i) \, x_i\)</span></p></li>
-<li><p><span class="math inline">\(db = db + (t_i - y_i)\)</span></p></li>
+<li><p><span class="math inline">y_i = w \, x_i + b</span></p></li>
+<li><p><span class="math inline">dw = dw + (t_i - y_i) \, x_i</span></p></li>
+<li><p><span class="math inline">db = db + (t_i - y_i)</span></p></li>
 </ul></li>
-<li><p><span class="math inline">\(\Delta w = \eta \, \frac{1}{N} dw\)</span></p></li>
-<li><p><span class="math inline">\(\Delta b = \eta \, \frac{1}{N} db\)</span></p></li>
+<li><p><span class="math inline">\Delta w = \eta \, \frac{1}{N} dw</span></p></li>
+<li><p><span class="math inline">\Delta b = \eta \, \frac{1}{N} db</span></p></li>
 </ul></li>
 </ul>
-<p>Our linear model <span class="math inline">\(y = w \, x + b\)</span> predicts outputs for an input <span class="math inline">\(x\)</span>. The error <span class="math inline">\(t-y\)</span> between the prediction and the data is used to adapt the weight <span class="math inline">\(w\)</span> and the bias <span class="math inline">\(b\)</span> at the end of each epoch.</p>
+<p>Our linear model <span class="math inline">y = w \, x + b</span> predicts outputs for an input <span class="math inline">x</span>. The error <span class="math inline">t-y</span> between the prediction and the data is used to adapt the weight <span class="math inline">w</span> and the bias <span class="math inline">b</span> at the end of each epoch.</p>
 <p><strong>Q:</strong> Implement the LMS algorithm and apply it to the generated data. The Python code that you will write is almost a line-by-line translation of the pseudo-code above. You will use a learning rate <code>eta = 0.1</code> at first, but you will vary this value later. Start by running a single epoch, as it will be easier to debug it, and then increase the number of epochs to 100. Print the value of the weight and bias at the end.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> <span class="dv">0</span></span>
@@ -582,8 +602,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Another option is to predict a value for all inputs and plot this vector <span class="math inline">\(y\)</span> against the desired values <span class="math inline">\(t\)</span>.</p>
-<p><strong>Q:</strong> Make a scatter plot where <span class="math inline">\(t\)</span> is the x-axis and <span class="math inline">\(y = w\, x + b\)</span> is the y-axis. How should the points be arranged in the ideal case? Also plot what this ideal relationship should be.</p>
+<p>Another option is to predict a value for all inputs and plot this vector <span class="math inline">y</span> against the desired values <span class="math inline">t</span>.</p>
+<p><strong>Q:</strong> Make a scatter plot where <span class="math inline">t</span> is the x-axis and <span class="math inline">y = w\, x + b</span> is the y-axis. How should the points be arranged in the ideal case? Also plot what this ideal relationship should be.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> w <span class="op">*</span> X <span class="op">+</span> b</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -605,9 +625,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>A:</strong> the points <span class="math inline">\((t, y)\)</span> should be on a line with slope 1 and intercept 0 (i.e.&nbsp;t=y).</p>
+<p><strong>A:</strong> the points <span class="math inline">(t, y)</span> should be on a line with slope 1 and intercept 0 (i.e.&nbsp;t=y).</p>
 <p>A much better method to analyse the result of the learning algorithm is to track the <strong>mean squared error</strong> (mse) after each epoch, i.e.&nbsp;the loss function which we actually want to minimize. The MSE is defined as:</p>
-<p><span class="math display">\[\text{mse} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2\]</span></p>
+<p><span class="math display">\text{mse} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2</span></p>
 <p><strong>Q:</strong> Modify your LMS algorithm (either directly or copy it in the next cell) to track the mse after each epoch. After each epoch, append the mse on the training set to a list (initially empty) and plot it at the end. How does the mse evolve? Which value does it get in the end? Why? How many epochs do you actually need?</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> <span class="dv">0</span></span>
@@ -658,7 +678,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>A:</strong> the mse decreases exponentially with the epochs. It never reaches 0 because of the noise in the data (try setting the <code>noise</code> argument in the data generator to 0 and check that the mse reaches 0). 30 or 40 epochs seem sufficient to solve the problem, nothing happens afterwards.</p>
 <p>Let’s now study the influence of the learning rate <code>eta=0.1</code> seemed to work, but is it the best value?</p>
 <p><strong>Q:</strong> Iterate over multiple values of <code>eta</code> using a logarithmic scale and plot the final mse after 100 epochs as a function of the learning rate. Conclude.</p>
-<p><em>Hint:</em> the logarithmic scale means that you will try values such as <span class="math inline">\(10^{-5}\)</span>, <span class="math inline">\(10^{-4}\)</span>, <span class="math inline">\(10^{-3}\)</span>, etc. until 1.0. In Python, you can either write explictly 0.0001 or use the notation <code>1e-4</code>. For the plot, use <code>np.log10(eta)</code> to only display the exponent on the X-axis.</p>
+<p><em>Hint:</em> the logarithmic scale means that you will try values such as <span class="math inline">10^{-5}</span>, <span class="math inline">10^{-4}</span>, <span class="math inline">10^{-3}</span>, etc. until 1.0. In Python, you can either write explictly 0.0001 or use the notation <code>1e-4</code>. For the plot, use <code>np.log10(eta)</code> to only display the exponent on the X-axis.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>losses <span class="op">=</span> []</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -720,9 +740,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You create the object with:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> LinearRegression()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>reg</code> is now an object with different methods (<code>fit()</code>, <code>predict()</code>) that accept any kind of data and performs linear regression.</p>
-<p>To train the model on the data <span class="math inline">\((X, t)\)</span>, simply use:</p>
+<p>To train the model on the data <span class="math inline">(X, t)</span>, simply use:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reg.fit(X, t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The parameters of the model are obtained with <code>reg.coef_</code> for <span class="math inline">\(w\)</span> and <code>reg.intercept_</code> for <span class="math inline">\(b\)</span>.</p>
+<p>The parameters of the model are obtained with <code>reg.coef_</code> for <span class="math inline">w</span> and <code>reg.intercept_</code> for <span class="math inline">b</span>.</p>
 <p>You can predict outputs for new inputs using:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> reg.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Q:</strong> Apply linear regression on the data using <code>scikit-learn</code>. Check the model parameters after learning and compare them to what you obtained previously. Print the mse and make a plot comparing the predictions with the data.</p>
@@ -767,14 +787,14 @@ mse: 205.75341537754272</code></pre>
 <h2 class="anchored" data-anchor-id="delta-learning-rule">Delta learning rule</h2>
 <p>Let’s now implement the online version of LMS, the <strong>delta learning rule</strong>. The only difference is that the parameter updates are applied immediately after each example is evaluated, not at the end of training.</p>
 <ul>
-<li><p><span class="math inline">\(w=0 \quad;\quad b=0\)</span></p></li>
+<li><p><span class="math inline">w=0 \quad;\quad b=0</span></p></li>
 <li><p><strong>for</strong> M epochs:</p>
 <ul>
-<li><p><strong>for</strong> each sample <span class="math inline">\((x_i, t_i)\)</span>:</p>
+<li><p><strong>for</strong> each sample <span class="math inline">(x_i, t_i)</span>:</p>
 <ul>
-<li><p><span class="math inline">\(y_i = w \, x_i + b\)</span></p></li>
-<li><p><span class="math inline">\(\Delta w = \eta \, (t_i - y_i ) \, x_i\)</span></p></li>
-<li><p><span class="math inline">\(\Delta b = \eta \, (t_i - y_i)\)</span></p></li>
+<li><p><span class="math inline">y_i = w \, x_i + b</span></p></li>
+<li><p><span class="math inline">\Delta w = \eta \, (t_i - y_i ) \, x_i</span></p></li>
+<li><p><span class="math inline">\Delta b = \eta \, (t_i - y_i)</span></p></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1048,6 +1068,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

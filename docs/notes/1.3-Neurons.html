@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -102,12 +117,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -199,7 +214,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -224,7 +239,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,7 +277,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +322,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -478,14 +498,14 @@ div.csl-indent {
 <section id="hodgkin-huxley-neurons" class="level2">
 <h2 class="anchored" data-anchor-id="hodgkin-huxley-neurons">Hodgkin-Huxley neurons</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WAfOUZW4rq8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential <span class="math inline">\(V\)</span> of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a <strong>capacitance</strong> <span class="math inline">\(C\)</span> that models the dynamics of the membrane (time constant). The <strong>conductance</strong> <span class="math inline">\(g_L\)</span> allows the membrane potential to relax back to its resting potential <span class="math inline">\(E_L\)</span> in the absence of external currents. External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential.</p>
+<p>Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential <span class="math inline">V</span> of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a <strong>capacitance</strong> <span class="math inline">C</span> that models the dynamics of the membrane (time constant). The <strong>conductance</strong> <span class="math inline">g_L</span> allows the membrane potential to relax back to its resting potential <span class="math inline">E_L</span> in the absence of external currents. External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential.</p>
 <p>Their neuron model include:</p>
 <ul>
-<li><p>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">\(v\)</span>.</p></li>
-<li><p>Three ODEs for <span class="math inline">\(n\)</span>, <span class="math inline">\(m\)</span> and <span class="math inline">\(h\)</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</p></li>
+<li><p>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">v</span>.</p></li>
+<li><p>Three ODEs for <span class="math inline">n</span>, <span class="math inline">m</span> and <span class="math inline">h</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</p></li>
 <li><p>Several parameters determined experimentally.</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     a_n &amp;= 0.01 \, (v + 60) / (1.0 - \exp(-0.1\, (v + 60) ) ) \\
     a_m &amp;= 0.1 \, (v + 45) / (1.0 - \exp (- 0.1 \, ( v + 45 ))) \\
@@ -498,13 +518,13 @@ div.csl-indent {
     \frac{dm}{dt} &amp;= a_m \, (1 - m) - b_m \, m  \\
     \frac{dh}{dt} &amp;= a_h \, (1 - h) - b_h \, h  \\
 \end{aligned}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 \begin{aligned}
     C \, \frac{dv}{dt} = g_L \, (V_L - v) &amp;+ g_K \, n^4 \, (V_K - v) \\
         &amp; + g_\text{Na} \, m^3 \, h \, (V_\text{Na} - v) + I \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <p>These equations allow to describe very precisely how an action potential is created from external currents.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -517,12 +537,12 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="spiking-neurons">Spiking neurons</h2>
 <p>As action potentials are stereotypical, it is a waste of computational resources to model their generation precisely. What actually matters are the <strong>sub-threshold dynamics</strong>, i.e.&nbsp;what happens before the spike is emitted.</p>
 <p>The <strong>leaky integrate-and-fire</strong> (LIF; Lapicque, 1907) neuron integrates its input current and emits a spike if the membrane potential exceeds a threshold.</p>
-<p><span class="math display">\[
+<p><span class="math display">
     C \, \frac{dv}{dt} = - g_L \, (v - V_L) + I
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \text{if} \; v &gt; V_T \; \text{emit a spike and reset.}
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/LIF-data.png" class="img-fluid figure-img" style="width:70.0%"></p>
@@ -531,24 +551,24 @@ div.csl-indent {
 </div>
 <p>Other well-known spiking neuron models include:</p>
 <ul>
-<li>Izhikevich quadratic IF <span class="citation" data-cites="Izhikevich2003">(<a href="../references.html#ref-Izhikevich2003" role="doc-biblioref">Izhikevich, 2003</a>)</span>, using a quadratic function of the membrane potential and an adaptation variable <span class="math inline">\(u\)</span>.</li>
+<li>Izhikevich quadratic IF <span class="citation" data-cites="Izhikevich2003">(<a href="../references.html#ref-Izhikevich2003" role="doc-biblioref">Izhikevich, 2003</a>)</span>, using a quadratic function of the membrane potential and an adaptation variable <span class="math inline">u</span>.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{dv}{dt} = 0.04 \, v^2 + 5 \, v + 140 - u + I
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \frac{du}{dt} = a \, (b \, v - u)
-\]</span></p>
+</span></p>
 <ul>
 <li>Adaptive exponential IF (AdEx, <span class="citation" data-cites="Brette2005">(<a href="../references.html#ref-Brette2005" role="doc-biblioref">Brette and Gerstner, 2005</a>)</span>), using an exponential function.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     C \, \frac{dv}{dt} = -g_L \ (v - E_L) + &amp; g_L \, \Delta_T \, \exp(\frac{v - v_T}{\Delta_T}) \\
                                             &amp; + I - w
 \end{aligned}
-\]</span> <span class="math display">\[
+</span> <span class="math display">
     \tau_w \, \frac{dw}{dt} = a \, (v - E_L) - w
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/LIF-Izhi-AdEx.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -575,24 +595,24 @@ div.csl-indent {
 </div>
 <p>A rate-coded neuron is represented by two time-dependent variables:</p>
 <ul>
-<li>The <strong>“membrane potential”</strong> <span class="math inline">\(v(t)\)</span> which evolves over time using an ODE.</li>
+<li>The <strong>“membrane potential”</strong> <span class="math inline">v(t)</span> which evolves over time using an ODE.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \tau \, \frac{d v(t)}{dt} + v(t) = \sum_{i=1}^d w_{i, j} \, r_i(t) + b
-\]</span></p>
+</span></p>
 <ul>
-<li>The <strong>firing rate</strong> <span class="math inline">\(r(t)\)</span> which transforms the membrane potential into a single continuous value using a <strong>transfer function</strong> or <strong>activation function</strong>.</li>
+<li>The <strong>firing rate</strong> <span class="math inline">r(t)</span> which transforms the membrane potential into a single continuous value using a <strong>transfer function</strong> or <strong>activation function</strong>.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     r(t) = f(v(t))
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-neuron.svg" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Rate-coded neuron.</figcaption><p></p>
 </figure>
 </div>
-<p>The membrane potential uses a weighted sum of inputs (the firing rates <span class="math inline">\(r_i(t)\)</span> of other neurons) by multiplying each rate with a <strong>weight</strong> <span class="math inline">\(w_i\)</span> and adds a constant value <span class="math inline">\(b\)</span> (the <strong>bias</strong>). The activation function can be any non-linear function, usually making sure that the firing rate is positive.</p>
+<p>The membrane potential uses a weighted sum of inputs (the firing rates <span class="math inline">r_i(t)</span> of other neurons) by multiplying each rate with a <strong>weight</strong> <span class="math inline">w_i</span> and adds a constant value <span class="math inline">b</span> (the <strong>bias</strong>). The activation function can be any non-linear function, usually making sure that the firing rate is positive.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple.png" class="img-fluid figure-img" style="width:70.0%"></p>
@@ -600,25 +620,25 @@ div.csl-indent {
 </figure>
 </div>
 <p><strong>Remarks on ODEs</strong></p>
-<p>Let’s consider a simple rate-coded neuron taking a step signal <span class="math inline">\(I(t)\)</span> as input:</p>
-<p><span class="math display">\[
+<p>Let’s consider a simple rate-coded neuron taking a step signal <span class="math inline">I(t)</span> as input:</p>
+<p><span class="math display">
     \tau \, \frac{d v(t)}{dt} + v(t) = I(t)
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     r(t) = (v(t))^+
-\]</span></p>
-<p>The “speed” of <span class="math inline">\(v(t)\)</span> is given by its temporal derivative:</p>
-<p><span class="math display">\[
+</span></p>
+<p>The “speed” of <span class="math inline">v(t)</span> is given by its temporal derivative:</p>
+<p><span class="math display">
     \frac{d v(t)}{dt} = \frac{I(t) - v(t)}{\tau}
-\]</span></p>
-<p>When <span class="math inline">\(v(t)\)</span> is quite different from <span class="math inline">\(I(t)\)</span>, the membrane potential “accelerates” to reduce the difference. When <span class="math inline">\(v(t)\)</span> is similar to <span class="math inline">\(I(t)\)</span>, the membrane potential stays constant.</p>
+</span></p>
+<p>When <span class="math inline">v(t)</span> is quite different from <span class="math inline">I(t)</span>, the membrane potential “accelerates” to reduce the difference. When <span class="math inline">v(t)</span> is similar to <span class="math inline">I(t)</span>, the membrane potential stays constant.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple-multiple.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">The time constant <span class="math inline">\(\tau\)</span> of a rate-coded neuron influences the speed at which it reacts to inputs.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">The time constant <span class="math inline">\tau</span> of a rate-coded neuron influences the speed at which it reacts to inputs.</figcaption><p></p>
 </figure>
 </div>
-<p>The membrane potential follows an exponential function which tries to “match” its input with a speed determined by the <strong>time constant</strong> <span class="math inline">\(\tau\)</span>. The time constant <span class="math inline">\(\tau\)</span> determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.</p>
+<p>The membrane potential follows an exponential function which tries to “match” its input with a speed determined by the <strong>time constant</strong> <span class="math inline">\tau</span>. The time constant <span class="math inline">\tau</span> determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.</p>
 <p>There exists a significant number of transfer functions that can be used:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -627,10 +647,10 @@ div.csl-indent {
 </figure>
 </div>
 <p>When using the rectifier activation function (ReLU):</p>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \max(0, x)
-\]</span></p>
-<p>the membrane potential <span class="math inline">\(v(t)\)</span> can take any value, but the firing rate <span class="math inline">\(r(t)\)</span> is only positive.</p>
+</span></p>
+<p>the membrane potential <span class="math inline">v(t)</span> can take any value, but the firing rate <span class="math inline">r(t)</span> is only positive.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple2.png" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -638,10 +658,10 @@ div.csl-indent {
 </figure>
 </div>
 <p>When using the logistic (or sigmoid) activation function:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \frac{1}{1 + \exp(-x)}
-\]</span></p>
-<p>the firing rate <span class="math inline">\(r(t)\)</span> is bounded between 0 and 1, but responds for negative membrane potentials.</p>
+</span></p>
+<p>the firing rate <span class="math inline">r(t)</span> is bounded between 0 and 1, but responds for negative membrane potentials.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple3.png" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -659,50 +679,50 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">Artificial neuron.</figcaption><p></p>
 </figure>
 </div>
-<p>An artificial neuron sums its inputs <span class="math inline">\(x_1, \ldots, x_d\)</span> by multiplying them with weights <span class="math inline">\(w_1, \ldots, w_d\)</span>, adds a bias <span class="math inline">\(b\)</span> and transforms the result into an output <span class="math inline">\(y\)</span> using an activation function <span class="math inline">\(f\)</span>.</p>
-<p><span class="math display">\[
+<p>An artificial neuron sums its inputs <span class="math inline">x_1, \ldots, x_d</span> by multiplying them with weights <span class="math inline">w_1, \ldots, w_d</span>, adds a bias <span class="math inline">b</span> and transforms the result into an output <span class="math inline">y</span> using an activation function <span class="math inline">f</span>.</p>
+<p><span class="math display">
     y = f( \sum_{i=1}^d w_i \, x_i + b)
-\]</span></p>
-<p>The output <span class="math inline">\(y\)</span> directly reflects the input, without temporal integration. The weighted sum of inputs + bias <span class="math inline">\(\sum_{i=1}^d w_i \, x_i + b\)</span> is called the <strong>net activation</strong>.</p>
+</span></p>
+<p>The output <span class="math inline">y</span> directly reflects the input, without temporal integration. The weighted sum of inputs + bias <span class="math inline">\sum_{i=1}^d w_i \, x_i + b</span> is called the <strong>net activation</strong>.</p>
 <p>This overly simplified neuron model is the basic unit of the <strong>artificial neural networks</strong> (ANN) used in machine learning / deep learning.</p>
 <p><strong>Artificial neurons and hyperplanes</strong></p>
-<p>Let’s consider an artificial neuron with only two inputs <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p>
-<p>The net activation <span class="math inline">\(w_1 \, x_1 + w_2 \, x_2 + b\)</span> is the equation of a line in the space <span class="math inline">\((x_1, x_2)\)</span>.</p>
-<p><span class="math display">\[
+<p>Let’s consider an artificial neuron with only two inputs <span class="math inline">x_1</span> and <span class="math inline">x_2</span>.</p>
+<p>The net activation <span class="math inline">w_1 \, x_1 + w_2 \, x_2 + b</span> is the equation of a line in the space <span class="math inline">(x_1, x_2)</span>.</p>
+<p><span class="math display">
     w_1 \, x_1 + w_2 \, x_2 + b = 0 \Leftrightarrow x_2 = - \frac{w_1}{w_2} \, x_1 - \frac{b}{w_2}
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/artificialneuron-simple.png" class="img-fluid figure-img" style="width:50.0%"></p>
 <p></p><figcaption class="figure-caption">The net activation represents an hyperplane in 2D.</figcaption><p></p>
 </figure>
 </div>
-<p>The net activation is a line in 2D, a plane in 3D, etc. Generally, the net activation describes an <strong>hyperplane</strong> in the input space with <span class="math inline">\(d\)</span> dimensions <span class="math inline">\((x_1, x_2, \ldots, x_d)\)</span>. An hyperplane has one dimension less than the space.</p>
+<p>The net activation is a line in 2D, a plane in 3D, etc. Generally, the net activation describes an <strong>hyperplane</strong> in the input space with <span class="math inline">d</span> dimensions <span class="math inline">(x_1, x_2, \ldots, x_d)</span>. An hyperplane has one dimension less than the space.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/hyperplane.gif" class="img-fluid figure-img" style="width:50.0%"></p>
 <p></p><figcaption class="figure-caption">Hyperplane in 3D. Source: <a href="https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif" class="uri">https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif</a></figcaption><p></p>
 </figure>
 </div>
-<p>We can write the net activation using a <strong>weight vector</strong> <span class="math inline">\(\mathbf{w}\)</span> and a <strong>bias</strong> <span class="math inline">\(b\)</span>:</p>
-<p><span class="math display">\[
+<p>We can write the net activation using a <strong>weight vector</strong> <span class="math inline">\mathbf{w}</span> and a <strong>bias</strong> <span class="math inline">b</span>:</p>
+<p><span class="math display">
     \sum_{i=1}^d w_i \, x_i + b  = \langle\mathbf{w} \cdot \mathbf{x} \rangle + b
-\]</span></p>
+</span></p>
 <p>with:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \\ \ldots \\ w_d \end{bmatrix} \qquad \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \ldots \\ x_d \end{bmatrix}
-\]</span></p>
-<p><span class="math inline">\(\langle \cdot \rangle\)</span> is the <strong>dot product</strong> (aka inner product, scalar product) between the <strong>input vector</strong> <span class="math inline">\(\mathbf{x}\)</span> and the weight vector <span class="math inline">\(\mathbf{w}\)</span>.</p>
-<p>The weight vector is orthogonal to the hyperplane <span class="math inline">\((\mathbf{w}, b)\)</span> and defines its orientation. <span class="math inline">\(b\)</span> is the “signed distance” between the hyperplane and the origin. The hyperplane separates the input space into two parts:</p>
+</span></p>
+<p><span class="math inline">\langle \cdot \rangle</span> is the <strong>dot product</strong> (aka inner product, scalar product) between the <strong>input vector</strong> <span class="math inline">\mathbf{x}</span> and the weight vector <span class="math inline">\mathbf{w}</span>.</p>
+<p>The weight vector is orthogonal to the hyperplane <span class="math inline">(\mathbf{w}, b)</span> and defines its orientation. <span class="math inline">b</span> is the “signed distance” between the hyperplane and the origin. The hyperplane separates the input space into two parts:</p>
 <ul>
-<li><p><span class="math inline">\(\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &gt; 0\)</span> for all points <span class="math inline">\(\mathbf{x}\)</span> <strong>above</strong> the hyperplane.</p></li>
-<li><p><span class="math inline">\(\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &lt; 0\)</span> for all points <span class="math inline">\(\mathbf{x}\)</span> <strong>below</strong> the hyperplane.</p></li>
+<li><p><span class="math inline">\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &gt; 0</span> for all points <span class="math inline">\mathbf{x}</span> <strong>above</strong> the hyperplane.</p></li>
+<li><p><span class="math inline">\langle\mathbf{w} \cdot \mathbf{x} \rangle + b &lt; 0</span> for all points <span class="math inline">\mathbf{x}</span> <strong>below</strong> the hyperplane.</p></li>
 </ul>
 <p>By looking at the <strong>sign</strong> of the net activation, we can separate the input space into two classes. This will be the main principle of <strong>linear classification</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/projection.svg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The sign of the projection of an input <span class="math inline">\(\mathbf{x}\)</span> on the hyperplane tells whether the input is above or below the hyperplane.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">The sign of the projection of an input <span class="math inline">\mathbf{x}</span> on the hyperplane tells whether the input is above or below the hyperplane.</figcaption><p></p>
 </figure>
 </div>
 
@@ -829,6 +849,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

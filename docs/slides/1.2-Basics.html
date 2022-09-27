@@ -7,7 +7,7 @@
 <link href="1.2-Basics_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="1.2-Basics_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="1.2-Basics_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="1.2-Basics_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="1.2-Basics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="1.2-Basics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="1.2-Basics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Basics in mathematics</p>
   <p class="author">Julien Vitay</p>
@@ -352,28 +368,28 @@
 <section id="mathematical-objects" class="title-slide slide level1 center">
 <h1>Mathematical objects</h1>
 <ul>
-<li><p><strong>Scalars</strong> <span class="math inline">\(x\)</span> are 0-dimensional values. They can either take real values (<span class="math inline">\(x \in \Re\)</span>, e.g.&nbsp;<span class="math inline">\(x = 1.4573\)</span>, floats in CS) or natural values (<span class="math inline">\(x \in \mathbb{N}\)</span>, e.g.&nbsp;<span class="math inline">\(x = 3\)</span>, integers in CS).</p></li>
-<li><p><strong>Vectors</strong> <span class="math inline">\(\mathbf{x}\)</span> are 1-dimensional arrays of length <span class="math inline">\(d\)</span>.</p></li>
-<li><p>The bold notation <span class="math inline">\(\mathbf{x}\)</span> will be used in this course, but you may also be accustomed to the arrow notation <span class="math inline">\(\overrightarrow{x}\)</span> used on the blackboard. When using real numbers, the <strong>vector space</strong> with <span class="math inline">\(d\)</span> dimensions is noted <span class="math inline">\(\Re^d\)</span>, so we can note <span class="math inline">\(\mathbf{x} \in \Re^d\)</span>.</p></li>
-<li><p>Vectors are typically represented vertically to outline their <span class="math inline">\(d\)</span> elements <span class="math inline">\(x_1, x_2, \ldots, x_d\)</span>:</p></li>
+<li><p><strong>Scalars</strong> <span class="math inline">x</span> are 0-dimensional values. They can either take real values (<span class="math inline">x \in \Re</span>, e.g.&nbsp;<span class="math inline">x = 1.4573</span>, floats in CS) or natural values (<span class="math inline">x \in \mathbb{N}</span>, e.g.&nbsp;<span class="math inline">x = 3</span>, integers in CS).</p></li>
+<li><p><strong>Vectors</strong> <span class="math inline">\mathbf{x}</span> are 1-dimensional arrays of length <span class="math inline">d</span>.</p></li>
+<li><p>The bold notation <span class="math inline">\mathbf{x}</span> will be used in this course, but you may also be accustomed to the arrow notation <span class="math inline">\overrightarrow{x}</span> used on the blackboard. When using real numbers, the <strong>vector space</strong> with <span class="math inline">d</span> dimensions is noted <span class="math inline">\Re^d</span>, so we can note <span class="math inline">\mathbf{x} \in \Re^d</span>.</p></li>
+<li><p>Vectors are typically represented vertically to outline their <span class="math inline">d</span> elements <span class="math inline">x_1, x_2, \ldots, x_d</span>:</p></li>
 </ul>
-<p><span class="math display">\[\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}\]</span></p>
+<p><span class="math display">\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}</span></p>
 </section>
 
 <section id="mathematical-objects-1" class="title-slide slide level1 center">
 <h1>Mathematical objects</h1>
 <ul>
-<li><p><strong>Matrices</strong> <span class="math inline">\(A\)</span> are 2-dimensional arrays of size (or shape) <span class="math inline">\(m \times n\)</span> (<span class="math inline">\(m\)</span> rows, <span class="math inline">\(n\)</span> columns, <span class="math inline">\(A \in \Re^{m \times n}\)</span>).</p></li>
-<li><p>They are represented by a capital letter to distinguish them from scalars (classically also in bold <span class="math inline">\(\mathbf{A}\)</span> but not here). The element <span class="math inline">\(a_{ij}\)</span> of a matrix <span class="math inline">\(A\)</span> is the element on the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column.</p></li>
+<li><p><strong>Matrices</strong> <span class="math inline">A</span> are 2-dimensional arrays of size (or shape) <span class="math inline">m \times n</span> (<span class="math inline">m</span> rows, <span class="math inline">n</span> columns, <span class="math inline">A \in \Re^{m \times n}</span>).</p></li>
+<li><p>They are represented by a capital letter to distinguish them from scalars (classically also in bold <span class="math inline">\mathbf{A}</span> but not here). The element <span class="math inline">a_{ij}</span> of a matrix <span class="math inline">A</span> is the element on the <span class="math inline">i</span>-th row and <span class="math inline">j</span>-th column.</p></li>
 </ul>
-<p><span class="math display">\[A = \begin{bmatrix}
+<p><span class="math display">A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
-\end{bmatrix}\]</span></p>
+\end{bmatrix}</span></p>
 <ul>
-<li><strong>Tensors</strong> <span class="math inline">\(\mathcal{A}\)</span> are arrays with more than two dimensions. We will not really do math on these objects, but they are useful internally (hence the name of the <code>tensorflow</code> library).</li>
+<li><strong>Tensors</strong> <span class="math inline">\mathcal{A}</span> are arrays with more than two dimensions. We will not really do math on these objects, but they are useful internally (hence the name of the <code>tensorflow</code> library).</li>
 </ul>
 </section>
 
@@ -388,11 +404,11 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <ul>
 <li>Vectors can be added:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} + \mathbf{y} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} + \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} = \begin{bmatrix} x_1 + y_1 \\ x_2 + y_2 \\ \vdots \\ x_d + y_d \end{bmatrix}\]</span></p>
+<p><span class="math display">\mathbf{x} + \mathbf{y} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} + \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} = \begin{bmatrix} x_1 + y_1 \\ x_2 + y_2 \\ \vdots \\ x_d + y_d \end{bmatrix}</span></p>
 <ul>
 <li>Vectors can be multiplied by a scalar:</li>
 </ul>
-<p><span class="math display">\[a \, \mathbf{x} = a \, \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} = \begin{bmatrix} a \, x_1 \\ a \, x_2 \\ \vdots \\ a \, x_d \end{bmatrix}\]</span></p>
+<p><span class="math display">a \, \mathbf{x} = a \, \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} = \begin{bmatrix} a \, x_1 \\ a \, x_2 \\ \vdots \\ a \, x_d \end{bmatrix}</span></p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -411,23 +427,23 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <ul>
 <li>associativity:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}\]</span></p>
+<p><span class="math display">\mathbf{x} + (\mathbf{y} + \mathbf{z}) = (\mathbf{x} + \mathbf{y}) + \mathbf{z}</span></p>
 <ul>
 <li>commutativity:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}\]</span></p>
+<p><span class="math display">\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}</span></p>
 <ul>
 <li>the existence of a zero vector</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} + \mathbf{0} = \mathbf{x}\]</span></p>
+<p><span class="math display">\mathbf{x} + \mathbf{0} = \mathbf{x}</span></p>
 <ul>
 <li>inversion:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} + (-\mathbf{x}) = \mathbf{0}\]</span></p>
+<p><span class="math display">\mathbf{x} + (-\mathbf{x}) = \mathbf{0}</span></p>
 <ul>
 <li>distributivity:</li>
 </ul>
-<p><span class="math display">\[a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}\]</span></p></li>
+<p><span class="math display">a \, (\mathbf{x} + \mathbf{y}) = a \, \mathbf{x} + a \, \mathbf{y}</span></p></li>
 </ul>
 </section>
 
@@ -438,27 +454,29 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/vector_norms.png"></p>
-<p></p><figcaption>Source: <a href="https://en.wikipedia.org/wiki/Norm_(mathematics)" class="uri">https://en.wikipedia.org/wiki/Norm_(mathematics)</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:85%;">
 <ul>
-<li>Vectors have a <strong>norm</strong> (or length) <span class="math inline">\(||\mathbf{x}||\)</span>. The most intuitive one (if you know the Pythagoras theorem) is the <strong>Euclidean norm</strong> or <span class="math inline">\(L^2\)</span>-norm, which sums the square of each element:</li>
+<li>Vectors have a <strong>norm</strong> (or length) <span class="math inline">||\mathbf{x}||</span>. The most intuitive one (if you know the Pythagoras theorem) is the <strong>Euclidean norm</strong> or <span class="math inline">L^2</span>-norm, which sums the square of each element:</li>
 </ul>
-<p><span class="math display">\[||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}\]</span></p>
+<p><span class="math display">||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + \ldots + x_d^2}</span></p>
 <ul>
-<li>Other norms exist, distinguished by the subscript. The <strong><span class="math inline">\(L^1\)</span>-norm</strong> (also called the Manhattan norm) sums the absolute value of each element:</li>
+<li>Other norms exist, distinguished by the subscript. The <strong><span class="math inline">L^1</span>-norm</strong> (also called the Manhattan norm) sums the absolute value of each element:</li>
 </ul>
-<p><span class="math display">\[||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|\]</span></p>
+<p><span class="math display">||\mathbf{x}||_1 = |x_1| + |x_2| + \ldots + |x_d|</span></p>
 <ul>
-<li>The <strong>p-norm</strong> generalizes the Euclidean norm to other powers <span class="math inline">\(p\)</span>:</li>
+<li>The <strong>p-norm</strong> generalizes the Euclidean norm to other powers <span class="math inline">p</span>:</li>
 </ul>
-<p><span class="math display">\[||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}\]</span></p>
+<p><span class="math display">||\mathbf{x}||_p = (|x_1|^p + |x_2|^p + \ldots + |x_d|^p)^{\frac{1}{p}}</span></p>
 <ul>
-<li>The <strong>infinity norm</strong> (or maximum norm) <span class="math inline">\(L^\infty\)</span> returns the maximum element of the vector:</li>
+<li>The <strong>infinity norm</strong> (or maximum norm) <span class="math inline">L^\infty</span> returns the maximum element of the vector:</li>
 </ul>
-<p><span class="math display">\[||\mathbf{x}||_\infty = \max(|x_1|, |x_2|, \ldots, |x_d|)\]</span></p>
+<p><span class="math display">||\mathbf{x}||_\infty = \max(|x_1|, |x_2|, \ldots, |x_d|)</span></p>
 </div>
+</div>
+<div class="footer">
+<p><a href="https://en.wikipedia.org/wiki/Norm_(mathematics)" class="uri">https://en.wikipedia.org/wiki/Norm_(mathematics)</a></p>
 </div>
 </section>
 
@@ -467,14 +485,14 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <ul>
 <li>One important operation for vectors is the <strong>dot product</strong> (also called scalar product or inner product) between two vectors:</li>
 </ul>
-<p><span class="math display">\[\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} \rangle = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_d \, y_d\]</span></p>
+<p><span class="math display">\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix} \cdot \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_d \end{bmatrix} \rangle = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_d \, y_d</span></p>
 <ul>
-<li><p>The dot product basically sums one by one the product of the elements of each vector. The angular brackets are sometimes omitted (<span class="math inline">\(\mathbf{x} \cdot \mathbf{y}\)</span>) but we will use them in this course for clarity.</p></li>
+<li><p>The dot product basically sums one by one the product of the elements of each vector. The angular brackets are sometimes omitted (<span class="math inline">\mathbf{x} \cdot \mathbf{y}</span>) but we will use them in this course for clarity.</p></li>
 <li><p>One can notice immediately that the dot product is <strong>symmetric</strong>:</p></li>
 </ul>
-<p><span class="math display">\[\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \mathbf{y} \cdot \mathbf{x} \rangle\]</span></p>
+<p><span class="math display">\langle \mathbf{x} \cdot \mathbf{y} \rangle = \langle \mathbf{y} \cdot \mathbf{x} \rangle</span></p>
 <p>and <strong>linear</strong>:</p>
-<p><span class="math display">\[\langle (a \, \mathbf{x} + b\, \mathbf{y}) \cdot \mathbf{z} \rangle = a\, \langle \mathbf{x} \cdot \mathbf{z} \rangle + b \, \langle \mathbf{y} \cdot \mathbf{z} \rangle\]</span></p>
+<p><span class="math display">\langle (a \, \mathbf{x} + b\, \mathbf{y}) \cdot \mathbf{z} \rangle = a\, \langle \mathbf{x} \cdot \mathbf{z} \rangle + b \, \langle \mathbf{y} \cdot \mathbf{z} \rangle</span></p>
 </section>
 
 <section id="dot-product-1" class="title-slide slide level1 center">
@@ -482,14 +500,14 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>The dot product is an indirect measurement of the <strong>angle</strong> <span class="math inline">\(\theta\)</span> between two vectors:</li>
+<li>The dot product is an indirect measurement of the <strong>angle</strong> <span class="math inline">\theta</span> between two vectors:</li>
 </ul>
-<p><span class="math display">\[\langle \mathbf{x} \cdot \mathbf{y} \rangle = ||\mathbf{x}||_2 \, ||\mathbf{y}||_2 \, \cos(\theta)\]</span></p>
+<p><span class="math display">\langle \mathbf{x} \cdot \mathbf{y} \rangle = ||\mathbf{x}||_2 \, ||\mathbf{y}||_2 \, \cos(\theta)</span></p>
 <ul>
 <li><p>If you normalize the two vectors by dividing them by their norm (which is a scalar), we indeed have the cosine of the angle between them</p></li>
 <li><p>The higher the normalized dot product, the more the two vectors point towards the same direction (<strong>cosine distance</strong> between two vectors).</p></li>
 </ul>
-<p><span class="math display">\[\langle \displaystyle\frac{\mathbf{x}}{||\mathbf{x}||_2} \cdot \frac{\mathbf{y}}{||\mathbf{y}||_2} \rangle =  \cos(\theta)\]</span></p>
+<p><span class="math display">\langle \displaystyle\frac{\mathbf{x}}{||\mathbf{x}||_2} \cdot \frac{\mathbf{y}}{||\mathbf{y}||_2} \rangle =  \cos(\theta)</span></p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -506,16 +524,16 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <ul>
 <li>Matrices are derived from vectors, so most of the previous properties will be true. Let’s consider this 4x3 matrix:</li>
 </ul>
-<p><span class="math display">\[A = \begin{bmatrix}
+<p><span class="math display">A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; a_{13} \\
 a_{21} &amp; a_{22} &amp; a_{23} \\
 a_{31} &amp; a_{32} &amp; a_{33} \\
 a_{41} &amp; a_{42} &amp; a_{43} \\
-\end{bmatrix}\]</span></p>
+\end{bmatrix}</span></p>
 <ul>
 <li>Each column of the matrix is a vector with 4 elements:</li>
 </ul>
-<p><span class="math display">\[\mathbf{a}_1 = \begin{bmatrix}
+<p><span class="math display">\mathbf{a}_1 = \begin{bmatrix}
 a_{11} \\
 a_{21} \\
 a_{31} \\
@@ -533,13 +551,13 @@ a_{23} \\
 a_{33} \\
 a_{43} \\
 \end{bmatrix} \qquad
-\]</span></p>
+</span></p>
 <ul>
-<li>A <span class="math inline">\(m \times n\)</span> matrix is therefore a collection of <span class="math inline">\(n\)</span> vectors of size <span class="math inline">\(m\)</span> put side by side column-wise:</li>
+<li>A <span class="math inline">m \times n</span> matrix is therefore a collection of <span class="math inline">n</span> vectors of size <span class="math inline">m</span> put side by side column-wise:</li>
 </ul>
-<p><span class="math display">\[A = \begin{bmatrix}
+<p><span class="math display">A = \begin{bmatrix}
 \mathbf{a}_1 &amp; \mathbf{a}_2 &amp; \mathbf{a}_3\\
-\end{bmatrix}\]</span></p>
+\end{bmatrix}</span></p>
 </section>
 
 <section id="properties-of-matrix-spaces" class="title-slide slide level1 center">
@@ -547,21 +565,21 @@ a_{43} \\
 <ul>
 <li>All properties of the vector spaces (associativity, commutativity, distributivity) also apply to matrices, as additions and multiplications with a scalar are defined.</li>
 </ul>
-<p><span class="math display">\[\alpha \, A + \beta \, B = \begin{bmatrix}
+<p><span class="math display">\alpha \, A + \beta \, B = \begin{bmatrix}
 \alpha\, a_{11} + \beta \, b_{11} &amp; \alpha\, a_{12} + \beta \, b_{12} &amp; \alpha\, a_{13} + \beta \, b_{13} \\
 \alpha\, a_{21} + \beta \, b_{21} &amp; \alpha\, a_{22} + \beta \, b_{22} &amp; \alpha\, a_{23} + \beta \, b_{23} \\
 \alpha\, a_{31} + \beta \, b_{31} &amp; \alpha\, a_{32} + \beta \, b_{32} &amp; \alpha\, a_{33} + \beta \, b_{33} \\
 \alpha\, a_{41} + \beta \, b_{41} &amp; \alpha\, a_{42} + \beta \, b_{42} &amp; \alpha\, a_{43} + \beta \, b_{43} \\
-\end{bmatrix}\]</span></p>
-<p><strong>Note:</strong> Beware, you can only add matrices of the same dimensions <span class="math inline">\(m\times n\)</span>. You cannot add a <span class="math inline">\(2\times 3\)</span> matrix to a <span class="math inline">\(5 \times 4\)</span> one.</p>
+\end{bmatrix}</span></p>
+<p><strong>Note:</strong> Beware, you can only add matrices of the same dimensions <span class="math inline">m\times n</span>. You cannot add a <span class="math inline">2\times 3</span> matrix to a <span class="math inline">5 \times 4</span> one.</p>
 </section>
 
 <section id="transposition" class="title-slide slide level1 center">
 <h1>Transposition</h1>
 <ul>
-<li>The <strong>transpose</strong> <span class="math inline">\(A^T\)</span> of a <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(A\)</span> is a <span class="math inline">\(n \times m\)</span> matrix, where the row and column indices are swapped:</li>
+<li>The <strong>transpose</strong> <span class="math inline">A^T</span> of a <span class="math inline">m \times n</span> matrix <span class="math inline">A</span> is a <span class="math inline">n \times m</span> matrix, where the row and column indices are swapped:</li>
 </ul>
-<p><span class="math display">\[A = \begin{bmatrix}
+<p><span class="math display">A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
@@ -573,21 +591,21 @@ a_{12} &amp; a_{22} &amp; \cdots &amp; a_{m2} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 a_{1n} &amp; a_{2n} &amp; \cdots &amp; a_{mn} \\
 \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
 <li>This is also true for vectors, which become horizontal after transposition:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}, \qquad
+<p><span class="math display">\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{bmatrix}, \qquad
 \mathbf{x}^T = \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_d \end{bmatrix}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="matrix-multiplication" class="title-slide slide level1 center">
 <h1>Matrix multiplication</h1>
 <ul>
-<li>If <span class="math inline">\(A\)</span> is a <span class="math inline">\(m\times n\)</span> matrix and <span class="math inline">\(B\)</span> a <span class="math inline">\(n \times p\)</span> matrix:</li>
+<li>If <span class="math inline">A</span> is a <span class="math inline">m\times n</span> matrix and <span class="math inline">B</span> a <span class="math inline">n \times p</span> matrix:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 A=\begin{bmatrix}
 a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
@@ -600,25 +618,25 @@ b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2p} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 b_{n1} &amp; b_{n2} &amp; \cdots &amp; b_{np} \\
 \end{bmatrix}
-\]</span></p>
-<p>we can multiply them to obtain a <span class="math inline">\(m \times p\)</span> matrix:</p>
-<p><span class="math display">\[
+</span></p>
+<p>we can multiply them to obtain a <span class="math inline">m \times p</span> matrix:</p>
+<p><span class="math display">
 C = A \times B =\begin{bmatrix}
 c_{11} &amp; c_{12} &amp; \cdots &amp; c_{1p} \\
 c_{21} &amp; c_{22} &amp; \cdots &amp; c_{2p} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 c_{m1} &amp; c_{m2} &amp; \cdots &amp; c_{mp} \\
 \end{bmatrix}
-\]</span></p>
-<p>where each element <span class="math inline">\(c_{ij}\)</span> is the dot product of the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(A\)</span> and <span class="math inline">\(j\)</span>th column of <span class="math inline">\(B\)</span>:</p>
-<p><span class="math display">\[c_{ij} = \langle A_{i, :} \cdot B_{:, j} \rangle = a_{i1}b_{1j} + a_{i2}b_{2j} +\cdots + a_{in}b_{nj}= \sum_{k=1}^n a_{ik}b_{kj}\]</span></p>
-<p><strong>Note:</strong> <span class="math inline">\(n\)</span>, the number of columns of <span class="math inline">\(A\)</span> and rows of <span class="math inline">\(B\)</span>, must be the same!</p>
+</span></p>
+<p>where each element <span class="math inline">c_{ij}</span> is the dot product of the <span class="math inline">i</span>th row of <span class="math inline">A</span> and <span class="math inline">j</span>th column of <span class="math inline">B</span>:</p>
+<p><span class="math display">c_{ij} = \langle A_{i, :} \cdot B_{:, j} \rangle = a_{i1}b_{1j} + a_{i2}b_{2j} +\cdots + a_{in}b_{nj}= \sum_{k=1}^n a_{ik}b_{kj}</span></p>
+<p><strong>Note:</strong> <span class="math inline">n</span>, the number of columns of <span class="math inline">A</span> and rows of <span class="math inline">B</span>, must be the same!</p>
 </section>
 
 <section id="matrix-multiplication-1" class="title-slide slide level1 center">
 <h1>Matrix multiplication</h1>
 <ul>
-<li>The element <span class="math inline">\(c_{ij}\)</span> of <span class="math inline">\(C = A \times B\)</span> is the dot product between the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(A\)</span> and the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(B\)</span>.</li>
+<li>The element <span class="math inline">c_{ij}</span> of <span class="math inline">C = A \times B</span> is the dot product between the <span class="math inline">i</span>th row of <span class="math inline">A</span> and the <span class="math inline">j</span>th column of <span class="math inline">B</span>.</li>
 </ul>
 
 <img data-src="img/matrixmultiplication.jpg" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication" class="uri">https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication</a> CC BY-NC-SA; Marcia Levitus</p></section>
@@ -628,21 +646,21 @@ c_{m1} &amp; c_{m2} &amp; \cdots &amp; c_{mp} \\
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li>Thinking of vectors as <span class="math inline">\(n \times 1\)</span> matrices, we can multiply a matrix <span class="math inline">\(m \times n\)</span> with a vector:</li>
+<li>Thinking of vectors as <span class="math inline">n \times 1</span> matrices, we can multiply a matrix <span class="math inline">m \times n</span> with a vector:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \mathbf{y} = A \times \mathbf{x} = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
 a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 \end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>The result <span class="math inline">\(\mathbf{y}\)</span> is a vector of size <span class="math inline">\(m\)</span>.</p></li>
-<li><p>In that sense, a matrix <span class="math inline">\(A\)</span> can transform a vector of size <span class="math inline">\(n\)</span> into a vector of size <span class="math inline">\(m\)</span>:</p>
+<li><p>The result <span class="math inline">\mathbf{y}</span> is a vector of size <span class="math inline">m</span>.</p></li>
+<li><p>In that sense, a matrix <span class="math inline">A</span> can transform a vector of size <span class="math inline">n</span> into a vector of size <span class="math inline">m</span>:</p>
 <ul>
-<li><span class="math inline">\(A\)</span> represents a <strong>projection</strong> from <span class="math inline">\(\Re^n\)</span> to <span class="math inline">\(\Re^m\)</span>.</li>
+<li><span class="math inline">A</span> represents a <strong>projection</strong> from <span class="math inline">\Re^n</span> to <span class="math inline">\Re^m</span>.</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -659,36 +677,35 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <section id="dot-product-2" class="title-slide slide level1 center">
 <h1>Dot product</h1>
 <ul>
-<li>Note that the <strong>dot product</strong> between two vectors of size <span class="math inline">\(n\)</span> is the matrix multiplication between the transpose of the first vector and the second one:</li>
+<li>Note that the <strong>dot product</strong> between two vectors of size <span class="math inline">n</span> is the matrix multiplication between the transpose of the first vector and the second one:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x}^T \times \mathbf{y} = \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_n \end{bmatrix} \times \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_n \, y_n = \langle \mathbf{x} \cdot \mathbf{y} \rangle\]</span></p>
+<p><span class="math display">\mathbf{x}^T \times \mathbf{y} = \begin{bmatrix} x_1 &amp; x_2 &amp; \ldots &amp; x_n \end{bmatrix} \times \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = x_1 \, y_1 + x_2 \, y_2 + \ldots + x_n \, y_n = \langle \mathbf{x} \cdot \mathbf{y} \rangle</span></p>
 </section>
 
 <section id="matrix-inversion" class="title-slide slide level1 center">
 <h1>Matrix inversion</h1>
 <ul>
-<li><p>Square matrices of size <span class="math inline">\(n \times n\)</span> can be inverted.</p></li>
-<li><p>The <strong>inverse</strong> <span class="math inline">\(A^{-1}\)</span> of a matrix <span class="math inline">\(A\)</span> is defined by:</p></li>
+<li>Square matrices of size <span class="math inline">n \times n</span> can be inverted. The <strong>inverse</strong> <span class="math inline">A^{-1}</span> of a matrix <span class="math inline">A</span> is defined by:</li>
 </ul>
-<p><span class="math display">\[A \times A^{-1} = A^{-1} \times A = I\]</span></p>
-<p>where <span class="math inline">\(I\)</span> is the identity matrix (a matrix with ones on the diagonal and 0 otherwise).</p>
+<p><span class="math display">A \times A^{-1} = A^{-1} \times A = I</span></p>
+<p>where <span class="math inline">I</span> is the identity matrix (a matrix with ones on the diagonal and 0 otherwise).</p>
 <ul>
 <li>Matrix inversion allows to solve linear systems of equations. Given the problem:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{cases}
     a_{11} \, x_1 + a_{12} \, x_2 + \ldots + a_{1n} \, x_n = b_1 \\
     a_{21} \, x_1 + a_{22} \, x_2 + \ldots + a_{2n} \, x_n = b_2 \\
     \ldots \\
     a_{n1} \, x_1 + a_{n2} \, x_2 + \ldots + a_{nn} \, x_n = b_n \\
 \end{cases}
-\]</span></p>
+</span></p>
 <p>which is equivalent to:</p>
-<p><span class="math display">\[A \times \mathbf{x} = \mathbf{b}\]</span></p>
+<p><span class="math display">A \times \mathbf{x} = \mathbf{b}</span></p>
 <ul>
-<li>We can multiply both sides to the left with <span class="math inline">\(A^{-1}\)</span> (if it exists) and obtain:</li>
+<li>We can multiply both sides to the left with <span class="math inline">A^{-1}</span> (if it exists) and obtain:</li>
 </ul>
-<p><span class="math display">\[\mathbf{x} = A^{-1} \times \mathbf{b}\]</span></p>
+<p><span class="math display">\mathbf{x} = A^{-1} \times \mathbf{b}</span></p>
 </section>
 
 <section id="calculus" class="title-slide slide level1 center">
@@ -699,13 +716,13 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <section id="univariate-functions" class="title-slide slide level1 center">
 <h1>Univariate functions</h1>
 <ul>
-<li>A <strong>univariate function</strong> <span class="math inline">\(f\)</span> associates to any real number <span class="math inline">\(x \in \Re\)</span> (or a subset of <span class="math inline">\(\Re\)</span> called the support of the function) another (unique) real number <span class="math inline">\(f(x)\)</span>:</li>
+<li>A <strong>univariate function</strong> <span class="math inline">f</span> associates to any real number <span class="math inline">x \in \Re</span> (or a subset of <span class="math inline">\Re</span> called the support of the function) another (unique) real number <span class="math inline">f(x)</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align}
 f\colon \quad \Re &amp;\to \Re\\
 x &amp;\mapsto f(x),\end{align}
-\]</span></p>
+</span></p>
 
 <img data-src="img/function.png" class="r-stretch quarto-figure-center"></section>
 
@@ -714,22 +731,22 @@ x &amp;\mapsto f(x),\end{align}
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>A <strong>multivariate function</strong> <span class="math inline">\(f\)</span> associates to any vector <span class="math inline">\(\mathbf{x} \in \Re^n\)</span> (or a subset) a real number <span class="math inline">\(f(\mathbf{x})\)</span>:</li>
+<li>A <strong>multivariate function</strong> <span class="math inline">f</span> associates to any vector <span class="math inline">\mathbf{x} \in \Re^n</span> (or a subset) a real number <span class="math inline">f(\mathbf{x})</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align}
 f\colon \quad \Re^n &amp;\to \Re\\
 \mathbf{x} &amp;\mapsto f(\mathbf{x}),\end{align}
-\]</span></p>
+</span></p>
 <ul>
 <li><p>The variables of the function are the elements of the vector.</p></li>
 <li><p>For low-dimensional vector spaces, it is possible to represent each element explicitly, for example:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align}
 f\colon \quad\Re^3 &amp;\to \Re\\
 x, y, z &amp;\mapsto f(x, y, z),\end{align}
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -744,15 +761,15 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <section id="vector-fields" class="title-slide slide level1 center">
 <h1>Vector fields</h1>
 <ul>
-<li><strong>Vector fields</strong> associate to any vector <span class="math inline">\(\mathbf{x} \in \Re^n\)</span> (or a subset) another vector (possibly of different size):</li>
+<li><strong>Vector fields</strong> associate to any vector <span class="math inline">\mathbf{x} \in \Re^n</span> (or a subset) another vector (possibly of different size):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{align}
 \overrightarrow{f}\colon \quad \Re^n &amp;\to \Re^m\\
 \mathbf{x} &amp;\mapsto \overrightarrow{f}(\mathbf{x}),\end{align}
-\]</span></p>
+</span></p>
 
-<img data-src="img/vectorfield.png" style="width:35.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://en.wikipedia.org/wiki/Vector_field" class="uri">https://en.wikipedia.org/wiki/Vector_field</a></p><p><strong>Note:</strong> The matrix-vector multiplication <span class="math inline">\(\mathbf{y} = A \times \mathbf{x}\)</span> is a linear vector field, mapping any vector <span class="math inline">\(\mathbf{x}\)</span> into another vector <span class="math inline">\(\mathbf{y}\)</span>.</p>
+<img data-src="img/vectorfield.png" style="width:35.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://en.wikipedia.org/wiki/Vector_field" class="uri">https://en.wikipedia.org/wiki/Vector_field</a></p><p><strong>Note:</strong> The matrix-vector multiplication <span class="math inline">\mathbf{y} = A \times \mathbf{x}</span> is a linear vector field, mapping any vector <span class="math inline">\mathbf{x}</span> into another vector <span class="math inline">\mathbf{y}</span>.</p>
 </section>
 
 <section id="differentiation" class="title-slide slide level1 center">
@@ -761,11 +778,11 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <div class="column" style="width:50%;">
 <ul>
 <li><p>Differential calculus deals with the <strong>derivative</strong> of a function, a process called differentiation.</p></li>
-<li><p>The derivative <span class="math inline">\(f'(x)\)</span> or <span class="math inline">\(\displaystyle\frac{d f(x)}{dx}\)</span> of a univariate function <span class="math inline">\(f(x)\)</span> is defined as the local <em>slope</em> of the tangent to the function for a given value of <span class="math inline">\(x\)</span>:</p></li>
+<li><p>The derivative <span class="math inline">f'(x)</span> or <span class="math inline">\displaystyle\frac{d f(x)}{dx}</span> of a univariate function <span class="math inline">f(x)</span> is defined as the local <em>slope</em> of the tangent to the function for a given value of <span class="math inline">x</span>:</p></li>
 </ul>
-<p><span class="math display">\[f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\]</span></p>
+<p><span class="math display">f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}</span></p>
 <ul>
-<li>The line passing through the points <span class="math inline">\((x, f(x))\)</span> and <span class="math inline">\((x + h, f(x + h))\)</span> becomes tangent to the function when <span class="math inline">\(h\)</span> becomes very small.</li>
+<li>The line passing through the points <span class="math inline">(x, f(x))</span> and <span class="math inline">(x + h, f(x + h))</span> becomes tangent to the function when <span class="math inline">h</span> becomes very small.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -784,10 +801,10 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <ul>
 <li><p>The sign of the derivative tells you how the function behaves locally:</p>
 <ul>
-<li><p>If the derivative is positive, increasing a little bit <span class="math inline">\(x\)</span> increases the function <span class="math inline">\(f(x)\)</span>, so the function is <strong>locally increasing</strong>.</p></li>
-<li><p>If the derivative is negative, increasing a little bit <span class="math inline">\(x\)</span> decreases the function <span class="math inline">\(f(x)\)</span>, so the function is <strong>locally decreasing</strong>.</p></li>
+<li><p>If the derivative is positive, increasing a little bit <span class="math inline">x</span> increases the function <span class="math inline">f(x)</span>, so the function is <strong>locally increasing</strong>.</p></li>
+<li><p>If the derivative is negative, increasing a little bit <span class="math inline">x</span> decreases the function <span class="math inline">f(x)</span>, so the function is <strong>locally decreasing</strong>.</p></li>
 </ul></li>
-<li><p>It basically allows you to measure the local influence of <span class="math inline">\(x\)</span> on <span class="math inline">\(f(x)\)</span>: if I change a little bit the value <span class="math inline">\(x\)</span>, what happens to <span class="math inline">\(f(x)\)</span>? This will be very useful in machine learning.</p></li>
+<li><p>It basically allows you to measure the local influence of <span class="math inline">x</span> on <span class="math inline">f(x)</span>: if I change a little bit the value <span class="math inline">x</span>, what happens to <span class="math inline">f(x)</span>? This will be very useful in machine learning.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -804,12 +821,12 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>A special case is when the derivative is equal to 0 in <span class="math inline">\(x\)</span>. <span class="math inline">\(x\)</span> is then called an <strong>extremum</strong> (or optimum) of the function, i.e.&nbsp;it can be a maximum or minimum.</p></li>
+<li><p>A special case is when the derivative is equal to 0 in <span class="math inline">x</span>. <span class="math inline">x</span> is then called an <strong>extremum</strong> (or optimum) of the function, i.e.&nbsp;it can be a maximum or minimum.</p></li>
 <li><p>You can tell whether an extremum is a maximum or a minimum by looking at its second-order derivative:</p>
 <ul>
-<li><p>If <span class="math inline">\(f''(x) &gt; 0\)</span>, the extremum is a <strong>minimum</strong>.</p></li>
-<li><p>If <span class="math inline">\(f''(x) &lt; 0\)</span>, the extremum is a <strong>maximum</strong>.</p></li>
-<li><p>If <span class="math inline">\(f''(x) = 0\)</span>, the extremum is a <strong>saddle point</strong>.</p></li>
+<li><p>If <span class="math inline">f''(x) &gt; 0</span>, the extremum is a <strong>minimum</strong>.</p></li>
+<li><p>If <span class="math inline">f''(x) &lt; 0</span>, the extremum is a <strong>maximum</strong>.</p></li>
+<li><p>If <span class="math inline">f''(x) = 0</span>, the extremum is a <strong>saddle point</strong>.</p></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -825,18 +842,18 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <section id="gradients" class="title-slide slide level1 center">
 <h1>Gradients</h1>
 <ul>
-<li>The derivative of a <strong>multivariate function</strong> <span class="math inline">\(f(\mathbf{x})\)</span> is a vector of partial derivatives called the <strong>gradient of the function</strong> <span class="math inline">\(\nabla_\mathbf{x} \, f(\mathbf{x})\)</span>:</li>
+<li>The derivative of a <strong>multivariate function</strong> <span class="math inline">f(\mathbf{x})</span> is a vector of partial derivatives called the <strong>gradient of the function</strong> <span class="math inline">\nabla_\mathbf{x} \, f(\mathbf{x})</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix}
         \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_1} \\
         \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_2} \\
         \ldots \\
         \displaystyle\frac{\partial f(\mathbf{x})}{\partial x_n} \\
     \end{bmatrix}
-\]</span></p>
+</span></p>
 <ul>
-<li>The subscript to the <span class="math inline">\(\nabla\)</span> operator denotes <em>with respect to</em> (w.r.t) which variable the differentiation is done.</li>
+<li>The subscript to the <span class="math inline">\nabla</span> operator denotes <em>with respect to</em> (w.r.t) which variable the differentiation is done.</li>
 </ul>
 </section>
 
@@ -845,13 +862,13 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <ul>
 <li>A <strong>partial derivative</strong> w.r.t. to particular variable (or element of the vector) is simply achieved by differentiating the function while considering all other variables to be <strong>constant</strong>. For example the function:</li>
 </ul>
-<p><span class="math display">\[f(x, y) = x^2 + 3 \, x \, y + 4 \, x \, y^2 - 1\]</span></p>
-<p>can be partially differentiated w.r.t. <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> as:</p>
-<p><span class="math display">\[\begin{cases}
+<p><span class="math display">f(x, y) = x^2 + 3 \, x \, y + 4 \, x \, y^2 - 1</span></p>
+<p>can be partially differentiated w.r.t. <span class="math inline">x</span> and <span class="math inline">y</span> as:</p>
+<p><span class="math display">\begin{cases}
 \displaystyle\frac{\partial f(x, y)}{\partial x} = 2 \, x + 3\, y + 4 \, y^2 \\
 \\
 \displaystyle\frac{\partial f(x, y)}{\partial y} = 3 \, x + 8\, x \, y
-\end{cases}\]</span></p>
+\end{cases}</span></p>
 </section>
 
 <section id="jacobian" class="title-slide slide level1 center">
@@ -859,14 +876,14 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <ul>
 <li>The gradient can be generalized to <strong>vector fields</strong>, where the <strong>Jacobian</strong> or <strong>Jacobi matrix</strong> is a matrix containing all partial derivatives.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 J = \begin{bmatrix}
     \dfrac{\partial \mathbf{f}}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial \mathbf{f}}{\partial x_n} \end{bmatrix}
 = \begin{bmatrix}
     \dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n}\\
     \vdots &amp; \ddots &amp; \vdots\\
     \dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n} \end{bmatrix}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="analytical-properties" class="title-slide slide level1 center">
@@ -874,16 +891,16 @@ J = \begin{bmatrix}
 <ul>
 <li>Differentiation is linear, which means that if we define the function:</li>
 </ul>
-<p><span class="math display">\[h(x) = a \, f(x) + b \, g(x)\]</span></p>
+<p><span class="math display">h(x) = a \, f(x) + b \, g(x)</span></p>
 <p>its derivative is:</p>
-<p><span class="math display">\[h'(x) = a \, f'(x) + b \, g'(x)\]</span></p>
+<p><span class="math display">h'(x) = a \, f'(x) + b \, g'(x)</span></p>
 <ul>
 <li>A product of functions can also be differentiated analytically (product rule):</li>
 </ul>
-<p><span class="math display">\[(f(x) \times g(x))' = f'(x) \times g(x) + f(x) \times g'(x)\]</span></p>
+<p><span class="math display">(f(x) \times g(x))' = f'(x) \times g(x) + f(x) \times g'(x)</span></p>
 <p><strong>Example:</strong></p>
-<p><span class="math display">\[f(x) = x^2 \, e^x\]</span></p>
-<p><span class="math display">\[f'(x) = 2 \, x \, e^x + x^2 \cdot e^x\]</span></p>
+<p><span class="math display">f(x) = x^2 \, e^x</span></p>
+<p><span class="math display">f'(x) = 2 \, x \, e^x + x^2 \cdot e^x</span></p>
 </section>
 
 <section id="chain-rule" class="title-slide slide level1 center">
@@ -891,19 +908,19 @@ J = \begin{bmatrix}
 <ul>
 <li>A very important concept for neural networks is the <strong>chain rule</strong>, which tells how to differentiate <strong>function compositions</strong> (functions of a function) of the form:</li>
 </ul>
-<p><span class="math display">\[(f \circ g) (x) = f(g(x))\]</span></p>
+<p><span class="math display">(f \circ g) (x) = f(g(x))</span></p>
 <ul>
-<li>The derivative of <span class="math inline">\(f \circ g\)</span> is:</li>
+<li>The derivative of <span class="math inline">f \circ g</span> is:</li>
 </ul>
-<p><span class="math display">\[(f \circ g)' (x) = (f' \circ g) (x) \times g'(x)\]</span></p>
+<p><span class="math display">(f \circ g)' (x) = (f' \circ g) (x) \times g'(x)</span></p>
 <ul>
 <li>The chain rule may be more understandable using Leibniz’s notation:</li>
 </ul>
-<p><span class="math display">\[\frac{d (f \circ g) (x)}{dx} = \frac{d f (g (x))}{d g(x)} \times \frac{d g (x)}{dx}\]</span></p>
+<p><span class="math display">\frac{d (f \circ g) (x)}{dx} = \frac{d f (g (x))}{d g(x)} \times \frac{d g (x)}{dx}</span></p>
 <ul>
-<li>By posing <span class="math inline">\(y = g(x)\)</span> as an intermediary variable, it becomes:</li>
+<li>By posing <span class="math inline">y = g(x)</span> as an intermediary variable, it becomes:</li>
 </ul>
-<p><span class="math display">\[\frac{d f(y)}{dx} = \frac{d f(y)}{dy} \times \frac{dy}{dx}\]</span></p>
+<p><span class="math display">\frac{d f(y)}{dx} = \frac{d f(y)}{dy} \times \frac{dy}{dx}</span></p>
 </section>
 
 <section id="chain-rule-1" class="title-slide slide level1 center">
@@ -911,13 +928,13 @@ J = \begin{bmatrix}
 <ul>
 <li>The function :</li>
 </ul>
-<p><span class="math display">\[h(x) = \frac{1}{2 \, x + 1}\]</span></p>
-<p>is the function composition of <span class="math inline">\(g(x) = 2 \, x + 1\)</span> and <span class="math inline">\(f(x) = \displaystyle\frac{1}{x}\)</span>, whose derivatives are known:</p>
-<p><span class="math display">\[g'(x) = 2\]</span> <span class="math display">\[f'(x) = -\displaystyle\frac{1}{x^2}\]</span></p>
+<p><span class="math display">h(x) = \frac{1}{2 \, x + 1}</span></p>
+<p>is the function composition of <span class="math inline">g(x) = 2 \, x + 1</span> and <span class="math inline">f(x) = \displaystyle\frac{1}{x}</span>, whose derivatives are known:</p>
+<p><span class="math display">g'(x) = 2</span> <span class="math display">f'(x) = -\displaystyle\frac{1}{x^2}</span></p>
 <ul>
 <li>Its derivative according to the <strong>chain rule</strong> is:</li>
 </ul>
-<p><span class="math display">\[h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2\]</span></p>
+<p><span class="math display">h'(x) = f'(g(x)) \times g'(x) = -\displaystyle\frac{1}{(2 \, x + 1)^2} \times 2</span></p>
 </section>
 
 <section id="chain-rule-2" class="title-slide slide level1 center">
@@ -925,26 +942,26 @@ J = \begin{bmatrix}
 <ul>
 <li>The chain rule also applies to partial derivatives:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \displaystyle\frac{\partial f \circ g (x, y)}{\partial x} = \frac{\partial f \circ g (x, y)}{\partial g (x, y)} \times \frac{\partial g (x, y)}{\partial x}
-\]</span></p>
+</span></p>
 <p>and gradients:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \nabla_\mathbf{x} \, f \circ g (\mathbf{x}) = \nabla_{g(\mathbf{x})} \, f \circ g (\mathbf{x}) \times \nabla_\mathbf{x} \, g (\mathbf{x})
-\]</span></p>
+</span></p>
 </section>
 
 <section id="integrals" class="title-slide slide level1 center">
 <h1>Integrals</h1>
 <ul>
-<li>The opposite operation of differentation is <strong>integration</strong>. Given a function <span class="math inline">\(f(x)\)</span>, we search a function <span class="math inline">\(F(x)\)</span> whose <em>derivative</em> is <span class="math inline">\(f(x)\)</span>:</li>
+<li>The opposite operation of differentation is <strong>integration</strong>. Given a function <span class="math inline">f(x)</span>, we search a function <span class="math inline">F(x)</span> whose <em>derivative</em> is <span class="math inline">f(x)</span>:</li>
 </ul>
-<p><span class="math display">\[F'(x) = f(x)\]</span></p>
+<p><span class="math display">F'(x) = f(x)</span></p>
 <ul>
-<li>The <strong>integral</strong> of <span class="math inline">\(f\)</span> is noted:</li>
+<li>The <strong>integral</strong> of <span class="math inline">f</span> is noted:</li>
 </ul>
-<p><span class="math display">\[F(x) = \int f(x) \, dx\]</span></p>
-<p><span class="math inline">\(dx\)</span> being an infinitesimal interval (similar to <span class="math inline">\(h\)</span> in the definition of the derivative).</p>
+<p><span class="math display">F(x) = \int f(x) \, dx</span></p>
+<p><span class="math inline">dx</span> being an infinitesimal interval (similar to <span class="math inline">h</span> in the definition of the derivative).</p>
 <ul>
 <li>There are tons of formal definitions of integrals (Riemann, Lebesgue, Darboux…) and we will not get into details here as we will not use integrals a lot.</li>
 </ul>
@@ -954,17 +971,17 @@ J = \begin{bmatrix}
 <h1>Integrals</h1>
 <ul>
 <li><p>The most important to understand for now is maybe that the integral of a function is the <strong>area under the curve</strong>.</p></li>
-<li><p>The area under the curve of a function <span class="math inline">\(f\)</span> on the interval <span class="math inline">\([a, b]\)</span> is:</p></li>
+<li><p>The area under the curve of a function <span class="math inline">f</span> on the interval <span class="math inline">[a, b]</span> is:</p></li>
 </ul>
-<p><span class="math display">\[\mathcal{S} = \int_a^b f(x) \, dx\]</span></p>
+<p><span class="math display">\mathcal{S} = \int_a^b f(x) \, dx</span></p>
 
 <img data-src="img/riemann-sum1.svg" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.math24.net/riemann-sums-definite-integral/" class="uri">https://www.math24.net/riemann-sums-definite-integral/</a></p></section>
 
 <section id="integrals-2" class="title-slide slide level1 center">
 <h1>Integrals</h1>
 <ul>
-<li><p>One way to approximate this surface is to split the interval <span class="math inline">\([a, b]\)</span> into <span class="math inline">\(n\)</span> intervals of width <span class="math inline">\(dx\)</span> with the points <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>.</p></li>
-<li><p>This defines <span class="math inline">\(n\)</span> rectangles of width <span class="math inline">\(dx\)</span> and height <span class="math inline">\(f(x_i)\)</span>, so their surface is <span class="math inline">\(f(x_i) \, dx\)</span>.</p></li>
+<li><p>One way to approximate this surface is to split the interval <span class="math inline">[a, b]</span> into <span class="math inline">n</span> intervals of width <span class="math inline">dx</span> with the points <span class="math inline">x_1, x_2, \ldots, x_n</span>.</p></li>
+<li><p>This defines <span class="math inline">n</span> rectangles of width <span class="math inline">dx</span> and height <span class="math inline">f(x_i)</span>, so their surface is <span class="math inline">f(x_i) \, dx</span>.</p></li>
 <li><p>The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.</p></li>
 </ul>
 
@@ -973,9 +990,9 @@ J = \begin{bmatrix}
 <section id="integrals-3" class="title-slide slide level1 center">
 <h1>Integrals</h1>
 <ul>
-<li>When <span class="math inline">\(n \to \infty\)</span>, or equivalently <span class="math inline">\(dx \to 0\)</span>, the sum of these rectangular areas (called the Riemann sum) becomes exactly the area under the curve. This is the definition of the definite integral:</li>
+<li>When <span class="math inline">n \to \infty</span>, or equivalently <span class="math inline">dx \to 0</span>, the sum of these rectangular areas (called the Riemann sum) becomes exactly the area under the curve. This is the definition of the definite integral:</li>
 </ul>
-<p><span class="math display">\[\int_a^b f(x) \, dx = \lim_{dx \to 0} \sum_{i=1}^n f(x_i) \, dx\]</span></p>
+<p><span class="math display">\int_a^b f(x) \, dx = \lim_{dx \to 0} \sum_{i=1}^n f(x_i) \, dx</span></p>
 <ul>
 <li>Very roughly speaking, the integral can be considered as the equivalent of a sum for continuous functions.</li>
 </ul>
@@ -999,21 +1016,21 @@ J = \begin{bmatrix}
 </div>
 </div><div class="column" style="width:70%;">
 <ul>
-<li><p>Let’s note <span class="math inline">\(X\)</span> a <strong>discrete random variable</strong> with <span class="math inline">\(n\)</span> realizations (or outcomes) <span class="math inline">\(x_1, \ldots, x_n\)</span>.</p></li>
-<li><p>The <strong>probability</strong> that <span class="math inline">\(X\)</span> takes the value <span class="math inline">\(x_i\)</span> is defined by the <em>relative frequency of occurrence</em>, i.e.&nbsp;the proportion of samples having the value <span class="math inline">\(x_i\)</span>, when the total number <span class="math inline">\(N\)</span> of samples tends to infinity:</p></li>
+<li><p>Let’s note <span class="math inline">X</span> a <strong>discrete random variable</strong> with <span class="math inline">n</span> realizations (or outcomes) <span class="math inline">x_1, \ldots, x_n</span>.</p></li>
+<li><p>The <strong>probability</strong> that <span class="math inline">X</span> takes the value <span class="math inline">x_i</span> is defined by the <em>relative frequency of occurrence</em>, i.e.&nbsp;the proportion of samples having the value <span class="math inline">x_i</span>, when the total number <span class="math inline">N</span> of samples tends to infinity:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(X = x_i) = \frac{\text{Number of favorable cases}}{\text{Total number of samples}}
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
-<li><p>The set of probabilities <span class="math inline">\(\{P(X = x_i)\}_{i=1}^n\)</span> define the <strong>probability distribution</strong> for the random variable (or probability mass function, pmf).</p></li>
-<li><p>By definition, we have <span class="math inline">\(0 \leq P(X = x_i) \leq 1\)</span> and the probabilities <strong>have</strong> to respect:</p></li>
+<li><p>The set of probabilities <span class="math inline">\{P(X = x_i)\}_{i=1}^n</span> define the <strong>probability distribution</strong> for the random variable (or probability mass function, pmf).</p></li>
+<li><p>By definition, we have <span class="math inline">0 \leq P(X = x_i) \leq 1</span> and the probabilities <strong>have</strong> to respect:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \sum_{i=1}^n P(X = x_i) = 1
-\]</span></p>
+</span></p>
 </section>
 
 <section id="mathematical-expectation-and-variance" class="title-slide slide level1 center">
@@ -1021,24 +1038,24 @@ J = \begin{bmatrix}
 <ul>
 <li>An important metric for a random variable is its <strong>mathematical expectation</strong> or expected value, i.e.&nbsp;its “mean” realization weighted by the probabilities:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[X] = \sum_{i=1}^n P(X = x_i) \, x_i
-\]</span></p>
+</span></p>
 <ul>
 <li>The expectation does not even need to be a valid realization:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[\text{Coin}] = \frac{1}{2} \, 0 + \frac{1}{2} \, 1 = 0.5
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \mathbb{E}[\text{Dice}] = \frac{1}{6} \, (1 + 2 + 3 + 4 + 5 + 6) = 3.5
-\]</span></p>
+</span></p>
 <ul>
 <li>We can also compute the mathematical expectation of <strong>functions of</strong> a random variable:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[f(X)] = \sum_{i=1}^n P(X = x_i) \, f(x_i)
-\]</span></p>
+</span></p>
 </section>
 
 <section id="mathematical-expectation-and-variance-1" class="title-slide slide level1 center">
@@ -1046,21 +1063,21 @@ J = \begin{bmatrix}
 <ul>
 <li>The <strong>variance</strong> of a random variable is the squared deviation around the mean:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \sum_{i=1}^n P(X = x_i) \, (x_i - \mathbb{E}[X])^2
-\]</span></p>
+</span></p>
 <ul>
 <li>Variance of a coin:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{Var}(\text{Coin}) = \frac{1}{2} \, (0 - 0.5)^2 + \frac{1}{2} \, (1 - 0.5)^2 = 0.25
-\]</span></p>
+</span></p>
 <ul>
 <li>Variance of a dice:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{Var}(\text{Dice}) = \frac{1}{6} \, ((1-3.5)^2 + (2-3.5)^2 + (3-3.5)^2 + (4-3.5)^2 + (5-3.5)^2 + (6-3.5)^2) = \frac{105}{36}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="continuous-probability-distributions" class="title-slide slide level1 center">
@@ -1075,24 +1092,24 @@ J = \begin{bmatrix}
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li><p><strong>Continuous random variables</strong> can take an infinity of continuous values, e.g.&nbsp;<span class="math inline">\(\Re\)</span> or some subset.</p></li>
-<li><p>The closed set of values they can take is called the <strong>support</strong> <span class="math inline">\(\mathcal{D}_X\)</span> of the probability distribution.</p></li>
-<li><p>The probability distribution is described by a <strong>probability density function</strong> (pdf) <span class="math inline">\(f(x)\)</span>.</p></li>
-<li><p>The pdf of a distribution must be positive (<span class="math inline">\(f(x) \geq 0 \, \forall x \in \mathcal{D}_X\)</span>) and its integral must be equal to 1:</p></li>
+<li><p><strong>Continuous random variables</strong> can take an infinity of continuous values, e.g.&nbsp;<span class="math inline">\Re</span> or some subset.</p></li>
+<li><p>The closed set of values they can take is called the <strong>support</strong> <span class="math inline">\mathcal{D}_X</span> of the probability distribution.</p></li>
+<li><p>The probability distribution is described by a <strong>probability density function</strong> (pdf) <span class="math inline">f(x)</span>.</p></li>
+<li><p>The pdf of a distribution must be positive (<span class="math inline">f(x) \geq 0 \, \forall x \in \mathcal{D}_X</span>) and its integral must be equal to 1:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \int_{x \in \mathcal{D}_X} f(x) \, dx = 1
-\]</span></p>
+</span></p>
 </div>
 </div>
 <ul>
-<li>The pdf does not give the probability of taking a particular value <span class="math inline">\(x\)</span> (it is 0), but allows to get the probability that a value lies in a specific interval:</li>
+<li>The pdf does not give the probability of taking a particular value <span class="math inline">x</span> (it is 0), but allows to get the probability that a value lies in a specific interval:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(a \leq X \leq b) = \int_{a}^b f(x) \, dx
-\]</span></p>
+</span></p>
 <ul>
-<li>One can however think of the pdf as the <strong>likelihood</strong> that a value <span class="math inline">\(x\)</span> comes from that distribution.</li>
+<li>One can however think of the pdf as the <strong>likelihood</strong> that a value <span class="math inline">x</span> comes from that distribution.</li>
 </ul>
 </section>
 
@@ -1101,41 +1118,41 @@ J = \begin{bmatrix}
 <ul>
 <li>The mathematical expectation is now defined by an integral instead of a sum:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[X] = \int_{x \in \mathcal{D}_X} f(x) \, x \, dx
-\]</span></p>
+</span></p>
 <p>the variance:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{Var}(X) = \int_{x \in \mathcal{D}_X} f(x) \, (x - \mathbb{E}[X])^2 \, dx
-\]</span></p>
+</span></p>
 <p>or a function of the random variable:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[g(X)] = \int_{x \in \mathcal{D}_X} f(x) \, g(x) \, dx
-\]</span></p>
+</span></p>
 <ul>
 <li>Note that the expectation operator is <strong>linear</strong>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[a \, X + b \, Y] = a \, \mathbb{E}[X] + b \, \mathbb{E}[Y]
-\]</span></p>
+</span></p>
 </section>
 
 <section id="some-parameterized-probability-distributions" class="title-slide slide level1 center">
 <h1>Some parameterized probability distributions</h1>
 <ul>
-<li><p>Probability distributions can in principle have any form: <span class="math inline">\(f(x)\)</span> is unknown.</p></li>
+<li><p>Probability distributions can in principle have any form: <span class="math inline">f(x)</span> is unknown.</p></li>
 <li><p>However, specific parameterized distributions can be very useful: their pmf/pdf is fully determined by a couple of parameters.</p></li>
-<li><p>The <strong>Bernouilli</strong> distribution is a binary (discrete, 0 or 1) distribution with a parameter <span class="math inline">\(p\)</span> specifying the probability to obtain the outcome 1:</p></li>
+<li><p>The <strong>Bernouilli</strong> distribution is a binary (discrete, 0 or 1) distribution with a parameter <span class="math inline">p</span> specifying the probability to obtain the outcome 1:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(X = 1) = p \; \text{and} \; P(X=0) = 1 - p
-\]</span> <span class="math display">\[P(X=x) = p^x \, (1-p)^{1-x}\]</span> <span class="math display">\[\mathbb{E}[X] = p\]</span></p>
+</span> <span class="math display">P(X=x) = p^x \, (1-p)^{1-x}</span> <span class="math display">\mathbb{E}[X] = p</span></p>
 <ul>
-<li>The <strong>Multinouilli</strong> or <strong>categorical</strong> distribution is a discrete distribution with <span class="math inline">\(k\)</span> realizations. Each realization <span class="math inline">\(x_i\)</span> is associated with a parameter <span class="math inline">\(p_i &gt;0\)</span> representing its probability. We have <span class="math inline">\(\sum_i p_i = 1\)</span>.</li>
+<li>The <strong>Multinouilli</strong> or <strong>categorical</strong> distribution is a discrete distribution with <span class="math inline">k</span> realizations. Each realization <span class="math inline">x_i</span> is associated with a parameter <span class="math inline">p_i &gt;0</span> representing its probability. We have <span class="math inline">\sum_i p_i = 1</span>.</li>
 </ul>
-<p><span class="math display">\[P(X = x_i) = p_i\]</span></p>
+<p><span class="math display">P(X = x_i) = p_i</span></p>
 <ul>
-<li>Knowing <span class="math inline">\(p\)</span> or the <span class="math inline">\(p_i\)</span> tells us everything about the discrete distributions.</li>
+<li>Knowing <span class="math inline">p</span> or the <span class="math inline">p_i</span> tells us everything about the discrete distributions.</li>
 </ul>
 </section>
 
@@ -1151,24 +1168,24 @@ J = \begin{bmatrix}
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>The <strong>uniform distribution</strong> has an equal and constant probability of returning values between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, never outside this range.</p></li>
+<li><p>The <strong>uniform distribution</strong> has an equal and constant probability of returning values between <span class="math inline">a</span> and <span class="math inline">b</span>, never outside this range.</p></li>
 <li><p>It is parameterized by two parameters:</p>
 <ul>
-<li><p>the start of the range <span class="math inline">\(a\)</span>.</p></li>
-<li><p>the end of the range <span class="math inline">\(b\)</span>.</p></li>
+<li><p>the start of the range <span class="math inline">a</span>.</p></li>
+<li><p>the end of the range <span class="math inline">b</span>.</p></li>
 </ul></li>
-<li><p>Its support is <span class="math inline">\([a, b]\)</span>.</p></li>
+<li><p>Its support is <span class="math inline">[a, b]</span>.</p></li>
 </ul>
 </div>
 </div>
 <ul>
-<li>The pdf of the uniform distribution <span class="math inline">\(\mathcal{U}(a, b)\)</span> is defined on <span class="math inline">\([a, b]\)</span> as:</li>
+<li>The pdf of the uniform distribution <span class="math inline">\mathcal{U}(a, b)</span> is defined on <span class="math inline">[a, b]</span> as:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x; a, b) = \frac{1}{b - a}
-\]</span></p>
+</span></p>
 <ul>
-<li>Knowing <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> completely defines the distribution.</li>
+<li>Knowing <span class="math inline">a</span> and <span class="math inline">b</span> completely defines the distribution.</li>
 </ul>
 </section>
 
@@ -1187,21 +1204,21 @@ J = \begin{bmatrix}
 <li><p>For continuous distributions, the <strong>normal distribution</strong> is the most frequently encountered one.</p></li>
 <li><p>It is parameterized by two parameters:</p>
 <ul>
-<li><p>the mean <span class="math inline">\(\mu\)</span>.</p></li>
-<li><p>the variance <span class="math inline">\(\sigma^2\)</span> (or standard deviation <span class="math inline">\(\sigma\)</span>).</p></li>
+<li><p>the mean <span class="math inline">\mu</span>.</p></li>
+<li><p>the variance <span class="math inline">\sigma^2</span> (or standard deviation <span class="math inline">\sigma</span>).</p></li>
 </ul></li>
-<li><p>Its support is <span class="math inline">\(\Re\)</span>.</p></li>
+<li><p>Its support is <span class="math inline">\Re</span>.</p></li>
 </ul>
 </div>
 </div>
 <ul>
-<li>The pdf of the normal distribution <span class="math inline">\(\mathcal{N}(\mu, \sigma)\)</span> is defined on <span class="math inline">\(\Re\)</span> as:</li>
+<li>The pdf of the normal distribution <span class="math inline">\mathcal{N}(\mu, \sigma)</span> is defined on <span class="math inline">\Re</span> as:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x; \mu, \sigma) = \frac{1}{\sqrt{2\,\pi\,\sigma^2}} \, e^{-\displaystyle\frac{(x - \mu)^2}{2\,\sigma^2}}
-\]</span></p>
+</span></p>
 <ul>
-<li>Knowing <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> completely defines the distribution.</li>
+<li>Knowing <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> completely defines the distribution.</li>
 </ul>
 </section>
 
@@ -1220,65 +1237,65 @@ J = \begin{bmatrix}
 <li><p>The <strong>exponential distribution</strong> is the probability distribution of the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate.</p></li>
 <li><p>It is parameterized by one parameter:</p>
 <ul>
-<li>the rate <span class="math inline">\(\lambda\)</span>.</li>
+<li>the rate <span class="math inline">\lambda</span>.</li>
 </ul></li>
-<li><p>Its support is <span class="math inline">\(\Re^+\)</span> (<span class="math inline">\(x &gt; 0\)</span>).</p></li>
+<li><p>Its support is <span class="math inline">\Re^+</span> (<span class="math inline">x &gt; 0</span>).</p></li>
 </ul>
 </div>
 </div>
 <ul>
-<li>The pdf of the exponential distribution is defined on <span class="math inline">\(\Re^+\)</span> as:</li>
+<li>The pdf of the exponential distribution is defined on <span class="math inline">\Re^+</span> as:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x; \lambda) = \lambda \, e^{-\lambda \, x}
-\]</span></p>
+</span></p>
 <ul>
-<li>Knowing <span class="math inline">\(\lambda\)</span> completely defines the distribution.</li>
+<li>Knowing <span class="math inline">\lambda</span> completely defines the distribution.</li>
 </ul>
 </section>
 
 <section id="joint-probabilities" class="title-slide slide level1 center">
 <h1>Joint probabilities</h1>
 <ul>
-<li><p>Let’s now suppose that we have two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> with different probability distributions <span class="math inline">\(P(X)\)</span> and <span class="math inline">\(P(Y)\)</span>.</p></li>
-<li><p>The <strong>joint probability</strong> <span class="math inline">\(P(X, Y)\)</span> denotes the probability of observing the realizations <span class="math inline">\(x\)</span> <strong>and</strong> <span class="math inline">\(y\)</span> at the same time:</p></li>
+<li><p>Let’s now suppose that we have two random variables <span class="math inline">X</span> and <span class="math inline">Y</span> with different probability distributions <span class="math inline">P(X)</span> and <span class="math inline">P(Y)</span>.</p></li>
+<li><p>The <strong>joint probability</strong> <span class="math inline">P(X, Y)</span> denotes the probability of observing the realizations <span class="math inline">x</span> <strong>and</strong> <span class="math inline">y</span> at the same time:</p></li>
 </ul>
-<p><span class="math display">\[P(X=x, Y=y)\]</span></p>
+<p><span class="math display">P(X=x, Y=y)</span></p>
 <ul>
 <li>If the random variables are <strong>independent</strong>, we have:</li>
 </ul>
-<p><span class="math display">\[P(X=x, Y=y) = P(X=x) \, P(Y=y)\]</span></p>
+<p><span class="math display">P(X=x, Y=y) = P(X=x) \, P(Y=y)</span></p>
 <ul>
 <li>If you know the joint probability, you can compute the <strong>marginal probability distribution</strong> of each variable:</li>
 </ul>
-<p><span class="math display">\[P(X=x) = \sum_y P(X=x, Y=y)\]</span></p>
+<p><span class="math display">P(X=x) = \sum_y P(X=x, Y=y)</span></p>
 <ul>
 <li>The same is true for continuous probability distributions:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     f(x) = \int f(x, y) \, dy
-\]</span></p>
+</span></p>
 </section>
 
 <section id="conditional-probabilities" class="title-slide slide level1 center">
 <h1>Conditional probabilities</h1>
 <ul>
 <li><p>Some useful information between two random variables is the <strong>conditional probability</strong>.</p></li>
-<li><p><span class="math inline">\(P(X=x | Y=y)\)</span> is the conditional probability that <span class="math inline">\(X=x\)</span>, <strong>given</strong> that <span class="math inline">\(Y=y\)</span> is observed.</p></li>
-<li><p><span class="math inline">\(Y=y\)</span> is not random anymore: it is a <strong>fact</strong> (at least theoretically).</p></li>
-<li><p>You wonder what happens to the probability distribution of <span class="math inline">\(X\)</span> now that you know the value of <span class="math inline">\(Y\)</span>.</p></li>
+<li><p><span class="math inline">P(X=x | Y=y)</span> is the conditional probability that <span class="math inline">X=x</span>, <strong>given</strong> that <span class="math inline">Y=y</span> is observed.</p></li>
+<li><p><span class="math inline">Y=y</span> is not random anymore: it is a <strong>fact</strong> (at least theoretically).</p></li>
+<li><p>You wonder what happens to the probability distribution of <span class="math inline">X</span> now that you know the value of <span class="math inline">Y</span>.</p></li>
 <li><p>Conditional probabilities are linked to the joint probability by:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(X=x | Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>independent</strong>, we have <span class="math inline">\(P(X=x | Y=y) = P(X=x)\)</span> (knowing <span class="math inline">\(Y\)</span> does not change anything to the probability distribution of <span class="math inline">\(X\)</span>).</p></li>
+<li><p>If <span class="math inline">X</span> and <span class="math inline">Y</span> are <strong>independent</strong>, we have <span class="math inline">P(X=x | Y=y) = P(X=x)</span> (knowing <span class="math inline">Y</span> does not change anything to the probability distribution of <span class="math inline">X</span>).</p></li>
 <li><p>We can use the same notation for the complete probability distributions:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(X | Y) = \frac{P(X, Y)}{P(Y)}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="joint-and-conditional-probabilities-using-a-venn-diagram" class="title-slide slide level1 center">
@@ -1301,16 +1318,16 @@ J = \begin{bmatrix}
 <li>6 like none of them.</li>
 </ul></li>
 <li><p>We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities…)</p></li>
-<li><p>We have <span class="math inline">\(P(\text{dog}) = \frac{18+21}{50}\)</span> and <span class="math inline">\(P(\text{cat}) = \frac{18+5}{50}\)</span>.</p></li>
+<li><p>We have <span class="math inline">P(\text{dog}) = \frac{18+21}{50}</span> and <span class="math inline">P(\text{cat}) = \frac{18+5}{50}</span>.</p></li>
 <li><p>Among the 23 who love cats, which proportion also loves dogs?</p></li>
 </ul>
 </div>
 </div>
 <ul>
-<li><p>The joint probability of loving both cats and dogs is <span class="math inline">\(P(\text{cat}, \text{dog}) = \frac{18}{50}\)</span>.</p></li>
+<li><p>The joint probability of loving both cats and dogs is <span class="math inline">P(\text{cat}, \text{dog}) = \frac{18}{50}</span>.</p></li>
 <li><p>The conditional probability of loving dogs given one loves cats is:</p></li>
 </ul>
-<p><span class="math display">\[P(\text{dog} | \text{cat}) = \frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}\]</span></p>
+<p><span class="math display">P(\text{dog} | \text{cat}) = \frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}</span></p>
 </section>
 
 <section id="bayes-rule" class="title-slide slide level1 center">
@@ -1318,20 +1335,20 @@ J = \begin{bmatrix}
 <ul>
 <li>Noticing that the definition of conditional probabilities is symmetric:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     P(X, Y) = P(X | Y) \, P(Y) = P(Y | X) \, P(X)
-\]</span></p>
+</span></p>
 <p>we can obtain the <strong>Bayes’ rule</strong>:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     P(Y | X) = \frac{P(X|Y) \, P(Y)}{P(X)}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>It is very useful when you already know <span class="math inline">\(P(X|Y)\)</span> and want to obtain <span class="math inline">\(P(Y|X)\)</span> (<strong>Bayesian inference</strong>).</p>
+<li><p>It is very useful when you already know <span class="math inline">P(X|Y)</span> and want to obtain <span class="math inline">P(Y|X)</span> (<strong>Bayesian inference</strong>).</p>
 <ul>
-<li><p><span class="math inline">\(P(Y | X)\)</span> is called the <strong>posterior probability</strong>.</p></li>
-<li><p><span class="math inline">\(P(X | Y)\)</span> is called the <strong>likelihood</strong>.</p></li>
-<li><p><span class="math inline">\(P(Y)\)</span> is called the <strong>prior probability</strong> (belief).</p></li>
-<li><p><span class="math inline">\(P(X)\)</span> is called the <strong>model evidence</strong> or <strong>marginal likelihood</strong>.</p></li>
+<li><p><span class="math inline">P(Y | X)</span> is called the <strong>posterior probability</strong>.</p></li>
+<li><p><span class="math inline">P(X | Y)</span> is called the <strong>likelihood</strong>.</p></li>
+<li><p><span class="math inline">P(Y)</span> is called the <strong>prior probability</strong> (belief).</p></li>
+<li><p><span class="math inline">P(X)</span> is called the <strong>model evidence</strong> or <strong>marginal likelihood</strong>.</p></li>
 </ul></li>
 </ul>
 </section>
@@ -1339,17 +1356,17 @@ J = \begin{bmatrix}
 <section id="bayes-rule-example" class="title-slide slide level1 center">
 <h1>Bayes’ rule : example</h1>
 <ul>
-<li>Let’s consider a disease <span class="math inline">\(D\)</span> (binary random variable) and a medical test <span class="math inline">\(T\)</span> (also binary). The disease affects 10% of the general population:</li>
+<li>Let’s consider a disease <span class="math inline">D</span> (binary random variable) and a medical test <span class="math inline">T</span> (also binary). The disease affects 10% of the general population:</li>
 </ul>
-<p><span class="math display">\[P(D=1)= 0.1 \qquad \qquad P(D=0)=0.9\]</span></p>
+<p><span class="math display">P(D=1)= 0.1 \qquad \qquad P(D=0)=0.9</span></p>
 <ul>
 <li>When a patient has the disease, the test is positive 80% of the time:</li>
 </ul>
-<p><span class="math display">\[P(T=1 | D=1) = 0.8 \qquad \qquad P(T=0 | D=1) = 0.2\]</span></p>
+<p><span class="math display">P(T=1 | D=1) = 0.8 \qquad \qquad P(T=0 | D=1) = 0.2</span></p>
 <ul>
 <li>When a patient does not have the disease, the test is still positive 10% of the time:</li>
 </ul>
-<p><span class="math display">\[P(T=1 | D=0) = 0.1 \qquad \qquad P(T=0 | D=0) = 0.9\]</span></p>
+<p><span class="math display">P(T=1 | D=0) = 0.1 \qquad \qquad P(T=0 | D=0) = 0.9</span></p>
 <ul>
 <li>Given that the test is positive, what is the probability that the patient is ill?</li>
 </ul>
@@ -1357,7 +1374,7 @@ J = \begin{bmatrix}
 
 <section id="bayes-rule-example-1" class="title-slide slide level1 center">
 <h1>Bayes’ rule : example</h1>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     P(D=1|T=1) &amp;= \frac{P(T=1 | D=1) \, P(D=1)}{P(T=1)} \\
                &amp;\\
@@ -1367,7 +1384,7 @@ J = \begin{bmatrix}
                &amp;\\
                &amp; = 0.47 \\
 \end{aligned}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="statistics" class="title-slide slide level1 center">
@@ -1379,13 +1396,13 @@ J = \begin{bmatrix}
 <h1>Random sampling / Monte Carlo sampling</h1>
 <ul>
 <li><p>In ML, we will deal with random variables whose exact probability distribution is unknown, but we are interested in their expectation or variance anyway.</p></li>
-<li><p><strong>Random sampling</strong> or <strong>Monte Carlo sampling</strong> (MC) consists of taking <span class="math inline">\(N\)</span> samples <span class="math inline">\(x_i\)</span> out of the distribution <span class="math inline">\(X\)</span> (discrete or continuous) and computing the <strong>sample average</strong>: <span class="math display">\[
+<li><p><strong>Random sampling</strong> or <strong>Monte Carlo sampling</strong> (MC) consists of taking <span class="math inline">N</span> samples <span class="math inline">x_i</span> out of the distribution <span class="math inline">X</span> (discrete or continuous) and computing the <strong>sample average</strong>: <span class="math display">
   \mathbb{E}[X] = \mathbb{E}_{x \sim X} [x] \approx \frac{1}{N} \, \sum_{i=1}^N x_i
-\]</span></p></li>
+</span></p></li>
 </ul>
 
 <img data-src="img/normaldistribution.svg" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
-<li>More samples will be obtained where <span class="math inline">\(f(x)\)</span> is high (<span class="math inline">\(x\)</span> is probable), so the average of the sampled data will be close to the expected value of the distribution.</li>
+<li>More samples will be obtained where <span class="math inline">f(x)</span> is high (<span class="math inline">x</span> is probable), so the average of the sampled data will be close to the expected value of the distribution.</li>
 </ul>
 </section>
 
@@ -1400,9 +1417,9 @@ J = \begin{bmatrix}
 <li><p>the samples are <strong>i.i.d</strong> (independent and identically distributed):</p>
 <ul>
 <li><p>independent: the samples must be unrelated with each other.</p></li>
-<li><p>identically distributed: the samples must come from the same distribution <span class="math inline">\(X\)</span>.</p></li>
+<li><p>identically distributed: the samples must come from the same distribution <span class="math inline">X</span>.</p></li>
 </ul></li>
-<li><p>the number of samples is large enough. Usually <span class="math inline">\(N &gt; 30\)</span> for simple distributions.</p></li>
+<li><p>the number of samples is large enough. Usually <span class="math inline">N &gt; 30</span> for simple distributions.</p></li>
 </ul>
 </section>
 
@@ -1411,11 +1428,11 @@ J = \begin{bmatrix}
 <ul>
 <li>One can estimate any function of the random variable with random sampling:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[f(X)] = \mathbb{E}_{x \sim X} [f(x)] \approx \frac{1}{N} \, \sum_{i=1}^N f(x_i)
-\]</span></p>
+</span></p>
 <ul>
-<li>Example of Monte Carlo sampling to estimate <span class="math inline">\(\pi/4\)</span>:</li>
+<li>Example of Monte Carlo sampling to estimate <span class="math inline">\pi/4</span>:</li>
 </ul>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -1457,19 +1474,19 @@ J = \begin{bmatrix}
 <section id="central-limit-theorem" class="title-slide slide level1 center">
 <h1>Central limit theorem</h1>
 <ul>
-<li><p>Suppose we have an unknown distribution <span class="math inline">\(X\)</span> with expected value <span class="math inline">\(\mu = \mathbb{E}[X]\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p></li>
-<li><p>We can take randomly <span class="math inline">\(N\)</span> samples from <span class="math inline">\(X\)</span> to compute the sample average:</p></li>
+<li><p>Suppose we have an unknown distribution <span class="math inline">X</span> with expected value <span class="math inline">\mu = \mathbb{E}[X]</span> and variance <span class="math inline">\sigma^2</span>.</p></li>
+<li><p>We can take randomly <span class="math inline">N</span> samples from <span class="math inline">X</span> to compute the sample average:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     S_N = \frac{1}{N} \, \sum_{i=1}^N x_i
-\]</span></p>
+</span></p>
 <ul>
 <li>The <strong>Central Limit Theorem</strong> (CLT) states that:</li>
 </ul>
 <blockquote>
-<p>The distribution of sample averages is normally distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\frac{\sigma^2}{N}\)</span>.</p>
+<p>The distribution of sample averages is normally distributed with mean <span class="math inline">\mu</span> and variance <span class="math inline">\frac{\sigma^2}{N}</span>.</p>
 </blockquote>
-<p><span class="math display">\[S_N \sim \mathcal{N}(\mu, \frac{\sigma}{\sqrt{N}})\]</span></p>
+<p><span class="math display">S_N \sim \mathcal{N}(\mu, \frac{\sigma}{\sqrt{N}})</span></p>
 </section>
 
 <section id="central-limit-theorem-1" class="title-slide slide level1 center">
@@ -1477,7 +1494,7 @@ J = \begin{bmatrix}
 <ul>
 <li><p>If we perform the sampling multiple times, even with few samples, the average of the sampling averages will be very close to the expected value.</p></li>
 <li><p>The more samples we get, the smaller the variance of the estimates.</p></li>
-<li><p>Although the distribution <span class="math inline">\(X\)</span> can be anything, the sampling averages are normally distributed.</p></li>
+<li><p>Although the distribution <span class="math inline">X</span> can be anything, the sampling averages are normally distributed.</p></li>
 </ul>
 
 <img data-src="img/IllustrationCentralTheorem.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Credit: <a href="https://en.wikipedia.org/wiki/Central_limit_theorem" class="uri">https://en.wikipedia.org/wiki/Central_limit_theorem</a></p></section>
@@ -1487,14 +1504,14 @@ J = \begin{bmatrix}
 <ul>
 <li>CLT shows that the sampling average is an <strong>unbiased estimator</strong> of the expected value of a distribution:</li>
 </ul>
-<p><span class="math display">\[\mathbb{E}(S_N) = \mathbb{E}(X)\]</span></p>
+<p><span class="math display">\mathbb{E}(S_N) = \mathbb{E}(X)</span></p>
 <ul>
 <li><p>An estimator is a random variable used to measure parameters of a distribution (e.g.&nbsp;its expectation). The problem is that estimators can generally be <strong>biased</strong>.</p></li>
-<li><p>Take the example of a thermometer <span class="math inline">\(M\)</span> measuring the temperature <span class="math inline">\(T\)</span>. <span class="math inline">\(T\)</span> is a random variable (normally distributed with <span class="math inline">\(\mu=20\)</span> and <span class="math inline">\(\sigma=10\)</span>) and the measurements <span class="math inline">\(M\)</span> relate to the temperature with the relation:</p></li>
+<li><p>Take the example of a thermometer <span class="math inline">M</span> measuring the temperature <span class="math inline">T</span>. <span class="math inline">T</span> is a random variable (normally distributed with <span class="math inline">\mu=20</span> and <span class="math inline">\sigma=10</span>) and the measurements <span class="math inline">M</span> relate to the temperature with the relation:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     M = 0.95 \, T + 0.65
-\]</span></p>
+</span></p>
 
 <img data-src="img/estimators-temperature.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
 
@@ -1508,9 +1525,9 @@ J = \begin{bmatrix}
 <img data-src="img/estimators-temperature2.png" style="width:40.0%" class="r-stretch quarto-figure-center"><ul>
 <li>But, as the expectation is linear, we actually have:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbb{E}[M] = \mathbb{E}[0.95 \, T + 0.65] = 0.95 \, \mathbb{E}[T] + 0.65 = 19.65 \neq \mathbb{E}[T]
-\]</span></p>
+</span></p>
 <ul>
 <li>The thermometer is a <strong>biased estimator</strong> of the temperature.</li>
 </ul>
@@ -1519,24 +1536,24 @@ J = \begin{bmatrix}
 <section id="estimators-2" class="title-slide slide level1 center">
 <h1>Estimators</h1>
 <ul>
-<li><p>Let’s note <span class="math inline">\(\theta\)</span> a parameter of a probability distribution <span class="math inline">\(X\)</span> that we want to estimate (it does not have to be its mean).</p></li>
-<li><p>An <strong>estimator</strong> <span class="math inline">\(\hat{\theta}\)</span> is a random variable mapping the sample space of <span class="math inline">\(X\)</span> to a set of sample estimates.</p></li>
+<li><p>Let’s note <span class="math inline">\theta</span> a parameter of a probability distribution <span class="math inline">X</span> that we want to estimate (it does not have to be its mean).</p></li>
+<li><p>An <strong>estimator</strong> <span class="math inline">\hat{\theta}</span> is a random variable mapping the sample space of <span class="math inline">X</span> to a set of sample estimates.</p></li>
 <li><p>The <strong>bias</strong> of an estimator is the mean error made by the estimator:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{B}(\hat{\theta}) = \mathbb{E}[\hat{\theta} - \theta] = \mathbb{E}[\hat{\theta}] - \theta
-\]</span></p>
+</span></p>
 <ul>
 <li>The <strong>variance</strong> of an estimator is the deviation of the samples around the expected value:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{Var}(\hat{\theta}) = \mathbb{E}[(\hat{\theta} - \mathbb{E}[\hat{\theta}] )^2]
-\]</span></p>
+</span></p>
 <ul>
 <li><p>Ideally, we would like estimators with:</p>
 <ul>
 <li><p><strong>low bias</strong>: the estimations are correct on average (= equal to the true parameter).</p></li>
-<li><p><strong>low variance</strong>: we do not need many estimates to get a correct estimate (CLT: <span class="math inline">\(\frac{\sigma}{\sqrt{N}}\)</span>)</p></li>
+<li><p><strong>low variance</strong>: we do not need many estimates to get a correct estimate (CLT: <span class="math inline">\frac{\sigma}{\sqrt{N}}</span>)</p></li>
 </ul></li>
 </ul>
 </section>
@@ -1576,8 +1593,8 @@ J = \begin{bmatrix}
 <li><p><strong>Information theory</strong> (Claude Shannon) asks how much information is contained in a probability distribution.</p></li>
 <li><p>Information is related to <strong>surprise</strong> or <strong>uncertainty</strong>: are the outcomes of a random variable surprising?</p>
 <ul>
-<li><p>Almost certain outcomes (<span class="math inline">\(P \sim 1\)</span>) are not surprising because they happen all the time.</p></li>
-<li><p>Almost impossible outcomes (<span class="math inline">\(P \sim 0\)</span>) are very surprising because they are very rare.</p></li>
+<li><p>Almost certain outcomes (<span class="math inline">P \sim 1</span>) are not surprising because they happen all the time.</p></li>
+<li><p>Almost impossible outcomes (<span class="math inline">P \sim 0</span>) are very surprising because they are very rare.</p></li>
 </ul></li>
 </ul>
 <div class="columns">
@@ -1589,16 +1606,16 @@ J = \begin{bmatrix}
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>A useful measurement of how surprising is an outcome <span class="math inline">\(x\)</span> is the <strong>self-information</strong>:</li>
+<li>A useful measurement of how surprising is an outcome <span class="math inline">x</span> is the <strong>self-information</strong>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     I (x) = - \log P(X = x)
-\]</span></p>
+</span></p>
 <ul>
 <li><p>Depending on which log is used, self-information has different units:</p>
 <ul>
-<li><p><span class="math inline">\(\log_2\)</span>: bits or shannons.</p></li>
-<li><p><span class="math inline">\(\log_e = \ln\)</span>: nats.</p></li>
+<li><p><span class="math inline">\log_2</span>: bits or shannons.</p></li>
+<li><p><span class="math inline">\log_e = \ln</span>: nats.</p></li>
 </ul></li>
 <li><p>But it is just a rescaling, the base never matters.</p></li>
 </ul>
@@ -1611,9 +1628,9 @@ J = \begin{bmatrix}
 <ul>
 <li>The <strong>entropy</strong> (or Shannon entropy) of a probability distribution is the expected value of the self-information of its outcomes:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X) = \mathbb{E}_{x \sim X} [I(x)] = \mathbb{E}_{x \sim X} [- \log P(X = x)]
-\]</span></p>
+</span></p>
 <ul>
 <li>It measures the <strong>uncertainty</strong>, <strong>randomness</strong> or <strong>information content</strong> of the random variable.</li>
 </ul>
@@ -1622,15 +1639,15 @@ J = \begin{bmatrix}
 <ul>
 <li>In the discrete case:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X) = - \sum_x P(x) \, \log P(x)
-\]</span></p>
+</span></p>
 <ul>
 <li>In the continuous case:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X) = - \int_x f(x) \, \log f(x) \, dx
-\]</span></p>
+</span></p>
 <ul>
 <li><p>The entropy of a Bernouilli variable is maximal when both outcomes are <strong>equiprobable</strong>.</p></li>
 <li><p>If a variable is <strong>deterministic</strong>, its entropy is minimal and equal to zero.</p></li>
@@ -1648,35 +1665,35 @@ J = \begin{bmatrix}
 <section id="joint-and-conditional-entropies" class="title-slide slide level1 center">
 <h1>Joint and conditional entropies</h1>
 <ul>
-<li>The <strong>joint entropy</strong> of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined by:</li>
+<li>The <strong>joint entropy</strong> of two random variables <span class="math inline">X</span> and <span class="math inline">Y</span> is defined by:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X, Y) = \mathbb{E}_{x \sim X, y \sim Y} [- \log P(X=x, Y=y)]
-\]</span></p>
+</span></p>
 <ul>
-<li>The <strong>conditional entropy</strong> of two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined by:</li>
+<li>The <strong>conditional entropy</strong> of two random variables <span class="math inline">X</span> and <span class="math inline">Y</span> is defined by:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X | Y) = \mathbb{E}_{x \sim X, y \sim Y} [- \log P(X=x | Y=y)]  = \mathbb{E}_{x \sim X, y \sim Y} [- \log \frac{P(X=x , Y=y)}{P(Y=y)}]
-\]</span></p>
+</span></p>
 <ul>
 <li>If the variables are <strong>independent</strong>, we have:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X, Y) = H(X) + H(Y) \qquad \text{or} \qquad H(X | Y) = H(X)
-\]</span></p>
+</span></p>
 <ul>
 <li>Both are related by:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X | Y) = H(X, Y) - H(Y)
-\]</span></p>
+</span></p>
 <ul>
 <li>The equivalent of Bayes’ rule is:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(Y |X) = H(X |Y) + H(Y) - H(X)
-\]</span></p>
+</span></p>
 </section>
 
 <section id="mutual-information" class="title-slide slide level1 center">
@@ -1684,39 +1701,39 @@ J = \begin{bmatrix}
 <ul>
 <li>The most important information measurement between two variables is the <strong>mutual information</strong> MI (or information gain):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     I(X, Y) = H(X) - H(X | Y) = H(Y) - H(Y | X)
-\]</span></p>
+</span></p>
 <ul>
-<li><p>It measures how much information the variable <span class="math inline">\(X\)</span> holds on <span class="math inline">\(Y\)</span>:</p>
+<li><p>It measures how much information the variable <span class="math inline">X</span> holds on <span class="math inline">Y</span>:</p>
 <ul>
-<li>If the two variables are <strong>independent</strong>, the MI is 0 : <span class="math inline">\(X\)</span> is as random, whether you know <span class="math inline">\(Y\)</span> or not.</li>
+<li>If the two variables are <strong>independent</strong>, the MI is 0 : <span class="math inline">X</span> is as random, whether you know <span class="math inline">Y</span> or not.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
       I (X, Y) = 0
-  \]</span></p>
+  </span></p>
 <ul>
-<li>If the two variables are <strong>dependent</strong>, knowing <span class="math inline">\(Y\)</span> gives you information on <span class="math inline">\(X\)</span>, which becomes less random, i.e.&nbsp;less uncertain / surprising.</li>
+<li>If the two variables are <strong>dependent</strong>, knowing <span class="math inline">Y</span> gives you information on <span class="math inline">X</span>, which becomes less random, i.e.&nbsp;less uncertain / surprising.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
       I (X, Y) &gt; 0
-  \]</span></p></li>
-<li><p>If you can fully predict <span class="math inline">\(X\)</span> when you know <span class="math inline">\(Y\)</span>, it becomes deterministic (<span class="math inline">\(H(X|Y)=0\)</span>) so the mutual information is maximal (<span class="math inline">\(I(X, Y) = H(X)\)</span>).</p></li>
+  </span></p></li>
+<li><p>If you can fully predict <span class="math inline">X</span> when you know <span class="math inline">Y</span>, it becomes deterministic (<span class="math inline">H(X|Y)=0</span>) so the mutual information is maximal (<span class="math inline">I(X, Y) = H(X)</span>).</p></li>
 </ul>
 </section>
 
 <section id="cross-entropy" class="title-slide slide level1 center">
 <h1>Cross-entropy</h1>
 <ul>
-<li>The <strong>cross-entropy</strong> between two distributions <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as:</li>
+<li>The <strong>cross-entropy</strong> between two distributions <span class="math inline">X</span> and <span class="math inline">Y</span> is defined as:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
-\]</span></p>
+</span></p>
 <ul>
-<li><p>Beware that the notation <span class="math inline">\(H(X, Y)\)</span> is the same as the joint entropy, but it is a different concept!</p></li>
-<li><p>The cross-entropy measures the <strong>negative log-likelihood</strong> that a sample <span class="math inline">\(x\)</span> taken from the distribution <span class="math inline">\(X\)</span> could also come from the distribution <span class="math inline">\(Y\)</span>.</p></li>
-<li><p>More exactly, it measures how many bits of information one would need to distinguish the two distributions <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Beware that the notation <span class="math inline">H(X, Y)</span> is the same as the joint entropy, but it is a different concept!</p></li>
+<li><p>The cross-entropy measures the <strong>negative log-likelihood</strong> that a sample <span class="math inline">x</span> taken from the distribution <span class="math inline">X</span> could also come from the distribution <span class="math inline">Y</span>.</p></li>
+<li><p>More exactly, it measures how many bits of information one would need to distinguish the two distributions <span class="math inline">X</span> and <span class="math inline">Y</span>.</p></li>
 </ul>
 
 <img data-src="img/crossentropy.svg" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
@@ -1724,17 +1741,17 @@ J = \begin{bmatrix}
 <section id="cross-entropy-1" class="title-slide slide level1 center">
 <h1>Cross-entropy</h1>
 
-<img data-src="img/crossentropy.svg" style="width:80.0%" class="r-stretch quarto-figure-center"><p><span class="math display">\[
+<img data-src="img/crossentropy.svg" style="width:80.0%" class="r-stretch quarto-figure-center"><p><span class="math display">
     H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
-\]</span></p>
+</span></p>
 <ul>
 <li><p>If the two distributions are the same <em>almost anywhere</em>, one cannot distinguish samples from the two distributions:</p>
 <ul>
-<li>The cross-entropy is the same as the entropy of <span class="math inline">\(X\)</span>.</li>
+<li>The cross-entropy is the same as the entropy of <span class="math inline">X</span>.</li>
 </ul></li>
-<li><p>If the two distributions are completely different, one can tell whether a sample <span class="math inline">\(Z\)</span> comes from <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>:</p>
+<li><p>If the two distributions are completely different, one can tell whether a sample <span class="math inline">Z</span> comes from <span class="math inline">X</span> or <span class="math inline">Y</span>:</p>
 <ul>
-<li>The cross-entropy is higher than the entropy of <span class="math inline">\(X\)</span>.</li>
+<li>The cross-entropy is higher than the entropy of <span class="math inline">X</span>.</li>
 </ul></li>
 </ul>
 </section>
@@ -1742,17 +1759,17 @@ J = \begin{bmatrix}
 <section id="kullback-leibler-divergence" class="title-slide slide level1 center">
 <h1>Kullback-Leibler divergence</h1>
 <ul>
-<li>In practice, the <strong>Kullback-Leibler divergence</strong> <span class="math inline">\(\text{KL}(X ||Y)\)</span> is a better measurement of the similarity (statistical distance) between two probability distributions:</li>
+<li>In practice, the <strong>Kullback-Leibler divergence</strong> <span class="math inline">\text{KL}(X ||Y)</span> is a better measurement of the similarity (statistical distance) between two probability distributions:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{KL}(X ||Y) = \mathbb{E}_{x \sim X}[- \log \frac{P(Y=x)}{P(X=x)}]
-\]</span></p>
+</span></p>
 <ul>
 <li>It is linked to the cross-entropy by:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \text{KL}(X ||Y) = H(X, Y) - H(X)
-\]</span></p>
+</span></p>
 <ul>
 <li><p>If the two distributions are the same <em>almost anywhere</em>:</p>
 <ul>
@@ -1787,7 +1804,6 @@ J = \begin{bmatrix}
   <script src="1.2-Basics_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="1.2-Basics_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="1.2-Basics_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="1.2-Basics_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1956,27 +1972,9 @@ J = \begin{bmatrix}
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

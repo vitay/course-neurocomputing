@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 17&nbsp; Natural Language Processing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notes/6.3-Attention.html" rel="next">
+<link href="../notes/6.1-RNN.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Natural Language Processing</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Linear algorithms</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Recurrent neural networks</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Self-supervised learning</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">Outlook</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Exercises</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#word2vec" id="toc-word2vec" class="nav-link active" data-scroll-target="#word2vec">word2vec</a></li>
+  <li><a href="#applications-of-rnns" id="toc-applications-of-rnns" class="nav-link" data-scroll-target="#applications-of-rnns">Applications of RNNs</a>
+  <ul class="collapse">
+  <li><a href="#classification-of-lstm-architectures" id="toc-classification-of-lstm-architectures" class="nav-link" data-scroll-target="#classification-of-lstm-architectures">Classification of LSTM architectures</a></li>
+  <li><a href="#image-caption-generation" id="toc-image-caption-generation" class="nav-link" data-scroll-target="#image-caption-generation">Image caption generation</a></li>
+  <li><a href="#next-characterword-prediction" id="toc-next-characterword-prediction" class="nav-link" data-scroll-target="#next-characterword-prediction">Next character/word prediction</a></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment analysis</a></li>
+  <li><a href="#question-answering-scene-understanding" id="toc-question-answering-scene-understanding" class="nav-link" data-scroll-target="#question-answering-scene-understanding">Question answering / Scene understanding</a></li>
+  <li><a href="#seq2seq" id="toc-seq2seq" class="nav-link" data-scroll-target="#seq2seq">seq2seq</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Natural Language Processing</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/6.2-NLP.html" target="_blank">html</a> <a href="../slides/pdf/6.2-NLP.pdf" target="_blank">pdf</a></p>
+<section id="word2vec" class="level2">
+<h2 class="anchored" data-anchor-id="word2vec">word2vec</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/8ub1oavRfIE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>The most famous application of RNNs is <strong>Natural Language Processing</strong> (NLP): text understanding, translation, etc… Each word of a sentence has to be represented as a vector <span class="math inline">\mathbf{x}_t</span> in order to be fed to a LSTM. Which representation should we use?</p>
+<p>The naive solution is to use <strong>one-hot encoding</strong>, one element of the vector corresponding to one word of the dictionary.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/onehotvec.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption">One-hot encoding of words. Source: <a href="https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png" class="uri">https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png</a>.</figcaption><p></p>
+</figure>
+</div>
+<p>One-hot encoding is not a good representation for words:</p>
+<ul>
+<li>The vector size will depend on the number of words of the language:
+<ul>
+<li>English: 171,476 (Oxford English Dictionary), 470,000 (Merriam-Webster)… 20,000 in practice.</li>
+<li>French: 270,000 (TILF).</li>
+<li>German: 200,000 (Duden).</li>
+<li>Chinese: 370,000 (Hanyu Da Cidian).</li>
+<li>Korean: 1,100,373 (Woori Mal Saem)</li>
+</ul></li>
+<li>Semantically related words have completely different representations (“endure” and “tolerate”).</li>
+<li>The representation is extremely <strong>sparse</strong> (a lot of useless zeros).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/audio-image-text.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Audio and image data are dense, i.e.&nbsp;each input dimension carries information. One-hot encoded sentences are sparse. Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a>.</figcaption><p></p>
+</figure>
+</div>
+<p><strong>word2vec</strong> <span class="citation" data-cites="Mikolov2013">(<a href="../references.html#ref-Mikolov2013" role="doc-biblioref">Mikolov et al., 2013</a>)</span> learns word <strong>embeddings</strong> by trying to predict the current word based on the context (CBOW, continuous bag-of-words) or the context based on the current word (skip-gram). See <a href="https://code.google.com/archive/p/word2vec/" class="uri">https://code.google.com/archive/p/word2vec/</a> and <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a> for more information.</p>
+<p>It uses a three-layer autoencoder-like NN, where the hidden layer (latent space) will learn to represent the one-hot encoded words in a dense manner.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/word2vec-training.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Word2vec is an autoencoder trained to reproduce the context of a word using one-hot encoded vectors. Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a>.</figcaption><p></p>
+</figure>
+</div>
+<p><strong>word2vec</strong> has three parameters:</p>
+<ul>
+<li>the <strong>vocabulary size</strong>: number of words in the dictionary.</li>
+<li>the <strong>embedding size</strong>: number of neurons in the hidden layer.</li>
+<li>the <strong>context size</strong>: number of surrounding words to predict.</li>
+</ul>
+<p>It is trained on huge datasets of sentences (e.g.&nbsp;Wikipedia). After learning, the hidden layer represents an <strong>embedding vector</strong>, which is a dense and compressed representation of each possible word (dimensionality reduction). Semantically close words (“endure” and “tolerate”) tend to appear in similar contexts, so their embedded representations will be close (Euclidian distance). One can even perform arithmetic operations on these vectors!</p>
+<blockquote class="blockquote">
+<p>queen = king + woman - man</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/linear-relationships.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Arithmetic operations on word2vec representations. Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="applications-of-rnns" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-rnns">Applications of RNNs</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/FiSqycJE_i0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="classification-of-lstm-architectures" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-lstm-architectures">Classification of LSTM architectures</h3>
+<p>Several architectures are possible using recurrent neural networks:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/lstm-diagrams.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Arithmetic operations on word2vec representations. Source: <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" class="uri">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a>.</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>One to One</strong>: classical feedforward network.
+<ul>
+<li>Image <span class="math inline">\rightarrow</span> Label.</li>
+</ul></li>
+<li><strong>One to Many</strong>: single input, many outputs.
+<ul>
+<li>Image <span class="math inline">\rightarrow</span> Text.</li>
+</ul></li>
+<li><strong>Many to One</strong>: sequence of inputs, single output.
+<ul>
+<li>Video / Text <span class="math inline">\rightarrow</span> Label.</li>
+</ul></li>
+<li><strong>Many to Many</strong>: sequence to sequence.
+<ul>
+<li>Text <span class="math inline">\rightarrow</span> Text.</li>
+<li>Video <span class="math inline">\rightarrow</span> Text.</li>
+</ul></li>
+</ul>
+</section>
+<section id="image-caption-generation" class="level3">
+<h3 class="anchored" data-anchor-id="image-caption-generation">Image caption generation</h3>
+<p><strong>Show and Tell</strong> <span class="citation" data-cites="Vinyals2015">(<a href="../references.html#ref-Vinyals2015" role="doc-biblioref">Vinyals et al., 2015</a>)</span> uses the last FC layer of a CNN to feed a LSTM layer and generate words. The pretrained CNN (VGG16, ResNet50) is used as a <strong>feature extractor</strong>. Each word of the sentence is encoded/decoded using word2vec. The output of the LSTM at time <span class="math inline">t</span> becomes its new input at time <span class="math inline">t+1</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/showandtell.webp" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Show and Tell architecture. Source: <span class="citation" data-cites="Sathe2022">(<a href="../references.html#ref-Sathe2022" role="doc-biblioref">Sathe et al., 2022</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Show, attend and tell</strong> <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span> uses attention to focus on specific parts of the image when generating the sentence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/showattendtell.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Show, attend and tell <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/showattendtell-res.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Caption generation using Show, attend and tell <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="next-characterword-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="next-characterword-prediction">Next character/word prediction</h3>
+<p>Characters or words are fed one by one into a LSTM. The desired output is the next character or word in the text.</p>
+<p>Example:</p>
+<ul>
+<li>Inputs: <strong>To, be, or, not, to</strong></li>
+<li>Output: <strong>be</strong></li>
+</ul>
+<p>The text below was generated by a LSTM having read the entire writings of William Shakespeare, learning to predict the next letter (see <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" class="uri">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a>). Each generated character is used as the next input.</p>
+<pre class="text"><code>PANDARUS:
+Alas, I think he shall be come approached and the day
+When little srain would be attain'd into being never fed,
+And who is but a chain and subjects of his death,
+I should not sleep.
+
+Second Senator:
+They are away this miseries, produced upon my soul,
+Breaking and strongly should be buried, when I perish
+The earth and thoughts of many states.
+
+DUKE VINCENTIO:
+Well, your wit is in the care of side and that.
+
+Second Lord:
+They would be ruled after this chamber, and
+my fair nues begun out of the fact, to be conveyed,
+Whose noble souls I'll have the heart of the wars.
+
+Clown:
+Come, sir, I will make did behold your worship.</code></pre>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Sunspring SciFi movie
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/LY7x2Ihqjmc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>More info: <a href="http://www.thereforefilms.com/sunspring.html" class="uri">http://www.thereforefilms.com/sunspring.html</a></p>
+</div>
+</div>
+</section>
+<section id="sentiment-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="sentiment-analysis">Sentiment analysis</h3>
+<p>Sentiment analysis consists of attributing a value (positive or negative) to a text. A 1D convolutional layers “slides” over the text, each word being encoded using word2vec. The bidirectional LSTM computes a state vector for the complete text. A classifier (fully connected layer) learns to predict the sentiment of the text (positive/negative).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/sentimentanalysis.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Sentiment analysis using bidirectional LSTMs. Source: <a href="https://offbit.github.io/how-to-read/" class="uri">https://offbit.github.io/how-to-read/</a>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="question-answering-scene-understanding" class="level3">
+<h3 class="anchored" data-anchor-id="question-answering-scene-understanding">Question answering / Scene understanding</h3>
+<p>A LSTM can learn to associate an image (static) plus a question (sequence) with the answer (sequence). The image is abstracted by a CNN pretrained for object recognition.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/questionanswering.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Question answering. Source: <span class="citation" data-cites="Malinowski2015">(<a href="../references.html#ref-Malinowski2015" role="doc-biblioref">Malinowski et al., 2015</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="seq2seq" class="level3">
+<h3 class="anchored" data-anchor-id="seq2seq">seq2seq</h3>
+<p>The <strong>state vector</strong> obtained at the end of a sequence can be reused as an initial state for another LSTM. The goal of the <strong>encoder</strong> is to find a compressed representation of a sequence of inputs. The goal of the <strong>decoder</strong> is to generate a sequence from that representation. <strong>Sequence-to-sequence</strong> (seq2seq <span class="citation" data-cites="Sutskever2014">(<a href="../references.html#ref-Sutskever2014" role="doc-biblioref">Sutskever et al., 2014</a>)</span>) models are recurrent autoencoders.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/seq2seq.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">seq2seq architecture. Source: <span class="citation" data-cites="Sutskever2014">(<a href="../references.html#ref-Sutskever2014" role="doc-biblioref">Sutskever et al., 2014</a>)</span>.</figcaption><p></p>
+</figure>
+</div>
+<p>The <strong>encoder</strong> learns for example to encode each word of a sentence in French. The <strong>decoder</strong> learns to associate the <strong>final state vector</strong> to the corresponding English sentence. seq2seq allows automatic text translation between many languages given enough data. Modern translation tools are based on seq2seq, but with attention.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Malinowski2015" class="csl-entry" role="doc-biblioentry">
+Malinowski, M., Rohrbach, M., and Fritz, M. (2015). Ask <span>Your Neurons</span>: <span class="nocase">A Neural-based Approach</span> to <span>Answering Questions</span> about <span>Images</span>. Available at: <a href="http://arxiv.org/abs/1505.01121">http://arxiv.org/abs/1505.01121</a> [Accessed December 24, 2020].
+</div>
+<div id="ref-Mikolov2013" class="csl-entry" role="doc-biblioentry">
+Mikolov, T., Chen, K., Corrado, G., and Dean, J. (2013). Efficient <span>Estimation</span> of <span>Word Representations</span> in <span>Vector Space</span>. Available at: <a href="http://arxiv.org/abs/1301.3781">http://arxiv.org/abs/1301.3781</a> [Accessed December 24, 2020].
+</div>
+<div id="ref-Sathe2022" class="csl-entry" role="doc-biblioentry">
+Sathe, S., Shinde, S., Chorge, S., Thakare, S., and Kulkarni, L. (2022). Overview of <span>Image Caption Generators</span> and <span>Its Applications</span>. in <em>Proceeding of <span>International Conference</span> on <span>Computational Science</span> and <span>Applications</span></em> Algorithms for <span>Intelligent Systems</span>., eds. S. Bhalla, M. Bedekar, R. Phalnikar, and S. Sirsikar (<span>Singapore</span>: <span>Springer Nature</span>), 105–110. doi:<a href="https://doi.org/10.1007/978-981-19-0863-7_8">10.1007/978-981-19-0863-7_8</a>.
+</div>
+<div id="ref-Sutskever2014" class="csl-entry" role="doc-biblioentry">
+Sutskever, I., Vinyals, O., and Le, Q. V. (2014). Sequence to <span>Sequence Learning</span> with <span>Neural Networks</span>. Available at: <a href="http://arxiv.org/abs/1409.3215">http://arxiv.org/abs/1409.3215</a> [Accessed November 7, 2019].
+</div>
+<div id="ref-Vinyals2015" class="csl-entry" role="doc-biblioentry">
+Vinyals, O., Toshev, A., Bengio, S., and Erhan, D. (2015). Show and <span>Tell</span>: <span>A Neural Image Caption Generator</span>. Available at: <a href="http://arxiv.org/abs/1411.4555">http://arxiv.org/abs/1411.4555</a> [Accessed December 24, 2020].
+</div>
+<div id="ref-Xu2015" class="csl-entry" role="doc-biblioentry">
+Xu, K., Ba, J. L., Kiros, R., Cho, K., Courville, A., Salakhutdinov, R., et al. (2015). Show, <span>Attend</span> and <span>Tell</span>: <span>Neural Image Caption Generation</span> with <span>Visual Attention</span>. in <em>Proceedings of the 32nd <span>International Conference</span> on <span>Machine Learning</span> - <span>Volume</span> 37</em> <span>ICML</span>’15. (<span>JMLR.org</span>), 2048–2057. Available at: <a href="http://dl.acm.org/citation.cfm?id=3045118.3045336">http://dl.acm.org/citation.cfm?id=3045118.3045336</a> [Accessed April 7, 2019].
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/6.1-RNN.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Recurrent neural networks</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notes/6.3-Attention.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Attentional neural networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

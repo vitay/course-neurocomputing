@@ -7,7 +7,7 @@
 <link href="6.1-RNN_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="6.1-RNN_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="6.1-RNN_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -30,6 +30,22 @@
     }
   </style>
   <link rel="stylesheet" href="6.1-RNN_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="6.1-RNN_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="6.1-RNN_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="6.1-RNN_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -325,7 +341,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Recurrent neural networks</p>
   <p class="author">Julien Vitay</p>
@@ -340,30 +356,20 @@
 
 <section id="problem-with-feedforward-networks" class="title-slide slide level1 center">
 <h1>Problem with feedforward networks</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
 <ul>
 <li><strong>Feedforward neural networks</strong> learn to associate an input vector to an output.</li>
 </ul>
-<p><span class="math display">\[\mathbf{y} = F_\theta(\mathbf{x})\]</span></p>
+<p><span class="math display">\mathbf{y} = F_\theta(\mathbf{x})</span></p>
 <ul>
-<li>If you present a sequence of inputs <span class="math inline">\(\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_t\)</span> to a feedforward network, the outputs will be independent from each other:</li>
+<li>If you present a sequence of inputs <span class="math inline">\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_t</span> to a feedforward network, the outputs will be independent from each other:</li>
 </ul>
-<p><span class="math display">\[\mathbf{y}_0 = F_\theta(\mathbf{x}_0)\]</span> <span class="math display">\[\mathbf{y}_1 = F_\theta(\mathbf{x}_1)\]</span> <span class="math display">\[\dots\]</span> <span class="math display">\[\mathbf{y}_t = F_\theta(\mathbf{x}_t)\]</span></p>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/mlp.svg"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><span class="math display">\mathbf{y}_0 = F_\theta(\mathbf{x}_0)</span> <span class="math display">\mathbf{y}_1 = F_\theta(\mathbf{x}_1)</span> <span class="math display">\dots</span> <span class="math display">\mathbf{y}_t = F_\theta(\mathbf{x}_t)</span></p>
 <ul>
 <li>Many problems depend on time series, such as predicting the future of a time series by knowing its past values.</li>
 </ul>
-<p><span class="math display">\[x_{t+1} = F_\theta(x_0, x_1, \ldots, x_t)\]</span></p>
+<p><span class="math display">x_{t+1} = F_\theta(x_0, x_1, \ldots, x_t)</span></p>
 <ul>
-<li>Example: weather prediction, financial prediction, predictive maintenance, natural language processing, video analysis…</li>
+<li>Example: weather forecast, financial prediction, predictive maintenance, video analysis…</li>
 </ul>
 </section>
 
@@ -372,13 +378,14 @@
 <ul>
 <li>A naive solution is to <strong>aggregate</strong> (concatenate) inputs over a sufficiently long window and use it as a new input vector for the feedforward network.</li>
 </ul>
-<p><span class="math display">\[\mathbf{X} = \begin{bmatrix}\mathbf{x}_{t-T} &amp; \mathbf{x}_{t-T+1} &amp; \ldots &amp; \mathbf{x}_t \\ \end{bmatrix}\]</span></p>
-<p><span class="math display">\[\mathbf{y}_t = F_\theta(\mathbf{X})\]</span></p>
+<p><span class="math display">\mathbf{X} = \begin{bmatrix}\mathbf{x}_{t-T} &amp; \mathbf{x}_{t-T+1} &amp; \ldots &amp; \mathbf{x}_t \\ \end{bmatrix}</span></p>
+<p><span class="math display">\mathbf{y}_t = F_\theta(\mathbf{X})</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/forecast-mlp.jpg"></p>
+<p></p><figcaption><a href="https://www.researchgate.net/publication/220827486_A_study_on_the_ability_of_Support_Vector_Regression_and_Neural_Networks_to_Forecast_Basic_Time_Series_Patterns" class="uri">https://www.researchgate.net/publication/220827486_A_study_on_the_ability_of_Support_Vector_Regression_and_Neural_Networks_to_Forecast_Basic_Time_Series_Patterns</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -387,9 +394,6 @@
 <li><p><strong>Problem 2:</strong> Having more input dimensions increases dramatically the complexity of the classifier (VC dimension), hence the number of training examples required to avoid overfitting.</p></li>
 </ul>
 </div>
-</div>
-<div class="footer">
-<p><a href="https://www.researchgate.net/publication/220827486_A_study_on_the_ability_of_Support_Vector_Regression_and_Neural_Networks_to_Forecast_Basic_Time_Series_Patterns" class="uri">https://www.researchgate.net/publication/220827486_A_study_on_the_ability_of_Support_Vector_Regression_and_Neural_Networks_to_Forecast_Basic_Time_Series_Patterns</a></p>
 </div>
 </section>
 
@@ -400,99 +404,91 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/RNN-rolled.png" style="width:70.0%"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:65%;">
 <ul>
 <li><p>A <strong>recurrent neural network</strong> (RNN) uses it previous output as an additional input (<em>context</em>).</p></li>
-<li><p>All vectors have a time index <span class="math inline">\(t\)</span> denoting the time at which this vector was computed.</p></li>
-<li><p>The input vector at time <span class="math inline">\(t\)</span> is <span class="math inline">\(\mathbf{x}_t\)</span>, the output vector is <span class="math inline">\(\mathbf{h}_t\)</span>:</p></li>
+<li><p>All vectors have a time index <span class="math inline">t</span> denoting the time at which this vector was computed.</p></li>
+<li><p>The input vector at time <span class="math inline">t</span> is <span class="math inline">\mathbf{x}_t</span>, the output vector is <span class="math inline">\mathbf{h}_t</span>:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h}_t = \sigma(W_x \times \mathbf{x}_t + W_h \times \mathbf{h}_{t-1} + \mathbf{b})
-\]</span></p>
+</span></p>
 <ul>
-<li><p><span class="math inline">\(\sigma\)</span> is a transfer function, usually logistic or tanh.</p></li>
-<li><p>The input <span class="math inline">\(\mathbf{x}_t\)</span> and previous output <span class="math inline">\(\mathbf{h}_{t-1}\)</span> are multiplied by <strong>learnable weights</strong>:</p>
+<li><p><span class="math inline">\sigma</span> is a transfer function, usually logistic or tanh.</p></li>
+<li><p>The input <span class="math inline">\mathbf{x}_t</span> and previous output <span class="math inline">\mathbf{h}_{t-1}</span> are multiplied by <strong>learnable weights</strong>:</p>
 <ul>
-<li><p><span class="math inline">\(W_x\)</span> is the input weight matrix.</p></li>
-<li><p><span class="math inline">\(W_h\)</span> is the recurrent weight matrix.</p></li>
+<li><p><span class="math inline">W_x</span> is the input weight matrix.</p></li>
+<li><p><span class="math inline">W_h</span> is the recurrent weight matrix.</p></li>
 </ul></li>
 </ul>
 </div>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </section>
 
 <section id="recurrent-neural-networks" class="title-slide slide level1 center">
 <h1>Recurrent neural networks</h1>
 
-<img data-src="img/RNN-unrolled.png" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
-<li>One can <strong>unroll</strong> a recurrent network: the output <span class="math inline">\(\mathbf{h}_t\)</span> depends on the whole history of inputs from <span class="math inline">\(\mathbf{x}_0\)</span> to <span class="math inline">\(\mathbf{x}_t\)</span>.</li>
+<img data-src="img/RNN-unrolled.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p><ul>
+<li>One can <strong>unroll</strong> a recurrent network: the output <span class="math inline">\mathbf{h}_t</span> depends on the whole history of inputs from <span class="math inline">\mathbf{x}_0</span> to <span class="math inline">\mathbf{x}_t</span>.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \mathbf{h}_t &amp; = \sigma(W_x \times \mathbf{x}_t + W_h \times \mathbf{h}_{t-1} + \mathbf{b}) \\
                  &amp; = \sigma(W_x \times \mathbf{x}_t + W_h \times \sigma(W_x \times \mathbf{x}_{t-1} + W_h \times \mathbf{h}_{t-2} + \mathbf{b})  + \mathbf{b}) \\
                  &amp; = f_{W_x, W_h, \mathbf{b}} (\mathbf{x}_0, \mathbf{x}_1, \dots,\mathbf{x}_t) \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>A RNN is considered as part of <strong>deep learning</strong>, as there are many layers of weights between the first input <span class="math inline">\(\mathbf{x}_0\)</span> and the output <span class="math inline">\(\mathbf{h}_t\)</span>.</p></li>
-<li><p>The only difference with a DNN is that the weights <span class="math inline">\(W_x\)</span> and <span class="math inline">\(W_h\)</span> are <strong>reused</strong> at each time step.</p></li>
+<li><p>A RNN is considered as part of <strong>deep learning</strong>, as there are many layers of weights between the first input <span class="math inline">\mathbf{x}_0</span> and the output <span class="math inline">\mathbf{h}_t</span>.</p></li>
+<li><p>The only difference with a DNN is that the weights <span class="math inline">W_x</span> and <span class="math inline">W_h</span> are <strong>reused</strong> at each time step.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
 </section>
 
 <section id="bptt-backpropagation-through-time" class="title-slide slide level1 center">
 <h1>BPTT: Backpropagation through time</h1>
 
-<img data-src="img/RNN-unrolled.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p><span class="math display">\[
+<img data-src="img/RNN-unrolled.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p><p><span class="math display">
     \mathbf{h}_t = f_{W_x, W_h, \mathbf{b}} (\mathbf{x}_0, \mathbf{x}_1, \dots,\mathbf{x}_t) \\
-\]</span></p>
+</span></p>
 <ul>
-<li><p>The function between the history of inputs and the output at time <span class="math inline">\(t\)</span> is differentiable: we can simply apply gradient descent to find the weights!</p></li>
+<li><p>The function between the history of inputs and the output at time <span class="math inline">t</span> is differentiable: we can simply apply gradient descent to find the weights!</p></li>
 <li><p>This variant of backpropagation is called <strong>Backpropagation Through Time</strong> (BPTT).</p></li>
-<li><p>Once the loss between <span class="math inline">\(\mathbf{h}_t\)</span> and its desired value is computed, one applies the <strong>chain rule</strong> to find out how to modify the weights <span class="math inline">\(W_x\)</span> and <span class="math inline">\(W_h\)</span> using the history <span class="math inline">\((\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_t)\)</span>.</p></li>
+<li><p>Once the loss between <span class="math inline">\mathbf{h}_t</span> and its desired value is computed, one applies the <strong>chain rule</strong> to find out how to modify the weights <span class="math inline">W_x</span> and <span class="math inline">W_h</span> using the history <span class="math inline">(\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_t)</span>.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
 </section>
 
 <section id="bptt-backpropagation-through-time-1" class="title-slide slide level1 center">
 <h1>BPTT: Backpropagation through time</h1>
 <ul>
-<li>Let’s compute the gradient accumulated between <span class="math inline">\(\mathbf{h}_{t-1}\)</span> and <span class="math inline">\(\mathbf{h}_{t}\)</span>:</li>
+<li>Let’s compute the gradient accumulated between <span class="math inline">\mathbf{h}_{t-1}</span> and <span class="math inline">\mathbf{h}_{t}</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \mathbf{h}_{t} &amp; = \sigma(W_x \times \mathbf{x}_{t} + W_h \times \mathbf{h}_{t-1} + \mathbf{b}) \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
 <li>As for feedforward networks, the gradient of the loss function is decomposed into two parts:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(W_x, W_h)}{\partial W_x} =
     \frac{\partial \mathcal{L}(W_x, W_h)}{\partial \mathbf{h}_t} \times
     \frac{\partial \mathbf{h}_t}{\partial W_x}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
     \frac{\partial \mathcal{L}(W_x, W_h)}{\partial W_h} =
     \frac{\partial \mathcal{L}(W_x, W_h)}{\partial \mathbf{h}_t} \times
     \frac{\partial \mathbf{h}_t}{\partial W_h}
-\]</span></p>
+</span></p>
 <ul>
 <li>The first part only depends on the loss function (mse, cross-entropy):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \frac{\partial \mathcal{L}(W_x, W_h)}{\partial \mathbf{h}_t} = - (\mathbf{t}_{t}- \mathbf{h}_{t})
-\]</span></p>
+</span></p>
 <ul>
 <li>The second part depends on the RNN itself.</li>
 </ul>
@@ -503,30 +499,30 @@
 <ul>
 <li>Output of the RNN:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \mathbf{h}_{t} &amp; = \sigma(W_x \times \mathbf{x}_{t} + W_h \times \mathbf{h}_{t-1} + \mathbf{b}) \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
 <li>The gradients w.r.t the two weight matrices are given by this <strong>recursive</strong> relationship (product rule):</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \frac{\partial \mathbf{h}_t}{\partial W_x} &amp; = \mathbf{h'}_{t} \times (\mathbf{x}_t + W_h \times \frac{\partial \mathbf{h}_{t-1}}{\partial W_x})\\
     &amp; \\
     \frac{\partial \mathbf{h}_t}{\partial W_h} &amp; = \mathbf{h'}_{t} \times (\mathbf{h}_{t-1} + W_h \times \frac{\partial \mathbf{h}_{t-1}}{\partial W_h})\\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
-<li>The derivative of the transfer function is noted <span class="math inline">\(\mathbf{h'}_{t}\)</span>:</li>
+<li>The derivative of the transfer function is noted <span class="math inline">\mathbf{h'}_{t}</span>:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h'}_{t} = \begin{cases}
         \mathbf{h}_{t} \, (1 - \mathbf{h}_{t}) \quad \text{ for logistic}\\
         (1 - \mathbf{h}_{t}^2) \quad \text{ for tanh.}\\
     \end{cases}
-\]</span></p>
+</span></p>
 </section>
 
 <section id="bptt-backpropagation-through-time-3" class="title-slide slide level1 center">
@@ -534,22 +530,22 @@
 <ul>
 <li>If we <strong>unroll</strong> the gradient, we obtain:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \frac{\partial \mathbf{h}_t}{\partial W_x} &amp; = \mathbf{h'}_{t} \, (\mathbf{x}_t + W_h \times \mathbf{h'}_{t-1} \, (\mathbf{x}_{t-1} + W_h \times \mathbf{h'}_{t-2} \, (\mathbf{x}_{t-2} + W_h \times \ldots (\mathbf{x}_0))))\\
     &amp; \\
     \frac{\partial \mathbf{h}_t}{\partial W_h} &amp; = \mathbf{h'}_{t} \, (\mathbf{h}_{t-1} + W_h \times \mathbf{h'}_{t-1} \, (\mathbf{h}_{t-2} + W_h \times \mathbf{h'}_{t-2} \, \ldots (\mathbf{h}_{0})))\\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>When updating the weights at time <span class="math inline">\(t\)</span>, we need to store in memory:</p>
+<li><p>When updating the weights at time <span class="math inline">t</span>, we need to store in memory:</p>
 <ul>
-<li><p>the complete history of inputs <span class="math inline">\(\mathbf{x}_0\)</span>, <span class="math inline">\(\mathbf{x}_1\)</span>, … <span class="math inline">\(\mathbf{x}_t\)</span>.</p></li>
-<li><p>the complete history of outputs <span class="math inline">\(\mathbf{h}_0\)</span>, <span class="math inline">\(\mathbf{h}_1\)</span>, … <span class="math inline">\(\mathbf{h}_t\)</span>.</p></li>
-<li><p>the complete history of derivatives <span class="math inline">\(\mathbf{h'}_0\)</span>, <span class="math inline">\(\mathbf{h'}_1\)</span>, … <span class="math inline">\(\mathbf{h'}_t\)</span>.</p></li>
+<li><p>the complete history of inputs <span class="math inline">\mathbf{x}_0</span>, <span class="math inline">\mathbf{x}_1</span>, … <span class="math inline">\mathbf{x}_t</span>.</p></li>
+<li><p>the complete history of outputs <span class="math inline">\mathbf{h}_0</span>, <span class="math inline">\mathbf{h}_1</span>, … <span class="math inline">\mathbf{h}_t</span>.</p></li>
+<li><p>the complete history of derivatives <span class="math inline">\mathbf{h'}_0</span>, <span class="math inline">\mathbf{h'}_1</span>, … <span class="math inline">\mathbf{h'}_t</span>.</p></li>
 </ul></li>
 </ul>
-<p>before computing the gradients iteratively, starting from time <span class="math inline">\(t\)</span> and accumulating gradients <strong>backwards</strong> in time until <span class="math inline">\(t=0\)</span>.</p>
+<p>before computing the gradients iteratively, starting from time <span class="math inline">t</span> and accumulating gradients <strong>backwards</strong> in time until <span class="math inline">t=0</span>.</p>
 <ul>
 <li>Each step backwards in time adds a bit to the gradient used to update the weights.</li>
 </ul>
@@ -558,66 +554,57 @@
 <section id="truncated-bptt" class="title-slide slide level1 center">
 <h1>Truncated BPTT</h1>
 
-<img data-src="img/truncated_backprop.png" class="r-stretch quarto-figure-center"><ul>
-<li><p>In practice, going back to <span class="math inline">\(t=0\)</span> at each time step requires too many computations, which may not be needed.</p></li>
-<li><p><strong>Truncated BPTT</strong> only updates the gradients up to <span class="math inline">\(T\)</span> steps before: the gradients are computed backwards from <span class="math inline">\(t\)</span> to <span class="math inline">\(t-T\)</span>. The partial derivative in <span class="math inline">\(t-T-1\)</span> is considered 0.</p></li>
-<li><p>This limits the <strong>horizon</strong> of BPTT: dependencies longer than <span class="math inline">\(T\)</span> will not be learned, so it has to be chosen carefully for the task.</p></li>
-<li><p><span class="math inline">\(T\)</span> becomes yet another hyperparameter of your algorithm…</p></li>
+<img data-src="img/truncated_backprop.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html" class="uri">https://r2rt.com/styles-of-truncated-backpropagation.html</a></p><ul>
+<li><p>In practice, going back to <span class="math inline">t=0</span> at each time step requires too many computations, which may not be needed.</p></li>
+<li><p><strong>Truncated BPTT</strong> only updates the gradients up to <span class="math inline">T</span> steps before: the gradients are computed backwards from <span class="math inline">t</span> to <span class="math inline">t-T</span>. The partial derivative in <span class="math inline">t-T-1</span> is considered 0.</p></li>
+<li><p>This limits the <strong>horizon</strong> of BPTT: dependencies longer than <span class="math inline">T</span> will not be learned, so it has to be chosen carefully for the task.</p></li>
+<li><p><span class="math inline">T</span> becomes yet another hyperparameter of your algorithm…</p></li>
 </ul>
-<div class="footer">
-<p><a href="https://r2rt.com/styles-of-truncated-backpropagation.html" class="uri">https://r2rt.com/styles-of-truncated-backpropagation.html</a></p>
-</div>
 </section>
 
 <section id="temporal-dependencies" class="title-slide slide level1 center">
 <h1>Temporal dependencies</h1>
 <ul>
-<li>BPTT is able to find <strong>short-term dependencies</strong> between inputs and outputs: perceiving the inputs <span class="math inline">\(\mathbf{x}_0\)</span> and <span class="math inline">\(\mathbf{x}_1\)</span> allows to respond correctly at <span class="math inline">\(t = 3\)</span>.</li>
+<li>BPTT is able to find <strong>short-term dependencies</strong> between inputs and outputs: perceiving the inputs <span class="math inline">\mathbf{x}_0</span> and <span class="math inline">\mathbf{x}_1</span> allows to respond correctly at <span class="math inline">t = 3</span>.</li>
 </ul>
 
-<img data-src="img/RNN-shorttermdependencies.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
-</section>
+<img data-src="img/RNN-shorttermdependencies.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p></section>
 
 <section id="temporal-dependencies-1" class="title-slide slide level1 center">
 <h1>Temporal dependencies</h1>
 <ul>
 <li><p>But it fails to detect <strong>long-term dependencies</strong> because of:</p>
 <ul>
-<li><p>the truncated horizon <span class="math inline">\(T\)</span> (for computational reasons).</p></li>
+<li><p>the truncated horizon <span class="math inline">T</span> (for computational reasons).</p></li>
 <li><p>the <strong>vanishing gradient problem</strong>.</p></li>
 </ul></li>
 </ul>
 
-<img data-src="img/RNN-longtermdependencies.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
-</section>
+<img data-src="img/RNN-longtermdependencies.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p></section>
 
 <section id="vanishing-and-exploding-gradients" class="title-slide slide level1 center">
 <h1>Vanishing and exploding gradients</h1>
 <ul>
 <li>Let’s look at the gradient w.r.t to the input weights:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \frac{\partial \mathbf{h}_t}{\partial W_x} &amp; = \mathbf{h'}_{t} \, (\mathbf{x}_t + W_h \times \frac{\partial \mathbf{h}_{t-1}}{\partial W_x})\\
     &amp; \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>At each iteration backwards in time, the gradients are multiplied by <span class="math inline">\(W_h\)</span>.</p></li>
-<li><p>If you search how <span class="math inline">\(\frac{\partial \mathbf{h}_t}{\partial W_x}\)</span> depends on <span class="math inline">\(\mathbf{x}_0\)</span>, you obtain something like:</p></li>
+<li><p>At each iteration backwards in time, the gradients are multiplied by <span class="math inline">W_h</span>.</p></li>
+<li><p>If you search how <span class="math inline">\frac{\partial \mathbf{h}_t}{\partial W_x}</span> depends on <span class="math inline">\mathbf{x}_0</span>, you obtain something like:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
     \frac{\partial \mathbf{h}_t}{\partial W_x} &amp; \approx \prod_{k=0}^t \mathbf{h'}_{k} \, ((W_h)^t \, \mathbf{x}_0 + \dots) \\
 \end{aligned}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>If <span class="math inline">\(|W_h| &gt; 1\)</span>, <span class="math inline">\(|(W_h)^t|\)</span> increases exponentially with <span class="math inline">\(t\)</span>: the gradient <strong>explodes</strong>.</p></li>
-<li><p>If <span class="math inline">\(|W_h| &lt; 1\)</span>, <span class="math inline">\(|(W_h)^t|\)</span> decreases exponentially with <span class="math inline">\(t\)</span>: the gradient <strong>vanishes</strong>.</p></li>
+<li><p>If <span class="math inline">|W_h| &gt; 1</span>, <span class="math inline">|(W_h)^t|</span> increases exponentially with <span class="math inline">t</span>: the gradient <strong>explodes</strong>.</p></li>
+<li><p>If <span class="math inline">|W_h| &lt; 1</span>, <span class="math inline">|(W_h)^t|</span> decreases exponentially with <span class="math inline">t</span>: the gradient <strong>vanishes</strong>.</p></li>
 </ul>
 </section>
 
@@ -626,9 +613,9 @@
 <ul>
 <li><strong>Exploding gradients</strong> are relatively easy to deal with: one just clips the norm of the gradient to a maximal value.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     || \frac{\partial \mathcal{L}(W_x, W_h)}{\partial W_x}|| \gets \min(||\frac{\partial \mathcal{L}(W_x, W_h)}{\partial W_x}||, T)
-\]</span></p>
+</span></p>
 <ul>
 <li><p>But there is no solution to the <strong>vanishing gradient problem</strong> for regular RNNs: the gradient fades over time (backwards) and no long-term dependency can be learned.</p></li>
 <li><p>This is the same problem as for feedforward deep networks: a RNN is just a deep network rolled over itself.</p></li>
@@ -649,18 +636,12 @@
 <section id="regular-rnn" class="title-slide slide level1 center">
 <h1>Regular RNN</h1>
 
-<img data-src="img/LSTM3-SimpleRNN.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
-</section>
+<img data-src="img/LSTM3-SimpleRNN.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p></section>
 
 <section id="lstm-1" class="title-slide slide level1 center">
 <h1>LSTM</h1>
 
-<img data-src="img/LSTM3-chain.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
-</section>
+<img data-src="img/LSTM3-chain.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p></section>
 
 <section id="lstm-cell" class="title-slide slide level1 center">
 <h1>LSTM cell</h1>
@@ -669,15 +650,13 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM-cell2.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
 <li><p>A <strong>LSTM layer</strong> is a RNN layer with the ability to control what it memorizes.</p></li>
-<li><p>In addition to the input <span class="math inline">\(\mathbf{x}_t\)</span> and output <span class="math inline">\(\mathbf{h}_t\)</span>, it also has a <strong>state</strong> <span class="math inline">\(\mathbf{C}_t\)</span> which is maintained over time.</p></li>
+<li><p>In addition to the input <span class="math inline">\mathbf{x}_t</span> and output <span class="math inline">\mathbf{h}_t</span>, it also has a <strong>state</strong> <span class="math inline">\mathbf{C}_t</span> which is maintained over time.</p></li>
 <li><p>The state is the memory of the layer (sometimes called context).</p></li>
 <li><p>It also contains three multiplicative <strong>gates</strong>:</p>
 <ul>
@@ -697,15 +676,12 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/lstm3.jpg" style="width:80.0%"></p>
+<p></p><figcaption>Source: <a href="http://eric-yuan.me/rnn2-lstm/" class="uri">http://eric-yuan.me/rnn2-lstm/</a></figcaption><p></p>
 </figure>
-</div>
-<p><em>Not the same notation, but one sees better the gates…</em></p>
-<div class="footer">
-<p>Source: <a href="http://eric-yuan.me/rnn2-lstm/" class="uri">http://eric-yuan.me/rnn2-lstm/</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>The <strong>state</strong> <span class="math inline">\(\mathbf{C}_t\)</span> can be seen as an accumulator integrating inputs (and previous outputs) over time.</p>
+<li><p>The <strong>state</strong> <span class="math inline">\mathbf{C}_t</span> can be seen as an accumulator integrating inputs (and previous outputs) over time.</p>
 <ul>
 <li><p>The <strong>input gate</strong> allows inputs to be stored.</p>
 <ul>
@@ -728,19 +704,18 @@
 
 <section id="the-cell-state-is-propagated-over-time" class="title-slide slide level1 center">
 <h1>The cell state is propagated over time</h1>
-<p>::: {.columns} ::: {.column width=50%}</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-C-line.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
 </div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
-<p>::: ::: {.column width=50%}</p>
+</div><div class="column" style="width:50%;">
 <ul>
-<li><p>By default, the cell state <span class="math inline">\(\mathbf{C}_t\)</span> stays the same over time (<em>conveyor belt</em>).</p></li>
-<li><p>It can have the same number of dimensions as the output <span class="math inline">\(\mathbf{h}_t\)</span>, but does not have to.</p></li>
+<li><p>By default, the cell state <span class="math inline">\mathbf{C}_t</span> stays the same over time (<em>conveyor belt</em>).</p></li>
+<li><p>It can have the same number of dimensions as the output <span class="math inline">\mathbf{h}_t</span>, but does not have to.</p></li>
 <li><p>Its content can be erased by multiplying it with a vector of 0s, or preserved by multiplying it by a vector of 1s.</p></li>
 <li><p>We can use a <strong>sigmoid</strong> to achieve this:</p></li>
 </ul>
@@ -748,6 +723,8 @@
 <figure>
 <p><img data-src="img/LSTM3-gate.png" style="width:30.0%"></p>
 </figure>
+</div>
+</div>
 </div>
 </section>
 
@@ -758,21 +735,19 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-focus-f.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>Forget weights <span class="math inline">\(W_f\)</span> and a sigmoid function are used to decide if the state should be preserved or not.</li>
+<li>Forget weights <span class="math inline">W_f</span> and a sigmoid function are used to decide if the state should be preserved or not.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{f}_t = \sigma(W_f \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f)
-\]</span></p>
+</span></p>
 <ul>
-<li><p><span class="math inline">\([\mathbf{h}_{t-1}; \mathbf{x}_t]\)</span> is simply the concatenation of the two vectors <span class="math inline">\(\mathbf{h}_{t-1}\)</span> and <span class="math inline">\(\mathbf{x}_t\)</span>.</p></li>
-<li><p><span class="math inline">\(\mathbf{f}_t\)</span> is a vector of values between 0 and 1, one per dimension of the cell state <span class="math inline">\(\mathbf{C}_t\)</span>.</p></li>
+<li><p><span class="math inline">[\mathbf{h}_{t-1}; \mathbf{x}_t]</span> is simply the concatenation of the two vectors <span class="math inline">\mathbf{h}_{t-1}</span> and <span class="math inline">\mathbf{x}_t</span>.</p></li>
+<li><p><span class="math inline">\mathbf{f}_t</span> is a vector of values between 0 and 1, one per dimension of the cell state <span class="math inline">\mathbf{C}_t</span>.</p></li>
 </ul>
 </div>
 </div>
@@ -785,24 +760,22 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-focus-i.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>Similarly, the input gate uses a sigmoid function to decide if the state should be updated or not.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{i}_t = \sigma(W_i \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i)
-\]</span></p>
+</span></p>
 <ul>
-<li>As for RNNs, the input <span class="math inline">\(\mathbf{x}_t\)</span> and previous output <span class="math inline">\(\mathbf{h}_{t-1}\)</span> are combined to produce a <strong>candidate state</strong> <span class="math inline">\(\tilde{\mathbf{C}}_t\)</span> using the tanh transfer function.</li>
+<li>As for RNNs, the input <span class="math inline">\mathbf{x}_t</span> and previous output <span class="math inline">\mathbf{h}_{t-1}</span> are combined to produce a <strong>candidate state</strong> <span class="math inline">\tilde{\mathbf{C}}_t</span> using the tanh transfer function.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \tilde{\mathbf{C}}_t = \text{tanh}(W_C \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_c)
-\]</span></p>
+</span></p>
 </div>
 </div>
 </section>
@@ -814,18 +787,16 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-focus-C.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>The new state <span class="math inline">\(\mathbf{C}_t\)</span> is computed as a part of the previous state <span class="math inline">\(\mathbf{C}_{t-1}\)</span> (element-wise multiplication with the forget gate <span class="math inline">\(\mathbf{f}_t\)</span>) plus a part of the candidate state <span class="math inline">\(\tilde{\mathbf{C}}_t\)</span> (element-wise multiplication with the input gate <span class="math inline">\(\mathbf{i}_t\)</span>).</li>
+<li>The new state <span class="math inline">\mathbf{C}_t</span> is computed as a part of the previous state <span class="math inline">\mathbf{C}_{t-1}</span> (element-wise multiplication with the forget gate <span class="math inline">\mathbf{f}_t</span>) plus a part of the candidate state <span class="math inline">\tilde{\mathbf{C}}_t</span> (element-wise multiplication with the input gate <span class="math inline">\mathbf{i}_t</span>).</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{C}_t = \mathbf{f}_t \odot \mathbf{C}_{t-1} + \mathbf{i}_t \odot \tilde{\mathbf{C}}_t
-\]</span></p>
+</span></p>
 <ul>
 <li>Depending on the gates, the new state can be equal to the previous state (gates closed), the candidate state (gates opened) or a mixture of both.</li>
 </ul>
@@ -840,24 +811,22 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-focus-o.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
 <li>The output gate decides which part of the new state will be used for the output.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{o}_t = \sigma(W_o \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_o)
-\]</span></p>
+</span></p>
 <ul>
 <li>The output not only influences the decision, but also how the gates will updated at the next step.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h}_t = \mathbf{o}_t \odot \text{tanh} (\mathbf{C}_t)
-\]</span></p>
+</span></p>
 </div>
 </div>
 </section>
@@ -867,36 +836,27 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>The function between <span class="math inline">\(\mathbf{x}_t\)</span> and <span class="math inline">\(\mathbf{h}_t\)</span> is quite complicated, with many different weights, but everything is differentiable: BPTT can be applied.</li>
+<li>The function between <span class="math inline">\mathbf{x}_t</span> and <span class="math inline">\mathbf{h}_t</span> is quite complicated, with many different weights, but everything is differentiable: BPTT can be applied.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM-cell2.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
 </div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[\begin{align}
-    &amp; \textbf{Forget gate} \\
-    \mathbf{f}_t &amp;= \sigma(W_f \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f) \\
-    &amp; \\
-    &amp; \textbf{Input gate} \\
-    \mathbf{i}_t &amp;= \sigma(W_i \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i) \\
-    &amp; \\
-    &amp; \textbf{Output gate} \\
-    \mathbf{o}_t &amp;= \sigma(W_o \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_o) \\
-    &amp; \\
-    &amp; \textbf{Candidate state} \\
-    \tilde{\mathbf{C}}_t &amp;= \text{tanh}(W_C \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_c) \\
-    &amp; \\
-    &amp; \textbf{New state} \\
-    \mathbf{C}_t &amp;= \mathbf{f}_t \odot \mathbf{C}_{t-1} + \mathbf{i}_t \odot \tilde{\mathbf{C}}_t \\
-    &amp; \\
-    &amp; \textbf{Output} \\
-    \mathbf{h}_t &amp;= \mathbf{o}_t \odot \text{tanh} (\mathbf{C}_t) \\
-\end{align}\]</span></p>
+<p><strong>Forget gate</strong></p>
+<p><span class="math display">\mathbf{f}_t = \sigma(W_f \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f)</span></p>
+<p><strong>Input gate</strong></p>
+<p><span class="math display">\mathbf{i}_t = \sigma(W_i \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i)</span></p>
+<p><strong>Output gate</strong></p>
+<p><span class="math display">\mathbf{o}_t = \sigma(W_o \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_o)</span></p>
+<p><strong>Candidate state</strong></p>
+<p><span class="math display">\tilde{\mathbf{C}}_t = \text{tanh}(W_C \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_c)</span></p>
+<p><strong>New state</strong></p>
+<p><span class="math display">\mathbf{C}_t = \mathbf{f}_t \odot \mathbf{C}_{t-1} + \mathbf{i}_t \odot \tilde{\mathbf{C}}_t</span></p>
+<p><strong>Output</strong></p>
+<p><span class="math display">\mathbf{h}_t = \mathbf{o}_t \odot \text{tanh} (\mathbf{C}_t)</span></p>
 </div>
 </div>
 </section>
@@ -904,37 +864,31 @@
 <section id="how-do-lstm-solve-the-vanishing-gradient-problem" class="title-slide slide level1 center">
 <h1>How do LSTM solve the vanishing gradient problem?</h1>
 
-<img data-src="img/RNN-longtermdependencies.png" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/RNN-longtermdependencies.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p><ul>
 <li><p>Not all inputs are remembered by the LSTM: the input gate controls what comes in.</p></li>
-<li><p>If only <span class="math inline">\(\mathbf{x}_0\)</span> and <span class="math inline">\(\mathbf{x}_1\)</span> are needed to produce <span class="math inline">\(\mathbf{h}_{t+1}\)</span>, they will be the only ones stored in the state, the other inputs are ignored.</p></li>
+<li><p>If only <span class="math inline">\mathbf{x}_0</span> and <span class="math inline">\mathbf{x}_1</span> are needed to produce <span class="math inline">\mathbf{h}_{t+1}</span>, they will be the only ones stored in the state, the other inputs are ignored.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
 </section>
 
 <section id="how-do-lstm-solve-the-vanishing-gradient-problem-1" class="title-slide slide level1 center">
 <h1>How do LSTM solve the vanishing gradient problem?</h1>
 
-<img data-src="img/RNN-longtermdependencies.png" class="r-stretch quarto-figure-center"><ul>
-<li>If the state stays constant between <span class="math inline">\(t=1\)</span> and <span class="math inline">\(t\)</span>, the gradient of the error will not vanish when backpropagating from <span class="math inline">\(t\)</span> to <span class="math inline">\(t=1\)</span>, because nothing happens!</li>
+<img data-src="img/RNN-longtermdependencies.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p><ul>
+<li>If the state stays constant between <span class="math inline">t=1</span> and <span class="math inline">t</span>, the gradient of the error will not vanish when backpropagating from <span class="math inline">t</span> to <span class="math inline">t=1</span>, because nothing happens!</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{C}_t = \mathbf{C}_{t-1} \rightarrow \frac{\partial \mathbf{C}_t}{\partial \mathbf{C}_{t-1}} = 1
-\]</span></p>
+</span></p>
 <ul>
 <li>The gradient is multiplied by exactly one when the gates are closed.</li>
 </ul>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
 </section>
 
 <section id="lstm-networks" class="title-slide slide level1 center">
 <h1>LSTM networks</h1>
 <ul>
 <li><p>LSTM are particularly good at learning long-term dependencies, because the gates protect the cell from vanishing gradients.</p></li>
-<li><p>Its problem is how to find out which inputs (e.g.&nbsp;<span class="math inline">\(\mathbf{x}_0\)</span> and <span class="math inline">\(\mathbf{x}_1\)</span>) should enter or leave the state memory.</p></li>
+<li><p>Its problem is how to find out which inputs (e.g.&nbsp;<span class="math inline">\mathbf{x}_0</span> and <span class="math inline">\mathbf{x}_1</span>) should enter or leave the state memory.</p></li>
 <li><p>Truncated BPTT is used to train all weights: the weights for the candidate state (as for RNN), and the weights of the three gates.</p></li>
 <li><p>LSTM are also subject to overfitting. Regularization (including dropout) can be used.</p></li>
 <li><p>The weights (also for the gates) can be convolutional.</p></li>
@@ -953,22 +907,16 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-var-peepholes.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>A popular variant of LSTM adds <em>peephole</em> connections, where the three gates have additionally access to the state <span class="math inline">\(\mathbf{C}_{t-1}\)</span>.</li>
+<li>A popular variant of LSTM adds <em>peephole</em> connections, where the three gates have additionally access to the state <span class="math inline">\mathbf{C}_{t-1}</span>.</li>
 </ul>
-<p><span class="math display">\[\begin{align}
-    \mathbf{f}_t &amp;= \sigma(W_f \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f) \\
-    &amp;\\
-    \mathbf{i}_t &amp;= \sigma(W_i \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i) \\
-    &amp;\\
-    \mathbf{o}_t &amp;= \sigma(W_o \times [\mathbf{C}_{t}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_o) \\
-\end{align}\]</span></p>
+<p><span class="math display">\mathbf{f}_t = \sigma(W_f \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f)</span></p>
+<p><span class="math display">\mathbf{i}_t = \sigma(W_i \times [\mathbf{C}_{t-1}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i)</span></p>
+<p><span class="math display">\mathbf{o}_t = \sigma(W_o \times [\mathbf{C}_{t}; \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_o)</span></p>
 <ul>
 <li>It usually works better, but it adds more weights.</li>
 </ul>
@@ -987,21 +935,17 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>It uses directly the output <span class="math inline">\(\mathbf{h}_t\)</span> as a state, and the forget and input gates are merged into a single gate <span class="math inline">\(\mathbf{r}_t\)</span>.</li>
+<li>It uses directly the output <span class="math inline">\mathbf{h}_t</span> as a state, and the forget and input gates are merged into a single gate <span class="math inline">\mathbf{r}_t</span>.</li>
 </ul>
-<p><span class="math display">\[\begin{align}
-    \mathbf{z}_t &amp;= \sigma(W_z \times [\mathbf{h}_{t-1}; \mathbf{x}_t]) \\
-    &amp;\\
-    \mathbf{r}_t &amp;= \sigma(W_r \times [\mathbf{h}_{t-1}; \mathbf{x}_t]) \\
-    &amp;\\
-    \tilde{\mathbf{h}}_t &amp;= \text{tanh} (W_h \times [\mathbf{r}_t \odot \mathbf{h}_{t-1}; \mathbf{x}_t])\\
-    &amp; \\
-    \mathbf{h}_t &amp;= (1 - \mathbf{z}_t) \odot \mathbf{h}_{t-1} + \mathbf{z}_t \odot \tilde{\mathbf{h}}_t\\
-\end{align}\]</span></p>
+<p><span class="math display">\mathbf{z}_t = \sigma(W_z \times [\mathbf{h}_{t-1}; \mathbf{x}_t])</span></p>
+<p><span class="math display">\mathbf{r}_t = \sigma(W_r \times [\mathbf{h}_{t-1}; \mathbf{x}_t])</span></p>
+<p><span class="math display">\tilde{\mathbf{h}}_t = \text{tanh} (W_h \times [\mathbf{r}_t \odot \mathbf{h}_{t-1}; \mathbf{x}_t])</span></p>
+<p><span class="math display">\mathbf{h}_t = (1 - \mathbf{z}_t) \odot \mathbf{h}_{t-1} + \mathbf{z}_t \odot \tilde{\mathbf{h}}_t</span></p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/LSTM3-var-GRU.png"></p>
+<p></p><figcaption>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1011,21 +955,21 @@
 <li><p>Much simpler to train as the LSTM, and almost as powerful.</p></li>
 </ul>
 <div class="footer">
-<p>Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
-</div>
-<div class="footer">
 <p>Chung, Gulcehre, Cho, Bengio (2014). “Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling”. arXiv:1412.3555</p>
 </div>
 </section>
 
 <section id="bidirectional-lstm" class="title-slide slide level1 center">
 <h1>Bidirectional LSTM</h1>
-<p>::: {.columns} ::: {.column width=50%}</p>
-
-<img data-src="img/bi_lstm.jpg" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/bi_lstm.jpg"></p>
+<p></p><figcaption>Source: <a href="http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html" class="uri">http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html</a></figcaption><p></p>
+</figure>
 </div>
-<p>::: ::: {.column width=50%}</p>
+</div><div class="column" style="width:50%;">
 <ul>
 <li><p>A <strong>bidirectional LSTM</strong> learns to predict the output in two directions:</p>
 <ul>
@@ -1036,310 +980,7 @@
 <li><p>Only possible offline, as the future inputs must be known.</p></li>
 <li><p>Works better than LSTM on many problems, but slower.</p></li>
 </ul>
-</section>
-
-<section id="word2vec" class="title-slide slide level1 center">
-<h1>3 - word2vec</h1>
-
-</section>
-
-<section id="representing-words" class="title-slide slide level1 center">
-<h1>Representing words</h1>
-<ul>
-<li><p>The most famous application of RNNs is <strong>Natural Language Processing</strong> (NLP): text understanding, translation, etc…</p></li>
-<li><p>Each word of a sentence has to be represented as a vector <span class="math inline">\(\mathbf{x}_t\)</span> in order to be fed to a LSTM.</p></li>
-<li><p>Which representation should we use?</p></li>
-<li><p>The naive solution is to use <strong>one-hot encoding</strong>, one element of the vector corresponding to one word of the dictionary.</p></li>
-</ul>
-
-<img data-src="img/onehotvec.png" style="width:40.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png" class="uri">https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png</a></p>
 </div>
-</section>
-
-<section id="representing-words-1" class="title-slide slide level1 center">
-<h1>Representing words</h1>
-<ul>
-<li><p>One-hot encoding is not a good representation for words:</p>
-<ul>
-<li><p>The vector size will depend on the number of words of the language:</p>
-<ul>
-<li>English: 171,476 (Oxford English Dictionary), 470,000 (Merriam-Webster)… 20,000 in practice.</li>
-<li>French: 270,000 (TILF).</li>
-<li>German: 200,000 (Duden).</li>
-<li>Chinese: 370,000 (Hanyu Da Cidian).</li>
-<li>Korean: 1,100,373 (Woori Mal Saem)</li>
-</ul></li>
-<li><p>Semantically related words have completely different representations (“endure” and “tolerate”).</p></li>
-<li><p>The representation is extremely <strong>sparse</strong> (a lot of useless zeros).</p></li>
-</ul></li>
-</ul>
-
-<img data-src="img/audio-image-text.png" style="width:65.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a></p>
-</div>
-</section>
-
-<section id="word2vec-1" class="title-slide slide level1 center">
-<h1>word2vec</h1>
-<ul>
-<li><p><strong>word2vec</strong> learns word <strong>embeddings</strong> by trying to predict the current word based on the context (CBOW, continuous bag-of-words) or the context based on the current word (skip-gram).</p></li>
-<li><p>It uses a three-layer autoencoder-like NN, where the hidden layer (latent space) will learn to represent the one-hot encoded words in a dense manner.</p></li>
-</ul>
-
-<img data-src="img/word2vec-training.png" style="width:50.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Distributed Representations of Words and Phrases and their Compositionality. In Proceedings of NIPS, 2013. <a href="https://code.google.com/archive/p/word2vec/" class="uri">https://code.google.com/archive/p/word2vec/</a> <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a></p>
-</div>
-<div class="footer">
-<p>Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a></p>
-</div>
-</section>
-
-<section id="word2vec-2" class="title-slide slide level1 center">
-<h1>word2vec</h1>
-<ul>
-<li><p><strong>word2vec</strong> has three parameters:</p>
-<ul>
-<li>the <strong>vocabulary size</strong>: number of words in the dictionary.</li>
-<li>the <strong>embedding size</strong>: number of neurons in the hidden layer.</li>
-<li>the <strong>context size</strong>: number of surrounding words to predict.</li>
-</ul></li>
-<li><p>It is trained on huge datasets of sentences (e.g.&nbsp;Wikipedia).</p></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/skip.png"></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/word2vec-data.png"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Distributed Representations of Words and Phrases and their Compositionality. In Proceedings of NIPS, 2013. <a href="https://code.google.com/archive/p/word2vec/" class="uri">https://code.google.com/archive/p/word2vec/</a> <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a></p>
-</div>
-<div class="footer">
-<p>Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/</a></p>
-</div>
-</section>
-
-<section id="word2vec-3" class="title-slide slide level1 center">
-<h1>word2vec</h1>
-<ul>
-<li><p>After learning, the hidden layer represents an <strong>embedding vector</strong>, which is a dense and compressed representation of each possible word (dimensionality reduction).</p></li>
-<li><p>Semantically close words (“endure” and “tolerate”) tend to appear in similar contexts, so their embedded representations will be close (Euclidian distance).</p></li>
-<li><p>One can even perform arithmetic operations on these vectors!</p></li>
-</ul>
-<blockquote>
-<p>queen = king + woman - man</p>
-</blockquote>
-
-<img data-src="img/linear-relationships.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source : <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a></p>
-</div>
-</section>
-
-<section id="applications-of-rnns" class="title-slide slide level1 center">
-<h1>4 - Applications of RNNs</h1>
-
-</section>
-
-<section id="classification-of-lstm-architectures" class="title-slide slide level1 center">
-<h1>Classification of LSTM architectures</h1>
-
-<img data-src="img/lstm-diagrams.jpg" class="r-stretch quarto-figure-center"><div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p><strong>One to One</strong>: classical feedforward network.</p>
-<p>Image <span class="math inline">\(\rightarrow\)</span> Label.</p></li>
-<li><p><strong>One to Many</strong>: single input, many outputs.</p>
-<p>Image <span class="math inline">\(\rightarrow\)</span> Text.</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><p><strong>Many to One</strong>: sequence of inputs, single output.</p>
-<p>Video / Text <span class="math inline">\(\rightarrow\)</span> Label.</p></li>
-<li><p><strong>Many to Many</strong>: sequence to sequence.</p>
-<p>Text <span class="math inline">\(\rightarrow\)</span> Text.</p>
-<p>Video <span class="math inline">\(\rightarrow\)</span> Text.</p></li>
-</ul>
-</div>
-</div>
-<div class="footer">
-<p>Source: http://karpathy.github.io/2015/05/21/rnn-effectiveness/</p>
-</div>
-</section>
-
-<section id="one-to-many-image-caption-generation" class="title-slide slide level1 center">
-<h1>One to Many: image caption generation</h1>
-<ul>
-<li><p><strong>Show and Tell</strong> uses the last FC layer of a CNN to feed a LSTM layer and generate words.</p></li>
-<li><p>The pretrained CNN (VGG16, ResNet50) is used as a <strong>feature extractor</strong>.</p></li>
-<li><p>Each word of the sentence is encoded/decoded using word2vec.</p></li>
-<li><p>The output of the LSTM at time <span class="math inline">\(t\)</span> becomes its new input at time <span class="math inline">\(t+1\)</span>.</p></li>
-</ul>
-
-<img data-src="img/showtell.jpg" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Vinyals et al.&nbsp;(2015). Show and tell: A neural image caption generator. CVPR.</p>
-</div>
-</section>
-
-<section id="one-to-many-image-caption-generation-1" class="title-slide slide level1 center">
-<h1>One to Many: image caption generation</h1>
-
-<img data-src="img/showattendtell-res.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Xu et al.&nbsp;(2015). Show, Attend and Tell: Neural Image Caption Generation with Visual Attention. NIPS.</p>
-</div>
-</section>
-
-<section id="one-to-many-image-caption-generation-2" class="title-slide slide level1 center">
-<h1>One to Many: image caption generation</h1>
-<div class="columns">
-<div class="column" style="width:70%;">
-<ul>
-<li><strong>Show, attend and tell</strong> uses attention to focus on specific parts of the image when generating the sentence.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/showattendtell.png"></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/showattendtell.gif"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/showattendtell2.gif"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="footer">
-<p>Xu et al.&nbsp;(2015). Show, Attend and Tell: Neural Image Caption Generation with Visual Attention. NIPS.</p>
-</div>
-<div class="footer">
-<p>Source: http://kelvinxu.github.io/projects/capgen.html</p>
-</div>
-</section>
-
-<section id="many-to-one-next-characterword-prediction" class="title-slide slide level1 center">
-<h1>Many to One: next character/word prediction</h1>
-<div class="columns">
-<div class="column" style="width:70%;">
-<pre><code>PANDARUS:
-Alas, I think he shall be come approached and the day
-When little srain would be attain'd into being never fed,
-And who is but a chain and subjects of his death,
-I should not sleep.
-
-Second Senator:
-They are away this miseries, produced upon my soul,
-Breaking and strongly should be buried, when I perish
-The earth and thoughts of many states.
-
-DUKE VINCENTIO:
-Well, your wit is in the care of side and that.
-
-Second Lord:
-They would be ruled after this chamber, and
-my fair nues begun out of the fact, to be conveyed,
-Whose noble souls I'll have the heart of the wars.
-
-Clown:
-Come, sir, I will make did behold your worship.</code></pre>
-</div><div class="column" style="width:30%;">
-<ul>
-<li><p>Characters or words are fed one by one into a LSTM.</p></li>
-<li><p>The desired output is the next character or word in the text.</p></li>
-<li><p>Example:</p>
-<ul>
-<li><p>Inputs: <strong>To, be, or, not, to</strong></p></li>
-<li><p>Output: <strong>be</strong></p></li>
-</ul></li>
-<li><p>The text on the left was generated by a LSTM having read the entire writings of William Shakespeare.</p></li>
-<li><p>Each generated word is used as the next input.</p></li>
-</ul>
-</div>
-</div>
-<div class="footer">
-<p>http://karpathy.github.io/2015/05/21/rnn-effectiveness/</p>
-</div>
-</section>
-
-<section id="many-to-one-sunspring-scifi-movie" class="title-slide slide level1 center">
-<h1>Many to one: Sunspring SciFi movie</h1>
-<iframe width="1463" height="566" src="https://www.youtube.com/embed/LY7x2Ihqjmc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-</iframe>
-<p>More info: <a href="http://www.thereforefilms.com/sunspring.html" class="uri">http://www.thereforefilms.com/sunspring.html</a></p>
-</section>
-
-<section id="many-to-one-sentiment-analysis" class="title-slide slide level1 center">
-<h1>Many to One: sentiment analysis</h1>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/sentimentanalysis.jpg"></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<ul>
-<li><p>To obtain a vector from a sentence, <strong>one-hot encoding</strong> is used (alternative: word2vec).</p></li>
-<li><p>A 1D convolutional layers “slides” over the text.</p></li>
-<li><p>The bidirectional LSTM computes a state vector for the complete text.</p></li>
-<li><p>A classifier (fully connected layer) learns to predict the sentiment of the text (positive/negative).</p></li>
-</ul>
-</div>
-</div>
-<div class="footer">
-<p>https://offbit.github.io/how-to-read/</p>
-</div>
-</section>
-
-<section id="many-to-many-question-answering-scene-understanding" class="title-slide slide level1 center">
-<h1>Many to Many: Question answering / Scene understanding</h1>
-
-<img data-src="img/questionanswering.jpg" class="r-stretch quarto-figure-center"><ul>
-<li><p>A LSTM can learn to associate an image (static) plus a question (sequence) with the answer (sequence).</p></li>
-<li><p>The image is abstracted by a CNN trained for object recognition.</p></li>
-</ul>
-</section>
-
-<section id="many-to-many-seq2seq" class="title-slide slide level1 center">
-<h1>Many to Many: seq2seq</h1>
-
-<img data-src="img/seq2seq.jpeg" style="width:60.0%" class="r-stretch quarto-figure-center"><ul>
-<li><p>The <strong>state vector</strong> obtained at the end of a sequence can be reused as an initial state for another LSTM.</p></li>
-<li><p>The goal of the <strong>encoder</strong> is to find a compressed representation of a sequence of inputs.</p></li>
-<li><p>The goal of the <strong>decoder</strong> is to generate a sequence from that representation.</p></li>
-<li><p><strong>Sequence-to-sequence</strong> (seq2seq) models are recurrent autoencoders.</p></li>
-</ul>
-<div class="footer">
-<p>Sutskever, I., Vinyals, O., and Le, Q. V. (2014). Sequence to Sequence Learning with Neural Networks. arXiv:1409.3215</p>
-</div>
-</section>
-
-<section id="seq2seq-for-language-translation" class="title-slide slide level1 center">
-<h1>seq2seq for language translation</h1>
-<video data-autoplay="" src="videos/jalammar/seq2seq_6.mp4" style="display:block; margin: 0 auto 10px 10px; width: 80%" loop="" allow="autoplay loop">
-</video>
-<ul>
-<li><p>The <strong>encoder</strong> learns for example to encode each word of a sentence in French.</p></li>
-<li><p>The <strong>decoder</strong> learns to associate the <strong>final state vector</strong> to the corresponding English sentence.</p></li>
-<li><p>seq2seq allows automatic text translation between many languages given enough data.</p></li>
-<li><p>Modern translation tools are based on seq2seq, but with attention.</p></li>
-</ul>
-<div class="footer">
-<p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
 </div>
 </section>
 
@@ -1375,7 +1016,6 @@ Come, sir, I will make did behold your worship.</code></pre>
   <script src="6.1-RNN_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="6.1-RNN_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="6.1-RNN_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="6.1-RNN_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1544,27 +1184,9 @@ Come, sir, I will make did behold your worship.</code></pre>
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

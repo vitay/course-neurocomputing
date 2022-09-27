@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="7.1-Transformers_files/libs/clipboard/clipboard.min.js"></script>
+<script src="7.1-Transformers_files/libs/quarto-html/tabby.min.js"></script>
+<script src="7.1-Transformers_files/libs/quarto-html/popper.min.js"></script>
+<script src="7.1-Transformers_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="7.1-Transformers_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="7.1-Transformers_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="7.1-Transformers_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.251">
+
+  <meta name="author" content="Julien Vitay">
+  <title>Neurocomputing</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="7.1-Transformers_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="7.1-Transformers_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="7.1-Transformers_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <link href="7.1-Transformers_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="7.1-Transformers_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="7.1-Transformers_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="7.1-Transformers_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="7.1-Transformers_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="7.1-Transformers_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+  <h1 class="title">Neurocomputing</h1>
+  <p class="subtitle">Transformers</p>
+  <p class="author">Julien Vitay</p>
+  <p class="institute">Professur für Künstliche Intelligenz - Fakultät für Informatik</p>
+  <p class="date"><a href="https://tu-chemnitz.de/informatik/KI/edu/neurocomputing" class="uri">https://tu-chemnitz.de/informatik/KI/edu/neurocomputing</a></p>
+</section>
+
+<section id="transformers" class="title-slide slide level1 center">
+<h1>1 - Transformers</h1>
+
+<img data-src="img/paper-transformer.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al.&nbsp;(2017). <strong>Attention Is All You Need</strong>. arXiv:1706.03762.</p>
+</div>
+</section>
+
+<section id="transformer-networks" class="title-slide slide level1 center">
+<h1>Transformer networks</h1>
+<ul>
+<li><p>Attentional mechanisms are so powerful that recurrent networks are not even needed anymore.</p></li>
+<li><p><strong>Transformer networks</strong> use <strong>self-attention</strong> in a purely feedforward architecture and outperform recurrent architectures.</p></li>
+<li><p>Used in Google BERT and OpenAI GPT-2/3 for text understanding (e.g.&nbsp;search engine queries).</p></li>
+</ul>
+
+<img data-src="img/transformer_resideual_layer_norm_3.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p><div class="footer">
+<p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al.&nbsp;(2017). <strong>Attention Is All You Need</strong>. arXiv:1706.03762.</p>
+</div>
+</section>
+
+<section id="transformer-networks-1" class="title-slide slide level1 center">
+<h1>Transformer networks</h1>
+<ul>
+<li>Transformer networks use an <strong>encoder-decoder</strong> architecture, each with 6 stacked layers.</li>
+</ul>
+
+<img data-src="img/transformer1.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="encoder-layer" class="title-slide slide level1 center">
+<h1>Encoder layer</h1>
+<ul>
+<li><p>Each layer of the encoder processes the <span class="math inline">n</span> words of the input sentence <strong>in parallel</strong>.</p></li>
+<li><p>Word embeddings (as in word2vec) of dimension 512 are used as inputs (but learned end-to-end).</p></li>
+</ul>
+
+<img data-src="img/encoder_with_tensors.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="encoder-layer-1" class="title-slide slide level1 center">
+<h1>Encoder layer</h1>
+<ul>
+<li><p>Two operations are performed on each word embedding <span class="math inline">\mathbf{x}_i</span>:</p>
+<ul>
+<li><p>self-attention vector <span class="math inline">\mathbf{z}_i</span> depending on the other words.</p></li>
+<li><p>a regular feedforward layer to obtain a new representation <span class="math inline">\mathbf{r}_i</span> (shared among all words).</p></li>
+</ul></li>
+</ul>
+
+<img data-src="img/encoder_with_tensors_2.png" style="width:65.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="self-attention" class="title-slide slide level1 center">
+<h1>Self-attention</h1>
+<ul>
+<li><p>The first step of self-attention is to compute for each word three vectors of length <span class="math inline">d_k = 64</span> from the embeddings <span class="math inline">\mathbf{x}_i</span> or previous representations <span class="math inline">\mathbf{r}_i</span> (d = 512).</p>
+<ul>
+<li><p>The <strong>query</strong> <span class="math inline">\mathbf{q}_i</span> using <span class="math inline">W^Q</span>.</p></li>
+<li><p>The <strong>key</strong> <span class="math inline">\mathbf{k}_i</span> using <span class="math inline">W^K</span>.</p></li>
+<li><p>The <strong>value</strong> <span class="math inline">\mathbf{v}_i</span> using <span class="math inline">W^V</span>.</p></li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer_self_attention_vectors.png"></p>
+<p></p><figcaption>Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li>This operation can be done in parallel over all words:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/self-attention-matrix-calculation.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="self-attention-1" class="title-slide slide level1 center">
+<h1>Self-attention</h1>
+<ul>
+<li><p>Why query / key / value? This a concept inspired from recommendation systems / databases.</p></li>
+<li><p>A Python dictionary is a set of key / value entries:</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>tel <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="st">'jack'</span>: <span class="dv">4098</span>, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="st">'sape'</span>: <span class="dv">4139</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The query would ask the dictionary to iterate over all entries and return the value associated to the key <strong>equal or close to</strong> the query.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>tel[<span class="st">'jacky'</span>] <span class="co"># 4098</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This would be some sort of <strong>fuzzy</strong> dictionary.</li>
+</ul>
+</section>
+
+<section id="self-attention-2" class="title-slide slide level1 center">
+<h1>Self-attention</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/translation.png"></p>
+</figure>
+</div>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li><p>In attentional RNNs, the attention scores were used by each word generated by the decoder to decide which <strong>input word</strong> is relevant.</p></li>
+<li><p>If we apply the same idea to the <strong>same sentence</strong> (self-attention), the attention score tells how much words of the same sentence are related to each other (context).</p>
+<p><em>The animal didn’t cross the street because it was too tired.</em></p></li>
+<li><p>The goal is to learn a representation for the word <code>it</code> that contains information about <code>the animal</code>, not <code>the street</code>.</p></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer_self-attention_visualization.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p>Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio (2014). Neural Machine Translation by Jointly Learning to Align and Translate. arXiv:1409.0473</p>
+</div>
+</section>
+
+<section id="self-attention-3" class="title-slide slide level1 center">
+<h1>Self-attention</h1>
+<ul>
+<li>Each word <span class="math inline">\mathbf{x}_i</span> of the sentence generates its query <span class="math inline">\mathbf{q}_i</span>, key <span class="math inline">\mathbf{k}_i</span> and value <span class="math inline">\mathbf{v}_i</span>.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>For all other words <span class="math inline">\mathbf{x}_j</span>, we compute the <strong>match</strong> between the query <span class="math inline">\mathbf{q}_i</span> and the keys <span class="math inline">\mathbf{k}_j</span> with a dot product:</li>
+</ul>
+<p><span class="math display">e_{i, j} = \mathbf{q}_i^T \, \mathbf{k}_j</span></p>
+<ul>
+<li>We normalize the scores by dividing by <span class="math inline">\sqrt{d_k} = 8</span> and apply a softmax:</li>
+</ul>
+<p><span class="math display">a_{i, j} = \text{softmax}(\dfrac{\mathbf{q}_i^T \, \mathbf{k}_j}{\sqrt{d_k}})</span></p>
+<ul>
+<li>The new representation <span class="math inline">\mathbf{z}_i</span> of the word <span class="math inline">\mathbf{x}_i</span> is a weighted sum of the values of all other words, weighted by the attention score:</li>
+</ul>
+<p><span class="math display">\mathbf{z}_i = \sum_{j} a_{i, j} \, \mathbf{v}_j</span></p>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/self-attention-output.png"></p>
+<p></p><figcaption>Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="self-attention-4" class="title-slide slide level1 center">
+<h1>Self-attention</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/self-attention-matrix-calculation.png"></p>
+<p></p><figcaption>Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>If we concatenate the word embeddings into a <span class="math inline">n\times d</span> matrix <span class="math inline">X</span>, self-attention only implies matrix multiplications and a row-based softmax:</li>
+</ul>
+<p><span class="math display">
+\begin{cases}
+    Q = X \times W^Q \\
+    K = X \times W^K \\
+    V = X \times W^V \\
+    Z = \text{softmax}(\dfrac{Q \times K^T}{\sqrt{d_k}}) \times V \\
+\end{cases}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/self-attention-matrix-calculation-2.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Note 1: everything is differentiable, backpropagation will work.</p></li>
+<li><p>Note 2: the weight matrices do not depend on the length <span class="math inline">n</span> of the sentence.</p></li>
+</ul>
+</section>
+
+<section id="multi-headed-self-attention" class="title-slide slide level1 center">
+<h1>Multi-headed self-attention</h1>
+<ul>
+<li><p>In the sentence <em>The animal didn’t cross the street because it was too tired.</em>, the new representation for the word <code>it</code> will hopefully contain features of the word <code>animal</code> after training.</p></li>
+<li><p>But what if the sentence was <em>The animal didn’t cross the street because it was too <strong>wide</strong>.</em>? The representation of <code>it</code> should be linked to <code>street</code> in that context.</p></li>
+<li><p>This is not possible with a single set of matrices <span class="math inline">W^Q</span>, <span class="math inline">W^K</span> and <span class="math inline">W^V</span>, as they would average every possible context and end up being useless.</p></li>
+</ul>
+
+<img data-src="img/transformer-needforheads.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></p></section>
+
+<section id="multi-headed-self-attention-1" class="title-slide slide level1 center">
+<h1>Multi-headed self-attention</h1>
+<ul>
+<li>The solution is to use <strong>multiple attention heads</strong> (<span class="math inline">h=8</span>) with their own matrices <span class="math inline">W^Q_k</span>, <span class="math inline">W^K_k</span> and <span class="math inline">W^V_k</span>.</li>
+</ul>
+
+<img data-src="img/transformer_attention_heads_qkv.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="multi-headed-self-attention-2" class="title-slide slide level1 center">
+<h1>Multi-headed self-attention</h1>
+<ul>
+<li><p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d=512</span> for each word.</p></li>
+<li><p>How do we combine them?</p></li>
+</ul>
+
+<img data-src="img/transformer_attention_heads_z.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="multi-headed-self-attention-3" class="title-slide slide level1 center">
+<h1>Multi-headed self-attention</h1>
+<ul>
+<li><p>The proposed solution is based on <strong>ensemble learning</strong> (stacking):</p>
+<ul>
+<li><p>let another matrix <span class="math inline">W^O</span> decide which attention head to trust…</p></li>
+<li><p><span class="math inline">8 \times 512</span> rows, 512 columns.</p></li>
+</ul></li>
+</ul>
+
+<img data-src="img/transformer_attention_heads_weight_matrix_o.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="multi-headed-self-attention-4" class="title-slide slide level1 center">
+<h1>Multi-headed self-attention</h1>
+
+<img data-src="img/transformer_multi-headed_self-attention-recap.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="multi-headed-self-attention-5" class="title-slide slide level1 center">
+<h1>Multi-headed self-attention</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Each attention head learns a different context:</p>
+<ul>
+<li><p><code>it</code> refers to <code>animal</code>.</p></li>
+<li><p><code>it</code> refers to <code>street</code>.</p></li>
+<li><p>etc.</p></li>
+</ul></li>
+<li><p>The original transformer paper in 2017 used 8 attention heads.</p></li>
+<li><p>OpenAI’s GPT-3 uses 96 attention heads…</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer_self-attention_visualization_2.png"></p>
+<p></p><figcaption>Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="encoder-layer-2" class="title-slide slide level1 center">
+<h1>Encoder layer</h1>
+<ul>
+<li><p>Multi-headed self-attention produces a vector <span class="math inline">\mathbf{z}_i</span> for each word of the sentence.</p></li>
+<li><p>A regular feedforward MLP transforms it into a new representation <span class="math inline">\mathbf{r}_i</span>.</p>
+<ul>
+<li><p>one input layer with 512 neurons.</p></li>
+<li><p>one hidden layer with 2048 neurons and a ReLU activation function.</p></li>
+<li><p>one output layer with 512 neurons.</p></li>
+</ul></li>
+<li><p>The same NN is applied on all words, it does not depend on the length <span class="math inline">n</span> of the sentence.</p></li>
+</ul>
+
+<img data-src="img/encoder_with_tensors_2.png" style="width:45.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="positional-encoding" class="title-slide slide level1 center">
+<h1>Positional encoding</h1>
+<ul>
+<li>As each word is processed in parallel, the order of the words in the sentence is lost.</li>
+</ul>
+<p><em>street was animal tired the the because it cross too didn’t</em></p>
+<ul>
+<li><p>We need to explicitly provide that information in the <strong>input</strong> using positional encoding.</p></li>
+<li><p>A simple method would be to append an index <span class="math inline">i = 1, 2, \ldots, n</span> to the word embeddings, but it is not very robust.</p></li>
+</ul>
+
+<img data-src="img/transformer_positional_encoding_vectors.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="positional-encoding-1" class="title-slide slide level1 center">
+<h1>Positional encoding</h1>
+<ul>
+<li><p>If the elements of the 512-d embeddings are numbers between 0 and 1, concatenating an integer between 1 and <span class="math inline">n</span> will unbalance the dimensions.</p></li>
+<li><p>Normalizing that integer between 0 and 1 requires to know <span class="math inline">n</span> in advance, this introduces a maximal sentence length…</p></li>
+<li><p>How about we append the binary code of that integer?</p></li>
+</ul>
+
+<img data-src="img/trasnformer-positionalencoding.png" style="width:30.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/" class="uri">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></p><ul>
+<li><p>Sounds good, we have numbers between 0 and 1, and we just need to use enough bits to encode very long sentences.</p></li>
+<li><p>However, representing a binary value (0 or 1) with a 64 bits floating number is a waste of computational resources.</p></li>
+</ul>
+</section>
+
+<section id="positional-encoding-2" class="title-slide slide level1 center">
+<h1>Positional encoding</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><p>We can notice that the bits of the integers oscillate at various frequencies:</p>
+<ul>
+<li><p>the lower bit oscillates every number.</p></li>
+<li><p>the bit before oscillates every two numbers.</p></li>
+<li><p>etc.</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:35%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/trasnformer-positionalencoding.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><p>We could also represent the position of a word using sine and cosine functions at different frequencies (Fourier basis).</p></li>
+<li><p>We create a vector, where each element oscillates at increasing frequencies.</p></li>
+<li><p>The “code” for each position in the sentence is unique.</p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/positional_encoding.png"></p>
+<p></p><figcaption>Source: <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/" class="uri">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="positional-encoding-3" class="title-slide slide level1 center">
+<h1>Positional encoding</h1>
+<ul>
+<li>In practice, a 512-d vector is created using sine and cosine functions.</li>
+</ul>
+<p><span class="math display">
+    \begin{cases}
+        t(\text{pos}, 2i) = \sin(\dfrac{\text{pos}}{10000^{2 i / 512}})\\
+        t(\text{pos}, 2i + 1) = \cos(\dfrac{\text{pos}}{10000^{2 i / 512}})\\
+    \end{cases}
+</span></p>
+
+<img data-src="img/attention-is-all-you-need-positional-encoding.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="positional-encoding-4" class="title-slide slide level1 center">
+<h1>Positional encoding</h1>
+<ul>
+<li>The positional encoding vector is <strong>added</strong> element-wise to the embedding, not concatenated!</li>
+</ul>
+<p><span class="math display">\mathbf{x}_{i} = \mathbf{x}^\text{embed}_{i} + \mathbf{t}_i</span></p>
+
+<img data-src="img/transformer_positional_encoding_vectors.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="encoder-layer-3" class="title-slide slide level1 center">
+<h1>Encoder layer</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Last tricks of the encoder layers:</p>
+<ul>
+<li><p>skip connections (residual layer)</p></li>
+<li><p>layer normalization</p></li>
+</ul></li>
+<li><p>The input <span class="math inline">X</span> is added to the output of the multi-headed self-attention and normalized (zero mean, unit variance).</p></li>
+<li><p><strong>Layer normalization</strong> (Ba et al., 2016) is an alternative to batch normalization, where the mean and variance are computed over single vectors, not over a minibatch:</p></li>
+</ul>
+<p><span class="math display">\mathbf{z} \leftarrow \dfrac{\mathbf{z} - \mu}{\sigma}</span></p>
+<p>with <span class="math inline">\mu = \dfrac{1}{d} \displaystyle\sum_{i=1}^d z_i</span> and <span class="math inline">\sigma = \dfrac{1}{d} \displaystyle\sum_{i=1}^d (z_i - \mu)^2</span>.</p>
+<div class="footer">
+<p>Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016). Layer Normalization. ArXiv:1607.06450</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer_resideual_layer_norm_2.png"></p>
+<p></p><figcaption>Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The feedforward network also uses a skip connection and layer normalization.</li>
+</ul>
+</section>
+
+<section id="encoder" class="title-slide slide level1 center">
+<h1>Encoder</h1>
+<ul>
+<li>We can now stack 6 (or more, 96 in GPT-3) of these encoder layers and use the final representation of each word as an input to the decoder.</li>
+</ul>
+
+<img data-src="img/transformer_resideual_layer_norm_3.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="decoder" class="title-slide slide level1 center">
+<h1>Decoder</h1>
+<ul>
+<li><p>In the first step of decoding, the final representations of the encoder are used as query and value vectors of the decoder to produce the first word.</p></li>
+<li><p>The input to the decoder is a “start of sentence” symbol.</p></li>
+</ul>
+
+<img data-src="img/transformer_decoding_1.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="decoder-1" class="title-slide slide level1 center">
+<h1>Decoder</h1>
+<ul>
+<li>The decoder is <strong>autoregressive</strong>: it outputs words one at a time, using the previously generated words as an input.</li>
+</ul>
+
+<img data-src="img/transformer_decoding_2.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="decoder-layer" class="title-slide slide level1 center">
+<h1>Decoder layer</h1>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li><p>Each decoder layer has two multi-head attention sub-layers:</p>
+<ul>
+<li><p>A self-attention sub-layer with query/key/values coming from the generated sentence.</p></li>
+<li><p>An <strong>encoder-decoder</strong> attention sub-layer, with the query coming from the generated sentence and the key/value from the encoder.</p></li>
+</ul></li>
+<li><p>The encoder-decoder attention is the regular attentional mechanism used in seq2seq architectures.</p></li>
+<li><p>Apart from this additional sub-layer, the same residual connection and layer normalization mechanisms are used.</p></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer-architecture.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al.&nbsp;(2017). <strong>Attention Is All You Need</strong>. arXiv:1706.03762.</p>
+</div>
+</section>
+
+<section id="masked-self-attention" class="title-slide slide level1 center">
+<h1>Masked self-attention</h1>
+<ul>
+<li><p>When the sentence has been fully generated (up to the <code>&lt;eos&gt;</code> symbol), <strong>masked self-attention</strong> has to applied in order for a word in the middle of the sentence to not “see” the solution in the input when learning.</p></li>
+<li><p>As usual, learning occurs on minibatches of sentences, not on single words.</p></li>
+</ul>
+
+<img data-src="img/self-attention-and-masked-self-attention.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="output" class="title-slide slide level1 center">
+<h1>Output</h1>
+<ul>
+<li>The output of the decoder is a simple softmax classification layer, predicting the one-hot encoding of the word using a vocabulary (<code>vocab_size=25000</code>).</li>
+</ul>
+
+<img data-src="img/transformer_decoder_output_softmax.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p></section>
+
+<section id="training-procedure" class="title-slide slide level1 center">
+<h1>Training procedure</h1>
+<ul>
+<li><p>The transformer is trained on the WMT datasets:</p>
+<ul>
+<li><p>English-French: 36M sentences, 32000 unique words.</p></li>
+<li><p>English-German: 4.5M sentences, 37000 unique words.</p></li>
+</ul></li>
+<li><p>Cross-entropy loss, Adam optimizer with scheduling, dropout. Training took 3.5 days on 8 P100 GPUs.</p></li>
+<li><p>The sentences can have different lengths, as the decoder is autoregressive.</p></li>
+<li><p>The transformer network beat the state-of-the-art performance in translation with less computations and without any RNN.</p></li>
+</ul>
+
+<img data-src="img/transformer-results.png" style="width:60.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al.&nbsp;(2017). <strong>Attention Is All You Need</strong>. arXiv:1706.03762.</p>
+</div>
+</section>
+
+<section id="self-supervised-transformers" class="title-slide slide level1 center">
+<h1>2 - Self-supervised transformers</h1>
+
+</section>
+
+<section id="transformer-based-language-models" class="title-slide slide level1 center">
+<h1>Transformer-based language models</h1>
+<ul>
+<li><p>The Transformer is considered as the <strong>AlexNet</strong> moment of natural language processing (NLP).</p></li>
+<li><p>However, it is limited to supervised learning of sentence-based translation.</p></li>
+<li><p>Two families of architectures have been developed from that idea to perform all NLP tasks using <strong>unsupervised pretraining</strong> or <strong>self-supervised training</strong>:</p>
+<ul>
+<li><p>BERT (Bidirectional Encoder Representations from Transformers) from Google.</p></li>
+<li><p>GPT (Generative Pre-trained Transformer) from OpenAI <a href="https://openai.com/blog/better-language-models/" class="uri">https://openai.com/blog/better-language-models/</a>.</p></li>
+</ul></li>
+</ul>
+
+<img data-src="img/gpt-2-transformer-xl-bert-3.png" style="width:40.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p><div class="footer">
+<p>Devlin J, Chang M-W, Lee K, Toutanova K. 2019. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. arXiv:181004805</p>
+</div>
+</section>
+
+<section id="bert---bidirectional-encoder-representations-from-transformers" class="title-slide slide level1 center">
+<h1>BERT - Bidirectional Encoder Representations from Transformers</h1>
+<ul>
+<li><p>BERT only uses the encoder of the transformer (12 layers, 12 attention heads, <span class="math inline">d = 768</span>).</p></li>
+<li><p>BERT is pretrained on two different unsupervised tasks before being fine-tuned on supervised tasks.</p></li>
+</ul>
+
+<img data-src="img/BERT-architecture.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Devlin J, Chang M-W, Lee K, Toutanova K. 2019. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. arXiv:181004805</p>
+</div>
+</section>
+
+<section id="bert---bidirectional-encoder-representations-from-transformers-1" class="title-slide slide level1 center">
+<h1>BERT - Bidirectional Encoder Representations from Transformers</h1>
+<ul>
+<li><p><strong>Task 1:</strong> Masked language model. Sentences from BooksCorpus and Wikipedia (3.3G words) are presented to BERT during pre-training, with 15% of the words masked.</p></li>
+<li><p>The goal is to predict the masked words from the final representations using a shallow FNN.</p></li>
+</ul>
+
+<img data-src="img/BERT-language-modeling-masked-lm.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p></section>
+
+<section id="bert---bidirectional-encoder-representations-from-transformers-2" class="title-slide slide level1 center">
+<h1>BERT - Bidirectional Encoder Representations from Transformers</h1>
+<ul>
+<li><p><strong>Task 2:</strong> Next sentence prediction. Two sentences are presented to BERT.</p></li>
+<li><p>The goal is to predict from the first representation whether the second sentence should follow the first.</p></li>
+</ul>
+
+<img data-src="img/bert-next-sentence-prediction.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p></section>
+
+<section id="bert---bidirectional-encoder-representations-from-transformers-3" class="title-slide slide level1 center">
+<h1>BERT - Bidirectional Encoder Representations from Transformers</h1>
+<ul>
+<li><p>Once BERT is pretrained, one can use <strong>transfer learning</strong> with or without fine-tuning from the high-level representations to perform:</p>
+<ul>
+<li><p>sentiment analysis / spam detection</p></li>
+<li><p>question answering</p></li>
+</ul></li>
+</ul>
+
+<img data-src="img/bert-classifier.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p></section>
+
+<section id="bert---bidirectional-encoder-representations-from-transformers-4" class="title-slide slide level1 center">
+<h1>BERT - Bidirectional Encoder Representations from Transformers</h1>
+
+<img data-src="img/bert-transfer-learning.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li>As the Transformer, GPT is an <strong>autoregressive</strong> language model learning to predict the next word using only the transformer’s <strong>decoder</strong>.</li>
+</ul>
+
+<img data-src="img/transformer-decoder-intro.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer-1" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+
+<img data-src="img/gpt-2-autoregression-2.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer-2" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li><p>GPT-2 comes in various sizes, with increasing performance.</p></li>
+<li><p>GPT-3 is even bigger, with 175 <strong>billion</strong> parameters and a much larger training corpus.</p></li>
+</ul>
+
+<img data-src="img/gpt2-sizes-hyperparameters-3.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer-3" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li>GPT can be fine-tuned (transfer learning) to perform <strong>machine translation</strong>.</li>
+</ul>
+
+<img data-src="img/decoder-only-transformer-translation.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer-4" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li>GPT can be fine-tuned to summarize Wikipedia articles.</li>
+</ul>
+
+<img data-src="img/wikipedia-summarization.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer-5" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li>GPT can be fine-tuned to summarize Wikipedia articles.</li>
+</ul>
+
+<img data-src="img/decoder-only-summarization.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="try-transformers-at-httpshuggingface.co" class="title-slide slide level1 center">
+<h1>Try transformers at https://huggingface.co/</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">pip</span> install transformers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/transformer-neurocomputing.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="github-copilot" class="title-slide slide level1 center">
+<h1>Github copilot</h1>
+<ul>
+<li><p>Github and OpenAI trained a GPT-3-like architecture on the available open source code.</p></li>
+<li><p>Copilot is able to “autocomplete” the code based on a simple comment/docstring.</p></li>
+</ul>
+<p><a href="https://copilot.github.com/" class="uri">https://copilot.github.com/</a></p>
+
+<img data-src="img/githubcopliot.gif" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+
+<section id="transformers-and-nlp" class="title-slide slide level1 center">
+<h1>Transformers and NLP</h1>
+<ul>
+<li><p>All NLP tasks (translation, sentence classification, text generation) are now done using transformer-like architectures (BERT, GPT), <strong>unsupervisedly</strong> pre-trained on huge corpuses.</p></li>
+<li><p>BERT can be used for feature extraction, while GPT is more generative.</p></li>
+<li><p>Transformer architectures seem to <strong>scale</strong>: more parameters = better performance. Is there a limit?</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer-trend.jpg"></p>
+<p></p><figcaption>Source: <a href="https://julsimon.medium.com/large-language-models-a-new-moores-law-66623de5631b" class="uri">https://julsimon.medium.com/large-language-models-a-new-moores-law-66623de5631b</a></figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>The price to pay is that these models are very expensive to train (training one instance of GPT-3 costs 12M$) and to use (GPT-3 is only accessible with an API).</p></li>
+<li><p>Many attempts have been made to reduce the size of these models while keeping a satisfying performance.</p>
+<ul>
+<li>DistilBERT, RoBERTa, BART, T5, XLNet…</li>
+</ul></li>
+<li><p>See <a href="https://medium.com/mlearning-ai/recent-language-models-9fcf1b5f17f5" class="uri">https://medium.com/mlearning-ai/recent-language-models-9fcf1b5f17f5</a></p></li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="vision-transformers" class="title-slide slide level1 center">
+<h1>3 - Vision transformers</h1>
+
+</section>
+
+<section id="vision-transformer-vit" class="title-slide slide level1 center">
+<h1>Vision transformer (ViT)</h1>
+<ul>
+<li><p>The transformer architecture can also be applied to computer vision, by splitting images into a <strong>sequence</strong> of small patches (16x16).</p></li>
+<li><p>The sequence of vectors can then be classified by the output of the transformer using labels.</p></li>
+</ul>
+
+<img data-src="img/vision-transformer.gif" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html" class="uri">https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html</a></p><div class="footer">
+<p>Dosovitskiy et al.&nbsp;(2021). An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. arXiv:201011929</p>
+</div>
+</section>
+
+<section id="vision-transformer-vit-1" class="title-slide slide level1 center">
+<h1>Vision transformer (ViT)</h1>
+<ul>
+<li>The Vision Transformer (ViT) outperforms state-of-the-art CNNs while requiring less computations.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ViTPerformance.png" style="width:70.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ViTPerformance2.png" style="width:60.0%"></p>
+<p></p><figcaption><a href="https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html" class="uri">https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html</a></figcaption><p></p>
+</figure>
+</div>
+<div class="footer">
+<p>Dosovitskiy et al.&nbsp;(2021). An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. arXiv:201011929</p>
+</div>
+</section>
+
+<section id="self-supervised-vision-transformer-sit" class="title-slide slide level1 center">
+<h1>Self-supervised Vision Transformer (SiT)</h1>
+<ul>
+<li><p>ViT only works on big supervised datasets (ImageNet). Can we benefit from self-supervised learning as in BERT or GPT?</p></li>
+<li><p>The Self-supervised Vision Transformer (SiT) has an denoising autoencoder-like structure, reconstructing corrupted patches autoregressively.</p></li>
+</ul>
+
+<img data-src="img/SiT.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Atito, S., Awais, M., and Kittler, J. (2021). SiT: Self-supervised vIsion Transformer. arXiv:2104.03602</p>
+</div>
+</section>
+
+<section id="self-supervised-vision-transformer-sit-1" class="title-slide slide level1 center">
+<h1>Self-supervised Vision Transformer (SiT)</h1>
+<ul>
+<li><p>Self-supervised learning is possible through from <strong>data augmentation</strong> techniques.</p></li>
+<li><p>Various corruptions (masking, replacing, color distortion, blurring) are applied to the input image, but SiT must reconstruct the original image (denoising autoencoder).</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/SiT-training.png" style="width:70.0%"></p>
+</figure>
+</div>
+<ul>
+<li>An auxiliary <strong>rotation loss</strong> forces SiT to predict the orientation of the image (e.g.&nbsp;30°). Another auxiliary <strong>contrastive loss</strong> ensures that high-level representations are different for different images.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/SiT-results.png" style="width:70.0%"></p>
+</figure>
+</div>
+<div class="footer">
+<p>Atito, S., Awais, M., and Kittler, J. (2021). SiT: Self-supervised vIsion Transformer. arXiv:2104.03602</p>
+</div>
+</section>
+
+<section id="self-distillation-with-no-labels-dino" class="title-slide slide level1 center">
+<h1>Self-distillation with no labels (DINO)</h1>
+<ul>
+<li><p>A recent approach for self-supervised learning has been proposed by Facebook AI researchers using <strong>self-distillation</strong>.</p></li>
+<li><p>The images are split into <strong>global</strong> and <strong>local patches</strong> at different scales.</p></li>
+<li><p>Global patches contain label-related information (whole objects) while local patches contain finer details.</p></li>
+</ul>
+
+<img data-src="img/DINO-images.gif" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/on-dino-self-distillation-with-no-labels-c29e9365e382" class="uri">https://towardsdatascience.com/on-dino-self-distillation-with-no-labels-c29e9365e382</a></p><div class="footer">
+<p>Caron et al.&nbsp;(2021). Emerging Properties in Self-Supervised Vision Transformers. arXiv:2104.14294</p>
+</div>
+</section>
+
+<section id="self-distillation-with-no-labels-dino-1" class="title-slide slide level1 center">
+<h1>Self-distillation with no labels (DINO)</h1>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li><p>The idea of <strong>self-distillation</strong> in DINO is to use two similar ViT networks to classify the patches.</p></li>
+<li><p>The <strong>teacher</strong> network gets the global views as an input, while the <strong>student</strong> network get both the local and global ones.</p></li>
+<li><p>Both have a MLP head to predict the softmax probabilities, but do <strong>not</strong> use any labels.</p></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/DINO-distillation.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>The student tries to imitate the output of the teacher, by minimizing the <strong>cross-entropy</strong> (or KL divergence) between the two probability distributions.</p></li>
+<li><p>The teacher slowly integrates the weights of the student (momentum or exponentially moving average ema):</p></li>
+</ul>
+<p><span class="math display">\theta_\text{teacher} \leftarrow \beta \, \theta_\text{teacher} + (1 - \beta) \, \theta_\text{student}</span></p>
+<div class="footer">
+<p>Caron et al.&nbsp;(2021). Emerging Properties in Self-Supervised Vision Transformers. arXiv:2104.14294</p>
+</div>
+</section>
+
+<section id="self-distillation-with-no-labels-dino-2" class="title-slide slide level1 center">
+<h1>Self-distillation with no labels (DINO)</h1>
+
+<img data-src="img/DINO-architecture2.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training/" class="uri">https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training/</a></p><div class="footer">
+<p>Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., et al.&nbsp;(2021). Emerging Properties in Self-Supervised Vision Transformers. arXiv:2104.14294</p>
+</div>
+</section>
+
+<section id="self-distillation-with-no-labels-dino-3" class="title-slide slide level1 center">
+<h1>Self-distillation with no labels (DINO)</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>The predicted classes do not matter when pre-training, as there is no ground truth.</p></li>
+<li><p>The only thing that matters is the <strong>high-level representation</strong> of an image before the softmax output, which can be used for transfer learning.</p></li>
+<li><p>Self-distillation forces the representations to be meaningful at both the global and local scales, as the teacher gets global views.</p></li>
+<li><p>ImageNet classes are already separated in the high-level representations: a simple kNN (k-nearest neighbour) classifier achieves 74.5% accuracy (vs.&nbsp;79.3% for a supervised ResNet50).</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/DINO-tsne.png"></p>
+<p></p><figcaption><a href="https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training" class="uri">https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="self-distillation-with-no-labels-dino-4" class="title-slide slide level1 center">
+<h1>Self-distillation with no labels (DINO)</h1>
+<ul>
+<li>More interestingly, by looking at the self-attention layers, one can obtain saliency maps that perform <strong>object segmentation</strong> without ever having been trained to!</li>
+</ul>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/8I1RelnsgMw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</section>
+
+<section id="transformer-for-time-series" class="title-slide slide level1 center">
+<h1>Transformer for time series</h1>
+<ul>
+<li><p>Transformers can also be used for time-series classification or forecasting instead of RNNs.</p></li>
+<li><p>Example: weather forecasting, market prices, etc.</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer-timeseries.png"></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/transformer-timeseries-architecture.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p>Wu, N., Green, B., Ben, X., and O’Banion, S. (2020). Deep Transformer Models for Time Series Forecasting: The Influenza Prevalence Case. arXiv:2001.08317</p>
+</div>
+</section>
+
+<section id="references" class="title-slide slide level1 center">
+<h1>References</h1>
+<ul>
+<li>Various great blog posts by Jay Alammar to understand attentional networks, transformers, etc:</li>
+</ul>
+<p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
+<p><a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p>
+<p><a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p>
+<p><a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p>
+<ul>
+<li>Application of transformers outside NLP:</li>
+</ul>
+<p><a href="https://medium.com/swlh/transformers-are-not-only-for-nlp-cd837c9f175" class="uri">https://medium.com/swlh/transformers-are-not-only-for-nlp-cd837c9f175</a></p>
+<ul>
+<li>Extensions of the Vision Transformer:</li>
+</ul>
+<p><a href="https://theaisummer.com/transformers-computer-vision/" class="uri">https://theaisummer.com/transformers-computer-vision/</a></p>
+<div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="7.1-Transformers_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="7.1-Transformers_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>

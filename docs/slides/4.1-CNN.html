@@ -7,7 +7,7 @@
 <link href="4.1-CNN_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="4.1-CNN_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="4.1-CNN_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.175">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -94,6 +94,22 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="4.1-CNN_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="4.1-CNN_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="4.1-CNN_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="4.1-CNN_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -389,7 +405,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc.svg" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Convolutional neural networks</p>
   <p class="author">Julien Vitay</p>
@@ -407,7 +423,7 @@
 <ul>
 <li><p>The different layers of a deep network extract increasingly complex features.</p>
 <ul>
-<li>edges <span class="math inline">\(\rightarrow\)</span> contours <span class="math inline">\(\rightarrow\)</span> shapes <span class="math inline">\(\rightarrow\)</span> objects</li>
+<li>edges <span class="math inline">\rightarrow</span> contours <span class="math inline">\rightarrow</span> shapes <span class="math inline">\rightarrow</span> objects</li>
 </ul></li>
 </ul>
 
@@ -432,7 +448,7 @@
 </ul></li>
 <li><p>To obtain a generalization error in the range of 10%, you would need at least 14 billion training examples…</p></li>
 </ul>
-<p><span class="math display">\[\epsilon \approx \frac{\text{VC}_\text{dim}}{N}\]</span></p>
+<p><span class="math display">\epsilon \approx \frac{\text{VC}_\text{dim}}{N}</span></p>
 </div>
 </div>
 </section>
@@ -461,10 +477,7 @@
 <section id="the-convolutional-layer" class="title-slide slide level1 center">
 <h1>The convolutional layer</h1>
 
-<img data-src="img/convolution-anim2.gif" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" class="uri">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></p>
-</div>
-</section>
+<img data-src="img/convolution-anim2.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" class="uri">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></p></section>
 
 <section id="the-convolutional-layer-1" class="title-slide slide level1 center">
 <h1>The convolutional layer</h1>
@@ -478,23 +491,21 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/same_padding_no_strides.gif" style="width:70.0%"></p>
+<p></p><figcaption>Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li><p>In a <strong>convolutional layer</strong>, <span class="math inline">\(d\)</span> filters are defined with very small sizes (3x3, 5x5…).</p></li>
+<li><p>In a <strong>convolutional layer</strong>, <span class="math inline">d</span> filters are defined with very small sizes (3x3, 5x5…).</p></li>
 <li><p>Each filter is convoluted over the input image (or the previous layer) to create a <strong>feature map</strong>.</p></li>
-<li><p>The set of <span class="math inline">\(d\)</span> feature maps becomes a new 3D structure: a <strong>tensor</strong>.</p></li>
+<li><p>The set of <span class="math inline">d</span> feature maps becomes a new 3D structure: a <strong>tensor</strong>.</p></li>
 </ul>
-<p><span class="math display">\[\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k\]</span></p>
+<p><span class="math display">\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k</span></p>
 <ul>
 <li><p>If the input image is 32x32x3, the resulting tensor will be 32x32xd.</p></li>
 <li><p>The convolutional layer has only very few parameters: each feature map has 3x3x3 values in the filter plus a bias, i.e.&nbsp;28 parameters.</p></li>
 <li><p>As in image processing, a padding method must be chosen (what to do when a pixel is outside the image).</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></p>
-</div>
 </div>
 </div>
 </section>
@@ -548,6 +559,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pooling.jpg"></p>
+<p></p><figcaption>Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -564,9 +576,6 @@
 <li><p>Mean-pooling layers are also possible, but they are not used anymore.</p></li>
 <li><p>Pooling allows translation invariance: the same input pattern will be detected whatever its position in the input image.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></p>
-</div>
 </section>
 
 <section id="convolution-with-strides" class="title-slide slide level1 center">
@@ -576,6 +585,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/padding_strides.gif"></p>
+<p></p><figcaption>Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -589,9 +599,6 @@
 </div>
 </div>
 <div class="footer">
-<p>Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></p>
-</div>
-<div class="footer">
 <p>Springerberg et al.&nbsp;(2014). Striving for Simplicity: The All Convolutional Net. arXiv:1412.6806</p>
 </div>
 </section>
@@ -603,10 +610,7 @@
 <li><p>The filter has a bigger spatial extent than its number of values.</p></li>
 </ul>
 
-<img data-src="img/dilation.gif" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: https://github.com/vdumoulin/conv_arithmetic</p>
-</div>
-</section>
+<img data-src="img/dilation.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></p></section>
 
 <section id="backpropagation-through-a-convolutional-layer" class="title-slide slide level1 center">
 <h1>Backpropagation through a convolutional layer</h1>
@@ -614,13 +618,10 @@
 <li>But how can we do backpropagation through a convolutional layer?</li>
 </ul>
 
-<img data-src="img/convolutional-forward.gif" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/convolutional-forward.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></p><ul>
 <li><p>In the example above, the four neurons of the feature map will receive a gradient from the upper layers.</p></li>
 <li><p>How can we use it to learn the filter values and pass the gradient to the lower layers?</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></p>
-</div>
 </section>
 
 <section id="backpropagation-through-a-convolutional-layer-1" class="title-slide slide level1 center">
@@ -629,38 +630,29 @@
 <li>Answer: simply by convolving the output gradients with the flipped filter!</li>
 </ul>
 
-<img data-src="img/convolutional-backward.gif" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></p>
-</div>
-</section>
+<img data-src="img/convolutional-backward.gif" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></p></section>
 
 <section id="backpropagation-through-a-convolutional-layer-2" class="title-slide slide level1 center">
 <h1>Backpropagation through a convolutional layer</h1>
 <ul>
-<li>The filter just has to be flipped (<span class="math inline">\(180^o\)</span> symmetry) before the convolution.</li>
+<li>The filter just has to be flipped (<span class="math inline">180^o</span> symmetry) before the convolution.</li>
 </ul>
 
-<img data-src="img/convolution-flipped.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/convolution-flipped.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></p><ul>
 <li>The convolution operation is differentiable, so we can apply backpropagation and learn the filters.</li>
 </ul>
-<p><span class="math display">\[\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k\]</span></p>
-<p><span class="math display">\[\frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = W_k^F \ast \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}\]</span></p>
-<div class="footer">
-<p>Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></p>
-</div>
+<p><span class="math display">\mathbf{h}_k = W_k \ast \mathbf{h}_{k-1} + \mathbf{b}_k</span></p>
+<p><span class="math display">\frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k-1}} = W_k^F \ast \frac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}</span></p>
 </section>
 
 <section id="backpropagation-through-a-max-pooling-layer" class="title-slide slide level1 center">
 <h1>Backpropagation through a max-pooling layer</h1>
 
-<img data-src="img/max-pooling-backprop.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/max-pooling-backprop.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/" class="uri">https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/</a></p><ul>
 <li><p>We can also use backpropagation through a max-pooling layer.</p></li>
 <li><p>We need to remember which location was the winning location in order to backpropagate the gradient.</p></li>
 <li><p>A max-pooling layer has no parameter, we do not need to learn anything, just to pass the gradient backwards.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/" class="uri">https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/</a></p>
-</div>
 </section>
 
 <section id="convolutional-neural-networks-1" class="title-slide slide level1 center">
@@ -730,16 +722,13 @@
 <section id="neocognitron" class="title-slide slide level1 center">
 <h1>NeoCognitron</h1>
 
-<img data-src="img/Neocognitron.jpg" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/Neocognitron.jpg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg" class="uri">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></p><ul>
 <li><p>The <strong>Neocognitron</strong> (Fukushima, 1980) was actually the first CNN able to recognize handwritten digits.</p></li>
 <li><p>Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA).</p></li>
 <li><p>Inspired by the human visual system.</p></li>
 </ul>
 <div class="footer">
 <p>Fukushima (1980). Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. Biological Cybernetics</p>
-</div>
-<div class="footer">
-<p>Source: <a href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg" class="uri">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></p>
 </div>
 </section>
 
@@ -814,7 +803,7 @@
 
 <img data-src="img/inception.png" class="r-stretch quarto-figure-center"><ul>
 <li><p>Inside GoogleNet, each <strong>Inception</strong> module learns features at different resolutions using convolutions and max poolings of different sizes.</p></li>
-<li><p>1x1 convolutions are <strong>shared MLPS</strong>: they transform a <span class="math inline">\((w, h, d_1)\)</span> tensor into <span class="math inline">\((w, h, d_2)\)</span> pixel per pixel.</p></li>
+<li><p>1x1 convolutions are <strong>shared MLPS</strong>: they transform a <span class="math inline">(w, h, d_1)</span> tensor into <span class="math inline">(w, h, d_2)</span> pixel per pixel.</p></li>
 <li><p>The resulting feature maps are concatenated along the feature dimension and passed to the next module.</p></li>
 </ul>
 <div class="footer">
@@ -828,7 +817,7 @@
 <img data-src="img/googlenet-arch.jpg" class="r-stretch quarto-figure-center"><ul>
 <li>Three softmax layers predict the classes at different levels of the network. Combined loss:</li>
 </ul>
-<p><span class="math display">\[\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]\]</span></p>
+<p><span class="math display">\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \mathbf{t} \, \log \mathbf{y}_1 - \mathbf{t} \, \log \mathbf{y}_2 - \mathbf{t} \, \log \mathbf{y}_3]</span></p>
 <ul>
 <li><p>Only the deeper softmax layer matters for the prediction.</p></li>
 <li><p>The additional losses improve convergence by fight vanishing gradients: the early layers get useful gradients from the lower softmax layers.</p></li>
@@ -841,18 +830,25 @@
 <section id="inception-networks" class="title-slide slide level1 center">
 <h1>Inception networks</h1>
 
-<img data-src="img/inceptionv3.png" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/inceptionv3.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://cloud.google.com/tpu/docs/inception-v3-advanced" class="uri">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></p><ul>
 <li><p>Several variants of GoogleNet have been later proposed: Inception v2, v3, InceptionResNet, Xception…</p></li>
 <li><p>Xception has currently the best top-1 accuracy on ImageNet: 126 layers, 22M parameters (88 MB).</p></li>
 <li><p>Pretrained weights are available in <code>keras</code>:</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>tf.keras.applications.Xception(include_top<span class="op">=</span><span class="va">True</span>, weights<span class="op">=</span><span class="st">"imagenet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>[citation Szegedy C, Vanhoucke V, Ioffe S, Shlens J, Wojna Z. (2015). Rethinking the Inception Architecture for Computer Vision. arXiv:151200567. .]</p>
-<div class="footer">
-<p>Chollet F. 2017. Xception: Deep Learning with Depthwise Separable Convolutions. arXiv:161002357.</p>
+<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="footer">
-<p>Source: <a href="https://cloud.google.com/tpu/docs/inception-v3-advanced" class="uri">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></p>
+<p><strong>References</strong></p>
+</div>
+<div class="callout-content">
+<p>Szegedy C, Vanhoucke V, Ioffe S, Shlens J, Wojna Z. (2015). Rethinking the Inception Architecture for Computer Vision. arXiv:151200567.</p>
+<p>Chollet F. (2017). Xception: Deep Learning with Depthwise Separable Convolutions. arXiv:161002357.</p>
+</div>
+</div>
 </div>
 </section>
 
@@ -862,11 +858,11 @@
 <div class="column" style="width:80%;">
 <ul>
 <li><p><strong>2015: ResNet</strong> (Microsoft). Won ImageNet 2015.</p></li>
-<li><p>Instead of learning to transform an input directly with <span class="math inline">\(\mathbf{h}_n = f_W(\mathbf{h}_{n-1})\)</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p></li>
+<li><p>Instead of learning to transform an input directly with <span class="math inline">\mathbf{h}_n = f_W(\mathbf{h}_{n-1})</span>, a <strong>residual layer</strong> learns to represent the residual between the output and the input:</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}  \quad \rightarrow \quad f_W(\mathbf{h}_{n-1}) = \mathbf{h}_n - \mathbf{h}_{n-1}
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/resnetlayer.jpg" style="width:50.0%"></p>
@@ -876,9 +872,6 @@
 <li><p>These <strong>skip connections</strong> allow the network to decide how deep it has to be.</p></li>
 <li><p>If the layer is not needed, the residual layer learns to output 0.</p></li>
 </ul>
-<div class="footer">
-<p>He and al.&nbsp;(2016). Deep Residual Learning for Image Recognition. ICML16</p>
-</div>
 </div><div class="column" style="width:14%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -886,6 +879,9 @@
 </figure>
 </div>
 </div>
+</div>
+<div class="footer">
+<p>He and al.&nbsp;(2016). Deep Residual Learning for Image Recognition. ICML16</p>
 </div>
 </section>
 
@@ -896,8 +892,8 @@
 <ul>
 <li>Skip connections help overcome the <strong>vanishing gradients</strong> problem, as the contribution of bypassed layers to the backpropagated gradient is 1.</li>
 </ul>
-<p><span class="math display">\[\mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}\]</span></p>
-<p><span class="math display">\[\frac{\partial \mathbf{h}_n}{\partial \mathbf{h}_{n-1}} = \frac{\partial f_W(\mathbf{h}_{n-1})}{\partial \mathbf{h}_{n-1}} + 1\]</span></p>
+<p><span class="math display">\mathbf{h}_n = f_W(\mathbf{h}_{n-1}) + \mathbf{h}_{n-1}</span></p>
+<p><span class="math display">\frac{\partial \mathbf{h}_n}{\partial \mathbf{h}_{n-1}} = \frac{\partial f_W(\mathbf{h}_{n-1})}{\partial \mathbf{h}_{n-1}} + 1</span></p>
 <ul>
 <li><p>The norm of the gradient stays roughly around one, limiting vanishing.</p></li>
 <li><p>Skip connections can bypass whole blocks of layers.</p></li>
@@ -928,9 +924,9 @@
 <img data-src="img/highway.png" class="r-stretch quarto-figure-center"><ul>
 <li><strong>Highway networks</strong> (IDSIA) are residual networks which also learn to balance inputs with feature extraction:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathbf{h}_n = T_{W'} \, f_W(h_{n-1}) + (1 -  T_{W'}) \, h_{n-1}
-\]</span></p>
+</span></p>
 <ul>
 <li><p>The balance between the <strong>primary</strong> pathway and the <strong>skip</strong> pathway adapts to the task.</p></li>
 <li><p>Has been used up to 1000 layers.</p></li>
@@ -956,10 +952,10 @@
 <li><p>100 layers altogether.</p></li>
 <li><p>Improved state-of-the-art accuracy on five major benchmarks.</p></li>
 </ul>
+</div>
+</div>
 <div class="footer">
 <p>Huang, Liu and Weinberger (2016). Densely Connected Convolutional Networks. arXiv:1608.06993*</p>
-</div>
-</div>
 </div>
 </section>
 
@@ -1010,10 +1006,7 @@
 </ul></li>
 </ul>
 
-<img data-src="img/deepnets-comparison.png" style="width:50.0%" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://dataconomy.com/2017/04/history-neural-networks" class="uri">https://dataconomy.com/2017/04/history-neural-networks</a></p>
-</div>
-</section>
+<img data-src="img/deepnets-comparison.png" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://dataconomy.com/2017/04/history-neural-networks" class="uri">https://dataconomy.com/2017/04/history-neural-networks</a></p></section>
 
 <section id="applications" class="title-slide slide level1 center">
 <h1>3 - Applications</h1>
@@ -1051,7 +1044,7 @@
 <li><p>Used now to recognize new faces from single examples (transfer learning, one-shot learning).</p></li>
 </ul>
 <div class="footer">
-<p>Yaniv Taigman; Ming Yang; Marc’Aurelio Ranzato; Lior Wolf (2014), “DeepFace: Closing the Gap to Human-Level Performance in Face Verification”, Conference on Computer Vision and Pattern Recognition (CVPR)</p>
+<p>Yaniv Taigman; Ming Yang; Marc’Aurelio Ranzato; Lior Wolf (2014), “DeepFace: Closing the Gap to Human-Level Performance in Face Verification”, CVPR.</p>
 </div>
 </div>
 </div>
@@ -1069,19 +1062,15 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/posnet-face.gif" style="width:70.0%"></p>
+<p></p><figcaption>Source: <a href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html" class="uri">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p><a href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html" class="uri">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pose_estimation.gif" style="width:70.0%"></p>
+<p></p><figcaption>Source: <a href="https://www.tensorflow.org/lite/models/pose_estimation/overview" class="uri">https://www.tensorflow.org/lite/models/pose_estimation/overview</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p>Source: <a href="https://www.tensorflow.org/lite/models/pose_estimation/overview" class="uri">https://www.tensorflow.org/lite/models/pose_estimation/overview</a></p>
 </div>
 </div>
 </div>
@@ -1149,6 +1138,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/wavenet.png"></p>
+<p></p><figcaption>Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
@@ -1158,9 +1148,6 @@
 </figure>
 </div>
 </div>
-</div>
-<div class="footer">
-<p>Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></p>
 </div>
 </section>
 
@@ -1181,10 +1168,7 @@
 </ol></li>
 </ul>
 
-<img data-src="img/transferlearning2.jpg" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></p>
-</div>
-</section>
+<img data-src="img/transferlearning2.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></p></section>
 
 <section id="transfer-learning-domain-adaptation-1" class="title-slide slide level1 center">
 <h1>Transfer learning / Domain adaptation</h1>
@@ -1201,6 +1185,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/transferlearning3.jpg"></p>
+<p></p><figcaption>Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -1215,21 +1200,15 @@
 </div>
 </div>
 </div>
-<div class="footer">
-<p><a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></p>
-</div>
 </section>
 
 <section id="example-of-transfer-learning" class="title-slide slide level1 center">
 <h1>Example of transfer learning</h1>
 
-<img data-src="img/snowleopard.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/snowleopard.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/" class="uri">https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/</a></p><ul>
 <li><p>Microsoft wanted a system to automatically detect <strong>snow leopards</strong> into the wild, but there were not enough labelled images to train a deep network <strong>end-to-end</strong>.</p></li>
 <li><p>They used a pretrained <strong>ResNet50</strong> as a feature extractor for a simple <strong>logistic regression</strong> classifier.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/" class="uri">https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/</a></p>
-</div>
 </section>
 
 <section id="transfer-learning-in-keras" class="title-slide slide level1 center">
@@ -1263,11 +1242,11 @@
 <p><img data-src="img/vgg16.png"></p>
 </figure>
 </div>
+</div>
+</div>
 <ul>
 <li>See <a href="https://keras.io/api/applications/" class="uri">https://keras.io/api/applications/</a> for the full list of pretrained networks.</li>
 </ul>
-</div>
-</div>
 </section>
 
 <section id="ensemble-learning" class="title-slide slide level1 center">
@@ -1286,13 +1265,10 @@
 <section id="ensemble-of-networks" class="title-slide slide level1 center">
 <h1>Ensemble of networks</h1>
 
-<img data-src="img/ensemble-example.png" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/ensemble-example.png" class="r-stretch quarto-figure-center"><p class="caption">Source <a href="https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html" class="uri">https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html</a></p><ul>
 <li><p><strong>Ensemble learning</strong> is the process of combining multiple independent classifiers together, in order to obtain a better performance.</p></li>
 <li><p>As long the individual classifiers do not make mistakes for the same examples, a simple majority vote might be enough to get better approximations.</p></li>
 </ul>
-<div class="footer">
-<p>Source <a href="https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html" class="uri">https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html</a></p>
-</div>
 </section>
 
 <section id="ensemble-learning-1" class="title-slide slide level1 center">
@@ -1320,13 +1296,10 @@
 <li>Bagging methods (bootstrap aggregation) trains multiple classifiers on randomly sampled subsets of the data.</li>
 </ul>
 
-<img data-src="img/bagging.jpg" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/bagging.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://www.sciencedirect.com/science/article/pii/S0957417409008781" class="uri">http://www.sciencedirect.com/science/article/pii/S0957417409008781</a></p><ul>
 <li><p>A <strong>random forest</strong> is a bagging method for decision trees, where the data and features are sampled..</p></li>
 <li><p>One can use majority vote, unweighted average, weighted average or even a meta-learner to form the final decision.</p></li>
 </ul>
-<div class="footer">
-<p>Source: <a href="http://www.sciencedirect.com/science/article/pii/S0957417409008781" class="uri">http://www.sciencedirect.com/science/article/pii/S0957417409008781</a></p>
-</div>
 </section>
 
 <section id="ensemble-learning-boosting" class="title-slide slide level1 center">
@@ -1339,12 +1312,9 @@
 </ul></li>
 </ul>
 
-<img data-src="img/boosting.png" class="r-stretch quarto-figure-center"><ul>
+<img data-src="img/boosting.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/" class="uri">https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/</a></p><ul>
 <li>Not very useful with deep networks (overfitting), but there are some approaches like SelfieBoost (<a href="https://arxiv.org/pdf/1411.3436.pdf" class="uri">https://arxiv.org/pdf/1411.3436.pdf</a>).</li>
 </ul>
-<div class="footer">
-<p><a href="https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/" class="uri">https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/</a></p>
-</div>
 </section>
 
 <section id="ensemble-learning-stacking" class="title-slide slide level1 center">
@@ -1352,14 +1322,18 @@
 <ul>
 <li><strong>Stacking</strong> is an ensemble learning technique that combines multiple models via a meta-classifier. The meta-model is trained on the outputs of the basic models as features.</li>
 </ul>
-
-<img data-src="img/stacking.png" style="width:80.0%" class="r-stretch quarto-figure-center"><ul>
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/stacking.png" style="width:80.0%"></p>
+<p></p><figcaption>Source: <a href="doi:10.1371/journal.pone.0024386.g005" class="uri">doi:10.1371/journal.pone.0024386.g005</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+<ul>
 <li><p>Winning approach of ImageNet 2016 and 2017.</p></li>
 <li><p>See <a href="https://blog.statsbot.co/ensemble-learning-d1dcd548e936" class="uri">https://blog.statsbot.co/ensemble-learning-d1dcd548e936</a></p></li>
 </ul>
-<div class="footer">
-<p><a href="doi:10.1371/journal.pone.0024386.g005" class="uri">doi:10.1371/journal.pone.0024386.g005</a></p>
-</div>
 <div class="footer footer-default">
 
 </div>
@@ -1382,7 +1356,6 @@
   <script src="4.1-CNN_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="4.1-CNN_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="4.1-CNN_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="4.1-CNN_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1551,27 +1524,9 @@
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

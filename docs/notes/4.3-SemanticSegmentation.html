@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -102,12 +117,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -199,7 +214,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -224,7 +239,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,7 +277,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +322,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -494,7 +514,7 @@ div.csl-indent {
 <section id="fully-convolutional-networks" class="level3">
 <h3 class="anchored" data-anchor-id="fully-convolutional-networks">Fully convolutional networks</h3>
 <p>A <strong>fully convolutional network</strong> only has convolutional layers and learns to predict the output tensor. The last layer has a pixel-wise softmax activation. We minimize the <strong>pixel-wise cross-entropy loss</strong></p>
-<p><span class="math display">\[\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \sum_\text{pixels} \sum_\text{classes} t_i \, \log y_i]\]</span></p>
+<p><span class="math display">\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \sum_\text{pixels} \sum_\text{classes} t_i \, \log y_i]</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/fullyconvolutional.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -568,16 +588,16 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Badrinarayanan2016" class="csl-entry" role="doc-biblioentry">
-Badrinarayanan, V., Kendall, A., and Cipolla, R. (2016). <span>SegNet</span>: <span>A Deep Convolutional Encoder-Decoder Architecture</span> for <span>Image Segmentation</span>. <em>arXiv:1511.00561 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1511.00561">https://arxiv.org/abs/1511.00561</a>.
+Badrinarayanan, V., Kendall, A., and Cipolla, R. (2016). <span>SegNet</span>: <span>A Deep Convolutional Encoder-Decoder Architecture</span> for <span>Image Segmentation</span>. Available at: <a href="http://arxiv.org/abs/1511.00561">http://arxiv.org/abs/1511.00561</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-He2018" class="csl-entry" role="doc-biblioentry">
-He, K., Gkioxari, G., Dollár, P., and Girshick, R. (2018). Mask <span>R-CNN</span>. <em>arXiv:1703.06870 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1703.06870">https://arxiv.org/abs/1703.06870</a>.
+He, K., Gkioxari, G., Dollár, P., and Girshick, R. (2018). Mask <span>R-CNN</span>. Available at: <a href="http://arxiv.org/abs/1703.06870">http://arxiv.org/abs/1703.06870</a> [Accessed September 17, 2020].
 </div>
 <div id="ref-Ronneberger2015" class="csl-entry" role="doc-biblioentry">
-Ronneberger, O., Fischer, P., and Brox, T. (2015). U-<span>Net</span>: <span>Convolutional Networks</span> for <span>Biomedical Image Segmentation</span>. <em>arXiv:1505.04597 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1505.04597">https://arxiv.org/abs/1505.04597</a>.
+Ronneberger, O., Fischer, P., and Brox, T. (2015). U-<span>Net</span>: <span>Convolutional Networks</span> for <span>Biomedical Image Segmentation</span>. Available at: <a href="http://arxiv.org/abs/1505.04597">http://arxiv.org/abs/1505.04597</a> [Accessed November 29, 2020].
 </div>
 <div id="ref-Wang2018b" class="csl-entry" role="doc-biblioentry">
-Wang, B., Zheng, H., Liang, X., Chen, Y., Lin, L., and Yang, M. (2018). Toward <span class="nocase">Characteristic-Preserving Image-based Virtual Try-On Network</span>. <em>arXiv:1807.07688 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1807.07688">https://arxiv.org/abs/1807.07688</a>.
+Wang, B., Zheng, H., Liang, X., Chen, Y., Lin, L., and Yang, M. (2018). Toward <span class="nocase">Characteristic-Preserving Image-based Virtual Try-On Network</span>. Available at: <a href="http://arxiv.org/abs/1807.07688">http://arxiv.org/abs/1807.07688</a> [Accessed November 27, 2020].
 </div>
 </div>
 </section>
@@ -694,6 +714,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

@@ -268,14 +268,16 @@ $$K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}
 
 Let's consider the quadratic kernel in $\Re^3$:
 
-\begin{eqnarray*}
-\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 && \\
-&& \\
-  K(\mathbf{x}, \mathbf{z}) &=& ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
-                                            &=&  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
-                                            &=&  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
-                                            &=&  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
-\end{eqnarray*}
+$$
+\begin{aligned}
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 & \\
+                            & \\
+  K(\mathbf{x}, \mathbf{z}) &= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
+                            &=  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
+                            &=  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
+                            &=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle \\
+\end{aligned}
+$$
 
 with:
 
@@ -326,25 +328,25 @@ While the inner product in the feature space would require $O(d^p)$ operations, 
 
 Depending on the kernel, the implicit dimensionality of the feature space can even be infinite! Some kernels:
 
-* **Linear kernel**: dimension of the feature space = $d$.
+* **Linear kernel**: $d$ dimensions.
 
 $$
 K(\mathbf{x},\mathbf{z}) = \langle \mathbf{x} \cdot \mathbf{z} \rangle
 $$
 
-* **Polynomial kernel**: dimension of the feature space = $d^p$.
+* **Polynomial kernel**: $d^p$ dimensions.
 
 $$
 K(\mathbf{x},\mathbf{z}) = (\langle \mathbf{x} \cdot \mathbf{z} \rangle)^p
 $$
 
-* **Gaussian kernel** (or RBF kernel): dimension of the feature space= $\infty$.
+* **Gaussian kernel** (or RBF kernel): $\infty$ dimensions.
 
 $$
 K(\mathbf{x},\mathbf{z}) = \exp(-\frac{\| \mathbf{x} - \mathbf{z} \|^2}{2\sigma^2})
 $$
 
-* **Hyperbolic tangent kernel**: dimension of the feature space = $\infty$
+* **Hyperbolic tangent kernel**: $\infty$ dimensions.
 
 $$
 k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangle +c)

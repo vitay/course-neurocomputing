@@ -173,5 +173,80 @@
   },
   "8.2-Beyond.md": {
     "8.2-Beyond.html": "d72f6adf"
+  },
+  "6.3-Attention.md": {
+    "6.3-Attention.html": "ac165d2f"
+  },
+  "6.2-NLP.md": {
+    "6.2-NLP.html": "ec53d8f5"
+  },
+  "7.1-Transformers.md": {
+    "7.1-Transformers.html": "1f6501c2"
+  },
+  "2.4-LearningTheory.qmd": {
+    "2.4-LearningTheory.html": "8654e467"
+  },
+  "2.1-Optimization.qmd": {
+    "2.1-Optimization.html": "0e18b4b4"
+  },
+  "1.0-Foreword.qmd": {
+    "1.0-Foreword.html": "7f7aaf3c"
+  },
+  "3.2-DeepNN.qmd": {
+    "3.2-DeepNN.html": "6c104871"
+  },
+  "2.2-LinearRegression.qmd": {
+    "2.2-LinearRegression.html": "caccb7a9"
+  },
+  "5.2-RBM.qmd": {
+    "5.2-RBM.html": "d4569762"
+  },
+  "5.1-Autoencoders.qmd": {
+    "5.1-Autoencoders.html": "949c1d38"
+  },
+  "5.3-GAN.qmd": {
+    "5.3-GAN.html": "f73965e9"
+  },
+  "4.2-ObjectDetection.qmd": {
+    "4.2-ObjectDetection.html": "ff314bd0"
+  },
+  "8.1-Limits.qmd": {
+    "8.1-Limits.html": "93c169d1"
+  },
+  "8.2-Beyond.qmd": {
+    "8.2-Beyond.html": "183b1540"
+  },
+  "4.1-CNN.qmd": {
+    "4.1-CNN.html": "61edc448"
+  },
+  "1.3-Neurons.qmd": {
+    "1.3-Neurons.html": "be91c6d0"
+  },
+  "6.3-Attention.qmd": {
+    "6.3-Attention.html": "bc659155"
+  },
+  "3.1-NeuralNetworks.qmd": {
+    "3.1-NeuralNetworks.html": "7bba1e88"
+  },
+  "1.2-Basics.qmd": {
+    "1.2-Basics.html": "3b5fa49f"
+  },
+  "2.3-LinearClassification.qmd": {
+    "2.3-LinearClassification.html": "ff42f213"
+  },
+  "1.1-Introduction.qmd": {
+    "1.1-Introduction.html": "3f09e418"
+  },
+  "6.1-RNN.qmd": {
+    "6.1-RNN.html": "6da097a2"
+  },
+  "4.3-Segnet.qmd": {
+    "4.3-Segnet.html": "bf8de9c8"
+  },
+  "7.1-Transformers.qmd": {
+    "7.1-Transformers.html": "739b4216"
+  },
+  "6.2-NLP.qmd": {
+    "6.2-NLP.html": "d4405be4"
   }
 }

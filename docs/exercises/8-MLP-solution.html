@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 30&nbsp; Multi-layer Perceptron</title>
+<title>Neurocomputing - 31&nbsp; Multi-layer Perceptron</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -125,7 +125,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -146,12 +161,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -243,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -268,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -306,7 +321,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -346,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -499,36 +519,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="structure-of-the-mlp" class="level2">
 <h2 class="anchored" data-anchor-id="structure-of-the-mlp">Structure of the MLP</h2>
-<p>In this exercise, we will consider a MLP for non-linear binary classification composed of 2 input neurons <span class="math inline">\(\mathbf{x}\)</span>, one output neuron <span class="math inline">\(y\)</span> and <span class="math inline">\(K\)</span> hidden neurons in a single hidden layer (<span class="math inline">\(\mathbf{h}\)</span>).</p>
+<p>In this exercise, we will consider a MLP for non-linear binary classification composed of 2 input neurons <span class="math inline">\mathbf{x}</span>, one output neuron <span class="math inline">y</span> and <span class="math inline">K</span> hidden neurons in a single hidden layer (<span class="math inline">\mathbf{h}</span>).</p>
 <p><img src="./mlp-example.png" alt="MLP" width="600px"></p>
-<p>The output neuron is a vector <span class="math inline">\(\mathbf{y}\)</span> with one element that sums its inputs with <span class="math inline">\(K\)</span> weights <span class="math inline">\(W^2\)</span> and a bias <span class="math inline">\(\mathbf{b}^2\)</span>.</p>
-<p><span class="math display">\[\mathbf{y} = \sigma( W^2 \times \mathbf{h} + \mathbf{b}^2)\]</span></p>
+<p>The output neuron is a vector <span class="math inline">\mathbf{y}</span> with one element that sums its inputs with <span class="math inline">K</span> weights <span class="math inline">W^2</span> and a bias <span class="math inline">\mathbf{b}^2</span>.</p>
+<p><span class="math display">\mathbf{y} = \sigma( W^2 \times \mathbf{h} + \mathbf{b}^2)</span></p>
 <p>It uses the logistic transfer function:</p>
-<p><span class="math display">\[\sigma(x) = \dfrac{1}{1 + \exp -x}\]</span></p>
-<p>As in logistic regression for linear classification, we will interpret <span class="math inline">\(y\)</span> as the probability that the input <span class="math inline">\(\mathbf{x}\)</span> belongs to the positive class.</p>
-<p><span class="math inline">\(W^2\)</span> is a <span class="math inline">\(1 \times K\)</span> matrix (we could interpret it as a vector, but this will make the computations easier) and <span class="math inline">\(\mathbf{b}^2\)</span> is a vector with one element.</p>
-<p>Each of the <span class="math inline">\(K\)</span> hidden neurons receives 2 weights from the input layer, what gives a <span class="math inline">\(K \times 2\)</span> weight matrix <span class="math inline">\(W^1\)</span>, and <span class="math inline">\(K\)</span> biases in the vector <span class="math inline">\(\mathbf{b}^1\)</span>. They will also use the logistic activation function at first:</p>
-<p><span class="math display">\[\mathbf{h} = \sigma(W^1 \times \mathbf{x} + \mathbf{b}^1)\]</span></p>
-<p>The goal is to implement the backpropagation algorithm by comparing the desired output <span class="math inline">\(t\)</span> with the prediction <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\sigma(x) = \dfrac{1}{1 + \exp -x}</span></p>
+<p>As in logistic regression for linear classification, we will interpret <span class="math inline">y</span> as the probability that the input <span class="math inline">\mathbf{x}</span> belongs to the positive class.</p>
+<p><span class="math inline">W^2</span> is a <span class="math inline">1 \times K</span> matrix (we could interpret it as a vector, but this will make the computations easier) and <span class="math inline">\mathbf{b}^2</span> is a vector with one element.</p>
+<p>Each of the <span class="math inline">K</span> hidden neurons receives 2 weights from the input layer, what gives a <span class="math inline">K \times 2</span> weight matrix <span class="math inline">W^1</span>, and <span class="math inline">K</span> biases in the vector <span class="math inline">\mathbf{b}^1</span>. They will also use the logistic activation function at first:</p>
+<p><span class="math display">\mathbf{h} = \sigma(W^1 \times \mathbf{x} + \mathbf{b}^1)</span></p>
+<p>The goal is to implement the backpropagation algorithm by comparing the desired output <span class="math inline">t</span> with the prediction <span class="math inline">y</span>:</p>
 <ul>
 <li>The output error is a vector with one element:</li>
 </ul>
-<p><span class="math display">\[\delta =  (\mathbf{t} - \mathbf{y})\]</span></p>
+<p><span class="math display">\delta =  (\mathbf{t} - \mathbf{y})</span></p>
 <ul>
-<li>The backpropagated error is a vector with <span class="math inline">\(K\)</span> elements:</li>
+<li>The backpropagated error is a vector with <span class="math inline">K</span> elements:</li>
 </ul>
-<p><span class="math display">\[\delta_\text{hidden} = \sigma'(W^1 \times \mathbf{x} + \mathbf{b}^1) \, W_2^T \times \delta\]</span></p>
-<p>(<span class="math inline">\(W^2\)</span> is a <span class="math inline">\(1 \times K\)</span> matrix, so <span class="math inline">\(W_2^T \times \delta\)</span> is a <span class="math inline">\(K \times 1\)</span> vector. The vector <span class="math inline">\(\sigma'(W^1 \times \mathbf{x} + \mathbf{b}^1)\)</span> is multiplied element-wise.)</p>
+<p><span class="math display">\delta_\text{hidden} = \sigma'(W^1 \times \mathbf{x} + \mathbf{b}^1) \, W_2^T \times \delta</span></p>
+<p>(<span class="math inline">W^2</span> is a <span class="math inline">1 \times K</span> matrix, so <span class="math inline">W_2^T \times \delta</span> is a <span class="math inline">K \times 1</span> vector. The vector <span class="math inline">\sigma'(W^1 \times \mathbf{x} + \mathbf{b}^1)</span> is multiplied element-wise.)</p>
 <ul>
 <li>Parameter updates follow the delta learning rule:</li>
 </ul>
-<p><span class="math display">\[\Delta W^1 = \eta \,  \delta_\text{hidden} \times \mathbf{x}^T\]</span></p>
-<p><span class="math display">\[\Delta \mathbf{b}^1 = \eta \, \delta_\text{hidden} \]</span></p>
-<p><span class="math display">\[\Delta W^2 = \eta \, \delta \, \mathbf{h}^T\]</span></p>
-<p><span class="math display">\[\Delta \mathbf{b}^2 = \eta \, \delta\]</span></p>
+<p><span class="math display">\Delta W^1 = \eta \,  \delta_\text{hidden} \times \mathbf{x}^T</span></p>
+<p><span class="math display">\Delta \mathbf{b}^1 = \eta \, \delta_\text{hidden} </span></p>
+<p><span class="math display">\Delta W^2 = \eta \, \delta \, \mathbf{h}^T</span></p>
+<p><span class="math display">\Delta \mathbf{b}^2 = \eta \, \delta</span></p>
 <p>Notice the transpose operators to obtain the correct shapes. You will remember that the derivative of the logistic function is given by:</p>
-<p><span class="math display">\[\sigma'(x)= \sigma(x) \, (1- \sigma(x))\]</span></p>
-<p><strong>Q:</strong> Why do not we use the derivative of the transfer function of the output neuron when computing the output error <span class="math inline">\(\delta\)</span>?</p>
+<p><span class="math display">\sigma'(x)= \sigma(x) \, (1- \sigma(x))</span></p>
+<p><strong>Q:</strong> Why do not we use the derivative of the transfer function of the output neuron when computing the output error <span class="math inline">\delta</span>?</p>
 <p><strong>A:</strong> As in logistic regression, we will interpret the output of the network as the probability of belonging to the positive class. We therefore use (implicitly) the cross-entropy / negative log-likelihood loss function, whose gradient does not include the derivative of the logistic function.</p>
 </section>
 <section id="data" class="level2">
@@ -760,7 +780,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [[0.37381855]]</code></pre>
 </div>
 </div>
-<p>The <code>feedforward</code> method takes a vector <code>x</code> as input, reshapes it to make sure it has two rows, and computes the hidden activation <span class="math inline">\(\mathbf{h}\)</span> and the prediction <span class="math inline">\(\mathbf{y}\)</span>.</p>
+<p>The <code>feedforward</code> method takes a vector <code>x</code> as input, reshapes it to make sure it has two rows, and computes the hidden activation <span class="math inline">\mathbf{h}</span> and the prediction <span class="math inline">\mathbf{y}</span>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> feedforward(<span class="va">self</span>, x):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make sure x has 2 rows</span></span>
@@ -772,7 +792,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Output layer</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.y <span class="op">=</span> logistic(np.dot(<span class="va">self</span>.W2, <span class="va">self</span>.h) <span class="op">+</span> <span class="va">self</span>.b2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Notice the use of <code>self.</code> to access attributes, as well as the use of <code>np.dot()</code> to mulitply vectors and matrices.</p>
-<p><strong>Q:</strong> Using the randomly initialized weights, apply the <code>feedforward()</code> method to an input vector (for example <span class="math inline">\([0.5, 0.5]\)</span>) and print <code>h</code> and <code>y</code>. What is the predicted class of the example?</p>
+<p><strong>Q:</strong> Using the randomly initialized weights, apply the <code>feedforward()</code> method to an input vector (for example <span class="math inline">[0.5, 0.5]</span>) and print <code>h</code> and <code>y</code>. What is the predicted class of the example?</p>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">0.5</span>, <span class="fl">0.5</span>])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -960,7 +980,7 @@ Training accuracy: 1.0</code></pre>
 <h2 class="anchored" data-anchor-id="experiments">Experiments</h2>
 <section id="influence-of-the-number-of-hidden-neurons" class="level3">
 <h3 class="anchored" data-anchor-id="influence-of-the-number-of-hidden-neurons">Influence of the number of hidden neurons</h3>
-<p><strong>Q:</strong> Try different values for the number of hidden neurons <span class="math inline">\(K\)</span> (e.g.&nbsp;2, 5, 10, 15, 20, 25, 50…) and observe how the accuracy and speed of convergence evolve.</p>
+<p><strong>Q:</strong> Try different values for the number of hidden neurons <span class="math inline">K</span> (e.g.&nbsp;2, 5, 10, 15, 20, 25, 50…) and observe how the accuracy and speed of convergence evolve.</p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="fl">1.0</span></span>
@@ -1101,7 +1121,7 @@ Test accuracy: 0.30000000000000004</code></pre>
 </div>
 </div>
 <p><strong>A:</strong> This is a simple example of <strong>vanishing gradient</strong>. The backpropagated error gets multiplied by <code>W2</code>, which is initially zero. There is therefore no backpropagated error, the first layer cannot learn anything for a quite long time. The global function stays linear.</p>
-<p><strong>Q:</strong> For a fixed number of hidden neurons (e.g.&nbsp;<span class="math inline">\(K=15\)</span>) and a correct value of <code>eta</code>, train 10 times the network with different initial weights and superimpose on the same plot the evolution of the training error. Conclude.</p>
+<p><strong>Q:</strong> For a fixed number of hidden neurons (e.g.&nbsp;<span class="math inline">K=15</span>) and a correct value of <code>eta</code>, train 10 times the network with different initial weights and superimpose on the same plot the evolution of the training error. Conclude.</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">15</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="fl">1.0</span></span>
@@ -1158,10 +1178,10 @@ Test accuracy: 0.30000000000000004</code></pre>
 </div>
 <p>Remember that the derivatives of these activations functions are easy to compute:</p>
 <ul>
-<li>linear: <span class="math inline">\(f'(x) = 1\)</span></li>
-<li>logistic: <span class="math inline">\(f'(x) = f(x) \, (1 - f(x))\)</span></li>
-<li>tanh: <span class="math inline">\(f'(x) = 1 - f^2(x)\)</span></li>
-<li>relu: <span class="math inline">\(f'(x) = \begin{cases}1 \; \text{if} \; x&gt;0\\ 0 \; \text{if} \; x \leq 0\\ \end{cases}\)</span></li>
+<li>linear: <span class="math inline">f'(x) = 1</span></li>
+<li>logistic: <span class="math inline">f'(x) = f(x) \, (1 - f(x))</span></li>
+<li>tanh: <span class="math inline">f'(x) = 1 - f^2(x)</span></li>
+<li>relu: <span class="math inline">f'(x) = \begin{cases}1 \; \text{if} \; x&gt;0\\ 0 \; \text{if} \; x \leq 0\\ \end{cases}</span></li>
 </ul>
 <p><em>Hint:</em> <code>activation_function</code> is a variable like others, although it is the name of a method. You can apply comparisons on it:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">self</span>.activation_function <span class="op">==</span> linear:</span>
@@ -1352,7 +1372,7 @@ Test accuracy: 0.85</code></pre>
 <h3 class="anchored" data-anchor-id="influence-of-data-normalization">Influence of data normalization</h3>
 <p>The input data returned by <code>make_circles</code> is nicely center around 0, with values between -1 and 1. What happens if this is not the case with your data?</p>
 <p><strong>Q:</strong> Shift the input data <code>X</code> using the formula:</p>
-<p><span class="math display">\[X_\text{shifted} = 8 \, X + 2\]</span></p>
+<p><span class="math display">X_\text{shifted} = 8 \, X + 2</span></p>
 <p>regenerate the training and test sets and train the MLP on them. What do you observe?</p>
 <div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>X_shifted <span class="op">=</span> <span class="dv">8</span><span class="op">*</span> X <span class="op">+</span> <span class="dv">2</span> </span>
@@ -1417,7 +1437,7 @@ Test accuracy: 0.6666666666666667</code></pre>
 </div>
 <p><strong>A:</strong> It does not work anymore…</p>
 <p><strong>Q:</strong> Normalize the shifted data so that it has a mean of 0 and a variance of 1 in each dimension, using the formula:</p>
-<p><span class="math display">\[X_\text{normalized} = \dfrac{X_\text{shifted} - \text{mean}(X_\text{shifted})}{\text{std}(X_\text{shifted})}\]</span></p>
+<p><span class="math display">X_\text{normalized} = \dfrac{X_\text{shifted} - \text{mean}(X_\text{shifted})}{\text{std}(X_\text{shifted})}</span></p>
 <p>and retrain the network. Conclude.</p>
 <div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> (X_shifted <span class="op">-</span> X_shifted.mean(axis<span class="op">=</span><span class="dv">0</span>))<span class="op">/</span>(X_shifted.std(axis<span class="op">=</span><span class="dv">0</span>)) </span>
@@ -1579,10 +1599,10 @@ Test accuracy: 0.9</code></pre>
 <section id="influence-of-weight-initialization---part-2" class="level3">
 <h3 class="anchored" data-anchor-id="influence-of-weight-initialization---part-2">Influence of weight initialization - part 2</h3>
 <p>According to the empirical analysis by Glorot and Bengio in “Understanding the difficulty of training deep feedforward neural networks”, the optimal initial values for the weights between two layers of a MLP are uniformly taken in the range:</p>
-<p><span class="math display">\[
+<p><span class="math display">
    \mathcal{U} ( - \sqrt{\frac{6}{N_{\text{in}}+N_{\text{out}}}} , \sqrt{\frac{6}{N_{\text{in}}+N_{\text{out}}}} )
-\]</span></p>
-<p>where <span class="math inline">\(N_{\text{in}}\)</span> is the number of neurons in the first layer and <span class="math inline">\(N_{\text{out}}\)</span> the number of neurons in the second layer.</p>
+</span></p>
+<p>where <span class="math inline">N_{\text{in}}</span> is the number of neurons in the first layer and <span class="math inline">N_{\text{out}}</span> the number of neurons in the second layer.</p>
 <p><strong>Q:</strong> Modify the constructor of your class to initialize both hidden and output weights with this new range. The biases should be initialized to 0. What is the effect?</p>
 <div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GlorotMLP (StochasticMLP):</span>
@@ -1893,6 +1913,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 

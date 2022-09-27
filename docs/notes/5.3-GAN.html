@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.175">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,7 +81,22 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -102,12 +117,12 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../../slides/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Neurocomputing</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/vitay/course-neurocomputing" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -199,7 +214,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Convolutional neural networks</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Computer Vision</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -224,7 +239,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Unsupervised learning and generative modeling</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Generative modeling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -262,7 +277,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +322,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond Deep Learning</span></a>
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
   </div>
 </li>
       </ul>
@@ -443,9 +463,9 @@ div.csl-indent {
 <section id="generative-models" class="level3">
 <h3 class="anchored" data-anchor-id="generative-models">Generative models</h3>
 <p>An autoencoder learns to first encode inputs in a <strong>latent space</strong> and then use a generative model to model the data distribution.</p>
-<p><span class="math display">\[\mathcal{L}_\text{autoencoder}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]\]</span></p>
+<p><span class="math display">\mathcal{L}_\text{autoencoder}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]</span></p>
 <p>Couldn’t we learn a decoder using random noise as input but still learning the distribution of the data?</p>
-<p><span class="math display">\[\mathcal{L}_\text{GAN}(\theta, \phi) = \mathbb{E}_{\mathbf{z} \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{z}) ]\]</span></p>
+<p><span class="math display">\mathcal{L}_\text{GAN}(\theta, \phi) = \mathbb{E}_{\mathbf{z} \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{z}) ]</span></p>
 <p>After all, this is how random numbers are generated: a uniform distribution of pseudo-random numbers is transformed into samples of another distribution using a mathematical formula.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -484,32 +504,32 @@ div.csl-indent {
 </section>
 <section id="gan-loss" class="level3">
 <h3 class="anchored" data-anchor-id="gan-loss">GAN loss</h3>
-<p>Let’s define <span class="math inline">\(x \sim P_\text{data}(x)\)</span> as a real image from the dataset and <span class="math inline">\(G(z)\)</span> as an image generated by the generator, where <span class="math inline">\(z \sim P_z(z)\)</span> is a random input. The output of the discriminator is a single sigmoid neuron:</p>
+<p>Let’s define <span class="math inline">x \sim P_\text{data}(x)</span> as a real image from the dataset and <span class="math inline">G(z)</span> as an image generated by the generator, where <span class="math inline">z \sim P_z(z)</span> is a random input. The output of the discriminator is a single sigmoid neuron:</p>
 <ul>
-<li><span class="math inline">\(D(x) = 1\)</span> for real images.</li>
-<li><span class="math inline">\(D(G(z)) = 0\)</span> for generated images</li>
+<li><span class="math inline">D(x) = 1</span> for real images.</li>
+<li><span class="math inline">D(G(z)) = 0</span> for generated images</li>
 </ul>
-<p>The discriminator wants both <span class="math inline">\(D(x)\)</span> and <span class="math inline">\(1-D(G(z))\)</span> to be close from 1, so the goal of the discriminator is to <strong>minimize</strong> the negative log-likelihood (cross-entropy) of classifying correctly the data:</p>
-<p><span class="math display">\[
+<p>The discriminator wants both <span class="math inline">D(x)</span> and <span class="math inline">1-D(G(z))</span> to be close from 1, so the goal of the discriminator is to <strong>minimize</strong> the negative log-likelihood (cross-entropy) of classifying correctly the data:</p>
+<p><span class="math display">
     \mathcal{L}(D) = \mathbb{E}_{x \sim P_\text{data}(x)} [ - \log D(x)] + \mathbb{E}_{z \sim P_z(z)} [ - \log(1 - D(G(z)))]
-\]</span></p>
-<p>It is similar to logistic regression: <span class="math inline">\(x\)</span> belongs to the positive class, <span class="math inline">\(G(z)\)</span> to the negative class.</p>
+</span></p>
+<p>It is similar to logistic regression: <span class="math inline">x</span> belongs to the positive class, <span class="math inline">G(z)</span> to the negative class.</p>
 <p>The goal of the generator is to <strong>maximize</strong> the negative log-likelihood of the discriminator being correct on the generated images, i.e.&nbsp;fool it:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \mathcal{J}(G) = \mathbb{E}_{z \sim P_z(z)} [ - \log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <p>The generator tries to maximize what the discriminator tries to minimize.</p>
 <p>Putting both objectives together, we obtain the following <strong>minimax</strong> problem:</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D \, \mathcal{V}(D, G) = \mathbb{E}_{x \sim P_\text{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim P_z(z)} [\log(1 - D(G(z)))]
-\]</span></p>
-<p><span class="math inline">\(D\)</span> and <span class="math inline">\(G\)</span> compete on the same objective function: one tries to maximize it, the other to minimize it. Note that the generator <span class="math inline">\(G\)</span> never sees the data <span class="math inline">\(x\)</span>: all it gets is a <strong>backpropagated gradient</strong> through the discriminator:</p>
-<p><span class="math display">\[\nabla_{G(z)} \, \mathcal{V}(D, G) = \nabla_{D(G(z))} \, \mathcal{V}(D, G) \times \nabla_{G(z)} \, D(G(z))\]</span></p>
+</span></p>
+<p><span class="math inline">D</span> and <span class="math inline">G</span> compete on the same objective function: one tries to maximize it, the other to minimize it. Note that the generator <span class="math inline">G</span> never sees the data <span class="math inline">x</span>: all it gets is a <strong>backpropagated gradient</strong> through the discriminator:</p>
+<p><span class="math display">\nabla_{G(z)} \, \mathcal{V}(D, G) = \nabla_{D(G(z))} \, \mathcal{V}(D, G) \times \nabla_{G(z)} \, D(G(z))</span></p>
 <p>It informs the generator which <strong>pixels</strong> are the most responsible for an eventual bad decision of the discriminator.</p>
 <p>This objective function can be optimized when the generator uses gradient descent and the discriminator gradient ascent: just apply a minus sign on the weight updates!</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D V(D, G) = \mathbb{E}_{x \sim P_\text{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim P_z(z)} [\log(1 - D(G(z)))]
-\]</span></p>
+</span></p>
 <p>Both can therefore use the usual <strong>backpropagation</strong> algorithm to adapt their parameters. The discriminator and the generator should reach a <strong>Nash equilibrium</strong>: they try to beat each other, but both become better over time.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -547,7 +567,7 @@ div.csl-indent {
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WxVKJfwPjw4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="cgan" class="level3">
 <h3 class="anchored" data-anchor-id="cgan">cGAN</h3>
-<p>The generator can also get additional <strong>deterministic</strong> information to the latent space, not only the random vector <span class="math inline">\(z\)</span>. One can for example provide the <strong>label</strong> (class) in the context of supervised learning, allowing to generate many <strong>new</strong> examples of each class: data augmentation using a conditional GAN <span class="citation" data-cites="Mirza2014">(<a href="../references.html#ref-Mirza2014" role="doc-biblioref">Mirza and Osindero, 2014</a>)</span>. One could also provide the output of a pre-trained CNN (ResNet) to condition on images.</p>
+<p>The generator can also get additional <strong>deterministic</strong> information to the latent space, not only the random vector <span class="math inline">z</span>. One can for example provide the <strong>label</strong> (class) in the context of supervised learning, allowing to generate many <strong>new</strong> examples of each class: data augmentation using a conditional GAN <span class="citation" data-cites="Mirza2014">(<a href="../references.html#ref-Mirza2014" role="doc-biblioref">Mirza and Osindero, 2014</a>)</span>. One could also provide the output of a pre-trained CNN (ResNet) to condition on images.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cgan.png" class="img-fluid figure-img" style="width:60.0%"></p>
@@ -617,9 +637,9 @@ div.csl-indent {
 </figure>
 </div>
 <p>The generator is trained by maximizing the GAN loss (using gradients backpropagated through the discriminator) but also by minimizing the L1 distance between the generated image and the target (supervised learning).</p>
-<p><span class="math display">\[
+<p><span class="math display">
     \min_G \max_D V(D, G) = V_\text{GAN}(D, G) + \lambda \, \mathbb{E}_\mathcal{D} [|T - G|]
-\]</span></p>
+</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/pix2pix-generator-training.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -693,31 +713,31 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-Arjovsky2017" class="csl-entry" role="doc-biblioentry">
-Arjovsky, M., Chintala, S., and Bottou, L. (2017). Wasserstein <span>GAN</span>. <em>arXiv:1701.07875 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/1701.07875">https://arxiv.org/abs/1701.07875</a>.
+Arjovsky, M., Chintala, S., and Bottou, L. (2017). Wasserstein <span>GAN</span>. Available at: <a href="http://arxiv.org/abs/1701.07875">http://arxiv.org/abs/1701.07875</a>.
 </div>
 <div id="ref-Goodfellow2014" class="csl-entry" role="doc-biblioentry">
-Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., et al. (2014). Generative <span>Adversarial Networks</span>. <em>arXiv:1406.2661 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1406.2661">https://arxiv.org/abs/1406.2661</a>.
+Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., et al. (2014). Generative <span>Adversarial Networks</span>. Available at: <a href="http://arxiv.org/abs/1406.2661">http://arxiv.org/abs/1406.2661</a>.
 </div>
 <div id="ref-Isola2018" class="csl-entry" role="doc-biblioentry">
-Isola, P., Zhu, J.-Y., Zhou, T., and Efros, A. A. (2018). Image-to-<span>Image Translation</span> with <span>Conditional Adversarial Networks</span>. <em>arXiv:1611.07004 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1611.07004">https://arxiv.org/abs/1611.07004</a>.
+Isola, P., Zhu, J.-Y., Zhou, T., and Efros, A. A. (2018). Image-to-<span>Image Translation</span> with <span>Conditional Adversarial Networks</span>. Available at: <a href="http://arxiv.org/abs/1611.07004">http://arxiv.org/abs/1611.07004</a> [Accessed December 7, 2020].
 </div>
 <div id="ref-Karras2020" class="csl-entry" role="doc-biblioentry">
-Karras, T., Laine, S., Aittala, M., Hellsten, J., Lehtinen, J., and Aila, T. (2020). Analyzing and <span>Improving</span> the <span>Image Quality</span> of <span>StyleGAN</span>. <em>arXiv:1912.04958 [cs, eess, stat]</em>. Available at: <a href="https://arxiv.org/abs/1912.04958">https://arxiv.org/abs/1912.04958</a>.
+Karras, T., Laine, S., Aittala, M., Hellsten, J., Lehtinen, J., and Aila, T. (2020). Analyzing and <span>Improving</span> the <span>Image Quality</span> of <span>StyleGAN</span>. Available at: <a href="http://arxiv.org/abs/1912.04958">http://arxiv.org/abs/1912.04958</a> [Accessed December 8, 2020].
 </div>
 <div id="ref-Mirza2014" class="csl-entry" role="doc-biblioentry">
-Mirza, M., and Osindero, S. (2014). Conditional <span>Generative Adversarial Nets</span>. <em>arXiv:1411.1784 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1411.1784">https://arxiv.org/abs/1411.1784</a>.
+Mirza, M., and Osindero, S. (2014). Conditional <span>Generative Adversarial Nets</span>. Available at: <a href="http://arxiv.org/abs/1411.1784">http://arxiv.org/abs/1411.1784</a>.
 </div>
 <div id="ref-Nowozin2016" class="csl-entry" role="doc-biblioentry">
-Nowozin, S., Cseke, B., and Tomioka, R. (2016). F-<span>GAN</span>: <span>Training Generative Neural Samplers</span> using <span>Variational Divergence Minimization</span>. <em>arXiv:1606.00709 [cs, stat]</em>. Available at: <a href="https://arxiv.org/abs/1606.00709">https://arxiv.org/abs/1606.00709</a>.
+Nowozin, S., Cseke, B., and Tomioka, R. (2016). F-<span>GAN</span>: <span>Training Generative Neural Samplers</span> using <span>Variational Divergence Minimization</span>. Available at: <a href="http://arxiv.org/abs/1606.00709">http://arxiv.org/abs/1606.00709</a> [Accessed December 9, 2020].
 </div>
 <div id="ref-Radford2015" class="csl-entry" role="doc-biblioentry">
-Radford, A., Metz, L., and Chintala, S. (2015). Unsupervised <span>Representation Learning</span> with <span>Deep Convolutional Generative Adversarial Networks</span>. <em>arXiv:1511.06434 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1511.06434">https://arxiv.org/abs/1511.06434</a>.
+Radford, A., Metz, L., and Chintala, S. (2015). Unsupervised <span>Representation Learning</span> with <span>Deep Convolutional Generative Adversarial Networks</span>. Available at: <a href="http://arxiv.org/abs/1511.06434">http://arxiv.org/abs/1511.06434</a>.
 </div>
 <div id="ref-Reed2016" class="csl-entry" role="doc-biblioentry">
-Reed, S., Akata, Z., Yan, X., Logeswaran, L., Schiele, B., and Lee, H. (2016). Generative <span>Adversarial Text</span> to <span>Image Synthesis</span>. <em>arXiv:1605.05396 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1605.05396">https://arxiv.org/abs/1605.05396</a>.
+Reed, S., Akata, Z., Yan, X., Logeswaran, L., Schiele, B., and Lee, H. (2016). Generative <span>Adversarial Text</span> to <span>Image Synthesis</span>. Available at: <a href="http://arxiv.org/abs/1605.05396">http://arxiv.org/abs/1605.05396</a> [Accessed September 23, 2020].
 </div>
 <div id="ref-Salimans2016" class="csl-entry" role="doc-biblioentry">
-Salimans, T., Goodfellow, I., Zaremba, W., Cheung, V., Radford, A., and Chen, X. (2016). Improved <span>Techniques</span> for <span>Training GANs</span>. <em>arXiv:1606.03498 [cs]</em>. Available at: <a href="https://arxiv.org/abs/1606.03498">https://arxiv.org/abs/1606.03498</a>.
+Salimans, T., Goodfellow, I., Zaremba, W., Cheung, V., Radford, A., and Chen, X. (2016). Improved <span>Techniques</span> for <span>Training GANs</span>. Available at: <a href="http://arxiv.org/abs/1606.03498">http://arxiv.org/abs/1606.03498</a> [Accessed December 9, 2020].
 </div>
 <div id="ref-Zhu2020" class="csl-entry" role="doc-biblioentry">
 Zhu, Y., Gao, T., Fan, L., Huang, S., Edmonds, M., Liu, H., et al. (2020). Dark, <span>Beyond Deep</span>: <span>A Paradigm Shift</span> to <span>Cognitive AI</span> with <span>Humanlike Common Sense</span>. <em>Engineering</em>. doi:<a href="https://doi.org/10.1016/j.eng.2020.01.011">10.1016/j.eng.2020.01.011</a>.
@@ -838,6 +858,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
 
 
 
