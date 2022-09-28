@@ -1,2 +1,3 @@
-docs/notes/img
 *.DS_Store
+.htaccess
+docs/.htaccess
