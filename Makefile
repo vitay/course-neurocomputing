@@ -22,4 +22,6 @@ export:
 	git add *
 	git commit -a -m "`date`"
 	git push origin master
+	cp .htaccess docs/
+	rsync -avze ssh --progress --delete ./docs/ vitay@login.tu-chemnitz.de:/afs/tu-chemnitz.de/www/root/informatik/KI/edu/neurocomputing/notes/
 	
