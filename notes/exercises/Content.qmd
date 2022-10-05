@@ -5,6 +5,8 @@ You will find below links to download the notebooks for the exercises (which you
 
 Alternatively, you can run the notebooks directly on Colab (<https://colab.research.google.com/>) if you have a Google account. 
 
+For instructions on how to install a Python distribution on your computer, check this [page](Installation.qmd).
+
 You will also find videos presenting the exercises and commenting their solution.
 
 The solution of each exercise is rendered in the following pages.

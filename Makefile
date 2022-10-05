@@ -1,12 +1,11 @@
 all: notes slides
 
 slides_targets := $(wildcard slides/*.qmd)
-notebook_targets := $(wildcard slides/exercises/*.ipynb)
-slides: $(slides_targets) $(notebook_targets)
+slides: $(slides_targets)
 	quarto render $? --to revealjs
 
 
-notes_targets := $(wildcard notes/notes/*.qmd)
+notes_targets := $(wildcard notes/notes/*.qmd notes/exercises/*.ipynb notes/exercises/*.qmd)
 notes: $(notes_targets)
 	quarto render $?  --to html
 

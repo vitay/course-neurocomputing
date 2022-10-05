@@ -56,6 +56,7 @@ book:
     - part: "Exercises"
       chapters:
       - exercises/Content.qmd
+      - exercises/Installation.qmd
       - exercises/1-Python-solution.ipynb
       - exercises/2-Numpy-solution.ipynb
       - exercises/3-LinearRegression-solution.ipynb
