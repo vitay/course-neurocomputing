@@ -23,7 +23,7 @@ This exercise is an introduction to Python for absolute beginners. If you alread
 
 **Presentation**
 
-{{< youtube lqJ-2Wrc5SI >}}
+{{< youtube eX5ZBnqAGyQ >}}
 
 **Commented solution**
 

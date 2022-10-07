@@ -11,6 +11,8 @@ Here are the main Python dependencies necessary for the exercises:
 
 If you are using Linux, you can probably install all the dependencies from your package manager. For the others, use either Anaconda or Colab.
 
+{{< youtube j-fKyQFHJ88 >}}
+
 ## Anaconda
 
 ### Installing Anaconda
