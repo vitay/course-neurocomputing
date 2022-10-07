@@ -1,5 +1,6 @@
 # List of exercises
 
+{{< youtube dzdXpUCo0nw >}}
 
 You will find below links to download the notebooks for the exercises (which you have to fill) and their solution (which you can look at after you finished the exercise). It is recommended not to look at the solution while doing the exercise unless you are lost. 
 

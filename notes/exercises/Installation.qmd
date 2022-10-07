@@ -156,6 +156,15 @@ If you have a CUDA-capable NVIDIA graphical card, follow these instructions to i
 <https://www.tensorflow.org/install/pip>
 :::
 
+### Using notebooks
+
+When the installation is complete, you just need to download the Jupyter notebooks (.ipynb) on [this page](Content.qmd), activate your environment, and type:
+
+```bash
+jupyter lab name_of_the_notebook.ipynb
+```
+
+to open a browser tab with the notebook.
 
 ## Colab
 
