@@ -163,7 +163,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -508,7 +508,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -527,7 +527,7 @@ div.csl-indent {
 </header>
 
 <p>Slides: <a href="../slides/3.1-NeuralNetworks.html" target="_blank">html</a> <a href="../slides/pdf/3.1-NeuralNetworks.pdf" target="_blank">pdf</a></p>
-<section id="multi-layer-perceptron" class="level2">
+<section id="multi-layer-perceptron" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="multi-layer-perceptron">Multi-layer perceptron</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/M5GwvFpzrjE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>A <strong>Multi-Layer Perceptron</strong> (MLP) or <strong>feedforward neural network</strong> is composed of:</p>
@@ -536,14 +536,14 @@ div.csl-indent {
 <li>one or several hidden layers allowing to project non-linearly the input into a space of higher dimensions <span class="math inline">\mathbf{h}_1, \mathbf{h}_2, \mathbf{h}_3, \ldots</span>.</li>
 <li>an output layer for the output <span class="math inline">\mathbf{y}</span>.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/mlp.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Multi-layer perceptron with one hidden layer.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/mlp.svg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Multi-layer perceptron with one hidden layer.</figcaption><p></p>
 </figure>
 </div>
 <p>If there is a single hidden layer <span class="math inline">\mathbf{h}</span> (shallow network), it corresponds to the feature space. Each layer takes inputs from the previous layer. If the hidden layer is adequately chosen, the output neurons can learn to replicate the desired output <span class="math inline">\mathbf{t}</span>.</p>
-<section id="fully-connected-layer" class="level3">
+<section id="fully-connected-layer" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="fully-connected-layer">Fully-connected layer</h3>
 <p>The operation performed by each layer can be written in the form of a <strong>matrix-vector</strong> multiplication:</p>
 <p><span class="math display">
@@ -551,21 +551,21 @@ div.csl-indent {
 </span> <span class="math display">
     \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
 </span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/matrixvector.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">Fully-connected layer.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/matrixvector.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Fully-connected layer.</figcaption><p></p>
 </figure>
 </div>
 <p><strong>Fully-connected layers</strong> (FC) transform an input vector <span class="math inline">\mathbf{x}</span> into a new vector <span class="math inline">\mathbf{h}</span> by multiplying it by a <strong>weight matrix</strong> <span class="math inline">W</span> and adding a <strong>bias vector</strong> <span class="math inline">\mathbf{b}</span>. A non-linear <strong>activation function</strong> transforms each element of the net activation.</p>
 </section>
-<section id="activation-functions" class="level3">
+<section id="activation-functions" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="activation-functions">Activation functions</h3>
 <p>Here are some of the most useful activation functions in a MLP.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/ratecoded-transferfunctions.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Some classical activation functions in MLPs.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/ratecoded-transferfunctions.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Some classical activation functions in MLPs.</figcaption><p></p>
 </figure>
 </div>
 <ul>
@@ -598,10 +598,10 @@ div.csl-indent {
 <p><span class="math display">
     f(x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ \alpha \, x  \quad \text{otherwise.}\end{cases}
 </span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/prelu.ppm" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">ReLU vs.&nbsp;PReLU activation functions.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/prelu.ppm" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">ReLU vs.&nbsp;PReLU activation functions.</figcaption><p></p>
 </figure>
 </div>
 <p>For classification problems, the <strong>softmax</strong> activation function can be used in the output layer to make sure that the sum of the outputs <span class="math inline">\mathbf{y} = \{y_j\}</span> over all output neurons is one.</p>
@@ -668,7 +668,8 @@ Note
     \Delta W^2 = - \eta \, \nabla_{W^2} \, \mathcal{L}(\theta) \\
     \\
     \Delta \mathbf{b}^2 = - \eta \, \nabla_{\mathbf{b}^2} \, \mathcal{L}(\theta)\\
-\end{cases}</span></p>
+\end{cases}
+</span></p>
 <p>We will see later that other optimizers than SGD can be used. The question is now how to compute efficiently these <strong>gradients</strong> w.r.t all the weights and biases. The algorithm to achieve this is called <strong>backpropagation</strong> <span class="citation" data-cites="Rumelhart1986a">(<a href="../references.html#ref-Rumelhart1986a" role="doc-biblioref">Rumelhart et al., 1986</a>)</span>, which is simply a smart implementation of the chain rule.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -687,7 +688,7 @@ Note
 </div>
 </section>
 </section>
-<section id="backpropagation" class="level2">
+<section id="backpropagation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="backpropagation">Backpropagation</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/eq3uVwtzWmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="backpropagation-on-a-shallow-network" class="level3">
@@ -800,7 +801,7 @@ Backpropagation for a shallow MLP
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../slides/img/mlp.svg" class="img-fluid figure-img" style="width:40.0%"></p>
+<p><img src="../slides/img/mlp.svg" class="img-fluid figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 <p>For a shallow MLP with one hidden layer:</p>
@@ -906,28 +907,28 @@ Universal approximation theorem
 <p>where <span class="math inline">\text{VC}_{\text{dim}}(\text{MLP})</span> is the total number of weights and biases in the model, and <span class="math inline">N</span> the number of training samples.</p>
 <p>The more neurons in the hidden layer, the better the training error, but the worse the generalization error (overfitting). The optimal number should be found with cross-validation methods. For most functions, the optimal number <span class="math inline">m_1</span> is high and becomes quickly computationally untractable. We need to go deep!</p>
 </section>
-<section id="backpropagation-on-a-deep-neural-network" class="level3">
+<section id="backpropagation-on-a-deep-neural-network" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="backpropagation-on-a-deep-neural-network">Backpropagation on a deep neural network</h3>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/2Ew8Sz0Giw0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>A MLP with more than one hidden layer is a <strong>deep neural network</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/deeplearning.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Deep network extract progressively more complex features.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Deep network extract progressively more complex features.</figcaption><p></p>
 </figure>
 </div>
 <p>Backpropagation still works if we have many hidden layers <span class="math inline">\mathbf{h}_1, \ldots, \mathbf{h}_n</span>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/deepforward.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Forward pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Forward pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <p>If each layer is differentiable, i.e.&nbsp;one can compute its gradient <span class="math inline">\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}</span>, we can chain <strong>backwards</strong> each partial derivatives to know how to update each layer.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/deepbackward.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">Backpropagation pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Backpropagation pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <p><strong>Backpropagation</strong> is simply an efficient implementation of the chain rule: the partial derivatives are iteratively reused in the backwards phase.</p>
@@ -987,14 +988,14 @@ Training a deep neural network with backpropagation
 </div>
 </section>
 </section>
-<section id="example-of-a-shallow-network" class="level2">
+<section id="example-of-a-shallow-network" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="example-of-a-shallow-network">Example of a shallow network</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/8B7RcBC11Lo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s try to solve this <strong>non-linear</strong> binary classification problem:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/mlp-data.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Non-linearly separable dataset.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Non-linearly separable dataset.</figcaption><p></p>
 </figure>
 </div>
 <p>We can create a shallow MLP with:</p>
@@ -1004,17 +1005,17 @@ Training a deep neural network with backpropagation
 <li><p>One output neuron with the logistic activation function.</p></li>
 <li><p>The cross-entropy (negative log-likelihood) loss function.</p></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/mlp-example.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Simple MLP for the non-linearly separable dataset.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Simple MLP for the non-linearly separable dataset.</figcaption><p></p>
 </figure>
 </div>
 <p>We train it on the input data using the backpropagation algorithm and the SGD optimizer.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/mlp-animation.gif" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Prediction after each epoch of training.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Prediction after each epoch of training.</figcaption><p></p>
 </figure>
 </div>
 <p>Experiment with this network live on <a href="https://playground.tensorflow.org/" class="uri">https://playground.tensorflow.org/</a>! You will implement this MLP with numpy during exercise 8.</p>

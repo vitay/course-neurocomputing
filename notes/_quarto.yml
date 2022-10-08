@@ -85,6 +85,8 @@ format:
     toc: true
     smooth-scroll: true
     html-math-method: katex
+    fig-cap-location: margin
+    reference-location: margin
 
 filters:
   - center_images.lua

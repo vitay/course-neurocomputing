@@ -38,7 +38,7 @@ Good old-fashion AI (GOFAI) approaches were purely symbolic (logical systems, kn
 * Transformers
 * Graph neural networks
 
-![Neurocomputing.](../slides/img/neurocomputing.svg){width=60%}
+![](../slides/img/neurocomputing.svg)
 
 **Neurocomputing** is at the intersection between computational neuroscience and artificial neural networks (deep learning). **Computational neuroscience** studies the functioning of the brain (human or animal) through biologically detailed models, either at the functional level (e.g. visual attention, decision-making) or cellular level (individual neurons, synapses, neurotransmitters, etc). The goal of computational neuroscience is 1) to provide theoretical explanations to the experimental observations made by neuroscientists and 2) make predictions that can be verified experimentally. Moreover, understanding how the brain solves real-life problems might allow to design better AI algorithms. If you are interested in computational neuroscience, make sure to visit the courses **Neurokognition** I and II taught by Prof. Dr. Hamker:
 
@@ -190,7 +190,7 @@ VAE are in particular central to **DeepFakes** which have widely reached the med
 
 Another class of generative models are **generative adversarial networks** (GAN) [@Goodfellow2014] which consist of a **generator** (decoder) and a **discriminator** that compete to produce realistic images while trying to discriminate generated from real images. 
 
-![Generative adversarial network.](../slides/img/gan.jpg){width=100%}
+![](../slides/img/gan.jpg){width=100%}
 
 Several evolutions of GANs have allowed to produce increasingly realistic images, such as conditional GANs who permit to generate images of a desired class, or CycleGAN which allows to replace an object with another:
 

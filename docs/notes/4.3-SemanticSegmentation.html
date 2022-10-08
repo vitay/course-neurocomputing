@@ -100,7 +100,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -438,7 +438,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -458,28 +458,28 @@ div.csl-indent {
 
 <p>Slides: <a href="../slides/4.3-Segnet.html" target="_blank">html</a> <a href="../slides/pdf/4.3-Segnet.pdf" target="_blank">pdf</a></p>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/JiQdlzqT4Qs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="semantic-segmentation" class="level2">
+<section id="semantic-segmentation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="semantic-segmentation">Semantic segmentation</h2>
 <p><strong>Semantic segmentation</strong> is a class of segmentation methods where you use knowledge about the identity of objects to partition the image pixel-per-pixel.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/semanticsegmentation-example.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Semantic segmentation. Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Semantic segmentation. Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></figcaption><p></p>
 </figure>
 </div>
 <p>Classical segmentation methods only rely on the similarity between neighboring pixels, they do not use class information. The output of a semantic segmentation is another image, where each pixel represents the class.</p>
 <p>The classes can be binary, for example foreground/background, person/not, etc. Semantic segmentation networks are used for example in Youtube stories to add <strong>virtual backgrounds</strong> (background matting).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/segmentation-virtualbackground.gif" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">Virtual backgrounds. Source: <a href="https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html" class="uri">https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Virtual backgrounds. Source: <a href="https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html" class="uri">https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html</a></figcaption><p></p>
 </figure>
 </div>
 <p>Clothes can be segmented to allow for virtual try-ons.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/semanticsegmentation-clothes.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Virtual try-ons. Source: <span class="citation" data-cites="Wang2018b">(<a href="../references.html#ref-Wang2018b" role="doc-biblioref">Wang et al., 2018</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Virtual try-ons. Source: <span class="citation" data-cites="Wang2018b">(<a href="../references.html#ref-Wang2018b" role="doc-biblioref">Wang et al., 2018</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>There are many datasets freely available, but annotating such data is very painful, expensive and error-prone.</p>
@@ -493,99 +493,99 @@ div.csl-indent {
 <li>ApolloScape Scene Parsing</li>
 <li>KITTI pixel-level semantic segmentation</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/kitti-example.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Semantic segmentation on the KITTI dataset. Source: <a href="http://www.cvlibs.net/datasets/kitti/" class="uri">http://www.cvlibs.net/datasets/kitti/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Semantic segmentation on the KITTI dataset. Source: <a href="http://www.cvlibs.net/datasets/kitti/" class="uri">http://www.cvlibs.net/datasets/kitti/</a></figcaption><p></p>
 </figure>
 </div>
-<section id="output-encoding" class="level3">
+<section id="output-encoding" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="output-encoding">Output encoding</h3>
 <p>Each pixel of the input image is associated to a label (as in classification).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/segnet-encoding.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Semantic labels. Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Semantic labels. Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></figcaption><p></p>
 </figure>
 </div>
 <p>A <strong>one-hot encoding</strong> of the segmented image is therefore a tensor:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/segnet-encoding2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">One-hot encoding of semantic labels. Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">One-hot encoding of semantic labels. Source : <a href="https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef" class="uri">https://medium.com/nanonets/how-to-do-image-segmentation-using-deep-learning-c673cc5862ef</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="fully-convolutional-networks" class="level3">
+<section id="fully-convolutional-networks" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="fully-convolutional-networks">Fully convolutional networks</h3>
 <p>A <strong>fully convolutional network</strong> only has convolutional layers and learns to predict the output tensor. The last layer has a pixel-wise softmax activation. We minimize the <strong>pixel-wise cross-entropy loss</strong></p>
 <p><span class="math display">\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [- \sum_\text{pixels} \sum_\text{classes} t_i \, \log y_i]</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/fullyconvolutional.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Fully convolutional network. Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Fully convolutional network. Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <p>Downside: the image size is preserved throughout the network: computationally expensive. It is therefore difficult to increase the number of features in each convolutional layer.</p>
 </section>
 </section>
-<section id="segnet-segmentation-network" class="level2">
+<section id="segnet-segmentation-network" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="segnet-segmentation-network">SegNet: segmentation network</h2>
 <p><strong>SegNet</strong> <span class="citation" data-cites="Badrinarayanan2016">(<a href="../references.html#ref-Badrinarayanan2016" role="doc-biblioref">Badrinarayanan et al., 2016</a>)</span> has an <strong>encoder-decoder</strong> architecture, with max-pooling to decrease the spatial resolution while increasing the number of features. But what is the inverse of max-pooling? <strong>Upsampling operation</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/segnet.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption"><strong>SegNet</strong> <span class="citation" data-cites="Badrinarayanan2016">(<a href="../references.html#ref-Badrinarayanan2016" role="doc-biblioref">Badrinarayanan et al., 2016</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption"><strong>SegNet</strong> <span class="citation" data-cites="Badrinarayanan2016">(<a href="../references.html#ref-Badrinarayanan2016" role="doc-biblioref">Badrinarayanan et al., 2016</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>Nearest neighbor and Bed of nails would just make random decisions for the upsampling. In SegNet, max-unpooling uses the information of the corresponding max-pooling layer in the encoder to place pixels adequately.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/max-pooling-inverse.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Upsampling methods. Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Upsampling methods. Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <p>Another popular option in the followers of SegNet is the <strong>transposed convolution</strong>. The original feature map is upsampled by putting zeros between the values and a learned filter performs a regular convolution to produce an upsampled feature map. This works well when convolutions with stride are used in the encoder, but it is quite expensive computationally.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/padding_strides_transposed.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Transposed convolution. Source : <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Transposed convolution. Source : <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/transposedconvolution.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Transposed convolution. Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Transposed convolution. Source : <a href="http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf" class="uri">http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture11.pdf</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="u-net" class="level2">
+<section id="u-net" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="u-net">U-Net</h2>
 <p>The problem of SegNet is that small details (small scales) are lost because of the max-pooling. the segmentation is not precise. The solution proposed by <strong>U-Net</strong> <span class="citation" data-cites="Ronneberger2015">(<a href="../references.html#ref-Ronneberger2015" role="doc-biblioref">Ronneberger et al., 2015</a>)</span> is to add <strong>skip connections</strong> (as in ResNet) between different levels of the encoder-decoder. The final segmentation depends both on:</p>
 <ul>
 <li>large-scale information computed in the middle of the encoder-decoder.</li>
 <li>small-scale information processed in the early layers of the encoder.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/unet.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">U-Net <span class="citation" data-cites="Ronneberger2015">(<a href="../references.html#ref-Ronneberger2015" role="doc-biblioref">Ronneberger et al., 2015</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">U-Net <span class="citation" data-cites="Ronneberger2015">(<a href="../references.html#ref-Ronneberger2015" role="doc-biblioref">Ronneberger et al., 2015</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="mask-r-cnn" class="level2">
+<section id="mask-r-cnn" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="mask-r-cnn">Mask R-CNN</h2>
 <p>For many applications, segmenting the background is useless. A two-stage approach can save computations. <strong>Mask R-CNN</strong> <span class="citation" data-cites="He2018">(<a href="../references.html#ref-He2018" role="doc-biblioref">He et al., 2018</a>)</span> uses faster R-CNN to extract bounding boxes around interesting objects, followed by the prediction of a <strong>mask</strong> to segment the object.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/mask-r-cnn.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Mask R-CNN <span class="citation" data-cites="He2018">(<a href="../references.html#ref-He2018" role="doc-biblioref">He et al., 2018</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Mask R-CNN <span class="citation" data-cites="He2018">(<a href="../references.html#ref-He2018" role="doc-biblioref">He et al., 2018</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/mask-r-cnn-result.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Mask R-CNN <span class="citation" data-cites="He2018">(<a href="../references.html#ref-He2018" role="doc-biblioref">He et al., 2018</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Mask R-CNN <span class="citation" data-cites="He2018">(<a href="../references.html#ref-He2018" role="doc-biblioref">He et al., 2018</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/OOT3UIXZztE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>

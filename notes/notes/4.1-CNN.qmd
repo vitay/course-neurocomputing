@@ -312,7 +312,7 @@ Facebook used 4.4 million annotated faces from 4030 users to train **DeepFace** 
 
 To perform speech recognition, one could treat speech signals like images: one direction is time, the other are frequencies (e.g. mel spectrum). A CNN can learn to associate phonemes to the corresponding signal. **DeepSpeech** [@Hannun2014] from Baidu is one of the state-of-the-art approaches. Convolutional networks can be used on any signals where early features are local. It uses additionally recurrent networks, which we will see later.
 
-![DeepSpeech. Source [@Hannun2014]. ](../slides/img/deepspeech.png){width=60%}
+![DeepSpeech. Source [@Hannun2014]. ](../slides/img/deepspeech.png)
 
 ### Sentiment analysis
 
@@ -339,7 +339,7 @@ It is also possible to apply convolutions on text. **Sentiment analysis** assign
 1. **Unsupervised learning** (autoencoders) may help extract useful representations using only images.
 2. **Transfer learning** allows to re-use weights obtained from a related task/domain.
 
-![Transfer learning.  Source: <http://imatge-upc.github.io/telecombcn-2016-dlcv>](../slides/img/transferlearning2.jpg){width=70%}
+![Transfer learning.  Source: <http://imatge-upc.github.io/telecombcn-2016-dlcv>](../slides/img/transferlearning2.jpg)
 
 Take a classical network (VGG-16, Inception, ResNet, etc.) trained on ImageNet (if your task is object recognition).
 
@@ -349,13 +349,13 @@ Take a classical network (VGG-16, Inception, ResNet, etc.) trained on ImageNet (
 
 * Use a shallow classifier directly on these representations (not obligatorily NN).
 
-![Off-the-shelf transfer learning.  Source: <http://imatge-upc.github.io/telecombcn-2016-dlcv>](../slides/img/transferlearning3.jpg){width=90%}
+![Off-the-shelf transfer learning.  Source: <http://imatge-upc.github.io/telecombcn-2016-dlcv>](../slides/img/transferlearning3.jpg)
 
 **Fine-tuning**
 
 * Use the trained weights as initial weight values and re-train the network on your data (often only the last layers, the early ones are frozen).
 
-![Fine-tuned transfer learning.  Source: <http://imatge-upc.github.io/telecombcn-2016-dlcv>](../slides/img/transferlearning4.jpg){width=50%}
+![Fine-tuned transfer learning.  Source: <http://imatge-upc.github.io/telecombcn-2016-dlcv>](../slides/img/transferlearning4.jpg)
 
 ::: {.callout-tip}
 ## Example of transfer learning

@@ -51,7 +51,7 @@ $$
 For multiclass classification problems, the **confusion matrix** tells how many examples are correctly classified and where confusion happens. One axis is the predicted class, the other is the target class. Each element of the matrix tells how many examples are classified or misclassified. The matrix should be as diagonal as possible.
 
 
-![Confusion matrix.](../slides/img/confusionmatrix.png){width=50%}
+![Confusion matrix.](../slides/img/confusionmatrix.png){width=80%}
 
 
 :::{.callout-note}
@@ -72,7 +72,7 @@ m = confusion_matrix(t, y)
 
 In classification too, **cross-validation** has to be used to prevent overfitting. The classifier is trained on the **training set** and tested on the **test set**. Optionally, a third **validation set** can be used to track overfitting during training.
 
-![Training, validation and test sets. Source: <https://developers.google.com/machine-learning/crash-course/validation/another-partition>](../slides/img/validationset.svg){width=80%}
+![Training, validation and test sets. Source: <https://developers.google.com/machine-learning/crash-course/validation/another-partition>](../slides/img/validationset.svg)
 
 :::{.callout-note}
 Beware: the test data must come from the same distribution as the training data, otherwise it makes no sense.
@@ -86,11 +86,11 @@ How many data examples can be correctly classified by a linear model in $\Re^d$?
 In $\Re^2$, all dichotomies of three non-aligned examples can be correctly classified by a linear model ($y = w_1 \, x_1 + w_2 \, x_2 + b$).
 
 
-![A linear classifier in 2D can classify any configuration of three points.](../slides/img/vc4.png){width=60%}
+![A linear classifier in 2D can classify any configuration of three points.](../slides/img/vc4.png)
 
 However, there exists sets of four examples in $\Re^2$ which can NOT be correctly classified by a linear model, i.e. they are not linearly separable.
 
-![There exists configurations of four points in 2D that cannot be linearly classified.](../slides/img/vc6.png){width=60%}
+![There exists configurations of four points in 2D that cannot be linearly classified.](../slides/img/vc6.png)
 
 The XOR function in $\Re^2$ is for example not linearly separable, i.e. the Perceptron algorithm can not converge.
 
@@ -124,7 +124,7 @@ Vapnik, Vladimir (2000). The nature of statistical learning theory. Springer.
 
 ## Structural risk minimization
 
-![Structural risk minimization.](../slides/img/srm.png){width=60%}
+![Structural risk minimization.](../slides/img/srm.png)
 
 The generalization error increases with the VC dimension, while the training error decreases. Structural risk minimization is an alternative method to cross-validation. The VC dimensions of various classes of hypothesis are already known (~ number of free parameters). The VC bounds tells how many training samples are needed by a given hypothesis class in order to obtain a satisfying generalization error.
 
@@ -163,7 +163,7 @@ However, if the space has too many dimensions, the VC dimension will increase an
 A complex pattern-classification problem, cast in a high dimensional space non-linearly, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.
 :::
 
-![Projection to a feature space.](../slides/img/featurespace.png){width=60%}
+![Projection to a feature space.](../slides/img/featurespace.png)
 
 The highly dimensional space where the input data is projected is called the **feature space** When the number of dimensions of the feature space increases, the training error decreases (the pattern is more likely linearly separable) but the generalization error increases (the VC dimension increases).
 
@@ -179,7 +179,7 @@ $$\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}$$
 
 ### Radial-basis function networks
 
-![Radial basis function network. Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](../slides/img/rbf.png){width=80%}
+![Radial basis function network. Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](../slides/img/rbf.png)
 
 Radial-basis function (**RBF**) networks samples a subset of $K$ training examples and form the feature space using a **gaussian kernel**:
 
@@ -199,7 +199,7 @@ $$\mathbf{y} = f(W \times \phi(\mathbf{x}) + \mathbf{b})$$
 we obtain a smooth **non-linear** partition of the input space. The width of the gaussian kernel allows distance-based **generalization**.
 
 
-![RBF networks learn linearly smooth transitions between the training examples. Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](../slides/img/rbf3.png){width=80%}
+![RBF networks learn linearly smooth transitions between the training examples. Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](../slides/img/rbf3.png)
 
 ### Kernel perceptron
 
@@ -367,6 +367,6 @@ $$
 $$
 
 
-![Support-vectors are the closest examples to the hyperplane. They have a non-zero $\alpha$ coefficient.](../slides/img/supportvectors.svg){width=60%}
+![Support-vectors are the closest examples to the hyperplane. They have a non-zero $\alpha$ coefficient.](../slides/img/supportvectors.svg)
 
 Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting. SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.

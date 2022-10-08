@@ -72,7 +72,7 @@ Several architectures are possible using recurrent neural networks:
 
 **Show and Tell** [@Vinyals2015] uses the last FC layer of a CNN to feed a LSTM layer and generate words. The pretrained CNN (VGG16, ResNet50) is used as a **feature extractor**. Each word of the sentence is encoded/decoded using word2vec. The output of the LSTM at time $t$ becomes its new input at time $t+1$.
 
-![Show and Tell architecture. Source: [@Sathe2022].](../slides/img/showandtell.webp){width=70%}
+![Show and Tell architecture. Source: [@Sathe2022].](../slides/img/showandtell.webp)
 
 
 **Show, attend and tell** [@Xu2015] uses attention to focus on specific parts of the image when generating the sentence.

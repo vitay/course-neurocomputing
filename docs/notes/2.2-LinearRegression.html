@@ -144,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -494,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -513,13 +513,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Slides: <a href="../slides/2.2-LinearRegression.html" target="_blank">html</a> <a href="../slides/pdf/2.2-LinearRegression.pdf" target="_blank">pdf</a></p>
-<section id="linear-regression" class="level2">
+<section id="linear-regression" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="linear-regression">Linear regression</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/lEILkDvT0gI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/regression-animation2.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Simple linear regression. <span class="math inline">x</span> is the input, <span class="math inline">y</span> the output. The data is represented by blue dots, the model by the black line.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Simple linear regression. <span class="math inline">x</span> is the input, <span class="math inline">y</span> the output. The data is represented by blue dots, the model by the black line.</figcaption><p></p>
 </figure>
 </div>
 <p>Let’s consider a training set of N examples <span class="math inline">\mathcal{D} = (x_i, t_i)_{i=1..N}</span>. In <strong>linear regression</strong>, we want to learn a linear model (hypothesis) <span class="math inline">y</span> that is linearly dependent on the input <span class="math inline">x</span>:</p>
@@ -527,10 +527,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y = f_{w, b}(x) = w \, x + b
 </span></p>
 <p>The <strong>free parameters</strong> of the model are the slope <span class="math inline">w</span> and the intercept <span class="math inline">b</span>. This model corresponds to a single <strong>artificial neuron</strong> with output <span class="math inline">y</span>, having one input <span class="math inline">x</span>, one weight <span class="math inline">w</span>, one bias <span class="math inline">b</span> and a <strong>linear</strong> activation function <span class="math inline">f(x) = x</span>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Artificial neuron with multiple inputs.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Artificial neuron with multiple inputs.</figcaption><p></p>
 </figure>
 </div>
 <p>The goal of the linear regression (or least mean squares - LMS) is to minimize the <strong>mean square error</strong> (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:</p>
@@ -542,13 +542,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 </span></p>
 <p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math inline">y_i = f_{w, b}(x_i)</span> is equal to the <strong>true value</strong> <span class="math inline">t_i</span> for all training examples. In other words, we want to minimize the <strong>residual error</strong> of the model on the data. It is not always possible to obtain the global minimum (0) as the data may be noisy, but the closer, the better.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/regression-animation-mse-dual.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">A good fit to the data is when the prediction <span class="math inline">y_i</span> (on the line) is close to the data <span class="math inline">t_i</span> for all training examples.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">A good fit to the data is when the prediction <span class="math inline">y_i</span> (on the line) is close to the data <span class="math inline">t_i</span> for all training examples.</figcaption><p></p>
 </figure>
 </div>
-<section id="least-mean-squares" class="level3">
+<section id="least-mean-squares" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="least-mean-squares">Least Mean Squares</h3>
 <p>We search for <span class="math inline">w</span> and <span class="math inline">b</span> which minimize the mean square error:</p>
 <p><span class="math display">
@@ -652,21 +652,21 @@ LMS algorithm
 </ul>
 </div>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-animation.gif" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Visualization of least mean squares applied to a simple regression problem with <span class="math inline">\eta=0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-animation.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Visualization of least mean squares applied to a simple regression problem with <span class="math inline">\eta=0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption><p></p>
 </figure>
 </div>
 <p>During learning, the <strong>mean square error</strong> (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-animation-loss.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Evolution of the loss function during training.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-animation-loss.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Evolution of the loss function during training.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="delta-learning-rule" class="level3">
+<section id="delta-learning-rule" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="delta-learning-rule">Delta learning rule</h3>
 <p>LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>, which is the <strong>online</strong> version of LMS:</p>
 <p><span class="math display">\Delta w = \eta \, (t_i - y_i) \, x_i</span></p>
@@ -696,21 +696,21 @@ Delta learning rule
 </div>
 </div>
 <p>The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is slightly higher at the end of learning (see Exercise 3 for a deeper discussion).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-animation-online.gif" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Visualization of the delta learning rule applied to a simple regression problem with <span class="math inline">\eta = 0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-animation-online.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Visualization of the delta learning rule applied to a simple regression problem with <span class="math inline">\eta = 0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-animation-online-loss.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-animation-online-loss.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</figcaption><p></p>
 </figure>
 </div>
 </section>
 </section>
-<section id="multiple-linear-regression" class="level2">
+<section id="multiple-linear-regression" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/BOJFFy0nA6I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The key idea of linear regression (one input <span class="math inline">x</span>, one output <span class="math inline">y</span>) can be generalized to multiple inputs and outputs.</p>
@@ -722,7 +722,7 @@ y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
 y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \end{cases}
 </span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-tip callout callout-style-default callout-captioned page-columns page-full">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -731,7 +731,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 Example: fuel consumption and CO2 emissions
 </div>
 </div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container callout-body page-columns page-full">
 <p>Let’s suppose you have 13971 measurements in some Excel file, linking engine size, number of cylinders, fuel consumption and CO2 emissions of various cars. You want to predict fuel consumption and CO2 emissions when you know the engine size and the number of cylinders.</p>
 <table class="table">
 <thead>
@@ -775,16 +775,16 @@ Example: fuel consumption and CO2 emissions
 </tr>
 </tbody>
 </table>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/MLR-example-data.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/MLR-example-data.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/MLR-example-data-3d.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/MLR-example-data-3d.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption><p></p>
 </figure>
 </div>
 <p>We can notice that the output variables seem to linearly depend on the inputs. Noting the input variables <span class="math inline">x_1</span>, <span class="math inline">x_2</span> and the output ones <span class="math inline">y_1</span>, <span class="math inline">y_2</span>, we can define our problem as a multiple linear regression:</p>
@@ -796,10 +796,10 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \end{cases}
 </span></p>
 <p>and solve it using the least mean squares method by minimizing the mse between the model and the data.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/MLR-example-fit-3d.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The result of MLR is a plane in the input space.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">The result of MLR is a plane in the input space.</figcaption><p></p>
 </figure>
 </div>
 <p>Using the Python library <code>scikit-learn</code> (<a href="https://scikit-learn.org" class="uri">https://scikit-learn.org</a>), this is done in two lines of code:</p>
@@ -829,10 +829,10 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
     \mathbf{y} = f_{W, \mathbf{b}}(\mathbf{x}) = W \times \mathbf{x} + \mathbf{b}
 </span></p>
 <p>The problem is exactly the same as before, except that we use vectors and matrices instead of scalars: <span class="math inline">\mathbf{x}</span> and <span class="math inline">\mathbf{y}</span> can have any number of dimensions, the same procedure will apply. This corresponds to a <strong>linear neural network</strong> (or linear perceptron), with one <strong>output neuron</strong> per predicted value <span class="math inline">y_i</span> using the linear activation function.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/linearperceptron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math inline">\mathbf{y}</span> is compared to the ground truth vector <span class="math inline">\mathbf{t}</span> using the mse loss.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math inline">\mathbf{y}</span> is compared to the ground truth vector <span class="math inline">\mathbf{t}</span> using the mse loss.</figcaption><p></p>
 </figure>
 </div>
 <p>The mean square error still needs to be a scalar in order to be minimized. We can define it as the squared norm of the error <strong>vector</strong>:</p>
@@ -980,7 +980,8 @@ x_1 &amp; x_2 \\
     \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}</span></p>
+\end{cases}
+</span></p>
 <ul>
 <li>Online version (<strong>delta learning rule</strong>):</li>
 </ul>
@@ -988,7 +989,8 @@ x_1 &amp; x_2 \\
     \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}</span></p>
+\end{cases}
+</span></p>
 <p>The matrix-vector notation is completely equivalent to having one learning rule per parameter:</p>
 <p><span class="math display">
 \begin{cases}
@@ -1017,17 +1019,17 @@ Note
 </div>
 </div>
 </section>
-<section id="logistic-regression" class="level2">
+<section id="logistic-regression" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/fRuzoyV036Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s suppose we want to perform a regression, but where the outputs <span class="math inline">t_i</span> are bounded between 0 and 1. We could use a logistic (or sigmoid) function instead of a linear function in order to transform the input into an output:</p>
 <p><span class="math display">
     y = \sigma(w \, x + b )  = \displaystyle\frac{1}{1+\exp(-w \, x - b )}
 </span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/sigmoid.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Logistic or sigmoid function <span class="math inline">\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Logistic or sigmoid function <span class="math inline">\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>By definition of the logistic function, the prediction <span class="math inline">y</span> will be bounded between 0 and 1, what matches the targets <span class="math inline">t</span>. Let’s now apply gradient descent on the <strong>mse</strong> loss using this new model. The individual loss will be:</p>
@@ -1083,10 +1085,10 @@ Note
 \end{cases}
 </span></p>
 <p><strong>Generalized form of the delta learning rule</strong></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Artificial neuron with multiple inputs.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Artificial neuron with multiple inputs.</figcaption><p></p>
 </figure>
 </div>
 <p>For a linear perceptron with parameters <span class="math inline">W</span> and <span class="math inline">\mathbf{b}</span> and any activation function <span class="math inline">f</span>:</p>
@@ -1112,8 +1114,7 @@ Note
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/a6sQgJovhzU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../slides/img/polynomialregression.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Polynomial regression.</figcaption><p></p>
+<p><img src="../slides/img/polynomialregression.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 <p>The functions underlying real data are rarely linear plus some noise around the ideal value. In the figure above, the input/output function is better modeled by a second-order polynomial:</p>
@@ -1140,7 +1141,7 @@ Note
 \end{cases}</span></p>
 <p>Non-linear problem solved! The only unknown is which order for the polynomial matches best the data. One can perform regression with any kind of parameterized function using gradient descent.</p>
 </section>
-<section id="a-bit-of-learning-theory" class="level2">
+<section id="a-bit-of-learning-theory" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="a-bit-of-learning-theory">A bit of learning theory</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/QbvCJNfeXbE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Before going further, let’s think about what we have been doing so far. We had a bunch of data samples <span class="math inline">\mathcal{D} = (\mathbf{x}_i, t_i)_{i=1..N}</span> (the <strong>training set</strong>). We decided to apply a (linear) model on it:</p>
@@ -1155,10 +1156,10 @@ Note
 </span></p>
 <p>We get a number, for example 0.04567. Is that good?</p>
 <p>The <strong>mean square error</strong> mse is not very informative, as its value depends on how the outputs are scaled: multiply the targets and prediction by 10 and the mse is 100 times higher.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/regression-animation-mse-dual.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The residual error measures the quality of the fit, but it is sensible to the scaling of the outputs.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">The residual error measures the quality of the fit, but it is sensible to the scaling of the outputs.</figcaption><p></p>
 </figure>
 </div>
 <p>The <strong>coefficient of determination</strong> <span class="math inline">R^2</span> is a rescaled variant of the mse comparing the variance of the residuals to the variance of the data around its mean <span class="math inline">\hat{t}</span>:</p>
@@ -1166,51 +1167,51 @@ Note
     R^2 = 1 - \frac{\text{Var}(\text{residuals})}{\text{Var}(\text{data})} = 1 - \frac{\sum_{i=1}^N (t_i- y_i)^2}{\sum_{i=1}^N (t_i - \hat{t})^2}
 </span></p>
 <p><span class="math inline">R^2</span> should be as close from 1 as possible. For example, if <span class="math inline">R^2 = 0.8</span>, we can say that the <strong>model explains 80% of the variance of the data</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/r2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The coefficient of determination compares the variance of the residuals to the variance of the data. Source: <a href="https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0" class="uri">https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">The coefficient of determination compares the variance of the residuals to the variance of the data. Source: <a href="https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0" class="uri">https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0</a></figcaption><p></p>
 </figure>
 </div>
-<section id="sensibility-to-outliers" class="level3">
+<section id="sensibility-to-outliers" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="sensibility-to-outliers">Sensibility to outliers</h3>
 <p>Suppose we have a training set with one <strong>outlier</strong> (bad measurement, bad luck, etc).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-outlier.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Linear data with one outlier.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-outlier.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Linear data with one outlier.</figcaption><p></p>
 </figure>
 </div>
 <p>LMS would find the minimum of the mse, but it is clearly a bad fit for most points.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-outlier-fit.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">LMS is attracted by the outlier, leading to a bad prediction for all points.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-outlier-fit.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">LMS is attracted by the outlier, leading to a bad prediction for all points.</figcaption><p></p>
 </figure>
 </div>
 <p>This model feels much better, but its residual mse is actually higher…</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-outlier-fit-corrected.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">By ignoring the outlier, the prediction would be correct for most points.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-outlier-fit-corrected.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">By ignoring the outlier, the prediction would be correct for most points.</figcaption><p></p>
 </figure>
 </div>
 <p>Let’s visualize polynomial regression with various orders of the polynomial on a small dataset.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/polynomialregression-animation.gif" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Polynomial regression with various orders.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/polynomialregression-animation.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Polynomial regression with various orders.</figcaption><p></p>
 </figure>
 </div>
 <p>When only looking at the residual mse on the training data, one could think that the higher the order of the polynomial, the better. But it is obvious that the interpolation quickly becomes very bad when the order is too high. A <strong>complex</strong> model (with a lot of parameters) is useless for predicting new values. We actually do <strong>not</strong> care about the error on the training set, but about <strong>generalization</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/polynomialregression-mse.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Residual mse of polynomial regression depending on the order of the polynomial.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/polynomialregression-mse.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Residual mse of polynomial regression depending on the order of the polynomial.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="cross-validation" class="level3">
+<section id="cross-validation" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="cross-validation">Cross-validation</h3>
 <p>Let’s suppose we dispose of <span class="math inline">m</span> models <span class="math inline">\mathcal{M} = \{ M_1, ..., M_m\}</span> that could be used to fit (or classify) some data <span class="math inline">\mathcal{D} = \{\mathbf{x}_i, t_i\}_{i=1}^N</span>. Such a class could be the ensemble of polynomes with different orders, different algorithms (NN, SVM) or the same algorithm with different values for the hyperparameters (learning rate, regularization parameters…).</p>
 <p>The naive and <strong>wrong</strong> method to find the best hypothesis would be:</p>
@@ -1243,10 +1244,10 @@ Do not do this!
 <li>Train the model on the training set (70% of the data).</li>
 <li>Test the performance of the model on the test set (30% of the data).</li>
 </ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/polynomialregression-traintest.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Polynomial data split in a training set and a test set.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/polynomialregression-traintest.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Polynomial data split in a training set and a test set.</figcaption><p></p>
 </figure>
 </div>
 <p>The test performance will better measure how well the model generalizes to new examples.</p>
@@ -1274,10 +1275,10 @@ Simple hold-out cross-validation
 </div>
 <p>The disadvantage of <strong>simple hold-out cross-validation</strong> is that 20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.</p>
 <p><strong>k-fold cross-validation</strong> allows a more efficient use os the available data and a better measure of the generalization error. The idea is to build several different training/test sets with the same data, train and test each model repeatedly on each partition and choose the hypothesis that works best on average.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/kfold.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">k-fold cross-validation. Source <a href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" class="uri">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/kfold.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">k-fold cross-validation. Source <a href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" class="uri">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></figcaption><p></p>
 </figure>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
@@ -1310,20 +1311,20 @@ k-fold cross-validation
 </div>
 <p>In general, you can take <span class="math inline">k=10</span> partitions. The extreme case is to take <span class="math inline">k=N</span> partition, i.e.&nbsp;the test set has only one sample each time: <strong>leave-one-out cross-validation</strong>. k-fold cross-validation works well, but needs a lot of repeated learning.</p>
 </section>
-<section id="underfitting---overfitting" class="level3">
+<section id="underfitting---overfitting" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="underfitting---overfitting">Underfitting - overfitting</h3>
 <p>While the training mse always decrease with more complex models, the test mse increases after a while. This is called <strong>overfitting</strong>: learning by heart the data without caring about generalization. The two curves suggest that we should chose a polynomial order between 2 and 9.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/polynomialregression-mse-traintest.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">Training and test mse of polynomial regression.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/polynomialregression-mse-traintest.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Training and test mse of polynomial regression.</figcaption><p></p>
 </figure>
 </div>
 <p>A model not complex enough for the data will <strong>underfit</strong>: its training error is high. A model too complex for the data will <strong>overfit</strong>: its test error is high. In between, there is the right complexity for the model: it learns the data correctly but does not overfit.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/underfitting-overfitting.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Underfitting and overfitting.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/underfitting-overfitting.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Underfitting and overfitting.</figcaption><p></p>
 </figure>
 </div>
 <p>What does complexity mean? In polynomial regression, the complexity is related to the order of the polynomial, i.e.&nbsp;the number of coefficients to estimate:</p>
@@ -1334,10 +1335,10 @@ k-fold cross-validation
 <p><strong>The more free parameters, the more complex the model is, the more likely it will overfit.</strong></p>
 </blockquote>
 <p>Under-/Over-fitting relates to the statistical concept of <strong>bias-variance trade-off</strong>. The <strong>bias</strong> is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model): a model with high bias is underfitting. The <strong>variance</strong> is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples): a model with high variance is overfitting.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/biasvariance3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Bias and variance of an estimator. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/biasvariance3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Bias and variance of an estimator. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
 </figure>
 </div>
 <p>The bias decreases when the model becomes complex; the variance increases when the model becomes complex. The <strong>generalization error</strong> is a combination of the bias and variance:</p>
@@ -1345,28 +1346,28 @@ k-fold cross-validation
     \text{generalization error} = \text{bias}^2 + \text{variance}
 </span></p>
 <p>We search for the model with the <strong>optimum complexity</strong> realizing the trade-off between bias and variance. It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/biasvariance2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/biasvariance2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
 </figure>
 </div>
 </section>
 </section>
-<section id="regularized-regression" class="level2">
+<section id="regularized-regression" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="regularized-regression">Regularized regression</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/6R46KLgfw5s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Linear regression can either underfit or overfit depending on the data.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/underfitting-overfitting-linear.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Linear regression underfits non-linear data.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/underfitting-overfitting-linear.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Linear regression underfits non-linear data.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/regression-outlier-fit.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Linear regression overfits outliers.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/regression-outlier-fit.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Linear regression overfits outliers.</figcaption><p></p>
 </figure>
 </div>
 <p>When linear regression <strong>underfits</strong> (both training and test errors are high), the data is not linear: we need to use a <strong>neural network</strong>. When linear regression <strong>overfits</strong> (the test error is higher than the training error), we would like to <strong>decrease its complexity</strong>.</p>
@@ -1376,7 +1377,7 @@ k-fold cross-validation
 </span></p>
 <p>For <span class="math inline">d</span> inputs, there are <span class="math inline">d+1</span> free parameters: the <span class="math inline">d</span> weights and the bias.</p>
 <p>We must find a way to reduce the complexity of the linear regression without changing the number of parameters, which is impossible. The solution is to <strong>constrain</strong> the values that the parameters can take: <strong>regularization</strong>. Regularization reduces the variance at the cost of increasing the bias.</p>
-<section id="l2-regularization---ridge-regression" class="level3">
+<section id="l2-regularization---ridge-regression" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="l2-regularization---ridge-regression">L2 regularization - Ridge regression</h3>
 <p>Using <strong>L2 regularization</strong> for linear regression leads to the <strong>Ridge regression</strong> algorithm. The individual loss function is defined as:</p>
 <p><span class="math display">
@@ -1391,14 +1392,14 @@ k-fold cross-validation
     \Delta w_i = \eta \, ((t_i - y_i) \ x_i - \lambda \, w_i)
 </span></p>
 <p>Ridge regression is also called <strong>weight decay</strong>: even if there is no error, all weights will decay to 0.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/ridge-effect.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Ridge regression finds the smallest value for the weights that minimize the mse. Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/ridge-effect.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ridge regression finds the smallest value for the weights that minimize the mse. Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="l1-regularization---lasso-regression" class="level3">
+<section id="l1-regularization---lasso-regression" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="l1-regularization---lasso-regression">L1 regularization - LASSO regression</h3>
 <p>Using <strong>L1 regularization</strong> for linear regression leads to the <strong>LASSO regression</strong> algorithm (least absolute shrinkage and selection operator). The individual loss function is defined as:</p>
 <p><span class="math display">
@@ -1413,24 +1414,24 @@ k-fold cross-validation
     \Delta w_i = \eta \, ((t_i - y_i) \ x_i - \lambda \, \text{sign}(w_i))
 </span></p>
 <p><strong>Weight decay</strong> does not depend on the value of the weight, only its sign. Weights can decay very fast to 0.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/lasso-effect.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/lasso-effect.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption><p></p>
 </figure>
 </div>
 <p>Both methods depend on the <strong>regularization parameter</strong> <span class="math inline">\lambda</span>. Its value determines how important the regularization term should. Regularization introduce a <strong>bias</strong>, as the solution found is <strong>not</strong> the minimum of the mse, but reduces the variance of the estimation, as small weights are less sensible to noise.</p>
 <p>LASSO allows <strong>feature selection</strong>: features with a zero weight can be removed from the training set.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/linearregression-withoutregularization.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Linear regression tends to assign values to all weights. Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/linearregression-withoutregularization.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Linear regression tends to assign values to all weights. Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/linearregression-withregularization.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/linearregression-withregularization.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption><p></p>
 </figure>
 </div>
 </section>

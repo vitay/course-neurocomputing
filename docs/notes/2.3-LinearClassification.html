@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -424,7 +424,7 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -443,28 +443,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Slides: <a href="../slides/2.3-LinearClassification.html" target="_blank">html</a> <a href="../slides/pdf/2.3-LinearClassification.pdf" target="_blank">pdf</a></p>
-<section id="hard-linear-classification" class="level2">
+<section id="hard-linear-classification" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="hard-linear-classification">Hard linear classification</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/jZoJHIHi6Qw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The training data <span class="math inline">\mathcal{D}</span> is composed of <span class="math inline">N</span> examples <span class="math inline">(\mathbf{x}_i, t_i)_{i=1..N}</span> , with a d-dimensional input vector <span class="math inline">\mathbf{x}_i \in \Re^d</span> and a binary output <span class="math inline">t_i \in \{-1, +1\}</span>. The data points where <span class="math inline">t = + 1</span> are called the <strong>positive class</strong>, the other the <strong>negative class</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/classification-animation1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Binary linear classification of 2D data.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/classification-animation1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Binary linear classification of 2D data.</figcaption><p></p>
 </figure>
 </div>
 <p>For example, the inputs <span class="math inline">\mathbf{x}_i</span> can be images (one dimension per pixel) and the positive class corresponds to cats (<span class="math inline">t_i = +1</span>), the negative class to dogs (<span class="math inline">t_i = -1</span>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/cats-dogs.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Binary linear classification of cats vs.&nbsp;dogs images. Source: <a href="http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe" class="uri">http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Binary linear classification of cats vs.&nbsp;dogs images. Source: <a href="http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe" class="uri">http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe</a></figcaption><p></p>
 </figure>
 </div>
 <p>We want to find the hyperplane <span class="math inline">(\mathbf{w}, b)</span> of <span class="math inline">\Re^d</span> that correctly separates the two classes.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/classification-animation2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The hyperplane separates the input space into two regions.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/classification-animation2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">The hyperplane separates the input space into two regions.</figcaption><p></p>
 </figure>
 </div>
 <p>For a point <span class="math inline">\mathbf{x} \in \mathcal{D}</span>, <span class="math inline">\langle \mathbf{w} \cdot \mathbf{x} \rangle +b</span> is the projection of <span class="math inline">\mathbf{x}</span> onto the hyperplane <span class="math inline">(\mathbf{w}, b)</span>.</p>
@@ -473,10 +473,10 @@ ul.task-list li input[type="checkbox"] {
 <li><p>If <span class="math inline">\langle \mathbf{w} \cdot \mathbf{x} \rangle +b &lt; 0</span>, the point is below the hyperplane.</p></li>
 <li><p>If <span class="math inline">\langle \mathbf{w} \cdot \mathbf{x} \rangle +b = 0</span>, the point is on the hyperplane.</p></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/projection.svg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Projection on an hyperplane.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/projection.svg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Projection on an hyperplane.</figcaption><p></p>
 </figure>
 </div>
 <p>By looking at the <strong>sign</strong> of <span class="math inline">\langle \mathbf{w} \cdot \mathbf{x} \rangle +b</span>, we can predict the class of the input.</p>
@@ -487,13 +487,13 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 </span></p>
 <p><span class="math inline">\mathbf{w}</span> is the weight vector and <span class="math inline">b</span> is the bias.</p>
 <p>Linear classification is the process of finding an hyperplane <span class="math inline">(\mathbf{w}, b)</span> that correctly separates the two classes. If such an hyperplane can be found, the training set is said <strong>linearly separable</strong>. Otherwise, the problem is <strong>non-linearly separable</strong> and other methods have to be applied (MLP, SVM…).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/linearlyseparable.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Linearly and non-linearly separable datasets.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Linearly and non-linearly separable datasets.</figcaption><p></p>
 </figure>
 </div>
-<section id="perceptron-algorithm" class="level3">
+<section id="perceptron-algorithm" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="perceptron-algorithm">Perceptron algorithm</h3>
 <p>The Perceptron algorithm tries to find the weights and biases minimizing the <strong>mean square error</strong> (<em>mse</em>) or <strong>quadratic loss</strong>:</p>
 <p><span class="math display">\mathcal{L}(\mathbf{w}, b) = \mathbb{E}_\mathcal{D} [(t_i - y_i)^2] \approx \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i)^2</span></p>
@@ -556,10 +556,10 @@ Batch perceptron
 </div>
 </div>
 <p>This is called the <strong>batch</strong> version of the Perceptron algorithm. If the data is linearly separable and <span class="math inline">\eta</span> is well chosen, it converges to the minimum of the mean square error.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/classification-animation.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Batch perceptron algorithm.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/classification-animation.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Batch perceptron algorithm.</figcaption><p></p>
 </figure>
 </div>
 <p>The <strong>Perceptron algorithm</strong> was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.</p>
@@ -587,10 +587,10 @@ Online perceptron algorithm
 </div>
 </div>
 <p>This algorithm iterates over all examples of the training set and applies the <strong>delta learning rule</strong> to each of them immediately, not at the end on the whole training set. One could check whether there are still classification errors on the training set at the end of each epoch and stop the algorithm. The delta learning rule depends as always on the learning rate <span class="math inline">\eta</span>, the error made by the prediction (<span class="math inline">t_i - y_i</span>) and the input <span class="math inline">\mathbf{x}_i</span>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/classification-animation-online.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Online perceptron algorithm.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/classification-animation-online.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Online perceptron algorithm.</figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -630,7 +630,7 @@ Note
 </div>
 </section>
 </section>
-<section id="maximum-likelihood-estimation" class="level2">
+<section id="maximum-likelihood-estimation" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/9Hw6nLMiPiI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s consider <span class="math inline">N</span> <strong>samples</strong> <span class="math inline">\{x_i\}_{i=1}^N</span> independently taken from a <strong>normal distribution</strong> <span class="math inline">X</span>. The probability density function (pdf) of a normal distribution is:</p>
@@ -638,10 +638,10 @@ Note
     f(x ; \mu, \sigma) =  \frac{1}{\sqrt{2\pi \sigma^2}} \, \exp{- \frac{(x - \mu)^2}{2\sigma^2}}
 </span></p>
 <p>where <span class="math inline">\mu</span> is the mean of the distribution and <span class="math inline">\sigma</span> its standard deviation.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/MLE2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Normal distributions with different parameters <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> explain the data with different likelihoods.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/MLE2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Normal distributions with different parameters <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> explain the data with different likelihoods.</figcaption><p></p>
 </figure>
 </div>
 <p>The problem is to find the values of <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> which explain best the observations <span class="math inline">\{x_i\}_{i=1}^N</span>.</p>
@@ -693,7 +693,7 @@ Note
 <p>Unsurprisingly, the mean and variance of the normal distribution which best explains the data are the mean and variance of the data…</p>
 <p>The same principle can be applied to estimate the parameters of any distribution: normal, exponential, Bernouilli, Poisson, etc… When a machine learning method has an probabilistic interpretation (i.e.&nbsp;it outputs probabilities), MLE can be used to find its parameters. One can use global optimization like here, or gradient descent to estimate the parameters iteratively.</p>
 </section>
-<section id="soft-linear-classification-logistic-regression" class="level2">
+<section id="soft-linear-classification-logistic-regression" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="soft-linear-classification-logistic-regression">Soft linear classification : Logistic regression</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/_Zc-k9pXVvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>In logistic regression, we want to perform a regression, but where the targets <span class="math inline">t_i</span> are bounded betwen 0 and 1. We can use a logistic function instead of a linear function in order to transform the net activation into an output:</p>
@@ -792,15 +792,15 @@ Logistic regression
 <li>if <span class="math inline">y_i &gt; 0.5</span> then the class is positive.</li>
 <li>if <span class="math inline">y_i &lt; 0.5</span> then the class is negative.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/logisticregression-animation.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Logistic regression for soft classification. The confidence scores tells how certain the classification is.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/logisticregression-animation.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Logistic regression for soft classification. The confidence scores tells how certain the classification is.</figcaption><p></p>
 </figure>
 </div>
 <p>Logistic regression also provides a <strong>confidence score</strong>: the closer <span class="math inline">y</span> is from 0 or 1, the more confident we can be that the classification is correct. This is particularly important in <strong>safety critical</strong> applications: if you detect the positive class but with a confidence of 0.51, you should perhaps not trust the prediction. If the confidence score is 0.99, you can probably trust the prediction.</p>
 </section>
-<section id="multi-class-classification" class="level2">
+<section id="multi-class-classification" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="multi-class-classification">Multi-class classification</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/24GpIHcaTxA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Can we perform multi-class classification using the previous methods when <span class="math inline">t \in \{A, B, C\}</span> instead of <span class="math inline">t = +1</span> or <span class="math inline">-1</span>? There are two main solutions:</p>
@@ -822,13 +822,13 @@ Logistic regression
 </ul></li>
 </ul>
 <p>A majority vote is then performed to find the correct class.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/pixelspace.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Example of <strong>One-vs-All</strong> classification: one binary classifier per class. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/pixelspace.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Example of <strong>One-vs-All</strong> classification: one binary classifier per class. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
 </figure>
 </div>
-<section id="softmax-linear-classifier" class="level3">
+<section id="softmax-linear-classifier" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="softmax-linear-classifier">Softmax linear classifier</h3>
 <p>Suppose we have <span class="math inline">C</span> classes (dog vs.&nbsp;cat vs.&nbsp;ship vs…). The One-vs-All scheme involves <span class="math inline">C</span> binary classifiers <span class="math inline">(\mathbf{w}_i, b_i)</span>, each with a weight vector and a bias, working on the same input <span class="math inline">\mathbf{x}</span>.</p>
 <p><span class="math display">y_i = f(\langle \mathbf{w}_i \cdot \mathbf{x} \rangle + b_i)</span></p>
@@ -837,10 +837,10 @@ Logistic regression
     \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
 </span></p>
 <p>The <span class="math inline">C</span> weight vectors form a <span class="math inline">d\times C</span> <strong>weight matrix</strong> <span class="math inline">W</span>, the biases form a vector <span class="math inline">\mathbf{b}</span>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/imagemap.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Linear perceptron for images. The output is the logit score. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/imagemap.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Linear perceptron for images. The output is the logit score. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
 </figure>
 </div>
 <p>The net activations form a vector <span class="math inline">\mathbf{z}</span>:</p>
@@ -848,7 +848,7 @@ Logistic regression
     \mathbf{z} = f_{W, \mathbf{b}}(\mathbf{x}) = W \times \mathbf{x} + \mathbf{b}
 </span></p>
 <p>Each element <span class="math inline">z_j</span> of the vector <span class="math inline">\mathbf{z}</span> is called the <strong>logit score</strong> of the class: the higher the score, the more likely the input belongs to this class. The logit scores are not probabilities, as they can be negative and do not sum to 1.</p>
-<section id="one-hot-encoding" class="level4">
+<section id="one-hot-encoding" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="one-hot-encoding">One-hot encoding</h4>
 <p>How do we represent the ground truth <span class="math inline">\mathbf{t}</span> for each neuron? The target vector <span class="math inline">\mathbf{t}</span> is represented using <strong>one-hot encoding</strong>. The binary vector has one element per class: only one element is 1, the others are 0. Example:</p>
 <p><span class="math display">
@@ -856,29 +856,29 @@ Logistic regression
 </span></p>
 <p>The labels can be seen as a <strong>probability distribution</strong> over the training set, in this case a <strong>multinomial</strong> distribution (a dice with <span class="math inline">C</span> sides). For a given image <span class="math inline">\mathbf{x}</span> (e.g.&nbsp;a picture of a dog), the conditional pmf is defined by the one-hot encoded vector <span class="math inline">\mathbf{t}</span>:</p>
 <p><span class="math display">P(\mathbf{t} | \mathbf{x}) = [P(\text{cat}| \mathbf{x}), P(\text{dog}| \mathbf{x}), P(\text{ship}| \mathbf{x}), P(\text{house}| \mathbf{x}), P(\text{car}| \mathbf{x})] = [0, 1, 0, 0, 0]</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/softmax-transformation.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The logit scores <span class="math inline">\mathbf{z}</span> cannot be compared to the targets <span class="math inline">\mathbf{t}</span>: we need to transform them into a probability distribution <span class="math inline">\mathbf{y}</span>.</figcaption><p></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="../slides/img/softmax-transformation.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">The logit scores <span class="math inline">\mathbf{z}</span> cannot be compared to the targets <span class="math inline">\mathbf{t}</span>: we need to transform them into a probability distribution <span class="math inline">\mathbf{y}</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>We need to transform the logit score <span class="math inline">\mathbf{z}</span> into a <strong>probability distribution</strong> <span class="math inline">P(\mathbf{y} | \mathbf{x})</span> that should be as close as possible from <span class="math inline">P(\mathbf{t} | \mathbf{x})</span>.</p>
 </section>
-<section id="softmax-activation" class="level4">
+<section id="softmax-activation" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="softmax-activation">Softmax activation</h4>
 <p>The <strong>softmax</strong> operator makes sure that the sum of the outputs <span class="math inline">\mathbf{y} = \{y_i\}</span> over all classes is 1.</p>
 <p><span class="math display">
     y_j = P(\text{class = j} | \mathbf{x}) = \mathcal{S}(z_j) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
 </span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/softmax-comp.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Softmax activation transforms the logit score into a probability distribution. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Softmax activation transforms the logit score into a probability distribution. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
 </figure>
 </div>
 <p>The higher <span class="math inline">z_j</span>, the higher the probability that the example belongs to class <span class="math inline">j</span>. This is very similar to logistic regression for soft classification, except that we have multiple classes.</p>
 </section>
-<section id="cross-entropy-loss-function" class="level4">
+<section id="cross-entropy-loss-function" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="cross-entropy-loss-function">Cross-entropy loss function</h4>
 <p>We cannot use the mse as a loss function, as the softmax function would be hard to differentiate:</p>
 <p><span class="math display">
@@ -890,10 +890,10 @@ Logistic regression
 <li>The one-hot encoded classes also come from a multinomial probability distribution <span class="math inline">P(\mathbf{t} | \mathbf{x})</span>.</li>
 </ul>
 <p>We search which parameters <span class="math inline">(W, \mathbf{b})</span> make the two distributions <span class="math inline">P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})</span> and <span class="math inline">P(\mathbf{t} | \mathbf{x})</span> close. The training data <span class="math inline">\{\mathbf{x}_i, \mathbf{t}_i\}</span> represents samples from <span class="math inline">P(\mathbf{t} | \mathbf{x})</span>. <span class="math inline">P(\mathbf{y} | \mathbf{x}; W, \mathbf{b})</span> is a good model of the data when the two distributions are close, i.e.&nbsp;when the <strong>negative log-likelihood</strong> of each sample under the model is small.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/crossentropy.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Cross-entropy between two distributions <span class="math inline">X</span> and <span class="math inline">Y</span>: are samples of <span class="math inline">X</span> likely under <span class="math inline">Y</span>?</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Cross-entropy between two distributions <span class="math inline">X</span> and <span class="math inline">Y</span>: are samples of <span class="math inline">X</span> likely under <span class="math inline">Y</span>?</figcaption><p></p>
 </figure>
 </div>
 <p>For an input <span class="math inline">\mathbf{x}</span>, we minimize the <strong>cross-entropy</strong> between the target distribution and the predicted outputs:</p>
@@ -921,10 +921,10 @@ Logistic regression
     y_j = P(\text{class = j}) = \frac{\exp(z_j)}{\sum_k \exp(z_k)}
 </span></p>
 <p>Minimizing the cross-entropy / negative log-likelihood pushes the output distribution <span class="math inline">\mathbf{y} | \mathbf{x}</span> to be as close as possible to the target distribution <span class="math inline">\mathbf{t} | \mathbf{x}</span>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/crossentropy-animation.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Minimizing the cross-entropy between <span class="math inline">\mathbf{t} | \mathbf{x}</span> and <span class="math inline">\mathbf{y} | \mathbf{x}</span> makes them similar.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Minimizing the cross-entropy between <span class="math inline">\mathbf{t} | \mathbf{x}</span> and <span class="math inline">\mathbf{y} | \mathbf{x}</span> makes them similar.</figcaption><p></p>
 </figure>
 </div>
 <p>As <span class="math inline">\mathbf{t}</span> is a binary vector <span class="math inline">[0, 1, 0, 0, 0]</span>, the cross-entropy / negative log-likelihood can also be noted as the dot product between <span class="math inline">\mathbf{t}</span> and <span class="math inline">\log \mathbf{y}</span>:</p>
@@ -1017,8 +1017,7 @@ Softmax linear classifier
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../slides/img/softmaxclassifier.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Softmax linear classifier</figcaption><p></p>
+<p><img src="../slides/img/softmaxclassifier.svg" class="img-fluid figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 <ul>

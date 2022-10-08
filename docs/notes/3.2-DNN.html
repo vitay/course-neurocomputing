@@ -163,7 +163,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -519,7 +519,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -570,20 +570,20 @@ div.csl-indent {
 </ul></li>
 </ol>
 </section>
-<section id="bad-convergence" class="level2">
+<section id="bad-convergence" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="bad-convergence">Bad convergence</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/UdcmfiDZrVU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The loss function <span class="math inline">\mathcal{L}(\theta)</span> of a deep neural network has usually not a single global minimum, but many local minima: irregular <strong>loss landscape</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/losslandscape.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Visualizing the loss landscape of neural nets <span class="citation" data-cites="Li2018">(<a href="../references.html#ref-Li2018" role="doc-biblioref">Li et al., 2018</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Visualizing the loss landscape of neural nets <span class="citation" data-cites="Li2018">(<a href="../references.html#ref-Li2018" role="doc-biblioref">Li et al., 2018</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>Gradient descent gets stuck in local minima by design. One could perform different weight initializations, in order to find per chance an initial position close enough from the global minimum, but this is <strong>inefficient</strong>.</p>
-<section id="optimizers" class="level3">
+<section id="optimizers" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="optimizers">Optimizers</h3>
-<section id="stochastic-gradient-descent" class="level4">
+<section id="stochastic-gradient-descent" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="stochastic-gradient-descent">Stochastic gradient descent</h4>
 <p>What we actually want to minimize is the <strong>mathematical expectation</strong> of the square error (or any other loss) on the distribution of the data.</p>
 <p><span class="math display">
@@ -615,15 +615,15 @@ div.csl-indent {
 </span></p>
 <p>This sampled loss has a high <strong>variance</strong>: take another minibatch and the gradient of the loss function will likely be very different. If the <strong>batch size</strong> is big enough, the estimated gradient is wrong, but usable on average (unbiased). The <strong>high variance</strong> of the estimated gradient helps getting out of local minimum: because our estimation of the gradient is often <strong>wrong</strong>, we get out of the local minima although we should have stayed in it. The <em>true</em> gradient is 0 for a local minimum, but its sampled value may not, so the parameters will be updated and hopefully get out of the local minimum. Which <strong>batch size</strong> works the best for your data? You need to use <strong>cross-validation</strong>, but beware that big batch sizes increase memory consumption, what can be a problem on GPUs.</p>
 <p>Another issue with stochastic gradient descent is that it uses the same learning rate for all parameters. In <strong>ravines</strong> (which are common around minima), some parameters (or directions) have a higher influence on the loss function than others.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/ravine.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Ravine in the loss function. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Ravine in the loss function. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>In the example above, you may want to go faster in the “horizontal” direction than in the “vertical” one, although the gradient is very small in the horizontal direction. With a fixed high learning rate for all parameters, SGD would start oscillating for the steep parameters, while being still very slow for the flat ones. The high variance of the sampled gradient is detrimental to performance as it can lead to oscillations. Most modern optimizers have a <strong>parameter-dependent adaptive learning rate</strong>.</p>
 </section>
-<section id="sgd-with-momentum" class="level4">
+<section id="sgd-with-momentum" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="sgd-with-momentum">SGD with momentum</h4>
 <p>One solution is to <strong>smooth</strong> the gradients over time (i.e.&nbsp;between minibatches), in order to avoid that one parameter is increased by one minibatch and decreased by the next one. The momentum method uses a <strong>moving average</strong> of the gradient (momentum step) to update the parameters:</p>
 <p><span class="math display">
@@ -639,10 +639,10 @@ div.csl-indent {
 </figure>
 </div>
 <p>When the gradient for a single parameter has always the same direction between successive examples, gradient descent accelerates (bigger steps). When its sign changes, the weight changes continue in the same direction for while, allowing to “jump” over small local minima if the speed is sufficient. If the gradient keeps being in the opposite direction, the weight changes will finally reverse their direction. SGD with momentum uses an <strong>adaptive learning rate</strong>: the learning is implictly higher when the gradient does not reverse its sign (the estimate “accelerates”).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/momentum-goh.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The momentum dampens oscillations around ravines. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">The momentum dampens oscillations around ravines. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>With momentum, the flat parameters keep increasing their update speed, while the steep ones slow down. SGD with momentum gets rid of oscillations at higher learning rates. The momentum method benefits a lot from the variance of SGD: noisy gradients are used to escape local minima but are averaged around the global minimum.</p>
@@ -660,12 +660,12 @@ Note
 </div>
 </div>
 </section>
-<section id="sgd-with-nesterov-momentum" class="level4">
+<section id="sgd-with-nesterov-momentum" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="sgd-with-nesterov-momentum">SGD with Nesterov momentum</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/momentum-vs-nesterov-momentum.gif" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The momentum method tends to oscillate around the global minimum. Source: <a href="https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/" class="uri">https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">The momentum method tends to oscillate around the global minimum. Source: <a href="https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/" class="uri">https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>SGD with momentum tends to oscillate around the minimum. The Nesterov momentum <strong>corrects</strong> these oscillations by estimating the gradient <strong>after</strong> the momentum update:</p>
@@ -675,10 +675,10 @@ Note
 <p><span class="math display">
     \Delta \theta = \eta \,  v(\theta)
 </span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/nesterov.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Difference between the momentum and Nesterov momentum. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Difference between the momentum and Nesterov momentum. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -710,20 +710,20 @@ Note
 </span></p>
 <p>In short: Adam = RMSprop + momentum. Other possible optimizers: Adagrad, Adadelta, AdaMax, Nadam…</p>
 </section>
-<section id="comparison-of-modern-optimizers" class="level4">
+<section id="comparison-of-modern-optimizers" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="comparison-of-modern-optimizers">Comparison of modern optimizers</h4>
 <p>The different optimizers build on the idea of gradient descent and try to fix the main issues. They have different convergence properties, which can be seen in the figures below.</p>
 <p>In practice, SGD with momentum allows to find better solutions (global minimum), but the meta-parameters are harder to find (need for cross-validation). Adam finds slightly poorer solutions, but the parameters <span class="math inline">\beta_1</span>, <span class="math inline">\beta_2</span> and <span class="math inline">\epsilon</span> can usually be kept at default, so it is a good idea to start with it, find the NN architecture that solves the problem and then replace it with SGD+momentum to fine-tune the performance.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/contours_evaluation_optimizers.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a></figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/saddle_point_evaluation_optimizers.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a>.</figcaption><p></p>
 </figure>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -764,13 +764,13 @@ Note
 </div>
 </section>
 </section>
-<section id="hyperparameters-annealing" class="level3">
+<section id="hyperparameters-annealing" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="hyperparameters-annealing">Hyperparameters annealing</h3>
 <p>Finding the optimal value for the hyperparameters (or metaparameters) of the network is not easy: learning rate <span class="math inline">\eta</span>, momentum <span class="math inline">\alpha</span>, etc.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/learningrates.jpeg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Finding the optimal learning rate is difficult. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Finding the optimal learning rate is difficult. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
 </figure>
 </div>
 <p>For example, choosing <span class="math inline">\eta</span> too small leads to very slow learning. Choosing it too big can lead to oscillations and prevent convergence. A better strategy is to start with a big learning rate to “roughly” find the position of the global minimum and progressively decrease its value for a better convergence:</p>
@@ -778,31 +778,31 @@ Note
     \eta \leftarrow (1 - \beta) \, \eta
 </span></p>
 <p>The decrease can be applied after each epoch. <span class="math inline">\beta</span> is called the <strong>decay rate</strong>, usually very small (<span class="math inline">10^{-6}</span>). The method is called <strong>annealing</strong> or <strong>scheduling</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/learningratescheduler.jpeg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Exponentially-decaying learning rate. Source: <a href="https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1" class="uri">https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Exponentially-decaying learning rate. Source: <a href="https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1" class="uri">https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1</a></figcaption><p></p>
 </figure>
 </div>
 <p>A simple trick to find a good estimate of the learning rate (or its start/stop value) is to increase its value exponentially <strong>for each minibatch</strong> at the beginning of learning. The “good” region for the learning rate is the one where the validation loss decreases, but does not oscillate.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/learningrate-selection.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Estimating the optimal range for the learning rate by increasing its value at the beginning of learning. Source <a href="https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae" class="uri">https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Estimating the optimal range for the learning rate by increasing its value at the beginning of learning. Source <a href="https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae" class="uri">https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="hyperparameter-search" class="level3">
+<section id="hyperparameter-search" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="hyperparameter-search">Hyperparameter search</h3>
 <p>Even with annealing, it is tricky to find the optimal value of the hyperparameters. The only option is to perform <strong>cross-validation</strong>, by varying the hyperparameters systematically and initializing the weights randomly every time. There are two basic strategies:</p>
 <ul>
 <li><strong>Grid search</strong>: different values of each parameter are chosen linearly (<span class="math inline">[0.1, 0.2, \ldots, 0.9]</span>) or logarithmically (<span class="math inline">[10^{-6}, 10^{-5}, \ldots, 10^{-1}]</span>).</li>
 <li><strong>Random search</strong>: the value are randomly chosen each time from some distribution (uniform, normal, lognormal).</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/gridsearchbad.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Grid-search vs.&nbsp;random search. Source: <a href="http://cs231n.github.io/neural-networks-3/" class="uri">http://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Grid-search vs.&nbsp;random search. Source: <a href="http://cs231n.github.io/neural-networks-3/" class="uri">http://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
 </figure>
 </div>
 <p>The advantage of random search is that you can stop it anytime if you can not wait any longer. Grid search is very time-consuming, but easy to perform in parallel if you have clusters of CPUs or GPUs (<strong>data-parallel</strong>).</p>
@@ -823,10 +823,10 @@ Note
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="long-training-times" class="level2">
+<section id="long-training-times" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="long-training-times">Long training times</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/nnf253n2HCY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="importance-of-normalization" class="level3">
+<section id="importance-of-normalization" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="importance-of-normalization">Importance of normalization</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -835,10 +835,10 @@ Note
 </div>
 <p>If the data is not centered in the input space, the hyperplane (i.e.&nbsp;each neuron) may need a lot of iterations to “move” to the correct position using gradient descent. The initialization of the weights will matter a lot: if you start too far away from the solution, you will need many iterations.</p>
 <p>If the data is normalized (zero mean, unit variance), the bias can be initialized to 0 and will converge much faster. Only the <strong>direction</strong> of the weight vector matters, not its norm, so it will be able to classify the data much faster.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/datanormalization.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Input data normalization. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Input data normalization. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption><p></p>
 </figure>
 </div>
 <p>In practice, the input data <span class="math inline">X</span> <strong>must</strong> be normalized before training, in order to improve the training time:</p>
@@ -855,14 +855,14 @@ Note
     X' = \frac{X - \mathbb{E}(X)}{\text{Std}(X)}
 </span></p>
 <p><strong>Whitening</strong> goes one step further by first decorrelating the input dimensions (using <strong>Principal Component Analysis</strong> - PCA) and then scaling them so that the data lies in the unit sphere. It is better method than simple data normalization, but computationally expensive. When predicting on new data, do not forget to normalize/whiten them too!</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/datawhitening.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Input data whitening. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Input data whitening. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="batch-normalization" class="level3">
+<section id="batch-normalization" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="batch-normalization">Batch normalization</h3>
 <p>A single layer can learn very fast if its inputs are normalized with zero mean and unit variance. This is easy to do for the first layer, as one only need to preprocess the inputs <span class="math inline">\mathbf{x}</span>, but not the others. The outputs of the first layer are not normalized anymore, so learning in the second layer will be slow.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -876,10 +876,10 @@ Note
 </span></p>
 <p>The mean and variance will vary from one minibatch to another, but it does not matter. At the end of learning, the mean and variance over the whole training set is computed and stored. BN allows to more easily initialize the weights relative to the input strength and to use higher learning rates.</p>
 <p>The <strong>Batch Normalization</strong> layer is usually placed between the FC layer and the activation function.It is differentiable w.r.t the input layer and the parameters, so backpropagation still works.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/batch_normalization.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">A batch normalization layer should be introduced between the linear net activation and the activation function. Source: <a href="http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/" class="uri">http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">A batch normalization layer should be introduced between the linear net activation and the activation function. Source: <a href="http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/" class="uri">http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/</a></figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -904,7 +904,7 @@ Note
 </ul>
 </section>
 </section>
-<section id="overfitting" class="level2">
+<section id="overfitting" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="overfitting">Overfitting</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AflXkfzAzoo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The main problem with deep NN is <strong>overfitting</strong>. With increasing depth, the network has too many weights = free parameters, so its VC dimension is high.</p>
@@ -955,47 +955,47 @@ Note
 <p><span class="math display">\mathcal{L}(\theta) = \mathbb{E}_\mathcal{D} [||\mathbf{t} - \mathbf{y}||^2] + \lambda \, |\theta|</span></p>
 <p>It leads to very sparse representations: a lot of neurons will be inactive, and only a few will represent the input.</p>
 </section>
-<section id="dropout" class="level3">
+<section id="dropout" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="dropout">Dropout</h3>
 <p>Randomly dropping (inactivating) some neurons with a <strong>probability</strong> <span class="math inline">p</span> between two input presentations reduces the number of free parameters available for each learning phase. Multiple smaller networks (smaller VC dimension) are in fact learned in parallel on different data, but they share some parameters. This <strong>dropout</strong> method forces the network to generalize <span class="citation" data-cites="Srivastava2014">(<a href="../references.html#ref-Srivastava2014" role="doc-biblioref">Srivastava et al., 2014</a>)</span>. It is a form of regularization (mathematically equivalent to L2), now preferred in deep networks. <em>p</em> is usually around 0.5.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/dropout.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Each new input <span class="math inline">\mathbf{x}</span> (or minibatch of inputs) is learned by a different neural network, but <strong>on average</strong>, the big neural network has learned the whole dataset without overfitting. Source: <a href="https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a" class="uri">https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Each new input <span class="math inline">\mathbf{x}</span> (or minibatch of inputs) is learned by a different neural network, but <strong>on average</strong>, the big neural network has learned the whole dataset without overfitting. Source: <a href="https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a" class="uri">https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="data-augmentation" class="level3">
+<section id="data-augmentation" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="data-augmentation">Data augmentation</h3>
 <p>The best way to avoid overfitting is to use more data (with variability), but this is not always possible. A simple trick to have more data is <strong>data augmentation</strong>, i.e.&nbsp;modifying the inputs while keeping the output constant. For object recognition, it consists of applying various affine transformations (translation, rotation, scaling) on each input image, while keeping the label constant. This allows virtually infinite training sets.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/data_augmentation2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Data augmentation. Source : <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html" class="uri">https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Data augmentation. Source : <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html" class="uri">https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="early-stopping" class="level3">
+<section id="early-stopping" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="early-stopping">Early-Stopping</h3>
 <p>Early-stopping fights overfitting by monitoring the model’s performance on a validation set. A <strong>validation set</strong> is a set of examples that we never use for gradient descent, but which is also not a part of the test set. If the model’s performance ceases to improve sufficiently on the validation set, or even degrades with further optimization, we can either stop learning or modify some meta-parameters (learning rate, momentum, regularization…). The validation loss is usually lower than the training loss at the beginning of learning (underfitting), but becomes higher when the network overfits.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/earlystopping.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Early-stopping by checking the validation loss during training.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Early-stopping by checking the validation loss during training.</figcaption><p></p>
 </figure>
 </div>
 </section>
 </section>
-<section id="vanishing-gradient" class="level2">
+<section id="vanishing-gradient" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="vanishing-gradient">Vanishing gradient</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/NPUqQb9U-ww" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="principle" class="level3">
+<section id="principle" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="principle">Principle</h3>
 <p>Contrary to what we could think, adding more layers to a DNN does not necessarily lead to a better performance, both on the training and test set. Here is the performance of neural networks with 20 or 56 layers on <strong>CIFAR-10</strong>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/vanishinggradient-cifar.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Adding more layers does not necessarily increase the training or test accuracy on CIFAR-10. Source: <a href="https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8" class="uri">https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Adding more layers does not necessarily increase the training or test accuracy on CIFAR-10. Source: <a href="https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8" class="uri">https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8</a></figcaption><p></p>
 </figure>
 </div>
 <p>The main reason behind this is the <strong>vanishing gradient problem</strong>. The gradient of the loss function is repeatedly multiplied by a weight matrix <span class="math inline">W</span> as it travels backwards in a deep network.</p>
@@ -1016,19 +1016,19 @@ Note
     || \frac{\partial \mathcal{L}(\theta)}{\partial W^k}|| \gets \min(||\frac{\partial \mathcal{L}(\theta)}{\partial W^k}||, K)
 </span></p>
 <p><strong>Vanishing gradients</strong> are still the current limitation of deep networks. The solutions include: ReLU activation functions, unsupervised pre-training, batch normalization, <strong>residual networks</strong>…</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/vanishinggradient.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Vanishing gradient problem. Source: <a href="https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/" class="uri">https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Vanishing gradient problem. Source: <a href="https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/" class="uri">https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="derivative-of-the-activation-function" class="level3">
+<section id="derivative-of-the-activation-function" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="derivative-of-the-activation-function">Derivative of the activation function</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
 <p><img src="../slides/img/derivative_sigmoid.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">The derivative of the logistic function is 0 for extreme values, what blocks the backpropagation of the gradient.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">The derivative of the logistic function is 0 for extreme values, what blocks the backpropagation of the gradient.</figcaption><p></p>
 </figure>
 </div>
 <p>Old-school MLP used logistic or tanh transfer functions for the hidden neurons, but their gradient is zero for very high or low net activations. If a neuron is saturated, it won’t transmit the gradient backwards, so the vanishing gradient is even worse. Deep networks now typically use the ReLU <span class="citation" data-cites="Maas2013">(<a href="../references.html#ref-Maas2013" role="doc-biblioref">Maas et al., 2013</a>)</span> or PReLU activation functions to improve convergence.</p>

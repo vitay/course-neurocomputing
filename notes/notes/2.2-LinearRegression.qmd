@@ -19,7 +19,7 @@ $$
 The **free parameters** of the model are the slope $w$ and the intercept $b$. This model corresponds to a single **artificial neuron** with output $y$, having one input $x$, one weight $w$, one bias $b$ and a **linear** activation function $f(x) = x$.
 
 
-![Artificial neuron with multiple inputs.](../slides/img/artificialneuron.svg){width=60%}
+![Artificial neuron with multiple inputs.](../slides/img/artificialneuron.svg)
 
 The goal of the linear regression (or least mean squares - LMS) is to minimize the **mean square error** (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:
 
@@ -173,12 +173,12 @@ The parameter changes have to be applied multiple times (**epochs**) in order fo
     * $\Delta b = \eta \, \frac{1}{N} db$
 :::
 
-![Visualization of least mean squares applied to a simple regression problem with $\eta=0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).](../slides/img/regression-animation.gif){width=70%}
+![Visualization of least mean squares applied to a simple regression problem with $\eta=0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).](../slides/img/regression-animation.gif)
 
 During learning, the **mean square error** (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.
 
 
-![Evolution of the loss function during training.](../slides/img/regression-animation-loss.png){width=70%}
+![Evolution of the loss function during training.](../slides/img/regression-animation-loss.png)
 
 ### Delta learning rule
 
@@ -207,9 +207,9 @@ $$\Delta b = \eta \, (t_i - y_i)$$
 
 The batch version is more stable, but the online version is faster: the weights have already learned something when arriving at the end of the first epoch. Note that the loss function is slightly higher at the end of learning (see Exercise 3 for a deeper discussion).
 
-![Visualization of the delta learning rule applied to a simple regression problem with $\eta = 0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).](../slides/img/regression-animation-online.gif){width=70%}
+![Visualization of the delta learning rule applied to a simple regression problem with $\eta = 0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).](../slides/img/regression-animation-online.gif)
 
-![Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.](../slides/img/regression-animation-online-loss.png){width=70%}
+![Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.](../slides/img/regression-animation-online-loss.png)
 
 ## Multiple linear regression
 
@@ -244,9 +244,9 @@ Let's suppose you have 13971 measurements in some Excel file, linking engine siz
 | ... | ... | ... | ... |
 
 
-![CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.](../slides/img/MLR-example-data.png){width=90%}
+![CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.](../slides/img/MLR-example-data.png)
 
-![CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.](../slides/img/MLR-example-data-3d.png){width=100%}
+![CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.](../slides/img/MLR-example-data-3d.png)
 
 We can notice that the output variables seem to linearly depend on the inputs. Noting the input variables $x_1$, $x_2$ and the output ones $y_1$, $y_2$, we can define our problem as a multiple linear regression:
 
@@ -453,7 +453,8 @@ $$\begin{cases}
     \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}$$
+\end{cases}
+$$
 
 * Online version (**delta learning rule**):
 
@@ -461,7 +462,8 @@ $$\begin{cases}
     \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}$$
+\end{cases}
+$$
 
 The matrix-vector notation is completely equivalent to having one learning rule per parameter:
 
@@ -590,7 +592,7 @@ In the linear case, $f'(x) = 1$. One can use any non-linear function, e.g hyperb
 
 {{< youtube  a6sQgJovhzU >}}
 
-![Polynomial regression.](../slides/img/polynomialregression.png){width=60%}
+![](../slides/img/polynomialregression.png)
 
 The functions underlying real data are rarely linear plus some noise around the ideal value. In the figure above, the input/output function is better modeled by a second-order polynomial:
 
@@ -674,25 +676,25 @@ $R^2$ should be as close from 1 as possible. For example, if $R^2 = 0.8$, we can
 
 Suppose we have a training set with one **outlier** (bad measurement, bad luck, etc).
 
-![Linear data with one outlier.](../slides/img/regression-outlier.png){width=70%}
+![Linear data with one outlier.](../slides/img/regression-outlier.png)
 
 LMS would find the minimum of the mse, but it is clearly a bad fit for most points.
 
-![LMS is attracted by the outlier, leading to a bad prediction for all points.](../slides/img/regression-outlier-fit.png){width=70%}
+![LMS is attracted by the outlier, leading to a bad prediction for all points.](../slides/img/regression-outlier-fit.png)
 
 This model feels much better, but its residual mse is actually higher...
 
-![By ignoring the outlier, the prediction would be correct for most points. ](../slides/img/regression-outlier-fit-corrected.png){width=70%}
+![By ignoring the outlier, the prediction would be correct for most points. ](../slides/img/regression-outlier-fit-corrected.png)
 
 Let's visualize polynomial regression with various orders of the polynomial on a small dataset.
 
 
-![Polynomial regression with various orders.](../slides/img/polynomialregression-animation.gif){width=70%}
+![Polynomial regression with various orders.](../slides/img/polynomialregression-animation.gif)
 
 
 When only looking at the residual mse on the training data, one could think that the higher the order of the polynomial, the better. But it is obvious that the interpolation quickly becomes very bad when the order is too high. A **complex** model (with a lot of parameters) is useless for predicting new values. We actually do **not** care about the error on the training set, but about **generalization**.
 
-![Residual mse of polynomial regression depending on the order of the polynomial.](../slides/img/polynomialregression-mse.png){width=70%}
+![Residual mse of polynomial regression depending on the order of the polynomial.](../slides/img/polynomialregression-mse.png)
 
 ### Cross-validation
 
@@ -723,7 +725,7 @@ The solution is randomly take some samples out of the training set to form the *
 1. Train the model on the training set (70% of the data).
 2. Test the performance of the model on the test set (30% of the data).
 
-![Polynomial data split in a training set and a test set.](../slides/img/polynomialregression-traintest.png){width=70%}
+![Polynomial data split in a training set and a test set.](../slides/img/polynomialregression-traintest.png)
 
 The test performance will better measure how well the model generalizes to new examples.
 
@@ -748,7 +750,7 @@ The disadvantage of **simple hold-out cross-validation** is that 20 or 30% of th
 
 **k-fold cross-validation** allows a more efficient use os the available data and a better measure of the generalization error. The idea is to build several different training/test sets with the same data, train and test each model repeatedly on each partition and choose the hypothesis that works best on average.
 
-![k-fold cross-validation. Source <https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg>](../slides/img/kfold.jpg){width=70%}
+![k-fold cross-validation. Source <https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg>](../slides/img/kfold.jpg)
 
 :::{.callout-tip} 
 ## k-fold cross-validation
@@ -777,12 +779,12 @@ In general, you can take $k=10$ partitions. The extreme case is to take $k=N$ pa
 
 While the training mse always decrease with more complex models, the test mse increases after a while. This is called **overfitting**: learning by heart the data without caring about generalization. The two curves suggest that we should chose a polynomial order between 2 and 9.
 
-![Training and test mse of polynomial regression.](../slides/img/polynomialregression-mse-traintest.png){width=90%}
+![Training and test mse of polynomial regression.](../slides/img/polynomialregression-mse-traintest.png)
 
 
 A model not complex enough for the data will **underfit**: its training error is high. A model too complex for the data will **overfit**: its test error is high. In between, there is the right complexity for the model: it learns the data correctly but does not overfit. 
 
-![Underfitting and overfitting.](../slides/img/underfitting-overfitting.png){width=100%}
+![Underfitting and overfitting.](../slides/img/underfitting-overfitting.png)
 
 What does complexity mean? In polynomial regression, the complexity is related to the order of the polynomial, i.e. the number of coefficients to estimate:
 
@@ -798,7 +800,7 @@ A polynomial of order $p$ has $p+1$ unknown parameters (**free parameters**): th
 
 Under-/Over-fitting relates to the statistical concept of **bias-variance trade-off**. The **bias** is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model): a model with high bias is underfitting. The **variance** is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples): a model with high variance is overfitting.
 
-![Bias and variance of an estimator. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance3.png){width=80%}
+![Bias and variance of an estimator. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance3.png)
 
 The bias decreases when the model becomes complex; the variance increases when the model becomes complex. The **generalization error** is a combination of the bias and variance:
 
@@ -808,7 +810,7 @@ $$
 
 We search for the model with the **optimum complexity** realizing the trade-off between bias and variance. It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).
 
-![The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance2.png){width=80%}
+![The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance2.png)
 
 ## Regularized regression
 
@@ -817,9 +819,9 @@ We search for the model with the **optimum complexity** realizing the trade-off 
 Linear regression can either underfit or overfit depending on the data.
 
 
-![Linear regression underfits non-linear data.](../slides/img/underfitting-overfitting-linear.png){width=60%}
+![Linear regression underfits non-linear data.](../slides/img/underfitting-overfitting-linear.png)
 
-![Linear regression overfits outliers.](../slides/img/regression-outlier-fit.png){width=60%}
+![Linear regression overfits outliers.](../slides/img/regression-outlier-fit.png){width=80%}
 
 When linear regression **underfits** (both training and test errors are high), the data is not linear: we need to use a **neural network**. When linear regression **overfits** (the test error is higher than the training error), we would like to **decrease its complexity**.
 
@@ -857,7 +859,7 @@ $$
 
 Ridge regression is also called **weight decay**: even if there is no error, all weights will decay to 0.
 
-![Ridge regression finds the smallest value for the weights that minimize the mse. Source: <https://www.mlalgorithms.org/articles/l1-l2-regression/>](../slides/img/ridge-effect.png){width=60%}
+![Ridge regression finds the smallest value for the weights that minimize the mse. Source: <https://www.mlalgorithms.org/articles/l1-l2-regression/>](../slides/img/ridge-effect.png)
 
 
 ### L1 regularization - LASSO regression
@@ -882,7 +884,7 @@ $$
 
 **Weight decay** does not depend on the value of the weight, only its sign. Weights can decay very fast to 0.
 
-![LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <https://www.mlalgorithms.org/articles/l1-l2-regression/>](../slides/img/lasso-effect.png){width=60%}
+![LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <https://www.mlalgorithms.org/articles/l1-l2-regression/>](../slides/img/lasso-effect.png)
 
 Both methods depend on the **regularization parameter** $\lambda$. Its value determines how important the regularization term should. Regularization introduce a **bias**, as the solution found is **not** the minimum of the mse, but reduces the variance of the estimation, as small weights are less sensible to noise.
 
@@ -890,9 +892,9 @@ Both methods depend on the **regularization parameter** $\lambda$. Its value det
 
 LASSO allows **feature selection**: features with a zero weight can be removed from the training set.
 
-![Linear regression tends to assign values to all weights. Source: <https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/>](../slides/img/linearregression-withoutregularization.png){width=80%}
+![Linear regression tends to assign values to all weights. Source: <https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/>](../slides/img/linearregression-withoutregularization.png)
 
-![LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/>](../slides/img/linearregression-withregularization.png){width=80%}
+![LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/>](../slides/img/linearregression-withregularization.png)
 
 
 ### L1+L2 regularization - ElasticNet

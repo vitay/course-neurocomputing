@@ -9,7 +9,7 @@ Slides: [html](../slides/2.3-LinearClassification.html){target="_blank"} [pdf](.
 
 The training data $\mathcal{D}$ is composed of $N$ examples $(\mathbf{x}_i, t_i)_{i=1..N}$ , with a d-dimensional input vector $\mathbf{x}_i \in \Re^d$ and a binary output $t_i \in \{-1, +1\}$. The data points where $t = + 1$ are called the **positive class**, the other the **negative class**.
 
-![Binary linear classification of 2D data.](../slides/img/classification-animation1.png){width=80%}
+![Binary linear classification of 2D data.](../slides/img/classification-animation1.png)
 
 For example, the inputs $\mathbf{x}_i$ can be images (one dimension per pixel) and the positive class corresponds to cats ($t_i = +1$), the negative class to dogs ($t_i = -1$).
 
@@ -17,7 +17,7 @@ For example, the inputs $\mathbf{x}_i$ can be images (one dimension per pixel) a
 
 We want to find the hyperplane $(\mathbf{w}, b)$ of $\Re^d$ that correctly separates the two classes.
 
-![The hyperplane separates the input space into two regions.](../slides/img/classification-animation2.png){width=80%}
+![The hyperplane separates the input space into two regions.](../slides/img/classification-animation2.png)
 
 For a point $\mathbf{x} \in \mathcal{D}$, $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b$  is the projection of $\mathbf{x}$  onto the hyperplane $(\mathbf{w}, b)$.
 
@@ -30,7 +30,7 @@ For a point $\mathbf{x} \in \mathcal{D}$, $\langle \mathbf{w} \cdot \mathbf{x} \
 * If $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b = 0$, the point is
     on the hyperplane.
 
-![Projection on an hyperplane.](../slides/img/projection.svg){width=80%}
+![Projection on an hyperplane.](../slides/img/projection.svg)
 
 By looking at the **sign** of $\langle \mathbf{w} \cdot \mathbf{x} \rangle +b$, we can predict the class of the input.
 
@@ -125,7 +125,7 @@ By applying gradient descent on the quadratic error function, one obtains the fo
 This is called the **batch** version of the Perceptron algorithm. If the data is linearly separable and $\eta$ is well chosen, it converges to the minimum of the mean square error.
 
 
-![Batch perceptron algorithm.](../slides/img/classification-animation.gif){width=80%}
+![Batch perceptron algorithm.](../slides/img/classification-animation.gif)
 
 The **Perceptron algorithm** was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.
 
@@ -145,7 +145,7 @@ The **Perceptron algorithm** was invented by the psychologist Frank Rosenblatt i
 
 This algorithm iterates over all examples of the training set and applies the **delta learning rule** to each of them immediately, not at the end on the whole training set. One could check whether there are still classification errors on the training set at the end of each epoch and stop the algorithm. The delta learning rule depends as always on the learning rate $\eta$, the error made by the prediction ($t_i - y_i$) and the input $\mathbf{x}_i$.
 
-![Online perceptron algorithm.](../slides/img/classification-animation-online.gif){width=80%}
+![Online perceptron algorithm.](../slides/img/classification-animation-online.gif)
 
 ### Stochastic Gradient descent
 
@@ -200,7 +200,7 @@ $$
 where $\mu$ is the mean of the distribution and $\sigma$ its standard deviation.
 
 
-![Normal distributions with different parameters $\mu$ and $\sigma$ explain the data with different likelihoods.](../slides/img/MLE2.png){width=80%}
+![Normal distributions with different parameters $\mu$ and $\sigma$ explain the data with different likelihoods.](../slides/img/MLE2.png)
 
 The problem is to find the values of $\mu$ and $\sigma$ which explain best the observations $\{x_i\}_{i=1}^N$.
 
@@ -387,7 +387,7 @@ Alternatively, you can put a **hard limit** at 0.5:
 * if $y_i < 0.5$ then the class is negative.
 
 
-![Logistic regression for soft classification. The confidence scores tells how certain the classification is.](../slides/img/logisticregression-animation.gif){width=80%}
+![Logistic regression for soft classification. The confidence scores tells how certain the classification is.](../slides/img/logisticregression-animation.gif)
 
 
 Logistic regression also provides a **confidence score**:  the closer $y$ is from 0 or 1, the more confident we can be that the classification is correct. This is particularly important in **safety critical** applications: if you detect the positive class but with a confidence of 0.51, you should perhaps not trust the prediction. If the confidence score is 0.99, you can probably trust the prediction.
@@ -417,7 +417,7 @@ If multiple classes are predicted for a single example, ones needs a confidence 
 A majority vote is then performed to find the correct class.
 
 
-![Example of **One-vs-All** classification: one binary classifier per class. Source <http://cs231n.github.io/linear-classify>](../slides/img/pixelspace.jpg){width=80%}
+![Example of **One-vs-All** classification: one binary classifier per class. Source <http://cs231n.github.io/linear-classify>](../slides/img/pixelspace.jpg)
 
 
 ### Softmax linear classifier
@@ -434,7 +434,7 @@ $$
 
 The $C$ weight vectors form a $d\times C$ **weight matrix** $W$, the biases form a vector $\mathbf{b}$.
 
-![Linear perceptron for images. The output is the logit score. Source <http://cs231n.github.io/linear-classify>](../slides/img/imagemap.jpg){width=100%}
+![Linear perceptron for images. The output is the logit score. Source <http://cs231n.github.io/linear-classify>](../slides/img/imagemap.jpg)
 
 The net activations form a vector $\mathbf{z}$:
 
@@ -457,7 +457,7 @@ The labels can be seen as a **probability distribution** over the training set, 
 
 $$P(\mathbf{t} | \mathbf{x}) = [P(\text{cat}| \mathbf{x}), P(\text{dog}| \mathbf{x}), P(\text{ship}| \mathbf{x}), P(\text{house}| \mathbf{x}), P(\text{car}| \mathbf{x})] = [0, 1, 0, 0, 0]$$
 
-![The logit scores $\mathbf{z}$ cannot be compared to the targets $\mathbf{t}$: we need to transform them into a probability distribution $\mathbf{y}$.](../slides/img/softmax-transformation.png){width=100%}
+![The logit scores $\mathbf{z}$ cannot be compared to the targets $\mathbf{t}$: we need to transform them into a probability distribution $\mathbf{y}$.](../slides/img/softmax-transformation.png)
 
 We need to transform the logit score $\mathbf{z}$ into a **probability distribution** $P(\mathbf{y} | \mathbf{x})$ that should be as close as possible from $P(\mathbf{t} | \mathbf{x})$.
 
@@ -621,7 +621,7 @@ $$
 :::{.callout-tip} 
 ## Softmax linear classifier
 
-![Softmax linear classifier](../slides/img/softmaxclassifier.svg){width=60%}
+![](../slides/img/softmaxclassifier.svg){width=70%}
 
 
 * We first compute the **logit scores** $\mathbf{z}$ using a linear layer:

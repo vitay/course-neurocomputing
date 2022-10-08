@@ -17,10 +17,7 @@ The videos in this chapter are taken from a  great blog post by Jay Alammar:
 
 The problem with the seq2seq architecture is that it **compresses** the complete input sentence into a single state vector.
 
-<video width="100%" height="auto" loop="" autoplay="" controls="">
-  <source src="https://jalammar.github.io/images/seq2seq_6.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+{{< video https://jalammar.github.io/images/seq2seq_6.mp4 >}}
 
 
 For long sequences, the beginning of the sentence may not be present in the final state vector:
@@ -30,10 +27,9 @@ For long sequences, the beginning of the sentence may not be present in the fina
 
 Consequence: there is not enough information in the state vector to start translating. A solution would be to concatenate the **state vectors** of all steps of the encoder and pass them to the decoder.
 
-<video width="100%" height="auto" loop="" autoplay="" controls="">
-  <source src="https://jalammar.github.io/images/seq2seq_7.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+
+{{< video https://jalammar.github.io/images/seq2seq_7.mp4 >}}
+
 
 
 * **Problem 1:** it would make a lot of elements in the state vector of the decoder (which should be constant).
@@ -45,10 +41,8 @@ The **attentional context vector** of the decoder $A^\text{decoder}_t$ at time $
 
 $$A^\text{decoder}_t = \sum_{i=0}^T a_i \, C^\text{encoder}_i$$
 
-<video width="100%" height="auto" loop="" autoplay="" controls="">
-  <source src="https://jalammar.github.io/images/seq2seq_9.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+
+{{< video https://jalammar.github.io/images/seq2seq_9.mp4 >}}
 
 
 The coefficients $a_i$ are called the **attention scores** : how much attention is the decoder paying to each of the encoder's state vectors? The attention scores $a_i$ are computed as a **softmax** over the scores $e_i$ (in order to sum to 1):
@@ -56,11 +50,7 @@ The coefficients $a_i$ are called the **attention scores** : how much attention 
 $$a_i = \frac{\exp e_i}{\sum_j \exp e_j} \Rightarrow A^\text{decoder}_t = \sum_{i=0}^T \frac{\exp e_i}{\sum_j \exp e_j} \, C^\text{encoder}_i$$
 
 
-<video width="100%" height="auto" loop="" autoplay="" controls="">
-  <source src="https://jalammar.github.io/images/attention_process.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
+{{< video https://jalammar.github.io/images/attention_process.mp4 >}}
 
 The score $e_i$ is computed using:
 
@@ -78,17 +68,14 @@ The attentional context vector $A^\text{decoder}_t$ is concatenated with the pre
 $$\mathbf{x}^\text{decoder}_t = [\mathbf{h}^\text{decoder}_{t-1} ; A^\text{decoder}_t]$$
 
 
-<video width="100%" height="auto" loop="" autoplay="" controls="">
-  <source src="https://jalammar.github.io/images/attention_tensor_dance.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+{{< video https://jalammar.github.io/images/attention_tensor_dance.mp4 >}}
 
 
 ![Seq2seq architecture with attention [@Bahdanau2016]. Source: <https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263>.](../slides/img/seq2seq-attention5.png){width=100%}
 
 The attention scores or **alignment scores** $a_i$ are useful to interpret what happened. They show which words in the original sentence are the most important to generate the next word.
 
-![Alignment scores during translation. Source: <https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263>.](../slides/img/seq2seq-attention7.png){width=60%}
+![Alignment scores during translation. Source: <https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263>.](../slides/img/seq2seq-attention7.png){width=80%}
 
 **Attentional mechanisms** are now central to NLP. The whole **history** of encoder states is passed to the decoder, which learns to decide which part is the most important using **attention**. This solves the bottleneck of seq2seq architectures, at the cost of much more operations. They require to use fixed-length sequences (generally 50 words). 
 

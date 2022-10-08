@@ -13,7 +13,7 @@ A **Multi-Layer Perceptron** (MLP) or **feedforward neural network** is composed
 * an output layer for the output $\mathbf{y}$.
 
 
-![Multi-layer perceptron with one hidden layer.](../slides/img/mlp.svg){width=60%}
+![Multi-layer perceptron with one hidden layer.](../slides/img/mlp.svg){width=70%}
 
 If there is a single hidden layer $\mathbf{h}$ (shallow network), it corresponds to the feature space. Each layer takes inputs from the previous layer. If the hidden layer is adequately chosen, the output neurons can learn to replicate the desired output $\mathbf{t}$.
 
@@ -30,7 +30,7 @@ $$
     \mathbf{y} = f(\textbf{net}_\mathbf{y}) = f(W^2 \, \mathbf{h} + \mathbf{b}^2)
 $$
 
-![Fully-connected layer.](../slides/img/matrixvector.png){width=90%}
+![Fully-connected layer.](../slides/img/matrixvector.png)
 
 **Fully-connected layers** (FC) transform an input vector $\mathbf{x}$ into a new vector $\mathbf{h}$ by multiplying it by a **weight matrix** $W$ and adding a **bias vector** $\mathbf{b}$. A non-linear **activation function** transforms each element of the net activation.
 
@@ -38,7 +38,7 @@ $$
 
 Here are some of the most useful activation functions in a MLP.
 
-![Some classical activation functions in MLPs.](../slides/img/ratecoded-transferfunctions.png){width=70%}
+![Some classical activation functions in MLPs.](../slides/img/ratecoded-transferfunctions.png)
 
 * Threshold function (output is binary)
 
@@ -72,7 +72,7 @@ $$
 $$
 
 
-![ReLU vs. PReLU activation functions.](../slides/img/prelu.ppm){width=70%}
+![ReLU vs. PReLU activation functions.](../slides/img/prelu.ppm)
 
 
 For classification problems, the **softmax** activation function can be used in the output layer to make sure that the sum of the outputs $\mathbf{y} = \{y_j\}$ over all output neurons is one.
@@ -142,7 +142,8 @@ $$\begin{cases}
     \Delta W^2 = - \eta \, \nabla_{W^2} \, \mathcal{L}(\theta) \\
     \\
     \Delta \mathbf{b}^2 = - \eta \, \nabla_{\mathbf{b}^2} \, \mathcal{L}(\theta)\\
-\end{cases}$$
+\end{cases}
+$$
 
 We will see later that other optimizers than SGD can be used. The question is now how to compute efficiently these **gradients** w.r.t all the weights and biases. The algorithm to achieve this is called **backpropagation** [@Rumelhart1986a], which is simply a smart implementation of the chain rule.
 
@@ -306,7 +307,7 @@ If $\mathbf{h}$ and $\mathbf{\delta_h}$ have $K$ elements and $\mathbf{y}$ and $
 ::: {.callout-tip}
 ## Backpropagation for a shallow MLP
 
-![](../slides/img/mlp.svg){width=40%}
+![](../slides/img/mlp.svg){width=70%}
 
 For a shallow MLP with one hidden layer:
 
