@@ -7,8 +7,9 @@ book:
   author: "Julien Vitay"
   search: true
   sidebar:
-    style: floating
-    type: dark
+    style: docked
+    type: light
+    background: white
     logo: notes/img/tuc-new.png
   page-footer: "Copyright 2022, Julien Vitay - <julien.vitay@informatik.tu-chemnitz.de>" 
   execute: 
@@ -78,15 +79,15 @@ csl: frontiers.csl
 
 format:
   html:
-    theme: [journal, custom.scss]
+    theme: [sandstone, custom.scss]
     page-layout: full
     number-depth: 2
     number-sections: false
     toc: true
     smooth-scroll: true
     html-math-method: katex
-    fig-cap-location: margin
-    reference-location: margin
+    #fig-cap-location: margin
+    #reference-location: margin
 
 filters:
   - center_images.lua

@@ -100,7 +100,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,7 +116,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -440,7 +440,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -459,15 +459,15 @@ div.csl-indent {
 </header>
 
 <p>Slides: <a href="../slides/6.2-NLP.html" target="_blank">html</a> <a href="../slides/pdf/6.2-NLP.pdf" target="_blank">pdf</a></p>
-<section id="word2vec" class="level2 page-columns page-full">
+<section id="word2vec" class="level2">
 <h2 class="anchored" data-anchor-id="word2vec">word2vec</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/8ub1oavRfIE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The most famous application of RNNs is <strong>Natural Language Processing</strong> (NLP): text understanding, translation, etc… Each word of a sentence has to be represented as a vector <span class="math inline">\mathbf{x}_t</span> in order to be fed to a LSTM. Which representation should we use?</p>
 <p>The naive solution is to use <strong>one-hot encoding</strong>, one element of the vector corresponding to one word of the dictionary.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/onehotvec.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">One-hot encoding of words. Source: <a href="https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png" class="uri">https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">One-hot encoding of words. Source: <a href="https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png" class="uri">https://cdn-images-1.medium.com/max/1600/1*ULfyiWPKgWceCqyZeDTl0g.png</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>One-hot encoding is not a good representation for words:</p>
@@ -483,18 +483,18 @@ div.csl-indent {
 <li>Semantically related words have completely different representations (“endure” and “tolerate”).</li>
 <li>The representation is extremely <strong>sparse</strong> (a lot of useless zeros).</li>
 </ul>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/audio-image-text.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Audio and image data are dense, i.e.&nbsp;each input dimension carries information. One-hot encoded sentences are sparse. Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Audio and image data are dense, i.e.&nbsp;each input dimension carries information. One-hot encoded sentences are sparse. Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a>.</figcaption><p></p>
 </figure>
 </div>
 <p><strong>word2vec</strong> <span class="citation" data-cites="Mikolov2013">(<a href="../references.html#ref-Mikolov2013" role="doc-biblioref">Mikolov et al., 2013</a>)</span> learns word <strong>embeddings</strong> by trying to predict the current word based on the context (CBOW, continuous bag-of-words) or the context based on the current word (skip-gram). See <a href="https://code.google.com/archive/p/word2vec/" class="uri">https://code.google.com/archive/p/word2vec/</a> and <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a> for more information.</p>
 <p>It uses a three-layer autoencoder-like NN, where the hidden layer (latent space) will learn to represent the one-hot encoded words in a dense manner.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/word2vec-training.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Word2vec is an autoencoder trained to reproduce the context of a word using one-hot encoded vectors. Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Word2vec is an autoencoder trained to reproduce the context of a word using one-hot encoded vectors. Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a>.</figcaption><p></p>
 </figure>
 </div>
 <p><strong>word2vec</strong> has three parameters:</p>
@@ -507,23 +507,23 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>queen = king + woman - man</p>
 </blockquote>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/linear-relationships.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Arithmetic operations on word2vec representations. Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Arithmetic operations on word2vec representations. Source: <a href="https://www.tensorflow.org/tutorials/representation/word2vec" class="uri">https://www.tensorflow.org/tutorials/representation/word2vec</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="applications-of-rnns" class="level2 page-columns page-full">
+<section id="applications-of-rnns" class="level2">
 <h2 class="anchored" data-anchor-id="applications-of-rnns">Applications of RNNs</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/FiSqycJE_i0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="classification-of-lstm-architectures" class="level3 page-columns page-full">
+<section id="classification-of-lstm-architectures" class="level3">
 <h3 class="anchored" data-anchor-id="classification-of-lstm-architectures">Classification of LSTM architectures</h3>
 <p>Several architectures are possible using recurrent neural networks:</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/lstm-diagrams.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Arithmetic operations on word2vec representations. Source: <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" class="uri">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Arithmetic operations on word2vec representations. Source: <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" class="uri">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a>.</figcaption><p></p>
 </figure>
 </div>
 <ul>
@@ -546,26 +546,26 @@ div.csl-indent {
 </ul></li>
 </ul>
 </section>
-<section id="image-caption-generation" class="level3 page-columns page-full">
+<section id="image-caption-generation" class="level3">
 <h3 class="anchored" data-anchor-id="image-caption-generation">Image caption generation</h3>
 <p><strong>Show and Tell</strong> <span class="citation" data-cites="Vinyals2015">(<a href="../references.html#ref-Vinyals2015" role="doc-biblioref">Vinyals et al., 2015</a>)</span> uses the last FC layer of a CNN to feed a LSTM layer and generate words. The pretrained CNN (VGG16, ResNet50) is used as a <strong>feature extractor</strong>. Each word of the sentence is encoded/decoded using word2vec. The output of the LSTM at time <span class="math inline">t</span> becomes its new input at time <span class="math inline">t+1</span>.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/showandtell.webp" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Show and Tell architecture. Source: <span class="citation" data-cites="Sathe2022">(<a href="../references.html#ref-Sathe2022" role="doc-biblioref">Sathe et al., 2022</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Show and Tell architecture. Source: <span class="citation" data-cites="Sathe2022">(<a href="../references.html#ref-Sathe2022" role="doc-biblioref">Sathe et al., 2022</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p><strong>Show, attend and tell</strong> <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span> uses attention to focus on specific parts of the image when generating the sentence.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/showattendtell.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Show, attend and tell <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Show, attend and tell <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/showattendtell-res.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Caption generation using Show, attend and tell <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Caption generation using Show, attend and tell <span class="citation" data-cites="Xu2015">(<a href="../references.html#ref-Xu2015" role="doc-biblioref">Xu et al., 2015</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -614,33 +614,33 @@ Sunspring SciFi movie
 </div>
 </div>
 </section>
-<section id="sentiment-analysis" class="level3 page-columns page-full">
+<section id="sentiment-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="sentiment-analysis">Sentiment analysis</h3>
 <p>Sentiment analysis consists of attributing a value (positive or negative) to a text. A 1D convolutional layers “slides” over the text, each word being encoded using word2vec. The bidirectional LSTM computes a state vector for the complete text. A classifier (fully connected layer) learns to predict the sentiment of the text (positive/negative).</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/sentimentanalysis.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Sentiment analysis using bidirectional LSTMs. Source: <a href="https://offbit.github.io/how-to-read/" class="uri">https://offbit.github.io/how-to-read/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Sentiment analysis using bidirectional LSTMs. Source: <a href="https://offbit.github.io/how-to-read/" class="uri">https://offbit.github.io/how-to-read/</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="question-answering-scene-understanding" class="level3 page-columns page-full">
+<section id="question-answering-scene-understanding" class="level3">
 <h3 class="anchored" data-anchor-id="question-answering-scene-understanding">Question answering / Scene understanding</h3>
 <p>A LSTM can learn to associate an image (static) plus a question (sequence) with the answer (sequence). The image is abstracted by a CNN pretrained for object recognition.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/questionanswering.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Question answering. Source: <span class="citation" data-cites="Malinowski2015">(<a href="../references.html#ref-Malinowski2015" role="doc-biblioref">Malinowski et al., 2015</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Question answering. Source: <span class="citation" data-cites="Malinowski2015">(<a href="../references.html#ref-Malinowski2015" role="doc-biblioref">Malinowski et al., 2015</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="seq2seq" class="level3 page-columns page-full">
+<section id="seq2seq" class="level3">
 <h3 class="anchored" data-anchor-id="seq2seq">seq2seq</h3>
 <p>The <strong>state vector</strong> obtained at the end of a sequence can be reused as an initial state for another LSTM. The goal of the <strong>encoder</strong> is to find a compressed representation of a sequence of inputs. The goal of the <strong>decoder</strong> is to generate a sequence from that representation. <strong>Sequence-to-sequence</strong> (seq2seq <span class="citation" data-cites="Sutskever2014">(<a href="../references.html#ref-Sutskever2014" role="doc-biblioref">Sutskever et al., 2014</a>)</span>) models are recurrent autoencoders.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/seq2seq.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">seq2seq architecture. Source: <span class="citation" data-cites="Sutskever2014">(<a href="../references.html#ref-Sutskever2014" role="doc-biblioref">Sutskever et al., 2014</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">seq2seq architecture. Source: <span class="citation" data-cites="Sutskever2014">(<a href="../references.html#ref-Sutskever2014" role="doc-biblioref">Sutskever et al., 2014</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>The <strong>encoder</strong> learns for example to encode each word of a sentence in French. The <strong>decoder</strong> learns to associate the <strong>final state vector</strong> to the corresponding English sentence. seq2seq allows automatic text translation between many languages given enough data. Modern translation tools are based on seq2seq, but with attention.</p>

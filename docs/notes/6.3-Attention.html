@@ -102,7 +102,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +118,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -433,7 +433,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -466,7 +466,7 @@ Note
 <p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
 </div>
 </div>
-<section id="rnns-with-attention" class="level2 page-columns page-full">
+<section id="rnns-with-attention" class="level2">
 <h2 class="anchored" data-anchor-id="rnns-with-attention">RNNs with Attention</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/Gi8aHnnyDaM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The problem with the seq2seq architecture is that it <strong>compresses</strong> the complete input sentence into a single state vector.</p>
@@ -500,31 +500,31 @@ Note
 <p>The attentional context vector <span class="math inline">A^\text{decoder}_t</span> is concatenated with the previous output <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span> and used as the next input <span class="math inline">\mathbf{x}^\text{decoder}_t</span> of the decoder:</p>
 <p><span class="math display">\mathbf{x}^\text{decoder}_t = [\mathbf{h}^\text{decoder}_{t-1} ; A^\text{decoder}_t]</span></p>
 <video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_tensor_dance.mp4"></video>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/seq2seq-attention5.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Seq2seq architecture with attention <span class="citation" data-cites="Bahdanau2016">(<a href="../references.html#ref-Bahdanau2016" role="doc-biblioref">Bahdanau et al., 2016</a>)</span>. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Seq2seq architecture with attention <span class="citation" data-cites="Bahdanau2016">(<a href="../references.html#ref-Bahdanau2016" role="doc-biblioref">Bahdanau et al., 2016</a>)</span>. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>The attention scores or <strong>alignment scores</strong> <span class="math inline">a_i</span> are useful to interpret what happened. They show which words in the original sentence are the most important to generate the next word.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/seq2seq-attention7.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Alignment scores during translation. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Alignment scores during translation. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
 </figure>
 </div>
 <p><strong>Attentional mechanisms</strong> are now central to NLP. The whole <strong>history</strong> of encoder states is passed to the decoder, which learns to decide which part is the most important using <strong>attention</strong>. This solves the bottleneck of seq2seq architectures, at the cost of much more operations. They require to use fixed-length sequences (generally 50 words).</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/seq2seq-comparison.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Comparison of seq2seq and seq2seq with attention. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Comparison of seq2seq and seq2seq with attention. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>Google Neural Machine Translation (GNMT <span class="citation" data-cites="Wu2016">(<a href="../references.html#ref-Wu2016" role="doc-biblioref">Wu et al., 2016</a>)</span>) uses an attentional recurrent NN, with bidirectional GRUs, 8 recurrent layers on 8 GPUs for both the encoder and decoder.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/google-nmt-lstm.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Google Neural Machine Translation (GNMT <span class="citation" data-cites="Wu2016">(<a href="../references.html#ref-Wu2016" role="doc-biblioref">Wu et al., 2016</a>)</span>)</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Google Neural Machine Translation (GNMT <span class="citation" data-cites="Wu2016">(<a href="../references.html#ref-Wu2016" role="doc-biblioref">Wu et al., 2016</a>)</span>)</figcaption><p></p>
 </figure>
 </div>
 

@@ -100,7 +100,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,7 +116,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -443,7 +443,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -462,52 +462,52 @@ div.csl-indent {
 </header>
 
 <p>Slides: <a href="../slides/5.3-GAN.html" target="_blank">html</a> <a href="../slides/pdf/5.3-GAN.pdf" target="_blank">pdf</a></p>
-<section id="generative-adversarial-networks" class="level2 page-columns page-full">
+<section id="generative-adversarial-networks" class="level2">
 <h2 class="anchored" data-anchor-id="generative-adversarial-networks">Generative adversarial networks</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/CWgvnu8Qtug" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="generative-models" class="level3 page-columns page-full">
+<section id="generative-models" class="level3">
 <h3 class="anchored" data-anchor-id="generative-models">Generative models</h3>
 <p>An autoencoder learns to first encode inputs in a <strong>latent space</strong> and then use a generative model to model the data distribution.</p>
 <p><span class="math display">\mathcal{L}_\text{autoencoder}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})} [ - \log p_\theta(\mathbf{z})]</span></p>
 <p>Couldn’t we learn a decoder using random noise as input but still learning the distribution of the data?</p>
 <p><span class="math display">\mathcal{L}_\text{GAN}(\theta, \phi) = \mathbb{E}_{\mathbf{z} \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{z}) ]</span></p>
 <p>After all, this is how random numbers are generated: a uniform distribution of pseudo-random numbers is transformed into samples of another distribution using a mathematical formula.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/generation-distribution.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Random numbers are generated using a standard distribution as source of randomness. Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Random numbers are generated using a standard distribution as source of randomness. Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
 </figure>
 </div>
 <p>The problem is how to estimate the discrepancy between the true distribution and the generated distribution when we only have samples. The Maximum Mean Discrepancy (MMD) approach allows to do that, but does not work very well in highly-dimensional spaces.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/gan-principle2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">The generative sample should learn to minimize the statistical distance between the true distribution and the parameterized distribution using samples. Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">The generative sample should learn to minimize the statistical distance between the true distribution and the parameterized distribution using samples. Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="architecture-of-a-gan" class="level3 page-columns page-full">
+<section id="architecture-of-a-gan" class="level3">
 <h3 class="anchored" data-anchor-id="architecture-of-a-gan">Architecture of a GAN</h3>
 <p>The <strong>Generative Adversarial Network</strong> (GAN, <span class="citation" data-cites="Goodfellow2014">(<a href="../references.html#ref-Goodfellow2014" role="doc-biblioref">Goodfellow et al., 2014</a>)</span>) is a smart way of providing a loss function to the generative model. It is composed of two parts:</p>
 <ul>
 <li>The <strong>Generator</strong> (or decoder) produces an image based on latent variables sampled from some random distribution (e.g.&nbsp;uniform or normal).</li>
 <li>The <strong>Discriminator</strong> has to recognize real images from generated ones.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/gan-simple2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Architecture of a GAN. The generator only sees noisy latent representations and outputs a reconstruction. The discriminator gets alternatively real or generated inputs and predicts whether it is real or fake. Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Architecture of a GAN. The generator only sees noisy latent representations and outputs a reconstruction. The discriminator gets alternatively real or generated inputs and predicts whether it is real or fake. Source: <a href="https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml" class="uri">https://www.oreilly.com/library/view/java-deep-learning/9781788997454/60579068-af4b-4bbf-83f1-e988fbe3b226.xhtml</a></figcaption><p></p>
 </figure>
 </div>
 <p>The generator and the discriminator are in competition with each other. The discriminator uses pure <strong>supervised learning</strong>: we know if the input is real or generated (binary classification) and train the discriminator accordingly. The generator tries to fool the discriminator, without ever seeing the data!</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/gan-principle.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Principle of a GAN. Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Principle of a GAN. Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="gan-loss" class="level3 page-columns page-full">
+<section id="gan-loss" class="level3">
 <h3 class="anchored" data-anchor-id="gan-loss">GAN loss</h3>
 <p>Let’s define <span class="math inline">x \sim P_\text{data}(x)</span> as a real image from the dataset and <span class="math inline">G(z)</span> as an image generated by the generator, where <span class="math inline">z \sim P_z(z)</span> is a random input. The output of the discriminator is a single sigmoid neuron:</p>
 <ul>
@@ -536,26 +536,26 @@ div.csl-indent {
     \min_G \max_D V(D, G) = \mathbb{E}_{x \sim P_\text{data}(x)} [\log D(x)] + \mathbb{E}_{z \sim P_z(z)} [\log(1 - D(G(z)))]
 </span></p>
 <p>Both can therefore use the usual <strong>backpropagation</strong> algorithm to adapt their parameters. The discriminator and the generator should reach a <strong>Nash equilibrium</strong>: they try to beat each other, but both become better over time.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/gan-loss.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">The generator and discriminator loss functions reach an equilibrium, it is quite hard to tell when the network has converged. Source: Research project - Vivek Bakul Maru - TU Chemnitz</figcaption><p></p>
+<p></p><figcaption class="figure-caption">The generator and discriminator loss functions reach an equilibrium, it is quite hard to tell when the network has converged. Source: Research project - Vivek Bakul Maru - TU Chemnitz</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="variants" class="level3 page-columns page-full">
+<section id="variants" class="level3">
 <h3 class="anchored" data-anchor-id="variants">Variants</h3>
 <p>DCGAN <span class="citation" data-cites="Radford2015">(<a href="../references.html#ref-Radford2015" role="doc-biblioref">Radford et al., 2015</a>)</span> is the convolutional version of GAN, using transposed convolutions in the generator and concolutions with stride in the discriminator.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/dcgan-flat.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">DCGAN <span class="citation" data-cites="Radford2015">(<a href="../references.html#ref-Radford2015" role="doc-biblioref">Radford et al., 2015</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">DCGAN <span class="citation" data-cites="Radford2015">(<a href="../references.html#ref-Radford2015" role="doc-biblioref">Radford et al., 2015</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/dcgan.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Results of DCGAN <span class="citation" data-cites="Radford2015">(<a href="../references.html#ref-Radford2015" role="doc-biblioref">Radford et al., 2015</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Results of DCGAN <span class="citation" data-cites="Radford2015">(<a href="../references.html#ref-Radford2015" role="doc-biblioref">Radford et al., 2015</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>GAN are quite sensible to train: the discriminator should not become too good too early, otherwise there is no usable gradient for the generator. In practice, one updates the generator more often than the discriminator. There has been many improvements on GANs to stabilizes training (see <span class="citation" data-cites="Salimans2016">(<a href="../references.html#ref-Salimans2016" role="doc-biblioref">Salimans et al., 2016</a>)</span>):</p>
@@ -567,111 +567,111 @@ div.csl-indent {
 <p>StyleGAN2 from NVIDIA <span class="citation" data-cites="Karras2020">(<a href="../references.html#ref-Karras2020" role="doc-biblioref">Karras et al., 2020</a>)</span> is one of the most realistic GAN variant. Check its generated faces at <a href="https://thispersondoesnotexist.com/" class="uri">https://thispersondoesnotexist.com/</a>.</p>
 </section>
 </section>
-<section id="conditional-gans" class="level2 page-columns page-full">
+<section id="conditional-gans" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-gans">Conditional GANs</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WxVKJfwPjw4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="cgan" class="level3 page-columns page-full">
+<section id="cgan" class="level3">
 <h3 class="anchored" data-anchor-id="cgan">cGAN</h3>
 <p>The generator can also get additional <strong>deterministic</strong> information to the latent space, not only the random vector <span class="math inline">z</span>. One can for example provide the <strong>label</strong> (class) in the context of supervised learning, allowing to generate many <strong>new</strong> examples of each class: data augmentation using a conditional GAN <span class="citation" data-cites="Mirza2014">(<a href="../references.html#ref-Mirza2014" role="doc-biblioref">Mirza and Osindero, 2014</a>)</span>. One could also provide the output of a pre-trained CNN (ResNet) to condition on images.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cgan.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">cGAN <span class="citation" data-cites="Mirza2014">(<a href="../references.html#ref-Mirza2014" role="doc-biblioref">Mirza and Osindero, 2014</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">cGAN <span class="citation" data-cites="Mirza2014">(<a href="../references.html#ref-Mirza2014" role="doc-biblioref">Mirza and Osindero, 2014</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/dcgan_network.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">cGAN conditioned on text <span class="citation" data-cites="Reed2016">(<a href="../references.html#ref-Reed2016" role="doc-biblioref">Reed et al., 2016</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">cGAN conditioned on text <span class="citation" data-cites="Reed2016">(<a href="../references.html#ref-Reed2016" role="doc-biblioref">Reed et al., 2016</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/dcgan-textimage.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">cGAN conditioned on text <span class="citation" data-cites="Reed2016">(<a href="../references.html#ref-Reed2016" role="doc-biblioref">Reed et al., 2016</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">cGAN conditioned on text <span class="citation" data-cites="Reed2016">(<a href="../references.html#ref-Reed2016" role="doc-biblioref">Reed et al., 2016</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="pix2pix" class="level3 page-columns page-full">
+<section id="pix2pix" class="level3">
 <h3 class="anchored" data-anchor-id="pix2pix">pix2pix</h3>
 <p>cGAN can be extended to have an autoencoder-like architecture, allowing to generate images from images. <strong>pix2pix</strong> <span class="citation" data-cites="Isola2018">(<a href="../references.html#ref-Isola2018" role="doc-biblioref">Isola et al., 2018</a>)</span> is trained on pairs of similar images in different domains. The conversion from one domain to another is easy in one direction, but we want to learn the opposite.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/dcgan-imageimage.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix <span class="citation" data-cites="Isola2018">(<a href="../references.html#ref-Isola2018" role="doc-biblioref">Isola et al., 2018</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix <span class="citation" data-cites="Isola2018">(<a href="../references.html#ref-Isola2018" role="doc-biblioref">Isola et al., 2018</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 <p>The goal of the generator is to convert for example a black-and-white image into a colorized one. It is a deep convolutional autoencoder, with convolutions with strides and transposed convolutions (SegNet-like).</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-generator1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix generator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix generator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-generator2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Blocks of the pix2pix generator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Blocks of the pix2pix generator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>In practice, it has a <strong>U-Net</strong> architecture with skip connections to generate fine details.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-generator3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix generator with skip connections. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix generator with skip connections. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>The discriminator takes a <strong>pair</strong> of images as input: input/target or input/generated. It does not output a single value real/fake, but a 30x30 “image” telling how real or fake is the corresponding <strong>patch</strong> of the unknown image. Patches correspond to overlapping 70x70 regions of the 256x256 input image. This type of discriminator is called a <strong>PatchGAN</strong>.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-discriminator-principle.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix discriminator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix discriminator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-discriminator.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix discriminator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix discriminator. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>The discriminator is trained like in a regular GAN by alternating input/target or input/generated pairs.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-discriminator-training.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix discriminator training. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix discriminator training. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>The generator is trained by maximizing the GAN loss (using gradients backpropagated through the discriminator) but also by minimizing the L1 distance between the generated image and the target (supervised learning).</p>
 <p><span class="math display">
     \min_G \max_D V(D, G) = V_\text{GAN}(D, G) + \lambda \, \mathbb{E}_\mathcal{D} [|T - G|]
 </span></p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/pix2pix-generator-training.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">pix2pix generator training. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">pix2pix generator training. Source: <a href="https://affinelayer.com/pix2pix/" class="uri">https://affinelayer.com/pix2pix/</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="cyclegan-neural-style-transfer" class="level3 page-columns page-full">
+<section id="cyclegan-neural-style-transfer" class="level3">
 <h3 class="anchored" data-anchor-id="cyclegan-neural-style-transfer">CycleGAN : Neural Style Transfer</h3>
 <p>The drawback of pix2pix is that you need <strong>paired</strong> examples of each domain, which is sometimes difficult to obtain. In <strong>style transfer</strong>, we are interested in converting images using unpaired datasets, for example realistic photographies and paintings. <strong>CycleGAN</strong> <span class="citation" data-cites="Zhu2020">(<a href="../references.html#ref-Zhu2020" role="doc-biblioref">Zhu et al., 2020</a>)</span> is a GAN architecture for neural style transfer.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/img_translation.jpeg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Neural style transfer requires unpaired domains <span class="citation" data-cites="Zhu2020">(<a href="../references.html#ref-Zhu2020" role="doc-biblioref">Zhu et al., 2020</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Neural style transfer requires unpaired domains <span class="citation" data-cites="Zhu2020">(<a href="../references.html#ref-Zhu2020" role="doc-biblioref">Zhu et al., 2020</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/doge_starrynight.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Neural style transfer. Source: <a href="https://hardikbansal.github.io/CycleGANBlog/" class="uri">https://hardikbansal.github.io/CycleGANBlog/</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Neural style transfer. Source: <a href="https://hardikbansal.github.io/CycleGANBlog/" class="uri">https://hardikbansal.github.io/CycleGANBlog/</a></figcaption><p></p>
 </figure>
 </div>
 <p>Let’s suppose that we want to transform <strong>domain A</strong> (horses) into <strong>domain B</strong> (zebras) or the other way around. The problem is that the two datasets are not paired, so we cannot provide targets to pix2pix (supervised learning). If we just select any zebra target for a horse input, pix2pix would learn to generate zebras that do not correspond to the input horse (the shape may be lost). How about we train a second GAN to generate the target?</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cycle-gan-zebra-horse-images.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Neural style transfer between horses and zebras. Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Neural style transfer between horses and zebras. Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
 </figure>
 </div>
 <p><strong>Cycle A2B2A</strong></p>
@@ -680,37 +680,37 @@ div.csl-indent {
 <li>The B discriminator allows to train A2B using real images of B.</li>
 <li>The B2A generator generates a sample of A from the output of A2B, which can be used to minimize the L1-reconstruction loss (shape-preserving).</li>
 </ul>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cyclegan-AB.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Cycle A2B2A. Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Cycle A2B2A. Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
 </figure>
 </div>
 <p><strong>Cycle B2A2B</strong></p>
 <p>In the B2A2B cycle, the domains are reversed, what allows to train the A discriminator.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cyclegan-BA.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Cycle B2A2B. Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Cycle B2A2B. Source: <a href="https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff" class="uri">https://towardsdatascience.com/gender-swap-and-cyclegan-in-tensorflow-2-0-359fe74ab7ff</a></figcaption><p></p>
 </figure>
 </div>
 <p>This cycle is repeated throughout training, allowing to train both GANS concurrently.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cycleGAN2.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">CycleGAN. Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">CycleGAN. Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cycleGAN3.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">CycleGAN. Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">CycleGAN. Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/cycleGAN4.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">CycleGAN. Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">CycleGAN. Source: <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a>.</figcaption><p></p>
 </figure>
 </div>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/fu2fzx4w3mI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>

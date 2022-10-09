@@ -100,7 +100,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,7 +116,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -450,7 +450,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -469,7 +469,7 @@ div.csl-indent {
 </header>
 
 <p>Slides: <a href="../slides/6.1-RNN.html" target="_blank">html</a> <a href="../slides/pdf/6.1-RNN.pdf" target="_blank">pdf</a></p>
-<section id="recurrent-neural-networks" class="level2 page-columns page-full">
+<section id="recurrent-neural-networks" class="level2">
 <h2 class="anchored" data-anchor-id="recurrent-neural-networks">Recurrent neural networks</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/IIeWpVMgriI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="problem-with-feedforward-neural-networks" class="level3">
@@ -489,7 +489,7 @@ div.csl-indent {
 <li><strong>Problem 2:</strong> Having more input dimensions increases dramatically the complexity of the classifier (VC dimension), hence the number of training examples required to avoid overfitting.</li>
 </ul>
 </section>
-<section id="recurrent-neural-network" class="level3 page-columns page-full">
+<section id="recurrent-neural-network" class="level3">
 <h3 class="anchored" data-anchor-id="recurrent-neural-network">Recurrent neural network</h3>
 <p>A <strong>recurrent neural network</strong> (RNN) uses it previous output as an additional input (<em>context</em>). All vectors have a time index <span class="math inline">t</span> denoting the time at which this vector was computed.</p>
 <p>The input vector at time <span class="math inline">t</span> is <span class="math inline">\mathbf{x}_t</span>, the output vector is <span class="math inline">\mathbf{h}_t</span>:</p>
@@ -501,10 +501,10 @@ div.csl-indent {
 <li><span class="math inline">W_x</span> is the input weight matrix.</li>
 <li><span class="math inline">W_h</span> is the recurrent weight matrix.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/RNN-rolled.png" class="img-fluid figure-img" style="width:30.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Recurrent neural network. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Recurrent neural network. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>One can <strong>unroll</strong> a recurrent network: the output <span class="math inline">\mathbf{h}_t</span> depends on the whole history of inputs from <span class="math inline">\mathbf{x}_0</span> to <span class="math inline">\mathbf{x}_t</span>.</p>
@@ -518,14 +518,14 @@ div.csl-indent {
 \end{aligned}
 </span></p>
 <p>A RNN is considered as part of <strong>deep learning</strong>, as there are many layers of weights between the first input <span class="math inline">\mathbf{x}_0</span> and the output <span class="math inline">\mathbf{h}_t</span>. The only difference with a DNN is that the weights <span class="math inline">W_x</span> and <span class="math inline">W_h</span> are <strong>reused</strong> at each time step.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/RNN-unrolled.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Recurrent neural network unrolled. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Recurrent neural network unrolled. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="bptt-backpropagation-through-time" class="level3 page-columns page-full">
+<section id="bptt-backpropagation-through-time" class="level3">
 <h3 class="anchored" data-anchor-id="bptt-backpropagation-through-time">BPTT: Backpropagation through time</h3>
 <p>The function between the history of inputs and the output at time <span class="math inline">t</span> is differentiable: we can simply apply gradient descent to find the weights! This variant of backpropagation is called <strong>Backpropagation Through Time</strong> (BPTT). Once the loss between <span class="math inline">\mathbf{h}_t</span> and its desired value is computed, one applies the <strong>chain rule</strong> to find out how to modify the weights <span class="math inline">W_x</span> and <span class="math inline">W_h</span> using the history <span class="math inline">(\mathbf{x}_0, \mathbf{x}_1, \ldots, \mathbf{x}_t)</span>.</p>
 <p>Let’s compute the gradient accumulated between <span class="math inline">\mathbf{h}_{t-1}</span> and <span class="math inline">\mathbf{h}_{t}</span>:</p>
@@ -586,20 +586,20 @@ div.csl-indent {
 </ul>
 <p>before computing the gradients iteratively, starting from time <span class="math inline">t</span> and accumulating gradients <strong>backwards</strong> in time until <span class="math inline">t=0</span>. Each step backwards in time adds a bit to the gradient used to update the weights.</p>
 <p>In practice, going back to <span class="math inline">t=0</span> at each time step requires too many computations, which may not be needed. <strong>Truncated BPTT</strong> only updates the gradients up to <span class="math inline">T</span> steps before: the gradients are computed backwards from <span class="math inline">t</span> to <span class="math inline">t-T</span>. The partial derivative in <span class="math inline">t-T-1</span> is considered 0. This limits the <strong>horizon</strong> of BPTT: dependencies longer than <span class="math inline">T</span> will not be learned, so it has to be chosen carefully for the task. <span class="math inline">T</span> becomes yet another hyperparameter of your algorithm…</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/truncated_backprop.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Truncated backpropagation through time. Source: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html" class="uri">https://r2rt.com/styles-of-truncated-backpropagation.html</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Truncated backpropagation through time. Source: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html" class="uri">https://r2rt.com/styles-of-truncated-backpropagation.html</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="vanishing-gradients" class="level3 page-columns page-full">
+<section id="vanishing-gradients" class="level3">
 <h3 class="anchored" data-anchor-id="vanishing-gradients">Vanishing gradients</h3>
 <p>BPTT is able to find <strong>short-term dependencies</strong> between inputs and outputs: perceiving the inputs <span class="math inline">\mathbf{x}_0</span> and <span class="math inline">\mathbf{x}_1</span> allows to respond correctly at <span class="math inline">t = 3</span>.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/RNN-shorttermdependencies.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">RNN can learn short-term dependencies. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">RNN can learn short-term dependencies. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>But it fails to detect <strong>long-term dependencies</strong> because of:</p>
@@ -607,10 +607,10 @@ div.csl-indent {
 <li>the truncated horizon <span class="math inline">T</span> (for computational reasons).</li>
 <li>the <strong>vanishing gradient problem</strong> <span class="citation" data-cites="Hochreiter1991">(<a href="../references.html#ref-Hochreiter1991" role="doc-biblioref">Hochreiter, 1991</a>)</span>.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/RNN-longtermdependencies.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">RNN cannot learn long-term dependencies. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">RNN cannot learn long-term dependencies. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>Let’s look at the gradient w.r.t to the input weights:</p>
@@ -634,7 +634,7 @@ div.csl-indent {
 <p>But there is no solution to the <strong>vanishing gradient problem</strong> for regular RNNs: the gradient fades over time (backwards) and no long-term dependency can be learned. This is the same problem as for feedforward deep networks: a RNN is just a deep network rolled over itself. Its depth (number of layers) corresponds to the maximal number of steps back in time. In order to limit vanishing gradients and learn long-term dependencies, one has to use a more complex structure for the layer. This is the idea behind <strong>long short-term memory</strong> (LSTM) networks.</p>
 </section>
 </section>
-<section id="long-short-term-memory-networks---lstm" class="level2 page-columns page-full">
+<section id="long-short-term-memory-networks---lstm" class="level2">
 <h2 class="anchored" data-anchor-id="long-short-term-memory-networks---lstm">Long short-term memory networks - LSTM</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/jvBOgXSebV0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -651,16 +651,16 @@ Note
 <p><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a></p>
 </div>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-SimpleRNN.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">RNN layer. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">RNN layer. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-chain.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">LSTM layer. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">LSTM layer. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>A <strong>LSTM layer</strong> <span class="citation" data-cites="Hochreiter1997">(<a href="../references.html#ref-Hochreiter1997" role="doc-biblioref">Hochreiter and Schmidhuber, 1997</a>)</span> is a RNN layer with the ability to control what it memorizes. In addition to the input <span class="math inline">\mathbf{x}_t</span> and output <span class="math inline">\mathbf{h}_t</span>, it also has a <strong>state</strong> <span class="math inline">\mathbf{C}_t</span> which is maintained over time. The state is the memory of the layer (sometimes called context). It also contains three multiplicative <strong>gates</strong>:</p>
@@ -679,28 +679,28 @@ Note
 </ul></li>
 </ul>
 <p>The <strong>state</strong> <span class="math inline">\mathbf{C}_t</span> can be seen as an accumulator integrating inputs (and previous outputs) over time. The gates <strong>learn</strong> to open and close through learnable weights.</p>
-<section id="state-conveyor-belt" class="level3 page-columns page-full">
+<section id="state-conveyor-belt" class="level3">
 <h3 class="anchored" data-anchor-id="state-conveyor-belt">State conveyor belt</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-C-line.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">State conveyor belt. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">State conveyor belt. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>By default, the cell state <span class="math inline">\mathbf{C}_t</span> stays the same over time (<em>conveyor belt</em>). It can have the same number of dimensions as the output <span class="math inline">\mathbf{h}_t</span>, but does not have to. Its content can be erased by multiplying it with a vector of 0s, or preserved by multiplying it by a vector of 1s. We can use a <strong>sigmoid</strong> to achieve this:</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-gate.png" class="img-fluid figure-img" style="width:30.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Element-wise multiplication with a vector using using the logistic/sigmoid function. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Element-wise multiplication with a vector using using the logistic/sigmoid function. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="forget-gate" class="level3 page-columns page-full">
+<section id="forget-gate" class="level3">
 <h3 class="anchored" data-anchor-id="forget-gate">Forget gate</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-focus-f.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Forget gate. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Forget gate. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>Forget weights <span class="math inline">W_f</span> and a sigmoid function are used to decide if the state should be preserved or not.</p>
@@ -709,12 +709,12 @@ Note
 </span></p>
 <p><span class="math inline">[\mathbf{h}_{t-1}; \mathbf{x}_t]</span> is simply the concatenation of the two vectors <span class="math inline">\mathbf{h}_{t-1}</span> and <span class="math inline">\mathbf{x}_t</span>. <span class="math inline">\mathbf{f}_t</span> is a vector of values between 0 and 1, one per dimension of the cell state <span class="math inline">\mathbf{C}_t</span>.</p>
 </section>
-<section id="input-gate" class="level3 page-columns page-full">
+<section id="input-gate" class="level3">
 <h3 class="anchored" data-anchor-id="input-gate">Input gate</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-focus-i.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Input gate. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Input gate. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>Similarly, the input gate uses a sigmoid function to decide if the state should be updated or not.</p>
@@ -726,12 +726,12 @@ Note
     \tilde{\mathbf{C}}_t = \text{tanh}(W_C \times [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_c)
 </span></p>
 </section>
-<section id="candidate-state" class="level3 page-columns page-full">
+<section id="candidate-state" class="level3">
 <h3 class="anchored" data-anchor-id="candidate-state">Candidate state</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-focus-C.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Candidate state. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Candidate state. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>The new state <span class="math inline">\mathbf{C}_t</span> is computed as a part of the previous state <span class="math inline">\mathbf{C}_{t-1}</span> (element-wise multiplication with the forget gate <span class="math inline">\mathbf{f}_t</span>) plus a part of the candidate state <span class="math inline">\tilde{\mathbf{C}}_t</span> (element-wise multiplication with the input gate <span class="math inline">\mathbf{i}_t</span>).</p>
@@ -740,12 +740,12 @@ Note
 </span></p>
 <p>Depending on the gates, the new state can be equal to the previous state (gates closed), the candidate state (gates opened) or a mixture of both.</p>
 </section>
-<section id="output-gate" class="level3 page-columns page-full">
+<section id="output-gate" class="level3">
 <h3 class="anchored" data-anchor-id="output-gate">Output gate</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-focus-o.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Output gate. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Output gate. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>The output gate decides which part of the new state will be used for the output.</p>
@@ -757,13 +757,13 @@ Note
     \mathbf{h}_t = \mathbf{o}_t \odot \text{tanh} (\mathbf{C}_t)
 </span></p>
 </section>
-<section id="lstm-layer" class="level3 page-columns page-full">
+<section id="lstm-layer" class="level3">
 <h3 class="anchored" data-anchor-id="lstm-layer">LSTM layer</h3>
 <p>The function between <span class="math inline">\mathbf{x}_t</span> and <span class="math inline">\mathbf{h}_t</span> is quite complicated, with many different weights, but everything is differentiable: BPTT can be applied.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM-cell2.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">LSTM layer. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">LSTM layer. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p><strong>Equations:</strong></p>
@@ -803,12 +803,12 @@ Note
 <p>LSTM are particularly good at learning long-term dependencies, because the gates protect the cell from vanishing gradients. Its problem is how to find out which inputs (e.g.&nbsp;<span class="math inline">\mathbf{x}_0</span> and <span class="math inline">\mathbf{x}_1</span>) should enter or leave the state memory.</p>
 <p>Truncated BPTT is used to train all weights: the weights for the candidate state (as for RNN), and the weights of the three gates. LSTM are also subject to overfitting. Regularization (including dropout) can be used. The weights (also for the gates) can be convolutional. The gates also have a bias, which can be fixed (but hard to find). LSTM layers can be stacked to detect dependencies at different scales (deep LSTM network).</p>
 </section>
-<section id="peephole-connections" class="level3 page-columns page-full">
+<section id="peephole-connections" class="level3">
 <h3 class="anchored" data-anchor-id="peephole-connections">Peephole connections</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-var-peepholes.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Peephole connections. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Peephole connections. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>A popular variant of LSTM adds <strong>peephole connections</strong> <span class="citation" data-cites="Gers2000">(<a href="../references.html#ref-Gers2000" role="doc-biblioref">Gers and Schmidhuber, 2000</a>)</span>, where the three gates have additionally access to the state <span class="math inline">\mathbf{C}_{t-1}</span>.</p>
@@ -821,12 +821,12 @@ Note
 \end{align}</span></p>
 <p>It usually works better, but adds more weights.</p>
 </section>
-<section id="gru-gated-recurrent-unit" class="level3 page-columns page-full">
+<section id="gru-gated-recurrent-unit" class="level3">
 <h3 class="anchored" data-anchor-id="gru-gated-recurrent-unit">GRU: Gated Recurrent Unit</h3>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/LSTM3-var-GRU.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Gated recurrent unit (GRU). Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Gated recurrent unit (GRU). Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs</a>.</figcaption><p></p>
 </figure>
 </div>
 <p>Another variant is called the <strong>Gated Recurrent Unit</strong> (GRU) <span class="citation" data-cites="Chung2014">(<a href="../references.html#ref-Chung2014" role="doc-biblioref">Chung et al., 2014</a>)</span>. It uses directly the output <span class="math inline">\mathbf{h}_t</span> as a state, and the forget and input gates are merged into a single gate <span class="math inline">\mathbf{r}_t</span>.</p>
@@ -841,7 +841,7 @@ Note
 \end{align}</span></p>
 <p>It does not even need biases (mostly useless in LSTMs anyway). Much simpler to train as the LSTM, and almost as powerful.</p>
 </section>
-<section id="bidirectional-lstm" class="level3 page-columns page-full">
+<section id="bidirectional-lstm" class="level3">
 <h3 class="anchored" data-anchor-id="bidirectional-lstm">Bidirectional LSTM</h3>
 <p>A <strong>bidirectional LSTM</strong> learns to predict the output in two directions:</p>
 <ul>
@@ -849,10 +849,10 @@ Note
 <li>The <strong>backforward</strong> line learns using the future context (inputs are reversed).</li>
 </ul>
 <p>The two state vectors are then concatenated at each time step to produce the output. Only possible offline, as the future inputs must be known. Works better than LSTM on many problems, but slower.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/bi_lstm.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Bidirectional LSTM. Source: <a href="http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html" class="uri">http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html</a>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Bidirectional LSTM. Source: <a href="http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html" class="uri">http://www.paddlepaddle.org/doc/demo/sentiment_analysis/sentiment_analysis.html</a>.</figcaption><p></p>
 </figure>
 </div>
 

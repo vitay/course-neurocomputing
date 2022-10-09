@@ -100,7 +100,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -116,7 +116,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -440,7 +440,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -460,45 +460,45 @@ div.csl-indent {
 
 <p><strong>Work in progress.</strong></p>
 <p>Slides: <a href="../slides/8.2-Beyond.html" target="_blank">html</a> <a href="../slides/pdf/8.2-Beyond.pdf" target="_blank">pdf</a></p>
-<section id="towards-biological-deep-learning" class="level2 page-columns page-full">
+<section id="towards-biological-deep-learning" class="level2">
 <h2 class="anchored" data-anchor-id="towards-biological-deep-learning">Towards biological deep learning?</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/MX0H8MLwxeA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="the-credit-assignment-problem" class="level3 page-columns page-full">
+<section id="the-credit-assignment-problem" class="level3">
 <h3 class="anchored" data-anchor-id="the-credit-assignment-problem">The credit assignment problem</h3>
 <p>The <strong>credit assignment problem</strong> is the issue of knowing which part of the brain is responsible when something goes wrong (or well) so that it can learn from it.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/creditassignment1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Credit assignement problem. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Credit assignement problem. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <p>Backpropagation solves the credit assignment problem by transmitting the error gradient <strong>backwards</strong> through the weights (<span class="math inline">\sim</span> synapses).</p>
 <p><span class="math display">\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T</span></p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/creditassignment2.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Backpropagation solves the credit assignement problem by transmitting the error backwards. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Backpropagation solves the credit assignement problem by transmitting the error backwards. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <p>But information only goes in one direction in the brain: from the presynaptic neuron to the postsynaptic one. A synapse does know not the weight of other synapses and cannot transmit anything backwards. <strong>Backpropagation is not biologically plausible</strong> in its current formulation.</p>
 </section>
-<section id="feedback-alignment" class="level3 page-columns page-full">
+<section id="feedback-alignment" class="level3">
 <h3 class="anchored" data-anchor-id="feedback-alignment">Feedback alignment</h3>
 <p>An alternative mechanism consists of backpropagating the error through another set of <strong>feedback weights</strong> (feedback alignment, <span class="citation" data-cites="Lillicrap2016">(<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">Lillicrap et al., 2016</a>)</span>). Feedback connections are ubiquitous in the brain, especially in the neocortex. The feedback weights do not need to learn: they can stay random but still transmit useful gradients. The mechanism only works for small networks on MNIST for now.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/feedbackalignment1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Feedback alignment. Source: <span class="citation" data-cites="Lillicrap2016">(<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">Lillicrap et al., 2016</a>)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Feedback alignment. Source: <span class="citation" data-cites="Lillicrap2016">(<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">Lillicrap et al., 2016</a>)</span>.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="deep-learning-architectures-are-way-too-simple-and-unidirectional" class="level3 page-columns page-full">
+<section id="deep-learning-architectures-are-way-too-simple-and-unidirectional" class="level3">
 <h3 class="anchored" data-anchor-id="deep-learning-architectures-are-way-too-simple-and-unidirectional">Deep learning architectures are way too simple and unidirectional</h3>
 <p>Deep learning architectures are mostly unidirectional, from the input to the output, without feedback connections. The brain is totally differently organized: a big “mess” of interconnected areas processing everything in parallel. The figure on the left is only for vision, and only for the cerebral cortex: the thalamus, basal ganglia, hippocampus, cerebellum, etc, create additional shortcuts. Is the complex structure of the brain just a side effect of evolution, or is it the only possible solution? <strong>Inductive bias</strong>: the choice of the architecture constrains the functions it can perform / learn.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/fellemanvanessen.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Organization of the visual system. Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Organization of the visual system. Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1</figcaption><p></p>
 </figure>
 </div>
 </section>
@@ -517,17 +517,17 @@ div.csl-indent {
 </ul>
 <p>These dynamics are essential to information processing in the brain.</p>
 </section>
-<section id="recurrent-dynamics-and-emergence-of-functions" class="level3 page-columns page-full">
+<section id="recurrent-dynamics-and-emergence-of-functions" class="level3">
 <h3 class="anchored" data-anchor-id="recurrent-dynamics-and-emergence-of-functions">Recurrent dynamics and emergence of functions</h3>
 <p>Recurrent networks of dynamical neurons can exhibit very complex dynamics. Biological neural networks evolve at the <strong>edge of chaos</strong>, i.e.&nbsp;in a highly non-linear regime while still being deterministic. This allows the <strong>emergence</strong> of complex functions: <strong>the whole is more than the sum of its parts</strong>.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/rc-network.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Reservoir computing.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Reservoir computing.</figcaption><p></p>
 </figure>
 </div>
 </section>
-<section id="self-organization" class="level3 page-columns page-full">
+<section id="self-organization" class="level3">
 <h3 class="anchored" data-anchor-id="self-organization">Self-organization</h3>
 <p>There are two complementary approaches to unsupervised learning:</p>
 <ul>
@@ -543,10 +543,10 @@ div.csl-indent {
 </ul>
 <p>A self-organizing system is composed of elementary units (particles, cells, neurons, organs, individuals…) which all perform similar deterministic functions (rule of behavior) on a small part of the available information.</p>
 <p>There is <strong>no central supervisor</strong> or coordinator that knows everything and tells each unit what to do: they have their own rule of behavior and apply it to the information they receive. The units are able to adapt their behavior to the available information: principle of <strong>localized learning</strong>. There is no <strong>explicit loss function</strong> specifying what the system should do: <strong>emergence</strong>.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="../slides/img/gameoflife2.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption margin-caption">Conway’s game of life. Source: <a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Conway’s game of life. Source: <a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></figcaption><p></p>
 </figure>
 </div>
 <p>The rules of Conway’s <strong>Game of Life</strong> (1970) are extremely simple:</p>
