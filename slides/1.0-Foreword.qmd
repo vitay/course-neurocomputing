@@ -8,7 +8,11 @@ date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
 
 ---
 
-# Dr. habil. Julien Vitay - <julien.vitay@informatik.tu-chemnitz.de>
+# Dr. habil. Julien Vitay
+
+<https://julien-vitay.net>
+
+<julien.vitay@informatik.tu-chemnitz.de>
 
 ::: {.columns}
 ::: {.column}
@@ -87,17 +91,26 @@ date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
 
 # Course description
 
-* One lecture and one exercise per week.
+* Registration and forum on OPAL: 
+
+<https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/21637267460>.
+
+* One lecture (Tuesday 17:15) and one exercise per week:
+
+    * Tuesday 13:45
+    * Wednesday 07:30
+    * Friday 09:30
+
+* Register on OPAL in one of the three exercise groups. Exercises can be done online.
 
 * All materials are at:
 
 <https://www.tu-chemnitz.de/informatik/KI/edu/neurocomputing/notes>
 
-* Written (online) exam, 90 minutes, 5 credit points.
+* The videos might be slightly outdated, but still cover most of the important content.
 
-* Registration and forum on OPAL: 
+* Written exam, 90 minutes, 5 credit points.
 
-<https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/21637267460>.
 
 
 # Exercises
