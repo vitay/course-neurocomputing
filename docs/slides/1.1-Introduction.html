@@ -28,6 +28,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="1.1-Introduction_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
@@ -936,22 +1000,42 @@ Come, sir, I will make did behold your worship.</code></pre>
 </div>
 </section>
 
-<section id="caption-generation" class="title-slide slide level1 center">
-<h1>Caption Generation</h1>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/showattendtell.png" style="width:50.0%"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/showattendtell-res.png" style="width:60.0%"></p>
-</figure>
-</div>
-<div class="footer">
-<p>Xu et al.&nbsp;(2015). Show, Attend and Tell: Neural Image Caption Generation with Visual Attention. NIPS.</p>
-</div>
-</section>
+<section id="transformers" class="title-slide slide level1 center">
+<h1>Transformers</h1>
+
+<img data-src="img/bert-transfer-learning.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li>GPT can be fine-tuned (transfer learning) to perform <strong>machine translation</strong>.</li>
+</ul>
+
+<img data-src="img/decoder-only-transformer-translation.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="gpt---generative-pre-trained-transformer-1" class="title-slide slide level1 center">
+<h1>GPT - Generative Pre-trained Transformer</h1>
+<ul>
+<li>GPT can be fine-tuned to summarize Wikipedia articles.</li>
+</ul>
+
+<img data-src="img/wikipedia-summarization.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></p></section>
+
+<section id="try-transformers-at-httpshuggingface.co" class="title-slide slide level1 center">
+<h1>Try transformers at https://huggingface.co/</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">pip</span> install transformers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="img/transformer-neurocomputing.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="github-copilot" class="title-slide slide level1 center">
+<h1>Github copilot</h1>
+<ul>
+<li><p>Github and OpenAI trained a GPT-3-like architecture on the available open source code.</p></li>
+<li><p>Copilot is able to “autocomplete” the code based on a simple comment/docstring.</p></li>
+</ul>
+<p><a href="https://copilot.github.com/" class="uri">https://copilot.github.com/</a></p>
+
+<img data-src="img/githubcopliot.gif" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
 
 <section id="voice-recognition" class="title-slide slide level1 center">
 <h1>Voice recognition</h1>

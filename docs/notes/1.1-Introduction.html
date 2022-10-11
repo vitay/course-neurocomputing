@@ -598,11 +598,18 @@ div.csl-indent {
 </figure>
 </div>
 <p>The main difference with feedforward neural networks is that RNNs can be applied on sequences (of words, but it could also be video frames or any time-dependent signal). At each step, a RNN produces an output not only depending on its current input, but also on its previous output, implementing a form of memory of past events.</p>
-<p>More recent advances furthermore introduce the concept of <strong>attention</strong> for processing sequences. This is now at the heart of all translation systems or in BERT, the language understanding module behind Google search. The neural architectures may seem complex, but we will break them down in this course.</p>
+<p>More recent advances introduced the concept of <strong>attention</strong> for processing sequences. This is now at the heart of all translation systems, including the language understanding modules behind Google search/translate and DeepL. The neural architectures may seem complex, but we will break them down in this course.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/google-nmt-lstm.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Google Neural Machine Translation. Source: <a href="https://ai.google/research/pubs/pub45610" class="uri">https://ai.google/research/pubs/pub45610</a></figcaption><p></p>
+</figure>
+</div>
+<p>Transformer architectures have revolutionized NLP, allowing to train a massive neural network in a <strong>self-supervised</strong> manner from raw data, i.e.&nbsp;without annotations, and then fine-tune it on particular tasks such as language translation, text summarization, code generation…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/bert-transfer-learning.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
 </figure>
 </div>
 </section>

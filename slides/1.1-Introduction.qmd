@@ -575,16 +575,46 @@ Come, sir, I will make did behold your worship.
 <https://ai.google/research/pubs/pub45610>
 :::
 
-# Caption Generation
+# Transformers
 
-![](img/showattendtell.png){width=50%}
+![Source: <https://jalammar.github.io/illustrated-bert/>](img/bert-transfer-learning.png)
 
-![](img/showattendtell-res.png){width=60%}
 
-::: footer 
-Xu et al. (2015). Show, Attend and Tell: Neural Image Caption Generation with Visual Attention. NIPS.
-:::
+# GPT - Generative Pre-trained Transformer
 
+* GPT can be fine-tuned (transfer learning) to perform **machine translation**.
+
+![Source: <https://jalammar.github.io/illustrated-gpt2/>](img/decoder-only-transformer-translation.png)
+
+
+
+
+# GPT - Generative Pre-trained Transformer
+
+* GPT can be fine-tuned to summarize Wikipedia articles.
+
+![Source: <https://jalammar.github.io/illustrated-gpt2/>](img/wikipedia-summarization.png)
+
+
+# Try transformers at https://huggingface.co/
+
+```bash
+pip install transformers
+```
+
+![](img/transformer-neurocomputing.png)
+
+
+# Github copilot
+
+* Github and OpenAI trained a GPT-3-like architecture on the available open source code.
+
+* Copilot is able to "autocomplete" the code based on a simple comment/docstring.
+
+<https://copilot.github.com/>
+
+
+![](img/githubcopliot.gif){width=80%}
 
 # Voice recognition
 

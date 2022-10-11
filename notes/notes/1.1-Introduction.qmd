@@ -143,9 +143,14 @@ The key neural network involved in this paradigmatic change is the **recurrent n
 
 The main difference with feedforward neural networks is that RNNs can be applied on sequences (of words, but it could also be video frames or any time-dependent signal). At each step, a RNN produces an output not only depending on its current input, but also on its previous output, implementing a form of memory of past events. 
 
-More recent advances furthermore introduce the concept of **attention** for processing sequences. This is now at the heart of all translation systems or in BERT, the language understanding module behind Google search. The neural architectures may seem complex, but we will break them down in this course.
+More recent advances introduced the concept of **attention** for processing sequences. This is now at the heart of all translation systems, including the language understanding modules behind Google search/translate and DeepL. The neural architectures may seem complex, but we will break them down in this course.
 
 ![Google Neural Machine Translation. Source: <https://ai.google/research/pubs/pub45610>](../slides/img/google-nmt-lstm.png){width=100%}
+
+Transformer architectures have revolutionized NLP, allowing to train a massive neural network in a **self-supervised** manner from raw data, i.e. without annotations, and then fine-tune it on particular tasks such as language translation, text summarization, code generation...
+
+![Source: <https://jalammar.github.io/illustrated-bert/>](../slides/img/bert-transfer-learning.png)
+
 
 ### Unsupervised learning
 

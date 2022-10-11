@@ -75,9 +75,10 @@ date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
 
     * Master Neurorobotik.
 
+    * Master Data Science.
+
     * Master Informatik (Multi-Agent systems) and angewandte Informatik (Themenschwerpunkte Informatik I/II).
 
-    * Master Data Science.
 
 * Other ML-related courses at the University:
 
@@ -101,7 +102,7 @@ date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
     * Wednesday 07:30
     * Friday 09:30
 
-* Register on OPAL in one of the three exercise groups. Exercises can be done online.
+* Register on OPAL in one of the three exercise groups. Exercises can also be done online.
 
 * All materials are at:
 
