@@ -7,7 +7,7 @@ In the B202 (FRIZ), conda is already installed. All you need to do is to once ty
 conda init tcsh
 conda create --name neurocomputing python=3.9
 conda activate neurocomputing
-conda install numpy matplotlib jupyterlab scikit-learn
+conda install -c conda-forge numpy matplotlib jupyterlab scikit-learn
 pip install tensorflow
 ```
 
