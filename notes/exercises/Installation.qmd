@@ -1,5 +1,26 @@
 # Python installation
 
+::: {.callout-note}
+In the B202 (FRIZ), conda is already installed. All you need to do is to once type these commands in a terminal:
+
+```bash
+conda init tcsh
+conda create --name neurocomputing python=3.9
+conda activate neurocomputing
+conda install numpy matplotlib jupyterlab scikit-learn
+pip install tensorflow
+```
+
+The last line can wait until the corresponding exercise.
+
+Before every session, or when you open a new terminal, you will need to type:
+
+```bash
+conda activate neurocomputing
+```
+
+:::
+
 Here are the main Python dependencies necessary for the exercises:
 
 * python >= 3.8
