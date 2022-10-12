@@ -1,17 +1,21 @@
 # Python installation
 
 ::: {.callout-note}
-In the B202 (FRIZ), conda is already installed. All you need to do is to once type these commands in a terminal:
+In the B202 (FRIZ), conda is already installed. You first need to initialize it by typing this command in a terminal:
 
 ```bash
 conda init tcsh
+```
+
+Close the terminal, open a new one, and type:
+
+```bash
 conda create --name neurocomputing python=3.9
 conda activate neurocomputing
 conda install -c conda-forge numpy matplotlib jupyterlab scikit-learn
-pip install tensorflow
 ```
 
-The last line can wait until the corresponding exercise.
+This can take a while, be patient.
 
 Before every session, or when you open a new terminal, you will need to type:
 

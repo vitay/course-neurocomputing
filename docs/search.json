@@ -816,7 +816,7 @@
     "href": "exercises/Installation.html",
     "title": "Python installation",
     "section": "",
-    "text": "Note\n\n\n\nIn the B202 (FRIZ), conda is already installed. All you need to do is to once type these commands in a terminal:\nconda init tcsh\nconda create --name neurocomputing python=3.9\nconda activate neurocomputing\nconda install -c conda-forge numpy matplotlib jupyterlab scikit-learn\npip install tensorflow\nThe last line can wait until the corresponding exercise.\nBefore every session, or when you open a new terminal, you will need to type:\nconda activate neurocomputing\nHere are the main Python dependencies necessary for the exercises:\nIf you are using Linux, you can probably install all the dependencies from your package manager. For the others, use either Anaconda or Colab."
+    "text": "Note\n\n\n\nIn the B202 (FRIZ), conda is already installed. You first need to initialize it by typing this command in a terminal:\nconda init tcsh\nClose the terminal, open a new one, and type:\nconda create --name neurocomputing python=3.9\nconda activate neurocomputing\nconda install -c conda-forge numpy matplotlib jupyterlab scikit-learn\nThis can take a while, be patient.\nBefore every session, or when you open a new terminal, you will need to type:\nconda activate neurocomputing\nHere are the main Python dependencies necessary for the exercises:\nIf you are using Linux, you can probably install all the dependencies from your package manager. For the others, use either Anaconda or Colab."
   },
   {
     "objectID": "exercises/Installation.html#anaconda",
