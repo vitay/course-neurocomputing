@@ -546,7 +546,7 @@ $$
 
 ![<https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif>](img/hyperplane.gif)
 
-* The net activation is a line in 2D, a plane in 3D, etc.
+* The net activation defines a line in 2D, a plane in 3D, etc.
 
 * Generally, the net activation describes an **hyperplane** in the input space with $d$ dimensions $(x_1, x_2, \ldots, x_d)$. 
 

@@ -371,7 +371,7 @@
 <li><p>ML searches for the value of <strong>free parameters</strong> which optimize the objective function on the data set.</p></li>
 <li><p>The simplest optimization method is the <strong>gradient descent</strong> (or ascent) method.</p></li>
 </ul>
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/localminimum.png"></p>
@@ -393,19 +393,36 @@
     x^* = \max_x f(x) \Leftrightarrow f'(x^*) = 0 \; \text{and} \; f''(x^*) &lt; 0
 </span></p>
 <ul>
-<li><p>The sign of the second order derivative tells us whether it is a maximum or minimum.</p></li>
+<li>The sign of the second order derivative tells us whether it is a maximum or minimum.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
 <li><p>There can be multiple minima or maxima (or none) depending on the function.</p>
 <ul>
 <li><p>The “best” minimum (with the lowest value among all minima) is called the <strong>global minimum</strong>.</p></li>
 <li><p>The others are called <strong>local minima</strong>.</p></li>
 </ul></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/localminimum.png"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 
 <section id="multivariate-optimization" class="title-slide slide level1 center">
 <h1>Multivariate optimization</h1>
 <ul>
-<li>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>. A point <span class="math inline">(x^*, y^*)</span> is an extremum of <span class="math inline">f</span> if all partial derivatives are zero:</li>
+<li>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>.</li>
+</ul>
+<div class="columns">
+<div class="column">
+<ul>
+<li>A point <span class="math inline">(x^*, y^*)</span> is an extremum of <span class="math inline">f</span> if all partial derivatives are zero at the same time:</li>
 </ul>
 <p><span class="math display">
     \begin{cases}
@@ -414,17 +431,20 @@
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
 </span></p>
+</div><div class="column">
 <ul>
 <li>The vector of partial derivatives is called the <strong>gradient of the function</strong>:</li>
 </ul>
 <p><span class="math display">
     \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} \\ \\ \dfrac{\partial f(x, y)}{\partial y} \end{bmatrix}
 </span></p>
+</div>
+</div>
 <ul>
-<li>Finding the extremum of <span class="math inline">f</span> is searching for the values of <span class="math inline">(x, y)</span> where the gradient of the function is zero:</li>
+<li>Finding the extremum of <span class="math inline">f</span> is searching for the values of <span class="math inline">(x, y)</span> where the gradient of the function is the zero vector:</li>
 </ul>
 <p><span class="math display">
-    \nabla_{x, y} \, f(x^*, y^*) = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+    \nabla_{x, y} \, f(x^*, y^*) =  \begin{bmatrix} 0 \\ 0 \end{bmatrix}
 </span></p>
 </section>
 

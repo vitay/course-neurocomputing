@@ -155,7 +155,6 @@ You can then install all the required packages to their latest versions, alterna
 ```bash
 conda install numpy matplotlib jupyterlab scikit-learn
 pip install tensorflow
-pip install gym[all]
 ```
 ::: {.callout-hint}
 If you installed the regular Anaconda and not miniforge, we strongly advise to force using the conda forge channel:

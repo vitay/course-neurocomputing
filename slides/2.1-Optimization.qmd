@@ -32,7 +32,7 @@ resources: pdf/2.1-Optimization.pdf
 * The simplest optimization method is the **gradient descent** (or ascent) method.
 
 :::
-::: {.column width=40%}
+::: {.column width=50%}
 
 ![](img/localminimum.png)
 
@@ -54,18 +54,33 @@ $$
 
 * The sign of the second order derivative tells us whether it is a maximum or minimum.
 
+::: {.columns}
+::: {.column width=50%}
+
+
 * There can be multiple minima or maxima (or none) depending on the function.
 
     * The "best" minimum (with the lowest value among all minima) is called the **global minimum**.
 
     * The others are called **local minima**.
 
+:::
+::: {.column width=50%}
+
+![](img/localminimum.png)
+
+:::
+:::
+
 # Multivariate optimization
+
+* A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. 
 
 ::: {.columns}
 ::: {.column}
 
-* A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. A point $(x^*, y^*)$ is an extremum of $f$ if all partial derivatives are zero:
+
+* A point $(x^*, y^*)$ is an extremum of $f$ if all partial derivatives are zero at the same time:
 
 $$
     \begin{cases}
@@ -87,10 +102,10 @@ $$
 :::
 :::
 
-* Finding the extremum of $f$ is searching for the values of $(x, y)$ where the gradient of the function is zero:
+* Finding the extremum of $f$ is searching for the values of $(x, y)$ where the gradient of the function is the zero vector:
 
 $$
-    \nabla_{x, y} \, f(x^*, y^*) = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+    \nabla_{x, y} \, f(x^*, y^*) =  \begin{bmatrix} 0 \\ 0 \end{bmatrix}
 $$
 
 
