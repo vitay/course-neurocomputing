@@ -62,6 +62,9 @@ $$
 
 # Multivariate optimization
 
+::: {.columns}
+::: {.column}
+
 * A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. A point $(x^*, y^*)$ is an extremum of $f$ if all partial derivatives are zero:
 
 $$
@@ -72,11 +75,17 @@ $$
     \end{cases}
 $$
 
+::: 
+::: {.column}
+
 * The vector of partial derivatives is called the **gradient of the function**:
 
 $$
     \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} \\ \\ \dfrac{\partial f(x, y)}{\partial y} \end{bmatrix}
 $$
+
+:::
+:::
 
 * Finding the extremum of $f$ is searching for the values of $(x, y)$ where the gradient of the function is zero:
 
