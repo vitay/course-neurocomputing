@@ -405,12 +405,12 @@
 <section id="multivariate-optimization" class="title-slide slide level1 center">
 <h1>Multivariate optimization</h1>
 <ul>
-<li><p>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>.</p></li>
-<li><p>A point <span class="math inline">(x^*, y^*)</span> is an extremum of <span class="math inline">f</span> if all partial derivatives are zero:</p></li>
+<li>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>. A point <span class="math inline">(x^*, y^*)</span> is an extremum of <span class="math inline">f</span> if all partial derivatives are zero:</li>
 </ul>
 <p><span class="math display">
     \begin{cases}
         \dfrac{\partial f(x^*, y^*)}{\partial x} = 0 \\
+        \\
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
 </span></p>
@@ -418,7 +418,7 @@
 <li>The vector of partial derivatives is called the <strong>gradient of the function</strong>:</li>
 </ul>
 <p><span class="math display">
-    \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} \\ \frac{\partial f(x, y)}{\partial y} \end{bmatrix}
+    \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} \\ \\ \dfrac{\partial f(x, y)}{\partial y} \end{bmatrix}
 </span></p>
 <ul>
 <li>Finding the extremum of <span class="math inline">f</span> is searching for the values of <span class="math inline">(x, y)</span> where the gradient of the function is zero:</li>
@@ -551,7 +551,7 @@
     h \, f'(x) &lt; 0
 </span></p>
 <ul>
-<li><p>The <strong>change</strong> in the value of <span class="math inline">x</span> must have the opposite sign of <span class="math inline">f'(x)</span>.</p>
+<li><p>The <strong>change</strong> <span class="math inline">h</span> in the value of <span class="math inline">x</span> must have the opposite sign of <span class="math inline">f'(x)</span>.</p>
 <ul>
 <li><p>If the function is increasing in <span class="math inline">x</span>, the minimum is smaller than <span class="math inline">x</span>.</p></li>
 <li><p>If the function is decreasing in <span class="math inline">x</span>, the minimum is bigger than <span class="math inline">x</span>.</p></li>
@@ -568,7 +568,7 @@
 </ul>
 
 <img data-src="img/gradient.png" style="width:45.0%" class="r-stretch quarto-figure-center"><ul>
-<li><p>It creates a series of estimates <span class="math inline">[x_0, x_1, x_2, \ldots]</span> that converge to a local minimum of <span class="math inline">f</span>.</p></li>
+<li><p>It creates a series of estimates <span class="math inline">[x_0, x_1, x_2, \ldots]</span> that converges to a local minimum of <span class="math inline">f</span>.</p></li>
 <li><p>Each element of the series is calculated based on the previous element and the derivative of the function in that element:</p></li>
 </ul>
 <p><span class="math display">
@@ -617,6 +617,8 @@
 
 <section id="multivariate-gradient-descent" class="title-slide slide level1 center">
 <h1>Multivariate gradient descent</h1>
+<div class="columns">
+<div class="column">
 <ul>
 <li>Gradient descent can be applied to multivariate functions:</li>
 </ul>
@@ -633,20 +635,22 @@
 </span> <span class="math display">
     \Delta z = z_{n+1} - z_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial z}
 </span></p>
-</section>
-
-<section id="multivariate-gradient-descent-1" class="title-slide slide level1 center">
-<h1>Multivariate Gradient descent</h1>
+</div><div class="column">
 <ul>
 <li>We can also use the vector notation to use the <strong>gradient operator</strong>:</li>
 </ul>
 <p><span class="math display">
-    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix} \frac{\partial f(x, y, z)}{\partial x} \\ \frac{\partial f(x, y, z)}{\partial y} \\ \frac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
-    \qquad \rightarrow \qquad \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} \, f(\mathbf{x}_n)
+    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix} \dfrac{\partial f(x, y, z)}{\partial x} \\ \\ \dfrac{\partial f(x, y, z)}{\partial y} \\ \\ \dfrac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
 </span></p>
+<p>which gives:</p>
+<p><span class="math display">
+    \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} \, f(\mathbf{x}_n)
+</span></p>
+</div>
+</div>
 </section>
 
-<section id="multivariate-gradient-descent-2" class="title-slide slide level1 center">
+<section id="multivariate-gradient-descent-1" class="title-slide slide level1 center">
 <h1>Multivariate gradient descent</h1>
 
 <img data-src="img/gradient-descent-animation-multivariate.gif" class="r-stretch quarto-figure-center"></section>
@@ -730,11 +734,11 @@
 <li>We just need to compute its gradient:</li>
 </ul>
 <p><span class="math display">
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 </span></p>
 <p>and apply gradient descent iteratively:</p>
 <p><span class="math display">
-    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 </span></p>
 </section>
 
@@ -810,7 +814,7 @@
 <li>Its gradient only depend on the sign of <span class="math inline">x</span> and <span class="math inline">y</span>:</li>
 </ul>
 <p><span class="math display">
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \frac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \\ \dfrac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
 </span></p>
 <ul>
 <li>It tends to lead to <strong>sparser</strong> value of <span class="math inline">(x, y)</span>, i.e.&nbsp;either <span class="math inline">x</span> or <span class="math inline">y</span> will be 0.</li>

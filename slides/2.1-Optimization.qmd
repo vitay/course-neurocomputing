@@ -62,13 +62,12 @@ $$
 
 # Multivariate optimization
 
-* A multivariate function is a function of more than one variable, e.g.  $f(x, y)$.
-
-* A point $(x^*, y^*)$ is an extremum of $f$ if all partial derivatives are zero:
+* A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. A point $(x^*, y^*)$ is an extremum of $f$ if all partial derivatives are zero:
 
 $$
     \begin{cases}
         \dfrac{\partial f(x^*, y^*)}{\partial x} = 0 \\
+        \\
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
 $$
@@ -76,7 +75,7 @@ $$
 * The vector of partial derivatives is called the **gradient of the function**:
 
 $$
-    \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} \\ \frac{\partial f(x, y)}{\partial y} \end{bmatrix}
+    \nabla_{x, y} \, f(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} \\ \\ \dfrac{\partial f(x, y)}{\partial y} \end{bmatrix}
 $$
 
 * Finding the extremum of $f$ is searching for the values of $(x, y)$ where the gradient of the function is zero:
@@ -208,7 +207,7 @@ $$
 $$
 
 
-* The **change** in the value of $x$ must have the opposite sign of $f'(x)$.
+* The **change** $h$ in the value of $x$ must have the opposite sign of $f'(x)$.
 
     * If the function is increasing in $x$, the minimum is smaller than $x$.
 
@@ -226,7 +225,7 @@ $$
 
 ![](img/gradient.png){width=45%}
 
-* It creates a series of estimates $[x_0, x_1, x_2, \ldots]$ that converge to a local minimum of $f$.
+* It creates a series of estimates $[x_0, x_1, x_2, \ldots]$ that converges to a local minimum of $f$.
 
 * Each element of the series is calculated based on the previous element and the derivative of the function in that element:
 
@@ -265,6 +264,9 @@ $$
 
 # Multivariate gradient descent
 
+::: {.columns}
+::: {.column}
+
 * Gradient descent can be applied to multivariate functions:
 
 $$
@@ -283,14 +285,23 @@ $$
     \Delta z = z_{n+1} - z_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial z}
 $$
 
-# Multivariate Gradient descent
+:::
+::: {.column}
 
 * We can also use the vector notation to use the **gradient operator**:
 
 $$
-    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix} \frac{\partial f(x, y, z)}{\partial x} \\ \frac{\partial f(x, y, z)}{\partial y} \\ \frac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
-    \qquad \rightarrow \qquad \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} \, f(\mathbf{x}_n)
+    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} \, f(\mathbf{x}) = \begin{bmatrix} \dfrac{\partial f(x, y, z)}{\partial x} \\ \\ \dfrac{\partial f(x, y, z)}{\partial y} \\ \\ \dfrac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
 $$
+
+which gives:
+
+$$
+    \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} \, f(\mathbf{x}_n)
+$$
+
+:::
+:::
 
 # Multivariate gradient descent
 
@@ -373,13 +384,13 @@ $$
 * We just need to compute its gradient:
 
 $$
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 $$
 
 and apply gradient descent iteratively:
 
 $$
-    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 $$
 
 # L2 - Regularization
@@ -450,7 +461,7 @@ $$
 * Its gradient only depend on the sign of $x$ and $y$:
 
 $$
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \frac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \\ \dfrac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
 $$
 
 * It tends to lead to **sparser** value of $(x, y)$, i.e. either $x$ or $y$ will be 0.

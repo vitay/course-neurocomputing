@@ -1,0 +1,15 @@
+---
+title: Neurocomputing
+subtitle: Contrastive learning
+
+author: Julien Vitay
+institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
+date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
+
+resources: pdf/7.2-ContrastiveLearning.pdf
+---
+
+
+# References
+
+<https://lilianweng.github.io/posts/2021-05-31-contrastive>

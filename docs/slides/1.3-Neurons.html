@@ -512,27 +512,28 @@
 </ul>
 </div><div class="column" style="width:60%;">
 <p><span class="math display">
-\begin{aligned}
-    a_n &amp;= 0.01 \, (v + 60) / (1.0 - \exp(-0.1\, (v + 60) ) ) \\
-    a_m &amp;= 0.1 \, (v + 45) / (1.0 - \exp (- 0.1 \, ( v + 45 ))) \\
-    a_h &amp;= 0.07 \, \exp(- 0.05 \, ( v + 70 )) \\
-    b_n &amp;= 0.125 \, \exp (- 0.0125 \, (v + 70)) \\
-    b_m &amp;= 4 \,  \exp (- (v + 70) / 80) \\
-    b_h &amp;= 1/(1 + \exp (- 0.1 \, ( v + 40 )) ) \\
-    &amp; \\
-    \frac{dn}{dt} &amp;= a_n \, (1 - n) - b_n \, n  \\
-    \frac{dm}{dt} &amp;= a_m \, (1 - m) - b_m \, m  \\
-    \frac{dh}{dt} &amp;= a_h \, (1 - h) - b_h \, h  \\
-\end{aligned}
+\begin{cases}
+    a_n = 0.01 \, (v + 60) / (1.0 - \exp(-0.1\, (v + 60) ) ) \\
+    a_m = 0.1 \, (v + 45) / (1.0 - \exp (- 0.1 \, ( v + 45 ))) \\
+    a_h = 0.07 \, \exp(- 0.05 \, ( v + 70 )) \\
+    b_n = 0.125 \, \exp (- 0.0125 \, (v + 70)) \\
+    b_m = 4 \,  \exp (- (v + 70) / 80) \\
+    b_h = 1/(1 + \exp (- 0.1 \, ( v + 40 )) ) \\
+\end{cases}
+</span> <span class="math display">
+\begin{cases}
+    \dfrac{dn}{dt} = a_n \, (1 - n) - b_n \, n  \\
+    \\
+    \dfrac{dm}{dt} = a_m \, (1 - m) - b_m \, m  \\
+    \\
+    \dfrac{dh}{dt} = a_h \, (1 - h) - b_h \, h  \\
+\end{cases}
 </span></p>
+</div>
+</div>
 <p><span class="math display">
-\begin{aligned}
-    C \, \frac{dv}{dt} = g_L \, (V_L - v) &amp;+ g_K \, n^4 \, (V_K - v) \\
-        &amp; + g_\text{Na} \, m^3 \, h \, (V_\text{Na} - v) + I \\
-\end{aligned}
+    C \, \dfrac{dv}{dt} = g_L \, (V_L - v) + g_K \, n^4 \, (V_K - v) + g_\text{Na} \, m^3 \, h \, (V_\text{Na} - v) + I
 </span></p>
-</div>
-</div>
 </section>
 
 <section id="the-hodgkin-huxley-neuron-hodgkin-and-huxley-1952-2" class="title-slide slide level1 center">
