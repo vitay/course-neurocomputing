@@ -481,7 +481,7 @@
 <h1>Linear regression</h1>
 <ul>
 <li><p>The goal of the linear regression (or least mean squares - LMS) is to minimize the <strong>mean square error</strong> (mse) between the targets and the predictions.</p></li>
-<li><p>It is defined as:</p></li>
+<li><p>It is defined as the mathematical expectation of the quadratic error over the training data:</p></li>
 </ul>
 <p><span class="math display">
     \mathcal{L}(w, b) =  \mathbb{E}_{x_i, t_i \in \mathcal{D}} [ (t_i - y_i )^2 ]
@@ -492,8 +492,7 @@
 <section id="linear-regression-4" class="title-slide slide level1 center">
 <h1>Linear regression</h1>
 <ul>
-<li><p>The loss function is defined as the mathematical expectation of the quadratic error over the training set.</p></li>
-<li><p>As the training set is finite and the samples i.i.d, we can simply replace the expectation by an average:</p></li>
+<li>As the training set is finite and the samples i.i.d (independent and identically distributed), we can simply replace the expectation by a sampling average:</li>
 </ul>
 <p><span class="math display">
     \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
@@ -504,7 +503,7 @@
 <section id="linear-regression-5" class="title-slide slide level1 center">
 <h1>Linear regression</h1>
 <ul>
-<li><p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math inline">y_i = f_{w, b}(x_i)</span> is equal to the <strong>true value</strong> <span class="math inline">t_i</span> for all training examples.</p></li>
+<li><p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math inline">y_i = f_{w, b}(x_i)</span> is equal to the <strong>ground truth</strong> <span class="math inline">t_i</span> for all training examples.</p></li>
 <li><p>In other words, we want to minimize the <strong>residual error</strong> of the model on the data.</p></li>
 <li><p>It is not always possible to obtain the global minimum (0) but the closer, the better.</p></li>
 </ul>
@@ -1075,10 +1074,7 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
 <li>Let’s prove it element per element:</li>
 </ul>
 <p><span class="math display">
-    \mathbf{y} = W \times \mathbf{x} + \mathbf{b}
-</span></p>
-<p><span class="math display">
-    \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
+    \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = W \times \mathbf{x} + \mathbf{b} = \begin{bmatrix} w_1 &amp; w_2 \\ w_3 &amp; w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
 </span></p>
 <p><span class="math display">
 \mathcal{l}(W, \mathbf{b}) = (\mathbf{t} - \mathbf{y})^T \times (\mathbf{t} - \mathbf{y}) = \begin{bmatrix} t_1 - y_1 &amp; t_2 - y_2 \\\end{bmatrix} \times \begin{bmatrix} t_1 - y_1 \\ t_2 - y_2 \\\end{bmatrix} = (t_1 - y_1)^2 + (t_2 - y_2)^2
@@ -1087,12 +1083,17 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
 <li>The Jacobian w.r.t <span class="math inline">W</span> can be explicitly formed using partial derivatives:</li>
 </ul>
 <p><span class="math display">
-\nabla_W \, \mathcal{l}(W, \mathbf{b}) = \begin{bmatrix}
-\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
-\end{bmatrix}
-= \begin{bmatrix}
--2 \, (t_1 - y_1) \, x_1 &amp; -2 \, (t_1 - y_1) \, x_2 \\ -2 \, (t_2 - y_2) \, x_1 &amp; -2 \, (t_2 - y_2) \, x_2 \\
-\end{bmatrix}
+\nabla_W \, \mathcal{l}(W, \mathbf{b}) =
+    \begin{bmatrix}
+        \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\
+        \\
+        \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
+    \end{bmatrix}
+    = \begin{bmatrix}
+        -2 \, (t_1 - y_1) \, x_1 &amp; -2 \, (t_1 - y_1) \, x_2 \\
+        \\
+        -2 \, (t_2 - y_2) \, x_1 &amp; -2 \, (t_2 - y_2) \, x_2 \\
+    \end{bmatrix}
 </span></p>
 <ul>
 <li>We can rearrange this matrix as an outer product:</li>
@@ -1111,6 +1112,23 @@ x_1 &amp; x_2 \\
 <h1>Multiple linear regression</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
+<ul>
+<li>Batch version (<strong>least mean squares</strong>):</li>
+</ul>
+<p><span class="math display">\begin{cases}
+    \Delta W = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
+    \\
+    \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{cases}</span></p>
+<ul>
+<li>Online version (<strong>delta learning rule</strong>):</li>
+</ul>
+<p><span class="math display">\begin{cases}
+    \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
+    \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{cases}</span></p>
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/linearperceptron.svg" style="width:50.0%"></p>
@@ -1132,23 +1150,6 @@ x_1 &amp; x_2 \\
     \Delta b_2 = \eta \, (t_2 - y_2) \\
 \end{cases}
 </span></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Batch version:</li>
-</ul>
-<p><span class="math display">\begin{cases}
-    \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
-    \\
-    \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}</span></p>
-<ul>
-<li>Online version (<strong>delta learning rule</strong>):</li>
-</ul>
-<p><span class="math display">\begin{cases}
-    \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
-    \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}</span></p>
 </div>
 </div>
 <ul>
@@ -1260,7 +1261,7 @@ x_1 &amp; x_2 \\
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/linearperceptron.svg" style="width:70.0%"></p>
+<p><img data-src="img/linearperceptron.svg" style="width:90.0%"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -1305,7 +1306,7 @@ x_1 &amp; x_2 \\
 
 <img data-src="img/polynomialregression.png" style="width:50.0%" class="r-stretch quarto-figure-center"><ul>
 <li><p>The functions underlying real data are rarely linear plus some noise around the ideal value.</p></li>
-<li><p>In the figure, the input/output function is better modeled by a second-order polynomial:</p></li>
+<li><p>In the figure, the input/output function would be better modeled by a second-order polynomial (or higher):</p></li>
 </ul>
 <p><span class="math display">y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 +b</span></p>
 </section>
@@ -1327,8 +1328,13 @@ x_1 &amp; x_2 \\
 <ul>
 <li>We can simply apply multiple linear regression (MLR) to find <span class="math inline">\mathbf{w}</span> and b:</li>
 </ul>
-<p><span class="math display">\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}</span></p>
-<p><span class="math display">\Delta b =  \eta \, (t - y)</span></p>
+<p><span class="math display">
+\begin{cases}
+\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x} \\
+\\
+\Delta b =  \eta \, (t - y) \\
+\end{cases}
+</span></p>
 </section>
 
 <section id="polynomial-regression-3" class="title-slide slide level1 center">
@@ -1338,14 +1344,19 @@ x_1 &amp; x_2 \\
 </ul>
 <p><span class="math display">y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 + \ldots + w_p \, x^p + b</span></p>
 <ul>
-<li>We create a vector of powers of <span class="math inline">x</span>:</li>
+<li>We create a vector of powers of <span class="math inline">x</span> (called <strong>polynomial features</strong>):</li>
 </ul>
 <p><span class="math display">\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix} \qquad \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \\ \ldots \\ w_p \end{bmatrix}</span></p>
 <ul>
 <li>And apply multiple linear regression (MLR) to find <span class="math inline">\mathbf{w}</span> and b:</li>
 </ul>
-<p><span class="math display">\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}</span></p>
-<p><span class="math display">\Delta b =  \eta \, (t - y)</span></p>
+<p><span class="math display">
+\begin{cases}
+\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x} \\
+\\
+\Delta b =  \eta \, (t - y) \\
+\end{cases}
+</span></p>
 <ul>
 <li><p>Non-linear problem solved! The only unknown is which order for the polynomial matches best the data.</p></li>
 <li><p>One can perform regression with any kind of parameterized function using gradient descent.</p></li>
@@ -1384,7 +1395,7 @@ x_1 &amp; x_2 \\
     \epsilon_\mathcal{D} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2
 </span></p>
 <ul>
-<li>If you multiply both the data <span class="math inline">t</span> and the prediction <span class="math inline">y</span> by 10, the residual error will be 100 times higher, without any change to the model.</li>
+<li>If you multiply both the data <span class="math inline">t</span> and the prediction <span class="math inline">y</span> by 10, the residual error will be 100 times higher, without any change to the quality of the model.</li>
 </ul>
 
 <img data-src="img/regression-animation-mse-dual.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
@@ -1540,7 +1551,11 @@ x_1 &amp; x_2 \\
 </div>
 </div>
 <ul>
-<li>Disadvantage: 20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.</li>
+<li><p>Disadvantages:</p>
+<ul>
+<li><p>20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.</p></li>
+<li><p>The test set must be representative of the difficulty of the training set (same distribution).</p></li>
+</ul></li>
 </ul>
 </section>
 
@@ -1642,63 +1657,72 @@ x_1 &amp; x_2 \\
 <li><strong>The more free parameters, the more complex the model is, the more likely it will overfit.</strong></li>
 </ul></li>
 </ul>
-</section>
+<!--
+# Bias - variance trade-off
 
-<section id="bias---variance-trade-off" class="title-slide slide level1 center">
-<h1>Bias - variance trade-off</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/biasvariance3.png"></p>
-</figure>
-</div>
-<div class="footer">
-<p><a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></p>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><p>Under-/Over-fitting relates to the statistical concept of <strong>bias-variance trade-off</strong>.</p></li>
-<li><p>The <strong>bias</strong> is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model).</p>
-<ul>
-<li>A model with high bias is underfitting.</li>
-</ul></li>
-<li><p>The <strong>variance</strong> is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples).</p>
-<ul>
-<li>A model with high variance is overfitting.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</section>
+::: {.columns}
+::: {.column width=50%}
 
-<section id="bias---variance-trade-off-1" class="title-slide slide level1 center">
-<h1>Bias - variance trade-off</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/biasvariance2.png"></p>
-</figure>
-</div>
-<div class="footer">
-<p><a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></p>
-</div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><p>The bias decreases when the model becomes complex.</p></li>
-<li><p>The variance increases when the model becomes complex.</p></li>
-<li><p>The <strong>generalization error</strong> is a combination of the bias and variance:</p></li>
-</ul>
-<p><span class="math display">
+
+![](img/biasvariance3.png)
+
+::: footer
+<http://scott.fortmann-roe.com/docs/BiasVariance.html>
+:::
+
+:::
+::: {.column width=50%}
+
+
+* Under-/Over-fitting relates to the statistical concept of **bias-variance trade-off**.
+
+* The **bias** is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model).
+
+    * A model with high bias is underfitting.
+
+* The **variance** is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples).
+
+    * A model with high variance is overfitting.
+
+:::
+:::
+
+
+# Bias - variance trade-off
+
+::: {.columns}
+::: {.column width=50%}
+
+
+![](img/biasvariance2.png)
+
+::: footer
+<http://scott.fortmann-roe.com/docs/BiasVariance.html>
+:::
+
+:::
+::: {.column width=50%}
+
+
+* The bias decreases when the model becomes complex.
+
+* The variance increases when the model becomes complex.
+
+* The **generalization error** is a combination of the bias and variance:
+
+$$
     \text{generalization error} = \text{bias}^2 + \text{variance}
-</span></p>
-</div>
-</div>
-<ul>
-<li><p>We search for the model with the <strong>optimum complexity</strong> realizing the trade-off between bias and variance.</p></li>
-<li><p>It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).</p></li>
-</ul>
+$$
+
+:::
+:::
+
+
+* We search for the model with the **optimum complexity** realizing the trade-off between bias and variance.
+
+* It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).
+
+-->
 </section>
 
 <section id="regularized-regression" class="title-slide slide level1 center">

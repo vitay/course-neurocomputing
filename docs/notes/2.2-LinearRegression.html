@@ -537,7 +537,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">
     \mathcal{L}(w, b) =  \mathbb{E}_{x_i, t_i \in \mathcal{D}} [ (t_i - y_i )^2 ]
 </span></p>
-<p>As the training set is finite and the samples i.i.d, we can simply replace the expectation by an average over the training set:</p>
+<p>As the training set is finite and the samples i.i.d (independent and identically distributed), we can simply replace the expectation by a sampling average over the training set:</p>
 <p><span class="math display">
     \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 </span></p>
@@ -844,7 +844,7 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
     \begin{cases}
     \Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b}) \\
     \\
-    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b}  \mathcal{L}(W, \mathbf{b}) \\
+    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b} \, \mathcal{L}(W, \mathbf{b}) \\
     \end{cases}
 </span></p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -974,7 +974,7 @@ x_1 &amp; x_2 \\
 </span></p>
 <p><strong>Multiple linear regression</strong></p>
 <ul>
-<li>Batch version:</li>
+<li>Batch version (<strong>least mean squares</strong>):</li>
 </ul>
 <p><span class="math display">\begin{cases}
     \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
@@ -1334,10 +1334,20 @@ k-fold cross-validation
 <blockquote class="blockquote">
 <p><strong>The more free parameters, the more complex the model is, the more likely it will overfit.</strong></p>
 </blockquote>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Bias-variance trade-off
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Under-/Over-fitting relates to the statistical concept of <strong>bias-variance trade-off</strong>. The <strong>bias</strong> is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model): a model with high bias is underfitting. The <strong>variance</strong> is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples): a model with high variance is overfitting.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../slides/img/biasvariance3.png" class="img-fluid figure-img"></p>
+<p><img src="../slides/img/biasvariance3.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Bias and variance of an estimator. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
 </figure>
 </div>
@@ -1351,6 +1361,8 @@ k-fold cross-validation
 <p><img src="../slides/img/biasvariance2.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
 </figure>
+</div>
+</div>
 </div>
 </section>
 </section>

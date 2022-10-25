@@ -478,8 +478,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#polynomial-features" id="toc-polynomial-features" class="nav-link" data-scroll-target="#polynomial-features">Polynomial features</a></li>
   <li><a href="#radial-basis-function-networks" id="toc-radial-basis-function-networks" class="nav-link" data-scroll-target="#radial-basis-function-networks">Radial-basis function networks</a></li>
-  <li><a href="#kernel-perceptron" id="toc-kernel-perceptron" class="nav-link" data-scroll-target="#kernel-perceptron">Kernel perceptron</a></li>
-  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines">Support vector machines</a></li>
+  <li><a href="#kernel-perceptron-optional" id="toc-kernel-perceptron-optional" class="nav-link" data-scroll-target="#kernel-perceptron-optional">Kernel perceptron (optional)</a></li>
+  <li><a href="#support-vector-machines-optional" id="toc-support-vector-machines-optional" class="nav-link" data-scroll-target="#support-vector-machines-optional">Support vector machines (optional)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -731,8 +731,8 @@ Cover’s theorem on the separability of patterns (1965)
 </figure>
 </div>
 </section>
-<section id="kernel-perceptron" class="level3">
-<h3 class="anchored" data-anchor-id="kernel-perceptron">Kernel perceptron</h3>
+<section id="kernel-perceptron-optional" class="level3">
+<h3 class="anchored" data-anchor-id="kernel-perceptron-optional">Kernel perceptron (optional)</h3>
 <p>What happens during online Perceptron learning?</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -893,8 +893,8 @@ k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangl
 </figure>
 </div>
 </section>
-<section id="support-vector-machines" class="level3">
-<h3 class="anchored" data-anchor-id="support-vector-machines">Support vector machines</h3>
+<section id="support-vector-machines-optional" class="level3">
+<h3 class="anchored" data-anchor-id="support-vector-machines-optional">Support vector machines (optional)</h3>
 <p><strong>Support vector machines</strong> (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier. Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the “safety zone” (geometric margin) between the classifier and the training examples. It also tries to reduce the number of non-zero <span class="math inline">\alpha_i</span> coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:</p>
 <p><span class="math display">
 \mathbf{y} = \text{sign}(\sum_{i=1}^{N_{SV}} \alpha_i \, t_i \, K(\mathbf{x}_i, \mathbf{x}) + b)

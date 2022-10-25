@@ -201,7 +201,7 @@ we obtain a smooth **non-linear** partition of the input space. The width of the
 
 ![RBF networks learn linearly smooth transitions between the training examples. Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](../slides/img/rbf3.png)
 
-### Kernel perceptron
+### Kernel perceptron (optional)
 
 What happens during online Perceptron learning?
 
@@ -358,7 +358,7 @@ In practice, the choice of the kernel family depends more on the nature of data 
 
 ![Different kernels lead to different decision functions. Source: <http://beta.cambridgespark.com/courses/jpm/05-module.html>](../slides/img/kernels.png){width=100%}
 
-### Support vector machines
+### Support vector machines (optional)
 
 **Support vector machines** (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier. Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the "safety zone" (geometric margin) between the classifier and the training examples. It also tries to reduce the number of non-zero $\alpha_i$ coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:
 

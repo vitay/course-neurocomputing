@@ -28,7 +28,7 @@ $$
 $$
 
 
-As the training set is finite and the samples i.i.d, we can simply replace the expectation by an average over the training set:
+As the training set is finite and the samples i.i.d (independent and identically distributed), we can simply replace the expectation by a sampling average over the training set:
 
 $$
     \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
@@ -320,7 +320,7 @@ $$
     \begin{cases}
     \Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b}) \\
     \\
-    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b}  \mathcal{L}(W, \mathbf{b}) \\
+    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b} \, \mathcal{L}(W, \mathbf{b}) \\
     \end{cases}
 $$
 
@@ -447,7 +447,7 @@ $$
 
 **Multiple linear regression**
 
-* Batch version:
+* Batch version (**least mean squares**):
 
 $$\begin{cases}
     \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
@@ -797,10 +797,12 @@ A polynomial of order $p$ has $p+1$ unknown parameters (**free parameters**): th
 
 > **The more free parameters, the more complex the model is, the more likely it will overfit.**
 
+::: {.callout-note}
+## Bias-variance trade-off
 
 Under-/Over-fitting relates to the statistical concept of **bias-variance trade-off**. The **bias** is the training error that the hypothesis would make if the training set was infinite (accuracy, flexibility of the model): a model with high bias is underfitting. The **variance** is the error that will be made by the hypothesis on new examples taken from the same distribution (spread, the model is correct on average, but not for individual samples): a model with high variance is overfitting.
 
-![Bias and variance of an estimator. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance3.png)
+![Bias and variance of an estimator. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance3.png){width=70%}
 
 The bias decreases when the model becomes complex; the variance increases when the model becomes complex. The **generalization error** is a combination of the bias and variance:
 
@@ -811,6 +813,8 @@ $$
 We search for the model with the **optimum complexity** realizing the trade-off between bias and variance. It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).
 
 ![The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance2.png)
+:::
+
 
 ## Regularized regression
 

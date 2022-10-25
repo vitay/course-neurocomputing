@@ -82,7 +82,7 @@ $$
 
 * The goal of the linear regression (or least mean squares - LMS) is to minimize the **mean square error** (mse) between the targets and the predictions.
 
-* It is defined as:
+* It is defined as the mathematical expectation of the quadratic error over the training data:
 
 $$
     \mathcal{L}(w, b) =  \mathbb{E}_{x_i, t_i \in \mathcal{D}} [ (t_i - y_i )^2 ]
@@ -93,9 +93,7 @@ $$
 
 # Linear regression
 
-* The loss function is defined as the mathematical expectation of the quadratic error over the training set.
-
-* As the training set is finite and the samples i.i.d, we can simply replace the expectation by an average:
+* As the training set is finite and the samples i.i.d (independent and identically distributed), we can simply replace the expectation by a sampling average:
 
 $$
     \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
@@ -106,7 +104,7 @@ $$
 
 # Linear regression
 
-* The minimum of the mse is achieved when the **prediction** $y_i = f_{w, b}(x_i)$ is equal to the **true value** $t_i$ for all training examples.
+* The minimum of the mse is achieved when the **prediction** $y_i = f_{w, b}(x_i)$ is equal to the **ground truth** $t_i$ for all training examples.
 
 * In other words, we want to minimize the **residual error** of the model on the data.
 
@@ -608,11 +606,7 @@ $$
 * Let's prove it element per element:
 
 $$
-    \mathbf{y} = W \times \mathbf{x} + \mathbf{b}
-$$
-
-$$
-    \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = \begin{bmatrix} w_1 & w_2 \\ w_3 & w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
+    \mathbf{y} = \begin{bmatrix} y_1 \\ y_2 \\\end{bmatrix} = W \times \mathbf{x} + \mathbf{b} = \begin{bmatrix} w_1 & w_2 \\ w_3 & w_4 \\\end{bmatrix} \times \begin{bmatrix} x_1 \\ x_2 \\\end{bmatrix} + \begin{bmatrix} b_1 \\ b_2 \\\end{bmatrix}
 $$
 
 $$
@@ -622,12 +616,17 @@ $$
 * The Jacobian w.r.t $W$ can be explicitly formed using partial derivatives:
 
 $$
-\nabla_W \, \mathcal{l}(W, \mathbf{b}) = \begin{bmatrix} 
-\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
-\end{bmatrix}
-= \begin{bmatrix} 
--2 \, (t_1 - y_1) \, x_1 & -2 \, (t_1 - y_1) \, x_2 \\ -2 \, (t_2 - y_2) \, x_1 & -2 \, (t_2 - y_2) \, x_2 \\
-\end{bmatrix}
+\nabla_W \, \mathcal{l}(W, \mathbf{b}) = 
+    \begin{bmatrix} 
+        \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ 
+        \\
+        \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
+    \end{bmatrix}
+    = \begin{bmatrix} 
+        -2 \, (t_1 - y_1) \, x_1 & -2 \, (t_1 - y_1) \, x_2 \\ 
+        \\
+        -2 \, (t_2 - y_2) \, x_1 & -2 \, (t_2 - y_2) \, x_2 \\
+    \end{bmatrix}
 $$
 
 * We can rearrange this matrix as an outer product:
@@ -645,6 +644,28 @@ $$
 
 
 ::: {.columns}
+::: {.column width=50%}
+
+
+
+* Batch version (**least mean squares**):
+
+$$\begin{cases}
+    \Delta W = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
+    \\
+    \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{cases}$$
+
+* Online version (**delta learning rule**):
+
+$$\begin{cases}
+    \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
+    \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
+\end{cases}$$
+
+
+:::
 ::: {.column width=50%}
 
 
@@ -667,26 +688,6 @@ $$
 \end{cases}
 $$
 
-
-:::
-::: {.column width=50%}
-
-
-* Batch version:
-
-$$\begin{cases}
-    \Delta W = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
-    \\
-    \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}$$
-
-* Online version (**delta learning rule**):
-
-$$\begin{cases}
-    \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
-    \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}$$
 
 :::
 :::
@@ -807,7 +808,7 @@ $$
 ::: {.column width=50%}
 
 
-![](img/linearperceptron.svg){width=70%}
+![](img/linearperceptron.svg){width=90%}
 
 :::
 ::: {.column width=50%}
@@ -854,7 +855,7 @@ $$
 
 * The functions underlying real data are rarely linear plus some noise around the ideal value.
 
-* In the figure, the input/output function is better modeled by a second-order polynomial:
+* In the figure, the input/output function would be better modeled by a second-order polynomial (or higher):
 
 $$y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 +b$$
 
@@ -876,9 +877,13 @@ $$y = \langle \mathbf{w} . \mathbf{x} \rangle + b = \sum_j w_j \, x_j + b$$
 
 * We can simply apply multiple linear regression (MLR) to find $\mathbf{w}$ and b:
 
-$$\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}$$
-
-$$\Delta b =  \eta \, (t - y)$$
+$$
+\begin{cases}
+\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x} \\
+\\
+\Delta b =  \eta \, (t - y) \\
+\end{cases}
+$$
 
 # Polynomial regression
 
@@ -886,15 +891,19 @@ $$\Delta b =  \eta \, (t - y)$$
 
 $$y = f_{\mathbf{w}, b}(x) = w_1 \, x + w_2 \, x^2 + \ldots + w_p \, x^p + b$$
 
-* We create a vector of powers of $x$:
+* We create a vector of powers of $x$ (called **polynomial features**):
 
 $$\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix} \qquad \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \\ \ldots \\ w_p \end{bmatrix}$$
 
 * And apply multiple linear regression (MLR) to find $\mathbf{w}$ and b:
 
-$$\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}$$
-
-$$\Delta b =  \eta \, (t - y)$$
+$$
+\begin{cases}
+\Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x} \\
+\\
+\Delta b =  \eta \, (t - y) \\
+\end{cases}
+$$
 
 * Non-linear problem solved! The only unknown is which order for the polynomial matches best the data.
 
@@ -928,7 +937,7 @@ $$
     \epsilon_\mathcal{D} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2
 $$
 
-* If you multiply both the data $t$ and the prediction $y$ by 10, the residual error will be 100 times higher, without any change to the model.
+* If you multiply both the data $t$ and the prediction $y$ by 10, the residual error will be 100 times higher, without any change to the quality of the model.
 
 
 ![](img/regression-animation-mse-dual.png){width=90%}
@@ -1069,7 +1078,11 @@ Source: <https://towardsdatascience.com/introduction-to-linear-regression-in-pyt
 - Select the hypothesis $h_{i}^*$ with the minimal empirical error : $h_{i}^* = \text{argmin}_{h_i \in \mathcal{M}} \quad \epsilon_{\text{test}}(h_i)$
 :::
 
-* Disadvantage: 20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.
+* Disadvantages: 
+
+    * 20 or 30% of the data is wasted and not used for learning. It may be a problem when data is rare or expensive.
+
+    * The test set must be representative of the difficulty of the training set (same distribution).
 
 
 # k-fold cross-validation
@@ -1159,6 +1172,7 @@ $$\mathbf{x} = \begin{bmatrix} x \\ x^2 \\ \ldots \\ x^p \end{bmatrix} \qquad \m
 
     * **The more free parameters, the more complex the model is, the more likely it will overfit.**
 
+<!--
 # Bias - variance trade-off
 
 ::: {.columns}
@@ -1222,6 +1236,8 @@ $$
 * We search for the model with the **optimum complexity** realizing the trade-off between bias and variance.
 
 * It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).
+
+-->
 
 # 6 - Regularized regression
 

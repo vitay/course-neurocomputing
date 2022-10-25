@@ -468,7 +468,7 @@ we obtain a smooth **non-linear** partition of the input space.
 
 ![Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](img/rbf3.png){width=45%}
 
-
+<!--
 
 # Kernel perceptron
 
@@ -746,3 +746,5 @@ $$
 * Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting.
 
 * SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.
+
+-->

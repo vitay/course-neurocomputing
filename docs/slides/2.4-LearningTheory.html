@@ -868,150 +868,151 @@
 <p></p><figcaption>Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
 </figure>
 </div>
-</section>
+<!--
 
-<section id="kernel-perceptron" class="title-slide slide level1 center">
-<h1>Kernel perceptron</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p>What happens during online Perceptron learning?</p></li>
-<li><p>If an example <span class="math inline">\mathbf{x}_i</span> is correctly classified (<span class="math inline">y_i = t_i</span>), the weight vector does not change.</p></li>
-</ul>
-<p><span class="math display">\mathbf{w} \leftarrow \mathbf{w}</span></p>
-<ul>
-<li>If an example <span class="math inline">\mathbf{x}_i</span> is miscorrectly classified (<span class="math inline">y_i \neq t_i</span>), the weight vector is increased from <span class="math inline">t_i \, \mathbf{x}_i</span>.</li>
-</ul>
-<p><span class="math display">\mathbf{w} \leftarrow \mathbf{w} + 2 \, \eta \, t_i \, \mathbf{x}_i</span></p>
-</div><div class="column" style="width:50%;">
-<div class="callout callout-tip callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Primal form of the online Perceptron algorithm</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p><strong>for</strong> <span class="math inline">M</span> epochs:</p>
-<ul>
-<li><p><strong>for</strong> each sample <span class="math inline">(\mathbf{x}_i, t_i)</span>:</p>
-<ul>
-<li><p><span class="math inline">y_i = \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)</span></p></li>
-<li><p><span class="math inline">\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i</span></p></li>
-<li><p><span class="math inline">\Delta b = \eta \, (t_i - y_i)</span></p></li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>If you initialize the weight vector to 0, its final value will therefore be a <strong>linear combination</strong> of the input samples:</li>
-</ul>
-<p><span class="math display">\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i</span></p>
-<ul>
-<li>The coefficients <span class="math inline">\alpha_i</span> represent the <strong>embedding strength</strong> of each example, i.e.&nbsp;how often they were misclassified.</li>
-</ul>
-</section>
+# Kernel perceptron
 
-<section id="kernel-perceptron-1" class="title-slide slide level1 center">
-<h1>Kernel perceptron</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>With <span class="math inline">\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i</span>, the prediction for an input <span class="math inline">\mathbf{x}</span> only depends on the training samples and their <span class="math inline">\alpha_i</span> value:</li>
-</ul>
-<p><span class="math display">y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)</span></p>
-<ul>
-<li><p>To make a prediction <span class="math inline">y</span>, we need the dot product between the input <span class="math inline">\mathbf{x}</span> and all training examples <span class="math inline">\mathbf{x}_i</span>.</p></li>
-<li><p>We ignore the bias here, but it can be added back.</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="callout callout-tip callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Dual form of the online Perceptron algorithm</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p><strong>for</strong> <span class="math inline">M</span> epochs:</p>
-<ul>
-<li><p><strong>for</strong> each sample <span class="math inline">(\mathbf{x}_i, t_i)</span>:</p>
-<ul>
-<li><p><span class="math inline">y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, \langle \mathbf{x}_j \cdot \mathbf{x}_i \rangle)</span></p></li>
-<li><p><strong>if</strong> <span class="math inline">y_i \neq t_i</span> :</p>
-<ul>
-<li><span class="math inline">\alpha_i \leftarrow \alpha_i + 1</span></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li><p>This <strong>dual form</strong> of the Perceptron algorithm is strictly equivalent to its primal form.</p></li>
-<li><p>It needs one parameter <span class="math inline">\alpha_i</span> per training example instead of a weight vector (<span class="math inline">N &gt;&gt; d</span>), but relies on dot products between vectors.</p></li>
-</ul>
-</section>
+::: {.columns}
+::: {.column width=50%}
 
-<section id="kernel-perceptron-2" class="title-slide slide level1 center">
-<h1>Kernel perceptron</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Why is it interesting to have an algorithm relying on dot products?</li>
-</ul>
-<p><span class="math display">y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)</span></p>
-<ul>
-<li>You can project the inputs <span class="math inline">\mathbf{x}</span> to a <strong>feature space</strong> <span class="math inline">\phi(\mathbf{x})</span> and apply the same algorithm:</li>
-</ul>
-<p><span class="math display">y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle)</span></p>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/rbf.png"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li>But you do not need to compute the dot product in the feature space, all you need to know is its result.</li>
-</ul>
-<p><span class="math display">K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle</span></p>
-<ul>
-<li><strong>Kernel trick:</strong> A kernel <span class="math inline">K(\mathbf{x}, \mathbf{z})</span> allows to compute the dot product between the feature space representation of two vectors without ever computing these representations!</li>
-</ul>
-</section>
 
-<section id="example-of-the-polynomial-kernel" class="title-slide slide level1 center">
-<h1>Example of the polynomial kernel</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Let’s consider the quadratic kernel in <span class="math inline">\Re^3</span>:</li>
-</ul>
-<p><span class="math display">
+* What happens during online Perceptron learning?
+
+* If an example $\mathbf{x}_i$ is correctly classified ($y_i = t_i$), the weight vector does not change.
+
+$$\mathbf{w} \leftarrow \mathbf{w}$$
+
+* If an example $\mathbf{x}_i$ is miscorrectly classified ($y_i \neq t_i$), the weight vector is increased from $t_i \, \mathbf{x}_i$.
+
+$$\mathbf{w} \leftarrow \mathbf{w} + 2 \, \eta \, t_i \, \mathbf{x}_i$$
+
+:::
+::: {.column width=50%}
+
+
+::: {.callout-tip}
+## Primal form of the online Perceptron algorithm
+
+* **for** $M$ epochs:
+
+    * **for** each sample $(\mathbf{x}_i, t_i)$:
+
+        * $y_i =  \text{sign}( \langle \mathbf{w} \cdot \mathbf{x}_i \rangle + b)$
+
+        * $\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i$
+
+        * $\Delta b = \eta \, (t_i - y_i)$
+:::
+
+:::
+:::
+
+
+* If you initialize the weight vector to 0, its final value will therefore be a **linear combination** of the input samples:
+
+$$\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i$$
+
+* The coefficients $\alpha_i$ represent the **embedding strength** of each example, i.e. how often they were misclassified.
+
+# Kernel perceptron
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* With $\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i$, the prediction for an input $\mathbf{x}$ only depends on the training samples and their $\alpha_i$ value:
+
+$$y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)$$
+
+* To make a prediction $y$, we need the dot product between the input $\mathbf{x}$ and all training examples $\mathbf{x}_i$.
+
+* We ignore the bias here, but it can be added back.
+
+:::
+::: {.column width=50%}
+
+
+::: {.callout-tip}
+## Dual form of the online Perceptron algorithm
+
+* **for** $M$ epochs:
+
+    * **for** each sample $(\mathbf{x}_i, t_i)$:
+
+        * $y_i =  \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, \langle \mathbf{x}_j \cdot \mathbf{x}_i \rangle)$
+
+        * **if** $y_i \neq t_i$ :
+
+            * $\alpha_i \leftarrow \alpha_i + 1$
+:::
+
+:::
+:::
+
+
+* This **dual form** of the Perceptron algorithm is strictly equivalent to its primal form.
+
+* It needs one parameter $\alpha_i$ per training example instead of a weight vector ($N >> d$), but relies on dot products between vectors.
+
+# Kernel perceptron
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* Why is it interesting to have an algorithm relying on dot products?
+
+$$y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)$$
+
+* You can project the inputs $\mathbf{x}$ to a **feature space** $\phi(\mathbf{x})$ and apply the same algorithm:
+
+$$y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle)$$
+
+:::
+::: {.column width=50%}
+
+
+![](img/rbf.png)
+
+:::
+:::
+
+
+* But you do not need to compute the dot product in the feature space, all you need to know is its result.
+
+$$K(\mathbf{x}_i, \mathbf{x}) = \langle \phi(\mathbf{x}_i) \cdot \phi(\mathbf{x}) \rangle$$
+
+* **Kernel trick:** A kernel $K(\mathbf{x}, \mathbf{z})$ allows to compute the dot product between the feature space representation of two vectors without ever computing these representations! 
+
+
+# Example of the polynomial kernel
+
+
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* Let's consider the quadratic kernel in $\Re^3$:
+
+$$
 \begin{aligned}
-\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 &amp; \\
-                            &amp; \\
-  K(\mathbf{x}, \mathbf{z}) &amp;= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
-                            &amp;=  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
-                            &amp;=  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
-                            &amp;=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle \\
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^3 \times \Re^3 & \\
+                            & \\
+  K(\mathbf{x}, \mathbf{z}) &= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^2 \\
+                            &=  (\sum_{i=1}^3 x_i \cdot z_i) \cdot (\sum_{j=1}^3 x_j \cdot z_j) \\
+                            &=  \sum_{i=1}^3 \sum_{j=1}^3 (x_i \cdot x_j) \cdot ( z_i \cdot z_j) \\
+                            &=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle \\
 \end{aligned}
-</span></p>
-</div><div class="column" style="width:50%;">
-<p><span class="math display">
+$$
+
+:::
+::: {.column width=50%}
+
+
+
+
+$$
   \text{with:} \qquad  \phi(\mathbf{x}) = \begin{bmatrix}
                             x_1 \cdot x_1 \\
                             x_1 \cdot x_2 \\
@@ -1022,131 +1023,131 @@
                             x_3 \cdot x_1 \\
                             x_3 \cdot x_2 \\
                             x_3 \cdot x_3 \end{bmatrix}
-</span></p>
-</div>
-</div>
-<ul>
-<li>The quadratic kernel implicitely transforms an input space with three dimensions into a feature space of 9 dimensions.</li>
-</ul>
-</section>
+$$
 
-<section id="example-of-the-polynomial-kernel-1" class="title-slide slide level1 center">
-<h1>Example of the polynomial kernel</h1>
-<ul>
-<li>More generally, the polynomial kernel in <span class="math inline">\Re^d</span> of degree <span class="math inline">p</span>:</li>
-</ul>
-<p><span class="math display">
+:::
+:::
+
+
+* The quadratic kernel implicitely transforms an input space with three dimensions into a feature space of 9 dimensions.
+
+# Example of the polynomial kernel
+
+* More generally, the polynomial kernel in $\Re^d$ of degree $p$:
+
+$$
 \begin{align*}
-\forall (\mathbf{x}, \mathbf{z}) \in \Re^d \times \Re^d \qquad  K(\mathbf{x}, \mathbf{z}) &amp;= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^p \\
-                                            &amp;=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
+\forall (\mathbf{x}, \mathbf{z}) \in \Re^d \times \Re^d \qquad  K(\mathbf{x}, \mathbf{z}) &= ( \langle \mathbf{x} \cdot  \mathbf{z} \rangle)^p \\
+                                            &=  \langle \phi(\mathbf{x}) \cdot \phi(\mathbf{z}) \rangle
 \end{align*}
-</span></p>
-<p>transforms the input from a space with <span class="math inline">d</span> dimensions into a feature space of <span class="math inline">d^p</span> dimensions.</p>
-<ul>
-<li><p>While the inner product in the feature space would require <span class="math inline">O(d^p)</span> operations, the calculation of the kernel directly in the input space only requires <span class="math inline">O(d)</span> operations.</p></li>
-<li><p>This is called the <strong>kernel trick</strong>: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.</p></li>
-</ul>
-</section>
+$$
 
-<section id="kernel-perceptron-3" class="title-slide slide level1 center">
-<h1>Kernel perceptron</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>The <strong>kernel perceptron</strong> is the dual form of the Perceptron algorithm using a kernel.</li>
-</ul>
-<div class="callout callout-tip callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Kernel Perceptron</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p><strong>for</strong> <span class="math inline">M</span> epochs:</p>
-<ul>
-<li><p><strong>for</strong> each sample <span class="math inline">(\mathbf{x}_i, t_i)</span>:</p>
-<ul>
-<li><p><span class="math inline">y_i = \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, K(\mathbf{x}_j, \mathbf{x}_i))</span></p></li>
-<li><p><strong>if</strong> <span class="math inline">y_i \neq t_i</span> :</p>
-<ul>
-<li><span class="math inline">\alpha_i \leftarrow \alpha_i + 1</span></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<ul>
-<li>Depending on the kernel, the implicit dimensionality of the feature space can even be infinite!</li>
-</ul>
-</div><div class="column" style="width:45%;">
-<ul>
-<li><strong>Linear kernel</strong>: <span class="math inline">d</span> dimensions.</li>
-</ul>
-<p><span class="math display">
+transforms the input from a space with $d$ dimensions into a feature space of $d^p$ dimensions.
+
+* While the inner product in the feature space would require $O(d^p)$ operations, the calculation of the kernel directly in the input space only requires $O(d)$ operations.
+
+* This is called the **kernel trick**: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.
+
+# Kernel perceptron
+
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* The **kernel perceptron** is the dual form of the Perceptron algorithm using a kernel.
+
+
+::: {.callout-tip}
+## Kernel Perceptron
+
+* **for** $M$ epochs:
+
+    * **for** each sample $(\mathbf{x}_i, t_i)$:
+
+        * $y_i =  \text{sign}( \sum_{j=1}^N \alpha_j \, t_j \, K(\mathbf{x}_j, \mathbf{x}_i))$
+
+        * **if** $y_i \neq t_i$ :
+
+            * $\alpha_i \leftarrow \alpha_i + 1$
+:::
+
+* Depending on the kernel, the implicit dimensionality of the feature space can even be infinite!
+
+:::
+::: {.column width=45%}
+
+* **Linear kernel**: $d$ dimensions.
+
+$$
 K(\mathbf{x},\mathbf{z}) = \langle \mathbf{x} \cdot \mathbf{z} \rangle
-</span></p>
-<ul>
-<li><strong>Polynomial kernel</strong>: <span class="math inline">d^p</span> dimensions.</li>
-</ul>
-<p><span class="math display">
+$$
+
+* **Polynomial kernel**: $d^p$ dimensions.
+
+$$
 K(\mathbf{x},\mathbf{z}) = (\langle \mathbf{x} \cdot \mathbf{z} \rangle)^p
-</span></p>
-<ul>
-<li><strong>Gaussian kernel</strong> (or RBF kernel): <span class="math inline">\infty</span> dimensions.</li>
-</ul>
-<p><span class="math display">
+$$
+
+* **Gaussian kernel** (or RBF kernel): $\infty$ dimensions.
+
+$$
 K(\mathbf{x},\mathbf{z}) = \exp(-\frac{\| \mathbf{x} - \mathbf{z} \|^2}{2\sigma^2})
-</span></p>
-<ul>
-<li><strong>Hyperbolic tangent kernel</strong>: <span class="math inline">\infty</span> dimensions.</li>
-</ul>
-<p><span class="math display">
+$$
+
+* **Hyperbolic tangent kernel**: $\infty$ dimensions.
+
+$$
 k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangle +c)
-</span></p>
-</div>
-</div>
-</section>
+$$
 
-<section id="examples-of-kernels" class="title-slide slide level1 center">
-<h1>Examples of kernels</h1>
+:::
+:::
 
-<img data-src="img/kernels.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://beta.cambridgespark.com/courses/jpm/05-module.html" class="uri">http://beta.cambridgespark.com/courses/jpm/05-module.html</a></p><ul>
-<li><p>In practice, the choice of the kernel family depends more on the nature of data (text, image…) and its distribution than on the complexity of the learning problem.</p></li>
-<li><p>RBF kernels tend to “group” positive examples together.</p></li>
-<li><p>Polynomial kernels are more like “distorted” hyperplanes.</p></li>
-<li><p>Kernels have parameters (<span class="math inline">p</span>, <span class="math inline">\sigma</span>…) which have to found using cross-validation.</p></li>
-</ul>
-</section>
 
-<section id="support-vector-machines" class="title-slide slide level1 center">
-<h1>Support vector machines</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><p><strong>Support vector machines</strong> (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier.</p></li>
-<li><p>Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the “safety zone” (geometric margin) between the classifier and the training examples.</p></li>
-<li><p>It also tries to reduce the number of non-zero <span class="math inline">\alpha_i</span> coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:</p></li>
-</ul>
-<p><span class="math display">
+# Examples of kernels
+
+![Source: <http://beta.cambridgespark.com/courses/jpm/05-module.html>](img/kernels.png)
+
+* In practice, the choice of the kernel family depends more on the nature of data (text, image...) and its distribution than on the complexity of the learning problem.
+
+* RBF kernels tend to "group" positive examples together.
+
+* Polynomial kernels are more like "distorted" hyperplanes.
+
+* Kernels have parameters ($p$, $\sigma$...) which have to found using cross-validation.
+
+
+# Support vector machines
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* **Support vector machines** (SVM) extend the idea of a kernel perceptron using a different linear learning algorithm, the maximum margin classifier.
+
+* Using Lagrange optimization and regularization, the maximal margin classifer tries to maximize the "safety zone" (geometric margin) between the classifier and the training examples.
+
+* It also tries to reduce the number of non-zero $\alpha_i$ coefficients to keep the complexity of the classifier bounded, thereby improving the generalization:
+
+$$
 \mathbf{y} = \text{sign}(\sum_{i=1}^{N_{SV}} \alpha_i \, t_i \, K(\mathbf{x}_i, \mathbf{x}) + b)
-</span></p>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/supportvectors.svg"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li><p>Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting.</p></li>
-<li><p>SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.</p></li>
-</ul>
+$$
+
+:::
+::: {.column width=50%}
+
+![](img/supportvectors.svg)
+
+:::
+:::
+
+
+* Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting.
+
+* SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.
+
+-->
 <div class="footer footer-default">
 
 </div>
