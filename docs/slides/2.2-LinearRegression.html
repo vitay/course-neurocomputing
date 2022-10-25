@@ -633,9 +633,11 @@
 <li>LMS is a <strong>batch</strong> algorithm: the parameter changes are computed over the whole dataset.</li>
 </ul>
 <p><span class="math display">
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-</span> <span class="math display">
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
+\begin{cases}
+    \Delta w = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \Delta b = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 </span></p>
 <ul>
 <li><p>The parameter changes have to be applied multiple times (<strong>epochs</strong>) in order for the parameters to converge.</p></li>
@@ -695,9 +697,9 @@
 </ul>
 <p><span class="math display">
 \begin{cases}
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \Delta w = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \, x_i \\
     \\
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+    \Delta b = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \\
 \end{cases}
 </span></p>
 </div><div class="column" style="width:50%;">
@@ -970,7 +972,7 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
     \begin{cases}
     \Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b}) \\
     \\
-    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b}  \mathcal{L}(W, \mathbf{b}) \\
+    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b} \, \mathcal{L}(W, \mathbf{b}) \\
     \end{cases}
 </span></p>
 <ul>
@@ -1552,8 +1554,14 @@ x_1 &amp; x_2 \\
 <li><p>choose the hypothesis that works best on average.</p></li>
 </ul></li>
 </ul>
-
-<img data-src="img/kfold.jpg" class="r-stretch quarto-figure-center"><div class="footer">
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/kfold.jpg" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+<div class="footer">
 <p>Source <a href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" class="uri">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></p>
 </div>
 </section>
@@ -1596,8 +1604,14 @@ x_1 &amp; x_2 \\
 
 <section id="training-and-test-errors" class="title-slide slide level1 center">
 <h1>Training and test errors</h1>
-
-<img data-src="img/polynomialregression-mse-traintest.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
+<div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/polynomialregression-mse-traintest.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+<ul>
 <li><p>While the training mse always decrease with more complex models, the test mse increases after a while.</p></li>
 <li><p>This is called <strong>overfitting</strong>: learning by heart the data without caring about generalization.</p></li>
 <li><p>The two curves suggest that we should chose a polynomial order between 2 and 9.</p></li>

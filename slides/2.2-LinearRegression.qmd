@@ -238,10 +238,11 @@ $$
 * LMS is a **batch** algorithm: the parameter changes are computed over the whole dataset.
 
 $$
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-$$
-$$
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
+\begin{cases}
+    \Delta w = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \Delta b = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 $$
 
 * The parameter changes have to be applied multiple times (**epochs**) in order for the parameters to converge.
@@ -298,9 +299,9 @@ $$
 
 $$
 \begin{cases}
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \Delta w = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \, x_i \\
     \\
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+    \Delta b = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^{N} (t_i - y_i) \\
 \end{cases}
 $$
 
@@ -505,7 +506,7 @@ $$
     \begin{cases}
     \Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b}) \\
     \\
-    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b}  \mathcal{L}(W, \mathbf{b}) \\
+    \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b} \, \mathcal{L}(W, \mathbf{b}) \\
     \end{cases}
 $$
 
@@ -1082,7 +1083,9 @@ Source: <https://towardsdatascience.com/introduction-to-linear-regression-in-pyt
     
     * choose the hypothesis that works best on average.
 
-![](img/kfold.jpg)
+::: {}
+![](img/kfold.jpg){width=70%}
+:::
 
 ::: footer
 Source <https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg>
@@ -1120,7 +1123,9 @@ Source <https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validat
 
 # Training and test errors
 
+::: {}
 ![](img/polynomialregression-mse-traintest.png){width=70%}
+:::
 
 * While the training mse always decrease with more complex models, the test mse increases after a while.
 

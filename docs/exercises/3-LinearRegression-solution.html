@@ -504,14 +504,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="least-mean-squares" class="level2">
 <h2 class="anchored" data-anchor-id="least-mean-squares">Least mean squares</h2>
 <p>To generate the data for the exercise, we will use the <code>scikit-learn</code> library <a href="https://scikit-learn.org" class="uri">https://scikit-learn.org</a>. It provides a huge selection of already implemented machine learning algorithms for classification, regression or clustering.</p>
-<p>If you use Anaconda or Colab, <code>scikit-learn</code> should already be installed. Otherwise, install it with <code>pip</code> (you may need to restart this notebook afterwards):</p>
-<pre><code>pip install scikit-learn</code></pre>
+<p>If you use Colab, <code>scikit-learn</code> should already be installed. Otherwise, install it with either <code>conda</code> or <code>pip</code> (you may need to restart this notebook afterwards):</p>
+<pre><code>conda install scikit-learn
+# or:
+pip install scikit-learn</code></pre>
 <p>We will use the method <code>sklearn.datasets.make_regression</code> to generate the data. The documentation of this method is available at <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html" class="uri">https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html</a>.</p>
 <p>The following cell imports the method:</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_regression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can now generate the data. We start with the simplest case where the inputs have only one dimension. We will generate 100 samples<span class="math inline">(x_i, t_i)</span> linked by a linear relationship and some noise.</p>
+<p>We can now generate the data. We start with the simplest case where the inputs have only one dimension. We will generate 100 samples <span class="math inline">(x_i, t_i)</span> linked by a linear relationship and some noise.</p>
 <p>The following code generates the data:</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
@@ -583,7 +585,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(w, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[95.27987845] [-1.42853731]</code></pre>
+<pre><code>[50.59780124] [-2.16672418]</code></pre>
 </div>
 </div>
 <p><strong>Q:</strong> Visualize the quality of the fit by superposing the learned model to the data with matplotlib.</p>
@@ -630,7 +632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>A:</strong> the points <span class="math inline">(t, y)</span> should be on a line with slope 1 and intercept 0 (i.e.&nbsp;t=y).</p>
+<p><strong>A:</strong> The points <span class="math inline">(t, y)</span> should be on a line with slope 1 and intercept 0 (i.e.&nbsp;t=y).</p>
 <p>A much better method to analyse the result of the learning algorithm is to track the <strong>mean squared error</strong> (mse) after each epoch, i.e.&nbsp;the loss function which we actually want to minimize. The MSE is defined as:</p>
 <p><span class="math display">\text{mse} = \frac{1}{N} \, \sum_{i=1}^N (t_i - y_i)^2</span></p>
 <p><strong>Q:</strong> Modify your LMS algorithm (either directly or copy it in the next cell) to track the mse after each epoch. After each epoch, append the mse on the training set to a list (initially empty) and plot it at the end. How does the mse evolve? Which value does it get in the end? Why? How many epochs do you actually need?</p>
@@ -670,7 +672,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"mse"</span>)</span>
 <span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>mse: [205.75347966]</code></pre>
+<pre><code>mse: [276.42556726]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -680,7 +682,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>A:</strong> the mse decreases exponentially with the epochs. It never reaches 0 because of the noise in the data (try setting the <code>noise</code> argument in the data generator to 0 and check that the mse reaches 0). 30 or 40 epochs seem sufficient to solve the problem, nothing happens afterwards.</p>
+<p><strong>A:</strong> The mse decreases exponentially with the epochs. It never reaches 0 because of the noise in the data (try setting the <code>noise</code> argument in the data generator to 0 and check that the mse reaches 0). 30 or 40 epochs seem sufficient to solve the problem, nothing happens afterwards.</p>
 <p>Let’s now study the influence of the learning rate <code>eta=0.1</code> seemed to work, but is it the best value?</p>
 <p><strong>Q:</strong> Iterate over multiple values of <code>eta</code> using a logarithmic scale and plot the final mse after 100 epochs as a function of the learning rate. Conclude.</p>
 <p><em>Hint:</em> the logarithmic scale means that you will try values such as <span class="math inline">10^{-5}</span>, <span class="math inline">10^{-4}</span>, <span class="math inline">10^{-3}</span>, etc. until 1.0. In Python, you can either write explictly 0.0001 or use the notation <code>1e-4</code>. For the plot, use <code>np.log10(eta)</code> to only display the exponent on the X-axis.</p>
@@ -723,7 +725,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"mse"</span>)</span>
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[array([8461.50542914]), array([8448.11250949]), array([8315.36918067]), array([7099.73267265]), array([1558.81380678]), array([205.75347966]), array([205.75341538])]</code></pre>
+<pre><code>[array([2502.38125727]), array([2498.82326114]), array([2463.56399936]), array([2141.11879663]), array([670.57755267]), array([276.42556726]), array([276.42533428])]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -733,7 +735,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>A:</strong> with small values of the learning rate, LMS does not have time to converge within 100 epochs. A learning rate of 1 is actually possible in this simple problem. Try setting <code>eta</code> to 2.0 and observe what happens.</p>
+<p><strong>A:</strong> With small values of the learning rate, LMS does not have time to converge within 100 epochs. A learning rate of 1 is actually possible in this simple problem. Try setting <code>eta</code> to 2.0 and observe what happens.</p>
 </section>
 <section id="scikit-learn" class="level2">
 <h2 class="anchored" data-anchor-id="scikit-learn">Scikit-learn</h2>
@@ -775,8 +777,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
 <span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[95.28734628] -1.426580793575432
-mse: 205.75341537754272</code></pre>
+<pre><code>[50.61163981] -2.15821943523261
+mse: 276.42533428232537</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -836,7 +838,7 @@ mse: 205.75341537754272</code></pre>
 <span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"mse"</span>)</span>
 <span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>plt.show() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>mse: [241.05201205]</code></pre>
+<pre><code>mse: [317.20325456]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -904,7 +906,7 @@ mse: 205.75341537754272</code></pre>
 <span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"mse"</span>)</span>
 <span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[array([8314.66609921]), array([7094.25080431]), array([1557.7207601]), array([206.18470859]), array([209.94231293]), array([241.05201205])]</code></pre>
+<pre><code>[array([2463.37614216]), array([2139.66406069]), array([670.31330378]), array([276.95458754]), array([281.52657112]), array([317.20325456])]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -947,7 +949,7 @@ mse: 205.75341537754272</code></pre>
 <span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"mse"</span>)</span>
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>plt.show() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>mse: [206.18470859]</code></pre>
+<pre><code>mse: [276.95458754]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
