@@ -830,15 +830,16 @@ $$
 
 $$
 \begin{cases}
-    \Delta W = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \times \mathbf{x}^T \\
+    \Delta W = \eta \, [(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) ] \times \mathbf{x}^T \\
 \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) \\
 \end{cases}
 $$
 
 :::
 :::
 
+* $\odot$ denotes element-wise multiplication, i.e. $(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b})$ is also a vector.
 
 * In the linear case, $f'(x) = 1$.
 

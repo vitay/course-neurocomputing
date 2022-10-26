@@ -1102,11 +1102,12 @@ Note
 <p>the <strong>delta learning rule</strong> has the form:</p>
 <p><span class="math display">
 \begin{cases}
-    \Delta W = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \times \mathbf{x}^T \\
+    \Delta W = \eta \, [(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) ] \times \mathbf{x}^T \\
 \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) \\
 \end{cases}
 </span></p>
+<p><span class="math inline">\odot</span> denotes element-wise multiplication, i.e.&nbsp;<span class="math inline">(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b})</span> is also a vector.</p>
 <p>In the linear case, <span class="math inline">f'(x) = 1</span>. One can use any non-linear function, e.g hyperbolic tangent tanh(), ReLU, etc. Transfer functions are chosen for neural networks so that we can compute their derivative easily.</p>
 </section>
 <section id="polynomial-regression" class="level2">
@@ -1138,7 +1139,8 @@ Note
 \Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}\\
 \\
 \Delta b =  \eta \, (t - y)\\
-\end{cases}</span></p>
+\end{cases}
+</span></p>
 <p>Non-linear problem solved! The only unknown is which order for the polynomial matches best the data. One can perform regression with any kind of parameterized function using gradient descent.</p>
 </section>
 <section id="a-bit-of-learning-theory" class="level2">
@@ -1358,7 +1360,7 @@ Bias-variance trade-off
 <p>We search for the model with the <strong>optimum complexity</strong> realizing the trade-off between bias and variance. It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../slides/img/biasvariance2.png" class="img-fluid figure-img"></p>
+<p><img src="img/biasvariance2.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
 </figure>
 </div>

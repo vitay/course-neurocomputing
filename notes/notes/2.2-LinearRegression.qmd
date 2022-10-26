@@ -578,12 +578,13 @@ the **delta learning rule** has the form:
 
 $$
 \begin{cases}
-    \Delta W = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \times \mathbf{x}^T \\
+    \Delta W = \eta \, [(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) ] \times \mathbf{x}^T \\
 \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) \\
 \end{cases}
 $$
 
+$\odot$ denotes element-wise multiplication, i.e. $(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b})$ is also a vector.
 
 In the linear case, $f'(x) = 1$. One can use any non-linear function, e.g hyperbolic tangent tanh(), ReLU, etc. Transfer functions are chosen for neural networks so that we can compute their derivative easily.
 
@@ -629,7 +630,8 @@ $$\begin{cases}
 \Delta \mathbf{w} =  \eta \, (t - y) \, \mathbf{x}\\
 \\
 \Delta b =  \eta \, (t - y)\\
-\end{cases}$$
+\end{cases}
+$$
 
 Non-linear problem solved! The only unknown is which order for the polynomial matches best the data. One can perform regression with any kind of parameterized function using gradient descent.
 
@@ -770,6 +772,7 @@ The disadvantage of **simple hold-out cross-validation** is that 20 or 30% of th
         $$
             \epsilon_{\mathcal{D}} (M_i) = \frac{1}{k} \cdot \sum_{j=1}^{k} \epsilon_{\mathcal{S}_j}(h_{ij})
         $$
+
 * Select the model $M_{i}^*$ with the minimal empirical error on $\mathcal{D}$.
 :::
 
@@ -812,7 +815,7 @@ $$
 
 We search for the model with the **optimum complexity** realizing the trade-off between bias and variance. It is better to have a model with a slightly higher bias (training error) but with a smaller variance (generalization error).
 
-![The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](../slides/img/biasvariance2.png)
+![The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <http://scott.fortmann-roe.com/docs/BiasVariance.html>](img/biasvariance2.png)
 :::
 
 

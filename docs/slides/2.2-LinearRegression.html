@@ -1282,14 +1282,15 @@ x_1 &amp; x_2 \\
 </ul>
 <p><span class="math display">
 \begin{cases}
-    \Delta W = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \times \mathbf{x}^T \\
+    \Delta W = \eta \, [(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) ] \times \mathbf{x}^T \\
 \\
-    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \times f'(W \times \mathbf{x} + \mathbf{b}) \\
+    \Delta \mathbf{b} = \eta \, (\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b}) \\
 \end{cases}
 </span></p>
 </div>
 </div>
 <ul>
+<li><p><span class="math inline">\odot</span> denotes element-wise multiplication, i.e.&nbsp;<span class="math inline">(\mathbf{t} - \mathbf{y}) \odot f'(W \times \mathbf{x} + \mathbf{b})</span> is also a vector.</p></li>
 <li><p>In the linear case, <span class="math inline">f'(x) = 1</span>.</p></li>
 <li><p>One can use any non-linear function, e.g hyperbolic tangent tanh(), ReLU, etc.</p></li>
 <li><p>Transfer functions are chosen for neural networks so that we can compute their derivative easily.</p></li>
