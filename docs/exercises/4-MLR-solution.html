@@ -670,7 +670,7 @@ It can be downloaded/loaded using the
 <p>i.e.&nbsp;you compute the mean and standard deviation of each column of <code>X</code> and apply the formula on each column.</p>
 <p><strong>Q:</strong> Normalize the dataset. Make sure that the new mean and std is correct.</p>
 <p><em>Tip:</em> <code>X.mean(axis=0)</code> and <code>X.std(axis=0)</code> should be useful.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X_normalized <span class="op">=</span> (X <span class="op">-</span> X.mean(axis<span class="op">=</span><span class="dv">0</span>))<span class="op">/</span>X.std(axis<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Old mean:"</span>, X.mean(axis<span class="op">=</span><span class="dv">0</span>))</span>
@@ -688,7 +688,7 @@ New std: [1. 1. 1. 1. 1. 1. 1. 1.]</code></pre>
 </div>
 </div>
 <p><strong>Q:</strong> Apply MLR again on <span class="math inline">X^\text{normalized}</span>, print the mse and visualize the weights. What has changed?</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> LinearRegression()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>reg.fit(X_normalized, t)</span>
@@ -752,11 +752,11 @@ New std: [1. 1. 1. 1. 1. 1. 1. 1.]</code></pre>
 <p>Fortunately, <code>scikit-learn</code> provides these methods with a similar interface to <code>LinearRegression</code>. The <code>Ridge</code> and <code>Lasso</code> objects take an additional argument <code>alpha</code> which represents the regularization parameter:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> Lasso(alpha<span class="op">=</span><span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge, Lasso</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Q:</strong> Apply Ridge and Lasso regression on the scaled data, vary the regularization parameter to understand its function and comment on the results. In particular, vary the regularization parameter for LASSO and identify the features which are the most predictive of the price. Does it make sense?</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">10.0</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>reg.fit(X_normalized, t)</span>
@@ -812,7 +812,7 @@ New std: [1. 1. 1. 1. 1. 1. 1. 1.]</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> Lasso(alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>reg.fit(X_normalized, t)</span>
@@ -869,14 +869,14 @@ New std: [1. 1. 1. 1. 1. 1. 1. 1.]</code></pre>
 </div>
 </div>
 <p><strong>A:</strong> Ridge regression does not have a big effect for this data. By increasing the regularization parameter in Lasso regression, the MSE worsens slightly, but the number of non-zero weights becomes very small. With <code>alpha=1.0</code>, all weights are set to 0… With <code>alpha=0.1</code>, there are only 3 non-zero parameters: the corresponding features are the most predictive of the prices. You can identify them with:</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, w <span class="kw">in</span> <span class="bu">enumerate</span>(reg.coef_):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> w <span class="op">!=</span> <span class="fl">0.0</span>:</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(dataset.feature_names[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(dataset.feature_names[i], w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>MedInc
-HouseAge
-Latitude</code></pre>
+<pre><code>MedInc 0.705713372959335
+HouseAge 0.10601099216033393
+Latitude -0.011212667061584703</code></pre>
 </div>
 </div>
 

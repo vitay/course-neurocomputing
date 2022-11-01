@@ -288,7 +288,7 @@ $$
     P(t = 1 | x; w, b) = y ; \qquad P(t = 0 | x; w, b) = 1 - y
 $$
 
-The output $t$ therefore comes from a Bernouilli distribution $\mathcal{B}$ of parameter $p = y = f_{w, b}(x)$. The probability density function (pdf) is:
+The output $t$ therefore comes from a Bernouilli distribution $\mathcal{B}$ of parameter $p = y = f_{w, b}(x)$. The probability mass function (pmf) is:
 
 $$f(t | x; w, b) = y^t \, (1- y)^{1-t}$$
 
@@ -432,7 +432,7 @@ $$
     \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
 $$
 
-The $C$ weight vectors form a $d\times C$ **weight matrix** $W$, the biases form a vector $\mathbf{b}$.
+The $C$ weight vectors form a $C \times d$ **weight matrix** $W$, the biases form a vector $\mathbf{b}$.
 
 ![Linear perceptron for images. The output is the logit score. Source <http://cs231n.github.io/linear-classify>](../slides/img/imagemap.jpg)
 

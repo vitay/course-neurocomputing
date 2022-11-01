@@ -706,7 +706,7 @@ Note
 <p><span class="math display">
     P(t = 1 | x; w, b) = y ; \qquad P(t = 0 | x; w, b) = 1 - y
 </span></p>
-<p>The output <span class="math inline">t</span> therefore comes from a Bernouilli distribution <span class="math inline">\mathcal{B}</span> of parameter <span class="math inline">p = y = f_{w, b}(x)</span>. The probability density function (pdf) is:</p>
+<p>The output <span class="math inline">t</span> therefore comes from a Bernouilli distribution <span class="math inline">\mathcal{B}</span> of parameter <span class="math inline">p = y = f_{w, b}(x)</span>. The probability mass function (pmf) is:</p>
 <p><span class="math display">f(t | x; w, b) = y^t \, (1- y)^{1-t}</span></p>
 <p>If we consider our training samples <span class="math inline">(x_i, t_i)</span> as independently taken from this distribution, our task is to find the parameterized distribution that best explains the data, which means to find the parameters <span class="math inline">w</span> and <span class="math inline">b</span> maximizing the <strong>likelihood</strong> that the samples <span class="math inline">t</span> come from a Bernouilli distribution when <span class="math inline">x</span>, <span class="math inline">w</span> and <span class="math inline">b</span> are given. We only need to apply <strong>Maximum Likelihood Estimation</strong> (MLE) on this Bernouilli distribution!</p>
 <p>The likelihood function for logistic regression is :</p>
@@ -836,7 +836,7 @@ Logistic regression
 <p><span class="math display">
     \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
 </span></p>
-<p>The <span class="math inline">C</span> weight vectors form a <span class="math inline">d\times C</span> <strong>weight matrix</strong> <span class="math inline">W</span>, the biases form a vector <span class="math inline">\mathbf{b}</span>.</p>
+<p>The <span class="math inline">C</span> weight vectors form a <span class="math inline">C \times d</span> <strong>weight matrix</strong> <span class="math inline">W</span>, the biases form a vector <span class="math inline">\mathbf{b}</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/imagemap.jpg" class="img-fluid figure-img"></p>

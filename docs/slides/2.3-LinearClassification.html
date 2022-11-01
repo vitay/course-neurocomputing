@@ -511,9 +511,9 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 </ul>
 <p><span class="math display">
 \begin{cases}
-    \Delta \mathbf{w} =  \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i\\
+    \Delta \mathbf{w} =  \eta \, \dfrac{1}{N} \, \displaystyle\sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i\\
     \\
-    \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )\\
+    \Delta b = \eta \, \dfrac{1}{N} \, \displaystyle\sum_{i=1}^{N} (t_i - y_i )\\
 \end{cases}
 </span></p>
 </section>
@@ -709,11 +709,10 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 <li>The idea of MLE is to maximize the joint density function for all observations. This function is expressed by the <strong>likelihood function</strong>:</li>
 </ul>
 <p><span class="math display">
-    L(\mu, \sigma) = P( x ; \mu , \sigma  )  = \prod_{i=1}^{N} f(x_i ; \mu, \sigma )
+    L(\mu, \sigma) = P( \mathbf{x} ; \mu , \sigma  )  = \prod_{i=1}^{N} f(x_i ; \mu, \sigma )
 </span></p>
 <ul>
-<li><p>When the pdf takes high values for all samples, it is quite likely that the samples come from this particular distribution.</p></li>
-<li><p>The likelihood function reflects the probability that the parameters <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> explain the observations <span class="math inline">\{x_i\}_{i=1}^N</span>.</p></li>
+<li>When the pdf takes high values for all samples, it is quite likely that the samples come from this particular distribution.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -723,6 +722,10 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 </div>
 </div>
 </div>
+<ul>
+<li><p>The likelihood function reflects how well the parameters <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> explain the observations <span class="math inline">\{x_i\}_{i=1}^N</span>.</p></li>
+<li><p>Note: the samples must be i.i.d. so that the likelihood is a product.</p></li>
+</ul>
 </section>
 
 <section id="maximum-likelihood-estimation-3" class="title-slide slide level1 center">
@@ -842,7 +845,7 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
     P(t = 1 | x; w, b) = y ; \qquad P(t = 0 | x; w, b) = 1 - y
 </span></p>
 <ul>
-<li>The output <span class="math inline">t</span> therefore comes from a Bernouilli distribution <span class="math inline">\mathcal{B}</span> of parameter <span class="math inline">p = y = f_{w, b}(x)</span>. The probability density function (pdf) is:</li>
+<li>The output <span class="math inline">t</span> therefore comes from a Bernouilli distribution <span class="math inline">\mathcal{B}</span> of parameter <span class="math inline">p = y = f_{w, b}(x)</span>. The probability mass function (pmf) is:</li>
 </ul>
 <p><span class="math display">f(t | x; w, b) = y^t \, (1- y)^{1-t}</span></p>
 <ul>
@@ -867,7 +870,7 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 \end{aligned}
 </span></p>
 <ul>
-<li>The likelihood function is quite hard to differentiate, so we take the <em>log-likelihood</em> function:</li>
+<li>The likelihood function is quite hard to differentiate, so we take the <strong>log-likelihood</strong> function:</li>
 </ul>
 <p><span class="math display">
 \begin{aligned}
@@ -1091,7 +1094,7 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
     \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
 </span></p>
 <ul>
-<li>The <span class="math inline">C</span> weight vectors form a <span class="math inline">d\times C</span> <strong>weight matrix</strong> <span class="math inline">W</span>, the biases form a vector <span class="math inline">\mathbf{b}</span>.</li>
+<li>The <span class="math inline">C</span> weight vectors form a <span class="math inline">C \times d</span> <strong>weight matrix</strong> <span class="math inline">W</span>, the biases form a vector <span class="math inline">\mathbf{b}</span>.</li>
 </ul>
 </div>
 </div>
@@ -1212,7 +1215,7 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 <li>The cross-entropy samples from <span class="math inline">\mathbf{t} | \mathbf{x}</span>:</li>
 </ul>
 <p><span class="math display">
-    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})]
+    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})] = - \sum_{j=1}^C P(t_j | \mathbf{x}) \, \log P(y_j = t_j | \mathbf{x})
 </span></p>
 <ul>
 <li>For a given input <span class="math inline">\mathbf{x}</span>, <span class="math inline">\mathbf{t}</span> is non-zero only for the correct class <span class="math inline">t^*</span>, as <span class="math inline">\mathbf{t}</span> is a one-hot encoded vector <span class="math inline">[0, 1, 0, 0, 0]</span>:</li>

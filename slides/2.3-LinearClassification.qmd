@@ -168,9 +168,9 @@ $$
 
 $$
 \begin{cases}
-    \Delta \mathbf{w} =  \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i\\
+    \Delta \mathbf{w} =  \eta \, \dfrac{1}{N} \, \displaystyle\sum_{i=1}^{N} (t_i - y_i) \, \mathbf{x}_i\\
     \\
-    \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )\\
+    \Delta b = \eta \, \dfrac{1}{N} \, \displaystyle\sum_{i=1}^{N} (t_i - y_i )\\
 \end{cases}
 $$
 
@@ -358,12 +358,11 @@ where $\mu$ is the mean of the distribution and $\sigma$ its standard deviation.
 * The idea of MLE is to maximize the joint density function for all observations. This function is expressed by the **likelihood function**:
 
 $$
-    L(\mu, \sigma) = P( x ; \mu , \sigma  )  = \prod_{i=1}^{N} f(x_i ; \mu, \sigma )
+    L(\mu, \sigma) = P( \mathbf{x} ; \mu , \sigma  )  = \prod_{i=1}^{N} f(x_i ; \mu, \sigma )
 $$
 
 * When the pdf takes high values for all samples, it is quite likely that the samples come from this particular distribution.
 
-* The likelihood function reflects the probability that the parameters $\mu$ and $\sigma$ explain the observations $\{x_i\}_{i=1}^N$.
 
 
 :::
@@ -375,6 +374,9 @@ $$
 :::
 :::
 
+* The likelihood function reflects how well the parameters $\mu$ and $\sigma$ explain the observations $\{x_i\}_{i=1}^N$.
+
+* Note: the samples must be i.i.d. so that the likelihood is a product.
 
 # Maximum Likelihood Estimation
 
@@ -485,7 +487,7 @@ $$
     P(t = 1 | x; w, b) = y ; \qquad P(t = 0 | x; w, b) = 1 - y
 $$
 
-* The output $t$ therefore comes from a Bernouilli distribution $\mathcal{B}$ of parameter $p = y = f_{w, b}(x)$. The probability density function (pdf) is:
+* The output $t$ therefore comes from a Bernouilli distribution $\mathcal{B}$ of parameter $p = y = f_{w, b}(x)$. The probability mass function (pmf) is:
 
 $$f(t | x; w, b) = y^t \, (1- y)^{1-t}$$
 
@@ -510,7 +512,7 @@ $$
 \end{aligned}
 $$
 
-* The likelihood function is quite hard to differentiate, so we take the *log-likelihood* function:
+* The likelihood function is quite hard to differentiate, so we take the **log-likelihood** function:
 
 $$
 \begin{aligned}
@@ -712,7 +714,7 @@ $$
     \mathbf{y} = f(W \times \mathbf{x} + \mathbf{b})
 $$
 
-* The $C$ weight vectors form a $d\times C$ **weight matrix** $W$, the biases form a vector $\mathbf{b}$.
+* The $C$ weight vectors form a $C \times d$ **weight matrix** $W$, the biases form a vector $\mathbf{b}$.
 
 :::
 :::
@@ -836,7 +838,7 @@ $$
 * The cross-entropy samples from $\mathbf{t} | \mathbf{x}$:
 
 $$
-    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})]
+    \mathcal{l}(W, \mathbf{b}) = \mathcal{H}(\mathbf{t} | \mathbf{x}, \mathbf{y} | \mathbf{x}) =  \mathbb{E}_{t \sim P(\mathbf{t} | \mathbf{x})} [ - \log P(\mathbf{y} = t | \mathbf{x})] = - \sum_{j=1}^C P(t_j | \mathbf{x}) \, \log P(y_j = t_j | \mathbf{x})
 $$
 
 * For a given input $\mathbf{x}$, $\mathbf{t}$ is non-zero only for the correct class $t^*$, as $\mathbf{t}$ is a one-hot encoded vector $[0, 1, 0, 0, 0]$:
