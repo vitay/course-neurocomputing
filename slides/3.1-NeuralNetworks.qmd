@@ -144,9 +144,11 @@ $$
 
 * We have a training set \mathcal{D} composed of N input/output pairs $(\mathbf{x}_i, \mathbf{t}_i)_{i=1..N}$.
 
-* **Optimization problem:** 
+::: {.callout-tip}
+## Optimization problem
   
-  * What are the free parameters $\theta$ (weights $W^1, W^2$ and biases $\textbf{b}^1, \textbf{b}^2$) making the prediction $\mathbf{y}$ as close as possible from the desired output $\mathbf{t}$?
+What are the free parameters $\theta$ (weights $W^1, W^2$ and biases $\textbf{b}^1, \textbf{b}^2$) making the prediction $\mathbf{y}$ as close as possible from the desired output $\mathbf{t}$?
+:::
 
 * We define a **loss function** $\mathcal{L}(\theta)$ of the free parameters which should be minimized:
 
@@ -270,9 +272,7 @@ $$
 
 $$
     \frac{\partial \mathcal{l}(\theta)}{\partial W^2} = - \mathbf{\delta_y} \times \mathbf{h}^T
-$$
-
-$$
+    \;\; \text{and} \;\;
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^2} = - \mathbf{\delta_y}
 $$
 

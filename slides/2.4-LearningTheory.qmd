@@ -30,7 +30,7 @@ resources: pdf/2.4-LearningTheory.pdf
         \epsilon_\mathcal{D} = \dfrac{\text{number of misclassifications}}{\text{number of examples}}
     $$
 
-    * For regression, the mse is generally used.
+    * For regression, the mse and coefficient of determination are generally used.
 
     * Totally irrelevant on usage: reading the training set has a training error of 0%.
 

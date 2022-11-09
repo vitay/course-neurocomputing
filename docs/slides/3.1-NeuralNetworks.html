@@ -545,11 +545,22 @@
 <section id="training-a-mlp-loss-functions" class="title-slide slide level1 center">
 <h1>Training a MLP : loss functions</h1>
 <ul>
-<li><p>We have a training set composed of N input/output pairs <span class="math inline">(\mathbf{x}_i, \mathbf{t}_i)_{i=1..N}</span>.</p></li>
-<li><p><strong>Optimization problem:</strong></p>
+<li>We have a training set composed of N input/output pairs <span class="math inline">(\mathbf{x}_i, \mathbf{t}_i)_{i=1..N}</span>.</li>
+</ul>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Optimization problem</strong></p>
+</div>
+<div class="callout-content">
+<p>What are the free parameters <span class="math inline">\theta</span> (weights <span class="math inline">W^1, W^2</span> and biases <span class="math inline">\textbf{b}^1, \textbf{b}^2</span>) making the prediction <span class="math inline">\mathbf{y}</span> as close as possible from the desired output <span class="math inline">\mathbf{t}</span>?</p>
+</div>
+</div>
+</div>
 <ul>
-<li>What are the free parameters <span class="math inline">\theta</span> (weights <span class="math inline">W^1, W^2</span> and biases <span class="math inline">\textbf{b}^1, \textbf{b}^2</span>) making the prediction <span class="math inline">\mathbf{y}</span> as close as possible from the desired output <span class="math inline">\mathbf{t}</span>?</li>
-</ul></li>
 <li><p>We define a <strong>loss function</strong> <span class="math inline">\mathcal{L}(\theta)</span> of the free parameters which should be minimized:</p>
 <ul>
 <li>For <strong>regression</strong> problems, we take the <strong>mean square error</strong> (mse):</li>
@@ -672,8 +683,7 @@
 </ul>
 <p><span class="math display">
     \frac{\partial \mathcal{l}(\theta)}{\partial W^2} = - \mathbf{\delta_y} \times \mathbf{h}^T
-</span></p>
-<p><span class="math display">
+    \;\; \text{and} \;\;
     \frac{\partial \mathcal{l}(\theta)}{\partial \mathbf{b}^2} = - \mathbf{\delta_y}
 </span></p>
 <p>i.e.&nbsp;exactly the same delta learning rule as a softmax linear classifier or multiple linear regression using the vector <span class="math inline">\mathbf{h}</span> as an input.</p>

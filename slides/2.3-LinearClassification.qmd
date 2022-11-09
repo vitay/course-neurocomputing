@@ -1017,7 +1017,19 @@ $$
 
 # Comparison of linear classification and regression
 
+
+
 * Classification and regression differ in the nature of their outputs: in classification they are discrete, in regression they are continuous values.
+
+::: {.columns}
+::: {.column width=25%}
+
+![](img/linearperceptron-simple.svg)
+
+:::
+::: {.column width=75%}
+
+
 
 * However, when trying to minimize the mismatch between a model $\mathbf{y}$ and the real data $\mathbf{t}$, we have found the same **delta learning rule**:
 
@@ -1029,17 +1041,30 @@ $$
 \end{cases}
 $$
 
-* Regression and classification are in the end the same problem for us. The only things that needs to be adapted is the activation function of the output and the **loss function**:
+* Regression and classification are in the end the same problem for us. The only things that needs to be adapted is the **activation function** of the output and the **loss function**.
 
-    * For regression, we use regular activation functions and the **mean square error** (mse):
+:::
+:::
 
-    $$
-    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \in \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
-    $$
 
-    * For classification, we use the softmax activation function and the **cross-entropy** (negative log-likelihood) loss function:
+::: {.columns}
+::: {.column width=50%}
 
-    $$\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]$$
+* For regression, we use linear activation functions and the **mean square error** (mse):
+
+$$
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
+$$
+
+:::
+::: {.column width=50%}
+
+* For classification, we use the softmax activation function and the **cross-entropy** (negative log-likelihood) loss function.
+
+$$\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]$$
+
+:::
+:::
 
 # 5 - Multi-label classification
 

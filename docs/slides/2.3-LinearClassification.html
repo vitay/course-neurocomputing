@@ -1385,8 +1385,18 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 <section id="comparison-of-linear-classification-and-regression" class="title-slide slide level1 center">
 <h1>Comparison of linear classification and regression</h1>
 <ul>
-<li><p>Classification and regression differ in the nature of their outputs: in classification they are discrete, in regression they are continuous values.</p></li>
-<li><p>However, when trying to minimize the mismatch between a model <span class="math inline">\mathbf{y}</span> and the real data <span class="math inline">\mathbf{t}</span>, we have found the same <strong>delta learning rule</strong>:</p></li>
+<li>Classification and regression differ in the nature of their outputs: in classification they are discrete, in regression they are continuous values.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/linearperceptron-simple.svg"></p>
+</figure>
+</div>
+</div><div class="column" style="width:75%;">
+<ul>
+<li>However, when trying to minimize the mismatch between a model <span class="math inline">\mathbf{y}</span> and the real data <span class="math inline">\mathbf{t}</span>, we have found the same <strong>delta learning rule</strong>:</li>
 </ul>
 <p><span class="math display">
 \begin{cases}
@@ -1396,18 +1406,25 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 \end{cases}
 </span></p>
 <ul>
-<li><p>Regression and classification are in the end the same problem for us. The only things that needs to be adapted is the activation function of the output and the <strong>loss function</strong>:</p>
+<li>Regression and classification are in the end the same problem for us. The only things that needs to be adapted is the <strong>activation function</strong> of the output and the <strong>loss function</strong>.</li>
+</ul>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li>For regression, we use regular activation functions and the <strong>mean square error</strong> (mse):</li>
+<li>For regression, we use linear activation functions and the <strong>mean square error</strong> (mse):</li>
 </ul>
 <p><span class="math display">
-  \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \in \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
-  </span></p>
+    \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ ||\mathbf{t} - \mathbf{y}||^2 ]
+</span></p>
+</div><div class="column" style="width:50%;">
 <ul>
-<li>For classification, we use the softmax activation function and the <strong>cross-entropy</strong> (negative log-likelihood) loss function:</li>
+<li>For classification, we use the softmax activation function and the <strong>cross-entropy</strong> (negative log-likelihood) loss function.</li>
 </ul>
-<p><span class="math display">\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]</span></p></li>
-</ul>
+<p><span class="math display">\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [ - \langle \mathbf{t} \cdot \log \mathbf{y} \rangle]</span></p>
+</div>
+</div>
 </section>
 
 <section id="multi-label-classification" class="title-slide slide level1 center">
