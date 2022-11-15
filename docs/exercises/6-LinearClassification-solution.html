@@ -625,7 +625,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Before going further, let’s track the evolution of the classification error during learning, defined as the fraction of incorrectly classified examples during one epoch:</p>
 <p><span class="math display">
-    \epsilon = \frac{\text{# misclassifications}}{N}
+    \epsilon = \frac{\text{Number of misclassifications}}{\text{Number of samples}}
 </span></p>
 <p><strong>Q:</strong> Modify your algorithm to compute the training error and the mse loss for each epoch. How do the training error and loss evolve during learning? Do you really need both?</p>
 <p><em>Tips:</em> When iterating over each training example, you will need to increment a counter for misclassifications when your prediction <code>y_i</code> is different from <code>t[i]</code> (use <code>!=</code> for “not equal”).</p>
@@ -825,7 +825,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Error: 0.28</code></pre>
+<pre><code>Error: 0.41</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -842,7 +842,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>A:</strong> contrary to the case where the weight vector is initially 0, the learning rate had a big influence on the learning speed when the initial weight vector is non-zero. It is even worse with big weights ([-10, 10]).</p>
+<p><strong>A:</strong> Contrary to the case where the weight vector is initially 0, the learning rate had a big influence on the learning speed when the initial weight vector is non-zero. It is even worse with big weights ([-10, 10]).</p>
 <p>The explanation lies on the incremental nature of the perceptron learning rule:</p>
 <p><span class="math display">
     \mathbf{w} \leftarrow \mathbf{w} + \eta \, (t - y) \, \mathbf{x}
@@ -939,7 +939,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Final error: 0.31</code></pre>
+<pre><code>Final error: 0.23</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -956,7 +956,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p><strong>A:</strong> the outlier heavily attracts the hyperplane and changing the hyperparameters does not improve the situation. That’s bad.</p>
+<p><strong>A:</strong> The outlier heavily attracts the hyperplane and changing the hyperparameters does not improve the situation. That’s bad.</p>
 </section>
 </section>
 <section id="soft-linear-classification-logistic-regression" class="level2">
@@ -1035,7 +1035,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Final error: 0.06</code></pre>
+<pre><code>Final error: 0.04</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">

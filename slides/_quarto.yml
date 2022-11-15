@@ -18,6 +18,9 @@ title-slide-attributes:
     data-background-opacity: "1"
     data-background-position: top
 
+highlight-style: github
+code-line-numbers: false
+
 filters:
   - center_images.lua
   - quarto
