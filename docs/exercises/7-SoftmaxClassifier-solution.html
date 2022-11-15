@@ -728,9 +728,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Final training error: 0.0
-Final training loss: 0.005654702534318429
-Final test error: 0.02962962962962963
-Final test loss: 0.02962962962962963</code></pre>
+Final training loss: 0.005522075921611576
+Final test error: 0.04259259259259259
+Final test loss: 0.04259259259259259</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -745,10 +745,10 @@ Final test loss: 0.02962962962962963</code></pre>
 <p><strong>A:</strong> The training error reaches quickly 0, but the loss still decreases for a number of epochs. This is because the probability vector <code>y</code> is a correct prediction for the class (the maximum probability corresponds to the correct class) but not with a probability of 1 yet. The loss continues to evolve even when there is no error, as it wants to bring the probability vector as close as possible to a binary vector.</p>
 <p>This is the main difference with the mean square error (mse) loss function: as soon as there are no errors, the mse loss becomes 0 and learning stops. In classification problems, one should therefore track the loss function, not the training error.</p>
 <p><strong>Q:</strong> Compare the evolution of the training and test errors during training. What happens?</p>
-<p>The test error is higher than the final training error. as the examples were not use for training. This is a classical sign of <strong>overfitting</strong>, although the model is linear. Regularization may help.</p>
+<p>The test error is higher than the final training error, as the examples were not used for training. This is a classical sign of <strong>overfitting</strong>, although the model is linear. Regularization may help.</p>
 <p>If you let the network learn for more epochs, the validation error may even start to go up: you need <strong>early stopping</strong>.</p>
 <p><strong>Q:</strong> The following cell samples 12 misclassified images from the test and shows the predicted class together with the ground truth. What do you think?</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>misclassified <span class="op">=</span> []</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N_test):</span>
@@ -775,7 +775,7 @@ Final test loss: 0.02962962962962963</code></pre>
 </div>
 </div>
 </div>
-<p><strong>A:</strong> for some misclassified images, the mistakes are quite understandable, so the classifier did a quite good job. Real-world data are never clean, there always are some bad annotations. It is therefore important to use methods that are robust to outliers, such as soft classifiers.</p>
+<p><strong>A:</strong> For some misclassified images, the mistakes are quite understandable, so the classifier did a quite good job. Real-world data are never clean, there always are some bad annotations. It is therefore important to use methods that are robust to outliers, such as soft classifiers.</p>
 
 
 </section>
