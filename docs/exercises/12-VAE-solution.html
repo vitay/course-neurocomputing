@@ -739,7 +739,7 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> CNN()</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimizer</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(lr<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
@@ -948,7 +948,7 @@ Test accuracy: 0.9923999905586243</code></pre>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> CNN()</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimizer</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(lr<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile</span></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
@@ -1138,7 +1138,7 @@ Test accuracy: 0.9898999929428101</code></pre>
 <span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span>
 <span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimizer</span></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(lr<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile</span></span>
 <span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
@@ -1438,7 +1438,7 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <ul>
 <li>computes the KL divergence loss for the encoder:</li>
 </ul>
-<p><span class="math display">\mathcal{L}_\text{KL}(\theta) = \frac{1}{N} \sum_{i=1}^N -0.5 \, (1 + \text{z_log_var}^i - (\text{z_mean}^i)^2 - \exp(\text{z_log_var}^i))</span></p>
+<p><span class="math display">\mathcal{L}_\text{KL}(\theta) = \frac{1}{N} \sum_{i=1}^N -0.5 \, (1 + \text{z\_log\_var}^i - (\text{z\_mean}^i)^2 - \exp(\text{z\_log\_var}^i))</span></p>
 <ul>
 <li>minimizes the total loss:</li>
 </ul>
@@ -1523,7 +1523,7 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>vae <span class="op">=</span> VAE(latent_dim<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimizer</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.Adam(lr<span class="op">=</span><span class="fl">0.0001</span>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">0.0001</span>)</span>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile</span></span>
 <span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>vae.<span class="bu">compile</span>(optimizer<span class="op">=</span>optimizer)</span>
@@ -1712,9 +1712,6 @@ Epoch 30/30
 </div>
 <p><strong>A:</strong> Without having been instructed to, the encoder already separates quite well the different classes of digits in the latent space. A shallow classifier on the latent space with 2 dimensions might be able to classify the MNIST data!</p>
 <p>Here, we used labelled data to train the autoencoder, but the use-case would be semi-supervised learning: train the autoencoder on unsupervised unlabelled data, and then train a classifier on its latent space using a small amount of labelled data.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
 </section>
