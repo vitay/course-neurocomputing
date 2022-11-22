@@ -232,7 +232,7 @@ Radford, Metz and Chintala (2015). Unsupervised Representation Learning with Dee
 
     * f-GAN (relying on any f-divergence).
 
-* But the generator often **collapses**, i.e. outputs non-sense, or always the same image.
+* But the generator often **collapses**, i.e. outputs always the same image regarless the input noise.
 
 * Hyperparameter tuning is very difficult.
 

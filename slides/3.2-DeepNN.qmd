@@ -524,8 +524,10 @@ best = fmin(objective,
     algo=tpe.suggest,
     max_evals=100)
 
-print best
+print(best)
 ```
+
+* Other library: `optuna` <https://optuna.org>
 
 :::
 ::: {.column width=40%}
@@ -932,7 +934,7 @@ $$
 
 * **Vanishing gradients** are still the current limitation of deep networks.
 
-* Solutions: ReLU, pre-training, batch normalization, **residual networks**...
+* Solutions: ReLU, batch normalization + weight initialization, unsupervised pre-training, **residual networks**...
 
 
 # Derivative of the activation function
@@ -1003,12 +1005,10 @@ model.add(Dense(100)
 model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
+
 model.add(Dense(units=10, activation='softmax'))
 
-model.compile(loss='categorical_crossentropy',
-    optimizer=Adam(lr=0.01, decay=1e-6), 
-    metrics=['accuracy'] 
-)
+model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.01, decay=1e-6))
 ```
 
 # Take-home messages
