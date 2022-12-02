@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -120,7 +120,7 @@ div.csl-indent {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../" class="sidebar-logo-link">
+      <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
@@ -445,6 +445,7 @@ div.csl-indent {
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -470,14 +471,14 @@ Note
 <h2 class="anchored" data-anchor-id="rnns-with-attention">RNNs with Attention</h2>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/Gi8aHnnyDaM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The problem with the seq2seq architecture is that it <strong>compresses</strong> the complete input sentence into a single state vector.</p>
-<video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_6.mp4"></video>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_6.mp4"></video></div>
 <p>For long sequences, the beginning of the sentence may not be present in the final state vector:</p>
 <ul>
 <li>Truncated BPTT, vanishing gradients.</li>
 <li>When predicting the last word, the beginning of the paragraph might not be necessary.</li>
 </ul>
 <p>Consequence: there is not enough information in the state vector to start translating. A solution would be to concatenate the <strong>state vectors</strong> of all steps of the encoder and pass them to the decoder.</p>
-<video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_7.mp4"></video>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_7.mp4"></video></div>
 <ul>
 <li><strong>Problem 1:</strong> it would make a lot of elements in the state vector of the decoder (which should be constant).</li>
 <li><strong>Problem 2:</strong> the state vector of the decoder would depend on the length of the input sequence.</li>
@@ -485,10 +486,10 @@ Note
 <p>Attentional mechanisms <span class="citation" data-cites="Bahdanau2016">(<a href="../references.html#ref-Bahdanau2016" role="doc-biblioref">Bahdanau et al., 2016</a>)</span> let the decoder decide (by learning) which state vectors it needs to generate each word at each step.</p>
 <p>The <strong>attentional context vector</strong> of the decoder <span class="math inline">A^\text{decoder}_t</span> at time <span class="math inline">t</span> is a weighted average of all state vectors <span class="math inline">C^\text{encoder}_i</span> of the encoder.</p>
 <p><span class="math display">A^\text{decoder}_t = \sum_{i=0}^T a_i \, C^\text{encoder}_i</span></p>
-<video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_9.mp4"></video>
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_9.mp4"></video></div>
 <p>The coefficients <span class="math inline">a_i</span> are called the <strong>attention scores</strong> : how much attention is the decoder paying to each of the encoder’s state vectors? The attention scores <span class="math inline">a_i</span> are computed as a <strong>softmax</strong> over the scores <span class="math inline">e_i</span> (in order to sum to 1):</p>
 <p><span class="math display">a_i = \frac{\exp e_i}{\sum_j \exp e_j} \Rightarrow A^\text{decoder}_t = \sum_{i=0}^T \frac{\exp e_i}{\sum_j \exp e_j} \, C^\text{encoder}_i</span></p>
-<video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_process.mp4"></video>
+<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_process.mp4"></video></div>
 <p>The score <span class="math inline">e_i</span> is computed using:</p>
 <ul>
 <li>the previous output of the decoder <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span>.</li>
@@ -499,7 +500,7 @@ Note
 <p>Everything is differentiable, these attentional weights can be learned with BPTT.</p>
 <p>The attentional context vector <span class="math inline">A^\text{decoder}_t</span> is concatenated with the previous output <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span> and used as the next input <span class="math inline">\mathbf{x}^\text{decoder}_t</span> of the decoder:</p>
 <p><span class="math display">\mathbf{x}^\text{decoder}_t = [\mathbf{h}^\text{decoder}_{t-1} ; A^\text{decoder}_t]</span></p>
-<video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_tensor_dance.mp4"></video>
+<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_tensor_dance.mp4"></video></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/seq2seq-attention5.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -581,7 +582,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -617,24 +635,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

@@ -4,7 +4,6 @@ subtitle: Object detection
 
 author: Julien Vitay
 institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
-date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
 
 resources: pdf/4.2-ObjectDetection.pdf
 ---

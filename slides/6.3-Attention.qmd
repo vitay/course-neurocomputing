@@ -4,7 +4,6 @@ subtitle: Attentional neural networks
 
 author: Julien Vitay
 institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
-date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
 
 resources: pdf/6.3-Attention.pdf
 ---

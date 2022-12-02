@@ -7,7 +7,7 @@
 <link href="4.1-CNN_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="4.1-CNN_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="4.1-CNN_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.251">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -405,14 +405,22 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="center">
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="quarto-title-block center">
   <h1 class="title">Neurocomputing</h1>
   <p class="subtitle">Convolutional neural networks</p>
-  <p class="author">Julien Vitay</p>
-  <p class="institute">Professur für Künstliche Intelligenz - Fakultät für Informatik</p>
-  <p class="date"><a href="https://tu-chemnitz.de/informatik/KI/edu/neurocomputing" class="uri">https://tu-chemnitz.de/informatik/KI/edu/neurocomputing</a></p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Julien Vitay 
+</div>
+        <p class="quarto-title-affiliation">
+            Professur für Künstliche Intelligenz - Fakultät für Informatik
+          </p>
+    </div>
+</div>
+
+</section>
 <section id="convolutional-neural-networks" class="title-slide slide level1 center">
 <h1>1 - Convolutional neural networks</h1>
 
@@ -757,8 +765,22 @@
 
 <section id="alexnet" class="title-slide slide level1 center">
 <h1>AlexNet</h1>
-
-<img data-src="img/alexnet.png" style="width:70.0%" class="r-stretch quarto-figure-center"><ul>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/alexnet.png"></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/imagenet-result.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
 <li><p><strong>2012: AlexNet</strong> (Toronto University) started the DL revolution by winning ImageNet 2012.</p></li>
 <li><p>Similar architecture to LeNet, but trained on two GPUs using augmented data.</p></li>
 <li><p>Uses ReLU, max-pooling, dropout, SGD with momentum, L2 regularization.</p></li>
@@ -836,12 +858,9 @@
 <li><p>Pretrained weights are available in <code>keras</code>:</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tf.keras.applications.Xception(include_top<span class="op">=</span><span class="va">True</span>, weights<span class="op">=</span><span class="st">"imagenet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-note callout-captioned callout-style-default">
+<div class="callout callout-note no-icon callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
 <p><strong>References</strong></p>
 </div>
 <div class="callout-content">
@@ -1571,7 +1590,24 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -1609,24 +1645,42 @@
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>

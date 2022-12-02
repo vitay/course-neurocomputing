@@ -4,7 +4,6 @@ subtitle: Convolutional neural networks
 
 author: Julien Vitay
 institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
-date: "<https://tu-chemnitz.de/informatik/KI/edu/neurocomputing>"
 
 resources: pdf/4.1-CNN.pdf
 ---
@@ -390,7 +389,19 @@ LeCun et al. (1998). Gradient Based Learning Applied to Document Recognition. Pr
 
 # AlexNet
 
-![](img/alexnet.png){width=70%}
+::: {.columns}
+::: {.column width=70%}
+
+![](img/alexnet.png)
+
+
+:::
+::: {.column width=30%}
+
+![](img/imagenet-result.png)
+
+:::
+:::
 
 * **2012: AlexNet** (Toronto University) started the DL revolution by winning ImageNet 2012.
 

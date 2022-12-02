@@ -20,6 +20,7 @@ title-slide-attributes:
 
 highlight-style: github
 code-line-numbers: false
+callout-appearance: minimal
 
 filters:
   - center_images.lua
