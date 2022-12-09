@@ -750,40 +750,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mlp.W2)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mlp.b2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[ 0.33272587  0.01398066]
- [ 0.94956954  0.84870421]
- [ 0.43605376 -0.58038859]
- [-0.99363698 -0.81789281]
- [-0.90596541 -0.11666186]
- [-0.68262926  0.54880095]
- [ 0.85470209  0.7081648 ]
- [ 0.62943111 -0.0847816 ]
- [-0.41945648 -0.92465732]
- [ 0.33105959 -0.86764431]
- [-0.26682699 -0.69912661]
- [ 0.45807615  0.06831561]
- [ 0.45821217  0.66453464]
- [-0.11603061  0.14275347]
- [ 0.20816446  0.63013282]]
-[[-0.80868452]
- [ 0.6271299 ]
- [-0.39471384]
- [-0.80376237]
- [ 0.99412293]
- [ 0.43885791]
- [-0.25094838]
- [ 0.48525399]
- [ 0.40064106]
- [-0.93766766]
- [ 0.94753202]
- [-0.45115928]
- [-0.81414577]
- [-0.55444073]
- [-0.96083552]]
-[[-0.58794627 -0.30389506 -0.09102471 -0.53036605  0.7054946  -0.1952169
-   0.7134156  -0.76363868 -0.76930079  0.42121123 -0.33786493  0.54922539
-   0.05239216 -0.47243363 -0.44618742]]
-[[-0.08196602]]</code></pre>
+<pre><code>[[-0.73208944 -0.20965278]
+ [-0.27515815  0.73159014]
+ [-0.76012262 -0.46215965]
+ [-0.84635159  0.29245406]
+ [-0.73194004 -0.03637448]
+ [ 0.86264062  0.35319895]
+ [-0.62629883 -0.631849  ]
+ [ 0.1285053   0.3493445 ]
+ [-0.42223682 -0.26228327]
+ [-0.52174544  0.85955365]
+ [ 0.94448822 -0.11290365]
+ [-0.34090039  0.91686627]
+ [-0.33780046  0.80982865]
+ [-0.39626546 -0.90717189]
+ [ 0.99327594 -0.50228313]]
+[[ 0.91862404]
+ [ 0.2504195 ]
+ [ 0.42999694]
+ [ 0.08549937]
+ [ 0.22951284]
+ [ 0.12564425]
+ [ 0.53270233]
+ [-0.48085121]
+ [ 0.52723703]
+ [ 0.52985588]
+ [-0.95757609]
+ [-0.23116838]
+ [ 0.95077149]
+ [-0.27266384]
+ [ 0.90558859]]
+[[-0.94479102  0.12877654  0.43355234 -0.28073317 -0.9233803   0.7707296
+  -0.15516929  0.04266023 -0.88229133 -0.2331283   0.06572288 -0.37534
+   0.59914259  0.31750682  0.19315471]]
+[[-0.72456445]]</code></pre>
 </div>
 </div>
 <p>The <code>feedforward</code> method takes a vector <code>x</code> as input, reshapes it to make sure it has two rows, and computes the hidden activation <span class="math inline">\mathbf{h}</span> and the prediction <span class="math inline">\mathbf{y}</span>.</p>
@@ -812,22 +812,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"negative class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[0.34630268]
- [0.82145944]
- [0.38535467]
- [0.15322504]
- [0.61841103]
- [0.59192857]
- [0.62959624]
- [0.68082782]
- [0.43255954]
- [0.23041666]
- [0.61409424]
- [0.45314701]
- [0.43714124]
- [0.36793655]
- [0.36779526]]
-[[0.286814]]
+<pre><code>[[0.61010484]
+ [0.61742561]
+ [0.45483738]
+ [0.45228331]
+ [0.46141576]
+ [0.67558689]
+ [0.47592573]
+ [0.4398117 ]
+ [0.54611283]
+ [0.66791279]
+ [0.36777272]
+ [0.51419982]
+ [0.76616568]
+ [0.28406577]
+ [0.75970904]]
+[[0.22756759]]
 negative class</code></pre>
 </div>
 </div>
@@ -961,7 +961,7 @@ negative class</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 827
+<pre><code>Number of epochs needed: 669
 Training accuracy: 1.0</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -978,7 +978,7 @@ Training accuracy: 1.0</code></pre>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, <span class="fl">1.</span> <span class="op">-</span> test_error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test accuracy: 1.0</code></pre>
+<pre><code>Test accuracy: 0.95</code></pre>
 </div>
 </div>
 </section>
@@ -1066,9 +1066,9 @@ Test accuracy: 0.95</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 334
+<pre><code>Number of epochs needed: 300
 Training accuracy: 1.0
-Test accuracy: 0.85</code></pre>
+Test accuracy: 1.0</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1315,9 +1315,9 @@ Test accuracy: 0.30000000000000004</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 577
+<pre><code>Number of epochs needed: 290
 Training accuracy: 1.0
-Test accuracy: 1.0</code></pre>
+Test accuracy: 0.95</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1360,9 +1360,9 @@ Test accuracy: 1.0</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 102
+<pre><code>Number of epochs needed: 159
 Training accuracy: 1.0
-Test accuracy: 1.0</code></pre>
+Test accuracy: 0.95</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1430,8 +1430,8 @@ Test accuracy: 1.0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of epochs needed: 1000
-Training accuracy: 0.7428571428571429
-Test accuracy: 0.5666666666666667</code></pre>
+Training accuracy: 0.7571428571428571
+Test accuracy: 0.6333333333333333</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1494,9 +1494,9 @@ Test accuracy: 0.5666666666666667</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 339
-Training accuracy: 1.0
-Test accuracy: 0.9</code></pre>
+<pre><code>Number of epochs needed: 1000
+Training accuracy: 0.9857142857142858
+Test accuracy: 0.9666666666666667</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1589,9 +1589,9 @@ Test accuracy: 0.9</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 74
+<pre><code>Number of epochs needed: 78
 Training accuracy: 1.0
-Test accuracy: 0.9333333333333333</code></pre>
+Test accuracy: 0.9</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1659,7 +1659,7 @@ Test accuracy: 0.9333333333333333</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 75
+<pre><code>Number of epochs needed: 72
 Training accuracy: 1.0
 Test accuracy: 0.9666666666666667</code></pre>
 </div>
@@ -1676,7 +1676,7 @@ Test accuracy: 0.9666666666666667</code></pre>
 <section id="summary" class="level3">
 <h3 class="anchored" data-anchor-id="summary">Summary</h3>
 <p><strong>Q:</strong> Now that we optimized the MLP, it is time to cross-validate again the number of hidden neurons and the learning rate. As the networks always get a training error rate of 0 and the test set is not very relevant, the maincriteria will be the number of epochs needed on average to converge. Find the best MLP for the dataset (there is not a single solution), for example by iterating over multiple values of <code>K</code> and <code>eta</code>. What do you think of the change in performance between the first naive implementation and the final one? What were the most critical changes?</p>
-<div class="cell" data-execution_count="29">
+<div class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>activation_function <span class="op">=</span> relu</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(K, eta):</span>
@@ -1706,107 +1706,107 @@ Test accuracy: 0.9666666666666667</code></pre>
 <span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> acc <span class="op">&gt;</span> best_test_accuracy:</span>
 <span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>            best_K, best_eta <span class="op">=</span> K, eta</span>
 <span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best hyperparameters: K ="</span>, K, <span class="st">"; eta = "</span>, eta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best hyperparameters: K ="</span>, best_K, <span class="st">"; eta = "</span>, best_eta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>K: 10 eta: 0.01
-Number of epochs needed: 134
+Number of epochs needed: 174
 Training accuracy: 1.0
 Test accuracy: 0.8333333333333334
 --------------------
 K: 10 eta: 0.05
-Number of epochs needed: 104
+Number of epochs needed: 78
 Training accuracy: 1.0
-Test accuracy: 0.7666666666666666
+Test accuracy: 0.9333333333333333
 --------------------
 K: 10 eta: 0.1
-Number of epochs needed: 131
+Number of epochs needed: 81
 Training accuracy: 1.0
 Test accuracy: 0.8666666666666667
 --------------------
 K: 10 eta: 0.2
-Number of epochs needed: 82
+Number of epochs needed: 66
 Training accuracy: 1.0
-Test accuracy: 0.9666666666666667
+Test accuracy: 0.8
 --------------------
 K: 10 eta: 0.3
-Number of epochs needed: 96
+Number of epochs needed: 86
 Training accuracy: 1.0
-Test accuracy: 1.0
+Test accuracy: 0.9333333333333333
 --------------------
 K: 15 eta: 0.01
-Number of epochs needed: 343
+Number of epochs needed: 263
 Training accuracy: 1.0
 Test accuracy: 0.8666666666666667
 --------------------
 K: 15 eta: 0.05
-Number of epochs needed: 90
+Number of epochs needed: 77
 Training accuracy: 1.0
-Test accuracy: 0.9
+Test accuracy: 0.7666666666666666
 --------------------
 K: 15 eta: 0.1
-Number of epochs needed: 90
+Number of epochs needed: 62
 Training accuracy: 1.0
-Test accuracy: 0.9666666666666667
+Test accuracy: 0.9333333333333333
 --------------------
 K: 15 eta: 0.2
-Number of epochs needed: 50
+Number of epochs needed: 69
 Training accuracy: 1.0
-Test accuracy: 0.8333333333333334
+Test accuracy: 0.9333333333333333
 --------------------
 K: 15 eta: 0.3
-Number of epochs needed: 83
+Number of epochs needed: 66
 Training accuracy: 1.0
 Test accuracy: 0.9333333333333333
 --------------------
 K: 20 eta: 0.01
-Number of epochs needed: 177
+Number of epochs needed: 174
 Training accuracy: 1.0
-Test accuracy: 0.8333333333333334
+Test accuracy: 0.9666666666666667
 --------------------
 K: 20 eta: 0.05
-Number of epochs needed: 89
+Number of epochs needed: 75
 Training accuracy: 1.0
 Test accuracy: 0.9
 --------------------
 K: 20 eta: 0.1
-Number of epochs needed: 96
+Number of epochs needed: 67
 Training accuracy: 1.0
-Test accuracy: 1.0
+Test accuracy: 0.8333333333333334
 --------------------
 K: 20 eta: 0.2
-Number of epochs needed: 69
+Number of epochs needed: 64
 Training accuracy: 1.0
 Test accuracy: 0.9666666666666667
 --------------------
 K: 20 eta: 0.3
-Number of epochs needed: 66
-Training accuracy: 1.0
-Test accuracy: 0.9666666666666667
---------------------
-K: 25 eta: 0.01
-Number of epochs needed: 151
-Training accuracy: 1.0
-Test accuracy: 0.7333333333333334
---------------------
-K: 25 eta: 0.05
-Number of epochs needed: 78
-Training accuracy: 1.0
-Test accuracy: 0.7666666666666666
---------------------
-K: 25 eta: 0.1
-Number of epochs needed: 77
-Training accuracy: 1.0
-Test accuracy: 0.8333333333333334
---------------------
-K: 25 eta: 0.2
-Number of epochs needed: 64
+Number of epochs needed: 65
 Training accuracy: 1.0
 Test accuracy: 1.0
 --------------------
-K: 25 eta: 0.3
-Number of epochs needed: 48
+K: 25 eta: 0.01
+Number of epochs needed: 176
+Training accuracy: 1.0
+Test accuracy: 0.9333333333333333
+--------------------
+K: 25 eta: 0.05
+Number of epochs needed: 63
 Training accuracy: 1.0
 Test accuracy: 0.9
+--------------------
+K: 25 eta: 0.1
+Number of epochs needed: 72
+Training accuracy: 1.0
+Test accuracy: 1.0
+--------------------
+K: 25 eta: 0.2
+Number of epochs needed: 50
+Training accuracy: 1.0
+Test accuracy: 0.9666666666666667
+--------------------
+K: 25 eta: 0.3
+Number of epochs needed: 77
+Training accuracy: 1.0
+Test accuracy: 0.8333333333333334
 --------------------
 Best hyperparameters: K = 25 ; eta =  0.3</code></pre>
 </div>
