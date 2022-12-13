@@ -754,17 +754,17 @@ Kullback-Leibler divergence
 <p>When the two distributions are equal almost anywhere, the KL divergence is 0. Otherwise it is positive. <strong>Minimizing the KL divergence between two distributions makes them close in the statistical sense</strong>.</p>
 </div>
 </div>
-<p>The advantage of minimizing the KL of <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> with <span class="math inline">\mathcal{N}(0, 1)</span> is that the KL takes a <strong>closed form</strong>, i.e.&nbsp;there is no need to compute the expectation over all possible latent representations <span class="math inline">\mathbf{z}</span>:</p>
+<p>The advantage of minimizing the KL of <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> with <span class="math inline">\mathcal{N}(0, 1)</span> is that the KL takes a <strong>closed form</strong> when the distributions are normal, i.e.&nbsp;there is no need to compute the expectation over all possible latent representations <span class="math inline">\mathbf{z}</span>:</p>
 <p><span class="math display">
     \mathcal{L}_\text{regularization}(\phi) = \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1})) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})}[- \log \frac{f_{0, 1}(\mathbf{z}|\mathbf{x})}{q_\phi(\mathbf{z}|\mathbf{x})}]
 </span></p>
 <p>If <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span> have <span class="math inline">K</span> elements (dimension of the latent space), the KL can be expressed as:</p>
 <p><span class="math display">
-    \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})]
+    \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})]
 </span></p>
-<p>The KL is very easy to differentiate w.r.t <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span>, i.e.&nbsp;w.r.t <span class="math inline">\phi</span>! In practice, the encoder predicts the vectors <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\Sigma_\mathbf{x} = \log \mathbf{\sigma_x}</span>, so the loss becomes:</p>
+<p>The KL is very easy to differentiate w.r.t <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span>, i.e.&nbsp;w.r.t <span class="math inline">\phi</span>! In practice, the encoder predicts the vectors <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\Sigma_\mathbf{x} = \log \mathbf{\sigma_x^2}</span>, so the loss becomes:</p>
 <p><span class="math display">
-    \mathcal{L}_\text{regularization}(\phi) = \dfrac{1}{2} \, \sum_{k=1}^K (\exp \Sigma_\mathbf{x} + \mathbf{\mu_x}^2 -1 - \Sigma_\mathbf{x})
+    \mathcal{L}_\text{regularization}(\phi) = \dfrac{1}{2} \, \sum_{k=1}^K (\exp \Sigma_\mathbf{x} + \mathbf{\mu_x}^2 - 1 - \Sigma_\mathbf{x})
 </span></p>
 <p>See <a href="https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/" class="uri">https://wiseodd.github.io/techblog/2016/12/10/variational-autoencoder/</a> for the proof.</p>
 <p>Regularization tends to create a “gradient” over the information encoded in the latent space. A point of the latent space sampled between the means of two encoded distributions should be decoded in an image in between the two training images.</p>
@@ -813,7 +813,7 @@ Kullback-Leibler divergence
 <p><span class="math display">
 \begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi) \\
-    &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
+    &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})] \\
 \end{aligned}
 </span></p>
 <div class="quarto-figure quarto-figure-center">
@@ -853,7 +853,7 @@ Kullback-Leibler divergence
 <p><span class="math display">
 \begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \beta \, \mathcal{L}_\text{regularization}(\phi) \\
-    &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})] \\
+    &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})] \\
 \end{aligned}
 </span></p>
 <p>Using <span class="math inline">\beta &gt; 1</span> puts emphasis on learning statistically independent latent factors.</p>
