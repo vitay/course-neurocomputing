@@ -540,7 +540,7 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <li>The VAE loss:</li>
 </ol>
 <p><span class="math display">
-    \mathcal{L}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x})]
+    \mathcal{L}(\theta, \phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})]
 </span></p>
 <p>This will force us to dive a bit deeper into the mechanics of tensorflow, but it is not that difficult since the release of tensorflow 2.0 and the eager execution mode.</p>
 <section id="gradient-tapes-redefining-the-learning-procedure" class="level2">
@@ -1305,7 +1305,7 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <p>What we still need and is not standard in keras is a sampling layer that implements the <strong>reparameterization trick</strong>:</p>
 <p><span class="math display">\mathbf{z} = \mu + \sigma \, \xi</span></p>
 <p>where <span class="math inline">\xi</span> comes from the standard normal distribution <span class="math inline">\mathcal{N}(0, 1)</span>.</p>
-<p>For technical reasons, it is actually better when <code>z_log_var</code> represents <span class="math inline">2 \, \log \sigma</span> instead of <span class="math inline">\sigma</span>, as it can take both positive and negative values, while <span class="math inline">\sigma</span> could only be strictly positive.</p>
+<p>For technical reasons, it is actually better when <code>z_log_var</code> represents <span class="math inline">\log \sigma^2</span> instead of <span class="math inline">\sigma</span>, as it can take both positive and negative values, while <span class="math inline">\sigma</span> could only be strictly positive.</p>
 <p>We therefore want a layer that computes:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> z_mean <span class="op">+</span> tf.math.exp(<span class="fl">0.5</span> <span class="op">*</span> z_log_var) <span class="op">*</span> xi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>on the tensors of shape <code>(batch_size, latent_dim)</code>. To sample the standard normal distribution, you can use tensorflow:</p>
