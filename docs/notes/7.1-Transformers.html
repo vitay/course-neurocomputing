@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 19&nbsp; Transformers</title>
+<title>Neurocomputing - 18&nbsp; Transformers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../notes/7.2-ContrastiveLearning.html" rel="next">
-<link href="../notes/6.3-Attention.html" rel="prev">
+<link href="../notes/6.2-NLP.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -340,12 +340,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing and attention</span></a>
   </div>
 </li>
       </ul>
@@ -541,7 +536,7 @@ div.csl-indent {
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AO-gqXNCEx0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="architecture" class="level3">
 <h3 class="anchored" data-anchor-id="architecture">Architecture</h3>
-<p>Attentional mechanisms are so powerful that recurrent networks are not even needed anymore. <strong>Transformer networks</strong> <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span> use <strong>self-attention</strong> in a purely feedforward architecture and outperform recurrent architectures. They are used in Google BERT and OpenAI GPT-2/3 for text understanding (e.g.&nbsp;search engine queries).</p>
+<p>Attentional mechanisms are so powerful that recurrent networks are not even needed anymore. <strong>Transformer networks</strong> <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span> use <strong>self-attention</strong> in a purely feedforward architecture and outperform recurrent architectures. They are used in Google BERT and OpenAI GPT-3 for text understanding (e.g.&nbsp;search engine queries) and generation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_resideual_layer_norm_3.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -663,14 +658,14 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d=512</span> for each word. How do we combine them?</p>
+<p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d_k=64</span> for each word. How do we combine them?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_z.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
 </figure>
 </div>
-<p>The proposed solution is based on <strong>ensemble learning</strong> (stacking): let another matrix <span class="math inline">W^O</span> decide which attention head to trust… <span class="math inline">8 \times 512</span> rows, 512 columns.</p>
+<p>The proposed solution is based on <strong>ensemble learning</strong> (stacking): let another matrix <span class="math inline">W^O</span> decide which attention head to trust… <span class="math inline">8 \times 64</span> rows, 512 columns.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_weight_matrix_o.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -962,7 +957,14 @@ Note
 <p></p><figcaption class="figure-caption">Github Copilot. <a href="https://copilot.github.com/" class="uri">https://copilot.github.com/</a></figcaption><p></p>
 </figure>
 </div>
-<p>All NLP tasks (translation, sentence classification, text generation) are now done using transformer-like architectures (BERT, GPT), <strong>unsupervisedly</strong> pre-trained on huge corpuses. BERT can be used for feature extraction, while GPT is more generative. Transformer architectures seem to <strong>scale</strong>: more parameters = better performance. Is there a limit?</p>
+<p>ChatGPT (<a href="https://chat.openai.com" class="uri">https://chat.openai.com</a>) interacts in a conversational way. The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/chatgpt2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">ChatGPT. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a></figcaption><p></p>
+</figure>
+</div>
+<p>All NLP tasks (translation, sentence classification, text generation) are now done using <strong>Large Language Models</strong> (LLM), <strong>self-supervisedly</strong> pre-trained on huge corpuses. BERT can be used for feature extraction, while GPT is more generative. Transformer architectures seem to <strong>scale</strong>: more parameters = better performance. Is there a limit?</p>
 <p>The price to pay is that these models are very expensive to train (training one instance of GPT-3 costs 12M$) and to use (GPT-3 is only accessible with an API). Many attempts have been made to reduce the size of these models while keeping a satisfying performance.</p>
 <ul>
 <li>DistilBERT, RoBERTa, BART, T5, XLNet…</li>
@@ -1233,8 +1235,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
-      <a href="../notes/6.3-Attention.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Attentional neural networks</span></span>
+      <a href="../notes/6.2-NLP.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Natural Language Processing and attention</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

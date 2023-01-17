@@ -131,7 +131,12 @@ Source: <https://link.springer.com/article/10.1007/s00146-020-00965-5>
 
 * The deeper your network, the more powerful, but the more data it needs to be useful.
 
-* Solutions: data augmentation, transfer learning, unsupervised pre-training...
+* Solutions: 
+
+    * data augmentation
+    * transfer learning
+    * unsupervised pre-training
+    * self-supervised learning
 
 
 :::
@@ -174,7 +179,13 @@ Source: <https://link.springer.com/article/10.1007/s00146-020-00965-5>
 
 # Computational power and energy
 
-![Source : <https://openai.com/blog/ai-and-compute/>](img/power.png){width=80%}
+![Source : <https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8>](img/ai-flops.webp)
+
+
+
+# Computational power and energy
+
+![Source : <https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8>](img/ai-ram.webp)
 
 
 

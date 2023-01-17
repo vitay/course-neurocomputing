@@ -434,7 +434,7 @@ Julien Vitay
 <ul>
 <li><p>Attentional mechanisms are so powerful that recurrent networks are not even needed anymore.</p></li>
 <li><p><strong>Transformer networks</strong> use <strong>self-attention</strong> in a purely feedforward architecture and outperform recurrent architectures.</p></li>
-<li><p>Used in Google BERT and OpenAI GPT-2/3 for text understanding (e.g.&nbsp;search engine queries).</p></li>
+<li><p>Used in Google BERT and OpenAI GPT-3 for text understanding (e.g.&nbsp;search engine queries) and generation.</p></li>
 </ul>
 
 <img data-src="img/transformer_resideual_layer_norm_3.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></p><div class="footer">
@@ -635,7 +635,7 @@ Julien Vitay
 <section id="multi-headed-self-attention-2" class="title-slide slide level1 center">
 <h1>Multi-headed self-attention</h1>
 <ul>
-<li><p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d=512</span> for each word.</p></li>
+<li><p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d_k=64</span> for each word.</p></li>
 <li><p>How do we combine them?</p></li>
 </ul>
 
@@ -647,7 +647,7 @@ Julien Vitay
 <li><p>The proposed solution is based on <strong>ensemble learning</strong> (stacking):</p>
 <ul>
 <li><p>let another matrix <span class="math inline">W^O</span> decide which attention head to trust…</p></li>
-<li><p><span class="math inline">8 \times 512</span> rows, 512 columns.</p></li>
+<li><p><span class="math inline">8 \times 64</span> rows, 512 columns.</p></li>
 </ul></li>
 </ul>
 
@@ -1035,10 +1035,18 @@ Julien Vitay
 
 <img data-src="img/githubcopliot.gif" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
 
+<section id="chatgpt" class="title-slide slide level1 center">
+<h1>ChatGPT</h1>
+
+<img data-src="img/chatpgt2.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p><a href="https://chat.openai.com/" class="uri">https://chat.openai.com/</a></p>
+</div>
+</section>
+
 <section id="transformers-and-nlp" class="title-slide slide level1 center">
 <h1>Transformers and NLP</h1>
 <ul>
-<li><p>All NLP tasks (translation, sentence classification, text generation) are now done using transformer-like architectures (BERT, GPT), <strong>unsupervisedly</strong> pre-trained on huge corpuses.</p></li>
+<li><p>All NLP tasks (translation, sentence classification, text generation) are now done using <strong>Large Language Models</strong> (LLM), <strong>self-supervisedly</strong> pre-trained on huge corpuses.</p></li>
 <li><p>BERT can be used for feature extraction, while GPT is more generative.</p></li>
 <li><p>Transformer architectures seem to <strong>scale</strong>: more parameters = better performance. Is there a limit?</p></li>
 </ul>

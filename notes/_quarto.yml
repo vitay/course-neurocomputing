@@ -43,7 +43,6 @@ book:
       chapters:
       - notes/6.1-RNN.qmd
       - notes/6.2-NLP.qmd
-      - notes/6.3-Attention.qmd
     - part: "**Self-supervised learning**"
       chapters:
       - notes/7.1-Transformers.qmd

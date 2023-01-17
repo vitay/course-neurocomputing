@@ -24,7 +24,7 @@ Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et
 
 * **Transformer networks** use **self-attention** in a purely feedforward architecture and outperform recurrent architectures.
 
-* Used in Google BERT and OpenAI GPT-2/3 for text understanding (e.g. search engine queries).
+* Used in Google BERT and OpenAI GPT-3 for text understanding (e.g. search engine queries) and generation.
 
 ![Source: <http://jalammar.github.io/illustrated-transformer/>](img/transformer_resideual_layer_norm_3.png){width=70%}
 
@@ -236,7 +236,7 @@ $$
 
 # Multi-headed self-attention
 
-* Each **attention head** will output a vector $\mathbf{z}_i$ of size $d=512$ for each word.
+* Each **attention head** will output a vector $\mathbf{z}_i$ of size $d_k=64$ for each word.
 
 * How do we combine them?
 
@@ -250,7 +250,7 @@ $$
 
     * let another matrix $W^O$ decide which attention head to trust...
 
-    * $8 \times 512$ rows, 512 columns.
+    * $8 \times 64$ rows, 512 columns.
 
 ![Source: <http://jalammar.github.io/illustrated-transformer/>](img/transformer_attention_heads_weight_matrix_o.png){width=80%}
 
@@ -688,9 +688,17 @@ pip install transformers
 
 ![](img/githubcopliot.gif){width=80%}
 
+# ChatGPT
+
+![](img/chatpgt2.png)
+
+::: footer
+<https://chat.openai.com/>
+:::
+
 # Transformers and NLP
 
-* All NLP tasks (translation, sentence classification, text generation) are now done using transformer-like architectures (BERT, GPT), **unsupervisedly** pre-trained on huge corpuses. 
+* All NLP tasks (translation, sentence classification, text generation) are now done using **Large Language Models** (LLM), **self-supervisedly** pre-trained on huge corpuses. 
 
 * BERT can be used for feature extraction, while GPT is more generative.
 

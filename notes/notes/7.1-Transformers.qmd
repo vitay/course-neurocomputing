@@ -5,7 +5,6 @@ Slides: [html](../slides/7.1-Transformers.html){target="_blank"} [pdf](../slides
 
 ## Transformers
 
-
 {{< youtube  AO-gqXNCEx0 >}}
 
 
@@ -13,7 +12,7 @@ Slides: [html](../slides/7.1-Transformers.html){target="_blank"} [pdf](../slides
 
 Attentional mechanisms are so powerful that recurrent networks are not even needed anymore.
 **Transformer networks** [@Vaswani2017] use **self-attention** in a purely feedforward architecture and outperform recurrent architectures.
-They are used in Google BERT and OpenAI GPT-2/3 for text understanding (e.g. search engine queries).
+They are used in Google BERT and OpenAI GPT-3 for text understanding (e.g. search engine queries) and generation.
 
 ![Architecture of the Transformer. Source: <http://jalammar.github.io/illustrated-transformer/>](../slides/img/transformer_resideual_layer_norm_3.png){width=100%}
 
@@ -125,12 +124,12 @@ The solution is to use **multiple attention heads** ($h=8$) with their own matri
 ![Multiple attention heads. Source: <http://jalammar.github.io/illustrated-transformer/>](../slides/img/transformer_attention_heads_qkv.png){width=100%}
 
 
-Each **attention head** will output a vector $\mathbf{z}_i$ of size $d=512$ for each word.
+Each **attention head** will output a vector $\mathbf{z}_i$ of size $d_k=64$ for each word.
 How do we combine them?
 
 ![Multiple attention heads. Source: <http://jalammar.github.io/illustrated-transformer/>](../slides/img/transformer_attention_heads_z.png){width=100%}
 
-The proposed solution is based on **ensemble learning** (stacking): let another matrix $W^O$ decide which attention head to trust... $8 \times 512$ rows, 512 columns.
+The proposed solution is based on **ensemble learning** (stacking): let another matrix $W^O$ decide which attention head to trust... $8 \times 64$ rows, 512 columns.
 
 ![Multiple attention heads. Source: <http://jalammar.github.io/illustrated-transformer/>](../slides/img/transformer_attention_heads_weight_matrix_o.png){width=100%}
 
@@ -359,11 +358,15 @@ Github and OpenAI trained a GPT-3-like architecture on the available open source
 Copilot is able to "autocomplete" the code based on a simple comment/docstring.
 
 
-
 ![Github Copilot. <https://copilot.github.com/>](../slides/img/githubcopliot.gif){width=100%}
 
+ChatGPT (<https://chat.openai.com>) interacts in a conversational way. The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.
 
-All NLP tasks (translation, sentence classification, text generation) are now done using transformer-like architectures (BERT, GPT), **unsupervisedly** pre-trained on huge corpuses. 
+
+![ChatGPT. <https://chat.openai.com>](../slides/img/chatgpt2.png){width=100%}
+
+
+All NLP tasks (translation, sentence classification, text generation) are now done using **Large Language Models** (LLM), **self-supervisedly** pre-trained on huge corpuses. 
 BERT can be used for feature extraction, while GPT is more generative.
 Transformer architectures seem to **scale**: more parameters = better performance. Is there a limit?
 

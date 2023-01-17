@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 17&nbsp; Natural Language Processing</title>
+<title>Neurocomputing - 17&nbsp; Natural Language Processing and attention</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notes/6.3-Attention.html" rel="next">
+<link href="../notes/7.1-Transformers.html" rel="next">
 <link href="../notes/6.1-RNN.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -60,6 +60,8 @@ div.csl-indent {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,7 +108,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Natural Language Processing</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Natural Language Processing and attention</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -277,12 +279,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Natural Language Processing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Natural Language Processing and attention</span></a>
   </div>
 </li>
       </ul>
@@ -436,6 +433,7 @@ div.csl-indent {
   <li><a href="#question-answering-scene-understanding" id="toc-question-answering-scene-understanding" class="nav-link" data-scroll-target="#question-answering-scene-understanding">Question answering / Scene understanding</a></li>
   <li><a href="#seq2seq" id="toc-seq2seq" class="nav-link" data-scroll-target="#seq2seq">seq2seq</a></li>
   </ul></li>
+  <li><a href="#rnns-with-attention" id="toc-rnns-with-attention" class="nav-link" data-scroll-target="#rnns-with-attention">RNNs with Attention</a></li>
   </ul>
 </nav>
     </div>
@@ -444,7 +442,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Natural Language Processing</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Natural Language Processing and attention</span></h1>
 </div>
 
 
@@ -645,9 +643,89 @@ Sunspring SciFi movie
 </figure>
 </div>
 <p>The <strong>encoder</strong> learns for example to encode each word of a sentence in French. The <strong>decoder</strong> learns to associate the <strong>final state vector</strong> to the corresponding English sentence. seq2seq allows automatic text translation between many languages given enough data. Modern translation tools are based on seq2seq, but with attention.</p>
+</section>
+</section>
+<section id="rnns-with-attention" class="level2">
+<h2 class="anchored" data-anchor-id="rnns-with-attention">RNNs with Attention</h2>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/Gi8aHnnyDaM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The videos in this section are taken from a great blog post by Jay Alammar:</p>
+<p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
+</div>
+</div>
+<p>The problem with the seq2seq architecture is that it <strong>compresses</strong> the complete input sentence into a single state vector.</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_6.mp4"></video></div>
+<p>For long sequences, the beginning of the sentence may not be present in the final state vector:</p>
+<ul>
+<li>Truncated BPTT, vanishing gradients.</li>
+<li>When predicting the last word, the beginning of the paragraph might not be necessary.</li>
+</ul>
+<p>Consequence: there is not enough information in the state vector to start translating. A solution would be to concatenate the <strong>state vectors</strong> of all steps of the encoder and pass them to the decoder.</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_7.mp4"></video></div>
+<ul>
+<li><strong>Problem 1:</strong> it would make a lot of elements in the state vector of the decoder (which should be constant).</li>
+<li><strong>Problem 2:</strong> the state vector of the decoder would depend on the length of the input sequence.</li>
+</ul>
+<p>Attentional mechanisms <span class="citation" data-cites="Bahdanau2016">(<a href="../references.html#ref-Bahdanau2016" role="doc-biblioref">Bahdanau et al., 2016</a>)</span> let the decoder decide (by learning) which state vectors it needs to generate each word at each step.</p>
+<p>The <strong>attentional context vector</strong> of the decoder <span class="math inline">A^\text{decoder}_t</span> at time <span class="math inline">t</span> is a weighted average of all state vectors <span class="math inline">C^\text{encoder}_i</span> of the encoder.</p>
+<p><span class="math display">A^\text{decoder}_t = \sum_{i=0}^T a_i \, C^\text{encoder}_i</span></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/seq2seq_9.mp4"></video></div>
+<p>The coefficients <span class="math inline">a_i</span> are called the <strong>attention scores</strong> : how much attention is the decoder paying to each of the encoder’s state vectors? The attention scores <span class="math inline">a_i</span> are computed as a <strong>softmax</strong> over the scores <span class="math inline">e_i</span> (in order to sum to 1):</p>
+<p><span class="math display">a_i = \frac{\exp e_i}{\sum_j \exp e_j} \Rightarrow A^\text{decoder}_t = \sum_{i=0}^T \frac{\exp e_i}{\sum_j \exp e_j} \, C^\text{encoder}_i</span></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_process.mp4"></video></div>
+<p>The score <span class="math inline">e_i</span> is computed using:</p>
+<ul>
+<li>the previous output of the decoder <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span>.</li>
+<li>the corresponding state vector <span class="math inline">C^\text{encoder}_i</span> of the encoder at step <span class="math inline">i</span>.</li>
+<li>attentional weights <span class="math inline">W_a</span>.</li>
+</ul>
+<p><span class="math display">e_i = \text{tanh}(W_a \, [\mathbf{h}^\text{decoder}_{t-1}; C^\text{encoder}_i])</span></p>
+<p>Everything is differentiable, these attentional weights can be learned with BPTT.</p>
+<p>The attentional context vector <span class="math inline">A^\text{decoder}_t</span> is concatenated with the previous output <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span> and used as the next input <span class="math inline">\mathbf{x}^\text{decoder}_t</span> of the decoder:</p>
+<p><span class="math display">\mathbf{x}^\text{decoder}_t = [\mathbf{h}^\text{decoder}_{t-1} ; A^\text{decoder}_t]</span></p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jalammar.github.io/images/attention_tensor_dance.mp4"></video></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/seq2seq-attention5.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Seq2seq architecture with attention <span class="citation" data-cites="Bahdanau2016">(<a href="../references.html#ref-Bahdanau2016" role="doc-biblioref">Bahdanau et al., 2016</a>)</span>. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
+</figure>
+</div>
+<p>The attention scores or <strong>alignment scores</strong> <span class="math inline">a_i</span> are useful to interpret what happened. They show which words in the original sentence are the most important to generate the next word.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/seq2seq-attention7.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Alignment scores during translation. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Attentional mechanisms</strong> are now central to NLP. The whole <strong>history</strong> of encoder states is passed to the decoder, which learns to decide which part is the most important using <strong>attention</strong>. This solves the bottleneck of seq2seq architectures, at the cost of much more operations. They require to use fixed-length sequences (generally 50 words).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/seq2seq-comparison.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Comparison of seq2seq and seq2seq with attention. Source: <a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a>.</figcaption><p></p>
+</figure>
+</div>
+<p>Google Neural Machine Translation (GNMT <span class="citation" data-cites="Wu2016">(<a href="../references.html#ref-Wu2016" role="doc-biblioref">Wu et al., 2016</a>)</span>) uses an attentional recurrent NN, with bidirectional GRUs, 8 recurrent layers on 8 GPUs for both the encoder and decoder.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/google-nmt-lstm.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Google Neural Machine Translation (GNMT <span class="citation" data-cites="Wu2016">(<a href="../references.html#ref-Wu2016" role="doc-biblioref">Wu et al., 2016</a>)</span>)</figcaption><p></p>
+</figure>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Bahdanau2016" class="csl-entry" role="doc-biblioentry">
+Bahdanau, D., Cho, K., and Bengio, Y. (2016). Neural <span>Machine Translation</span> by <span>Jointly Learning</span> to <span>Align</span> and <span>Translate</span>. <a href="http://arxiv.org/abs/1409.0473">http://arxiv.org/abs/1409.0473</a>.
+</div>
 <div id="ref-Malinowski2015" class="csl-entry" role="doc-biblioentry">
 Malinowski, M., Rohrbach, M., and Fritz, M. (2015). Ask <span>Your Neurons</span>: <span class="nocase">A Neural-based Approach</span> to <span>Answering Questions</span> about <span>Images</span>. <a href="http://arxiv.org/abs/1505.01121">http://arxiv.org/abs/1505.01121</a>.
 </div>
@@ -663,11 +741,13 @@ Sutskever, I., Vinyals, O., and Le, Q. V. (2014). Sequence to <span>Sequence Lea
 <div id="ref-Vinyals2015" class="csl-entry" role="doc-biblioentry">
 Vinyals, O., Toshev, A., Bengio, S., and Erhan, D. (2015). Show and <span>Tell</span>: <span>A Neural Image Caption Generator</span>. <a href="http://arxiv.org/abs/1411.4555">http://arxiv.org/abs/1411.4555</a>.
 </div>
+<div id="ref-Wu2016" class="csl-entry" role="doc-biblioentry">
+Wu, Y., Schuster, M., Chen, Z., Le, Q. V., Norouzi, M., Macherey, W., et al. (2016). Google’s <span>Neural Machine Translation System</span>: <span>Bridging</span> the <span>Gap</span> between <span>Human</span> and <span>Machine Translation</span>. <a href="https://arxiv.org/abs/1609.08144v2">https://arxiv.org/abs/1609.08144v2</a>.
+</div>
 <div id="ref-Xu2015" class="csl-entry" role="doc-biblioentry">
 Xu, K., Ba, J. L., Kiros, R., Cho, K., Courville, A., Salakhutdinov, R., et al. (2015). Show, <span>Attend</span> and <span>Tell</span>: <span>Neural Image Caption Generation</span> with <span>Visual Attention</span>. in <em>Proceedings of the 32nd <span>International Conference</span> on <span>Machine Learning</span> - <span>Volume</span> 37</em> <span>ICML</span>’15. (<span>JMLR.org</span>), 2048–2057. <a href="http://dl.acm.org/citation.cfm?id=3045118.3045336">http://dl.acm.org/citation.cfm?id=3045118.3045336</a>.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -811,8 +891,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../notes/6.3-Attention.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-title">Attentional neural networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../notes/7.1-Transformers.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Transformers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -822,6 +902,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
   </div>
 </footer>
+<script>videojs(video_shortcode_videojs_video1);</script>
+<script>videojs(video_shortcode_videojs_video2);</script>
+<script>videojs(video_shortcode_videojs_video3);</script>
+<script>videojs(video_shortcode_videojs_video4);</script>
+<script>videojs(video_shortcode_videojs_video5);</script>
 
 
 

@@ -251,7 +251,7 @@ $$
 If $\mathbf{\mu_x}$ and  $\mathbf{\sigma_x}$ have $K$ elements (dimension of the latent space), the KL can be expressed as:
 
 $$
-    \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})]
+    \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 - 1 - \log \mathbf{\sigma_x^2})]
 $$
 
 The KL is very easy to differentiate w.r.t $\mathbf{\mu_x}$ and  $\mathbf{\sigma_x}$, i.e. w.r.t $\phi$! In practice, the encoder predicts the vectors $\mathbf{\mu_x}$ and $\Sigma_\mathbf{x} = \log \mathbf{\sigma_x^2}$, so the loss becomes:

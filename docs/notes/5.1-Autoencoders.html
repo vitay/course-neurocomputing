@@ -277,12 +277,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing and attention</span></a>
   </div>
 </li>
       </ul>
@@ -760,7 +755,7 @@ Kullback-Leibler divergence
 </span></p>
 <p>If <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span> have <span class="math inline">K</span> elements (dimension of the latent space), the KL can be expressed as:</p>
 <p><span class="math display">
-    \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})]
+    \mathcal{L}_\text{regularization}(\phi) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}}[\dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 - 1 - \log \mathbf{\sigma_x^2})]
 </span></p>
 <p>The KL is very easy to differentiate w.r.t <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span>, i.e.&nbsp;w.r.t <span class="math inline">\phi</span>! In practice, the encoder predicts the vectors <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\Sigma_\mathbf{x} = \log \mathbf{\sigma_x^2}</span>, so the loss becomes:</p>
 <p><span class="math display">

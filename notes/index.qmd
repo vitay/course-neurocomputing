@@ -41,8 +41,7 @@ Exercises are provided in the form of Jupyter notebooks, allowing to implement i
     3. [Generative adversarial networks](notes/5.3-GAN.qmd)
 6. **Recurrent neural networks**
     1. [Recurrent neural networks, LSTM](notes/6.1-RNN.qmd)
-    2. [Natural Language Processing](notes/6.2-NLP.qmd)
-    3. [Attentional neural networks](notes/6.3-Attention.qmd)
+    2. [Natural Language Processing and attention](notes/6.2-NLP.qmd)
 7. **Self-supervised learning**
     1. [Transformers](notes/7.1-Transformers.qmd)
     2. [Contrastive learning](notes/7.2-ContrastiveLearning.qmd)

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 34&nbsp; Convolutional neural networks</title>
+<title>Neurocomputing - 33&nbsp; Convolutional neural networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -305,12 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/6.3-Attention.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Attentional neural networks</span></a>
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing and attention</span></a>
   </div>
 </li>
       </ul>
@@ -561,7 +556,7 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Activation(<span class="st">'softmax'</span>)) </span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Learning rule</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.1</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.1</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Loss function</span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
@@ -571,19 +566,17 @@ Test data: (10000, 28, 28) (10000,)</code></pre>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2023-01-13 13:22:48.271866: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2023-01-13 13:22:48.272182: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Metal device set to: Apple M1 Pro
 
 systemMemory: 16.00 GB
 maxCacheSize: 5.33 GB
-</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:18:43.571203: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
-2022-11-15 10:18:43.571329: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Model: "sequential"
+
+Model: "sequential"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
@@ -618,81 +611,81 @@ None</code></pre>
 <p><strong>A:</strong> conv layers have relatively few parameters (10 per filter). The main bottleneck is when going from convolutions to fully-connected.</p>
 <p>Let’s now train this network on MNIST for 10 epochs, using minibatches of 64 images:</p>
 <div class="cell" data-outputid="369fd514-db33-4d31-d257-51d37e42a857" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># History tracks the evolution of the metrics during learning</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Training procedure</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>model.fit(</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    X_train, T_train, <span class="co"># training data</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">64</span>,  <span class="co"># batch size</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    epochs<span class="op">=</span><span class="dv">10</span>, <span class="co"># Maximum number of epochs</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    validation_split<span class="op">=</span><span class="fl">0.1</span>, <span class="co"># Perceptage of training data used for validation</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[history] <span class="co"># Track the metrics at the end of each epoch</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># History tracks the evolution of the metrics during learning</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Training procedure</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model.fit(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    X_train, T_train, <span class="co"># training data</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">64</span>,  <span class="co"># batch size</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    epochs<span class="op">=</span><span class="dv">10</span>, <span class="co"># Maximum number of epochs</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    validation_split<span class="op">=</span><span class="fl">0.1</span>, <span class="co"># Perceptage of training data used for validation</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[history] <span class="co"># Track the metrics at the end of each epoch</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:19:02.344996: W tensorflow/core/platform/profile_utils/cpu_utils.cc:128] Failed to get CPU frequency: 0 Hz
-2022-11-15 10:19:02.507957: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 13:22:54.571613: W tensorflow/core/platform/profile_utils/cpu_utils.cc:128] Failed to get CPU frequency: 0 Hz
+2023-01-13 13:22:54.746875: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/10
-843/844 [============================&gt;.] - ETA: 0s - loss: 0.1535 - accuracy: 0.9523</code></pre>
+844/844 [==============================] - ETA: 0s - loss: 0.1484 - accuracy: 0.9542</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:19:12.965693: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 13:23:05.518595: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>844/844 [==============================] - 11s 12ms/step - loss: 0.1534 - accuracy: 0.9524 - val_loss: 0.0566 - val_accuracy: 0.9840
+<pre><code>844/844 [==============================] - 12s 11ms/step - loss: 0.1484 - accuracy: 0.9542 - val_loss: 0.0638 - val_accuracy: 0.9810
 Epoch 2/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0505 - accuracy: 0.9845 - val_loss: 0.0655 - val_accuracy: 0.9838
+844/844 [==============================] - 9s 10ms/step - loss: 0.0491 - accuracy: 0.9853 - val_loss: 0.0557 - val_accuracy: 0.9843
 Epoch 3/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0332 - accuracy: 0.9891 - val_loss: 0.0662 - val_accuracy: 0.9822
+844/844 [==============================] - 8s 10ms/step - loss: 0.0287 - accuracy: 0.9909 - val_loss: 0.0535 - val_accuracy: 0.9862
 Epoch 4/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0221 - accuracy: 0.9927 - val_loss: 0.0618 - val_accuracy: 0.9858
+844/844 [==============================] - 8s 10ms/step - loss: 0.0203 - accuracy: 0.9932 - val_loss: 0.0672 - val_accuracy: 0.9837
 Epoch 5/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0146 - accuracy: 0.9951 - val_loss: 0.0636 - val_accuracy: 0.9862
+844/844 [==============================] - 8s 10ms/step - loss: 0.0146 - accuracy: 0.9951 - val_loss: 0.0565 - val_accuracy: 0.9887
 Epoch 6/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0123 - accuracy: 0.9959 - val_loss: 0.0619 - val_accuracy: 0.9875
+844/844 [==============================] - 8s 10ms/step - loss: 0.0120 - accuracy: 0.9959 - val_loss: 0.0860 - val_accuracy: 0.9845
 Epoch 7/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0106 - accuracy: 0.9964 - val_loss: 0.0656 - val_accuracy: 0.9862
+844/844 [==============================] - 8s 10ms/step - loss: 0.0113 - accuracy: 0.9964 - val_loss: 0.0673 - val_accuracy: 0.9882
 Epoch 8/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0110 - accuracy: 0.9964 - val_loss: 0.0630 - val_accuracy: 0.9882
+844/844 [==============================] - 9s 10ms/step - loss: 0.0053 - accuracy: 0.9983 - val_loss: 0.0575 - val_accuracy: 0.9895
 Epoch 9/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0079 - accuracy: 0.9973 - val_loss: 0.0807 - val_accuracy: 0.9882
+844/844 [==============================] - 8s 10ms/step - loss: 0.0067 - accuracy: 0.9978 - val_loss: 0.0577 - val_accuracy: 0.9895
 Epoch 10/10
-844/844 [==============================] - 10s 12ms/step - loss: 0.0048 - accuracy: 0.9983 - val_loss: 0.0778 - val_accuracy: 0.9870</code></pre>
+844/844 [==============================] - 8s 10ms/step - loss: 0.0054 - accuracy: 0.9984 - val_loss: 0.0755 - val_accuracy: 0.9877</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>&lt;keras.callbacks.History at 0x1769d37c0&gt;</code></pre>
+<pre><code>&lt;keras.callbacks.History at 0x162fc2790&gt;</code></pre>
 </div>
 </div>
 <p>As in the previous exercise, the next cells compute the test loss and accuracy and display the evolution of the training and validation accuracies:</p>
 <div class="cell" data-outputid="13a07860-516c-41f9-ac6b-cb9d1baac936" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test loss: 0.06820043921470642
-Test accuracy: 0.9861000180244446</code></pre>
+<pre><code>Test loss: 0.08646804094314575
+Test accuracy: 0.9837000370025635</code></pre>
 </div>
 </div>
 <div class="cell" data-outputid="40096207-7e0c-4d9a-9ece-4cb208d950a2" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'accuracy'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_accuracy'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'accuracy'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_accuracy'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -717,40 +710,40 @@ Test accuracy: 0.9861000180244446</code></pre>
 </ul>
 <p><strong>Beware:</strong> training is now relatively slow, keep your number of tries limited. Once you find a good architecture that does not overfit, train it for 20 epochs and proceed to the next questions.</p>
 <div class="cell" data-outputid="686abdee-cae5-4d83-9523-203cc0508e0f" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete all previous models to free memory</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tf.keras.backend.clear_session()</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sequential model</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential()</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Input((<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)))</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'valid'</span>))</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dropout(<span class="fl">0.5</span>))</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'valid'</span>))</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dropout(<span class="fl">0.5</span>))</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Flatten())</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">150</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dropout(<span class="fl">0.5</span>))</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>))</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Learning rule</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>, decay<span class="op">=</span><span class="fl">1e-6</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Loss function</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span><span class="st">'categorical_crossentropy'</span>, <span class="co"># loss</span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>optimizer, <span class="co"># learning rule</span></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>[<span class="st">'accuracy'</span>] <span class="co"># show accuracy</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete all previous models to free memory</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tf.keras.backend.clear_session()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sequential model</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential()</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Input((<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'valid'</span>))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dropout(<span class="fl">0.5</span>))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>, <span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'valid'</span>))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dropout(<span class="fl">0.5</span>))</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Flatten())</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">150</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dropout(<span class="fl">0.5</span>))</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>model.add(tf.keras.layers.Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>))</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Learning rule</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>, momentum<span class="op">=</span><span class="fl">0.9</span>, nesterov<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Loss function</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span><span class="st">'categorical_crossentropy'</span>, <span class="co"># loss</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>optimizer, <span class="co"># learning rule</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>[<span class="st">'accuracy'</span>] <span class="co"># show accuracy</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model: "sequential"
 _________________________________________________________________
@@ -787,99 +780,99 @@ None</code></pre>
 </div>
 </div>
 <div class="cell" data-outputid="33013185-7809-424a-8246-09b916d0379a" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>model.fit(</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    X_train, T_train,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">64</span>, </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    validation_split<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[history]</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tf.keras.callbacks.History()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>model.fit(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    X_train, T_train,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">64</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    validation_split<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[history]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:21:29.499936: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 16:34:47.484625: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>844/844 [==============================] - ETA: 0s - loss: 0.4567 - accuracy: 0.8509</code></pre>
+<pre><code>844/844 [==============================] - ETA: 0s - loss: 0.4580 - accuracy: 0.8508</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:21:42.950073: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 16:34:59.803391: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>844/844 [==============================] - 14s 16ms/step - loss: 0.4567 - accuracy: 0.8509 - val_loss: 0.0836 - val_accuracy: 0.9762
+<pre><code>844/844 [==============================] - 13s 15ms/step - loss: 0.4580 - accuracy: 0.8508 - val_loss: 0.0935 - val_accuracy: 0.9745
 Epoch 2/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.1364 - accuracy: 0.9580 - val_loss: 0.0549 - val_accuracy: 0.9842
+844/844 [==============================] - 12s 15ms/step - loss: 0.1463 - accuracy: 0.9556 - val_loss: 0.0614 - val_accuracy: 0.9837
 Epoch 3/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.1057 - accuracy: 0.9675 - val_loss: 0.0502 - val_accuracy: 0.9867
+844/844 [==============================] - 12s 14ms/step - loss: 0.1087 - accuracy: 0.9669 - val_loss: 0.0516 - val_accuracy: 0.9857
 Epoch 4/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0888 - accuracy: 0.9726 - val_loss: 0.0431 - val_accuracy: 0.9867
+844/844 [==============================] - 12s 14ms/step - loss: 0.0924 - accuracy: 0.9719 - val_loss: 0.0447 - val_accuracy: 0.9873
 Epoch 5/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0799 - accuracy: 0.9757 - val_loss: 0.0413 - val_accuracy: 0.9875
+844/844 [==============================] - 12s 14ms/step - loss: 0.0810 - accuracy: 0.9744 - val_loss: 0.0431 - val_accuracy: 0.9863
 Epoch 6/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0731 - accuracy: 0.9774 - val_loss: 0.0372 - val_accuracy: 0.9898
+844/844 [==============================] - 12s 14ms/step - loss: 0.0740 - accuracy: 0.9767 - val_loss: 0.0411 - val_accuracy: 0.9883
 Epoch 7/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0636 - accuracy: 0.9801 - val_loss: 0.0378 - val_accuracy: 0.9900
+844/844 [==============================] - 11s 13ms/step - loss: 0.0683 - accuracy: 0.9788 - val_loss: 0.0385 - val_accuracy: 0.9887
 Epoch 8/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0602 - accuracy: 0.9811 - val_loss: 0.0346 - val_accuracy: 0.9890
+844/844 [==============================] - 13s 15ms/step - loss: 0.0634 - accuracy: 0.9798 - val_loss: 0.0374 - val_accuracy: 0.9897
 Epoch 9/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0583 - accuracy: 0.9812 - val_loss: 0.0337 - val_accuracy: 0.9903
+844/844 [==============================] - 12s 14ms/step - loss: 0.0592 - accuracy: 0.9819 - val_loss: 0.0370 - val_accuracy: 0.9890
 Epoch 10/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0546 - accuracy: 0.9829 - val_loss: 0.0322 - val_accuracy: 0.9907
+844/844 [==============================] - 13s 15ms/step - loss: 0.0556 - accuracy: 0.9827 - val_loss: 0.0347 - val_accuracy: 0.9898
 Epoch 11/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0509 - accuracy: 0.9840 - val_loss: 0.0301 - val_accuracy: 0.9918
+844/844 [==============================] - 12s 15ms/step - loss: 0.0539 - accuracy: 0.9829 - val_loss: 0.0314 - val_accuracy: 0.9907
 Epoch 12/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0498 - accuracy: 0.9845 - val_loss: 0.0315 - val_accuracy: 0.9905
+844/844 [==============================] - 13s 15ms/step - loss: 0.0507 - accuracy: 0.9841 - val_loss: 0.0304 - val_accuracy: 0.9907
 Epoch 13/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0483 - accuracy: 0.9841 - val_loss: 0.0324 - val_accuracy: 0.9903
+844/844 [==============================] - 13s 15ms/step - loss: 0.0495 - accuracy: 0.9845 - val_loss: 0.0316 - val_accuracy: 0.9907
 Epoch 14/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0472 - accuracy: 0.9855 - val_loss: 0.0292 - val_accuracy: 0.9915
+844/844 [==============================] - 12s 14ms/step - loss: 0.0460 - accuracy: 0.9859 - val_loss: 0.0311 - val_accuracy: 0.9917
 Epoch 15/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0441 - accuracy: 0.9860 - val_loss: 0.0294 - val_accuracy: 0.9915
+844/844 [==============================] - 13s 15ms/step - loss: 0.0439 - accuracy: 0.9859 - val_loss: 0.0293 - val_accuracy: 0.9908
 Epoch 16/20
-844/844 [==============================] - 113s 134ms/step - loss: 0.0429 - accuracy: 0.9864 - val_loss: 0.0309 - val_accuracy: 0.9913
+844/844 [==============================] - 12s 14ms/step - loss: 0.0434 - accuracy: 0.9863 - val_loss: 0.0290 - val_accuracy: 0.9912
 Epoch 17/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0399 - accuracy: 0.9874 - val_loss: 0.0269 - val_accuracy: 0.9915
+844/844 [==============================] - 13s 15ms/step - loss: 0.0420 - accuracy: 0.9858 - val_loss: 0.0287 - val_accuracy: 0.9912
 Epoch 18/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0419 - accuracy: 0.9861 - val_loss: 0.0290 - val_accuracy: 0.9917
+844/844 [==============================] - 12s 14ms/step - loss: 0.0394 - accuracy: 0.9873 - val_loss: 0.0273 - val_accuracy: 0.9913
 Epoch 19/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0381 - accuracy: 0.9877 - val_loss: 0.0270 - val_accuracy: 0.9922
+844/844 [==============================] - 12s 15ms/step - loss: 0.0403 - accuracy: 0.9874 - val_loss: 0.0283 - val_accuracy: 0.9920
 Epoch 20/20
-844/844 [==============================] - 13s 15ms/step - loss: 0.0372 - accuracy: 0.9885 - val_loss: 0.0275 - val_accuracy: 0.9923</code></pre>
+844/844 [==============================] - 12s 15ms/step - loss: 0.0386 - accuracy: 0.9874 - val_loss: 0.0286 - val_accuracy: 0.9917</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>&lt;keras.callbacks.History at 0x17cf7f790&gt;</code></pre>
+<pre><code>&lt;keras.callbacks.History at 0x16c001fa0&gt;</code></pre>
 </div>
 </div>
 <div class="cell" data-outputid="ff2d43a5-eaf7-44cf-b3e7-fc32857f7486" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(X_test, T_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test loss: 0.019702225923538208
-Test accuracy: 0.9937000274658203</code></pre>
+<pre><code>Test loss: 0.022637275978922844
+Test accuracy: 0.9929000735282898</code></pre>
 </div>
 </div>
 <div class="cell" data-outputid="ea09ed11-55d9-44d4-a6b0-9ac9bca493f3" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'accuracy'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_accuracy'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">6</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">121</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'loss'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_loss'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">122</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'accuracy'</span>], <span class="st">'-r'</span>, label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">'val_accuracy'</span>], <span class="st">'-b'</span>, label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Epoch #'</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Accuracy'</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -896,28 +889,28 @@ Test accuracy: 0.9937000274658203</code></pre>
 <h3 class="anchored" data-anchor-id="accessing-trained-weights">Accessing trained weights</h3>
 <p>Each layer of the network can be addressed individually. For example, <code>model.layers[0]</code> represents the first layer of your network (the first convolutional one, as the input layer does not count). The index of the other layers can be found by looking at the output of <code>model.summary()</code>.</p>
 <p>You can obtain the parameters of each layer (if any) with:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> model.layers[<span class="dv">0</span>].get_weights()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> model.layers[<span class="dv">0</span>].get_weights()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Q:</strong> Print the shape of these weights and relate them to the network.</p>
 <div class="cell" data-outputid="7a7d43a4-1eb2-4a0b-fef3-d050180a97ed" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> model.layers[<span class="dv">0</span>].get_weights()[<span class="dv">0</span>]</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"W shape : "</span>, W.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> model.layers[<span class="dv">0</span>].get_weights()[<span class="dv">0</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"W shape : "</span>, W.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>W shape :  (3, 3, 1, 32)</code></pre>
 </div>
 </div>
 <p><strong>Q:</strong> Visualize with <code>imshow()</code> each of the 16 filters of the first convolutional layer. Interpret what kind of operation they perform on the image.</p>
 <p><em>Hint:</em> <code>subplot()</code> is going to be useful here. If you have 16 images <code>img[i]</code>, you can visualize them in a 4x4 grid with:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    plt.imshow(img[i], cmap<span class="op">=</span>plt.cm.gray)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    plt.imshow(img[i], cmap<span class="op">=</span>plt.cm.gray)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-outputid="17e54d61-1daf-4ba3-db3a-ede72d5663e8" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    plt.imshow(W[:, :, <span class="dv">0</span>, i], cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    plt.imshow(W[:, :, <span class="dv">0</span>, i], cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -931,16 +924,16 @@ Test accuracy: 0.9937000274658203</code></pre>
 <h3 class="anchored" data-anchor-id="visualizing-the-feature-maps">Visualizing the feature maps</h3>
 <p>Let’s take a random image from the training set and visualize it:</p>
 <div class="cell" data-outputid="6a2d632d-8fa6-4ad4-ffc3-24f952494260" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="dv">31727</span> <span class="co"># or any other digit</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[idx, :, :, :].reshape(<span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> t_train[idx]</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(x[<span class="dv">0</span>, :, :, <span class="dv">0</span>] <span class="op">+</span> X_mean[:, :, <span class="dv">0</span>], cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="dv">31727</span> <span class="co"># or any other digit</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[idx, :, :, :].reshape(<span class="dv">1</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> t_train[idx]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(x[<span class="dv">0</span>, :, :, <span class="dv">0</span>] <span class="op">+</span> X_mean[:, :, <span class="dv">0</span>], cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1</code></pre>
 </div>
@@ -955,20 +948,20 @@ Test accuracy: 0.9937000274658203</code></pre>
 <p>This example could be a 1 or 7. That is why you will never get 100% accuracy on MNIST: some examples are hard even for humans…</p>
 <p><strong>Q:</strong> Print what the model predict for it, its true label, and visualize the probabilities in the softmax output layer (look at the doc of <code>model.predict()</code>):</p>
 <div class="cell" data-outputid="0b53717b-cdc0-4dfc-e1c3-86c18f2b5242" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model.predict([x])</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The predicted class has the maximal probability</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> output[<span class="dv">0</span>].argmax()</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Predicted digit:'</span>, prediction, <span class="st">'; True digit:'</span>, t)</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>plt.bar(<span class="bu">range</span>(<span class="dv">10</span>), output[<span class="dv">0</span>])</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Digit'</span>)</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Probability'</span>)</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model.predict([x])</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The predicted class has the maximal probability</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> output[<span class="dv">0</span>].argmax()</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Predicted digit:'</span>, prediction, <span class="st">'; True digit:'</span>, t)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>plt.bar(<span class="bu">range</span>(<span class="dv">10</span>), output[<span class="dv">0</span>])</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Digit'</span>)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Probability'</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:28:07.144889: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 16:38:56.701873: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predicted digit: 1 ; True digit: 1</code></pre>
@@ -985,28 +978,28 @@ Test accuracy: 0.9937000274658203</code></pre>
 <p><strong>Q:</strong> Visualize the output of the network for different examples. Do these ambiguities happen often?</p>
 <p>Now let’s look inside the network. We will first visualize the 16 feature maps of the first convolutional layer.</p>
 <p>This is actually very simple using tensorflow 2.x: One only needs to create a new model (class <code>tf.keras.models.Model</code>, not Sequential) taking the same inputs as the original model, but returning the output of the first layer (<code>model.layers[0]</code> is the first convolutional layer of the model, as the input layer does not count):</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model_conv <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">0</span>].output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_conv <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">0</span>].output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To get the tensor corresponding to the first convolutional layer, one simply needs to call <code>predict()</code> on the new model:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>feature_maps <span class="op">=</span> model_conv.predict([x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>feature_maps <span class="op">=</span> model_conv.predict([x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Q:</strong> Visualize the 16 feature maps using <code>subplot()</code>. Relate these activation with the filters you have visualized previously.</p>
 <div class="cell" data-outputid="e25a4bb2-4109-4d72-ac3c-c62b05ac5119" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model_conv <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">0</span>].output)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>feature_maps <span class="op">=</span> model_conv.predict([x])</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(feature_maps.shape)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    plt.imshow(feature_maps[<span class="dv">0</span>, :, :, i], cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:28:38.895124: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model_conv <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">0</span>].output)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>feature_maps <span class="op">=</span> model_conv.predict([x])</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(feature_maps.shape)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    plt.imshow(feature_maps[<span class="dv">0</span>, :, :, i], cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1, 26, 26, 32)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2023-01-13 16:38:57.307504: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1019,20 +1012,20 @@ Test accuracy: 0.9937000274658203</code></pre>
 <p><strong>Q:</strong> Do the same with the output of the first max-pooling layer.</p>
 <p><em>Hint:</em> you need to find the index of that layer in <code>model.summary()</code>.</p>
 <div class="cell" data-outputid="06c867f7-0abc-4431-ea0d-1056795b0dfd" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>model_pool <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">1</span>].output)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>pooling_maps <span class="op">=</span> model_pool.predict([x])</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pooling_maps.shape)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    plt.imshow(pooling_maps[<span class="dv">0</span>, :, :, i], cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model_pool <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">1</span>].output)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>pooling_maps <span class="op">=</span> model_pool.predict([x])</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pooling_maps.shape)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    plt.imshow(pooling_maps[<span class="dv">0</span>, :, :, i], cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:28:50.513222: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 16:38:57.915228: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1, 13, 13, 32)</code></pre>
@@ -1047,20 +1040,20 @@ Test accuracy: 0.9937000274658203</code></pre>
 </div>
 <p><strong>Bonus question:</strong> if you had several convolutional layers in your network, visualize them too. What do you think of the specificity of some features?</p>
 <div class="cell" data-outputid="0edd64df-ad7c-43b7-a866-0200fe706093" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>model_conv <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">3</span>].output)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>feature_maps <span class="op">=</span> model_conv.predict([x])</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(feature_maps.shape)</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    plt.imshow(feature_maps[<span class="dv">0</span>, :, :, i], cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>model_conv <span class="op">=</span> tf.keras.models.Model(inputs<span class="op">=</span>model.inputs, outputs<span class="op">=</span>model.layers[<span class="dv">3</span>].output)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>feature_maps <span class="op">=</span> model_conv.predict([x])</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(feature_maps.shape)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>):</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">4</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    plt.imshow(feature_maps[<span class="dv">0</span>, :, :, i], cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    plt.colorbar()</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-15 10:28:59.341295: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-01-13 16:38:58.542516: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1, 11, 11, 64)</code></pre>

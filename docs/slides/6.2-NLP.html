@@ -659,6 +659,161 @@ Come, sir, I will make did behold your worship.</code></pre>
 <div class="footer">
 <p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
 </div>
+</section>
+
+<section id="attentional-recurrent-networks" class="title-slide slide level1 center">
+<h1>3 - Attentional recurrent networks</h1>
+
+</section>
+
+<section id="attentional-recurrent-networks-1" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li>The problem with seq2seq is that it <strong>compresses</strong> the complete input sentence into a single state vector.</li>
+</ul>
+<video data-autoplay="" src="https://jalammar.github.io/images/seq2seq_6.mp4" style="display:block; margin: 0 auto 10px 10px; width: 80%" loop="" allow="autoplay loop">
+</video>
+<ul>
+<li><p>For long sequences, the beginning of the sentence may not be present in the final state vector:</p>
+<ul>
+<li><p>Truncated BPTT, vanishing gradients.</p></li>
+<li><p>When predicting the last word, the beginning of the paragraph might not be necessary.</p></li>
+</ul></li>
+<li><p>Consequence: there is not enough information in the state vector to start translating.</p></li>
+</ul>
+<div class="footer">
+<p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
+</div>
+</section>
+
+<section id="attentional-recurrent-networks-2" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li>A solution would be to concatenate the <strong>state vectors</strong> of all steps of the encoder and pass them to the decoder.</li>
+</ul>
+<video data-autoplay="" src="https://jalammar.github.io/images/seq2seq_7.mp4" style="display:block; margin: 0 auto 10px 10px; width: 80%" loop="" allow="autoplay loop">
+</video>
+<ul>
+<li><p><strong>Problem 1:</strong> it would make a lot of elements in the state vector of the decoder (which should be constant).</p></li>
+<li><p><strong>Problem 2:</strong> the state vector of the decoder would depend on the length of the input sequence.</p></li>
+</ul>
+<div class="footer">
+<p><a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" class="uri">https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/</a></p>
+</div>
+</section>
+
+<section id="attentional-recurrent-networks-3" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li>Attentional mechanisms let the decoder decide (by learning) which state vectors it needs to generate each word at each step.</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>The <strong>attentional context vector</strong> of the decoder <span class="math inline">A^\text{decoder}_t</span> at time <span class="math inline">t</span> is a weighted average of all state vectors <span class="math inline">C^\text{encoder}_i</span> of the encoder.</li>
+</ul>
+<p><span class="math display">A^\text{decoder}_t = \sum_{i=0}^T a_i \, C^\text{encoder}_i</span></p>
+</div><div class="column" style="width:50%;">
+<video data-autoplay="" src="https://jalammar.github.io/images/seq2seq_9.mp4" style="display:block; margin: 0 auto 10px 10px; width: 100%" loop="" allow="autoplay loop">
+</video>
+</div>
+</div>
+<ul>
+<li>The coefficients <span class="math inline">a_i</span> are called the <strong>attention scores</strong> : how much attention is the decoder paying to each of the encoder’s state vectors?</li>
+</ul>
+
+<img data-src="img/translation.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio (2014). Neural Machine Translation by Jointly Learning to Align and Translate. arXiv:1409.0473</p>
+</div>
+</section>
+
+<section id="attentional-recurrent-networks-4" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li>The attention scores <span class="math inline">a_i</span> are computed as a <strong>softmax</strong> over the scores <span class="math inline">e_i</span> (in order to sum to 1):</li>
+</ul>
+<p><span class="math display">a_i = \frac{\exp e_i}{\sum_j \exp e_j} \Rightarrow A^\text{decoder}_t = \sum_{i=0}^T \frac{\exp e_i}{\sum_j \exp e_j} \, C^\text{encoder}_i</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<video data-autoplay="" src="https://jalammar.github.io/images/attention_process.mp4" style="display:block; margin: 0 auto 10px 10px; width: 100%" loop="" allow="autoplay loop">
+</video>
+</div><div class="column" style="width:40%;">
+<ul>
+<li><p>The score <span class="math inline">e_i</span> is computed using:</p>
+<ul>
+<li><p>the previous output of the decoder <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span>.</p></li>
+<li><p>the corresponding state vector <span class="math inline">C^\text{encoder}_i</span> of the encoder at step <span class="math inline">i</span>.</p></li>
+<li><p>attentional weights <span class="math inline">W_a</span>.</p></li>
+</ul></li>
+</ul>
+<p><span class="math display">e_i = \text{tanh}(W_a \, [\mathbf{h}^\text{decoder}_{t-1}; C^\text{encoder}_i])</span></p>
+</div>
+</div>
+<ul>
+<li>Everything is differentiable, these attentional weights can be learned with BPTT.</li>
+</ul>
+<div class="footer">
+<p><a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a></p>
+</div>
+</section>
+
+<section>
+<section id="attentional-recurrent-networks-5" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li>The attentional context vector <span class="math inline">A^\text{decoder}_t</span> is concatenated with the previous output <span class="math inline">\mathbf{h}^\text{decoder}_{t-1}</span> and used as the next input <span class="math inline">\mathbf{x}^\text{decoder}_t</span> of the decoder:</li>
+</ul>
+<p><span class="math display">\mathbf{x}^\text{decoder}_t = [\mathbf{h}^\text{decoder}_{t-1} ; A^\text{decoder}_t]</span></p>
+<video data-autoplay="" src="https://jalammar.github.io/images/attention_tensor_dance.mp4" style="display:block; margin: 0 auto 10px 10px; width: 70%" loop="" allow="autoplay loop">
+</video>
+<div class="footer">
+<p><a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a></p>
+</div>
+</section>
+<section class="slide level2">
+
+
+<img data-src="img/seq2seq-attention5.png" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p><a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a></p>
+</div>
+</section></section>
+<section id="attentional-recurrent-networks-6" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li><p>The attention scores or <strong>alignment scores</strong> <span class="math inline">a_i</span> are useful to interpret what happened.</p></li>
+<li><p>They show which words in the original sentence are the most important to generate the next word.</p></li>
+</ul>
+
+<img data-src="img/seq2seq-attention7.png" style="width:45.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio (2014). Neural Machine Translation by Jointly Learning to Align and Translate. arXiv:1409.0473</p>
+</div>
+</section>
+
+<section id="attentional-recurrent-networks-7" class="title-slide slide level1 center">
+<h1>Attentional recurrent networks</h1>
+<ul>
+<li><strong>Attentional mechanisms</strong> are now central to NLP.</li>
+</ul>
+
+<img data-src="img/seq2seq-comparison.png" class="r-stretch quarto-figure-center"><ul>
+<li><p>The whole <strong>history</strong> of encoder states is passed to the decoder, which learns to decide which part is the most important using <strong>attention</strong>.</p></li>
+<li><p>This solves the bottleneck of seq2seq architectures, at the cost of much more operations.</p></li>
+<li><p>They require to use fixed-length sequences (generally 50 words).</p></li>
+</ul>
+<div class="footer">
+<p><a href="https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263" class="uri">https://towardsdatascience.com/day-1-2-attention-seq2seq-models-65df3f49e263</a></p>
+</div>
+</section>
+
+<section id="google-neural-machine-translation-gnmt" class="title-slide slide level1 center">
+<h1>Google Neural Machine Translation (GNMT)</h1>
+<ul>
+<li>Google Neural Machine Translation (GNMT) uses an attentional recurrent NN, with bidirectional GRUs, 8 recurrent layers on 8 GPUs for both the encoder and decoder.</li>
+</ul>
+
+<img data-src="img/google-nmt-lstm.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Wu et al.&nbsp;(2016). Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation. arXiv:1609.08144v2</p>
+</div>
 <div class="footer footer-default">
 
 </div>
