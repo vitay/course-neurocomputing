@@ -363,7 +363,7 @@ Copilot is able to "autocomplete" the code based on a simple comment/docstring.
 ChatGPT (<https://chat.openai.com>) interacts in a conversational way. The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.
 
 
-![ChatGPT. <https://chat.openai.com>](../slides/img/chatgpt2.png){width=100%}
+![ChatGPT. <https://chat.openai.com>](../slides/img/chatpgt2.png){width=100%}
 
 
 All NLP tasks (translation, sentence classification, text generation) are now done using **Large Language Models** (LLM), **self-supervisedly** pre-trained on huge corpuses. 
@@ -377,75 +377,3 @@ Many attempts have been made to reduce the size of these models while keeping a 
 
 See <https://medium.com/mlearning-ai/recent-language-models-9fcf1b5f17f5>.
 
-
-## Vision transformers
-
-{{< youtube  mK9HMXZVSUQ >}}
-
-### ViT
-
-The transformer architecture can also be applied to computer vision, by splitting images into a **sequence** of small patches (16x16). The sequence of vectors can then be classified by the output of the transformer using labels.
-
-![Vision Tranformer (ViT). Source: <https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html>](../slides/img/vision-transformer.gif){width=100%}
-
-
-The Vision Transformer (ViT, [@Dosovitskiy2021]) outperforms state-of-the-art CNNs while requiring less computations.
-
-![ViT performance. Source: [@Dosovitskiy2021]](../slides/img/ViTPerformance.png){width=100%}
-
-
-![ViT performance. Source: [@Dosovitskiy2021]](../slides/img/ViTPerformance2.png){width=100%}
-
-### SiT
-
-ViT only works on big supervised datasets (ImageNet). Can we benefit from self-supervised learning as in BERT or GPT? The Self-supervised Vision Transformer (SiT) [@Atito2021] has an denoising autoencoder-like structure, reconstructing corrupted patches autoregressively.
-
-
-![SiT architecture [@Atito2021].](../slides/img/SiT.png){width=100%}
-
-Self-supervised learning is possible through from **data augmentation** techniques. Various corruptions (masking, replacing, color distortion, blurring) are applied to the input image, but SiT must reconstruct the original image (denoising autoencoder). 
-
-![Data augmentation for SiT [@Atito2021].](../slides/img/SiT-training.png){width=100%}
-
-An auxiliary **rotation loss** forces SiT to predict the orientation of the image (e.g. 30°). Another auxiliary **contrastive loss** ensures that high-level representations are different for different images.
-
-![Performance of SiT [@Atito2021].](../slides/img/SiT-results.png){width=100%}
-
-### DINO
-
-A recent approach for self-supervised learning has been proposed by Facebook AI researchers using **self-distillation** (Self-distillation with no labels - DINO, [@Caron2021]). The images are split into **global** and **local patches** at different scales. Global patches contain label-related information (whole objects) while local patches contain finer details.
-
-![Global and local views for DINO. Source: <https://towardsdatascience.com/on-dino-self-distillation-with-no-labels-c29e9365e382>](../slides/img/DINO-images.gif){width=100%}
-
-The idea of **self-distillation** in DINO is to use two similar ViT networks to classify the patches.
-The **teacher** network gets the global views as an input, while the **student** network get both the local and global ones.
-Both have a MLP head to predict the softmax probabilities, but do **not** use any labels.
-
-![Self-distillation in DINO. [@Caron2021].](../slides/img/DINO-distillation.png){width=60%}
-
-The student tries to imitate the output of the teacher, by minimizing the **cross-entropy** (or KL divergence) between the two probability distributions. The teacher slowly integrates the weights of the student (momentum or exponentially moving average ema):
-
-$$\theta_\text{teacher} \leftarrow \beta \, \theta_\text{teacher} + (1 - \beta) \, \theta_\text{student}$$
-
-
-![DINO training. Source: <https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training/>](../slides/img/DINO-architecture2.gif){width=100%}
-
-The predicted classes do not matter when pre-training, as there is no ground truth. 
-The only thing that matters is the **high-level representation** of an image before the softmax output, which can be used for transfer learning.
-Self-distillation forces the representations to be meaningful at both the global and local scales, as the teacher gets global views. 
-ImageNet classes are already separated in the high-level representations: a simple kNN (k-nearest neighbour) classifier achieves 74.5% accuracy (vs. 79.3% for a supervised ResNet50).
-
-
-![t-SNE visualization of the feature representations in DINO. Source: <https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training/>](img/DINO-tsne.gif){width=100%}
-
-More interestingly, by looking at the self-attention layers, one can obtain saliency maps that perform **object segmentation** without ever having been trained to!
-
-{{< youtube  8I1RelnsgMw >}}
-
-## Time series transformers
-
-Transformers can also be used for time-series classification or forecasting instead of RNNs. Example: weather forecasting, market prices, etc.
-
-![Time series forecasting. [@Wu2020]](../slides/img/transformer-timeseries.png){width=100%}
-
-![Time series transformer. [@Wu2020]](../slides/img/transformer-timeseries-architecture.png){width=100%}

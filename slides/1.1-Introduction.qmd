@@ -1011,6 +1011,10 @@ David Silver et al. (2016). Mastering the game of Go with deep neural networks a
 
 <https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf>
 
+* **Probabilistic Machine Learning: An introduction**, *Kevin Murphy*, MIT Press, 2022. 
+
+<https://probml.github.io/pml-book/book1.html>
+
 # But also
 
 * The machine learning course of Andrew Ng (Stanford at the time) hosted on Coursera is great for beginners:
