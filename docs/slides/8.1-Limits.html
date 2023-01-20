@@ -357,87 +357,8 @@ Julien Vitay
 </div>
 
 </section>
-<section>
-<section id="ai-hype" class="title-slide slide level1 center">
-<h1>1 - AI hype</h1>
-
-<img data-src="img/aicoverage.webp" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Source: <a href="https://link.springer.com/article/10.1007/s00146-020-00965-5" class="uri">https://link.springer.com/article/10.1007/s00146-020-00965-5</a></p>
-</div>
-</section>
-<section class="slide level2">
-
-<div>
-<ul>
-<li class="fragment"><blockquote>
-<p>Intuition, insight, and learning are no longer exclusive possessions of human beings: any large high-speed computer can be programed to exhibit them also.</p>
-</blockquote></li>
-<li class="fragment"><strong>Herbert Simon</strong>, MIT, Nobel Prize, Turing award, <strong>1958</strong>.</li>
-</ul>
-</div>
-</section>
-<section class="slide level2">
-
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/aygSMgK3BEM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-</section>
-<section class="slide level2">
-
-<div>
-<ul>
-<li class="fragment"><blockquote>
-<p>If a typical person can do a mental task with less than one second of thought, we can probably automate it using AI either now or in the near future.</p>
-<p><strong>Andrew Ng</strong>, Stanford University, Google Brain / Baidu, 2016.</p>
-</blockquote></li>
-<li class="fragment"><blockquote>
-<p>The development of full artificial intelligence could spell the end of the human race… It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn’t compete, and would be superseded.</p>
-<p><strong>Stephen Hawking</strong>, Cambridge University, 2014.</p>
-</blockquote></li>
-<li class="fragment"><blockquote>
-<p>Artificial intelligence will reach human levels by around 2029. Follow that out further to, say, 2045, we will have multiplied the intelligence, the human biological machine intelligence of our civilization a billion-fold.</p>
-<p><strong>Ray Kurzweil</strong>, Google, 2017.</p>
-</blockquote></li>
-</ul>
-</div>
-</section></section>
-<section id="the-singularity" class="title-slide slide level1 center">
-<h1>The singularity</h1>
-<ul>
-<li><p>If technological progress continues at its current rate, it will increase <strong>exponentially</strong>.</p></li>
-<li><p>Artificial Intelligence will soon reach the human intelligence level: this is the <strong>singularity</strong>.</p></li>
-<li><p>Past that point, <strong>super artificial intelligence</strong> will be infinitely more intelligent than humans.</p></li>
-<li><p><strong>Skynet</strong> syndrome: Will machines still need us after the singularity?</p></li>
-<li><p>Kurzweil and colleagues argue for <strong>transhumanity</strong>, i.e.&nbsp;the augmentation of human intelligence by super AI.</p></li>
-</ul>
-
-<img data-src="img/singularity.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://hpluspedia.org/wiki/The_Singularity" class="uri">https://hpluspedia.org/wiki/The_Singularity</a></p></section>
-
-<section id="moores-law" class="title-slide slide level1 center">
-<h1>Moore’s law</h1>
-<ul>
-<li><p>The singularity hypothesis relies on an exponential increase of computational power.</p></li>
-<li><p><strong>Moore’s law</strong> (the number of transistors in a dense integrated circuit doubles about every two years) is the only known physical process following an exponential curve, and it is coming to an end.</p></li>
-</ul>
-
-<img data-src="img/mooreslaw.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.alleywatch.com/2017/03/preparing-end-moores-law/" class="uri">https://www.alleywatch.com/2017/03/preparing-end-moores-law/</a></p></section>
-
-<section id="the-singularity-1" class="title-slide slide level1 center">
-<h1>The singularity</h1>
-<ul>
-<li>But is scientific knowledge exponentially increasing?</li>
-</ul>
-<blockquote>
-<p><em>“Max Planck said, ‘Science progresses one funeral at a time.’ The future depends on some graduate student who is deeply suspicious of everything I have said”</em></p>
-<p><strong>Geoffrey Hinton</strong>, Univ. Toronto, 2017.</p>
-</blockquote>
-<ul>
-<li><p>Is the current deep learning approach taking all the light, at the expense of more promising approaches?</p></li>
-<li><p>Science progresses with <strong>breakthroughs</strong>, which are by definition unpredictable.</p></li>
-<li><p><strong>Serendipity</strong> (luck + curiosity) is at the heart of scientific discoveries (gravity, microwaves, etc).</p></li>
-</ul>
-</section>
-
-<section id="current-limitations-of-deep-learning" class="title-slide slide level1 center">
-<h1>2 - Current limitations of deep learning</h1>
+<section id="data" class="title-slide slide level1 center">
+<h1>1 - Data</h1>
 
 </section>
 
@@ -479,6 +400,7 @@ Julien Vitay
 <li>transfer learning</li>
 <li>unsupervised pre-training</li>
 <li>self-supervised learning</li>
+<li>contrastive learning</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -492,8 +414,8 @@ Julien Vitay
 </div>
 </section>
 
-<section id="data-is-never-infinite-3" class="title-slide slide level1 center">
-<h1>Data is never infinite</h1>
+<section id="sample-complexity" class="title-slide slide level1 center">
+<h1>Sample complexity</h1>
 <ul>
 <li><p>Deep Reinforcement Learning has the same <strong>sample complexity</strong> problem: it needs many trial-and-errors to find a correct behavior.</p></li>
 <li><p>DQN and its variants need 200 million frames to learn to play Atari games: 38 days of uninterrupted human playing…</p></li>
@@ -522,17 +444,49 @@ Julien Vitay
 </blockquote>
 </section>
 
-<section id="computational-power-and-energy" class="title-slide slide level1 center">
-<h1>Computational power and energy</h1>
+<section id="data-is-biased" class="title-slide slide level1 center">
+<h1>Data is biased</h1>
+<ul>
+<li>Deep networks only learn from data, so if the data is wrong or <strong>biased</strong>, the predictions will reproduce it.</li>
+</ul>
+<blockquote>
+<p>Garbage in, garbage out.</p>
+</blockquote>
+<ul>
+<li><p><strong>Scenario 1:</strong> you use AI to sort CVs based on how well your previous employees performed.</p>
+<ul>
+<li>If you only hired white middle-aged men in the past, the AI will discard all the others. (Amazon)</li>
+</ul></li>
+<li><p><strong>Scenario 2:</strong> You train your speech recognition system on male American voices.</p>
+<ul>
+<li>You will not recognize female voices or foreign accents well (everybody).</li>
+</ul></li>
+<li><p><strong>Scenario 3:</strong> You create an AI chatbot on twitter, “Tay.ai”, learning from conversations with the twitter crowd.</p>
+<ul>
+<li>The chatbot became in hours a horrible sexist, racist, homophobic monster (Microsoft).</li>
+</ul></li>
+<li><p>AI bias is currently taken very seriously by the major players. LLMs require expensive data cleaning by humans.</p></li>
+</ul>
+<p><a href="https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai" class="uri">https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai</a></p>
+<p><a href="https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/" class="uri">https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/</a></p>
+</section>
 
-<img data-src="img/ai-flops.webp" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8" class="uri">https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8</a></p></section>
+<section id="computational-power-and-energy" class="title-slide slide level1 center">
+<h1>2 - Computational power and energy</h1>
+
+</section>
 
 <section id="computational-power-and-energy-1" class="title-slide slide level1 center">
 <h1>Computational power and energy</h1>
 
-<img data-src="img/ai-ram.webp" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8" class="uri">https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8</a></p></section>
+<img data-src="img/ai-flops.webp" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8" class="uri">https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8</a></p></section>
 
 <section id="computational-power-and-energy-2" class="title-slide slide level1 center">
+<h1>Computational power and energy</h1>
+
+<img data-src="img/ai-ram.webp" class="r-stretch quarto-figure-center"><p class="caption">Source : <a href="https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8" class="uri">https://medium.com/riselab/ai-and-memory-wall-2cb4265cb0b8</a></p></section>
+
+<section id="computational-power-and-energy-3" class="title-slide slide level1 center">
 <h1>Computational power and energy</h1>
 
 <img data-src="img/alphago-power.png" style="width:60.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.ceva-dsp.com/ourblog/artificial-intelligence-leaps-forward-mastering-the-ancient-game-of-go/" class="uri">https://www.ceva-dsp.com/ourblog/artificial-intelligence-leaps-forward-mastering-the-ancient-game-of-go/</a></p><ul>
@@ -541,7 +495,7 @@ Julien Vitay
 </ul>
 </section>
 
-<section id="computational-power-and-energy-3" class="title-slide slide level1 center">
+<section id="computational-power-and-energy-4" class="title-slide slide level1 center">
 <h1>Computational power and energy</h1>
 <ul>
 <li><p>The computational power needed by deep networks increases exponentially: more layers, more parameters, more data, more everything.</p></li>
@@ -637,33 +591,9 @@ Julien Vitay
 </div>
 </section>
 
-<section id="data-is-biased" class="title-slide slide level1 center">
-<h1>Data is biased</h1>
-<ul>
-<li><p>Deep networks only learn from data, so if the data is wrong or <strong>biased</strong>, the predictions will reproduce it.</p></li>
-<li><p><strong>Scenario 1:</strong> you use AI to sort CVs based on how well your previous employees performed.</p>
-<ul>
-<li>If you only hired white middle-aged men in the past, the AI will discard all the others. (Amazon)</li>
-</ul></li>
-</ul>
-<!--
-* **Scenario 2:** you use AI to predict whether an individual is likely to commit a crime based on population statistics.
+<section id="trustworthiness" class="title-slide slide level1 center">
+<h1>3 - Trustworthiness</h1>
 
-$\rightarrow$ Black people are 37% of the incarcerated population in the US, but only 12% of the population. Black people will be overly tagged as potential criminals. (DoJ)
--->
-<ul>
-<li><p><strong>Scenario 2:</strong> You train your speech recognition system on male American voices.</p>
-<ul>
-<li>You will not recognize female voices or foreign accents well (everybody).</li>
-</ul></li>
-<li><p><strong>Scenario 3:</strong> You create an AI chatbot on twitter, “Tay.ai”, learning from conversations with the twitter crowd.</p>
-<ul>
-<li>The chatbot became in hours a horrible sexist, racist, homophobic monster (Microsoft).</li>
-</ul></li>
-<li><p>AI bias is currently taken very seriously by the major players.</p></li>
-</ul>
-<p><a href="https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai" class="uri">https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai</a></p>
-<p><a href="https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/" class="uri">https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/</a></p>
 </section>
 
 <section id="adversarial-attacks" class="title-slide slide level1 center">
@@ -764,10 +694,47 @@ $\rightarrow$ Black people are 37% of the incarcerated population in the US, but
 </div>
 </section>
 
-<section id="learning-is-mostly-offline" class="title-slide slide level1 center">
-<h1>Learning is mostly offline</h1>
+<section id="explainable-interpretable-ai" class="title-slide slide level1 center">
+<h1>Explainable / interpretable AI</h1>
 <ul>
-<li>NN are prone to <strong>catastrophic forgetting</strong>: if you learn A then B, you forget A.</li>
+<li><p>Research on <strong>interpretability</strong> (XAI, explainable AI) may allow to better understand and trust how deep networks take decisions.</p></li>
+<li><p>Neural networks are <strong>black box models</strong>: they are able to learn many things, but one does not know how.</p>
+<ul>
+<li>Can we really trust their decisions? Safety-critical applications.</li>
+</ul></li>
+</ul>
+
+<img data-src="img/LRP.png" class="r-stretch quarto-figure-center"><ul>
+<li><p><strong>Layer-wise relevance propagation</strong> allows to visualize which part of the input is most responsible for the prediction.</p></li>
+<li><p>It is a form of backpropagation, but from the prediction <span class="math inline">\mathbf{y}</span> to the input <span class="math inline">\mathbf{x}</span>, instead of from the loss function <span class="math inline">\mathcal{L}(\theta)</span> to the parameters <span class="math inline">\theta</span>.</p></li>
+<li><p>See <a href="http://www.heatmapping.org/" class="uri">http://www.heatmapping.org/</a> for explanations and code.</p></li>
+</ul>
+<div class="footer">
+<p>Binder et al.&nbsp;(2016). Layer-wise Relevance Propagation for Neural Networks with Local Renormalization Layers. arXiv:1604.00825</p>
+</div>
+</section>
+
+<section id="explainable-interpretable-ai-1" class="title-slide slide level1 center">
+<h1>Explainable / interpretable AI</h1>
+<ul>
+<li><p>The results are sometimes surprising.</p></li>
+<li><p>Horse images in Pascal VOC all have a tag in the bottom left. The CNN has learned to detect that tag, not the horse…</p></li>
+</ul>
+
+<img data-src="img/cleverhans.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Lapuschkin et al.&nbsp;(2019). Unmasking Clever Hans predictors and assessing what machines really learn. Nature Communications 10, 1096. doi:10.1038/s41467-019-08987-4.</p>
+</div>
+</section>
+
+<section id="continuous-learning" class="title-slide slide level1 center">
+<h1>4 - Continuous learning</h1>
+
+</section>
+
+<section id="catastrophic-forgetting" class="title-slide slide level1 center">
+<h1>Catastrophic forgetting</h1>
+<ul>
+<li>Neural networks are prone to <strong>catastrophic forgetting</strong>: if you learn A then B, you forget A.</li>
 </ul>
 <div>
 <div class="quarto-figure quarto-figure-center">
@@ -802,7 +769,7 @@ $\rightarrow$ Black people are 37% of the incarcerated population in the US, but
 <li><p>Motor Control</p></li>
 </ul></li>
 </ul>
-<p>but not two at the same time.</p>
+<p>but rarely two at the same time.</p>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -818,6 +785,11 @@ $\rightarrow$ Black people are 37% of the incarcerated population in the US, but
 </ul>
 </section>
 
+<section id="human-like-intelligence" class="title-slide slide level1 center">
+<h1>5 - Human-like intelligence</h1>
+
+</section>
+
 <section id="overattribution" class="title-slide slide level1 center">
 <h1>Overattribution</h1>
 
@@ -827,43 +799,6 @@ $\rightarrow$ Black people are 37% of the incarcerated population in the US, but
 <li><p>We want AI to be intelligent, so we attribute it intelligent features.</p></li>
 <li><p>The only way to verify this is to have deep networks <strong>verbalize</strong> their decisions (not there yet).</p></li>
 </ul>
-</section>
-
-<section id="explainable-interpretable-ai" class="title-slide slide level1 center">
-<h1>Explainable / interpretable AI</h1>
-<ul>
-<li><p>Research on <strong>interpretability</strong> (XAI, explainable AI) may allow to better understand and trust how deep networks take decisions.</p></li>
-<li><p>Neural networks are <strong>black box models</strong>: they are able to learn many things, but one does not know how.</p>
-<ul>
-<li>Can we really trust their decisions? Safety-critical applications.</li>
-</ul></li>
-</ul>
-
-<img data-src="img/LRP.png" class="r-stretch quarto-figure-center"><ul>
-<li><p><strong>Layer-wise relevance propagation</strong> allows to visualize which part of the input is most resposnible for the prediction.</p></li>
-<li><p>It is a form of backpropagation, but from the prediction <span class="math inline">\mathbf{y}</span> to the input <span class="math inline">\mathbf{x}</span>, instead of from the loss function <span class="math inline">\mathcal{L}(\theta)</span> to the parameters <span class="math inline">\theta</span>.</p></li>
-<li><p>See <a href="http://www.heatmapping.org/" class="uri">http://www.heatmapping.org/</a> for explanations and code.</p></li>
-</ul>
-<div class="footer">
-<p>Binder et al.&nbsp;(2016). Layer-wise Relevance Propagation for Neural Networks with Local Renormalization Layers. arXiv:1604.00825</p>
-</div>
-</section>
-
-<section id="explainable-interpretable-ai-1" class="title-slide slide level1 center">
-<h1>Explainable / interpretable AI</h1>
-<ul>
-<li><p>The results are sometimes surprising.</p></li>
-<li><p>Horse images in Pascal VOC all have a tag in the bottom left. The CNN has learned to detect that tag, not the horse…</p></li>
-</ul>
-
-<img data-src="img/cleverhans.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p>Lapuschkin et al.&nbsp;(2019). Unmasking Clever Hans predictors and assessing what machines really learn. Nature Communications 10, 1096. doi:10.1038/s41467-019-08987-4.</p>
-</div>
-</section>
-
-<section id="what-deep-learning-might-never-be-able-to-do" class="title-slide slide level1 center">
-<h1>3 - What deep learning might never be able to do</h1>
-
 </section>
 
 <section>
@@ -925,7 +860,7 @@ $\rightarrow$ Black people are 37% of the incarcerated population in the US, but
 <li><p>DL models do not have a <strong>model of physics</strong>: if the task (and the data) do not contain physics, it won’t learn it.</p></li>
 <li><p>DL finds <strong>correlations</strong> between the inputs and the outputs, but not the <strong>causation</strong>.</p></li>
 <li><p>Using gigantic datasets as in GPT-3 might give the illusion of reasoning, but it sometimes fails on surprisingly simple tasks.</p></li>
-<li><p>DL has no <strong>theory of mind</strong>: when playing against humans (Go), it does not bother inferring the opponent’s mental state, it just plays his game.</p></li>
+<li><p>DL has no <strong>theory of mind</strong>: when playing against humans (Go), it does not bother inferring the opponent’s mental state, it just plays its own game.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">

@@ -8,90 +8,7 @@ institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
 resources: pdf/8.1-Limits.pdf
 ---
 
-# 1 - AI hype
-
-![](img/aicoverage.webp)
-
-::: footer
-Source: <https://link.springer.com/article/10.1007/s00146-020-00965-5>
-:::
-
----
-
-::: {.incremental}
-* > Intuition, insight, and learning are no longer exclusive possessions of human beings: any large high-speed computer can be programed to exhibit them also.
-
-* **Herbert Simon**, MIT, Nobel Prize, Turing award, **1958**.
-:::
-
----
-
-{{< youtube aygSMgK3BEM >}}
-
-
----
-
-
-::: {.incremental}
-* > If a typical person can do a mental task with less than one second of thought, we can probably automate it using AI either now or in the near future.
->
-> **Andrew Ng**, Stanford University, Google Brain / Baidu, 2016.
-
-* > The development of full artificial intelligence could spell the end of the human race... It would take off on its own, and re-design itself at an ever increasing rate. Humans, who are limited by slow biological evolution, couldn't compete, and would be superseded.
->
-> **Stephen Hawking**, Cambridge University, 2014.
-
-
-* > Artificial intelligence will reach human levels by around 2029. Follow that out further to, say, 2045, we will have multiplied the intelligence, the human biological machine intelligence of our civilization a billion-fold.
->
-> **Ray Kurzweil**, Google, 2017.
-:::
-
-# The singularity
-
-* If technological progress continues at its current rate, it will increase **exponentially**.
-
-* Artificial Intelligence will soon reach the human intelligence level: this is the **singularity**.
-
-* Past that point, **super artificial intelligence** will be infinitely more intelligent than humans.
-
-* **Skynet** syndrome: Will machines still need us after the singularity?
-
-* Kurzweil and colleagues argue for **transhumanity**, i.e. the augmentation of human intelligence by super AI.
-
-
-
-![Source: <https://hpluspedia.org/wiki/The_Singularity>](img/singularity.jpg)
-
-
-
-# Moore's law
-
-* The singularity hypothesis relies on an exponential increase of computational power.
-
-* **Moore's law** (the number of transistors in a dense integrated circuit doubles about every two years) is the only known physical process following an exponential curve, and it is coming to an end.
-
-
-![Source: <https://www.alleywatch.com/2017/03/preparing-end-moores-law/>](img/mooreslaw.png){width=60%}
-
-
-# The singularity
-
-* But is scientific knowledge exponentially increasing?
-
-> *"Max Planck said, 'Science progresses one funeral at a time.' The future depends on some graduate student who is deeply suspicious of everything I have said"*
->
-> **Geoffrey Hinton**, Univ. Toronto, 2017.
-
-* Is the current deep learning approach taking all the light, at the expense of more promising approaches?
-
-* Science progresses with **breakthroughs**, which are by definition unpredictable.
-
-* **Serendipity** (luck + curiosity) is at the heart of scientific discoveries (gravity, microwaves, etc).
-
-
-
-# 2 - Current limitations of  deep learning
+# 1 - Data
 
 # Data is never infinite
 
@@ -137,6 +54,7 @@ Source: <https://link.springer.com/article/10.1007/s00146-020-00965-5>
     * transfer learning
     * unsupervised pre-training
     * self-supervised learning
+    * contrastive learning
 
 
 :::
@@ -150,7 +68,7 @@ Source: <https://link.springer.com/article/10.1007/s00146-020-00965-5>
 
 
 
-# Data is never infinite
+# Sample complexity
 
 * Deep Reinforcement Learning has the same **sample complexity** problem: it needs many trial-and-errors to find a correct behavior.
 
@@ -176,6 +94,34 @@ Source: <https://link.springer.com/article/10.1007/s00146-020-00965-5>
 
 > The AlphaStar league was run for 14 days, using 16 TPUs for each agent. During training, each agent experienced up to 200 years of real-time StarCraft play.
 
+
+# Data is biased
+
+* Deep networks only learn from data, so if the data is wrong or **biased**, the predictions will reproduce it.
+
+> Garbage in, garbage out.
+
+* **Scenario 1:** you use AI to sort CVs based on how well your previous employees performed.
+
+    * If you only hired white middle-aged men in the past, the AI will discard all the others. (Amazon)
+
+
+* **Scenario 2:** You train your speech recognition system on male American voices.
+
+    * You will not recognize female voices or foreign accents well (everybody).
+
+* **Scenario 3:** You create an AI chatbot on twitter, "Tay.ai", learning from conversations with the twitter crowd.
+
+    * The chatbot became in hours a horrible sexist, racist, homophobic monster (Microsoft).
+
+* AI bias is currently taken very seriously by the major players. LLMs require expensive data cleaning by humans.
+
+<https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai>
+
+<https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/>
+
+
+#  2 - Computational power and energy
 
 # Computational power and energy
 
@@ -304,35 +250,7 @@ Hinton G, Vinyals O, Dean J. 2015. Distilling the Knowledge in a Neural Network.
 :::
 
 
-
-# Data is biased
-
-* Deep networks only learn from data, so if the data is wrong or **biased**, the predictions will reproduce it.
-
-* **Scenario 1:** you use AI to sort CVs based on how well your previous employees performed.
-
-    * If you only hired white middle-aged men in the past, the AI will discard all the others. (Amazon)
-
-<!--
-* **Scenario 2:** you use AI to predict whether an individual is likely to commit a crime based on population statistics.
-
-$\rightarrow$ Black people are 37% of the incarcerated population in the US, but only 12% of the population. Black people will be overly tagged as potential criminals. (DoJ)
--->
-
-* **Scenario 2:** You train your speech recognition system on male American voices.
-
-    * You will not recognize female voices or foreign accents well (everybody).
-
-* **Scenario 3:** You create an AI chatbot on twitter, "Tay.ai", learning from conversations with the twitter crowd.
-
-    * The chatbot became in hours a horrible sexist, racist, homophobic monster (Microsoft).
-
-* AI bias is currently taken very seriously by the major players.
-
-<https://www.fastcompany.com/40536485/now-is-the-time-to-act-to-stop-bias-in-ai>
-
-<https://www.weforum.org/agenda/2019/01/to-eliminate-human-bias-from-ai-we-need-to-rethink-our-approach/>
-
+# 3 - Trustworthiness
 
 # Adversarial attacks
 
@@ -425,10 +343,45 @@ Source: <https://blog.openai.com/adversarial-example-research>, <https://arxiv.o
 :::
 
 
-# Learning is mostly offline
+# Explainable / interpretable AI
+
+* Research on **interpretability** (XAI, explainable AI) may allow to better understand and trust how deep networks take decisions.
+
+* Neural networks are **black box models**: they are able to learn many things, but one does not know how.
+
+    * Can we really trust their decisions? Safety-critical applications.
+
+![](img/LRP.png)
+
+* **Layer-wise relevance propagation** allows to visualize which part of the input is most responsible for the prediction.
+
+* It is a form of backpropagation, but from the prediction $\mathbf{y}$ to the input $\mathbf{x}$, instead of from the loss function $\mathcal{L}(\theta)$ to the parameters $\theta$.
+
+* See <http://www.heatmapping.org/> for explanations and code.
+
+::: footer
+Binder et al. (2016). Layer-wise Relevance Propagation for Neural Networks with Local Renormalization Layers. arXiv:1604.00825
+:::
+
+# Explainable / interpretable AI
+
+* The results are sometimes surprising.
+
+* Horse images in Pascal VOC all have a tag in the bottom left. The CNN has learned to detect that tag, not the horse...
+
+![](img/cleverhans.png)
 
 
-* NN are prone to **catastrophic forgetting**: if you learn A then B, you forget A.
+::: footer
+Lapuschkin et al. (2019). Unmasking Clever Hans predictors and assessing what machines really learn. Nature Communications 10, 1096. doi:10.1038/s41467-019-08987-4.
+:::
+
+# 4 - Continuous learning
+
+# Catastrophic forgetting
+
+
+* Neural networks are prone to **catastrophic forgetting**: if you learn A then B, you forget A.
 
 ::: {}
 ![](img/forgetting.svg){width=70%}
@@ -460,7 +413,7 @@ Source: <https://blog.openai.com/adversarial-example-research>, <https://arxiv.o
 
     * Motor Control
 
-but not two at the same time.
+but rarely two at the same time.
 
 :::
 ::: {.column width=30%}
@@ -478,6 +431,7 @@ but not two at the same time.
 * But see Gato (Reed et al. 2022, arXiv:2205.06175) and MIA (Abramson et al. 2022, arXiv.2112.03763) from Deepmind.
 
 
+# 5 - Human-like intelligence
 
 # Overattribution
 
@@ -491,44 +445,6 @@ but not two at the same time.
 
 * The only way to verify this is to have deep networks **verbalize** their decisions (not there yet).
 
-
-
-# Explainable / interpretable AI
-
-* Research on **interpretability** (XAI, explainable AI) may allow to better understand and trust how deep networks take decisions.
-
-* Neural networks are **black box models**: they are able to learn many things, but one does not know how.
-
-    * Can we really trust their decisions? Safety-critical applications.
-
-![](img/LRP.png)
-
-* **Layer-wise relevance propagation** allows to visualize which part of the input is most resposnible for the prediction.
-
-* It is a form of backpropagation, but from the prediction $\mathbf{y}$ to the input $\mathbf{x}$, instead of from the loss function $\mathcal{L}(\theta)$ to the parameters $\theta$.
-
-* See <http://www.heatmapping.org/> for explanations and code.
-
-::: footer
-Binder et al. (2016). Layer-wise Relevance Propagation for Neural Networks with Local Renormalization Layers. arXiv:1604.00825
-:::
-
-# Explainable / interpretable AI
-
-* The results are sometimes surprising.
-
-* Horse images in Pascal VOC all have a tag in the bottom left. The CNN has learned to detect that tag, not the horse...
-
-![](img/cleverhans.png)
-
-
-::: footer
-Lapuschkin et al. (2019). Unmasking Clever Hans predictors and assessing what machines really learn. Nature Communications 10, 1096. doi:10.1038/s41467-019-08987-4.
-:::
-
-
-
-# 3 - What deep learning might never be able to do
 
 
 # No real generalization
@@ -592,7 +508,7 @@ Lapuschkin et al. (2019). Unmasking Clever Hans predictors and assessing what ma
 
 * Using gigantic datasets as in GPT-3 might give the illusion of reasoning, but it sometimes fails on surprisingly simple tasks.
 
-* DL has no **theory of mind**: when playing against humans (Go), it does not bother inferring the opponent's mental state, it just plays his game.
+* DL has no **theory of mind**: when playing against humans (Go), it does not bother inferring the opponent's mental state, it just plays its own game.
 
 :::
 ::: {.column width=50%}

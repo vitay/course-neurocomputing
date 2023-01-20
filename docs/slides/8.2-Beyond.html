@@ -9,7 +9,8 @@
 <link href="8.2-Beyond_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.2.269">
 
-  <title>beyond</title>
+  <meta name="author" content="Julien Vitay">
+  <title>Neurocomputing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -340,7 +341,22 @@
   <div class="reveal">
     <div class="slides">
 
+<section id="title-slide" data-background-image="img/tuc-new-large.png" data-background-opacity="1" data-background-position="top" data-background-size="30%" class="quarto-title-block center">
+  <h1 class="title">Neurocomputing</h1>
+  <p class="subtitle">Beyond deep learning</p>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Julien Vitay 
+</div>
+        <p class="quarto-title-affiliation">
+            Professur für Künstliche Intelligenz - Fakultät für Informatik
+          </p>
+    </div>
+</div>
+
+</section>
 <section id="towards-biological-deep-learning" class="title-slide slide level1 center">
 <h1>1 - Towards biological deep learning?</h1>
 
@@ -364,7 +380,7 @@
 <p><span class="math display">\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/creditassignment2.png"></p>
+<p><img data-src="img/creditassignment2.png" style="width:80.0%"></p>
 </figure>
 </div>
 <ul>
@@ -392,12 +408,12 @@
 <div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/feedbackalignment1.png"></p>
+<p><img data-src="img/feedbackalignment1.png" style="width:80.0%"></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/feedbackalignment2.png"></p>
+<p><img data-src="img/feedbackalignment2.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div><div class="column" style="width:55%;">
@@ -405,7 +421,7 @@
 <li><p>An alternative mechanism consists of backpropagating the error through another set of <strong>feedback weights</strong>.</p></li>
 <li><p>Feedback connections are ubiquitous in the brain, especially in the neocortex.</p></li>
 <li><p>The feedback weights do not need to learn: they can stay random.</p></li>
-<li><p>The mechanism only works for small networks on MNIST.</p></li>
+<li><p>The mechanism only works for small networks on MNIST until now.</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -415,7 +431,7 @@
 </div>
 </div>
 <div class="footer">
-<p>Lillicrap, T. P., Cownden, D., Tweed, D. B., and Akerman, C. J. (2016). Random synaptic feedback weights support error backpropagation for deep learning. Nat Commun 7, 1–10. doi:10.1038/ncomms13276.</p>
+<p>Lillicrap et al.&nbsp;(2016). Random synaptic feedback weights support error backpropagation for deep learning. Nat Commun 7, 1–10. doi:10.1038/ncomms13276.</p>
 </div>
 </section>
 
@@ -441,6 +457,11 @@
 <div class="footer">
 <p>Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1.</p>
 </div>
+</section>
+
+<section id="neural-dynamics" class="title-slide slide level1 center">
+<h1>2 - Neural dynamics</h1>
+
 </section>
 
 <section id="biological-neurons-have-dynamics" class="title-slide slide level1 center">
@@ -511,6 +532,11 @@
 <img data-src="img/biologicalplausibility-neurons.svg" class="r-stretch quarto-figure-center"></section>
 
 <section id="self-organization" class="title-slide slide level1 center">
+<h1>3 - Self-organization</h1>
+
+</section>
+
+<section id="self-organization-1" class="title-slide slide level1 center">
 <h1>Self-organization</h1>
 
 <img data-src="img/fish.jpg" style="width:40.0%" class="r-stretch quarto-figure-center"><ul>
@@ -523,7 +549,7 @@
 </ul>
 </section>
 
-<section id="self-organization-1" class="title-slide slide level1 center">
+<section id="self-organization-2" class="title-slide slide level1 center">
 <h1>Self-organization</h1>
 <ul>
 <li><p><strong>Self-organization</strong> is observed in a wide range of natural processes:</p>
@@ -587,10 +613,8 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/gameoflife2.gif"></p>
+<p></p><figcaption>Source: <a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></figcaption><p></p>
 </figure>
-</div>
-<div class="footer">
-<p><a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></p>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
@@ -615,26 +639,26 @@
 
 <section id="key-differences-between-deep-networks-and-the-brain" class="title-slide slide level1 center">
 <h1>Key differences between deep networks and the brain</h1>
+<p><strong>Bio-inspired AI</strong> has to tackle many challenges.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/ai-brain.jpg"></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
 <ul>
 <li><p><strong>No backpropagation</strong> in the brain, at least in its current form.</p></li>
 <li><p>Information processing is <strong>local</strong> to each neuron and synapse.</p></li>
-<li><p>Highly <strong>recurrent</strong> architecture (feedback connections).</p></li>
+<li><p>Complex <strong>recurrent</strong> architecture (feedback connections).</p></li>
 <li><p>Neurons have <strong>non-linear dynamics</strong>, especially as populations (edge of chaos).</p></li>
 <li><p><strong>Emergence</strong> of functions: the whole is more than the sum of its parts</p></li>
 <li><p><strong>Self-organization</strong>. There is no explicit loss function to minimize: the only task of the brain is to ensure survival of the organism (homeostasis).</p></li>
+<li><p><strong>Embodiment</strong>: the brain is part of a body.</p></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ai-brain.jpg"></p>
+<p></p><figcaption>Source: <a href="https://www.wsj.com/articles/should-artificial-intelligence-copy-the-human-brain-1533355265" class="uri">https://www.wsj.com/articles/should-artificial-intelligence-copy-the-human-brain-1533355265</a></figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="footer">
-<p><a href="https://www.wsj.com/articles/should-artificial-intelligence-copy-the-human-brain-1533355265" class="uri">https://www.wsj.com/articles/should-artificial-intelligence-copy-the-human-brain-1533355265</a></p>
 </div>
 <div class="footer footer-default">
 

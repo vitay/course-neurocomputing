@@ -20,6 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -62,6 +81,22 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -381,11 +416,18 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </nav>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#self-supervised-learning" id="toc-self-supervised-learning" class="nav-link active" data-scroll-target="#self-supervised-learning">Self-supervised learning</a></li>
+  <li><a href="#contrastive-learning" id="toc-contrastive-learning" class="nav-link" data-scroll-target="#contrastive-learning">Contrastive learning</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -404,9 +446,294 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Coming soon…</p>
+<p>Slides: <a href="../slides/7.2-ContrastiveLearning.html" target="_blank">html</a> <a href="../slides/pdf/7.2-ContrastiveLearning.pdf" target="_blank">pdf</a></p>
+<section id="self-supervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="self-supervised-learning">Self-supervised learning</h2>
+<ul>
+<li><strong>Supervised learning</strong> uses a supervisory signal (e.g.&nbsp;human-annotated labels) to train a model (classification, regression).</li>
+<li><strong>Unsupervised learning</strong> only relies on analysing the properties of the data (clustering, dimensionality reduction).</li>
+<li><strong>Semi-supervised learning</strong> first extract features on raw data (e.g.&nbsp;autoencoder) and then fine-tunes a model on annotated data.</li>
+<li><strong>Self-supervised learning</strong> creates its own supervisory signal from the raw data to extract features using a <strong>pretext task</strong> or <strong>auxiliary task</strong>. These features can then be used to learn a supervised learning problem (downstream task).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/nlp-ssl.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/05/self-supervised-learning-nlp/" class="uri">https://amitness.com/2020/05/self-supervised-learning-nlp/</a></figcaption><p></p>
+</figure>
+</div>
+<p>Pretext tasks can be easily and automatically derived from the existing data, such as predicting the future of a signal.</p>
+<p>Generative models (AE, GAN) are somehow self-supervised: reconstructing an image is just a pretext to learn a good latent representation, or to learn to remove noise <span class="citation" data-cites="Vincent2010">(denoising AE, <a href="../references.html#ref-Vincent2010" role="doc-biblioref">Vincent et al., 2010</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/denoisingautoencoder.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>word2vec <span class="citation" data-cites="Mikolov2013">(<a href="../references.html#ref-Mikolov2013" role="doc-biblioref">Mikolov et al., 2013</a>)</span> is trained using the pretext task of predicting the surrounding words in a sentence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/word2vec-training.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/BERT-language-modeling-masked-lm.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Masked word prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/bert-next-sentence-prediction.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Next sentence prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gpt-2-autoregression-2.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Next word prediction. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+</figure>
+</div>
+<p>Autoregressive models (RNN) are trained to predict the next value <span class="math inline">\mathbf{x}_{t+1}</span> of a (multivariate) signal based on its history <span class="math inline">(\mathbf{x}_{t-T}, \ldots, \mathbf{x}_{t})</span>. At inference time, they can “unroll” the future by considering their prediction as the future “ground truth”. Useful for forecasting: weather, share values, predictive maintenance, etc.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/arima.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://saas.berkeley.edu/rp/arima" class="uri">https://saas.berkeley.edu/rp/arima</a></figcaption><p></p>
+</figure>
+</div>
+<p>Rotations are applied to an image and the CNN has to guess which one has been applied. By doing so, it has to learn visual features that “understand” what the regular position of an object is.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/self-sup-rotation.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rotation prediciton. <span class="citation" data-cites="Gidaris2018">(<a href="../references.html#ref-Gidaris2018" role="doc-biblioref">Gidaris et al., 2018</a>)</span></figcaption><p></p>
+</figure>
+</div>
+<p>One can also cut two patches of an image and ask the CNN to predict their relative position on a grid. The task is easier when the CNN “understands” the content of the patches, i.e.&nbsp;has learned good features. Note that the two patches go through the <strong>same</strong> CNN, but the two outputs are concatenated before the classification layers.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/selfsup-patches.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Context prediction. <span class="citation" data-cites="Doersch2016">(<a href="../references.html#ref-Doersch2016" role="doc-biblioref">Doersch et al., 2016</a>)</span></figcaption><p></p>
+</figure>
+</div>
+<p>One can also shuffle patches of an image according to a specific permutation, and have the network predict which permutation was applied.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/self-sup-jigsaw-puzzle.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Jigsaw puzzles. <span class="citation" data-cites="Noroozi2017">(<a href="../references.html#ref-Noroozi2017" role="doc-biblioref">Noroozi and Favaro, 2017</a>)</span></figcaption><p></p>
+</figure>
+</div>
+<p>As with denoising autoencoders, <strong>context encoders</strong> can be trained to generate the contents of an arbitrary image region based on its surroundings. The loss function is the sum of the reconstruction loss and an adversarial loss (as in GANs). Useful for in-paintings. The encoder part can be fine-tuned on classification tasks.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/context-encoder.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Context encoder. <span class="citation" data-cites="Pathak2016">(<a href="../references.html#ref-Pathak2016" role="doc-biblioref">Pathak et al., 2016</a>)</span></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/context-network.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Context encoder. <span class="citation" data-cites="Pathak2016">(<a href="../references.html#ref-Pathak2016" role="doc-biblioref">Pathak et al., 2016</a>)</span></figcaption><p></p>
+</figure>
+</div>
+<p>Triplet siamese networks have to guess whether three frames are consecutive in a video sequence or not.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/frame-order-validation.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Frame order validation. <span class="citation" data-cites="Misra2016">(<a href="../references.html#ref-Misra2016" role="doc-biblioref">Misra et al., 2016</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="contrastive-learning" class="level2">
+<h2 class="anchored" data-anchor-id="contrastive-learning">Contrastive learning</h2>
+<p>The idea of <strong>contrastive learning</strong> is to force a neural network to learn similar representations for similar images (e.g.&nbsp;cats), and different representations for different images (cats vs.&nbsp;dogs).</p>
+<p>In supervised learning, this is achieved by forcing the output layer to <strong>linearly</strong> separate the classes, so the last FC layer must group its representation of cats together and separate it from dogs. But how could we do this without the labels?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/contrastive-1.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/contrastive-2.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://ai.stanford.edu/blog/understanding-contrastive-learning/" class="uri">https://ai.stanford.edu/blog/understanding-contrastive-learning/</a></figcaption><p></p>
+</figure>
+</div>
+<p>A cheap and easy to obtain similar instances of the same class without labels is to perform <strong>data augmentation</strong> on the same image:</p>
+<ul>
+<li>crop, resize, flip, blur, color distortion….</li>
+</ul>
+<p>Ideally, the representation for these augmented images should be similar at the end of the neural network.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/contrastive-dataaugmentation.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-dataaugmentation.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <span class="citation" data-cites="Chen2020a">Chen et al. (<a href="../references.html#ref-Chen2020a" role="doc-biblioref">2020</a>)</span></figcaption><p></p>
+</figure>
+</div>
+<p>SimCLR <span class="citation" data-cites="Chen2020a">(<strong>Sim</strong>ple framework for <strong>C</strong>ontrastive <strong>L</strong>earning of visual <strong>R</strong>epresentations, <a href="../references.html#ref-Chen2020a" role="doc-biblioref">Chen et al., 2020</a>)</span> generates a <strong>positive pair</strong> of augmented images. Both images <span class="math inline">\mathbf{x}_i</span> and <span class="math inline">\mathbf{x}_j</span> go through the same CNN encoder <span class="math inline">f</span> (e.g.&nbsp;a ResNet-50) to produce high-level representations <span class="math inline">\mathbf{h}_i</span> and <span class="math inline">\mathbf{h}_j</span>. The representations are passed through a FCN <span class="math inline">g</span> to produce embeddings <span class="math inline">\mathbf{z}_i</span> and <span class="math inline">\mathbf{z}_j</span>. The goal is to <strong>maximize the similarity</strong> or agreement between the embeddings <span class="math inline">\mathbf{z}_i</span> and <span class="math inline">\mathbf{z}_j</span>, i.e.&nbsp;have the vectors as close as possible from each other..</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-architecture.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption><p></p>
+</figure>
+</div>
+<p>The similarity between the embeddings <span class="math inline">\mathbf{z}_i</span> and <span class="math inline">\mathbf{z}_j</span> is calculated using the <strong>cosine similarity</strong>:</p>
+<p><span class="math display">\cos(\mathbf{z}_i, \mathbf{z}_j) = \dfrac{\mathbf{z}_i^T \, \mathbf{z}_j}{||\mathbf{z}_i|| \, ||\mathbf{z}_j||}</span></p>
+<p>Colinear vectors have a cosine similarity of 1 (or -1), orthogonal vector have a cosine similarity of 0. Note that one could use the L2-norm, but it would force the vectors to have the same norm.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-pairwise-similarity.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-cosinesimilarity.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption><p></p>
+</figure>
+</div>
+<p>SimCLR actually selects a minibatch of <span class="math inline">K</span> images and generates two augmented images for each of them.</p>
+<p>For an image <span class="math inline">k</span>, the goal is to:</p>
+<ul>
+<li><strong>maximize</strong> the similarity between the embeddings <span class="math inline">\mathbf{z}_{2k}</span> and <span class="math inline">\mathbf{z}_{2k+1}</span> of the positive pair,</li>
+<li><strong>minimize</strong> their similarity with the other augmented images (<span class="math inline">(K-1)</span> negative pairs).</li>
+</ul>
+<p>There could be another instance of the same class in the minibatch, but in practice it will not matter much. The batch size should be quite big (<span class="math inline">K=8192</span>) to allow for many relevant negative pairs.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2020/04/advancing-self-supervised-and-semi.html" class="uri">https://ai.googleblog.com/2020/04/advancing-self-supervised-and-semi.html</a></figcaption><p></p>
+</figure>
+</div>
+<p>The NT-Xent (Normalized Temperature-Scaled Cross-Entropy Loss) loss function allows to achieve this. It is a variant of the Noise Contrastive Estimator (NCE) loss.</p>
+<p>Let’s first transform the cosine similarity between two images <span class="math inline">i</span> and <span class="math inline">j</span> into a probability using a softmax:</p>
+<p><span class="math display">
+    s(i, j) = \dfrac{\exp \dfrac{\cos(\mathbf{z}_i, \mathbf{z}_j)}{\tau}}{\sum_{k \neq i} \exp \dfrac{\cos(\mathbf{z}_i, \mathbf{z}_k)}{\tau}}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-softmax-interpretation.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+</figure>
+</div>
+<p>For a positive pair, this softmax represents the probability that the second augmented cat is closer to the first one, compared to the other negative images in the minibatch:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-softmax-calculation.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>By maximizing this probability for a positive pair, we not only maximize the similarity between them, but we also minimize the similarity with the negative pairs, as they appear at the denominator!</p>
+<p>In practice, we will minimize the <strong>negative log-likelihood</strong>:</p>
+<p><span class="math display">
+    l(i, j) = - \log s(i, j)
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-softmax-loss.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+</figure>
+</div>
+<p>Note that the loss function is not symmetric, as the denominator changes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-softmax-loss.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-softmax-loss-inverted.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+</figure>
+</div>
+<p>For a positive pair <span class="math inline">(2k, 2k+1)</span>, we will then average the two losses:</p>
+<p><span class="math display">
+    l(k) = \dfrac{- \log s(2k, 2k+1) - \log s(2k+1, 2k)}{2}
+</span></p>
+<p>Finally, we sum over all positive pairs in the minibatch to obtain the <strong>NT-Xent</strong> (Normalized Temperature-Scaled Cross-Entropy Loss) loss:</p>
+<p><span class="math display">
+\mathcal{L}(\theta) = - \dfrac{1}{2 \, K} \, \sum_{k=1}^K \,  \log s(2k, 2k+1) + \log s(2k+1, 2k)
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-total-loss.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>The loss is defined only over positive pairs in the minibatch, but the negative pairs influence it through the softmax. The temperature plays an important role and should be adapted to the batch size and the number of epochs.</p>
+<p>After performing contrastive learning on the training set of ImageNet, the Resnet-50 encoder can be used to:</p>
+<ol type="1">
+<li>linearly predict the labels using logistic regression.</li>
+<li>fine-tune on 1% of the training data.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-downstream.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr" class="uri">https://amitness.com/2020/03/illustrated-simclr</a></figcaption><p></p>
+</figure>
+</div>
+<p>A simple logistic regression on the learned representations is already on-par with fully supervised models.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-performance.png" class="img-fluid figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/simclr-semisupervised.png" class="img-fluid figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional resources
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></p>
+<p><a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></p>
+<p><a href="https://lilianweng.github.io/posts/2019-11-10-self-supervised/" class="uri">https://lilianweng.github.io/posts/2019-11-10-self-supervised/</a></p>
+<p><a href="https://lilianweng.github.io/posts/2021-05-31-contrastive" class="uri">https://lilianweng.github.io/posts/2021-05-31-contrastive</a></p>
+<p><a href="https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial17/SimCLR.html" class="uri">https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial17/SimCLR.html</a></p>
+<p><a href="https://docs.google.com/presentation/d/1ccddJFD_j3p3h0TCqSV9ajSi2y1yOfh0-lJoK29ircs" class="uri">https://docs.google.com/presentation/d/1ccddJFD_j3p3h0TCqSV9ajSi2y1yOfh0-lJoK29ircs</a></p>
+<p><a href="https://sthalles.github.io/simple-self-supervised-learning/" class="uri">https://sthalles.github.io/simple-self-supervised-learning/</a></p>
+</div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-Chen2020a" class="csl-entry" role="doc-biblioentry">
+Chen, T., Kornblith, S., Norouzi, M., and Hinton, G. (2020). A <span>Simple Framework</span> for <span>Contrastive Learning</span> of <span>Visual Representations</span>. doi:<a href="https://doi.org/10.48550/arXiv.2002.05709">10.48550/arXiv.2002.05709</a>.
+</div>
+<div id="ref-Doersch2016" class="csl-entry" role="doc-biblioentry">
+Doersch, C., Gupta, A., and Efros, A. A. (2016). Unsupervised <span>Visual Representation Learning</span> by <span>Context Prediction</span>. doi:<a href="https://doi.org/10.48550/arXiv.1505.05192">10.48550/arXiv.1505.05192</a>.
+</div>
+<div id="ref-Gidaris2018" class="csl-entry" role="doc-biblioentry">
+Gidaris, S., Singh, P., and Komodakis, N. (2018). Unsupervised <span>Representation Learning</span> by <span>Predicting Image Rotations</span>. doi:<a href="https://doi.org/10.48550/arXiv.1803.07728">10.48550/arXiv.1803.07728</a>.
+</div>
+<div id="ref-Mikolov2013" class="csl-entry" role="doc-biblioentry">
+Mikolov, T., Chen, K., Corrado, G., and Dean, J. (2013). Efficient <span>Estimation</span> of <span>Word Representations</span> in <span>Vector Space</span>. <a href="http://arxiv.org/abs/1301.3781">http://arxiv.org/abs/1301.3781</a>.
+</div>
+<div id="ref-Misra2016" class="csl-entry" role="doc-biblioentry">
+Misra, I., Zitnick, C. L., and Hebert, M. (2016). Shuffle and <span>Learn</span>: <span>Unsupervised Learning</span> using <span>Temporal Order Verification</span>. doi:<a href="https://doi.org/10.48550/arXiv.1603.08561">10.48550/arXiv.1603.08561</a>.
+</div>
+<div id="ref-Noroozi2017" class="csl-entry" role="doc-biblioentry">
+Noroozi, M., and Favaro, P. (2017). Unsupervised <span>Learning</span> of <span>Visual Representations</span> by <span>Solving Jigsaw Puzzles</span>. doi:<a href="https://doi.org/10.48550/arXiv.1603.09246">10.48550/arXiv.1603.09246</a>.
+</div>
+<div id="ref-Pathak2016" class="csl-entry" role="doc-biblioentry">
+Pathak, D., Krahenbuhl, P., Donahue, J., Darrell, T., and Efros, A. A. (2016). Context <span>Encoders</span>: <span>Feature Learning</span> by <span>Inpainting</span>. doi:<a href="https://doi.org/10.48550/arXiv.1604.07379">10.48550/arXiv.1604.07379</a>.
+</div>
+<div id="ref-Vincent2010" class="csl-entry" role="doc-biblioentry">
+Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>Journal of Machine Learning Research</em>, 38.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -542,7 +869,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-page-right">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../notes/7.1-Transformers.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Transformers</span></span>

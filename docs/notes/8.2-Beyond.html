@@ -20,25 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -81,22 +62,6 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -416,26 +381,11 @@ div.csl-indent {
     </div>
 </nav>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#towards-biological-deep-learning" id="toc-towards-biological-deep-learning" class="nav-link active" data-scroll-target="#towards-biological-deep-learning">Towards biological deep learning?</a>
-  <ul class="collapse">
-  <li><a href="#the-credit-assignment-problem" id="toc-the-credit-assignment-problem" class="nav-link" data-scroll-target="#the-credit-assignment-problem">The credit assignment problem</a></li>
-  <li><a href="#feedback-alignment" id="toc-feedback-alignment" class="nav-link" data-scroll-target="#feedback-alignment">Feedback alignment</a></li>
-  <li><a href="#deep-learning-architectures-are-way-too-simple-and-unidirectional" id="toc-deep-learning-architectures-are-way-too-simple-and-unidirectional" class="nav-link" data-scroll-target="#deep-learning-architectures-are-way-too-simple-and-unidirectional">Deep learning architectures are way too simple and unidirectional</a></li>
-  <li><a href="#biological-neurons-have-dynamics" id="toc-biological-neurons-have-dynamics" class="nav-link" data-scroll-target="#biological-neurons-have-dynamics">Biological neurons have dynamics</a></li>
-  <li><a href="#recurrent-dynamics-and-emergence-of-functions" id="toc-recurrent-dynamics-and-emergence-of-functions" class="nav-link" data-scroll-target="#recurrent-dynamics-and-emergence-of-functions">Recurrent dynamics and emergence of functions</a></li>
-  <li><a href="#self-organization" id="toc-self-organization" class="nav-link" data-scroll-target="#self-organization">Self-organization</a></li>
-  <li><a href="#key-differences-between-deep-networks-and-the-brain" id="toc-key-differences-between-deep-networks-and-the-brain" class="nav-link" data-scroll-target="#key-differences-between-deep-networks-and-the-brain">Key differences between deep networks and the brain</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -456,123 +406,8 @@ div.csl-indent {
 
 <p><strong>Work in progress.</strong></p>
 <p>Slides: <a href="../slides/8.2-Beyond.html" target="_blank">html</a> <a href="../slides/pdf/8.2-Beyond.pdf" target="_blank">pdf</a></p>
-<section id="towards-biological-deep-learning" class="level2">
-<h2 class="anchored" data-anchor-id="towards-biological-deep-learning">Towards biological deep learning?</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/MX0H8MLwxeA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<section id="the-credit-assignment-problem" class="level3">
-<h3 class="anchored" data-anchor-id="the-credit-assignment-problem">The credit assignment problem</h3>
-<p>The <strong>credit assignment problem</strong> is the issue of knowing which part of the brain is responsible when something goes wrong (or well) so that it can learn from it.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/creditassignment1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Credit assignement problem. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
-</figure>
-</div>
-<p>Backpropagation solves the credit assignment problem by transmitting the error gradient <strong>backwards</strong> through the weights (<span class="math inline">\sim</span> synapses).</p>
-<p><span class="math display">\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/creditassignment2.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Backpropagation solves the credit assignement problem by transmitting the error backwards. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
-</figure>
-</div>
-<p>But information only goes in one direction in the brain: from the presynaptic neuron to the postsynaptic one. A synapse does know not the weight of other synapses and cannot transmit anything backwards. <strong>Backpropagation is not biologically plausible</strong> in its current formulation.</p>
-</section>
-<section id="feedback-alignment" class="level3">
-<h3 class="anchored" data-anchor-id="feedback-alignment">Feedback alignment</h3>
-<p>An alternative mechanism consists of backpropagating the error through another set of <strong>feedback weights</strong> (feedback alignment, <span class="citation" data-cites="Lillicrap2016">(<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">Lillicrap et al., 2016</a>)</span>). Feedback connections are ubiquitous in the brain, especially in the neocortex. The feedback weights do not need to learn: they can stay random but still transmit useful gradients. The mechanism only works for small networks on MNIST for now.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/feedbackalignment1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Feedback alignment. Source: <span class="citation" data-cites="Lillicrap2016">(<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">Lillicrap et al., 2016</a>)</span>.</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="deep-learning-architectures-are-way-too-simple-and-unidirectional" class="level3">
-<h3 class="anchored" data-anchor-id="deep-learning-architectures-are-way-too-simple-and-unidirectional">Deep learning architectures are way too simple and unidirectional</h3>
-<p>Deep learning architectures are mostly unidirectional, from the input to the output, without feedback connections. The brain is totally differently organized: a big “mess” of interconnected areas processing everything in parallel. The figure on the left is only for vision, and only for the cerebral cortex: the thalamus, basal ganglia, hippocampus, cerebellum, etc, create additional shortcuts. Is the complex structure of the brain just a side effect of evolution, or is it the only possible solution? <strong>Inductive bias</strong>: the choice of the architecture constrains the functions it can perform / learn.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/fellemanvanessen.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Organization of the visual system. Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="biological-neurons-have-dynamics" class="level3">
-<h3 class="anchored" data-anchor-id="biological-neurons-have-dynamics">Biological neurons have dynamics</h3>
-<p>The <strong>artificial neuron</strong> has no dynamics, it is a simple mathematical function:</p>
-<p><span class="math display">
-    y = f( \sum_{i=1}^d w_i \, x_i + b)
-</span></p>
-<p>If you do not change the inputs to an artificial neuron, its output won’t change. Time does not exist, even in a LSTM: the only temporal variable is the frequency at which inputs are set.</p>
-<p>Biological neurons have <strong>dynamics</strong>:</p>
-<ul>
-<li>They adapt their firing rate to constant inputs.</li>
-<li>They continue firing after an input disappears.</li>
-<li>They fire even in the absence of inputs (tonic).</li>
-</ul>
-<p>These dynamics are essential to information processing in the brain.</p>
-</section>
-<section id="recurrent-dynamics-and-emergence-of-functions" class="level3">
-<h3 class="anchored" data-anchor-id="recurrent-dynamics-and-emergence-of-functions">Recurrent dynamics and emergence of functions</h3>
-<p>Recurrent networks of dynamical neurons can exhibit very complex dynamics. Biological neural networks evolve at the <strong>edge of chaos</strong>, i.e.&nbsp;in a highly non-linear regime while still being deterministic. This allows the <strong>emergence</strong> of complex functions: <strong>the whole is more than the sum of its parts</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/rc-network.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Reservoir computing.</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="self-organization" class="level3">
-<h3 class="anchored" data-anchor-id="self-organization">Self-organization</h3>
-<p>There are two complementary approaches to unsupervised learning:</p>
-<ul>
-<li>the <strong>statistical approach</strong>, which tries to extract the most relevant information from the distribution of unlabeled data (autoencoders, etc).</li>
-<li><strong>self-organization</strong>, which tries to understand the principles of organization of natural systems and use them to create efficient algorithms.</li>
-</ul>
-<p>Self-organization is a generic process relying on four basic principles: locality of computations, learning, competition and cooperation.</p>
-<p><strong>Self-organization</strong> is observed in a wide range of natural processes:</p>
-<ul>
-<li>Physics: formation of crystals, star formation, chemical reactions…</li>
-<li>Biology: folding of proteins, social insects, flocking behavior, brain functioning, Gaia hypothesis…</li>
-<li>Social science: critical mass, group thinking, herd behavior…</li>
-</ul>
-<p>A self-organizing system is composed of elementary units (particles, cells, neurons, organs, individuals…) which all perform similar deterministic functions (rule of behavior) on a small part of the available information.</p>
-<p>There is <strong>no central supervisor</strong> or coordinator that knows everything and tells each unit what to do: they have their own rule of behavior and apply it to the information they receive. The units are able to adapt their behavior to the available information: principle of <strong>localized learning</strong>. There is no <strong>explicit loss function</strong> specifying what the system should do: <strong>emergence</strong>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/gameoflife2.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Conway’s game of life. Source: <a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></figcaption><p></p>
-</figure>
-</div>
-<p>The rules of Conway’s <strong>Game of Life</strong> (1970) are extremely simple:</p>
-<ul>
-<li>A cell is either <strong>dead</strong> or <strong>alive</strong>.</li>
-<li>A living cell with less than 1 neighbor dies.</li>
-<li>A living cell with more than 4 neighbors dies.</li>
-<li>A dead cell with 3 neighbors relives.</li>
-</ul>
-<p>Despite this simplicity, GoL can exhibit very complex patterns (fractals, spaceships, pulsars). The GoL is an example of self-organizing <strong>cellular automata</strong> <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" class="uri">https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life</a>.</p>
-</section>
-<section id="key-differences-between-deep-networks-and-the-brain" class="level3">
-<h3 class="anchored" data-anchor-id="key-differences-between-deep-networks-and-the-brain">Key differences between deep networks and the brain</h3>
-<ul>
-<li><strong>No backpropagation</strong> in the brain, at least in its current form.</li>
-<li>Information processing is <strong>local</strong> to each neuron and synapse.</li>
-<li>Highly <strong>recurrent</strong> architecture (feedback connections).</li>
-<li>Neurons have <strong>non-linear dynamics</strong>, especially as populations (edge of chaos).</li>
-<li><strong>Emergence</strong> of functions: the whole is more than the sum of its parts</li>
-<li><strong>Self-organization</strong>. There is no explicit loss function to minimize: the only task of the brain is to ensure survival of the organism (homeostasis).</li>
-</ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Lillicrap2016" class="csl-entry" role="doc-biblioentry">
-Lillicrap, T. P., Cownden, D., Tweed, D. B., and Akerman, C. J. (2016). Random synaptic feedback weights support error backpropagation for deep learning. <em>Nat Commun</em> 7, 1–10. doi:<a href="https://doi.org/10.1038/ncomms13276">10.1038/ncomms13276</a>.
-</div>
-</div>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -708,7 +543,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notes/8.1-Limits.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Limits of deep learning</span></span>

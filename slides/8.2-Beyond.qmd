@@ -5,9 +5,9 @@ subtitle: Beyond deep learning
 author: Julien Vitay
 institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
 
-
 resources: pdf/8.2-Beyond.pdf
 ---
+
 
 # 1 - Towards biological deep learning?
 
@@ -29,7 +29,7 @@ resources: pdf/8.2-Beyond.pdf
 
 $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$$
 
-![](img/creditassignment2.png)
+![](img/creditassignment2.png){width=80%}
 
 * But information only goes in one direction in the brain: from the presynaptic neuron to the postsynaptic one.
 
@@ -54,9 +54,9 @@ $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$
 ::: {.columns}
 ::: {.column width=45%}
 
-![](img/feedbackalignment1.png)
+![](img/feedbackalignment1.png){width=80%}
 
-![](img/feedbackalignment2.png)
+![](img/feedbackalignment2.png){width=80%}
 
 :::
 ::: {.column width=55%}
@@ -67,7 +67,7 @@ $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$
 
 * The feedback weights do not need to learn: they can stay random.
 
-* The mechanism only works for small networks on MNIST.
+* The mechanism only works for small networks on MNIST until now.
 
 ![](img/feedbackalignment3.png)
 
@@ -76,7 +76,7 @@ $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$
 
 
 ::: footer
-Lillicrap, T. P., Cownden, D., Tweed, D. B., and Akerman, C. J. (2016). Random synaptic feedback weights support error backpropagation for deep learning. Nat Commun 7, 1–10. doi:10.1038/ncomms13276.
+Lillicrap et al. (2016). Random synaptic feedback weights support error backpropagation for deep learning. Nat Commun 7, 1–10. doi:10.1038/ncomms13276.
 :::
 
 # Deep learning architectures are way too simple and unidirectional
@@ -108,6 +108,8 @@ Lillicrap, T. P., Cownden, D., Tweed, D. B., and Akerman, C. J. (2016). Random s
 ::: footer
 Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1.
 :::
+
+# 2 - Neural dynamics
 
 # Biological neurons have dynamics
 
@@ -174,6 +176,9 @@ $$
 # Overview of neuron models
 
 ![](img/biologicalplausibility-neurons.svg)
+
+# 3 - Self-organization
+
 
 # Self-organization
   
@@ -253,11 +258,8 @@ $$
 ::: {.column width=50%}
 
 
-![](img/gameoflife2.gif)
+![Source: <https://www.jakubkonka.com/2015/03/15/game-of-life.html>](img/gameoflife2.gif)
 
-::: footer
-<https://www.jakubkonka.com/2015/03/15/game-of-life.html>
-:::
 
 :::
 ::: {.column width=50%}
@@ -289,13 +291,9 @@ $$
 
 # Key differences between deep networks and the brain
 
+**Bio-inspired AI** has to tackle many challenges.
+
 ::: {.columns}
-::: {.column width=50%}
-
-
-![](img/ai-brain.jpg)
-
-:::
 ::: {.column width=50%}
 
 
@@ -303,7 +301,7 @@ $$
 
 * Information processing is **local** to each neuron and synapse.
 
-* Highly **recurrent** architecture (feedback connections).
+* Complex **recurrent** architecture (feedback connections).
 
 * Neurons have **non-linear dynamics**, especially as populations (edge of chaos).
 
@@ -311,10 +309,15 @@ $$
 
 * **Self-organization**. There is no explicit loss function to minimize: the only task of the brain is to ensure survival of the organism (homeostasis).
 
+* **Embodiment**: the brain is part of a body.
+
+
+
+:::
+::: {.column width=50%}
+
+![Source: <https://www.wsj.com/articles/should-artificial-intelligence-copy-the-human-brain-1533355265>](img/ai-brain.jpg)
+
 :::
 :::
 
-
-::: footer
-<https://www.wsj.com/articles/should-artificial-intelligence-copy-the-human-brain-1533355265>
-:::
