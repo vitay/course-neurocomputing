@@ -28,6 +28,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="8.2-Beyond_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
@@ -365,10 +429,7 @@ Julien Vitay
 <section id="the-credit-assignment-problem" class="title-slide slide level1 center">
 <h1>The credit assignment problem</h1>
 
-<img data-src="img/creditassignment1.png" class="r-stretch quarto-figure-center"><div class="footer">
-<p><a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></p>
-</div>
-</section>
+<img data-src="img/creditassignment1.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></p></section>
 
 <section id="backpropagation-is-not-biologically-plausible" class="title-slide slide level1 center">
 <h1>Backpropagation is not biologically plausible</h1>
@@ -381,6 +442,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/creditassignment2.png" style="width:80.0%"></p>
+<p></p><figcaption>Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
 </figure>
 </div>
 <ul>
@@ -396,9 +458,6 @@ Julien Vitay
 </figure>
 </div>
 </div>
-</div>
-<div class="footer">
-<p><a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></p>
 </div>
 </section>
 
@@ -433,6 +492,61 @@ Julien Vitay
 <div class="footer">
 <p>Lillicrap et al.&nbsp;(2016). Random synaptic feedback weights support error backpropagation for deep learning. Nat Commun 7, 1–10. doi:10.1038/ncomms13276.</p>
 </div>
+</section>
+
+<section id="predictive-coding" class="title-slide slide level1 center">
+<h1>Predictive coding</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Another alternative is <strong>predictive coding</strong> (Rao and Ballard, 1999), where the role of each layer is to predict the activity of the previous layer by learning a <strong>predictive model</strong> and computing a <strong>prediction error</strong>.</p></li>
+<li><p>The brain does not process its sensory inputs in a purely feedforward manner, it compares it to its own predictions or <strong>expectations</strong>: you perceive only what you cannot predict.</p></li>
+<li><p>In a hierarchical predictive network, each layer is composed of error and prediction neurons.</p></li>
+<li><p>All learning rules are local, no need for backpropagation. Problem: very slow…</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/predictivecoding.png"></p>
+<p></p><figcaption>Source: <a href="https://doi.org/10.1038/s41593-018-0200-7" class="uri">https://doi.org/10.1038/s41593-018-0200-7</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p>Rao &amp; Ballard (1999). Predictive coding in the visual cortex: A functional interpretation of some extra-classical receptive-field effects. Nature Neuroscience, 2(1) doi:10.1038/4580</p>
+</div>
+</section>
+
+<section id="active-inference" class="title-slide slide level1 center">
+<h1>Active inference</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>More generally, one can understand brain behavior as:</li>
+</ul>
+<ol type="1">
+<li>learning a generative model of the world, i.e.&nbsp;predicting what is going to happen next.</li>
+<li>minimizing the surprise / uncertainty, i.e.&nbsp;acting in order to improve the model and reach desirable outcomes (rewards).</li>
+</ol>
+<ul>
+<li>Active inference proposes that the brain minimizes its <strong>free energy</strong> through action selection, perception and learning:</li>
+</ul>
+<p><span class="math display">
+\mathcal{F} = D_\text{KL}[ p(x) || q(x)] + H[q(x)]
+</span></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/activeinference2.jpg"></p>
+<p></p><figcaption>Source: <a href="https://www.frontiersin.org/articles/10.3389/frobt.2018.00021" class="uri">https://www.frontiersin.org/articles/10.3389/frobt.2018.00021</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Although active inference is mostly a framework about Bayesian statistics and neuroscience, deep neural network implementations (using predictive coding networks) start to appear, paving the way for the next-gen AI.</li>
+</ul>
 </section>
 
 <section id="deep-learning-architectures-are-way-too-simple-and-unidirectional" class="title-slide slide level1 center">
@@ -476,63 +590,629 @@ Julien Vitay
 <li><p>If you do not change the inputs to an artificial neuron, its output won’t change.</p></li>
 <li><p>Time does not exist, even in a LSTM: the only temporal variable is the frequency at which inputs are set.</p></li>
 </ul>
+
+<img data-src="img/artificialneuron.svg" class="r-stretch quarto-figure-center"></section>
+
+<section id="biological-neurons-have-dynamics-1" class="title-slide slide level1 center">
+<h1>Biological neurons have dynamics</h1>
+<ul>
+<li><p>Biological neurons have <strong>dynamics</strong>:</p>
+<ul>
+<li><p>They adapt their firing rate to constant inputs.</p></li>
+<li><p>They continue firing after an input disappears.</p></li>
+<li><p>They fire even in the absence of inputs (tonic firing).</p></li>
+</ul></li>
+<li><p>These dynamics are essential to information processing in recurrent populations.</p></li>
+</ul>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/adex.png"></p>
 </figure>
 </div>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><p>Biological neurons have <strong>dynamics</strong>:</p>
-<ul>
-<li><p>They adapt their firing rate to constant inputs.</p></li>
-<li><p>they continue firing after an input disappears.</p></li>
-<li><p>they fire even in the absence of inputs (tonic).</p></li>
-</ul></li>
-<li><p>These dynamics are essential to information processing in the brain.</p></li>
-</ul>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ratecoded-izhikevich.png"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 
-<section id="recurrent-dynamics-and-emergence-of-functions" class="title-slide slide level1 center">
-<h1>Recurrent dynamics and emergence of functions</h1>
+<section id="reservoir-computing" class="title-slide slide level1 center">
+<h1>Reservoir computing</h1>
 <ul>
-<li><p>Recurrent networks of dynamical neurons can exhibit very complex dynamics.</p></li>
-<li><p>Biological neural networks evolve at the <strong>edge of chaos</strong>, i.e.&nbsp;in a highly non-linear regime while still being deterministic.</p></li>
+<li><p>The concept of <strong>Reservoir Computing</strong> (RC) was developed simultaneously by two researchers at the beginning of the 2000s.</p></li>
+<li><p>Herbert Jaeger (Bremen) introduced <strong>echo-state networks</strong> (ESN) using rate-coded neurons.</p></li>
+<li><p>Wolfgang Maass (TU Graz) introduced <strong>liquid state machines</strong> (LSM) using spiking neurons.</p></li>
 </ul>
+
+<img data-src="img/rc-network.jpg" style="width:60.0%" class="r-stretch quarto-figure-center"><div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Jaeger, H. (2001). The “echo state” approach to analysing and training recurrent neural networks. Technical Report.</p>
+<p>Maass, W., Natschläger, T., and Markram, H. (2002). Real-time computing without stable states: a new framework for neural computation based on perturbations. Neural computation 14, 2531–60. doi:10.1162/089976602760407955.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="echo-state-networks" class="title-slide slide level1 center">
+<h1>Echo-state networks</h1>
+<ul>
+<li>An ESN is a set of <strong>recurrent</strong> units (sparsely connected) exhibiting complex spatiotemporal dynamics.</li>
+</ul>
+
+<img data-src="img/RC-principle2.png" style="width:60.0%" class="r-stretch quarto-figure-center"><ul>
+<li>Rate-coded neurons in the reservoir integrate inputs and recurrent connections using an ODE:</li>
+</ul>
+<p><span class="math display">
+    \tau \, \frac{dx_j(t)}{dt} + x_j(t) = \sum_i W^\text{IN}_{ij} \, I_i(t) + \sum_i W_{ij} \, r_i(t)
+</span></p>
+<ul>
+<li>The output of a neuron uses the tanh function (between -1 and 1):</li>
+</ul>
+<p><span class="math display">
+    r_j(t) = \tanh(x_j(t))
+</span></p>
+<div class="footer">
+<p>Tanaka et al.&nbsp;(2019). Recent advances in physical reservoir computing: A review. Neural Networks 115, 100–123. doi:10.1016/j.neunet.2019.03.005.</p>
+</div>
+</section>
+
+<section id="echo-state-networks-1" class="title-slide slide level1 center">
+<h1>Echo-state networks</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>This allows the <strong>emergence</strong> of complex functions:</p>
-<ul>
-<li>the whole is more than the sum of its parts.</li>
-</ul></li>
+<li><strong>Readout neurons</strong> (or output neurons) transform linearly the activity in the reservoir:</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/rc-network.jpg"></p>
-</figure>
-</div>
+<p><span class="math display">
+    z_k(t) = \sum_j W^\text{OUT}_{jk} \, r_j(t)
+</span></p>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/reservoir-simple.png"></p>
+<p><img data-src="img/RC-principle2.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The recurrent weights are randomly initialized and fixed throughout learning:</li>
+</ul>
+<p><span class="math display">w_{ij} \sim \mathcal{N}(0, \frac{g}{\sqrt{N}})</span></p>
+<ul>
+<li><strong>Supervised learning</strong> can be used to train the readout weights to reproduce desired targets.</li>
+</ul>
+<div class="footer">
+<p>Tanaka et al.&nbsp;(2019). Recent advances in physical reservoir computing: A review. Neural Networks 115, 100–123. doi:10.1016/j.neunet.2019.03.005.</p>
+</div>
+</section>
+
+<section id="echo-state-networks-2" class="title-slide slide level1 center">
+<h1>Echo-state networks</h1>
+<ul>
+<li>When <span class="math inline">g&lt;1</span>, the network has no dynamics: the activity quickly fades to 0 when the input is removed.</li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-0.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="echo-state-networks-3" class="title-slide slide level1 center">
+<h1>Echo-state networks</h1>
+<ul>
+<li>For <span class="math inline">g=1</span>, the reservoir exhibits some <strong>transcient dynamics</strong> but eventually fades to 0 (echo-state property).</li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-1.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="echo-state-networks-4" class="title-slide slide level1 center">
+<h1>Echo-state networks</h1>
+<ul>
+<li>For <span class="math inline">g=1.5</span>, the reservoir exhibits many <strong>stable attractors</strong> due to its rich dynamics.</li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-2.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="echo-state-networks-5" class="title-slide slide level1 center">
+<h1>Echo-state networks</h1>
+<ul>
+<li>For higher values of <span class="math inline">g</span>, there are no stable attractors anymore: <strong>chaotic behavior</strong>.</li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-3.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="representational-power-at-the-edge-of-chaos" class="title-slide slide level1 center">
+<h1>Representational power at the edge of chaos</h1>
+<ul>
+<li>For <span class="math inline">g = 1.5</span>, different inputs (initial states) lead to different attractors.</li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-represent.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="chaotic-behavior-for-high-values-of-g" class="title-slide slide level1 center">
+<h1>Chaotic behavior for high values of <span class="math inline">g</span></h1>
+<ul>
+<li>In the chaotic regime, the slightest uncertainty on the initial conditions (or the presence of noise) produces very different trajectories on the long-term.</li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-reproduce2.png" class="r-stretch quarto-figure-center"></section>
+
+<section id="edge-of-chaos" class="title-slide slide level1 center">
+<h1>Edge of chaos</h1>
+<ul>
+<li><p>The chaotic regime appears for <span class="math inline">g &gt; 1.5</span>.</p></li>
+<li><p><span class="math inline">g=1.5</span> is the <strong>edge of chaos</strong>: the dynamics are very rich, but the network is not chaotic yet.</p></li>
+</ul>
+
+<img data-src="img/reservoir-dynamics-chaos.png" style="width:60.0%" class="r-stretch quarto-figure-center"></section>
+
+<section id="lorenz-attractor" class="title-slide slide level1 center">
+<h1>Lorenz attractor</h1>
+<ul>
+<li><p>The <strong>Lorenz attractor</strong> is a famous example of a chaotic attractor.</p></li>
+<li><p>The position <span class="math inline">x, y, z</span> of a particle is describe by a set of 3 <strong>deterministic</strong> ordinary differential equations:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dP3qAq9RNLg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</div><div class="column" style="width:30%;">
+<p><span class="math display">
+\begin{cases}
+\dfrac{dx}{dt} = \sigma \, (y -  x) \\
+\\
+\dfrac{dy}{dt} = x \, (\rho - z) - y \\
+\\
+\dfrac{dz}{dt} = x\, y - \beta \, z \\
+\end{cases}
+</span></p>
+</div>
+</div>
+<ul>
+<li><p>The resulting trajectories over time have complex dynamics and are <strong>chaotic</strong>:</p>
+<ul>
+<li>The slightest change in the initial conditions generates different trajectories.</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="training-the-readout-neurons" class="title-slide slide level1 center">
+<h1>Training the readout neurons</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/reservoir-fit.png"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Using the reservoir as input, the linear readout neurons can be trained to reproduce <strong>any non-linear</strong> target signal over time:</li>
+</ul>
+<p><span class="math display">
+    z_k(t) = \sum_j W^\text{OUT}_{jk} \, r_j(t)
+</span></p>
+<ul>
+<li>As it is a regression problem, the <strong>delta learning rule</strong> (LMS) is often enough.</li>
+</ul>
+<p><span class="math display">
+    \Delta W^\text{OUT}_{jk} = \eta \, (t_k(t) - z_k(t)) \, r_j(t)
+</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> linear_model</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> linear_model.LinearRegression()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>reg.fit(r, t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Reservoirs are <strong>universal approximators</strong>: given enough neurons in the reservoir and dynamics at the edge of the chaos, a RC network can approximate any non-linear function between an input signal <span class="math inline">\mathbf{I}(t)</span> and a target signal <span class="math inline">\mathbf{t}(t)</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="pattern-separation" class="title-slide slide level1 center">
+<h1>Pattern separation</h1>
+<ul>
+<li><p>The reservoir projects a low-dimensional input into a high-dimensional <strong>spatio-temporal feature space</strong> where trajectories becomes linearly separable.</p></li>
+<li><p>The reservoir increases the distance between the input patterns.</p></li>
+<li><p>Input patterns are separated in both space (neurons) and time: the readout neurons need much less weights than the equivalent MLP: <strong>better generalization and faster learning</strong>.</p></li>
+<li><p>The only drawback is that it does not deal very well with high-dimensional inputs (images).</p></li>
+</ul>
+
+<img data-src="img/rc-patternseparation.png" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Seoane, L. F. (2019). Evolutionary aspects of reservoir computing. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2018.0377.</p>
+</div>
+</section>
+
+<section id="applications-of-reservoir-computing" class="title-slide slide level1 center">
+<h1>Applications of Reservoir Computing</h1>
+<ul>
+<li><strong>Forecasting</strong>: ESN are able to predict the future of chaotic systems (stock market, weather) much better than static RNN.</li>
+</ul>
+
+<img data-src="img/rc-forecasting.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4" class="uri">https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4</a></p></section>
+
+<section id="applications-of-reservoir-computing-1" class="title-slide slide level1 center">
+<h1>Applications of Reservoir Computing</h1>
+<ul>
+<li><strong>Physics:</strong> RC networks can be used to predict the evolution of chaotic systems (Lorenz, Mackey-Glass, Kuramoto-Sivashinsky) at very long time scales (8 times the Lyapunov time).</li>
+</ul>
+
+<img data-src="img/rc-flame.gif" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Pathak et al.&nbsp;(2018). Model-Free Prediction of Large Spatiotemporally Chaotic Systems from Data: A Reservoir Computing Approach. Physical Review Letters 120, 024102–024102. doi:10.1103/PhysRevLett.120.024102.</p>
+</div>
+</section>
+
+<section id="physical-reservoir-computing" class="title-slide slide level1 center">
+<h1>Physical Reservoir Computing</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>The cool thing with reservoirs is that they do not have to be simulated by classical von Neumann architectures (CPU, GPU).</p></li>
+<li><p>Anything able to exhibit dynamics at the edge of chaos can be used:</p>
+<ul>
+<li>VLSI (memristors), magnetronics, photonics (lasers), spintronics (nanoscale electronics)…</li>
+</ul></li>
+<li><p>This can limit drastically the energy consumption of ML algorithms (200W for a GPU).</p></li>
+<li><p>Even biological or physical systems can be used…</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/rc-memristor.jpg"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p>Tanaka et al.&nbsp;(2018). Recent Advances in Physical Reservoir Computing: A Review. arXiv:1808.04962</p>
+</div>
+</section>
+
+<section id="pattern-recognition-in-a-bucket" class="title-slide slide level1 center">
+<h1>Pattern recognition in a bucket</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/liquidbrain.png"></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li><p>A bucket of water can be used as a reservoir.</p></li>
+<li><p>Different motors provide inputs to the reservoir by creating weights.</p></li>
+<li><p>The surface of the bucket is recorded and used as an input to a linear algorithm.</p></li>
+<li><p>It can learn non-linear operations (XOR) or even speech recognition.</p></li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/liquidbrain2.png" style="width:70.0%"></p>
+</figure>
+</div>
+<div class="footer">
+<p>Fernando, C., and Sojakka, S. (2003). Pattern Recognition in a Bucket. doi:10.1007/978-3-540-39432-7_63.</p>
+</div>
+</section>
+
+<section id="rc-with-a-in-silico-culture-of-biological-neurons" class="title-slide slide level1 center">
+<h1>RC with a in-silico culture of biological neurons</h1>
+<ul>
+<li>Real biological neurons can be kept alive in a culture and stimulated /recorded to implement a reservoir.</li>
+</ul>
+
+<img data-src="img/rc-culture2.jpg" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Frega et al.&nbsp;(2014). Network dynamics of 3D engineered neuronal cultures: a new experimental model for in-vitro electrophysiology. Scientific Reports 4, 1–14. doi:10.1038/srep05489.</p>
+</div>
+</section>
+
+<section id="rc-in-cultures-of-e.coli-bacteria" class="title-slide slide level1 center">
+<h1>RC in cultures of E.Coli bacteria</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/rc-ecoli.png"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Escherichia Coli bacteria change their mRNA in response to various external factors (temperature, chemical products, etc) and interact with each other.</p></li>
+<li><p>Their mRNA encode a dynamical trajectory reflecting the inputs.</p></li>
+<li><p>By placing them on a microarray, one can linearly learn to perform non-linear operations on the inputs.</p></li>
+</ul>
+</div>
+</div>
+<div class="footer">
+<p>Jones, B., Stekel, D., Rowe, J., and Fernando, C. (2007). Is there a Liquid State Machine in the Bacterium Escherichia Coli? doi:10.1109/ALIFE.2007.367795.</p>
+</div>
+</section>
+
+<section id="spiking-networks-and-neuromorphic-computing" class="title-slide slide level1 center">
+<h1>3 - Spiking networks and Neuromorphic computing</h1>
+
+</section>
+
+<section id="biological-neurons-communicate-through-spikes" class="title-slide slide level1 center">
+<h1>Biological neurons communicate through spikes</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/spiketrain.jpg"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>The two important dimensions of the information exchanged by neurons are:</p>
+<ul>
+<li><p>The instantaneous <strong>frequency</strong> or <strong>firing rate</strong>: number of spikes per second (Hz).</p></li>
+<li><p>The precise <strong>timing</strong> of the spikes.</p></li>
+</ul></li>
+<li><p>The shape of the spike (amplitude, duration) does not matter much.</p></li>
+<li><p>Spikes are binary signals (0 or 1) at precise moments of time.</p></li>
+<li><p><strong>Rate-coded neurons</strong> only represent the firing rate of a neuron and ignore spike timing.</p></li>
+<li><p><strong>Spiking neurons</strong> represent explicitly spike timing, but omit the details of action potentials.</p></li>
+</ul>
+</div>
+</div>
+<div class="footer">
+<p>Rossant et al.&nbsp;(2011). Fitting Neuron Models to Spike Trains. Front. Neurosci. 5. doi:10.3389/fnins.2011.00009</p>
+</div>
+</section>
+
+<section id="the-leaky-integrate-and-fire-neuron-lapicque-1907" class="title-slide slide level1 center">
+<h1>The leaky integrate-and-fire neuron (Lapicque, 1907)</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>The <strong>leaky integrate-and-fire</strong> (LIF) neuron has a <strong>membrane potential</strong> <span class="math inline">v(t)</span> that integrates its input current <span class="math inline">I(t)</span>:</li>
+</ul>
+<p><span class="math display">
+    C \, \frac{dv(t)}{dt} = - g_L \, (v(t) - V_L) + I(t)
+</span></p>
+<ul>
+<li><p><span class="math inline">C</span> is the membrane capacitance, <span class="math inline">g_L</span> the leak conductance and <span class="math inline">V_L</span> the resting potential.</p></li>
+<li><p>In the absence of input current (<span class="math inline">I=0</span>), the membrane potential is equal to the resting potential.</p></li>
+<li><p>When the membrane potential exceeds a threshold <span class="math inline">V_T</span>, the neuron emits a spike and the membrane potential is reset to the reset potential <span class="math inline">V_r</span> for a fixed refractory period <span class="math inline">t_\text{ref}</span>.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/LIF-threshold.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">
+    \text{if} \; v(t) &gt; V_T \; \text{: emit a spike and set} \, v(t) = V_r \; \text{for} \, t_\text{ref} \, \text{ms.}
+</span></p>
+</section>
+
+<section id="hebbian-learning" class="title-slide slide level1 center">
+<h1>Hebbian learning</h1>
+<ul>
+<li><strong>Hebbian learning</strong> postulates that synapses strengthen based on the <strong>correlation</strong> between the activity of the pre- and post-synaptic neurons:</li>
+</ul>
+<blockquote>
+<p>When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A’s efficiency, as one of the cells firing B, is increased.</p>
+<p><strong>Donald Hebb</strong>, 1949</p>
+</blockquote>
+
+<img data-src="img/hebb.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://slideplayer.com/slide/11511675/" class="uri">https://slideplayer.com/slide/11511675/</a></p></section>
+
+<section id="stdp-spike-timing-dependent-plasticity" class="title-slide slide level1 center">
+<h1>STDP: Spike-timing dependent plasticity</h1>
+<ul>
+<li><p>Synaptic efficiencies actually evolve depending on the the <strong>causation</strong> between the neuron’s firing patterns:</p>
+<ul>
+<li><p>If the pre-synaptic neuron fires <strong>before</strong> the post-synaptic one, the weight is increased (<strong>long-term potentiation</strong>). Pre causes Post to fire.</p></li>
+<li><p>If it fires <strong>after</strong>, the weight is decreased (<strong>long-term depression</strong>). Pre does not cause Post to fire.</p></li>
+</ul></li>
+</ul>
+
+<img data-src="img/stdp.jpg" style="width:70.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb’s postulate revisited. Ann. Rev.&nbsp;Neurosci., 24:139-166.</p>
+</div>
+</section>
+
+<section id="stdp-spike-timing-dependent-plasticity-1" class="title-slide slide level1 center">
+<h1>STDP: Spike-timing dependent plasticity</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>The STDP (spike-timing dependent plasticity) plasticity rule describes how the weight of a synapse evolves when the pre-synaptic neuron fires at <span class="math inline">t_\text{pre}</span> and the post-synaptic one fires at <span class="math inline">t_\text{post}</span>.</li>
+</ul>
+<p><span class="math display"> \Delta w =
+\begin{cases}
+A^+ \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^+} \; \text{if} \; t_\text{post} &gt; t_\text{pre} \\
+\\
+A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\text{pre} &gt; t_\text{post} \\
+\end{cases}
+</span></p>
+<ul>
+<li><p>STDP can be implemented online using traces.</p></li>
+<li><p>More complex variants of STDP (triplet STDP) exist, but this is the main model of synaptic plasticity in spiking networks.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/stdp2.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p>Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb’s postulate revisited. Ann. Rev.&nbsp;Neurosci., 24:139-166.</p>
+</div>
+</section>
+
+<section id="deep-convolutional-spiking-networks" class="title-slide slide level1 center">
+<h1>Deep convolutional spiking networks</h1>
+<ul>
+<li><p>A lot of work has lately focused on deep spiking networks, either using a modified version of backpropagation or using STDP.</p></li>
+<li><p>The Masquelier lab has proposed a deep spiking convolutional network learning to extract features using STDP (<strong>unsupervised learning</strong>).</p></li>
+<li><p>A simple classifier (SVM) then learns to predict classes.</p></li>
+</ul>
+
+<img data-src="img/masquelier-architecture.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</p>
+</div>
+</section>
+
+<section id="deep-convolutional-spiking-networks-1" class="title-slide slide level1 center">
+<h1>Deep convolutional spiking networks</h1>
+<ul>
+<li><p>The convolutional and pooling layers work just as in regular CNNs (shared weights), except the neurons are <strong>integrate-and-fire</strong> (IF).</p></li>
+<li><p>There is additionally a <strong>temporal coding scheme</strong>, where the first neuron to emit a spike at a particular location (i.e.&nbsp;over all feature maps) <strong>inhibits</strong> all the others.</p></li>
+<li><p>This ensures selectivity of the features through <strong>sparse coding</strong>: only one feature can be detected at a given location.</p></li>
+<li><p>STDP allows to learn <strong>causation</strong> between the features and to extract increasingly complex features.</p></li>
+</ul>
+
+<img data-src="img/masquelier-architecture.png" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</p>
+</div>
+</section>
+
+<section id="deep-convolutional-spiking-networks-2" class="title-slide slide level1 center">
+<h1>Deep convolutional spiking networks</h1>
+
+<img data-src="img/masquelier2.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+
+<section id="deep-convolutional-spiking-networks-3" class="title-slide slide level1 center">
+<h1>Deep convolutional spiking networks</h1>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/u32Xnz2hDkE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</section>
+
+<section id="deep-convolutional-spiking-networks-4" class="title-slide slide level1 center">
+<h1>Deep convolutional spiking networks</h1>
+<ul>
+<li><p>The network is trained <strong>unsupervisedly</strong> on various datasets and obtains accuracies close to the state of the art:</p>
+<ul>
+<li>Caltech face/motorbike dataset.</li>
+<li>ETH-80</li>
+<li>MNIST</li>
+</ul></li>
+</ul>
+
+<img data-src="img/masquelier3.png" style="width:80.0%" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</p>
+</div>
+</section>
+
+<section id="deep-convolutional-spiking-networks-5" class="title-slide slide level1 center">
+<h1>Deep convolutional spiking networks</h1>
+<ul>
+<li>The performance on MNIST is in line with classical 3-layered CNNs, but without backpropagation!</li>
+</ul>
+
+<img data-src="img/masquelier4.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p>Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</p>
+</div>
+</section>
+
+<section id="event-based-cameras" class="title-slide slide level1 center">
+<h1>Event-based cameras</h1>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/kPCZESVfHoQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</section>
+
+<section id="event-based-cameras-1" class="title-slide slide level1 center">
+<h1>Event-based cameras</h1>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/eomALySSGVU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+</section>
+
+<section id="neuromorphic-computing" class="title-slide slide level1 center">
+<h1>Neuromorphic computing</h1>
+<ul>
+<li>Event-based cameras are inspired from the retina (<strong>neuromorphic</strong>) and emit spikes corresponding to luminosity changes.</li>
+</ul>
+
+<img data-src="img/eventbased-spike.jpg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience" class="uri">https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience</a></p><ul>
+<li><p>Classical von Neumann computers cannot cope with the high fps of event-based cameras.</p></li>
+<li><p>Spiking neural networks can be used to process the events (classification, control, etc). But do we have the hardware for that?</p></li>
+</ul>
+</section>
+
+<section id="intel-loihi" class="title-slide slide level1 center">
+<h1>Intel Loihi</h1>
+
+<img data-src="img/lohihi-overview.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p><a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></p>
+</div>
+</section>
+
+<section id="intel-loihi-1" class="title-slide slide level1 center">
+<h1>Intel Loihi</h1>
+<ul>
+<li>Loihi implements 128 neuromorphic cores, each containing 1,024 primitive spiking neural units grouped into tree-like structures in order to simplify the implementation.</li>
+</ul>
+
+<img data-src="img/loihi_core.png" class="r-stretch quarto-figure-center"><div class="footer">
+<p><a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></p>
+</div>
+</section>
+
+<section id="intel-loihi-2" class="title-slide slide level1 center">
+<h1>Intel Loihi</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/loihi_spikes.gif"></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li><p>Each neuromorphic core transits spikes to the other cores.</p></li>
+<li><p>Fortunately, the firing rates in a spiking network are usually low (10 Hz), what limits the communication costs inside the chip.</p></li>
+<li><p>Synapses are <strong>learnable</strong> with STDP mechanisms (memristors).</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/loihi-algos.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="footer">
+<p><a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></p>
+</div>
+</section>
+
+<section id="neuromorphic-computing-1" class="title-slide slide level1 center">
+<h1>Neuromorphic computing</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Intel Loihi consumes 1/1000th of the energy needed by a modern GPU.</p>
+<ul>
+<li>Finding suitable algorithms would solve the power consumption of current deep learning-based algorithms.</li>
+</ul></li>
+<li><p>Alternatives to Intel Loihi are:</p>
+<ul>
+<li><p>FPGA</p></li>
+<li><p>IBM TrueNorth</p></li>
+<li><p>Spinnaker (University of Manchester and Dresden).</p></li>
+<li><p>Brainchip</p></li>
+<li><p>Intel Loihi 2 (2022)</p></li>
+</ul></li>
+<li><p>The number of simulated neurons and synapses is still very far away from the human brain, but getting closer!</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/loihi-comp.png"></p>
+<p></p><figcaption>Source: <a href="https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/" class="uri">https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/</a></figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 
-<section id="overview-of-neuron-models" class="title-slide slide level1 center">
-<h1>Overview of neuron models</h1>
-
-<img data-src="img/biologicalplausibility-neurons.svg" class="r-stretch quarto-figure-center"></section>
-
 <section id="self-organization" class="title-slide slide level1 center">
-<h1>3 - Self-organization</h1>
+<h1>4 - Self-organization</h1>
 
 </section>
 

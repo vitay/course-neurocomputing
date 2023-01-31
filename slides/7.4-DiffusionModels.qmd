@@ -1,0 +1,112 @@
+---
+title: Neurocomputing
+subtitle: Diffusion Probabilistic Models
+
+author: Julien Vitay
+institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
+
+bibliography: ../notes/DeepLearning.bib
+csl: ../notes/frontiers.csl
+
+resources: pdf/7.4-DiffusionModels.pdf
+---
+
+# 1 - Diffusion probabilistic models
+
+# Generative modeling
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-concept.webp){width=70%}
+
+
+# VAE and GAN generators transform simple noise to complex distributions
+
+::: {.columns}
+::: {.column}
+
+![](img/generation-distribution.jpeg)
+
+:::
+::: {.column}
+
+![](img/vae-structure.png)
+
+:::
+:::
+
+![](img/gan-principle.png)
+
+
+# Destroying information is easier than creating it
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-complexity.webp)
+
+# Stochastic processes can destroy information
+
+* Iteratively adding normal noise to a signal creates a **stochastic differential equation** (SDE).
+
+$$
+    X_t = \sqrt{1 - p} \, X_{t-1} + \sqrt{p}   \, \sigma \qquad\qquad \text{where} \qquad\qquad  \sigma \sim \mathcal{N}(0, 1)
+$$
+
+* Under some conditions, any probability distribution converges to a normal distribution.
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-noiseconvergence.webp)
+
+# Diffusion process
+
+* A **diffusion process** can iteratively destruct all information in an image through a Markov chain.
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-idea.webp)
+
+# Reverse Diffusion process
+
+* It should be possible to **reverse** each diffusion step by removing the noise using a form of denoising autoencoder.
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-steps.webp)
+
+# Reverse Diffusion process
+
+* We will not get into details, but learning the reverse diffusion step implies Bayesian inference, KL divergence and so on.
+
+* As we have the images at $t$ and $t+1$, it should be possible to learn, right?
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-steps4.webp)
+
+# Probabilistic diffusion models
+
+![Source: <http://adityaramesh.com/posts/dalle2/dalle2.html>](img/diffusion.gif)
+
+
+# 2 - Dall-e
+
+
+# Dall-e
+
+
+![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-dall-e.webp)
+
+::: footer
+<https://openai.com/dall-e-2/>
+:::
+
+# CLIP: Contrastive Language-Image Pre-training
+
+
+<video controls><source src="img/dall-e-2.webm" type="video/webm"></video>
+
+# GLIDE
+
+* GLIDE is a **reverse diffusion process** conditioned on the encoding of an image.
+
+![Source: <https://www.assemblyai.com/blog/how-dall-e-2-actually-works/>](img/CLIP_to_GLIDE-1.png)
+
+# Dall-e
+
+* A prior network learns to map text embeddings to image embeddings:
+
+![Source: <https://www.assemblyai.com/blog/how-dall-e-2-actually-works/>](img/dalle-text_to_image_encoding_2.png){width=40%}
+
+* Complete Dall-e architecture:
+
+![](img/dall-e-complete.png){width=80%}
+

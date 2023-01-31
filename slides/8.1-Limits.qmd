@@ -506,7 +506,7 @@ but rarely two at the same time.
 
 * DL finds **correlations** between the inputs and the outputs, but not the **causation**.
 
-* Using gigantic datasets as in GPT-3 might give the illusion of reasoning, but it sometimes fails on surprisingly simple tasks.
+* Using gigantic datasets as in GPT-3 might give the illusion of reasoning, but it sometimes fails on surprisingly simple tasks /reasoning.
 
 * DL has no **theory of mind**: when playing against humans (Go), it does not bother inferring the opponent's mental state, it just plays its own game.
 
@@ -514,7 +514,7 @@ but rarely two at the same time.
 ::: {.column width=50%}
 
 
-![](img/causation.png)
+![Source: <https://github.com/giuven95/chatgpt-failures>](img/chatgpt-causation.jpg)
 
 :::
 :::

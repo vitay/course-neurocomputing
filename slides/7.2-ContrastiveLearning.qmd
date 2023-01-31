@@ -361,7 +361,7 @@ $$
 ::: {.columns}
 ::: {.column width=50%}
 
-* After performing contrastive learning on the training set of ImageNet, the Resnet-50 encoder can be used to:
+* After performing contrastive learning on the training set of ImageNet (or bigger), the Resnet-50 encoder can be used to:
 
 1) linearly predict the labels using logistic regression.
 2) fine-tune on 1% of the training data.

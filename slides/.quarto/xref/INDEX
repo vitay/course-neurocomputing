@@ -254,5 +254,8 @@
   },
   "7.3-VisionTransformer.qmd": {
     "7.3-VisionTransformer.html": "db255ce7"
+  },
+  "7.4-DiffusionModels.qmd": {
+    "7.4-DiffusionModels.html": "cb1043b9"
   }
 }

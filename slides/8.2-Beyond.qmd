@@ -13,11 +13,8 @@ resources: pdf/8.2-Beyond.pdf
 
 # The credit assignment problem
 
-![](img/creditassignment1.png)
+![Source: <https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf>](img/creditassignment1.png)
 
-::: footer
-<https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf>
-::: 
 
 # Backpropagation is not biologically plausible
 
@@ -29,7 +26,7 @@ resources: pdf/8.2-Beyond.pdf
 
 $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$$
 
-![](img/creditassignment2.png){width=80%}
+![Source: <https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf>](img/creditassignment2.png){width=80%}
 
 * But information only goes in one direction in the brain: from the presynaptic neuron to the postsynaptic one.
 
@@ -45,9 +42,6 @@ $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$
 :::
 
 
-::: footer
-<https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf>
-::: 
 
 # Feedback alignment
 
@@ -78,6 +72,61 @@ $$\Delta W_0 = \eta \, (\mathbf{t} - \mathbf{y}) \times W_1 \times \mathbf{x}^T$
 ::: footer
 Lillicrap et al. (2016). Random synaptic feedback weights support error backpropagation for deep learning. Nat Commun 7, 1–10. doi:10.1038/ncomms13276.
 :::
+
+
+# Predictive coding 
+
+::: {.columns}
+::: {.column width=50%}
+
+* Another alternative is **predictive coding** (Rao and Ballard, 1999), where the role of each layer is to predict the activity of the previous layer by learning a **predictive model** and computing a **prediction error**.  
+
+* The brain does not process its sensory inputs in a purely feedforward manner, it compares it to its own predictions or **expectations**: you perceive only what you cannot predict.
+
+* In a hierarchical predictive network, each layer is composed of error and prediction neurons.
+
+* All learning rules are local, no need for backpropagation. Problem: very slow...
+
+
+:::
+::: {.column width=50%}
+
+![Source: <https://doi.org/10.1038/s41593-018-0200-7>](img/predictivecoding.png)
+
+:::
+:::
+
+::: footer
+Rao & Ballard (1999). Predictive coding in the visual cortex: A functional interpretation of some extra-classical receptive-field effects. Nature Neuroscience, 2(1) doi:10.1038/4580
+:::
+
+# Active inference
+
+
+::: {.columns}
+::: {.column width=50%}
+
+* More generally, one can understand brain behavior as:
+
+1. learning a generative model of the world, i.e. predicting what is going to happen next.
+2. minimizing the surprise / uncertainty, i.e. acting in order to improve the model and reach desirable outcomes (rewards).
+
+* Active inference proposes that the brain minimizes its **free energy** through action selection, perception and learning:
+
+$$
+\mathcal{F} = D_\text{KL}[ p(x) || q(x)] + H[q(x)]
+$$
+
+:::
+::: {.column width=50%}
+
+![Source: <https://www.frontiersin.org/articles/10.3389/frobt.2018.00021>](img/activeinference2.jpg)
+
+:::
+:::
+
+* Although active inference is mostly a framework about Bayesian statistics and neuroscience, deep neural network implementations (using predictive coding networks) start to appear, paving the way for the next-gen AI.
+
 
 # Deep learning architectures are way too simple and unidirectional
 
@@ -124,60 +173,659 @@ $$
 
 * Time does not exist, even in a LSTM: the only temporal variable is the frequency at which inputs are set.
 
-::: {.columns}
-::: {.column width=50%}
+![](img/artificialneuron.svg)
 
-
-![](img/adex.png)
-
-:::
-::: {.column width=50%}
+# Biological neurons have dynamics
 
 
 * Biological neurons have **dynamics**: 
 
     * They adapt their firing rate to constant inputs.
 
-    * they continue firing after an input disappears.
+    * They continue firing after an input disappears.
 
-    * they fire even in the absence of inputs (tonic).
+    * They fire even in the absence of inputs (tonic firing).
 
-* These dynamics are essential to information processing in the brain.
+* These dynamics are essential to information processing in recurrent populations.
+
+::: {.columns}
+::: {.column width=55%}
+
+
+![](img/adex.png)
+
+:::
+::: {.column width=45%}
+
+![](img/ratecoded-izhikevich.png)
 
 :::
 :::
 
 
-# Recurrent dynamics and emergence of functions
+# Reservoir computing
 
-* Recurrent networks of dynamical neurons can exhibit very complex dynamics. 
+* The concept of **Reservoir Computing** (RC) was developed simultaneously by two researchers at the beginning of the 2000s.
 
-* Biological neural networks evolve at the **edge of chaos**, i.e. in a highly non-linear regime while still being deterministic.
+* Herbert Jaeger (Bremen) introduced **echo-state networks** (ESN) using rate-coded neurons.
+
+* Wolfgang Maass (TU Graz) introduced **liquid state machines** (LSM) using spiking neurons.
+
+
+![](img/rc-network.jpg){width=60%}
+
+
+::: {.callout-tip}
+Jaeger, H. (2001). The “echo state” approach to analysing and training recurrent neural networks. Technical Report.
+
+Maass, W., Natschläger, T., and Markram, H. (2002). Real-time computing without stable states: a new framework for neural computation based on perturbations. Neural computation 14, 2531–60. doi:10.1162/089976602760407955.
+:::
+
+# Echo-state networks
+
+* An ESN is a set of **recurrent** units (sparsely connected) exhibiting complex spatiotemporal dynamics.
+
+![](img/RC-principle2.png){width=60%}
+
+
+* Rate-coded neurons in the reservoir integrate inputs and recurrent connections using an ODE:
+
+$$
+    \tau \, \frac{dx_j(t)}{dt} + x_j(t) = \sum_i W^\text{IN}_{ij} \, I_i(t) + \sum_i W_{ij} \, r_i(t) 
+$$
+
+* The output of a neuron uses the tanh function (between -1 and 1):
+
+$$
+    r_j(t) = \tanh(x_j(t))
+$$
+
+::: footer
+Tanaka et al. (2019). Recent advances in physical reservoir computing: A review. Neural Networks 115, 100–123. doi:10.1016/j.neunet.2019.03.005.
+:::
+
+
+# Echo-state networks
+
+
+::: {.columns}
+::: {.column width=50%}
+
+* **Readout neurons** (or output neurons) transform linearly the activity in the reservoir:
+
+$$
+    z_k(t) = \sum_j W^\text{OUT}_{jk} \, r_j(t) 
+$$
+
+::: 
+::: {.column width=50%}
+
+![](img/RC-principle2.png)
+
+:::
+:::
+
+* The recurrent weights are randomly initialized and fixed throughout learning:
+
+$$w_{ij} \sim \mathcal{N}(0, \frac{g}{\sqrt{N}})$$
+
+* **Supervised learning** can be used to train the readout weights to reproduce desired targets.
+
+::: footer
+Tanaka et al. (2019). Recent advances in physical reservoir computing: A review. Neural Networks 115, 100–123. doi:10.1016/j.neunet.2019.03.005.
+:::
+
+
+# Echo-state networks
+
+* When $g<1$, the network has no dynamics: the activity quickly fades to 0 when the input is removed.
+
+![](img/reservoir-dynamics-0.png)
+
+# Echo-state networks
+
+* For $g=1$, the reservoir exhibits some **transcient dynamics** but eventually fades to 0 (echo-state property).
+
+![](img/reservoir-dynamics-1.png)
+
+# Echo-state networks
+
+* For $g=1.5$, the reservoir exhibits many **stable attractors** due to its rich dynamics.
+
+![](img/reservoir-dynamics-2.png)
+
+# Echo-state networks
+
+* For higher values of $g$, there are no stable attractors anymore: **chaotic behavior**.
+
+![](img/reservoir-dynamics-3.png)
+
+# Representational power at the edge of chaos
+
+* For $g = 1.5$, different inputs (initial states) lead to different attractors.
+
+![](img/reservoir-dynamics-represent.png)
+
+
+
+# Chaotic behavior for high values of $g$
+
+* In the chaotic regime, the slightest uncertainty on the initial conditions (or the presence of noise) produces very different trajectories on the long-term.
+
+![](img/reservoir-dynamics-reproduce2.png)
+
+# Edge of chaos
+
+* The chaotic regime appears for $g > 1.5$.
+
+* $g=1.5$ is the **edge of chaos**: the dynamics are very rich, but the network is not chaotic yet.
+
+![](img/reservoir-dynamics-chaos.png){width=60%}
+
+# Lorenz attractor
+
+* The **Lorenz attractor** is a famous example of a chaotic attractor.
+
+* The position $x, y, z$ of a particle is describe by a set of 3 **deterministic** ordinary differential equations:
+
+::: {.columns}
+::: {.column width=70%}
+
+{{< youtube dP3qAq9RNLg >}}
+
+:::
+::: {.column width=30%}
+
+$$
+\begin{cases}
+\dfrac{dx}{dt} = \sigma \, (y -  x) \\
+\\
+\dfrac{dy}{dt} = x \, (\rho - z) - y \\
+\\
+\dfrac{dz}{dt} = x\, y - \beta \, z \\
+\end{cases}
+$$
+
+:::
+:::
+
+
+* The resulting trajectories over time have complex dynamics and are **chaotic**: 
+
+    * The slightest change in the initial conditions generates different trajectories.
+
+
+
+# Training the readout neurons
 
 ::: {.columns}
 ::: {.column width=50%}
 
 
-* This allows the **emergence** of complex functions:
-
-    * the whole is more than the sum of its parts.
-
-![](img/rc-network.jpg)
+![](img/reservoir-fit.png)
 
 :::
 ::: {.column width=50%}
 
-![](img/reservoir-simple.png)
+
+* Using the reservoir as input, the linear readout neurons can be trained to reproduce **any non-linear** target signal over time:
+
+$$
+    z_k(t) = \sum_j W^\text{OUT}_{jk} \, r_j(t) 
+$$
+
+* As it is a regression problem, the **delta learning rule** (LMS) is often enough.
+
+$$
+    \Delta W^\text{OUT}_{jk} = \eta \, (t_k(t) - z_k(t)) \, r_j(t) 
+$$
+
+```python
+from sklearn import linear_model
+reg = linear_model.LinearRegression()
+reg.fit(r, t)
+```
+
+* Reservoirs are **universal approximators**: given enough neurons in the reservoir and dynamics at the edge of the chaos, a RC network can approximate any non-linear function between an input signal $\mathbf{I}(t)$ and a target signal $\mathbf{t}(t)$.
 
 :::
 :::
 
 
-# Overview of neuron models
+# Pattern separation
 
-![](img/biologicalplausibility-neurons.svg)
+* The reservoir projects a low-dimensional input into a high-dimensional **spatio-temporal feature space** where trajectories becomes linearly separable.
 
-# 3 - Self-organization
+* The reservoir increases the distance between the input patterns.
+
+* Input patterns are separated in both space (neurons) and time: the readout neurons need much less weights than the equivalent MLP: **better generalization and faster learning**.
+
+* The only drawback is that it does not deal very well with high-dimensional inputs (images).
+
+![](img/rc-patternseparation.png){width=70%}
+
+::: footer
+Seoane, L. F. (2019). Evolutionary aspects of reservoir computing. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2018.0377.
+:::
+
+
+# Applications of  Reservoir Computing
+
+* **Forecasting**: ESN are able to predict the future of chaotic systems (stock market, weather) much better than static RNN.
+
+![Source: <https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4>](img/rc-forecasting.png)
+
+
+# Applications of  Reservoir Computing
+
+* **Physics:** RC networks can be used to predict the evolution of chaotic systems (Lorenz, Mackey-Glass, Kuramoto-Sivashinsky) at very long time scales (8 times the Lyapunov time).
+
+![](img/rc-flame.gif)
+
+::: footer
+Pathak et al. (2018). Model-Free Prediction of Large Spatiotemporally Chaotic Systems from Data: A Reservoir Computing Approach. Physical Review Letters 120, 024102–024102. doi:10.1103/PhysRevLett.120.024102.
+:::
+
+# Physical Reservoir Computing
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* The cool thing with reservoirs is that they do not have to be simulated by classical von Neumann architectures (CPU, GPU).
+
+* Anything able to exhibit dynamics at the edge of chaos can be used:
+
+    * VLSI (memristors), magnetronics, photonics (lasers), spintronics (nanoscale electronics)...
+
+* This can limit drastically the energy consumption of ML algorithms (200W for a GPU).
+
+* Even biological or physical systems can be used...
+
+:::
+::: {.column width=50%}
+
+
+![](img/rc-memristor.jpg)
+
+:::
+:::
+
+
+::: footer
+Tanaka et al. (2018). Recent Advances in Physical Reservoir Computing: A Review. arXiv:1808.04962
+:::
+
+# Pattern recognition in a bucket
+
+::: {.columns}
+::: {.column width=40%}
+
+![](img/liquidbrain.png)
+
+:::
+::: {.column width=60%}
+
+* A bucket of water can be used as a reservoir.
+
+* Different motors provide inputs to the reservoir by creating weights.
+
+* The surface of the bucket is recorded and used as an input to a linear algorithm.
+
+* It can learn non-linear operations (XOR) or even speech recognition.
+
+:::
+:::
+
+
+![](img/liquidbrain2.png){width=70%}
+
+::: footer
+Fernando, C., and Sojakka, S. (2003). Pattern Recognition in a Bucket. doi:10.1007/978-3-540-39432-7_63.
+:::
+
+# RC with a in-silico culture of biological neurons
+
+* Real biological neurons can be kept alive in a culture and stimulated /recorded to implement a reservoir.
+
+![](img/rc-culture2.jpg)
+
+::: footer
+Frega et al. (2014). Network dynamics of 3D engineered neuronal cultures: a new experimental model for in-vitro electrophysiology. Scientific Reports 4, 1–14. doi:10.1038/srep05489.
+:::
+
+# RC in cultures of E.Coli bacteria
+
+::: {.columns}
+::: {.column width=50%}
+
+
+![](img/rc-ecoli.png)
+
+:::
+::: {.column width=50%}
+
+
+* Escherichia Coli bacteria change their mRNA in response to various external factors (temperature, chemical products, etc) and interact with each other.
+
+* Their mRNA encode a dynamical trajectory reflecting the inputs.
+
+* By placing them on a microarray, one can linearly learn to perform non-linear operations on the inputs.
+
+:::
+:::
+
+
+::: footer
+Jones, B., Stekel, D., Rowe, J., and Fernando, C. (2007). Is there a Liquid State Machine in the Bacterium Escherichia Coli? doi:10.1109/ALIFE.2007.367795.
+:::
+
+
+
+# 3 - Spiking networks and Neuromorphic computing
+
+
+# Biological neurons communicate through spikes
+
+::: {.columns}
+::: {.column width=50%}
+
+
+![](img/spiketrain.jpg)
+
+:::
+::: {.column width=50%}
+
+
+* The two important dimensions of the information exchanged by neurons are:
+
+    * The instantaneous **frequency** or **firing rate**: number of spikes per second (Hz).
+
+    * The precise **timing** of the spikes.
+
+* The shape of the spike (amplitude, duration) does not matter much.
+
+* Spikes are binary signals (0 or 1) at precise moments of time.
+
+* **Rate-coded neurons** only represent the firing rate of a neuron and ignore spike timing.
+
+* **Spiking neurons** represent explicitly spike timing, but omit the details of action potentials.
+
+:::
+:::
+
+::: footer
+Rossant et al. (2011). Fitting Neuron Models to Spike Trains. Front. Neurosci. 5. doi:10.3389/fnins.2011.00009
+:::
+
+# The leaky integrate-and-fire neuron (Lapicque, 1907)
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* The **leaky integrate-and-fire** (LIF) neuron has a **membrane potential** $v(t)$ that integrates its input current $I(t)$:
+
+$$
+    C \, \frac{dv(t)}{dt} = - g_L \, (v(t) - V_L) + I(t)
+$$
+
+* $C$ is the membrane capacitance, $g_L$ the leak conductance and $V_L$ the resting potential. 
+
+* In the absence of input current ($I=0$), the membrane potential is equal to the resting potential.
+
+
+* When the membrane potential exceeds a threshold $V_T$, the neuron emits a spike and the membrane potential is reset to the reset potential $V_r$ for a fixed refractory period $t_\text{ref}$.
+
+:::
+::: {.column width=50%}
+
+![](img/LIF-threshold.png)
+
+:::
+:::
+
+
+$$
+    \text{if} \; v(t) > V_T \; \text{: emit a spike and set} \, v(t) = V_r \; \text{for} \, t_\text{ref} \, \text{ms.}
+$$
+
+
+
+# Hebbian learning
+
+* **Hebbian learning** postulates that synapses strengthen based on the **correlation** between the activity of the pre- and post-synaptic neurons:
+
+> When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A’s efficiency, as one of the cells firing B, is increased. 
+>
+> **Donald Hebb**, 1949
+
+
+![Source: <https://slideplayer.com/slide/11511675/>](img/hebb.png)
+
+
+# STDP: Spike-timing dependent plasticity
+
+* Synaptic efficiencies actually evolve depending on the the **causation** between the neuron's firing patterns:
+
+    * If the pre-synaptic neuron fires **before** the post-synaptic one, the weight is increased (**long-term potentiation**). Pre causes Post to fire.
+
+    * If it fires **after**, the weight is decreased (**long-term depression**). Pre does not cause Post to fire.
+
+![](img/stdp.jpg){width=70%}
+
+::: footer
+Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb's postulate revisited. Ann. Rev. Neurosci., 24:139-166.
+:::
+
+# STDP: Spike-timing dependent plasticity
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* The STDP (spike-timing dependent plasticity) plasticity rule describes how the weight of a synapse evolves when the pre-synaptic neuron fires at $t_\text{pre}$ and the post-synaptic one fires at $t_\text{post}$.
+
+$$ \Delta w = 
+\begin{cases} 
+A^+ \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^+} \; \text{if} \; t_\text{post} > t_\text{pre} \\ 
+\\ 
+A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\text{pre} > t_\text{post} \\ 
+\end{cases}
+$$
+
+* STDP can be implemented online using traces.
+
+* More complex variants of STDP (triplet STDP) exist, but this is the main model of synaptic plasticity in spiking networks.
+
+:::
+::: {.column width=50%}
+
+
+![](img/stdp2.png)
+
+:::
+:::
+
+
+::: footer
+Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb's postulate revisited. Ann. Rev. Neurosci., 24:139-166.
+:::
+
+# Deep convolutional spiking networks
+
+
+* A lot of work has lately focused on deep spiking networks, either using a modified version of backpropagation or using STDP.
+
+* The Masquelier lab has proposed a deep spiking convolutional network learning to extract features using STDP (**unsupervised learning**).
+
+* A simple classifier (SVM) then learns to predict classes.
+
+![](img/masquelier-architecture.png)
+
+::: footer
+Kheradpisheh et al. (2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.
+:::
+
+
+# Deep convolutional spiking networks
+
+
+* The convolutional and pooling layers work just as in regular CNNs (shared weights), except the neurons are **integrate-and-fire** (IF).
+
+* There is additionally a **temporal coding scheme**, where the first neuron to emit a spike at a particular location (i.e. over all feature maps) **inhibits** all the others.
+
+* This ensures selectivity of the features through **sparse coding**: only one feature can be detected at a given location.
+
+* STDP allows to learn **causation** between the features and to extract increasingly complex features.
+
+![](img/masquelier-architecture.png){width=80%}
+
+::: footer
+Kheradpisheh et al. (2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.
+:::
+
+
+# Deep convolutional spiking networks
+
+![](img/masquelier2.png){width=80%}
+
+# Deep convolutional spiking networks
+
+{{< youtube u32Xnz2hDkE >}}
+
+
+# Deep convolutional spiking networks
+
+
+* The network is trained **unsupervisedly** on various datasets and obtains accuracies close to the state of the art:
+
+    * Caltech face/motorbike dataset.
+    * ETH-80
+    * MNIST
+
+![](img/masquelier3.png){width=80%}
+
+
+::: footer
+Kheradpisheh et al. (2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.
+:::
+
+# Deep convolutional spiking networks
+
+* The performance on MNIST is in line with classical 3-layered CNNs, but without backpropagation!
+
+![](img/masquelier4.png)
+
+
+::: footer
+Kheradpisheh et al. (2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.
+:::
+
+
+# Event-based cameras
+
+
+{{< youtube kPCZESVfHoQ >}}
+
+
+# Event-based cameras
+
+{{< youtube eomALySSGVU >}}
+
+
+# Neuromorphic computing
+
+* Event-based cameras are inspired from the retina (**neuromorphic**) and emit spikes corresponding to luminosity changes.
+
+![Source: <https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience>](img/eventbased-spike.jpg)
+
+
+* Classical von Neumann computers cannot cope with the high fps of event-based cameras.
+
+* Spiking neural networks can be used to process the events (classification, control, etc). But do we have the hardware for that?
+
+
+# Intel Loihi
+
+![](img/lohihi-overview.png)
+
+::: footer
+<https://en.wikichip.org/wiki/intel/loihi>
+:::
+
+# Intel Loihi
+
+* Loihi implements 128 neuromorphic cores, each containing 1,024 primitive spiking neural units grouped into tree-like structures in order to simplify the implementation. 
+
+![](img/loihi_core.png)
+
+::: footer
+<https://en.wikichip.org/wiki/intel/loihi>
+:::
+
+# Intel Loihi
+
+::: {.columns}
+::: {.column width=40%}
+
+![](img/loihi_spikes.gif)
+
+:::
+::: {.column width=60%}
+
+* Each neuromorphic core transits spikes to the other cores.
+
+* Fortunately, the firing rates in a spiking network are usually low (10 Hz), what limits the communication costs inside the chip.
+
+* Synapses are **learnable** with STDP mechanisms (memristors). 
+
+![](img/loihi-algos.png)
+
+:::
+:::
+
+
+::: footer
+<https://en.wikichip.org/wiki/intel/loihi>
+:::
+
+# Neuromorphic computing
+
+::: {.columns}
+::: {.column width=50%}
+
+* Intel Loihi consumes 1/1000th of the energy needed by a modern GPU.
+
+    * Finding suitable algorithms would solve the power consumption of current deep learning-based algorithms.
+
+* Alternatives to Intel Loihi are:
+
+    * FPGA
+
+    * IBM TrueNorth
+
+    * Spinnaker (University of Manchester and Dresden).
+
+    * Brainchip
+
+    * Intel Loihi 2 (2022)
+
+* The number of simulated neurons and synapses is still very far away from the human brain, but getting closer!
+
+:::
+::: {.column width=50%}
+
+![Source: <https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/>](img/loihi-comp.png)
+
+
+:::
+:::
+
+
+
+
+# 4 - Self-organization
 
 
 # Self-organization

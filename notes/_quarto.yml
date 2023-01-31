@@ -48,6 +48,7 @@ book:
       - notes/7.1-Transformers.qmd
       - notes/7.2-ContrastiveLearning.qmd
       - notes/7.3-VisionTransformer.qmd
+      - notes/7.4-DiffusionModels.qmd
     - part: "**Outlook**"
       chapters:
       - notes/8.1-Limits.qmd

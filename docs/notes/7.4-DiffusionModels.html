@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Neurocomputing - 21&nbsp; Diffusion Probabilistic Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notes/8.1-Limits.html" rel="next">
+<link href="../notes/7.3-VisionTransformer.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Diffusion Probabilistic Models</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Neurocomputing</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.1-Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.2-Math.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Math basics (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/1.3-Neurons.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Neurons</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.1-Optimization.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Optimization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.2-LinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.3-LinearClassification.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/2.4-LearningTheory.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Learning theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.1-NeuralNetworks.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/3.2-DNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modern neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.1-CNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.2-ObjectDetection.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Object detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/4.3-SemanticSegmentation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Semantic segmentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.1-Autoencoders.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Autoencoders</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.2-RBM.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Restricted Boltzmann machines (optional)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/5.3-GAN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generative adversarial networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.1-RNN.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/6.2-NLP.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing and attention</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.1-Transformers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.2-ContrastiveLearning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contrastive Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.3-VisionTransformer.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vision Transformers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/7.4-DiffusionModels.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Diffusion Probabilistic Models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.1-Limits.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limits of deep learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/8.2-Beyond.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Beyond deep Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Content.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">List of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/Installation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python installation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/2-Numpy-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numpy and Matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/3-LinearRegression-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/4-MLR-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multiple linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/5-Crossvalidation-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-validation and polynomial regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/6-LinearClassification-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Linear classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/7-SoftmaxClassifier-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Softmax classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/8-MLP-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multi-layer Perceptron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/9-MNIST-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">MNIST classification using keras</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/10-CNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Convolutional neural networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/11-TransferLearning-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Transfer learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/12-VAE-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variational autoencoder</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/13-RNN-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Recurrent neural networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#diffusion-probabilistic-models" id="toc-diffusion-probabilistic-models" class="nav-link active" data-scroll-target="#diffusion-probabilistic-models">Diffusion Probabilistic models</a></li>
+  <li><a href="#dall-e" id="toc-dall-e" class="nav-link" data-scroll-target="#dall-e">Dall-e</a>
+  <ul class="collapse">
+  <li><a href="#clip-contrastive-language-image-pre-training" id="toc-clip-contrastive-language-image-pre-training" class="nav-link" data-scroll-target="#clip-contrastive-language-image-pre-training">CLIP: Contrastive Language-Image Pre-training</a></li>
+  <li><a href="#glide" id="toc-glide" class="nav-link" data-scroll-target="#glide">GLIDE</a></li>
+  <li><a href="#dall-e-1" id="toc-dall-e-1" class="nav-link" data-scroll-target="#dall-e-1">Dall-e</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Diffusion Probabilistic Models</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Slides: <a href="../slides/7.4-DiffusionModels.html" target="_blank">html</a> <a href="../slides/pdf/7.4-DiffusionModels.pdf" target="_blank">pdf</a></p>
+<section id="diffusion-probabilistic-models" class="level2">
+<h2 class="anchored" data-anchor-id="diffusion-probabilistic-models">Diffusion Probabilistic models</h2>
+<p>Generative modeling is about learning a mapping function from a simple probability distribution (e.g.&nbsp;normal) to a complex one (images).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-concept.webp" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<p>VAE and GAN generators transform simple Gaussian noise to complex distributions:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/vae-structure.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/gan-principle.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption><p></p>
+</figure>
+</div>
+<p>Destroying information is easier than creating it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-complexity.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<p>Stochastic processes can destroy information. Iteratively adding normal noise to a signal creates a <strong>stochastic differential equation</strong> (SDE).</p>
+<p><span class="math display">
+    X_t = \sqrt{1 - p} \, X_{t-1} + \sqrt{p}   \, \sigma \qquad\qquad \text{where} \qquad\qquad  \sigma \sim \mathcal{N}(0, 1)
+</span></p>
+<p>Under some conditions, any probability distribution converges to a normal distribution.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-noiseconvergence.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<p>A <strong>diffusion process</strong> can therefore iteratively destruct all information in an image through a Markov chain.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-idea.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<p>It should be possible to <strong>reverse</strong> each diffusion step by removing the noise using a form of denoising autoencoder.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-steps.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<p>We will not get into details, but learning the reverse diffusion step implies Bayesian inference, KL divergence and so on. As we have the images at <span class="math inline">t</span> and <span class="math inline">t+1</span>, it should be possible to learn, right?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-steps4.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="http://adityaramesh.com/posts/dalle2/dalle2.html" class="uri">http://adityaramesh.com/posts/dalle2/dalle2.html</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="dall-e" class="level2">
+<h2 class="anchored" data-anchor-id="dall-e">Dall-e</h2>
+<p>Dall-e is a very famous text-to-image generative model. See <a href="https://openai.com/dall-e-2/" class="uri">https://openai.com/dall-e-2/</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/diffusion-dall-e.webp" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption><p></p>
+</figure>
+</div>
+<section id="clip-contrastive-language-image-pre-training" class="level3">
+<h3 class="anchored" data-anchor-id="clip-contrastive-language-image-pre-training">CLIP: Contrastive Language-Image Pre-training</h3>
+<p>Embeddings for text and images are learned using <strong>Transformer encoders</strong> and <strong>contrastive learning</strong>.</p>
+<p>For each pair (text, image) in the training set, their representation should be made similar, while being different from the others.</p>
+<video controls="" width="100%">
+<source src="../slides/img/dall-e-2.webm" type="video/webm">
+</video>
+</section>
+<section id="glide" class="level3">
+<h3 class="anchored" data-anchor-id="glide">GLIDE</h3>
+<p>GLIDE is a <strong>reverse diffusion process</strong> conditioned on the encoding of an image.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/CLIP_to_GLIDE-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://www.assemblyai.com/blog/how-dall-e-2-actually-works/" class="uri">https://www.assemblyai.com/blog/how-dall-e-2-actually-works/</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="dall-e-1" class="level3">
+<h3 class="anchored" data-anchor-id="dall-e-1">Dall-e</h3>
+<p>A prior network learns to map text embeddings into image embeddings:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/dalle-text_to_image_encoding_2.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://www.assemblyai.com/blog/how-dall-e-2-actually-works/" class="uri">https://www.assemblyai.com/blog/how-dall-e-2-actually-works/</a></figcaption><p></p>
+</figure>
+</div>
+<p>Complete Dall-e architecture:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/dall-e-complete.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://www.assemblyai.com/blog/how-dall-e-2-actually-works/" class="uri">https://www.assemblyai.com/blog/how-dall-e-2-actually-works/</a></figcaption><p></p>
+</figure>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/7.3-VisionTransformer.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Vision Transformers</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notes/8.1-Limits.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Limits of deep learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+  </div>
+</footer>
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
