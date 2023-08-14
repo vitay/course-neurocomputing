@@ -2,7 +2,7 @@
 
 This website contains the materials for the module **Neurocomputing** taught by Dr. Julien Vitay at the Technische Universität Chemnitz, Faculty of Computer Science, Professorship for Artificial Intelligence. 
 
-Each section/lecture is accompanied by a set of videos, the slides and a written version of the content. The (slightly outdated) videos are integrated in the lecture notes, but you can also access the complete playlist on [Youtube](https://www.youtube.com/playlist?list=PLIEjdhhAF7ULrnVFYX3Alx3Cv0Wv9ybgU).
+Each section/lecture is accompanied by the slides and a written version of the content. Outdated videos are available in the playlist on [Youtube](https://www.youtube.com/playlist?list=PLIEjdhhAF7ULrnVFYX3Alx3Cv0Wv9ybgU).
 
 Exercises are provided in the form of Jupyter notebooks, allowing to implement in Python at your own pace the algorithms seen in the lectures and to learn to use machine learning libraries such as `scikit-learn`, `keras` and `tensorflow`. A notebook to work on (locally or on Colab) and the solution are available in the [Exercises section](exercises/Content.qmd). 
 

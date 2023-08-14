@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 2&nbsp; Math basics (optional)</title>
+<title>Neurocomputing - Math basics (optional)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,7 +76,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -104,11 +105,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Math basics (optional)</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/1.1-Introduction.html"><strong>Introduction</strong></a></li><li class="breadcrumb-item"><a href="../notes/1.2-Math.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math basics (optional)</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,7 +122,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -125,22 +131,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -164,8 +172,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -194,8 +203,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -214,8 +224,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -239,8 +250,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,8 +276,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -284,8 +297,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,8 +328,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -334,8 +349,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -352,7 +368,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,12 +435,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -469,7 +487,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Math basics (optional)</span></h1>
+<h1 class="title"><span class="chapter-title">Math basics (optional)</span></h1>
 </div>
 
 
@@ -490,7 +508,6 @@ div.csl-indent {
 <p><strong>References:</strong> Part I of <span class="citation" data-cites="Goodfellow2016">(<a href="../references.html#ref-Goodfellow2016" role="doc-biblioref">Goodfellow et al., 2016</a>)</span>. Any mathematics textbook can be used in addition.</p>
 <section id="linear-algebra" class="level2">
 <h2 class="anchored" data-anchor-id="linear-algebra">Linear algebra</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/gE3W7pymA2k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Several mathematical objects are manipulated in linear algebra:</p>
 <ul>
 <li><p><strong>Scalars</strong> <span class="math inline">x</span> are 0-dimensional values (single numbers, so to speak). They can either take real values (<span class="math inline">x \in \Re</span>, e.g.&nbsp;<span class="math inline">x = 1.4573</span>, floats in CS) or natural values (<span class="math inline">x \in \mathbb{N}</span>, e.g.&nbsp;<span class="math inline">x = 3</span>, integers in CS).</p></li>
@@ -523,7 +540,7 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vectorspace.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Vector spaces allow additions of vectors. Source: <a href="https://mathinsight.org/image/vector_2d_add" class="uri">https://mathinsight.org/image/vector_2d_add</a></figcaption><p></p>
+<figcaption class="figure-caption">Vector spaces allow additions of vectors. Source: <a href="https://mathinsight.org/image/vector_2d_add" class="uri">https://mathinsight.org/image/vector_2d_add</a></figcaption>
 </figure>
 </div>
 <p>These two operations generate a lot of nice properties (see <a href="https://en.wikipedia.org/wiki/Vector_space" class="uri">https://en.wikipedia.org/wiki/Vector_space</a> for a full list), including:</p>
@@ -554,7 +571,7 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/dot_product_projection_unit_vector.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: <a href="https://mathinsight.org/image/dot_product_projection_unit_vector" class="uri">https://mathinsight.org/image/dot_product_projection_unit_vector</a></figcaption><p></p>
+<figcaption class="figure-caption">The dot product between two vectors is proportional to the cosine of the angle between the two vectors. Source: <a href="https://mathinsight.org/image/dot_product_projection_unit_vector" class="uri">https://mathinsight.org/image/dot_product_projection_unit_vector</a></figcaption>
 </figure>
 </div>
 <p>If you normalize the two vectors by dividing them by their norm (which is a scalar), we indeed have the cosine of the angle between them: The higher the normalized dot product, the more the two vectors point towards the same direction (<strong>cosine distance</strong> between two vectors).</p>
@@ -600,12 +617,12 @@ a_{43} \\
 \alpha\, a_{31} + \beta \, b_{31} &amp; \alpha\, a_{32} + \beta \, b_{32} &amp; \alpha\, a_{33} + \beta \, b_{33} \\
 \alpha\, a_{41} + \beta \, b_{41} &amp; \alpha\, a_{42} + \beta \, b_{42} &amp; \alpha\, a_{43} + \beta \, b_{43} \\
 \end{bmatrix}</span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -657,12 +674,12 @@ c_{m1} &amp; c_{m2} &amp; \cdots &amp; c_{mp} \\
 </span></p>
 <p>where each element <span class="math inline">c_{ij}</span> is the dot product of the <span class="math inline">i</span>th row of <span class="math inline">A</span> and <span class="math inline">j</span>th column of <span class="math inline">B</span>:</p>
 <p><span class="math display">c_{ij} = \langle A_{i, :} \cdot B_{:, j} \rangle = a_{i1}b_{1j} + a_{i2}b_{2j} +\cdots + a_{in}b_{nj}= \sum_{k=1}^n a_{ik}b_{kj}</span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -673,7 +690,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/matrixmultiplication.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The element <span class="math inline">c_{ij}</span> of <span class="math inline">C = A \times B</span> is the dot product between the <span class="math inline">i</span>th row of <span class="math inline">A</span> and the <span class="math inline">j</span>th column of <span class="math inline">B</span>. Source: <a href="https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication">CC BY-NC-SA; Marcia Levitus</a></figcaption><p></p>
+<figcaption class="figure-caption">The element <span class="math inline">c_{ij}</span> of <span class="math inline">C = A \times B</span> is the dot product between the <span class="math inline">i</span>th row of <span class="math inline">A</span> and the <span class="math inline">j</span>th column of <span class="math inline">B</span>. Source: <a href="https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Book%3A_Mathematical_Methods_in_Chemistry_(Levitus)/15%3A_Matrices/15.03%3A_Matrix_Multiplication">CC BY-NC-SA; Marcia Levitus</a></figcaption>
 </figure>
 </div>
 <p>Thinking of vectors as <span class="math inline">n \times 1</span> matrices, we can multiply a matrix <span class="math inline">m \times n</span> with a vector:</p>
@@ -689,7 +706,7 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/projection.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">A <span class="math inline">2 \times 3</span> projection matrix allows to project any 3D vector onto a 2D plane. This is for example what happens inside a camera. Source: <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinate" class="uri">https://en.wikipedia.org/wiki/Homogeneous_coordinate</a></figcaption><p></p>
+<figcaption class="figure-caption">A <span class="math inline">2 \times 3</span> projection matrix allows to project any 3D vector onto a 2D plane. This is for example what happens inside a camera. Source: <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinate" class="uri">https://en.wikipedia.org/wiki/Homogeneous_coordinate</a></figcaption>
 </figure>
 </div>
 <p>Note that the <strong>dot product</strong> between two vectors of size <span class="math inline">n</span> is the matrix multiplication between the transpose of the first vector and the second one:</p>
@@ -714,7 +731,6 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 </section>
 <section id="calculus" class="level2">
 <h2 class="anchored" data-anchor-id="calculus">Calculus</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/RsQVNOTgYwk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="functions" class="level3">
 <h3 class="anchored" data-anchor-id="functions">Functions</h3>
 <p>A <strong>univariate function</strong> <span class="math inline">f</span> associates to any real number <span class="math inline">x \in \Re</span> (or a subset of <span class="math inline">\Re</span> called the support of the function) another (unique) real number <span class="math inline">f(x)</span>:</p>
@@ -727,7 +743,7 @@ x &amp;\mapsto f(x)
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/function.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Example of univariate function, here the quadratic function <span class="math inline">f(x) = x^2 - 2 \, x + 1</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Example of univariate function, here the quadratic function <span class="math inline">f(x) = x^2 - 2 \, x + 1</span>.</figcaption>
 </figure>
 </div>
 <p>A <strong>multivariate function</strong> <span class="math inline">f</span> associates to any vector <span class="math inline">\mathbf{x} \in \Re^n</span> (or a subset) a real number <span class="math inline">f(\mathbf{x})</span>:</p>
@@ -746,7 +762,7 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/multivariatefunction.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Example of a multivariate function <span class="math inline">f(x_1, x_2)</span> mapping <span class="math inline">\Re^2</span> to <span class="math inline">\Re</span>. Source: <a href="https://en.wikipedia.org/wiki/Function_of_several_real_variables" class="uri">https://en.wikipedia.org/wiki/Function_of_several_real_variables</a></figcaption><p></p>
+<figcaption class="figure-caption">Example of a multivariate function <span class="math inline">f(x_1, x_2)</span> mapping <span class="math inline">\Re^2</span> to <span class="math inline">\Re</span>. Source: <a href="https://en.wikipedia.org/wiki/Function_of_several_real_variables" class="uri">https://en.wikipedia.org/wiki/Function_of_several_real_variables</a></figcaption>
 </figure>
 </div>
 <p><strong>Vector fields</strong> associate to any vector <span class="math inline">\mathbf{x} \in \Re^n</span> (or a subset) another vector (possibly of different size):</p>
@@ -758,15 +774,15 @@ x, y, z &amp;\mapsto f(x, y, z),\end{align}
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vectorfield.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">Vector field associating to each point of <span class="math inline">\Re^2</span> another vector. Source: <a href="https://en.wikipedia.org/wiki/Vector_field" class="uri">https://en.wikipedia.org/wiki/Vector_field</a></figcaption><p></p>
+<figcaption class="figure-caption">Vector field associating to each point of <span class="math inline">\Re^2</span> another vector. Source: <a href="https://en.wikipedia.org/wiki/Vector_field" class="uri">https://en.wikipedia.org/wiki/Vector_field</a></figcaption>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -786,7 +802,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/derivative-approx.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The derivative of the function <span class="math inline">f(x)</span> can be approximated by the slope of the line passing through <span class="math inline">(x, f(x))</span> and <span class="math inline">(x + h, f(x + h))</span> when <span class="math inline">h</span> becomes very small.</figcaption><p></p>
+<figcaption class="figure-caption">The derivative of the function <span class="math inline">f(x)</span> can be approximated by the slope of the line passing through <span class="math inline">(x, f(x))</span> and <span class="math inline">(x + h, f(x + h))</span> when <span class="math inline">h</span> becomes very small.</figcaption>
 </figure>
 </div>
 <p>The sign of the derivative tells you how the function behaves locally:</p>
@@ -796,12 +812,12 @@ Note
 </ul>
 <p>It basically allows you to measure the local influence of <span class="math inline">x</span> on <span class="math inline">f(x)</span>: if I change a little bit the value <span class="math inline">x</span>, what happens to <span class="math inline">f(x)</span>? This will be very useful in machine learning.</p>
 <p>A special case is when the derivative is equal to 0 in <span class="math inline">x</span>. <span class="math inline">x</span> is then called an <strong>extremum</strong> (or optimum) of the function, i.e.&nbsp;it can be a maximum or minimum.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -819,7 +835,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/optimization-example.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Quadratic functions have only one extremum (here a minimum in -1), as their derivative is linear and is equal to zero for only one value.</figcaption><p></p>
+<figcaption class="figure-caption">Quadratic functions have only one extremum (here a minimum in -1), as their derivative is linear and is equal to zero for only one value.</figcaption>
 </figure>
 </div>
 <p>The derivative of a <strong>multivariate function</strong> <span class="math inline">f(\mathbf{x})</span> is a vector of partial derivatives called the <strong>gradient of the function</strong> <span class="math inline">\nabla_\mathbf{x} \, f(\mathbf{x})</span>:</p>
@@ -890,12 +906,12 @@ J = \begin{bmatrix}
 <p><span class="math display">h'(x) = a \, f'(x) + b \, g'(x)</span></p>
 <p>A product of functions can also be differentiated analytically:</p>
 <p><span class="math display">(f(x) \times g(x))' = f'(x) \times g(x) + f(x) \times g'(x)</span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Example
 </div>
 </div>
@@ -915,12 +931,12 @@ Example
 <p><span class="math display">\frac{d f \circ g (x)}{dx} = \frac{d f (g (x))}{d g(x)} \times \frac{d g (x)}{dx}</span></p>
 <p>By posing <span class="math inline">y = g(x)</span> as an intermediary variable, it becomes:</p>
 <p><span class="math display">\frac{d f(y)}{dx} = \frac{d f(y)}{dy} \times \frac{dy}{dx}</span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Example
 </div>
 </div>
@@ -955,14 +971,14 @@ Example
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/riemann-sum1.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The integral of <span class="math inline">f</span> on <span class="math inline">[a, b]</span> is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on <span class="math inline">[a, b]</span>. Source: <a href="https://www.math24.net/riemann-sums-definite-integral/" class="uri">https://www.math24.net/riemann-sums-definite-integral/</a></figcaption><p></p>
+<figcaption class="figure-caption">The integral of <span class="math inline">f</span> on <span class="math inline">[a, b]</span> is the area of the surface between the function and the x-axis. Note that it can become negative when the function is mostly negative on <span class="math inline">[a, b]</span>. Source: <a href="https://www.math24.net/riemann-sums-definite-integral/" class="uri">https://www.math24.net/riemann-sums-definite-integral/</a></figcaption>
 </figure>
 </div>
 <p>One way to approximate this surface is to split the interval <span class="math inline">[a, b]</span> into <span class="math inline">n</span> intervals of width <span class="math inline">dx</span> with the points <span class="math inline">x_1, x_2, \ldots, x_n</span>. This defines <span class="math inline">n</span> rectangles of width <span class="math inline">dx</span> and height <span class="math inline">f(x_i)</span>, so their surface is <span class="math inline">f(x_i) \, dx</span>. The area under the curve can then be approximated by the sum of the surfaces of all these rectangles.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/riemann-sum.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The interval<span class="math inline">[a, b]</span> can be split in <span class="math inline">n</span> small intervals of width <span class="math inline">dx</span>, defining <span class="math inline">n</span> rectangles whose sum is close to the area under the curve. Source: <a href="https://www.math24.net/riemann-sums-definite-integral/" class="uri">https://www.math24.net/riemann-sums-definite-integral/</a></figcaption><p></p>
+<figcaption class="figure-caption">The interval<span class="math inline">[a, b]</span> can be split in <span class="math inline">n</span> small intervals of width <span class="math inline">dx</span>, defining <span class="math inline">n</span> rectangles whose sum is close to the area under the curve. Source: <a href="https://www.math24.net/riemann-sums-definite-integral/" class="uri">https://www.math24.net/riemann-sums-definite-integral/</a></figcaption>
 </figure>
 </div>
 <p>When <span class="math inline">n \to \infty</span>, or equivalently <span class="math inline">dx \to 0</span>, the sum of these rectangular areas (called the Riemann sum) becomes exactly the area under the curve. This is the definition of the definite integral:</p>
@@ -972,7 +988,6 @@ Example
 </section>
 <section id="probability-theory" class="level2">
 <h2 class="anchored" data-anchor-id="probability-theory">Probability theory</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/X5uSbrFe82Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="discrete-probability-distributions" class="level3">
 <h3 class="anchored" data-anchor-id="discrete-probability-distributions">Discrete probability distributions</h3>
 <p>Let’s note <span class="math inline">X</span> a <strong>discrete random variable</strong> with <span class="math inline">n</span> realizations (or outcomes) <span class="math inline">x_1, \ldots, x_n</span>.</p>
@@ -1022,7 +1037,7 @@ Example
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/normaldistribution.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Normal distributions are continuous distributions. The area under the curve is always 1.</figcaption><p></p>
+<figcaption class="figure-caption">Normal distributions are continuous distributions. The area under the curve is always 1.</figcaption>
 </figure>
 </div>
 <p>The pdf of a distribution must be positive (<span class="math inline">f(x) \geq 0 \, \forall x \in \mathcal{D}_X</span>) and its integral (area under the curve) must be equal to 1:</p>
@@ -1116,7 +1131,7 @@ Example
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/conditionalprobability.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://www.elevise.co.uk/g-e-m-h-5-u.html" class="uri">https://www.elevise.co.uk/g-e-m-h-5-u.html</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://www.elevise.co.uk/g-e-m-h-5-u.html" class="uri">https://www.elevise.co.uk/g-e-m-h-5-u.html</a>.</figcaption>
 </figure>
 </div>
 <p>You ask 50 people whether they like cats or dogs:</p>
@@ -1127,12 +1142,12 @@ Example
 <li>6 like none of them.</li>
 </ul>
 <p>We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities…). Among the 23 who love cats, which proportion also loves dogs?</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Answer
 </div>
 </div>
@@ -1169,12 +1184,12 @@ Answer
 <p>When a patient does not have the disease, the test is still positive 10% of the time (false positives):</p>
 <p><span class="math display">P(T=1 | D=0) = 0.1 \qquad \qquad P(T=0 | D=0) = 0.9</span></p>
 <p>Given that the test is positive, what is the probability that the patient is ill?</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Answer
 </div>
 </div>
@@ -1196,7 +1211,6 @@ Answer
 </section>
 <section id="statistics" class="level2">
 <h2 class="anchored" data-anchor-id="statistics">Statistics</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/Q7u_iMZ89K8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="monte-carlo-sampling" class="level3">
 <h3 class="anchored" data-anchor-id="monte-carlo-sampling">Monte Carlo sampling</h3>
 <p><strong>Random sampling</strong> or <strong>Monte Carlo sampling</strong> (MC) consists of taking <span class="math inline">N</span> samples <span class="math inline">x_i</span> out of the distribution <span class="math inline">X</span> (discrete or continuous) and computing the <strong>sample average</strong>:</p>
@@ -1206,7 +1220,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/normaldistribution.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Samples taken from a normal distribution will mostly be around the mean.</figcaption><p></p>
+<figcaption class="figure-caption">Samples taken from a normal distribution will mostly be around the mean.</figcaption>
 </figure>
 </div>
 <p>More samples will be obtained where <span class="math inline">f(x)</span> is high (<span class="math inline">x</span> is probable), so the average of the sampled data will be close to the expected value of the distribution.</p>
@@ -1230,7 +1244,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/montecarlo.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Sampling can be used to estimate <span class="math inline">\pi</span>: when sampling <span class="math inline">x</span> and <span class="math inline">y</span> uniformly in <span class="math inline">[0, 1]</span>, the proportion of points with a norm smaller than tends to <span class="math inline">\pi/4</span>. Source: <a href="https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694" class="uri">https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694</a></figcaption><p></p>
+<figcaption class="figure-caption">Sampling can be used to estimate <span class="math inline">\pi</span>: when sampling <span class="math inline">x</span> and <span class="math inline">y</span> uniformly in <span class="math inline">[0, 1]</span>, the proportion of points with a norm smaller than tends to <span class="math inline">\pi/4</span>. Source: <a href="https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694" class="uri">https://towardsdatascience.com/an-overview-of-monte-carlo-methods-675384eb1694</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1249,7 +1263,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/IllustrationCentralTheorem.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://en.wikipedia.org/wiki/Central_limit_theorem" class="uri">https://en.wikipedia.org/wiki/Central_limit_theorem</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://en.wikipedia.org/wiki/Central_limit_theorem" class="uri">https://en.wikipedia.org/wiki/Central_limit_theorem</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1265,7 +1279,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/estimators-temperature.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Left: measurement as a function of the temperature. Right: distribution of temperature.</figcaption><p></p>
+<figcaption class="figure-caption">Left: measurement as a function of the temperature. Right: distribution of temperature.</figcaption>
 </figure>
 </div>
 <p>The thermometer is not perfect, but do random measurements allow us to estimate the expected value of the temperature?</p>
@@ -1273,7 +1287,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/estimators-temperature2.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Sampled measurements.</figcaption><p></p>
+<figcaption class="figure-caption">Sampled measurements.</figcaption>
 </figure>
 </div>
 <p>But, as the expectation is linear, we actually have:</p>
@@ -1302,7 +1316,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/biasvariance3.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Bias-variance trade-off.</figcaption><p></p>
+<figcaption class="figure-caption">Bias-variance trade-off.</figcaption>
 </figure>
 </div>
 <p>Unfortunately, the perfect estimator does not exist in practice. One usually talks of a <strong>bias/variance</strong> trade-off: if you have a small bias, you will have a high variance, or vice versa. In machine learning, bias corresponds to underfitting, variance to overfitting.</p>
@@ -1310,7 +1324,6 @@ Answer
 </section>
 <section id="information-theory" class="level2">
 <h2 class="anchored" data-anchor-id="information-theory">Information theory</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/-WZKHdKDtTY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="entropy" class="level3">
 <h3 class="anchored" data-anchor-id="entropy">Entropy</h3>
 <p><strong>Information theory</strong> (a field founded by Claude Shannon) asks how much information is contained in a probability distribution. Information is related to <strong>surprise</strong> or <strong>uncertainty</strong>: are the outcomes of a random variable surprising?</p>
@@ -1321,7 +1334,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/selfinformation.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Self-information.</figcaption><p></p>
+<figcaption class="figure-caption">Self-information.</figcaption>
 </figure>
 </div>
 <p>A useful measurement of how surprising is an outcome <span class="math inline">x</span> is the <strong>self-information</strong>:</p>
@@ -1350,7 +1363,7 @@ Answer
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/entropy-binomial.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The entropy of a Bernouilli distribution is maximal when the two outcomes are equiprobable.</figcaption><p></p>
+<figcaption class="figure-caption">The entropy of a Bernouilli distribution is maximal when the two outcomes are equiprobable.</figcaption>
 </figure>
 </div>
 <p>The <strong>joint entropy</strong> of two random variables <span class="math inline">X</span> and <span class="math inline">Y</span> is defined by:</p>
@@ -1400,12 +1413,12 @@ Answer
 <p><span class="math display">
     H(X, Y) = \mathbb{E}_{x \sim X}[- \log P(Y=x)]
 </span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1416,7 +1429,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/crossentropy.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The cross-entropy measures the overlap between two probability distributions.</figcaption><p></p>
+<figcaption class="figure-caption">The cross-entropy measures the overlap between two probability distributions.</figcaption>
 </figure>
 </div>
 <p>The cross-entropy measures the <strong>negative log-likelihood</strong> that a sample <span class="math inline">x</span> taken from the distribution <span class="math inline">X</span> could also come from the distribution <span class="math inline">Y</span>. More exactly, it measures how many bits of information one would need to distinguish the two distributions <span class="math inline">X</span> and <span class="math inline">Y</span>.</p>
@@ -1433,12 +1446,12 @@ Note
     \text{KL}(X ||Y) = H(X, Y) - H(X)
 </span></p>
 <p>If the two distributions are the same <em>almost anywhere</em>, the KL divergence is zero. If the two distributions are different, the KL divergence is positive. Minimizing the KL between two distributions is the same as making the two distributions “equal”. But remember: the KL is not a metric, as it is not symmetric.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1448,8 +1461,8 @@ Note
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Goodfellow2016" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Goodfellow2016" class="csl-entry" role="listitem">
 Goodfellow, I., Bengio, Y., and Courville, A. (2016). <em>Deep <span>Learning</span></em>. <span>MIT Press</span> <a href="http://www.deeplearningbook.org">http://www.deeplearningbook.org</a>.
 </div>
 </div>
@@ -1484,9 +1497,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1551,6 +1578,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1605,7 +1718,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

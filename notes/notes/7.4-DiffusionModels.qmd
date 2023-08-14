@@ -59,7 +59,7 @@ Embeddings for text and images are learned using **Transformer encoders** and **
 
 For each pair (text, image) in the training set, their representation should be made similar, while being different from the others. 
 
-<video controls width=100%><source src="../slides/img/dall-e-2.webm" type="video/webm"></video>
+![Source: <https://towardsdatascience.com/understanding-how-dall-e-mini-works-114048912b3b>](../slides/img/clip-training.png)
 
 ### GLIDE
 

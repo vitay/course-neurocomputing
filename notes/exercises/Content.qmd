@@ -1,6 +1,8 @@
 # List of exercises
 
+<!--
 {{< youtube dzdXpUCo0nw >}}
+-->
 
 You will find below links to download the notebooks for the exercises (which you have to fill) and their solution (which you can look at after you finished the exercise). It is recommended not to look at the solution while doing the exercise unless you are lost. 
 
@@ -8,7 +10,7 @@ Alternatively, you can run the notebooks directly on Colab (<https://colab.resea
 
 For instructions on how to install a Python distribution on your computer, check this [page](Installation.qmd).
 
-You will also find videos presenting the exercises and commenting their solution.
+You will also find **outdated** videos presenting the exercises and commenting their solution on [Youtube](https://www.youtube.com/playlist?list=PLIEjdhhAF7ULpZTu2sKkchFkvcxN8EQNv).
 
 The solution of each exercise is rendered in the following pages.
 
@@ -21,6 +23,7 @@ This exercise is an introduction to Python for absolute beginners. If you alread
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/1-Python-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/1-Python-solution.ipynb){target="_blank"}.
 
+<!--
 **Presentation**
 
 {{< youtube eX5ZBnqAGyQ >}}
@@ -28,6 +31,7 @@ This exercise is an introduction to Python for absolute beginners. If you alread
 **Commented solution**
 
 {{< youtube pBTwkxOSlpU >}}
+-->
 
 ## Numpy and Matplotlib
 
@@ -38,6 +42,8 @@ The goal of this exercise is to present the basics of the numerical library `num
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/2-Numpy-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/2-Numpy-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube 0FBuLT04r-M >}}
@@ -46,6 +52,7 @@ The goal of this exercise is to present the basics of the numerical library `num
 **Commented solution**
 
 {{< youtube kngLlgI3eKU >}}
+-->
 
 ## Linear regression
 
@@ -55,6 +62,8 @@ The goal of this exercise is to study linear regression in batch and online vers
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/3-LinearRegression-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/3-LinearRegression-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube w0ZGmSTt7xY >}}
@@ -63,6 +72,7 @@ The goal of this exercise is to study linear regression in batch and online vers
 **Commented solution**
 
 {{< youtube kGgoBcR5LSs >}}
+-->
 
 ## Multiple Linear Regression
 
@@ -73,6 +83,7 @@ The goal of this exercise is to study multiple linear regression on the Boston H
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/4-MLR-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/4-MLR-solution.ipynb){target="_blank"}.
 
 
+<!--
 **Presentation**
 
 {{< youtube vKRt2uL87pk >}}
@@ -80,6 +91,8 @@ The goal of this exercise is to study multiple linear regression on the Boston H
 **Commented solution**
 
 {{< youtube Y0dZDfDlVmE >}}
+-->
+
 
 ## Cross-validation
 
@@ -90,6 +103,7 @@ The goal of this exercise is to study the interest of cross-validation (simple a
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/5-Crossvalidation-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/5-Crossvalidation-solution.ipynb){target="_blank"}.
 
 
+<!--
 **Presentation**
 
 {{< youtube 7HuBkSLDwCY >}}
@@ -97,6 +111,7 @@ The goal of this exercise is to study the interest of cross-validation (simple a
 **Commented solution**
 
 {{< youtube jxN9o0qLL54 >}}
+-->
 
 ## Linear classification
 
@@ -106,6 +121,8 @@ The goal of this exercise is to investigate hard and soft binary classification.
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/6-LinearClassification-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/6-LinearClassification-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube 3WnNnHWIL3c >}}
@@ -113,6 +130,7 @@ The goal of this exercise is to investigate hard and soft binary classification.
 **Commented solution**
 
 {{< youtube sI4RHvMREcU >}}
+-->
 
 ## Softmax classifier
 
@@ -122,6 +140,7 @@ The goal of this exercise is to investigate the linear softmax classifier on sin
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/7-SoftmaxClassifier-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/7-SoftmaxClassifier-solution.ipynb){target="_blank"}.
 
+<!--
 **Presentation**
 
 {{< youtube RNoLsFckuao >}}
@@ -129,6 +148,8 @@ The goal of this exercise is to investigate the linear softmax classifier on sin
 **Commented solution**
 
 {{< youtube oXrmZgEG_Kw >}}
+-->
+
 
 ## Multi-layer perceptron
 
@@ -138,6 +159,8 @@ The goal of this exercise is to implement a shallow MLP and the backpropagation 
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/8-MLP-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/8-MLP-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube P_fKl9P7K-M >}}
@@ -154,14 +177,19 @@ The goal of this exercise is to implement a shallow MLP and the backpropagation 
 
 {{< youtube CKaTZcRH7tQ >}}
 
+-->
+
+
 ## MNIST classification using keras
 
-The goal of this exercise to to discover the keras API of tensorflow and apply it to the MNIST dataset.
+The goal of this exercise is to discover the keras API of tensorflow and apply it to the MNIST dataset.
 
 **Notebook:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/9-MNIST.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/9-MNIST.ipynb){target="_blank"}.
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/9-MNIST-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/9-MNIST-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube SW0W1PSgCbI >}}
@@ -170,7 +198,7 @@ The goal of this exercise to to discover the keras API of tensorflow and apply i
 **Commented solution**
 
 {{< youtube 7urlTds-EHA >}}
-
+-->
 
 ## Convolutional neural networks
 
@@ -180,6 +208,8 @@ The goal of this exercise is to implement a CNN using keras and to visualize the
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/10-CNN-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/10-CNN-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube w6uDBweT_PE >}}
@@ -188,6 +218,8 @@ The goal of this exercise is to implement a CNN using keras and to visualize the
 **Commented solution**
 
 {{< youtube Fr1B4NveF-g >}}
+-->
+
 
 ## Transfer learning
 
@@ -197,6 +229,8 @@ The goal of this exercise is to investigate data augmentation and transfer learn
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/11-TransferLearning-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/11-TransferLearning-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube T0VOhhmo38E >}}
@@ -205,6 +239,7 @@ The goal of this exercise is to investigate data augmentation and transfer learn
 **Commented solution**
 
 {{< youtube XsTt4F6dkLM >}}
+-->
 
 ## Variational autoencoder
 
@@ -214,6 +249,8 @@ The goal of this exercise is to implement a variational autoencoder on the MNIST
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/12-VAE-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/12-VAE-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube ULLT8jpuXBs >}}
@@ -222,6 +259,8 @@ The goal of this exercise is to implement a variational autoencoder on the MNIST
 **Commented solution**
 
 {{< youtube vU12ZFLgbkI >}}
+-->
+
 
 ## Recurrent neural networks
 
@@ -231,6 +270,8 @@ The goal of this exercise is to use LSTM layers to perform sentiment analysis an
 
 **Solution:** [download .ipynb](https://raw.githubusercontent.com/vitay/course-neurocomputing/master/notes/exercises/13-RNN-solution.ipynb){target="_blank"} or [run on colab](https://colab.research.google.com/github/vitay/Course-Neurocomputing/blob/master/notes/exercises/13-RNN-solution.ipynb){target="_blank"}.
 
+
+<!--
 **Presentation**
 
 {{< youtube MY1ZSWcG5Mc >}}
@@ -238,3 +279,4 @@ The goal of this exercise is to use LSTM layers to perform sentiment analysis an
 **Commented solution**
 
 {{< youtube 9h68UbQpqqc >}}
+-->

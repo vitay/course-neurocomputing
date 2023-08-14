@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 1&nbsp; Introduction</title>
+<title>Neurocomputing - Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,7 +76,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -104,11 +105,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Introduction</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/1.1-Introduction.html"><strong>Introduction</strong></a></li><li class="breadcrumb-item"><a href="../notes/1.1-Introduction.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,7 +122,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -125,22 +131,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -164,8 +172,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -194,8 +203,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -214,8 +224,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -239,8 +250,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,8 +276,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -284,8 +297,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,8 +328,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -334,8 +349,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -352,7 +368,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,12 +435,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -438,7 +456,6 @@ div.csl-indent {
   <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning">Unsupervised learning</a></li>
   <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning">Reinforcement learning</a></li>
   </ul></li>
-  <li><a href="#outlook" id="toc-outlook" class="nav-link" data-scroll-target="#outlook">Outlook</a></li>
   </ul>
 </nav>
     </div>
@@ -447,7 +464,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-title">Introduction</span></h1>
 </div>
 
 
@@ -465,14 +482,6 @@ div.csl-indent {
 <p>Slides: <a href="../slides/1.1-Introduction.html" target="_blank">html</a> <a href="../slides/pdf/1.1-Introduction.pdf" target="_blank">pdf</a></p>
 <section id="what-is-neurocomputing" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-neurocomputing">What is neurocomputing?</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/Hy0FpFjdJGI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>Let’s first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/aimldl.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied" class="uri">https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied</a></figcaption><p></p>
-</figure>
-</div>
 <p>The term <strong>Artificial Intelligence</strong> was coined by John McCarthy at the Dartmouth Summer Research Project on Artificial Intelligence in <strong>1956</strong>:</p>
 <blockquote class="blockquote">
 <p>The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.</p>
@@ -496,11 +505,6 @@ div.csl-indent {
 <li>Transformers</li>
 <li>Graph neural networks</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/neurocomputing.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
 <p><strong>Neurocomputing</strong> is at the intersection between computational neuroscience and artificial neural networks (deep learning). <strong>Computational neuroscience</strong> studies the functioning of the brain (human or animal) through biologically detailed models, either at the functional level (e.g.&nbsp;visual attention, decision-making) or cellular level (individual neurons, synapses, neurotransmitters, etc). The goal of computational neuroscience is 1) to provide theoretical explanations to the experimental observations made by neuroscientists and 2) make predictions that can be verified experimentally. Moreover, understanding how the brain solves real-life problems might allow to design better AI algorithms. If you are interested in computational neuroscience, make sure to visit the courses <strong>Neurokognition</strong> I and II taught by Prof.&nbsp;Dr.&nbsp;Hamker:</p>
 <p><a href="https://www.tu-chemnitz.de/informatik/KI/edu/neurokognition/" class="uri">https://www.tu-chemnitz.de/informatik/KI/edu/neurokognition/</a></p>
 <p>Neurocomputing aims at bringing the mechanisms underlying human cognition into artificial intelligence. The first part of this course focuses on deep learning, while the second will discuss how more biologically realistic neural networks could help designing better AI systems.</p>
@@ -513,24 +517,17 @@ div.csl-indent {
 <li><p><strong>Unsupervised learning</strong>: The program is given a bunch of data and must find patterns and relationships therein.</p></li>
 <li><p><strong>Reinforcement learning</strong>: The program explores its environment by producing actions and receiving rewards.</p></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/ml-areas.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="http://www.isaziconsulting.co.za/machinelearning.html" class="uri">http://www.isaziconsulting.co.za/machinelearning.html</a></figcaption><p></p>
-</figure>
-</div>
 <p>Deep learning has recently revolutionized these types of machine learning, so let’s have a look at some concrete examples for motivation. At the end of the course, if you also perform all exercises, you should be able to reproduce these applications.</p>
 <section id="supervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="supervised-learning">Supervised learning</h3>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/pbbzwFohH3I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math inline">N</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math inline">\mathbf{x}_i</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math inline">t_i</span>.</p>
+<p>What we want to learn is a <strong>parameterized model</strong> <span class="math inline">y_i = f_\theta (\mathbf{x}_i)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math inline">\theta</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e.&nbsp;the discrepancy between the prediction <span class="math inline">y_i = f_\theta (\mathbf{x}_i)</span> and the desired output <span class="math inline">t_i</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/supervisedlearning.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <a href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf" class="uri">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></figcaption><p></p>
+<figcaption class="figure-caption">Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <a href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf" class="uri">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></figcaption>
 </figure>
 </div>
-<p>In a supervised learning, we have a <strong>training set</strong> (or training data) consisting of <span class="math inline">N</span> samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an <strong>input</strong> <span class="math inline">\mathbf{x}_i</span> and an <strong>output</strong> (also called ground truth, desired output or target) <span class="math inline">t_i</span>.</p>
-<p>What we want to learn is <strong>parameterized model</strong> <span class="math inline">y_i = f_\theta (\mathbf{x}_i)</span> which can predict the correct output for the inputs of the training set. The goal of <strong>learning</strong> (or training) is to find which value of the parameters <span class="math inline">\theta</span> allows to reduce (<em>minimize</em>) the <strong>prediction error</strong>. i.e.&nbsp;the discrepancy between the prediction <span class="math inline">y_i = f_\theta (\mathbf{x}_i)</span> and the desired output <span class="math inline">t_i</span>.</p>
 <p>Depending on the nature of the outputs <span class="math inline">t</span>, we have two different supervised problems:</p>
 <ul>
 <li>In <strong>regression</strong> tasks, the outputs can take an infinity of values (e.g.&nbsp;real numbers). The following figure shows how examples of flat surfaces (input <span class="math inline">x_i</span>) and prices (output <span class="math inline">t_i</span>) collected in the neighborhood can be used to predict the price of a new flat. After collecting enough samples, a model is trained to minimize its prediction error. Here, a linear model is used (black line) as we perform <strong>linear regression</strong>, but any other type of function could be used. The parameters of the line (slope and intercept) are adapted so that the line lies close to the data: the predicted price <span class="math inline">y_i</span> is never far from the ground truth <span class="math inline">t_i</span>. Using that line after learning, we can predict that a 60 square meters flat should be rented around 550 euros/month.</li>
@@ -556,28 +553,28 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Artificial neuron.</figcaption><p></p>
+<figcaption class="figure-caption">Artificial neuron.</figcaption>
 </figure>
 </div>
 <p>By stacking layers of artificial neurons, we obtain a <strong>feedforward neural network</strong> able to solve non-linear classification and regression problems.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deep.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Feedforward neural network.</figcaption><p></p>
+<figcaption class="figure-caption">Feedforward neural network.</figcaption>
 </figure>
 </div>
 <p><em>Fully-connected layers</em> of neurons can be replaced by <em>convolutional layers</em> when dealing with images as inputs, leading to the very successful <strong>convolutional neural networks</strong> (CNN).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/dcn.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</figcaption><p></p>
+<figcaption class="figure-caption">Typical CNN architecture. Source: Albelwi S, Mahmood A. 2017. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 19:242. doi:10.3390/e19060242</figcaption>
 </figure>
 </div>
 <p>The “only” thing to do is to feed these networks with a lot of training data (inputs and desired outputs) and let them adjust their weights to minimize their prediction error using the backpropagation algorithm <span class="citation" data-cites="Rumelhart1986a">(<a href="../references.html#ref-Rumelhart1986a" role="doc-biblioref">Rumelhart et al., 1986</a>)</span> (more on that later). Neural networks (including CNNs) are a very old technology, dating back from the 60’s, with a resurgence in the 80’s thanks to the backpropation algorithm. They had been able to learn small datasets, but their performance was limited by the availability of data and the computing power available at the time. One classical example is the use of a CNN <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span> by Yann LeCun in 1998 to automatically classify single digits on ZIP postal codes (what led to the development of the MNIST dataset, the “Hello World!” of machine learning which we will use in the exercises).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/lenet5.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">LeNet5 CNN trained on MNIST. Source: <a href="http://yann.lecun.com/exdb/lenet/" class="uri">http://yann.lecun.com/exdb/lenet/</a></figcaption><p></p>
+<figcaption class="figure-caption">LeNet5 CNN trained on MNIST. Source: <a href="http://yann.lecun.com/exdb/lenet/" class="uri">http://yann.lecun.com/exdb/lenet/</a></figcaption>
 </figure>
 </div>
 <p>The revival of artificial neural networks marketed as <strong>deep learning</strong> at the end of the 2000’s was principally due the availability of massive amounts of training data (thanks to search engines and social networks) and the availability of consumer graphics GPUs able to perform scientific computations, especially using Nvidia’s CUDA programming framework.</p>
@@ -594,13 +591,12 @@ div.csl-indent {
 </section>
 <section id="recurrent-neural-networks" class="level4">
 <h4 class="anchored" data-anchor-id="recurrent-neural-networks">Recurrent neural networks</h4>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/_809brCJaTM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Another field that was heavily transformed by deep learning is <strong>natural language processing</strong> (NLP), i.e.&nbsp;the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.</p>
 <p>The key neural network involved in this paradigmatic change is the <strong>recurrent neural network</strong> (RNN), with the most prominent model being the <strong>long short-term memory</strong> (LSTM) network <span class="citation" data-cites="Hochreiter1997">(<a href="../references.html#ref-Hochreiter1997" role="doc-biblioref">Hochreiter and Schmidhuber, 1997</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/LSTM3-chain.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">LSTM cell. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></figcaption><p></p>
+<figcaption class="figure-caption">LSTM cell. Source: <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="uri">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></figcaption>
 </figure>
 </div>
 <p>The main difference with feedforward neural networks is that RNNs can be applied on sequences (of words, but it could also be video frames or any time-dependent signal). At each step, a RNN produces an output not only depending on its current input, but also on its previous output, implementing a form of memory of past events.</p>
@@ -608,21 +604,20 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/google-nmt-lstm.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Google Neural Machine Translation. Source: <a href="https://ai.google/research/pubs/pub45610" class="uri">https://ai.google/research/pubs/pub45610</a></figcaption><p></p>
+<figcaption class="figure-caption">Google Neural Machine Translation. Source: <a href="https://ai.google/research/pubs/pub45610" class="uri">https://ai.google/research/pubs/pub45610</a></figcaption>
 </figure>
 </div>
 <p>Transformer architectures have revolutionized NLP, allowing to train a massive neural network in a <strong>self-supervised</strong> manner from raw data, i.e.&nbsp;without annotations, and then fine-tune it on particular tasks such as language translation, text summarization, code generation…</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/bert-transfer-learning.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised learning</h3>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/uIrBgz4OPlM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>In supervised learning, we use <strong>annotated data</strong>, i.e.&nbsp;pairs <span class="math inline">(x_i, t_i)</span> of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it.</p>
 <p>In <strong>unsupervised learning</strong>, we only have inputs. The goal of the algorithms is to make sense out of the data: extract regularities, model the underlying distribution, group examples into clusters, etc… It may seem much harder than supervised learning, as there is no ground truth to measure performance, but data is very cheap to obtain.</p>
 <section id="clustering-and-feature-extraction" class="level4">
@@ -631,7 +626,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/unsupervised-learning.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Clustering. Source: <a href="https://learn.g2.com/supervised-vs-unsupervised-learning" class="uri">https://learn.g2.com/supervised-vs-unsupervised-learning</a></figcaption><p></p>
+<figcaption class="figure-caption">Clustering. Source: <a href="https://learn.g2.com/supervised-vs-unsupervised-learning" class="uri">https://learn.g2.com/supervised-vs-unsupervised-learning</a></figcaption>
 </figure>
 </div>
 </section>
@@ -642,7 +637,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/latent-space.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Autoencoders. Source: <a href="https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g" class="uri">https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g</a></figcaption><p></p>
+<figcaption class="figure-caption">Autoencoders. Source: <a href="https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g" class="uri">https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694g</a></figcaption>
 </figure>
 </div>
 <p>Apart from compression, one important application of dimensionality reduction is <strong>visualization</strong> when the latent space has 2 or 3 dimensions: you can visualize the distribution of your data and estimate how hard the classification/regression will be. Classical ML techniques include PCA (principal component analysis) and t-SNE, but autoencoders can also be used, for example the <strong>UMAP</strong> (Uniform Manifold Approximation and Projection for Dimension Reduction) architecture <span class="citation" data-cites="McInnes2020">(<a href="../references.html#ref-McInnes2020" role="doc-biblioref">McInnes et al., 2020</a>)</span>.</p>
@@ -655,11 +650,10 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-faces.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Sampling the latent space of a VAE trained on faces allows to generate new but realistic faces. Source: <a href="https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df" class="uri">https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df</a></figcaption><p></p>
+<figcaption class="figure-caption">Sampling the latent space of a VAE trained on faces allows to generate new but realistic faces. Source: <a href="https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df" class="uri">https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df</a></figcaption>
 </figure>
 </div>
 <p>VAE are in particular central to <strong>DeepFakes</strong> which have widely reached the media because of their impressive possibilities but also ethical issues:</p>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/JbzVhzNaTdI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Another class of generative models are <strong>generative adversarial networks</strong> (GAN) <span class="citation" data-cites="Goodfellow2014">(<a href="../references.html#ref-Goodfellow2014" role="doc-biblioref">Goodfellow et al., 2014</a>)</span> which consist of a <strong>generator</strong> (decoder) and a <strong>discriminator</strong> that compete to produce realistic images while trying to discriminate generated from real images.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -670,14 +664,13 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cycleGAN4.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">CycleGAN. <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></figcaption><p></p>
+<figcaption class="figure-caption">CycleGAN. <a href="https://github.com/junyanz/CycleGAN" class="uri">https://github.com/junyanz/CycleGAN</a></figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="reinforcement-learning" class="level3">
 <h3 class="anchored" data-anchor-id="reinforcement-learning">Reinforcement learning</h3>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/fczritSOcSM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:</p>
 <p><a href="https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/" class="uri">https://www.tu-chemnitz.de/informatik/KI/edu/deeprl/</a></p>
 <p>but it has recently gained a lot of importance when coupled with deep learning principles. Here we just present a couple of application of <strong>deep reinforcement learning</strong> to motivate you to also assist to this course.</p>
@@ -685,7 +678,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rl-loop.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Agent-environment interaction in RL. Source: <a href="https://ieeexplore.ieee.org/document/7839568" class="uri">https://ieeexplore.ieee.org/document/7839568</a></figcaption><p></p>
+<figcaption class="figure-caption">Agent-environment interaction in RL. Source: <a href="https://ieeexplore.ieee.org/document/7839568" class="uri">https://ieeexplore.ieee.org/document/7839568</a></figcaption>
 </figure>
 </div>
 <p>In deep RL, the policy <span class="math inline">\pi</span> is implemented using a deep neural network whose job is to predict which action in a given state is the most likely to provide reward in the long-term. Contrary to supervised learning, we do not know which action should have been performed (ground truth), we only get rewards indicating if this was a good choice or not. This makes the learning problem much harder. But the deep RL methods are quite generic: any problem that can be described in terms of states, actions and rewards (formally, a Markov decision process) can be solved by deep RL techniques, at the cost of quite long training times. Let’s have a look at some applications:</p>
@@ -713,48 +706,44 @@ div.csl-indent {
 <li>It is also promising for <strong>autonomous driving</strong>:</li>
 </ul>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/eRwTbRtnT1I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-</section>
-</section>
-<section id="outlook" class="level2">
-<h2 class="anchored" data-anchor-id="outlook">Outlook</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/KAE5mn7WFgU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Badrinarayanan2016" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Badrinarayanan2016" class="csl-entry" role="listitem">
 Badrinarayanan, V., Kendall, A., and Cipolla, R. (2016). <span>SegNet</span>: <span>A Deep Convolutional Encoder-Decoder Architecture</span> for <span>Image Segmentation</span>. <a href="http://arxiv.org/abs/1511.00561">http://arxiv.org/abs/1511.00561</a>.
 </div>
-<div id="ref-Bojarski2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Bojarski2016" class="csl-entry" role="listitem">
 Bojarski, M., Del Testa, D., Dworakowski, D., Firner, B., Flepp, B., Goyal, P., et al. (2016). End to <span>End Learning</span> for <span>Self-Driving Cars</span>. <a href="http://arxiv.org/abs/1604.07316">http://arxiv.org/abs/1604.07316</a>.
 </div>
-<div id="ref-Goodfellow2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Goodfellow2014" class="csl-entry" role="listitem">
 Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., et al. (2014). Generative <span>Adversarial Networks</span>. <a href="http://arxiv.org/abs/1406.2661">http://arxiv.org/abs/1406.2661</a>.
 </div>
-<div id="ref-He2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-He2018" class="csl-entry" role="listitem">
 He, K., Gkioxari, G., Dollár, P., and Girshick, R. (2018). Mask <span>R-CNN</span>. <a href="http://arxiv.org/abs/1703.06870">http://arxiv.org/abs/1703.06870</a>.
 </div>
-<div id="ref-Hochreiter1997" class="csl-entry" role="doc-biblioentry">
-Hochreiter, S., and Schmidhuber, J. (1997). Long short-term memory. <em>Neural computation</em> 9, 1735–80. <a href="https://www.ncbi.nlm.nih.gov/pubmed/9377276">https://www.ncbi.nlm.nih.gov/pubmed/9377276</a>.
+<div id="ref-Hochreiter1997" class="csl-entry" role="listitem">
+Hochreiter, S., and Schmidhuber, J. (1997). Long <span>Short-Term Memory</span>. <em>Neural Computation</em> 9, 1735–1780. doi:<a href="https://doi.org/10.1162/neco.1997.9.8.1735">10.1162/neco.1997.9.8.1735</a>.
 </div>
-<div id="ref-Kingma2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kingma2013" class="csl-entry" role="listitem">
 Kingma, D. P., and Welling, M. (2013). Auto-<span>Encoding Variational Bayes</span>. <a href="http://arxiv.org/abs/1312.6114">http://arxiv.org/abs/1312.6114</a>.
 </div>
-<div id="ref-Krizhevsky2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Krizhevsky2012" class="csl-entry" role="listitem">
 Krizhevsky, A., Sutskever, I., and Hinton, G. E. (2012). <span>ImageNet Classification</span> with <span>Deep Convolutional Neural Networks</span>. in <em>Advances in <span>Neural Information Processing Systems</span> (<span>NIPS</span>)</em> <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf</a>.
 </div>
-<div id="ref-LeCun1998" class="csl-entry" role="doc-biblioentry">
+<div id="ref-LeCun1998" class="csl-entry" role="listitem">
 LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). Gradient <span>Based Learning Applied</span> to <span>Document Recognition</span>. <em>Proceedings of the IEEE</em> 86, 2278–2324. doi:<a href="https://doi.org/10.1109/5.726791">10.1109/5.726791</a>.
 </div>
-<div id="ref-McInnes2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-McInnes2020" class="csl-entry" role="listitem">
 McInnes, L., Healy, J., and Melville, J. (2020). <span>UMAP</span>: <span>Uniform Manifold Approximation</span> and <span>Projection</span> for <span>Dimension Reduction</span>. <a href="http://arxiv.org/abs/1802.03426">http://arxiv.org/abs/1802.03426</a>.
 </div>
-<div id="ref-Redmon2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Redmon2016" class="csl-entry" role="listitem">
 Redmon, J., and Farhadi, A. (2016). <span>YOLO9000</span>: <span>Better</span>, <span>Faster</span>, <span>Stronger</span>. <a href="http://arxiv.org/abs/1612.08242">http://arxiv.org/abs/1612.08242</a>.
 </div>
-<div id="ref-Rumelhart1986a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Rumelhart1986a" class="csl-entry" role="listitem">
 Rumelhart, D. E., Hinton, G. E., and Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em> 323, 533–536. doi:<a href="https://doi.org/10.1038/323533a0">10.1038/323533a0</a>.
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -785,9 +774,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -852,6 +855,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -906,7 +995,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

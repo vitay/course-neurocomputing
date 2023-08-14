@@ -5,7 +5,6 @@ Slides: [html](../slides/7.1-Transformers.html){target="_blank"} [pdf](../slides
 
 ## Transformers
 
-{{< youtube  AO-gqXNCEx0 >}}
 
 
 ### Architecture
@@ -276,8 +275,6 @@ The transformer network beat the state-of-the-art performance in translation wit
 ![Performance of the Transformer on NLP tasks. Source [@Vaswani2017].](../slides/img/transformer-results.png){width=100%}
 
 ## Self-supervised Transformers
-
-{{< youtube  jYDEFZWn6co >}}
 
 The Transformer is considered as the **AlexNet** moment of natural language processing (NLP).
 However, it is limited to supervised learning of sentence-based translation.

@@ -1058,8 +1058,6 @@ Source: <https://towardsdatascience.com/introduction-to-linear-regression-in-pyt
 :::
 
 
-
-
 # Simple hold-out cross-validation
 
 :::{.callout-tip}
@@ -1132,6 +1130,19 @@ Source <https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validat
 
 * k-fold cross-validation works well, but needs a lot of repeated learning.
 
+# Validation data
+
+* The bare minimum in ML is to have separate training and test sets. However, the test set should only be used once:
+
+    * If you try many variations of the same algorithm on a single test set and keep the best one, you end up overfitting the test set: the model may not generalize well to novel data...
+
+* A third **validation set** is typically used to track overfitting during training and perform model selection.
+
+* The test set is ultimately used to report the final performance.
+
+![Source: <https://developers.google.com/machine-learning/crash-course/validation/another-partition>](img/validationset.svg){width=70%}
+
+
 
 
 # Training and test errors
@@ -1140,7 +1151,7 @@ Source <https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validat
 ![](img/polynomialregression-mse-traintest.png){width=70%}
 :::
 
-* While the training mse always decrease with more complex models, the test mse increases after a while.
+* While the training mse always decrease with more complex models, the validation/test mse increases after a while.
 
 * This is called **overfitting**: learning by heart the data without caring about generalization.
 

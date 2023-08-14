@@ -5,8 +5,6 @@ Slides: [html](../slides/1.3-Neurons.html){target="_blank"} [pdf](../slides/pdf/
 
 ## Biological neurons
 
-{{< youtube  ALBRu-AK53I >}}
-
 
 The human brain is composed of 100 billion **neurons**. A biological neuron is a cell, composed of a cell body (**soma**), multiple **dendrites** and an **axon**. The axon of a neuron can contact the dendrites of another through **synapses** to transmit information. There are hundreds of different types of neurons, each with different properties.
 
@@ -33,7 +31,6 @@ Neurotransmitters can enter the receiving neuron through **receptors** and chang
 The two important dimensions of the information exchanged by neurons are:
 
 * The instantaneous **frequency** or **firing rate**: number of spikes per second (Hz).
-
 * The precise **timing** of the spike trains.
 
 
@@ -46,17 +43,12 @@ Some neuron models called **rate-coded models** only represent the firing rate o
 
 ## Hodgkin-Huxley neurons
 
-{{< youtube  WAfOUZW4rq8 >}}
-
-
 Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential $V$ of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a **capacitance** $C$ that models the dynamics of the membrane (time constant). The **conductance** $g_L$ allows the membrane potential to relax back to its resting potential $E_L$ in the absence of external currents.  External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential. 
 
 Their neuron model include:
 
 * An ordinary differential equation (ODE) for the membrane potential $v$.
-
 * Three ODEs for $n$, $m$ and $h$ representing potassium channel activation, sodium channel activation, and sodium channel inactivation.
-
 * Several parameters determined experimentally.
 
 $$
@@ -139,9 +131,6 @@ Contrary to the simple LIF model, these realistic neuron models can reproduce a 
 
 ## Rate-coded neurons
 
-{{< youtube  AFzYj1VUnCg >}}
-
-
 At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the **firing rate** of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the **firing rate** of (a population of) neuron(s): the **rate-coded** neuron.
 
 ![The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.](../slides/img/ratecoded-izhikevich.png){width=60%}
@@ -217,9 +206,6 @@ the firing rate $r(t)$ is bounded between 0 and 1, but responds for negative mem
 ![The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.](../slides/img/ratecoded-simple3.png){width=80%}
 
 ## Artificial neurons
-
-{{< youtube  NVj17dve8B8 >}}
-
 
 By omitting the dynamics of the rate-coded neuron, one obtains the very simple **artificial neuron** (McCulloch and Pitts, 1943):
 

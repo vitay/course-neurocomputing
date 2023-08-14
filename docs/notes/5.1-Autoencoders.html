@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 13&nbsp; Autoencoders</title>
+<title>Neurocomputing - Autoencoders</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,7 +76,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -104,11 +105,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Autoencoders</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/5.1-Autoencoders.html"><strong>Generative modeling</strong></a></li><li class="breadcrumb-item"><a href="../notes/5.1-Autoencoders.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Autoencoders</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,7 +122,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -125,22 +131,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -164,8 +172,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -194,8 +203,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -214,8 +224,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -239,8 +250,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,8 +276,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -284,8 +297,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,8 +328,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -334,8 +349,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -352,7 +368,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,12 +435,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -462,7 +480,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Autoencoders</span></h1>
+<h1 class="title"><span class="chapter-title">Autoencoders</span></h1>
 </div>
 
 
@@ -480,7 +498,6 @@ div.csl-indent {
 <p>Slides: <a href="../slides/5.1-Autoencoders.html" target="_blank">html</a> <a href="../slides/pdf/5.1-Autoencoders.pdf" target="_blank">pdf</a></p>
 <section id="autoencoders" class="level2">
 <h2 class="anchored" data-anchor-id="autoencoders">Autoencoders</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/bW2jYMdaPZk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p><strong>Supervised learning</strong> algorithms need a lot of labeled data (with <span class="math inline">\mathbf{t}</span>) in order to learn classification/regression tasks, but labeled data is very expensive to obtain (experts, crowd sourcing). A “bad” algorithm trained with a lot of data will perform better than a “good” algorithm trained with few data.</p>
 <blockquote class="blockquote">
 <p>“It is not who has the best algorithm who wins, it is who has the most data.”</p>
@@ -490,7 +507,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/autoencoder3.png" class="img-fluid figure-img" style="width:35.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of a shallow autoencoder.</figcaption><p></p>
+<figcaption class="figure-caption">Architecture of a shallow autoencoder.</figcaption>
 </figure>
 </div>
 <p>An autoencoder minimizes the <strong>reconstruction loss</strong> between the input <span class="math inline">\mathbf{x}</span> and the reconstruction <span class="math inline">\mathbf{x'}</span>, for example the mse between the two vectors:</p>
@@ -503,7 +520,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/result-autoencoder.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Sparse autoencoder trained on natural images <span class="citation" data-cites="Olshausen1997">(<a href="../references.html#ref-Olshausen1997" role="doc-biblioref">Olshausen and Field, 1997</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Sparse autoencoder trained on natural images <span class="citation" data-cites="Olshausen1997">(<a href="../references.html#ref-Olshausen1997" role="doc-biblioref">Olshausen and Field, 1997</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>Inputs are taken from random natural images and cut in 10*10 patches. 100 features are extracted in the hidden layer. The autoencoder is said <strong>sparse</strong> because it uses <strong>L1-regularization</strong> to make sure that only a few neurons are active in the hidden layer for a particular image. The learned features look like what the first layer of a CNN would learn, except that there was no labels at all! Can we take advantage of this to pre-train a supervised network?</p>
@@ -515,35 +532,34 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stacked-autoencoder.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of the stacked autoencoder. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Architecture of the stacked autoencoder. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption>
 </figure>
 </div>
 <p>Using unlabeled data, train an autoencoder to extract first-order features, freeze the weights and remove the decoder.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stacked1.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">The first layer is trained using an autoencoder on the inputs. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption><p></p>
+<figcaption class="figure-caption">The first layer is trained using an autoencoder on the inputs. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption>
 </figure>
 </div>
 <p>Train another autoencoder on the same unlabeled data, but using the previous latent space as input/output.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stacked2.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">The second layer is trained using an autoencoder on the first layer. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption><p></p>
+<figcaption class="figure-caption">The second layer is trained using an autoencoder on the first layer. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption>
 </figure>
 </div>
 <p>Repeat the operation as often as needed, and finish with a simple classifier using the labeled data.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stacked3.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">The output layer is trained using supervised learning on the last hidden layer. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption><p></p>
+<figcaption class="figure-caption">The output layer is trained using supervised learning on the last hidden layer. Source: <a href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders" class="uri">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</a>.</figcaption>
 </figure>
 </div>
 <p>This defines a <strong>stacked autoencoder</strong>, trained using <strong>Greedy layer-wise</strong> learning. Each layer progressively learns more and more complex features of the input data (edges - contour - forms - objects): <strong>feature extraction</strong>. This method allows to train a deep network on few labeled data: the network will not overfit, because the weights are already in the right region. It solves <strong>gradient vanishing</strong>, as the weights are already close to the optimal solution and will efficiently transmit the gradient backwards. One can keep the pre-trained weights fixed for the classification task or <strong>fine-tune</strong> all the weights as in a regular DNN.</p>
 </section>
 <section id="deep-autoencoders" class="level2">
 <h2 class="anchored" data-anchor-id="deep-autoencoders">Deep autoencoders</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/daBrY1dmvn0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="semi-supervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="semi-supervised-learning">Semi-supervised learning</h3>
 <p>Autoencoders are not restricted to a single hidden layer.</p>
@@ -562,7 +578,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/autoencoder-architecture.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Deep autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Deep autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption>
 </figure>
 </div>
 <p>The <strong>latent space</strong> is a <strong>bottleneck</strong> layer of lower dimensionality, learning a compressed representation of the input which has to contain enough information in order to <strong>reconstruct</strong> the input. Both the encoder with weights <span class="math inline">\phi</span> and the decoder with weights <span class="math inline">\theta</span> try to minimize the <strong>reconstruction loss</strong>:</p>
@@ -574,14 +590,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolutionalAE.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Deep convolutional autoencoder. Source: <span class="citation" data-cites="Guo2017">(<a href="../references.html#ref-Guo2017" role="doc-biblioref">Guo et al., 2017</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Deep convolutional autoencoder. Source: <span class="citation" data-cites="Guo2017">(<a href="../references.html#ref-Guo2017" role="doc-biblioref">Guo et al., 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>In <strong>semi-supervised</strong> or <strong>self-taught</strong> learning, we can first train an autoencoder on huge amounts of unlabeled data, and then use the latent representations as an input to a shallow classifier on a small supervised dataset.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/semisupervised-autoencoder.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">The encoder of an unsupervised autoencoder can be used as a feature extractor for a classifier. Source: <a href="https://doi.org/10.1117/12.2303912" class="uri">https://doi.org/10.1117/12.2303912</a>.</figcaption><p></p>
+<figcaption class="figure-caption">The encoder of an unsupervised autoencoder can be used as a feature extractor for a classifier. Source: <a href="https://doi.org/10.1117/12.2303912" class="uri">https://doi.org/10.1117/12.2303912</a>.</figcaption>
 </figure>
 </div>
 <p>A linear classifier might even be enough if the latent space is well trained. The weights of the encoder can be fine-tuned with backpropagation, or remain fixed.</p>
@@ -592,13 +608,13 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/denoisingautoencoder.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Denoising autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Denoising autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/denoisingautoencoder-result.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Denoising autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Denoising autoencoder. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a>.</figcaption>
 </figure>
 </div>
 </section>
@@ -608,21 +624,20 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepclustering.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">Clustering can be applied on the latent representations. Source: <a href="doi:10.1007/978-3-030-32520-6_55" class="uri">doi:10.1007/978-3-030-32520-6_55</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Clustering can be applied on the latent representations. Source: <a href="doi:10.1007/978-3-030-32520-6_55" class="uri">doi:10.1007/978-3-030-32520-6_55</a>.</figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="variational-autoencoders-vae" class="level2">
 <h2 class="anchored" data-anchor-id="variational-autoencoders-vae">Variational autoencoders (VAE)</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/XhBI14qOzXg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="motivation" class="level3">
 <h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
 <p>Autoencoders are <strong>deterministic</strong>: after learning, the same input <span class="math inline">\mathbf{x}</span> will generate the same latent code <span class="math inline">\mathbf{z}</span> and the same reconstruction <span class="math inline">\mathbf{\tilde{x}}</span>. Sampling the latent space generally generates non-sense reconstructions, because an autoencoder only learns data samples, it does not learn the underlying <strong>probability distribution</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/autoencoder-limits.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Deterministic autoencoders do not regularize their latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Deterministic autoencoders do not regularize their latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a>.</figcaption>
 </figure>
 </div>
 <p>The main problem of supervised learning is to get enough annotated data. Being able to generate <strong>new</strong> images similar to the training examples would be extremely useful (data augmentation).</p>
@@ -630,7 +645,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-latentspace.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Variational autoencoders do regularize their latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Variational autoencoders do regularize their latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a>.</figcaption>
 </figure>
 </div>
 </section>
@@ -642,12 +657,12 @@ div.csl-indent {
     \mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)
 </span></p>
 <p>The two vectors <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}^2</span> are the outputs of the encoder.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Sampling from a normal distribution
 </div>
 </div>
@@ -655,7 +670,7 @@ Sampling from a normal distribution
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/normaldistribution.svg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Sampling from a normal distribution.</figcaption><p></p>
+<figcaption class="figure-caption">Sampling from a normal distribution.</figcaption>
 </figure>
 </div>
 <p>The normal distribution <span class="math inline">\mathcal{N}(\mu, \sigma^2)</span> is fully defined by its two parameters:</p>
@@ -680,7 +695,7 @@ Sampling from a normal distribution
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-structure.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<figcaption class="figure-caption">Architecture of a variational autoencoder. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption>
 </figure>
 </div>
 <p>Open questions:</p>
@@ -712,15 +727,15 @@ Sampling from a normal distribution
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-regularization.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Regularizing the latent space by minimizing the KL with <span class="math inline">\mathcal{N}(0,1)</span> makes sure that we can smoothly travel in the latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<figcaption class="figure-caption">Regularizing the latent space by minimizing the KL with <span class="math inline">\mathcal{N}(0,1)</span> makes sure that we can smoothly travel in the latent space. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -737,12 +752,12 @@ Note
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Kullback-Leibler divergence
 </div>
 </div>
@@ -776,7 +791,7 @@ Kullback-Leibler divergence
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-regularization2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">A regularized latent space makes sure that reconstructions always make sense. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<figcaption class="figure-caption">A regularized latent space makes sure that reconstructions always make sense. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption>
 </figure>
 </div>
 </section>
@@ -786,7 +801,7 @@ Kullback-Leibler divergence
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-structure.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<figcaption class="figure-caption">Architecture of a variational autoencoder. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption>
 </figure>
 </div>
 <p>Modifying slightly <span class="math inline">\mathbf{\mu_x}</span> or <span class="math inline">\mathbf{\sigma_x}</span> may not change at all the sample <span class="math inline">\mathbf{z} \sim \mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span>, so you cannot estimate any gradient.</p>
@@ -798,14 +813,14 @@ Kullback-Leibler divergence
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-reparameterization.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder with the reparameterization trick. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<figcaption class="figure-caption">Architecture of a variational autoencoder with the reparameterization trick. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption>
 </figure>
 </div>
 <p>The sampled value <span class="math inline">\xi \sim \mathcal{N}(0, 1)</span> becomes just another input to the neural network.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-reparameterization2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of a variational autoencoder with the reparameterization trick. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption><p></p>
+<figcaption class="figure-caption">Architecture of a variational autoencoder with the reparameterization trick. Source: <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73" class="uri">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73</a></figcaption>
 </figure>
 </div>
 <p>It allows to transform <span class="math inline">\mathbf{\mu_x}</span> and <span class="math inline">\mathbf{\sigma_x}</span> into a sample <span class="math inline">\mathbf{z}</span> of <span class="math inline">\mathcal{N}(\mathbf{\mu_x}, \mathbf{\sigma_x}^2)</span>:</p>
@@ -824,7 +839,7 @@ Kullback-Leibler divergence
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vae-structure.svg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Principle of a VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Principle of a VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption>
 </figure>
 </div>
 <p>The two main applications of VAEs in <strong>unsupervised learning</strong> are:</p>
@@ -842,13 +857,13 @@ Kullback-Leibler divergence
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepfakes_01.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">During training of a deepfake, <strong>one</strong> encoder and <strong>two</strong> decoders learns to reproduce the face of each person. Source: <a href="https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/" class="uri">https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/</a></figcaption><p></p>
+<figcaption class="figure-caption">During training of a deepfake, <strong>one</strong> encoder and <strong>two</strong> decoders learns to reproduce the face of each person. Source: <a href="https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/" class="uri">https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepfakes_02.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">When generating the deepfake, the decoder of person B is used on the latent representation of person A. Source: <a href="https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/" class="uri">https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/</a></figcaption><p></p>
+<figcaption class="figure-caption">When generating the deepfake, the decoder of person B is used on the latent representation of person A. Source: <a href="https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/" class="uri">https://www.alanzucconi.com/2018/03/14/understanding-the-technology-behind-deepfakes/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -866,15 +881,15 @@ Kullback-Leibler divergence
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/betavae-results.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption"><span class="math inline">\beta</span>-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. <span class="citation" data-cites="Higgins2016">(<a href="../references.html#ref-Higgins2016" role="doc-biblioref">Higgins et al., 2016</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption"><span class="math inline">\beta</span>-VAE trained on CelebA allows to disentangle skin color, age/gender or saturation by manipulating individual latent variables. <span class="citation" data-cites="Higgins2016">(<a href="../references.html#ref-Higgins2016" role="doc-biblioref">Higgins et al., 2016</a>)</span>.</figcaption>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -889,13 +904,13 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vqvae.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vqvae-results.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Faces generated by VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Faces generated by VQ-VAE-2 <span class="citation" data-cites="Razavi2019">(<a href="../references.html#ref-Razavi2019" role="doc-biblioref">Razavi et al., 2019</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -905,28 +920,28 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cvae-structure.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption>
 </figure>
 </div>
 <p>When trained with labels, the <strong>conditional variational autoencoder</strong> (CVAE <span class="citation" data-cites="Sohn2015">(<a href="../references.html#ref-Sohn2015" role="doc-biblioref">Sohn et al., 2015</a>)</span>) becomes able to sample many images of the same class.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cvae-generation.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption>
 </figure>
 </div>
 <p>CVAE allows to sample as many samples of a given class as we want: <strong>data augmentation</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cvae-mnist.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">MNIST digits generated by a Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption><p></p>
+<figcaption class="figure-caption">MNIST digits generated by a Conditional VAE. Source: <a href="https://ijdykeman.github.io/ml/2016/12/21/cvae.html" class="uri">https://ijdykeman.github.io/ml/2016/12/21/cvae.html</a></figcaption>
 </figure>
 </div>
 <p>The condition does not need to be a label, it can be a shape or another image (passed through another encoder).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cvae-shape.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">CVAE conditioned on shapes. Source: <a href="https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation" class="uri">https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation</a></figcaption><p></p>
+<figcaption class="figure-caption">CVAE conditioned on shapes. Source: <a href="https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation" class="uri">https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation</a></figcaption>
 </figure>
 </div>
 </section>
@@ -934,14 +949,13 @@ Note
 </section>
 <section id="variational-inference-optional" class="level2">
 <h2 class="anchored" data-anchor-id="variational-inference-optional">Variational inference (optional)</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/IP8YqRBBCP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="learning-probability-distributions-from-samples" class="level3">
 <h3 class="anchored" data-anchor-id="learning-probability-distributions-from-samples">Learning probability distributions from samples</h3>
 <p>The input data <span class="math inline">X</span> comes from an unknown distribution <span class="math inline">P(X)</span>. The training set <span class="math inline">\mathcal{D}</span> is formed by <strong>samples</strong> of that distribution. Learning the distribution of the data means learning a <strong>parameterized distribution</strong> <span class="math inline">p_\theta(X)</span> that is as close as possible from the true distribution <span class="math inline">P(X)</span>. The parameterized distribution could be a family of known distributions (e.g.&nbsp;normal) or a neural network with a softmax output layer.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/kerneldensityestimation.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Density estimation. Source: <a href="https://machinelearningmastery.com/probability-density-estimation/" class="uri">https://machinelearningmastery.com/probability-density-estimation/</a></figcaption><p></p>
+<figcaption class="figure-caption">Density estimation. Source: <a href="https://machinelearningmastery.com/probability-density-estimation/" class="uri">https://machinelearningmastery.com/probability-density-estimation/</a></figcaption>
 </figure>
 </div>
 <p>This means that we want to minimize the KL between the two distributions:</p>
@@ -977,7 +991,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cursedimensionality.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Curse of dimensionality. Source: <a href="https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html" class="uri">https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Curse of dimensionality. Source: <a href="https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html" class="uri">https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html</a></figcaption>
 </figure>
 </div>
 <p>MLE does not work well in high-dimensional spaces. We need to work in a much lower-dimensional space.</p>
@@ -989,14 +1003,14 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/manifold.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Manifold. Source: <a href="https://en.wikipedia.org/wiki/Manifold" class="uri">https://en.wikipedia.org/wiki/Manifold</a></figcaption><p></p>
+<figcaption class="figure-caption">Manifold. Source: <a href="https://en.wikipedia.org/wiki/Manifold" class="uri">https://en.wikipedia.org/wiki/Manifold</a></figcaption>
 </figure>
 </div>
 <p>The low-dimensional <strong>latent variables</strong> <span class="math inline">z</span> are the actual cause for the observations <span class="math inline">X</span>. Given a sample <span class="math inline">z</span> on the manifold, we can train a <strong>generative model</strong> <span class="math inline">p_\theta(X | z)</span> to recreate the input <span class="math inline">X</span>. <span class="math inline">p_\theta(X | z)</span> is the <strong>decoder</strong>: given a latent representation <span class="math inline">z</span>, what is the corresponding observation <span class="math inline">X</span>?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/latentvariable.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">Latent variable. Source: <a href="https://blog.evjang.com/2016/08/variational-bayes.html" class="uri">https://blog.evjang.com/2016/08/variational-bayes.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Latent variable. Source: <a href="https://blog.evjang.com/2016/08/variational-bayes.html" class="uri">https://blog.evjang.com/2016/08/variational-bayes.html</a></figcaption>
 </figure>
 </div>
 <p>If we learn the distribution <span class="math inline">p_\theta(z)</span> of the manifold (latent space), we can infer the distribution of the data <span class="math inline">p_\theta(X)</span> using that model:</p>
@@ -1018,7 +1032,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/VAE-graphical-model.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Variational inference approximates the encoder with another parameterized distribution. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Variational inference approximates the encoder with another parameterized distribution. Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption>
 </figure>
 </div>
 <p>The decoder <span class="math inline">p_\theta(x |z)</span> generates observations <span class="math inline">x</span> from a latent representation <span class="math inline">x</span> with parameters <span class="math inline">\theta</span>. The encoder <span class="math inline">q_\phi(z|x)</span> estimates the latent representation <span class="math inline">z</span> of a generated observation <span class="math inline">x</span>. It should approximate <span class="math inline">p_\theta(z | x)</span> with parameters <span class="math inline">\phi</span>.</p>
@@ -1079,12 +1093,12 @@ Note
 \end{aligned}
 </span></p>
 <p>The reparameterization trick and the fact that the KL between normal distributions has a closed form allow us to use backpropagation end-to-end. The encoder <span class="math inline">q_\phi(z|X)</span> and decoder <span class="math inline">p_\theta(X | z)</span> are neural networks in a VAE, but other parametrized distributions can be used (e.g.&nbsp;in physics).</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Sources
 </div>
 </div>
@@ -1099,27 +1113,27 @@ Sources
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Guo2017" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Guo2017" class="csl-entry" role="listitem">
 Guo, X., Liu, X., Zhu, E., and Yin, J. (2017). Deep <span>Clustering</span> with <span>Convolutional Autoencoders</span>. in <em>Neural <span>Information Processing</span></em> Lecture <span>Notes</span> in <span>Computer Science</span>., eds. D. Liu, S. Xie, Y. Li, D. Zhao, and E.-S. M. El-Alfy (<span>Cham</span>: <span>Springer International Publishing</span>), 373–382. doi:<a href="https://doi.org/10.1007/978-3-319-70096-0_39">10.1007/978-3-319-70096-0_39</a>.
 </div>
-<div id="ref-Higgins2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Higgins2016" class="csl-entry" role="listitem">
 Higgins, I., Matthey, L., Pal, A., Burgess, C., Glorot, X., Botvinick, M., et al. (2016). Beta-<span>VAE</span>: <span>Learning Basic Visual Concepts</span> with a <span>Constrained Variational Framework</span>. in <em><span>ICLR</span> 2017</em> <a href="https://openreview.net/forum?id=Sy2fzU9gl">https://openreview.net/forum?id=Sy2fzU9gl</a>.
 </div>
-<div id="ref-Kingma2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kingma2013" class="csl-entry" role="listitem">
 Kingma, D. P., and Welling, M. (2013). Auto-<span>Encoding Variational Bayes</span>. <a href="http://arxiv.org/abs/1312.6114">http://arxiv.org/abs/1312.6114</a>.
 </div>
-<div id="ref-Olshausen1997" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Olshausen1997" class="csl-entry" role="listitem">
 Olshausen, B. A., and Field, D. J. (1997). Sparse coding with an overcomplete basis set: <span>A</span> strategy employed by <span>V1</span>? <em>Vision Research</em> 37, 3311–3325. doi:<a href="https://doi.org/10.1016/S0042-6989(97)00169-7">10.1016/S0042-6989(97)00169-7</a>.
 </div>
-<div id="ref-Razavi2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Razavi2019" class="csl-entry" role="listitem">
 Razavi, A., Oord, A. van den, and Vinyals, O. (2019). Generating <span>Diverse High-Fidelity Images</span> with <span>VQ-VAE-2</span>. <a href="http://arxiv.org/abs/1906.00446">http://arxiv.org/abs/1906.00446</a>.
 </div>
-<div id="ref-Sohn2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Sohn2015" class="csl-entry" role="listitem">
 Sohn, K., Lee, H., and Yan, X. (2015). <span>“Learning <span>Structured Output Representation</span> using <span>Deep Conditional Generative Models</span>,”</span> in <em>Advances in <span>Neural Information Processing Systems</span> 28</em>, eds. C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett (<span>Curran Associates, Inc.</span>), 3483–3491. <a href="http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf">http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf</a>.
 </div>
-<div id="ref-Vincent2010" class="csl-entry" role="doc-biblioentry">
-Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>Journal of Machine Learning Research</em>, 38.
+<div id="ref-Vincent2010" class="csl-entry" role="listitem">
+Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>J. Mach. Learn. Res.</em> 11, 3371–3408.
 </div>
 </div>
 </section>
@@ -1153,9 +1167,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1220,6 +1248,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1274,7 +1388,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

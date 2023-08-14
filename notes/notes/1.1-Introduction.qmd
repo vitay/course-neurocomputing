@@ -6,13 +6,6 @@ Slides: [html](../slides/1.1-Introduction.html){target="_blank"} [pdf](../slides
 
 ##  What is neurocomputing?
 
-{{< youtube  Hy0FpFjdJGI >}}
-
-Let's first discuss the difference between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL) and Neurocomputing. Nowadays, these terms are used almost interchangeably, but there are historical and methodological differences.
-
-
-![Source: <https://data-science-blog.com/blog/2018/05/14/machine-learning-vs-deep-learning-wo-liegt-der-unterschied>](../slides/img/aimldl.png){width=50%}
-
 
 The term **Artificial Intelligence** was coined by John McCarthy at the Dartmouth Summer Research Project on Artificial Intelligence in **1956**:
 
@@ -38,7 +31,6 @@ Good old-fashion AI (GOFAI) approaches were purely symbolic (logical systems, kn
 * Transformers
 * Graph neural networks
 
-![](../slides/img/neurocomputing.svg)
 
 **Neurocomputing** is at the intersection between computational neuroscience and artificial neural networks (deep learning). **Computational neuroscience** studies the functioning of the brain (human or animal) through biologically detailed models, either at the functional level (e.g. visual attention, decision-making) or cellular level (individual neurons, synapses, neurotransmitters, etc). The goal of computational neuroscience is 1) to provide theoretical explanations to the experimental observations made by neuroscientists and 2) make predictions that can be verified experimentally. Moreover, understanding how the brain solves real-life problems might allow to design better AI algorithms. If you are interested in computational neuroscience, make sure to visit the courses **Neurokognition** I and II taught by Prof. Dr. Hamker:
 
@@ -57,21 +49,18 @@ Machine Learning applications are generally divided into three main branches:
 * **Reinforcement learning**: The program explores its environment by producing actions and receiving rewards.
 
 
-![Source: <http://www.isaziconsulting.co.za/machinelearning.html>](../slides/img/ml-areas.png)
-
-
 Deep learning has recently revolutionized these types of machine learning, so let's have a look at some concrete examples for motivation. At the end of the course, if you also perform all exercises, you should be able to reproduce these applications.
 
 
 ### Supervised learning
 
-{{< youtube pbbzwFohH3I >}}
-
-![Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf>](../slides/img/supervisedlearning.png){width=50%}
 
 In a supervised learning, we have a **training set** (or training data) consisting of $N$ samples (or examples) from which we want to learn the underlying function or distribution. Each sample consists of an **input** $\mathbf{x}_i$ and an **output** (also called ground truth, desired output or target) $t_i$. 
 
-What we want to learn is **parameterized model** $y_i = f_\theta (\mathbf{x}_i)$ which can predict the correct output for the inputs of the training set. The goal of **learning** (or training) is to find which value of the parameters $\theta$ allows to reduce (*minimize*) the **prediction error**. i.e. the discrepancy between the prediction $y_i = f_\theta (\mathbf{x}_i)$ and the desired output $t_i$. 
+What we want to learn is a **parameterized model** $y_i = f_\theta (\mathbf{x}_i)$ which can predict the correct output for the inputs of the training set. The goal of **learning** (or training) is to find which value of the parameters $\theta$ allows to reduce (*minimize*) the **prediction error**. i.e. the discrepancy between the prediction $y_i = f_\theta (\mathbf{x}_i)$ and the desired output $t_i$. 
+
+
+![Principle of supervised learning. Source: Andrew Ng, Stanford CS229, <https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf>](../slides/img/supervisedlearning.png){width=50%}
 
 Depending on the nature of the outputs $t$, we have two different supervised problems:
 
@@ -129,11 +118,7 @@ CNNs are also gaining an increasing importance in medical applications, for exam
 {{< youtube  9Mz84cwVmS0 >}}
 
 
-
-
 #### Recurrent neural networks
-
-{{< youtube  _809brCJaTM >}}
 
 Another field that was heavily transformed by deep learning is **natural language processing** (NLP), i.e. the automatic processing of language, be it text understanding, translation, summarization, question answering or even speech recognition and synthesis. In short, everything needed under the hood when you talk to Siri or Alexa.
 
@@ -153,8 +138,6 @@ Transformer architectures have revolutionized NLP, allowing to train a massive n
 
 
 ### Unsupervised learning
-
-{{< youtube  uIrBgz4OPlM >}}
 
 In supervised learning, we use **annotated data**, i.e. pairs $(x_i, t_i)$ of input/output examples. This requires to know the ground truth for each sample, what can be be very tedious and expensive if humans have to do it. 
 
@@ -191,7 +174,6 @@ One particular form of autoencoder which is very useful for data generation is t
 
 VAE are in particular central to **DeepFakes** which have widely reached the media because of their impressive possibilities but also ethical issues:
 
-{{< youtube  JbzVhzNaTdI >}}
 
 Another class of generative models are **generative adversarial networks** (GAN) [@Goodfellow2014] which consist of a **generator** (decoder) and a **discriminator** that compete to produce realistic images while trying to discriminate generated from real images. 
 
@@ -203,8 +185,6 @@ Several evolutions of GANs have allowed to produce increasingly realistic images
 ![CycleGAN. <https://github.com/junyanz/CycleGAN>](../slides/img/cycleGAN4.jpg){width=100%}
 
 ### Reinforcement learning
-
-{{< youtube  fczritSOcSM >}}
 
 Reinforcement learning (RL) is not part of this module, as we offer a complete course on it:
 
@@ -247,7 +227,3 @@ or in reality:
 
 {{< youtube  eRwTbRtnT1I >}}
 
-
-## Outlook
-
-{{< youtube  KAE5mn7WFgU >}}

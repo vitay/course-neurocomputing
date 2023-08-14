@@ -91,8 +91,11 @@ $$
 
 # CLIP: Contrastive Language-Image Pre-training
 
+* Embeddings for text and images are learned using **Transformer encoders** and **contrastive learning**. 
 
-<video controls><source src="img/dall-e-2.webm" type="video/webm"></video>
+* For each pair (text, image) in the training set, their representation should be made similar, while being different from the others. 
+
+![Source: <https://towardsdatascience.com/understanding-how-dall-e-mini-works-114048912b3b>](img/clip-training.png)
 
 # GLIDE
 

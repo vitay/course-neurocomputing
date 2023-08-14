@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 23&nbsp; Beyond deep Learning</title>
+<title>Neurocomputing - Beyond deep Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -167,11 +139,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Beyond deep Learning</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/8.1-Limits.html"><strong>Outlook</strong></a></li><li class="breadcrumb-item"><a href="../notes/8.2-Beyond.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Beyond deep Learning</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -179,7 +156,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -188,22 +165,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -227,8 +206,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -257,8 +237,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,8 +258,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -302,8 +284,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -327,8 +310,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -347,8 +331,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -377,8 +362,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -397,8 +383,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -415,7 +402,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,12 +469,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -521,7 +510,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Beyond deep Learning</span></h1>
+<h1 class="title"><span class="chapter-title">Beyond deep Learning</span></h1>
 </div>
 
 
@@ -544,7 +533,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/creditassignment1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">The credit assignment problem. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
+<figcaption class="figure-caption">The credit assignment problem. Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption>
 </figure>
 </div>
 <p>Backpropagation solves the credit assignment problem by transmitting the error gradient <strong>backwards</strong> through the weights (<span class="math inline">\sim</span> synapses).</p>
@@ -552,14 +541,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/creditassignment2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf" class="uri">https://simons.berkeley.edu/sites/default/files/docs/9574/backpropagationanddeeplearninginthebrain-timothylillicrap.pdf</a></figcaption>
 </figure>
 </div>
 <p>But information only goes in one direction in the brain: from the presynaptic neuron to the postsynaptic one. A synapse does know not the weight of other synapses and cannot transmit anything backwards.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/chemicalsynapse.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption>
 </figure>
 </div>
 </section>
@@ -569,20 +558,20 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/feedbackalignment1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <span class="citation" data-cites="Lillicrap2016">Lillicrap et al. (<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Source: <span class="citation" data-cites="Lillicrap2016">Lillicrap et al. (<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">2016</a>)</span></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/feedbackalignment2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <span class="citation" data-cites="Lillicrap2016">Lillicrap et al. (<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Source: <span class="citation" data-cites="Lillicrap2016">Lillicrap et al. (<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">2016</a>)</span></figcaption>
 </figure>
 </div>
 <p>Feedback connections are ubiquitous in the brain, especially in the neocortex. The feedback weights do not need to learn: they can stay random. The mechanism only works for small networks on MNIST until now.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/feedbackalignment3.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <span class="citation" data-cites="Lillicrap2016">Lillicrap et al. (<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Source: <span class="citation" data-cites="Lillicrap2016">Lillicrap et al. (<a href="../references.html#ref-Lillicrap2016" role="doc-biblioref">2016</a>)</span></figcaption>
 </figure>
 </div>
 </section>
@@ -593,7 +582,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/predictivecoding.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://doi.org/10.1038/s41593-018-0200-7" class="uri">https://doi.org/10.1038/s41593-018-0200-7</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://doi.org/10.1038/s41593-018-0200-7" class="uri">https://doi.org/10.1038/s41593-018-0200-7</a></figcaption>
 </figure>
 </div>
 <p>More generally, one can understand brain behavior as:</p>
@@ -608,14 +597,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/activeinference2.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://www.frontiersin.org/articles/10.3389/frobt.2018.00021" class="uri">https://www.frontiersin.org/articles/10.3389/frobt.2018.00021</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://www.frontiersin.org/articles/10.3389/frobt.2018.00021" class="uri">https://www.frontiersin.org/articles/10.3389/frobt.2018.00021</a></figcaption>
 </figure>
 </div>
 <p>Although active inference is mostly a framework about Bayesian statistics and neuroscience, deep neural network implementations (using predictive coding networks) start to appear, paving the way for the next-gen AI.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/fellemanvanessen.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1.</figcaption><p></p>
+<figcaption class="figure-caption">Felleman, D. J., and Van Essen, D. C. (1991). Distributed hierarchical processing in the primate cerebral cortex. Cereb. Cortex 1, 1–47. doi:10.1093/cercor/1.1.1.</figcaption>
 </figure>
 </div>
 <p>Deep learning architectures are mostly unidirectional, from the input to the output, without feedback connections. The brain is totally differently organized: a big “mess” of interconnected areas processing everything in parallel. The figure above is only for vision, and only for the cerebral cortex: the thalamus, basal ganglia, hippocampus, cerebellum, etc, create additional shortcuts. Is the complex structure of the brain just a side effect of evolution, or is it the only possible solution? <strong>Inductive bias</strong>: the choice of the architecture constrains the functions it can perform / learn.</p>
@@ -649,12 +638,12 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="reservoir-computing">Reservoir computing</h3>
 <p>The concept of <strong>Reservoir Computing</strong> (RC) was developed simultaneously by two researchers at the beginning of the 2000s.</p>
 <p>Herbert Jaeger (Bremen) introduced <strong>echo-state networks</strong> (ESN) using rate-coded neurons. Wolfgang Maass (TU Graz) introduced <strong>liquid state machines</strong> (LSM) using spiking neurons.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -667,7 +656,7 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/RC-principle2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Tanaka et al.&nbsp;(2019). Recent advances in physical reservoir computing: A review. Neural Networks 115, 100–123. doi:10.1016/j.neunet.2019.03.005.</figcaption><p></p>
+<figcaption class="figure-caption">Tanaka et al.&nbsp;(2019). Recent advances in physical reservoir computing: A review. Neural Networks 115, 100–123. doi:10.1016/j.neunet.2019.03.005.</figcaption>
 </figure>
 </div>
 <p>Rate-coded neurons in the reservoir integrate inputs and recurrent connections using an ODE:</p>
@@ -755,7 +744,7 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rc-patternseparation.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Seoane, L. F. (2019). Evolutionary aspects of reservoir computing. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2018.0377.</figcaption><p></p>
+<figcaption class="figure-caption">Seoane, L. F. (2019). Evolutionary aspects of reservoir computing. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2018.0377.</figcaption>
 </figure>
 </div>
 </section>
@@ -765,14 +754,14 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rc-forecasting.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4" class="uri">https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4" class="uri">https://towardsdatascience.com/predicting-stock-prices-with-echo-state-networks-f910809d23d4</a></figcaption>
 </figure>
 </div>
 <p><strong>Physics:</strong> RC networks can be used to predict the evolution of chaotic systems (Lorenz, Mackey-Glass, Kuramoto-Sivashinsky) at very long time scales (8 times the Lyapunov time).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rc-flame.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Pathak et al.&nbsp;(2018). Model-Free Prediction of Large Spatiotemporally Chaotic Systems from Data: A Reservoir Computing Approach. Physical Review Letters 120, 024102–024102. doi:10.1103/PhysRevLett.120.024102.</figcaption><p></p>
+<figcaption class="figure-caption">Pathak et al.&nbsp;(2018). Model-Free Prediction of Large Spatiotemporally Chaotic Systems from Data: A Reservoir Computing Approach. Physical Review Letters 120, 024102–024102. doi:10.1103/PhysRevLett.120.024102.</figcaption>
 </figure>
 </div>
 <p>The cool thing with reservoirs is that they do not have to be simulated by classical von Neumann architectures (CPU, GPU). Anything able to exhibit dynamics at the edge of chaos can be used: VLSI (memristors), magnetronics, photonics (lasers), spintronics (nanoscale electronics)…</p>
@@ -780,34 +769,34 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rc-memristor.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Tanaka et al.&nbsp;(2018). Recent Advances in Physical Reservoir Computing: A Review. arXiv:1808.04962</figcaption><p></p>
+<figcaption class="figure-caption">Tanaka et al.&nbsp;(2018). Recent Advances in Physical Reservoir Computing: A Review. arXiv:1808.04962</figcaption>
 </figure>
 </div>
 <p>A bucket of water can be used as a reservoir. Different motors provide inputs to the reservoir by creating weights. The surface of the bucket is recorded and used as an input to a linear algorithm. It can learn non-linear operations (XOR) or even speech recognition.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/liquidbrain.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Fernando, C., and Sojakka, S. (2003). Pattern Recognition in a Bucket. doi:10.1007/978-3-540-39432-7_63.</figcaption><p></p>
+<figcaption class="figure-caption">Fernando, C., and Sojakka, S. (2003). Pattern Recognition in a Bucket. doi:10.1007/978-3-540-39432-7_63.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/liquidbrain2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Fernando, C., and Sojakka, S. (2003). Pattern Recognition in a Bucket. doi:10.1007/978-3-540-39432-7_63.</figcaption><p></p>
+<figcaption class="figure-caption">Fernando, C., and Sojakka, S. (2003). Pattern Recognition in a Bucket. doi:10.1007/978-3-540-39432-7_63.</figcaption>
 </figure>
 </div>
 <p>Real biological neurons can be kept alive in a culture and stimulated /recorded to implement a reservoir.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rc-culture2.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Frega et al.&nbsp;(2014). Network dynamics of 3D engineered neuronal cultures: a new experimental model for in-vitro electrophysiology. Scientific Reports 4, 1–14. doi:10.1038/srep05489.</figcaption><p></p>
+<figcaption class="figure-caption">Frega et al.&nbsp;(2014). Network dynamics of 3D engineered neuronal cultures: a new experimental model for in-vitro electrophysiology. Scientific Reports 4, 1–14. doi:10.1038/srep05489.</figcaption>
 </figure>
 </div>
 <p>Escherichia Coli bacteria change their mRNA in response to various external factors (temperature, chemical products, etc) and interact with each other. Their mRNA encode a dynamical trajectory reflecting the inputs. By placing them on a microarray, one can linearly learn to perform non-linear operations on the inputs.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rc-ecoli.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Jones, B., Stekel, D., Rowe, J., and Fernando, C. (2007). Is there a Liquid State Machine in the Bacterium Escherichia Coli? doi:10.1109/ALIFE.2007.367795.</figcaption><p></p>
+<figcaption class="figure-caption">Jones, B., Stekel, D., Rowe, J., and Fernando, C. (2007). Is there a Liquid State Machine in the Bacterium Escherichia Coli? doi:10.1109/ALIFE.2007.367795.</figcaption>
 </figure>
 </div>
 </section>
@@ -819,7 +808,7 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/spiketrain.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rossant et al.&nbsp;(2011). Fitting Neuron Models to Spike Trains. Front. Neurosci. 5. doi:10.3389/fnins.2011.00009</figcaption><p></p>
+<figcaption class="figure-caption">Rossant et al.&nbsp;(2011). Fitting Neuron Models to Spike Trains. Front. Neurosci. 5. doi:10.3389/fnins.2011.00009</figcaption>
 </figure>
 </div>
 <p>The two important dimensions of the information exchanged by neurons are:</p>
@@ -855,7 +844,7 @@ Tip
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stdp.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb’s postulate revisited. Ann. Rev.&nbsp;Neurosci., 24:139-166.</figcaption><p></p>
+<figcaption class="figure-caption">Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb’s postulate revisited. Ann. Rev.&nbsp;Neurosci., 24:139-166.</figcaption>
 </figure>
 </div>
 <p>The STDP (spike-timing dependent plasticity) plasticity rule describes how the weight of a synapse evolves when the pre-synaptic neuron fires at <span class="math inline">t_\text{pre}</span> and the post-synaptic one fires at <span class="math inline">t_\text{post}</span>.</p>
@@ -870,7 +859,7 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stdp2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb’s postulate revisited. Ann. Rev.&nbsp;Neurosci., 24:139-166.</figcaption><p></p>
+<figcaption class="figure-caption">Bi, G. and Poo, M. (2001). Synaptic modification of correlated activity: Hebb’s postulate revisited. Ann. Rev.&nbsp;Neurosci., 24:139-166.</figcaption>
 </figure>
 </div>
 </section>
@@ -881,7 +870,7 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/masquelier-architecture.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption><p></p>
+<figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption>
 </figure>
 </div>
 <p>The convolutional and pooling layers work just as in regular CNNs (shared weights), except the neurons are <strong>integrate-and-fire</strong> (IF).</p>
@@ -889,7 +878,7 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/masquelier2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption><p></p>
+<figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption>
 </figure>
 </div>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/u32Xnz2hDkE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
@@ -902,14 +891,14 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/masquelier3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption><p></p>
+<figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption>
 </figure>
 </div>
 <p>The performance on MNIST is in line with classical 3-layered CNNs, but without backpropagation!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/masquelier4.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption><p></p>
+<figcaption class="figure-caption">Kheradpisheh et al.&nbsp;(2018). STDP-based spiking deep convolutional neural networks for object recognition. Neural Networks 99, 56–67. doi:10.1016/j.neunet.2017.12.005.</figcaption>
 </figure>
 </div>
 </section>
@@ -921,34 +910,34 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/eventbased-spike.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience" class="uri">https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience" class="uri">https://www.researchgate.net/publication/280600732_A_Computational_Model_of_Innate_Directional_Selectivity_Refined_by_Visual_Experience</a></figcaption>
 </figure>
 </div>
 <p>Classical von Neumann computers cannot cope with the high fps of event-based cameras. Spiking neural networks can be used to process the events (classification, control, etc). But do we have the hardware for that?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/lohihi-overview.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption>
 </figure>
 </div>
 <p>Intel Loihi implements 128 neuromorphic cores, each containing 1,024 primitive spiking neural units grouped into tree-like structures in order to simplify the implementation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/loihi_core.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/loihi_spikes.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption>
 </figure>
 </div>
 <p>Each neuromorphic core transits spikes to the other cores. Fortunately, the firing rates in a spiking network are usually low (10 Hz), what limits the communication costs inside the chip. Synapses are <strong>learnable</strong> with STDP mechanisms (memristors).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/loihi-algos.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://en.wikichip.org/wiki/intel/loihi" class="uri">https://en.wikichip.org/wiki/intel/loihi</a></figcaption>
 </figure>
 </div>
 <p>Intel Loihi consumes 1/1000th of the energy needed by a modern GPU. Finding suitable algorithms would solve the power consumption of current deep learning-based algorithms.</p>
@@ -964,7 +953,7 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/loihi-comp.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/" class="uri">https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/" class="uri">https://fuse.wikichip.org/news/2519/intel-labs-builds-a-neuromorphic-system-with-64-to-768-loihi-chips-8-million-to-100-million-neurons/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -986,12 +975,12 @@ A^- \, \exp - \dfrac{t_\text{pre} - t_\text{post}}{\tau^-} \; \text{if} \; t_\te
 <p>A self-organizing system is composed of elementary units (particles, cells, neurons, organs, individuals…) which all perform similar deterministic functions (rule of behavior) on a small part of the available information.</p>
 <p>There is <strong>no central supervisor</strong> or coordinator that knows everything and tells each unit what to do: they have their own rule of behavior and apply it to the information they receive.</p>
 <p>The units are able to adapt their behavior to the available information: principle of <strong>localized learning</strong>. There is no <strong>explicit loss function</strong> specifying what the system should do: <strong>emergence</strong>.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Conway’s game of life
 </div>
 </div>
@@ -999,7 +988,7 @@ Conway’s game of life
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gameoflife2.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Conway’s game of life. Source: <a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Conway’s game of life. Source: <a href="https://www.jakubkonka.com/2015/03/15/game-of-life.html" class="uri">https://www.jakubkonka.com/2015/03/15/game-of-life.html</a></figcaption>
 </figure>
 </div>
 <p>The rules of Conway’s <strong>Game of Life</strong> (1970) are extremely simple:</p>
@@ -1027,8 +1016,8 @@ Conway’s game of life
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Lillicrap2016" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Lillicrap2016" class="csl-entry" role="listitem">
 Lillicrap, T. P., Cownden, D., Tweed, D. B., and Akerman, C. J. (2016). Random synaptic feedback weights support error backpropagation for deep learning. <em>Nat Commun</em> 7, 1–10. doi:<a href="https://doi.org/10.1038/ncomms13276">10.1038/ncomms13276</a>.
 </div>
 </div>
@@ -1062,9 +1051,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1129,6 +1132,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1183,7 +1272,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

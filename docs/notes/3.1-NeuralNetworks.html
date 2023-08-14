@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 8&nbsp; Multi-layer perceptron</title>
+<title>Neurocomputing - Multi-layer perceptron</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -167,11 +139,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Multi-layer perceptron</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/3.1-NeuralNetworks.html"><strong>Neural networks</strong></a></li><li class="breadcrumb-item"><a href="../notes/3.1-NeuralNetworks.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multi-layer perceptron</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -179,7 +156,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -188,22 +165,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -227,8 +206,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -257,8 +237,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,8 +258,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -302,8 +284,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -327,8 +310,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -347,8 +331,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -377,8 +362,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -397,8 +383,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -415,7 +402,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,12 +469,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -517,7 +506,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Multi-layer perceptron</span></h1>
+<h1 class="title"><span class="chapter-title">Multi-layer perceptron</span></h1>
 </div>
 
 
@@ -535,7 +524,6 @@ div.csl-indent {
 <p>Slides: <a href="../slides/3.1-NeuralNetworks.html" target="_blank">html</a> <a href="../slides/pdf/3.1-NeuralNetworks.pdf" target="_blank">pdf</a></p>
 <section id="multi-layer-perceptron" class="level2">
 <h2 class="anchored" data-anchor-id="multi-layer-perceptron">Multi-layer perceptron</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/M5GwvFpzrjE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>A <strong>Multi-Layer Perceptron</strong> (MLP) or <strong>feedforward neural network</strong> is composed of:</p>
 <ul>
 <li>an input layer for the input vector <span class="math inline">\mathbf{x}</span></li>
@@ -545,7 +533,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/mlp.svg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Multi-layer perceptron with one hidden layer.</figcaption><p></p>
+<figcaption class="figure-caption">Multi-layer perceptron with one hidden layer.</figcaption>
 </figure>
 </div>
 <p>If there is a single hidden layer <span class="math inline">\mathbf{h}</span> (shallow network), it corresponds to the feature space. Each layer takes inputs from the previous layer. If the hidden layer is adequately chosen, the output neurons can learn to replicate the desired output <span class="math inline">\mathbf{t}</span>.</p>
@@ -560,7 +548,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/matrixvector.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Fully-connected layer.</figcaption><p></p>
+<figcaption class="figure-caption">Fully-connected layer.</figcaption>
 </figure>
 </div>
 <p><strong>Fully-connected layers</strong> (FC) transform an input vector <span class="math inline">\mathbf{x}</span> into a new vector <span class="math inline">\mathbf{h}</span> by multiplying it by a <strong>weight matrix</strong> <span class="math inline">W</span> and adding a <strong>bias vector</strong> <span class="math inline">\mathbf{b}</span>. A non-linear <strong>activation function</strong> transforms each element of the net activation.</p>
@@ -571,7 +559,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-transferfunctions.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Some classical activation functions in MLPs.</figcaption><p></p>
+<figcaption class="figure-caption">Some classical activation functions in MLPs.</figcaption>
 </figure>
 </div>
 <ul>
@@ -607,7 +595,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/prelu.ppm" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">ReLU vs.&nbsp;PReLU activation functions.</figcaption><p></p>
+<figcaption class="figure-caption">ReLU vs.&nbsp;PReLU activation functions.</figcaption>
 </figure>
 </div>
 <p>For classification problems, the <strong>softmax</strong> activation function can be used in the output layer to make sure that the sum of the outputs <span class="math inline">\mathbf{y} = \{y_j\}</span> over all output neurons is one.</p>
@@ -615,12 +603,12 @@ div.csl-indent {
     y_j = P(\text{class = j}) = \frac{\exp(\text{net}_j)}{\sum_k \exp(\text{net}_k)}
 </span></p>
 <p>The higher the net activation <span class="math inline">\text{net}_j</span>, the higher the probability that the example belongs to class <span class="math inline">j</span>. Softmax is not <em>per se</em> a transfer function (not local to each neuron), but the idea is similar.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -677,12 +665,12 @@ Note
 \end{cases}
 </span></p>
 <p>We will see later that other optimizers than SGD can be used. The question is now how to compute efficiently these <strong>gradients</strong> w.r.t all the weights and biases. The algorithm to achieve this is called <strong>backpropagation</strong> <span class="citation" data-cites="Rumelhart1986a">(<a href="../references.html#ref-Rumelhart1986a" role="doc-biblioref">Rumelhart et al., 1986</a>)</span>, which is simply a smart implementation of the chain rule.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -696,7 +684,6 @@ Note
 </section>
 <section id="backpropagation" class="level2">
 <h2 class="anchored" data-anchor-id="backpropagation">Backpropagation</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/eq3uVwtzWmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="backpropagation-on-a-shallow-network" class="level3">
 <h3 class="anchored" data-anchor-id="backpropagation-on-a-shallow-network">Backpropagation on a shallow network</h3>
 <p>A shallow MLP computes:</p>
@@ -795,12 +782,12 @@ Note
     \mathbf{\delta_h} = f'(\textbf{net}_\mathbf{h}) \, (W^2)^T \times \mathbf{\delta_y}
 </span></p>
 <p>If <span class="math inline">\mathbf{h}</span> and <span class="math inline">\mathbf{\delta_h}</span> have <span class="math inline">K</span> elements and <span class="math inline">\mathbf{y}</span> and <span class="math inline">\mathbf{\delta_y}</span> have <span class="math inline">C</span> elements, the matrix <span class="math inline">W^2</span> is <span class="math inline">C \times K</span> as <span class="math inline">W^2 \times \mathbf{h}</span> must be a vector with <span class="math inline">C</span> elements. <span class="math inline">(W^2)^T \times \mathbf{\delta_y}</span> is therefore a vector with <span class="math inline">K</span> elements, which is then multiplied element-wise with the derivative of the transfer function to obtain <span class="math inline">\mathbf{\delta_h}</span>.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Backpropagation for a shallow MLP
 </div>
 </div>
@@ -886,12 +873,12 @@ f(x) = \max(0, x) = \begin{cases} x \quad \text{if} \quad x \geq 0 \\ 0 \quad \t
 </section>
 <section id="universal-approximation-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="universal-approximation-theorem">Universal approximation theorem</h3>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Universal approximation theorem
 </div>
 </div>
@@ -915,26 +902,25 @@ Universal approximation theorem
 </section>
 <section id="backpropagation-on-a-deep-neural-network" class="level3">
 <h3 class="anchored" data-anchor-id="backpropagation-on-a-deep-neural-network">Backpropagation on a deep neural network</h3>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/2Ew8Sz0Giw0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>A MLP with more than one hidden layer is a <strong>deep neural network</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deeplearning.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Deep network extract progressively more complex features.</figcaption><p></p>
+<figcaption class="figure-caption">Deep network extract progressively more complex features.</figcaption>
 </figure>
 </div>
 <p>Backpropagation still works if we have many hidden layers <span class="math inline">\mathbf{h}_1, \ldots, \mathbf{h}_n</span>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepforward.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Forward pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption><p></p>
+<figcaption class="figure-caption">Forward pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption>
 </figure>
 </div>
 <p>If each layer is differentiable, i.e.&nbsp;one can compute its gradient <span class="math inline">\frac{\partial \mathbf{h}_{k}}{\partial \mathbf{h}_{k-1}}</span>, we can chain <strong>backwards</strong> each partial derivatives to know how to update each layer.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepbackward.png" class="img-fluid figure-img" style="width:90.0%"></p>
-<p></p><figcaption class="figure-caption">Backpropagation pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption><p></p>
+<figcaption class="figure-caption">Backpropagation pass. Source: David Silver <a href="https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf" class="uri">https://icml.cc/2016/tutorials/deep_rl_tutorial.pdf</a></figcaption>
 </figure>
 </div>
 <p><strong>Backpropagation</strong> is simply an efficient implementation of the chain rule: the partial derivatives are iteratively reused in the backwards phase.</p>
@@ -968,12 +954,12 @@ Universal approximation theorem
 \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{b}_{k}}  = \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}}  \times \dfrac{\partial \mathbf{h}_{k}}{\partial \mathbf{b}_{k}} =  f'(\textbf{net}_{\mathbf{h}^k}) \, \dfrac{\partial \mathcal{L}(\theta)}{\partial \mathbf{h}_{k}} \\
 \end{cases}
 </span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Training a deep neural network with backpropagation
 </div>
 </div>
@@ -996,12 +982,11 @@ Training a deep neural network with backpropagation
 </section>
 <section id="example-of-a-shallow-network" class="level2">
 <h2 class="anchored" data-anchor-id="example-of-a-shallow-network">Example of a shallow network</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/8B7RcBC11Lo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s try to solve this <strong>non-linear</strong> binary classification problem:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/mlp-data.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Non-linearly separable dataset.</figcaption><p></p>
+<figcaption class="figure-caption">Non-linearly separable dataset.</figcaption>
 </figure>
 </div>
 <p>We can create a shallow MLP with:</p>
@@ -1014,23 +999,23 @@ Training a deep neural network with backpropagation
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/mlp-example.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Simple MLP for the non-linearly separable dataset.</figcaption><p></p>
+<figcaption class="figure-caption">Simple MLP for the non-linearly separable dataset.</figcaption>
 </figure>
 </div>
 <p>We train it on the input data using the backpropagation algorithm and the SGD optimizer.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/mlp-animation.gif" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Prediction after each epoch of training.</figcaption><p></p>
+<figcaption class="figure-caption">Prediction after each epoch of training.</figcaption>
 </figure>
 </div>
 <p>Experiment with this network live on <a href="https://playground.tensorflow.org/" class="uri">https://playground.tensorflow.org/</a>! You will implement this MLP with numpy during exercise 8.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Automatic differentiation Deep Learning frameworks
 </div>
 </div>
@@ -1104,14 +1089,14 @@ None</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Linnainmaa1970" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Linnainmaa1970" class="csl-entry" role="listitem">
 Linnainmaa, S. (1970). The representation of the cumulative rounding error of an algorithm as a <span>Taylor</span> expansion of the local rounding errors.
 </div>
-<div id="ref-Rumelhart1986a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Rumelhart1986a" class="csl-entry" role="listitem">
 Rumelhart, D. E., Hinton, G. E., and Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em> 323, 533–536. doi:<a href="https://doi.org/10.1038/323533a0">10.1038/323533a0</a>.
 </div>
-<div id="ref-Werbos1982" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Werbos1982" class="csl-entry" role="listitem">
 Werbos, P. J. (1982). Applications of advances in nonlinear sensitivity analysis. in <em>System <span>Modeling</span> and <span>Optimization</span>: <span>Proc</span>. <span>IFIP</span></em> (<span>Springer</span>).
 </div>
 </div>
@@ -1145,9 +1130,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1212,6 +1211,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1266,7 +1351,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

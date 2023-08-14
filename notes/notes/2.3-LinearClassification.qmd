@@ -5,8 +5,6 @@ Slides: [html](../slides/2.3-LinearClassification.html){target="_blank"} [pdf](.
 
 ##  Hard linear classification
 
-{{< youtube  jZoJHIHi6Qw >}}
-
 The training data $\mathcal{D}$ is composed of $N$ examples $(\mathbf{x}_i, t_i)_{i=1..N}$ , with a d-dimensional input vector $\mathbf{x}_i \in \Re^d$ and a binary output $t_i \in \{-1, +1\}$. The data points where $t = + 1$ are called the **positive class**, the other the **negative class**.
 
 ![Binary linear classification of 2D data.](../slides/img/classification-animation1.png)
@@ -189,8 +187,6 @@ Online learning is a stochastic gradient descent with a batch size of 1.
 
 ## Maximum Likelihood Estimation
 
-{{< youtube  9Hw6nLMiPiI >}}
-
 Let's consider $N$ **samples** $\{x_i\}_{i=1}^N$ independently taken from a **normal distribution** $X$. The probability density function (pdf) of a normal distribution is:
 
 $$
@@ -271,8 +267,6 @@ The same principle can be applied to estimate the parameters of any distribution
 
 
 ## Soft linear classification : Logistic regression
-
-{{< youtube  _Zc-k9pXVvE >}}
 
 In logistic regression, we want to perform a regression, but where the targets $t_i$ are bounded betwen 0 and 1. We can use a logistic function instead of a linear function in order to transform the net activation into an output:
 
@@ -394,9 +388,6 @@ Logistic regression also provides a **confidence score**:  the closer $y$ is fro
 
 
 ## Multi-class classification
-
-
-{{< youtube  24GpIHcaTxA >}}
 
 Can we perform multi-class classification using the previous methods when $t \in \{A, B, C\}$ instead of $t = +1$ or $-1$? There are two main solutions:
 
@@ -715,3 +706,71 @@ $$
 \mathcal{L}(W, \mathbf{b}) =  \mathbb{E}_{\mathcal{D}} [- \sum_{j=1}^C t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)]
 $$
 
+## Metrics
+
+The **training error** is the error made on the training set. It is easy to measure for classification: number of misclassified examples divided by the total number.
+
+$$
+    \epsilon_\mathcal{D} = \dfrac{\text{number of misclassifications}}{\text{number of examples}}
+$$
+
+It is totally irrelevant on usage: reading the training set has a training error of 0%.
+What matters is the **generalization error**, which is the error that will be made on new examples (not used during learning). The generalization error is much harder to measure (potentially infinite number of new examples, what is the correct answer?) and often approximated by the **empirical error on the test set**: one keeps a number of training examples out of the learning phase and one tests the performance on them.
+We need **cross-validation** to detect **overfitting**.
+
+
+Classification errors can also depend on the class:
+
+* **False Positive** errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.
+* **False Negative** errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.
+
+**True Positive** (TP) and **True Negative** (TN) are correctly classified examples.
+Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?
+
+
+![Source: <https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.PrecisionRecall>](../slides/img/TP_FP.png)
+
+
+* Error
+
+$$
+    \epsilon = \frac{\text{FP} + \text{FN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+$$
+
+* Accuracy (1 - error)
+
+$$
+    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+$$
+
+* Recall (hit rate, sensitivity) and Precision (specificity)
+
+$$
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}} \;\;
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+$$
+
+* F1 score = harmonic mean of precision and recall
+
+$$
+    \text{F1} = \frac{2\, P \, R}{P + R}
+$$
+
+For multiclass classification problems, the **confusion matrix** tells how many examples are correctly classified and where confusion happens.
+One axis is the predicted class, the other is the target class.
+Each element of the matrix tells how many examples are classified or misclassified.
+The matrix should be as diagonal as possible.
+
+
+![](../slides/img/confusionmatrix.png)
+
+
+::: {.callout-note}
+## Using `scikit-learn`
+
+```python
+from sklearn.metrics import confusion_matrix
+
+m = confusion_matrix(t, y)
+```
+:::

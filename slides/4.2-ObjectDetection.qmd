@@ -8,6 +8,9 @@ institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
 resources: pdf/4.2-ObjectDetection.pdf
 ---
 
+# 1 - Object detection
+
+
 # Object recognition vs. object detection
 
 ![Source: <https://blog.athelas.com/a-brief-history-of-cnns-in-image-segmentation-from-r-cnn-to-mask-r-cnn-34ea83205de4>](img/dnn_classification_vs_detection.png)
@@ -181,6 +184,8 @@ Girschick (2015). Fast R-CNN. arxiv:1504.08083
 ::: footer
 Ren et al. (2015). Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks. arXiv:1506.01497
 :::
+
+# 2 - YOLO
 
 # YOLO (You Only Look Once)
 
@@ -440,6 +445,7 @@ Redmon et al. (2015).  You Only Look Once: Unified, Real-Time Object Detection. 
 <https://pjreddie.com/darknet/yolo/>
 :::
 
+# 3 - Other object detectors
 
 # SSD: Single-Shot Detector
 
@@ -499,6 +505,177 @@ Zhou Y, Tuzel O. (2017). VoxelNet: End-to-End Learning for Point Cloud Based 3D 
 # VoxelNet
 
 ![Source: <https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a>](img/voxelnet-result.png){width=100%}
+
+# 4 - Metrics
+
+# Metrics for object detection
+
+* How do we measure the "accuracy" of an object detector? The output is both a classification and a regression.
+
+* Not only must the predicted class be correct, but the predicted bounding box must overlap with the ground truth, i.e. have an high IoU.
+
+![Source: <https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2>](img/mAP-basic.png)
+
+# Metrics for object detection
+
+* The accuracy of an object detector depends on a threshold for the IoU, for example 0.5.
+
+* A prediction is correct if the predicted class is correct **and** the IoU is above the threshold.
+
+![Source: <https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2>](img/mAP-basic2.webp)
+
+
+# Precision and recall
+
+* For a given class (e.g. "human"), we can compute the binary **precision** and **recall** values:
+
+$$
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}} \;\;
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
+$$
+
+* P = when something is detected, is it correct? R = if something exists, is it detected?
+
+* In the image below, we have one TP, one FN, zero FP and an undefined number of TN:
+
+$$
+    P = \frac{\text{1}}{\text{1} + \text{0}} = 1\;\;
+    R = \frac{\text{1}}{\text{1} + \text{1}} = 0.5
+$$
+
+![Source: <https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2>](img/mAP-basic3.webp)
+
+# mAP: mean average precision
+
+::: {.columns}
+::: {.column width=70%}
+
+* Let's now compute the **precision-recall curve** over 7 images, with 15 ground truth boxes and 24 predictions.
+
+![Source: <https://github.com/rafaelpadilla/Object-Detection-Metrics>](img/meanAP-1.png)
+
+* Each prediction has a confidence score for the classification, and is either a TP or FP (depending on the IoU threshold).
+
+:::
+::: {.column width=30%}
+
+![](img/meanAP-2.png)
+
+:::
+:::
+
+
+# mAP: mean average precision
+
+::: {.columns}
+::: {.column width=50%}
+
+* Let's now **sort** the predictions with a decreasing confidence score and **incrementally** compute the prediction and recall:
+
+$$
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+$$
+$$
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
+$$
+
+* We just accumulate the number of TP and FP over the 24 predictions.
+
+* Note that `TP + FN` is the number of ground truths and is constant (15), so the recall will increase.
+
+* This equivalent to setting a high threshold for the confidence score and progressively decreasing it.
+
+::: 
+::: {.column width=50%}
+
+![Source: <https://github.com/rafaelpadilla/Object-Detection-Metrics>](img/meanAP-3.png)
+
+:::
+:::
+
+# mAP: mean average precision
+
+::: {.columns}
+::: {.column width=50%}
+
+* If we plot the **precision x recall curve** (PR curve) for the 24 predictions, we obtain:
+
+![](img/meanAP-4.png)
+
+
+* The precision globally decreases with the recall, as we use predictions with lower confidence scores, but there are some oscillations.
+
+::: 
+::: {.column width=50%}
+
+![Source: <https://github.com/rafaelpadilla/Object-Detection-Metrics>](img/meanAP-3.png)
+
+:::
+:::
+
+
+
+# mAP: mean average precision
+
+* To get rid of these oscillations, we **interpolate** the precision by taking maximal precision value for higher recall (left).
+
+* We can then easily integrate this curve by computing the **area under the curve** (AUC, right), what defines the **average precision** (AP).
+
+$$
+    \text{AP} = \sum_n (R_{n} - R_{n-1}) \, P_n
+$$
+
+::: {.columns}
+::: {.column width=45%}
+
+
+![Source: <https://github.com/rafaelpadilla/Object-Detection-Metrics>](img/meanAP-5.png)
+
+::: 
+::: {.column width=45%}
+
+![](img/meanAP-6.png)
+
+:::
+:::
+
+
+
+# mAP: mean average precision
+
+
+::: {.columns}
+::: {.column width=60%}
+
+* A good detector sees its precision decreases not that much when the recall increases, i.e. when it is still correct when it increasingly detects objects.
+
+* The ideal detector has an AP of 1.
+
+* When averaging the AP over the classes, one obtains the **mean average precision (mAP)**:
+
+$$
+    \text{mAP} = \dfrac{1}{N_\text{classes}} \, \sum_{i=1}^{N_\text{classes}} \, AP_i
+$$
+
+* One usually reports the mAP value with the IoU threshold, e.g. `mAP@0.5`.
+
+* mAP is a better trade-off between precision and recall than the F1 score.
+
+* `scikit-learn` is your friend:
+
+::: 
+::: {.column width=40%}
+
+![Source: Van Etten, A. (2019). Satellite Imagery Multiscale Rapid Detection with Windowed Networks. 2019 IEEE Winter Conference on Applications of Computer Vision (WACV), 735–743. doi:10.1109/WACV.2019.00083](img/mAP-ssd.webp)
+
+:::
+:::
+
+
+```python
+mAP = sklearn.metrics.average_precision_score(t, y, average="micro")
+```
+
 
 
 # Additional resources on object detection

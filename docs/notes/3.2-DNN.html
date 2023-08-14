@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 9&nbsp; Modern neural networks</title>
+<title>Neurocomputing - Modern neural networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -167,11 +139,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Modern neural networks</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/3.1-NeuralNetworks.html"><strong>Neural networks</strong></a></li><li class="breadcrumb-item"><a href="../notes/3.2-DNN.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modern neural networks</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -179,7 +156,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -188,22 +165,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -227,8 +206,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -257,8 +237,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,8 +258,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -302,8 +284,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -327,8 +310,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -347,8 +331,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -377,8 +362,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -397,8 +383,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -415,7 +402,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,12 +469,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -514,7 +503,7 @@ div.csl-indent {
   <li><a href="#data-augmentation" id="toc-data-augmentation" class="nav-link" data-scroll-target="#data-augmentation">Data augmentation</a></li>
   <li><a href="#early-stopping" id="toc-early-stopping" class="nav-link" data-scroll-target="#early-stopping">Early-Stopping</a></li>
   </ul></li>
-  <li><a href="#vanishing-gradient" id="toc-vanishing-gradient" class="nav-link" data-scroll-target="#vanishing-gradient">Vanishing gradient</a>
+  <li><a href="#vanishing-gradients" id="toc-vanishing-gradients" class="nav-link" data-scroll-target="#vanishing-gradients">Vanishing gradients</a>
   <ul class="collapse">
   <li><a href="#principle" id="toc-principle" class="nav-link" data-scroll-target="#principle">Principle</a></li>
   <li><a href="#derivative-of-the-activation-function" id="toc-derivative-of-the-activation-function" class="nav-link" data-scroll-target="#derivative-of-the-activation-function">Derivative of the activation function</a></li>
@@ -528,7 +517,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Modern neural networks</span></h1>
+<h1 class="title"><span class="chapter-title">Modern neural networks</span></h1>
 </div>
 
 
@@ -546,7 +535,6 @@ div.csl-indent {
 <p>Slides: <a href="../slides/3.2-DeepNN.html" target="_blank">html</a> <a href="../slides/pdf/3.2-DeepNN.pdf" target="_blank">pdf</a></p>
 <section id="why-deep-neural-networks" class="level2">
 <h2 class="anchored" data-anchor-id="why-deep-neural-networks">Why deep neural networks?</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/TWGcYiykAn4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The <strong>universal approximation theorem</strong> (Cybenko, 1989) states that a <strong>shallow</strong> network can approximate any mapping function between inputs and outputs. However, if the mapping function is too complex, a shallow network may need too many hidden neurons.</p>
 <p>The hidden neurons extract <strong>features</strong> in the input space: typical characteristics of the input which, when combined by the output neurons, allow to solve the classification task. Problem: the features are not hierarchically organized and cannot become complex enough.</p>
 <p>Shallow networks can not work directly with raw images: noise, translation, rotation, scaling… One needs first to extract complex and useful features from the input images in order to classify them correctly.</p>
@@ -578,12 +566,11 @@ div.csl-indent {
 </section>
 <section id="bad-convergence" class="level2">
 <h2 class="anchored" data-anchor-id="bad-convergence">Bad convergence</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/UdcmfiDZrVU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The loss function <span class="math inline">\mathcal{L}(\theta)</span> of a deep neural network has usually not a single global minimum, but many local minima: irregular <strong>loss landscape</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/losslandscape.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Visualizing the loss landscape of neural nets <span class="citation" data-cites="Li2018">(<a href="../references.html#ref-Li2018" role="doc-biblioref">Li et al., 2018</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Visualizing the loss landscape of neural nets <span class="citation" data-cites="Li2018">(<a href="../references.html#ref-Li2018" role="doc-biblioref">Li et al., 2018</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>Gradient descent gets stuck in local minima by design. One could perform different weight initializations, in order to find per chance an initial position close enough from the global minimum, but this is <strong>inefficient</strong>.</p>
@@ -624,7 +611,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ravine.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Ravine in the loss function. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Ravine in the loss function. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption>
 </figure>
 </div>
 <p>In the example above, you may want to go faster in the “horizontal” direction than in the “vertical” one, although the gradient is very small in the horizontal direction. With a fixed high learning rate for all parameters, SGD would start oscillating for the steep parameters, while being still very slow for the flat ones. The high variance of the sampled gradient is detrimental to performance as it can lead to oscillations. Most modern optimizers have a <strong>parameter-dependent adaptive learning rate</strong>.</p>
@@ -648,16 +635,16 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/momentum-goh.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The momentum dampens oscillations around ravines. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption><p></p>
+<figcaption class="figure-caption">The momentum dampens oscillations around ravines. Source: <a href="https://distill.pub/2017/momentum/" class="uri">https://distill.pub/2017/momentum/</a>.</figcaption>
 </figure>
 </div>
 <p>With momentum, the flat parameters keep increasing their update speed, while the steep ones slow down. SGD with momentum gets rid of oscillations at higher learning rates. The momentum method benefits a lot from the variance of SGD: noisy gradients are used to escape local minima but are averaged around the global minimum.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -671,7 +658,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/momentum-vs-nesterov-momentum.gif" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The momentum method tends to oscillate around the global minimum. Source: <a href="https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/" class="uri">https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/</a>.</figcaption><p></p>
+<figcaption class="figure-caption">The momentum method tends to oscillate around the global minimum. Source: <a href="https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/" class="uri">https://ikocabiyik.com/blog/en/visualizing-ml-optimizers/</a>.</figcaption>
 </figure>
 </div>
 <p>SGD with momentum tends to oscillate around the minimum. The Nesterov momentum <strong>corrects</strong> these oscillations by estimating the gradient <strong>after</strong> the momentum update:</p>
@@ -684,7 +671,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/nesterov.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Difference between the momentum and Nesterov momentum. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
+<figcaption class="figure-caption">Difference between the momentum and Nesterov momentum. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -723,21 +710,21 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/contours_evaluation_optimizers.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/saddle_point_evaluation_optimizers.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Source: Alec Radford <a href="https://imgur.com/a/Hqolp" class="uri">https://imgur.com/a/Hqolp</a>.</figcaption>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -776,7 +763,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/learningrates.jpeg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Finding the optimal learning rate is difficult. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
+<figcaption class="figure-caption">Finding the optimal learning rate is difficult. Source: <a href="https://cs231n.github.io/neural-networks-3/" class="uri">https://cs231n.github.io/neural-networks-3/</a></figcaption>
 </figure>
 </div>
 <p>For example, choosing <span class="math inline">\eta</span> too small leads to very slow learning. Choosing it too big can lead to oscillations and prevent convergence. A better strategy is to start with a big learning rate to “roughly” find the position of the global minimum and progressively decrease its value for a better convergence:</p>
@@ -787,14 +774,14 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/learningratescheduler.jpeg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Exponentially-decaying learning rate. Source: <a href="https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1" class="uri">https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1</a></figcaption><p></p>
+<figcaption class="figure-caption">Exponentially-decaying learning rate. Source: <a href="https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1" class="uri">https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1</a></figcaption>
 </figure>
 </div>
 <p>A simple trick to find a good estimate of the learning rate (or its start/stop value) is to increase its value exponentially <strong>for each minibatch</strong> at the beginning of learning. The “good” region for the learning rate is the one where the validation loss decreases, but does not oscillate.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/learningrate-selection.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Estimating the optimal range for the learning rate by increasing its value at the beginning of learning. Source <a href="https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae" class="uri">https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae</a>.</figcaption><p></p>
+<figcaption class="figure-caption">Estimating the optimal range for the learning rate by increasing its value at the beginning of learning. Source <a href="https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae" class="uri">https://towardsdatascience.com/advanced-topics-in-neural-networks-f27fbcc638ae</a>.</figcaption>
 </figure>
 </div>
 </section>
@@ -808,7 +795,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gridsearchbad.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Grid-search vs.&nbsp;random search. Source: <a href="http://cs231n.github.io/neural-networks-3/" class="uri">http://cs231n.github.io/neural-networks-3/</a></figcaption><p></p>
+<figcaption class="figure-caption">Grid-search vs.&nbsp;random search. Source: <a href="http://cs231n.github.io/neural-networks-3/" class="uri">http://cs231n.github.io/neural-networks-3/</a></figcaption>
 </figure>
 </div>
 <p>The advantage of random search is that you can stop it anytime if you can not wait any longer. Grid search is very time-consuming, but easy to perform in parallel if you have clusters of CPUs or GPUs (<strong>data-parallel</strong>).</p>
@@ -831,7 +818,6 @@ Note
 </section>
 <section id="long-training-times" class="level2">
 <h2 class="anchored" data-anchor-id="long-training-times">Long training times</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/nnf253n2HCY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="importance-of-normalization" class="level3">
 <h3 class="anchored" data-anchor-id="importance-of-normalization">Importance of normalization</h3>
 <div class="quarto-figure quarto-figure-center">
@@ -844,7 +830,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/datanormalization.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Input data normalization. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Input data normalization. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption>
 </figure>
 </div>
 <p>In practice, the input data <span class="math inline">X</span> <strong>must</strong> be normalized before training, in order to improve the training time:</p>
@@ -864,7 +850,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/datawhitening.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Input data whitening. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Input data whitening. Source: <a href="http://cs231n.github.io/neural-networks-2/" class="uri">http://cs231n.github.io/neural-networks-2/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -885,7 +871,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/batch_normalization.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">A batch normalization layer should be introduced between the linear net activation and the activation function. Source: <a href="http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/" class="uri">http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/</a></figcaption><p></p>
+<figcaption class="figure-caption">A batch normalization layer should be introduced between the linear net activation and the activation function. Source: <a href="http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/" class="uri">http://heimingx.cn/2016/08/18/cs231n-neural-networks-part-2-setting-up-the-Data-and-the-loss/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -912,7 +898,6 @@ Note
 </section>
 <section id="overfitting" class="level2">
 <h2 class="anchored" data-anchor-id="overfitting">Overfitting</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AflXkfzAzoo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The main problem with deep NN is <strong>overfitting</strong>. With increasing depth, the network has too many weights = free parameters, so its VC dimension is high.</p>
 <p><span class="math display">
     \epsilon = \frac{\text{VC}_\text{dim}}{N}
@@ -967,7 +952,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/dropout.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Each new input <span class="math inline">\mathbf{x}</span> (or minibatch of inputs) is learned by a different neural network, but <strong>on average</strong>, the big neural network has learned the whole dataset without overfitting. Source: <a href="https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a" class="uri">https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a</a></figcaption><p></p>
+<figcaption class="figure-caption">Each new input <span class="math inline">\mathbf{x}</span> (or minibatch of inputs) is learned by a different neural network, but <strong>on average</strong>, the big neural network has learned the whole dataset without overfitting. Source: <a href="https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a" class="uri">https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a</a></figcaption>
 </figure>
 </div>
 </section>
@@ -977,7 +962,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/data_augmentation2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Data augmentation. Source : <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html" class="uri">https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Data augmentation. Source : <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html" class="uri">https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html</a></figcaption>
 </figure>
 </div>
 </section>
@@ -987,21 +972,20 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/earlystopping.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Early-stopping by checking the validation loss during training.</figcaption><p></p>
+<figcaption class="figure-caption">Early-stopping by checking the validation loss during training.</figcaption>
 </figure>
 </div>
 </section>
 </section>
-<section id="vanishing-gradient" class="level2">
-<h2 class="anchored" data-anchor-id="vanishing-gradient">Vanishing gradient</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/NPUqQb9U-ww" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="vanishing-gradients" class="level2">
+<h2 class="anchored" data-anchor-id="vanishing-gradients">Vanishing gradients</h2>
 <section id="principle" class="level3">
 <h3 class="anchored" data-anchor-id="principle">Principle</h3>
 <p>Contrary to what we could think, adding more layers to a DNN does not necessarily lead to a better performance, both on the training and test set. Here is the performance of neural networks with 20 or 56 layers on <strong>CIFAR-10</strong>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vanishinggradient-cifar.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Adding more layers does not necessarily increase the training or test accuracy on CIFAR-10. Source: <a href="https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8" class="uri">https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8</a></figcaption><p></p>
+<figcaption class="figure-caption">Adding more layers does not necessarily increase the training or test accuracy on CIFAR-10. Source: <a href="https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8" class="uri">https://towardsdatascience.com/review-resnet-winner-of-ilsvrc-2015-image-classification-localization-detection-e39402bfa5d8</a></figcaption>
 </figure>
 </div>
 <p>The main reason behind this is the <strong>vanishing gradient problem</strong>. The gradient of the loss function is repeatedly multiplied by a weight matrix <span class="math inline">W</span> as it travels backwards in a deep network.</p>
@@ -1025,7 +1009,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vanishinggradient.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Vanishing gradient problem. Source: <a href="https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/" class="uri">https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/</a></figcaption><p></p>
+<figcaption class="figure-caption">Vanishing gradient problem. Source: <a href="https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/" class="uri">https://smartstuartkim.wordpress.com/2019/02/09/vanishing-gradient-problem/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1034,7 +1018,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/derivative_sigmoid.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">The derivative of the logistic function is 0 for extreme values, what blocks the backpropagation of the gradient.</figcaption><p></p>
+<figcaption class="figure-caption">The derivative of the logistic function is 0 for extreme values, what blocks the backpropagation of the gradient.</figcaption>
 </figure>
 </div>
 <p>Old-school MLP used logistic or tanh transfer functions for the hidden neurons, but their gradient is zero for very high or low net activations. If a neuron is saturated, it won’t transmit the gradient backwards, so the vanishing gradient is even worse. Deep networks now typically use the ReLU <span class="citation" data-cites="Maas2013">(<a href="../references.html#ref-Maas2013" role="doc-biblioref">Maas et al., 2013</a>)</span> or PReLU activation functions to improve convergence.</p>
@@ -1088,26 +1072,26 @@ Note
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Glorot2010" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Glorot2010" class="csl-entry" role="listitem">
 Glorot, X., and Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. in <em><span>AISTATS</span></em>, 8.
 </div>
-<div id="ref-He2015a" class="csl-entry" role="doc-biblioentry">
+<div id="ref-He2015a" class="csl-entry" role="listitem">
 He, K., Zhang, X., Ren, S., and Sun, J. (2015). Delving <span>Deep</span> into <span>Rectifiers</span>: <span>Surpassing Human-Level Performance</span> on <span>ImageNet Classification</span>. <a href="http://arxiv.org/abs/1502.01852">http://arxiv.org/abs/1502.01852</a>.
 </div>
-<div id="ref-Ioffe2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Ioffe2015" class="csl-entry" role="listitem">
 Ioffe, S., and Szegedy, C. (2015). Batch <span>Normalization</span>: <span>Accelerating Deep Network Training</span> by <span>Reducing Internal Covariate Shift</span>. <a href="http://arxiv.org/abs/1502.03167">http://arxiv.org/abs/1502.03167</a>.
 </div>
-<div id="ref-Kingma2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kingma2014" class="csl-entry" role="listitem">
 Kingma, D., and Ba, J. (2014). Adam: <span>A Method</span> for <span>Stochastic Optimization</span>. in <em>Proc. <span>ICLR</span></em>, 1–13. doi:<a href="https://doi.org/10.1145/1830483.1830503">10.1145/1830483.1830503</a>.
 </div>
-<div id="ref-Li2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Li2018" class="csl-entry" role="listitem">
 Li, H., Xu, Z., Taylor, G., Studer, C., and Goldstein, T. (2018). Visualizing the <span>Loss Landscape</span> of <span>Neural Nets</span>. <a href="http://arxiv.org/abs/1712.09913">http://arxiv.org/abs/1712.09913</a>.
 </div>
-<div id="ref-Maas2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Maas2013" class="csl-entry" role="listitem">
 Maas, A. L., Hannun, A. Y., and Ng, A. Y. (2013). Rectifier <span>Nonlinearities Improve Neural Network Acoustic Models</span>. in <em><span>ICML</span></em>, 6.
 </div>
-<div id="ref-Srivastava2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Srivastava2014" class="csl-entry" role="listitem">
 Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., and Salakhutdinov, R. (2014). Dropout: <span>A Simple Way</span> to <span>Prevent Neural Networks</span> from <span>Overfitting</span>. <em>Journal of Machine Learning Research</em> 15, 1929–1958. <a href="http://jmlr.org/papers/v15/srivastava14a.html">http://jmlr.org/papers/v15/srivastava14a.html</a>.
 </div>
 </div>
@@ -1141,9 +1125,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1208,6 +1206,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1262,7 +1346,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

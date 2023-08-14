@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 3&nbsp; Neurons</title>
+<title>Neurocomputing - Neurons</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,7 +76,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -104,11 +105,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Neurons</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/1.1-Introduction.html"><strong>Introduction</strong></a></li><li class="breadcrumb-item"><a href="../notes/1.3-Neurons.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neurons</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,7 +122,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -125,22 +131,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -164,8 +172,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -194,8 +203,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -214,8 +224,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -239,8 +250,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,8 +276,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -284,8 +297,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,8 +328,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -334,8 +349,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -352,7 +368,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,12 +435,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -444,7 +462,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Neurons</span></h1>
+<h1 class="title"><span class="chapter-title">Neurons</span></h1>
 </div>
 
 
@@ -462,45 +480,44 @@ div.csl-indent {
 <p>Slides: <a href="../slides/1.3-Neurons.html" target="_blank">html</a> <a href="../slides/pdf/1.3-Neurons.pdf" target="_blank">pdf</a></p>
 <section id="biological-neurons" class="level2">
 <h2 class="anchored" data-anchor-id="biological-neurons">Biological neurons</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/ALBRu-AK53I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The human brain is composed of 100 billion <strong>neurons</strong>. A biological neuron is a cell, composed of a cell body (<strong>soma</strong>), multiple <strong>dendrites</strong> and an <strong>axon</strong>. The axon of a neuron can contact the dendrites of another through <strong>synapses</strong> to transmit information. There are hundreds of different types of neurons, each with different properties.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/biologicalneuron.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Biological neuron. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption><p></p>
+<figcaption class="figure-caption">Biological neuron. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption>
 </figure>
 </div>
 <p>Neurons are negatively charged: they have a resting potential at around -70 mV. When a neuron receives enough input currents, its <strong>membrane potential</strong> can exceed a threshold and the neuron emits an <strong>action potential</strong> (or <strong>spike</strong>) along its axon.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/actionpotential.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Propagation of an action potential along the axon. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></figcaption><p></p>
+<figcaption class="figure-caption">Propagation of an action potential along the axon. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></figcaption>
 </figure>
 </div>
 <p>A spike has a very small duration (1 or 2 ms) and its amplitude is rather constant. It is followed by a <strong>refractory period</strong> where the neuron is hyperpolarized, limiting the number of spikes per second to 200.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/actionpotential.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Action potential or spike. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></figcaption><p></p>
+<figcaption class="figure-caption">Action potential or spike. Source: <a href="https://en.wikipedia.org/wiki/Action_potential" class="uri">https://en.wikipedia.org/wiki/Action_potential</a></figcaption>
 </figure>
 </div>
 <p>The action potential arrives at the synapses and releases <strong>neurotransmitters</strong> in the synaptic cleft: glutamate (AMPA, NMDA), GABA, dopamine, serotonin, nicotin, etc… Neurotransmitters can enter the receiving neuron through <strong>receptors</strong> and change its potential: the neuron may emit a spike too. Synaptic currents change the membrane potential of the post.synaptic neuron. The change depends on the strength of the synapse called the <strong>synaptic efficiency</strong> or <strong>weight</strong>. Some synapses are stronger than others, and have a larger influence on the post-synaptic cell.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/chemicalsynapse.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Neurotransmitter release at the synapse. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption><p></p>
+<figcaption class="figure-caption">Neurotransmitter release at the synapse. Source: <a href="https://en.wikipedia.org/wiki/Neuron" class="uri">https://en.wikipedia.org/wiki/Neuron</a></figcaption>
 </figure>
 </div>
 <p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WCqNn9PEELw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The two important dimensions of the information exchanged by neurons are:</p>
 <ul>
-<li><p>The instantaneous <strong>frequency</strong> or <strong>firing rate</strong>: number of spikes per second (Hz).</p></li>
-<li><p>The precise <strong>timing</strong> of the spike trains.</p></li>
+<li>The instantaneous <strong>frequency</strong> or <strong>firing rate</strong>: number of spikes per second (Hz).</li>
+<li>The precise <strong>timing</strong> of the spike trains.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/oscillations.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <a href="https://en.wikipedia.org/wiki/Neural_oscillation" class="uri">https://en.wikipedia.org/wiki/Neural_oscillation</a></figcaption><p></p>
+<figcaption class="figure-caption">Neurons emit spikes at varying frequencies (firing rate) and variable timings. Source: <a href="https://en.wikipedia.org/wiki/Neural_oscillation" class="uri">https://en.wikipedia.org/wiki/Neural_oscillation</a></figcaption>
 </figure>
 </div>
 <p>The shape of the spike (amplitude, duration) does not matter much for synaptic transission: spikes can be considered as binary signals (0 or 1) occuring at precise moments of time.</p>
@@ -508,13 +525,12 @@ div.csl-indent {
 </section>
 <section id="hodgkin-huxley-neurons" class="level2">
 <h2 class="anchored" data-anchor-id="hodgkin-huxley-neurons">Hodgkin-Huxley neurons</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WAfOUZW4rq8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Alan Hodgkin and Andrew Huxley (Nobel prize 1963) were the first to propose a detailed mathematical model of the giant squid neuron. The membrane potential <span class="math inline">V</span> of the neuron is governed by an electrical circuit, including sodium and potassium channels. The membrane has a <strong>capacitance</strong> <span class="math inline">C</span> that models the dynamics of the membrane (time constant). The <strong>conductance</strong> <span class="math inline">g_L</span> allows the membrane potential to relax back to its resting potential <span class="math inline">E_L</span> in the absence of external currents. External currents (synaptic inputs) perturb the membrane potential and can bring the neuron to fire an action potential.</p>
 <p>Their neuron model include:</p>
 <ul>
-<li><p>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">v</span>.</p></li>
-<li><p>Three ODEs for <span class="math inline">n</span>, <span class="math inline">m</span> and <span class="math inline">h</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</p></li>
-<li><p>Several parameters determined experimentally.</p></li>
+<li>An ordinary differential equation (ODE) for the membrane potential <span class="math inline">v</span>.</li>
+<li>Three ODEs for <span class="math inline">n</span>, <span class="math inline">m</span> and <span class="math inline">h</span> representing potassium channel activation, sodium channel activation, and sodium channel inactivation.</li>
+<li>Several parameters determined experimentally.</li>
 </ul>
 <p><span class="math display">
 \begin{aligned}
@@ -540,7 +556,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/hodgkinhuxley-data.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Action potential for a Hodgkin-Huxley neuron.</figcaption><p></p>
+<figcaption class="figure-caption">Action potential for a Hodgkin-Huxley neuron.</figcaption>
 </figure>
 </div>
 </section>
@@ -557,7 +573,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/LIF-data.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Spike emission for a LIF neuron.</figcaption><p></p>
+<figcaption class="figure-caption">Spike emission for a LIF neuron.</figcaption>
 </figure>
 </div>
 <p>Other well-known spiking neuron models include:</p>
@@ -583,25 +599,24 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/LIF-Izhi-AdEx.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron models.</figcaption><p></p>
+<figcaption class="figure-caption">Different subthreshold dynamics between the LIF, Izhikevich and AdEx neuron models.</figcaption>
 </figure>
 </div>
 <p>Contrary to the simple LIF model, these realistic neuron models can reproduce a variety of dynamics, as biological neurons do not all respond the same to an input current. Some fire regularly, some slow down with time, while others emit bursts of spikes. Modern spiking neuron models allow to recreate these variety of dynamics by changing a few parameters.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/adex.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Different parameters of the AdEx neuron model produce different spiking patterns.</figcaption><p></p>
+<figcaption class="figure-caption">Different parameters of the AdEx neuron model produce different spiking patterns.</figcaption>
 </figure>
 </div>
 </section>
 <section id="rate-coded-neurons" class="level2">
 <h2 class="anchored" data-anchor-id="rate-coded-neurons">Rate-coded neurons</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AFzYj1VUnCg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>At the population level, interconnected networks of spiking neurons tend to fire synchronously (code redundancy). What if the important information was not the precise spike timings, but the <strong>firing rate</strong> of a small population? The instantaneous firing rate is defined in Hz (number of spikes per second). It can be estimated by an histogram of the spikes emitted by a network of similar neurons, or by repeating the same experiment multiple times for a single neuron. One can also build neural models that directly model the <strong>firing rate</strong> of (a population of) neuron(s): the <strong>rate-coded</strong> neuron.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-izhikevich.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.</figcaption><p></p>
+<figcaption class="figure-caption">The spiking pattern (raster plot) of a population of interconnected neurons can be approximated by its mean firing rate.</figcaption>
 </figure>
 </div>
 <p>A rate-coded neuron is represented by two time-dependent variables:</p>
@@ -620,14 +635,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-neuron.svg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Rate-coded neuron.</figcaption><p></p>
+<figcaption class="figure-caption">Rate-coded neuron.</figcaption>
 </figure>
 </div>
 <p>The membrane potential uses a weighted sum of inputs (the firing rates <span class="math inline">r_i(t)</span> of other neurons) by multiplying each rate with a <strong>weight</strong> <span class="math inline">w_i</span> and adds a constant value <span class="math inline">b</span> (the <strong>bias</strong>). The activation function can be any non-linear function, usually making sure that the firing rate is positive.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Firing rate of a rate-coded neuron for a step input.</figcaption><p></p>
+<figcaption class="figure-caption">Firing rate of a rate-coded neuron for a step input.</figcaption>
 </figure>
 </div>
 <p><strong>Remarks on ODEs</strong></p>
@@ -646,7 +661,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple-multiple.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">The time constant <span class="math inline">\tau</span> of a rate-coded neuron influences the speed at which it reacts to inputs.</figcaption><p></p>
+<figcaption class="figure-caption">The time constant <span class="math inline">\tau</span> of a rate-coded neuron influences the speed at which it reacts to inputs.</figcaption>
 </figure>
 </div>
 <p>The membrane potential follows an exponential function which tries to “match” its input with a speed determined by the <strong>time constant</strong> <span class="math inline">\tau</span>. The time constant <span class="math inline">\tau</span> determines how fast the rate-coded neuron matches its inputs. Biological neurons have time constants between 5 and 30 ms depending on the cell type.</p>
@@ -654,7 +669,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-transferfunctions.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..</figcaption><p></p>
+<figcaption class="figure-caption">Typical transfer functions used in neural networks include the rectifier (ReLU), piece-wise linear, sigmoid (or logistic) and tanh functions..</figcaption>
 </figure>
 </div>
 <p>When using the rectifier activation function (ReLU):</p>
@@ -665,7 +680,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The rectifier function only keeps the positive part of the membrane potential.</figcaption><p></p>
+<figcaption class="figure-caption">The rectifier function only keeps the positive part of the membrane potential.</figcaption>
 </figure>
 </div>
 <p>When using the logistic (or sigmoid) activation function:</p>
@@ -676,18 +691,17 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ratecoded-simple3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.</figcaption><p></p>
+<figcaption class="figure-caption">The sigmoid/logistic function bounds the firing rate between 0 and 1, even if the membrane potential is negative.</figcaption>
 </figure>
 </div>
 </section>
 <section id="artificial-neurons" class="level2">
 <h2 class="anchored" data-anchor-id="artificial-neurons">Artificial neurons</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/NVj17dve8B8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>By omitting the dynamics of the rate-coded neuron, one obtains the very simple <strong>artificial neuron</strong> (McCulloch and Pitts, 1943):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Artificial neuron.</figcaption><p></p>
+<figcaption class="figure-caption">Artificial neuron.</figcaption>
 </figure>
 </div>
 <p>An artificial neuron sums its inputs <span class="math inline">x_1, \ldots, x_d</span> by multiplying them with weights <span class="math inline">w_1, \ldots, w_d</span>, adds a bias <span class="math inline">b</span> and transforms the result into an output <span class="math inline">y</span> using an activation function <span class="math inline">f</span>.</p>
@@ -705,14 +719,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/artificialneuron-simple.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">The net activation represents an hyperplane in 2D.</figcaption><p></p>
+<figcaption class="figure-caption">The net activation represents an hyperplane in 2D.</figcaption>
 </figure>
 </div>
 <p>The net activation is a line in 2D, a plane in 3D, etc. Generally, the net activation describes an <strong>hyperplane</strong> in the input space with <span class="math inline">d</span> dimensions <span class="math inline">(x_1, x_2, \ldots, x_d)</span>. An hyperplane has one dimension less than the space.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/hyperplane.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Hyperplane in 3D. Source: <a href="https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif" class="uri">https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif</a></figcaption><p></p>
+<figcaption class="figure-caption">Hyperplane in 3D. Source: <a href="https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif" class="uri">https://newvitruvian.com/explore/vector-planes/#gal_post_7186_nonzero-vector.gif</a></figcaption>
 </figure>
 </div>
 <p>We can write the net activation using a <strong>weight vector</strong> <span class="math inline">\mathbf{w}</span> and a <strong>bias</strong> <span class="math inline">b</span>:</p>
@@ -733,16 +747,16 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/projection.svg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">The sign of the projection of an input <span class="math inline">\mathbf{x}</span> on the hyperplane tells whether the input is above or below the hyperplane.</figcaption><p></p>
+<figcaption class="figure-caption">The sign of the projection of an input <span class="math inline">\mathbf{x}</span> on the hyperplane tells whether the input is above or below the hyperplane.</figcaption>
 </figure>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Brette2005" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Brette2005" class="csl-entry" role="listitem">
 Brette, R., and Gerstner, W. (2005). Adaptive <span class="nocase">Exponential Integrate-and-Fire Model</span> as an <span>Effective Description</span> of <span>Neuronal Activity</span>. <em>Journal of Neurophysiology</em> 94, 3637–3642. doi:<a href="https://doi.org/10.1152/jn.00686.2005">10.1152/jn.00686.2005</a>.
 </div>
-<div id="ref-Izhikevich2003" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Izhikevich2003" class="csl-entry" role="listitem">
 Izhikevich, E. M. (2003). Simple model of spiking neurons. <em>IEEE transactions on neural networks</em> 14, 1569–72. doi:<a href="https://doi.org/10.1109/TNN.2003.820440">10.1109/TNN.2003.820440</a>.
 </div>
 </div>
@@ -776,9 +790,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -843,6 +871,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -897,7 +1011,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

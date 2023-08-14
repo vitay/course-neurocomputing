@@ -1133,3 +1133,152 @@ $$
 \mathcal{L}(W, \mathbf{b}) =  \mathbb{E}_{\mathcal{D}} [- \sum_{j=1}^C t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)]
 $$
 
+
+# 6 - Metrics
+
+# Training vs. Generalization error
+
+
+::: {.columns}
+::: {.column width=30%}
+
+![](img/supervisedlearning.png)
+
+:::
+::: {.column width=60%}
+
+* The **training error** is the error made on the training set.
+
+    * Easy to measure for classification: number of misclassified examples divided by the total number.
+
+    $$
+        \epsilon_\mathcal{D} = \dfrac{\text{number of misclassifications}}{\text{number of examples}}
+    $$
+
+    * Totally irrelevant on usage: reading the training set has a training error of 0%.
+
+:::
+:::
+
+
+* What matters is the **generalization error**, which is the error that will be made on new examples (not used during learning).
+
+    * Much harder to measure (potentially infinite number of new examples, what is the correct answer?).
+
+    * Often approximated by the **empirical error on the test set**: one keeps a number of training examples out of the learning phase and one tests the performance on them.
+
+    * Need for **cross-validation** to detect **overfitting**.
+
+
+---
+
+**Overfitting in regression**
+
+![](img/underfitting-overfitting.png){width=80%}
+
+**Overfitting in classification**
+
+![](img/underfitting-overfitting-classification.png){width=80%}
+
+
+
+# Classification errors
+
+::: {.columns}
+::: {.column width=50%}
+
+
+**Confusion matrix**
+
+![Source: <https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.PrecisionRecall>](img/TP_FP.png)
+
+
+:::
+::: {.column width=50%}
+
+
+* Classification errors can also depend on the class:
+
+    * **False Positive** errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.
+
+    * **False Negative** errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.
+
+* **True Positive** (TP) and **True Negative** (TN) are correctly classified examples.
+
+* Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?
+
+:::
+:::
+
+# Classification errors
+
+::: {.columns}
+::: {.column width=30%}
+
+![Source: <https://upload.wikimedia.org/wikipedia/commons/2/26/Precisionrecall.svg>](img/Precisionrecall.svg)
+
+
+:::
+::: {.column width=70%}
+
+
+* Error
+
+$$
+    \epsilon = \frac{\text{FP} + \text{FN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+$$
+
+* Accuracy (1 - error)
+
+$$
+    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+$$
+
+* Recall (hit rate, sensitivity) and Precision (specificity)
+
+$$
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}} \;\;
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+$$
+
+* F1 score = harmonic mean of precision and recall
+
+$$
+    \text{F1} = \frac{2\, P \, R}{P + R}
+$$
+
+:::
+:::
+
+
+# Confusion matrix
+
+::: {.columns}
+::: {.column width=50%}
+
+
+* For multiclass classification problems, the **confusion matrix** tells how many examples are correctly classified and where confusion happens.
+
+* One axis is the predicted class, the other is the target class.
+
+* Each element of the matrix tells how many examples are classified or misclassified.
+
+* The matrix should be as diagonal as possible.
+
+:::
+::: {.column width=50%}
+
+
+![](img/confusionmatrix.png)
+
+:::
+:::
+
+
+* Using `scikit-learn`:
+
+```python
+from sklearn.metrics import confusion_matrix
+
+m = confusion_matrix(t, y)
+```

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 34&nbsp; MNIST classification using keras</title>
+<title>Neurocomputing - MNIST classification using keras</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,7 +91,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -132,11 +104,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">MNIST classification using keras</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/Content.html"><strong>Exercises</strong></a></li><li class="breadcrumb-item"><a href="../exercises/9-MNIST-solution.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">MNIST classification using keras</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -144,7 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -153,22 +130,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -192,8 +171,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -222,8 +202,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -242,8 +223,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -267,8 +249,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -292,8 +275,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -312,8 +296,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -342,8 +327,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -362,8 +348,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -380,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -447,12 +434,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -475,7 +464,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">MNIST classification using keras</span></h1>
+<h1 class="title"><span class="chapter-title">MNIST classification using keras</span></h1>
 </div>
 
 
@@ -703,8 +692,8 @@ maxCacheSize: 5.33 GB
 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-29 15:52:22.276272: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
-2022-11-29 15:52:22.276416: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)</code></pre>
+<pre><code>2023-03-20 18:09:54.683119: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2023-03-20 18:09:54.683274: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)</code></pre>
 </div>
 </div>
 <p>A good practice after creating the model is to call <code>model.summary()</code> to see how many layers you have created and how many parameters each layer has.</p>
@@ -759,59 +748,59 @@ None</code></pre>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[history] <span class="co"># Track the metrics at the end of each epoch</span></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-29 15:52:28.249092: W tensorflow/core/platform/profile_utils/cpu_utils.cc:128] Failed to get CPU frequency: 0 Hz
-2022-11-29 15:52:28.351132: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-03-20 18:10:02.477640: W tensorflow/core/platform/profile_utils/cpu_utils.cc:128] Failed to get CPU frequency: 0 Hz
+2023-03-20 18:10:02.579396: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
-420/422 [============================&gt;.] - ETA: 0s - loss: 2.0709 - accuracy: 0.4651</code></pre>
+422/422 [==============================] - ETA: 0s - loss: 2.0908 - accuracy: 0.4240</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-29 15:52:32.137612: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-03-20 18:10:07.488093: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>422/422 [==============================] - 4s 10ms/step - loss: 2.0698 - accuracy: 0.4659 - val_loss: 1.8160 - val_accuracy: 0.6918
+<pre><code>422/422 [==============================] - 5s 10ms/step - loss: 2.0908 - accuracy: 0.4240 - val_loss: 1.8238 - val_accuracy: 0.6538
 Epoch 2/20
-422/422 [==============================] - 4s 10ms/step - loss: 1.6281 - accuracy: 0.7030 - val_loss: 1.4038 - val_accuracy: 0.7813
+422/422 [==============================] - 4s 9ms/step - loss: 1.6363 - accuracy: 0.6766 - val_loss: 1.4138 - val_accuracy: 0.7585
 Epoch 3/20
-422/422 [==============================] - 4s 9ms/step - loss: 1.2881 - accuracy: 0.7664 - val_loss: 1.1032 - val_accuracy: 0.8277
+422/422 [==============================] - 4s 10ms/step - loss: 1.3001 - accuracy: 0.7496 - val_loss: 1.1166 - val_accuracy: 0.8143
 Epoch 4/20
-422/422 [==============================] - 4s 9ms/step - loss: 1.0516 - accuracy: 0.8007 - val_loss: 0.9015 - val_accuracy: 0.8522
+422/422 [==============================] - 4s 10ms/step - loss: 1.0651 - accuracy: 0.7899 - val_loss: 0.9142 - val_accuracy: 0.8458
 Epoch 5/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.8933 - accuracy: 0.8212 - val_loss: 0.7664 - val_accuracy: 0.8685
+422/422 [==============================] - 4s 10ms/step - loss: 0.9056 - accuracy: 0.8143 - val_loss: 0.7770 - val_accuracy: 0.8630
 Epoch 6/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.7848 - accuracy: 0.8353 - val_loss: 0.6726 - val_accuracy: 0.8765
+422/422 [==============================] - 4s 10ms/step - loss: 0.7954 - accuracy: 0.8303 - val_loss: 0.6808 - val_accuracy: 0.8742
 Epoch 7/20
-422/422 [==============================] - 4s 10ms/step - loss: 0.7074 - accuracy: 0.8447 - val_loss: 0.6047 - val_accuracy: 0.8832
+422/422 [==============================] - 4s 10ms/step - loss: 0.7162 - accuracy: 0.8421 - val_loss: 0.6113 - val_accuracy: 0.8785
 Epoch 8/20
-422/422 [==============================] - 4s 10ms/step - loss: 0.6499 - accuracy: 0.8525 - val_loss: 0.5532 - val_accuracy: 0.8888
+422/422 [==============================] - 4s 10ms/step - loss: 0.6573 - accuracy: 0.8503 - val_loss: 0.5586 - val_accuracy: 0.8848
 Epoch 9/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.6057 - accuracy: 0.8578 - val_loss: 0.5139 - val_accuracy: 0.8927
+422/422 [==============================] - 4s 10ms/step - loss: 0.6119 - accuracy: 0.8569 - val_loss: 0.5179 - val_accuracy: 0.8910
 Epoch 10/20
-422/422 [==============================] - 4s 10ms/step - loss: 0.5707 - accuracy: 0.8632 - val_loss: 0.4823 - val_accuracy: 0.8960
+422/422 [==============================] - 4s 10ms/step - loss: 0.5759 - accuracy: 0.8620 - val_loss: 0.4859 - val_accuracy: 0.8967
 Epoch 11/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.5424 - accuracy: 0.8672 - val_loss: 0.4569 - val_accuracy: 0.8980
+422/422 [==============================] - 4s 10ms/step - loss: 0.5468 - accuracy: 0.8670 - val_loss: 0.4597 - val_accuracy: 0.8983
 Epoch 12/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.5191 - accuracy: 0.8703 - val_loss: 0.4359 - val_accuracy: 0.9005
+422/422 [==============================] - 4s 10ms/step - loss: 0.5228 - accuracy: 0.8705 - val_loss: 0.4380 - val_accuracy: 0.9012
 Epoch 13/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.4995 - accuracy: 0.8728 - val_loss: 0.4183 - val_accuracy: 0.9025
+422/422 [==============================] - 4s 10ms/step - loss: 0.5027 - accuracy: 0.8734 - val_loss: 0.4199 - val_accuracy: 0.9032
 Epoch 14/20
-422/422 [==============================] - 4s 10ms/step - loss: 0.4828 - accuracy: 0.8748 - val_loss: 0.4033 - val_accuracy: 0.9043
+422/422 [==============================] - 4s 10ms/step - loss: 0.4855 - accuracy: 0.8761 - val_loss: 0.4045 - val_accuracy: 0.9050
 Epoch 15/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.4685 - accuracy: 0.8773 - val_loss: 0.3903 - val_accuracy: 0.9058
+422/422 [==============================] - 4s 10ms/step - loss: 0.4707 - accuracy: 0.8783 - val_loss: 0.3912 - val_accuracy: 0.9062
 Epoch 16/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.4560 - accuracy: 0.8791 - val_loss: 0.3793 - val_accuracy: 0.9065
+422/422 [==============================] - 4s 10ms/step - loss: 0.4578 - accuracy: 0.8801 - val_loss: 0.3800 - val_accuracy: 0.9067
 Epoch 17/20
-422/422 [==============================] - 4s 9ms/step - loss: 0.4450 - accuracy: 0.8816 - val_loss: 0.3695 - val_accuracy: 0.9083
+422/422 [==============================] - 4s 10ms/step - loss: 0.4465 - accuracy: 0.8827 - val_loss: 0.3698 - val_accuracy: 0.9092
 Epoch 18/20
-422/422 [==============================] - 4s 10ms/step - loss: 0.4352 - accuracy: 0.8833 - val_loss: 0.3607 - val_accuracy: 0.9088
+422/422 [==============================] - 4s 10ms/step - loss: 0.4365 - accuracy: 0.8841 - val_loss: 0.3611 - val_accuracy: 0.9097
 Epoch 19/20
-422/422 [==============================] - 4s 10ms/step - loss: 0.4265 - accuracy: 0.8848 - val_loss: 0.3530 - val_accuracy: 0.9093
+422/422 [==============================] - 4s 10ms/step - loss: 0.4275 - accuracy: 0.8859 - val_loss: 0.3533 - val_accuracy: 0.9108
 Epoch 20/20
-422/422 [==============================] - 5s 11ms/step - loss: 0.4186 - accuracy: 0.8862 - val_loss: 0.3462 - val_accuracy: 0.9107</code></pre>
+422/422 [==============================] - 4s 10ms/step - loss: 0.4194 - accuracy: 0.8872 - val_loss: 0.3463 - val_accuracy: 0.9117</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>&lt;keras.callbacks.History at 0x16c05dfd0&gt;</code></pre>
+<pre><code>&lt;keras.callbacks.History at 0x16a66a760&gt;</code></pre>
 </div>
 </div>
 <p>The training has now run for 20 epochs on the training set. You see the evolution of loss function and accuracy for both the training and validation sets.</p>
@@ -822,8 +811,8 @@ Epoch 20/20
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test loss: 0.3901696503162384
-Test accuracy: 0.8963000178337097</code></pre>
+<pre><code>Test loss: 0.39123424887657166
+Test accuracy: 0.8955000638961792</code></pre>
 </div>
 </div>
 <p>You can also use the <code>History()</code> object to visualize the evolution of the the training and validation accuracy during learning.</p>
@@ -871,7 +860,7 @@ Test accuracy: 0.8963000178337097</code></pre>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    plt.xticks([])<span class="op">;</span> plt.yticks([])</span>
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-29 15:53:52.060969: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-03-20 18:11:34.792866: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1024,56 +1013,56 @@ None
 Epoch 1/20</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-29 15:53:53.535515: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-03-20 18:11:37.357186: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>422/422 [==============================] - ETA: 0s - loss: 0.4475 - accuracy: 0.8678</code></pre>
+<pre><code>422/422 [==============================] - ETA: 0s - loss: 0.4516 - accuracy: 0.8682</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2022-11-29 15:54:01.593654: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
+<pre><code>2023-03-20 18:11:45.140012: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:112] Plugin optimizer for device_type GPU is enabled.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>422/422 [==============================] - 9s 18ms/step - loss: 0.4475 - accuracy: 0.8678 - val_loss: 0.1420 - val_accuracy: 0.9582
+<pre><code>422/422 [==============================] - 9s 17ms/step - loss: 0.4516 - accuracy: 0.8682 - val_loss: 0.1409 - val_accuracy: 0.9613
 Epoch 2/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.2049 - accuracy: 0.9387 - val_loss: 0.0929 - val_accuracy: 0.9730
+422/422 [==============================] - 7s 16ms/step - loss: 0.2019 - accuracy: 0.9401 - val_loss: 0.0954 - val_accuracy: 0.9723
 Epoch 3/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.1555 - accuracy: 0.9527 - val_loss: 0.0771 - val_accuracy: 0.9783
+422/422 [==============================] - 7s 16ms/step - loss: 0.1556 - accuracy: 0.9539 - val_loss: 0.0801 - val_accuracy: 0.9762
 Epoch 4/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.1272 - accuracy: 0.9614 - val_loss: 0.0723 - val_accuracy: 0.9785
+422/422 [==============================] - 7s 16ms/step - loss: 0.1285 - accuracy: 0.9609 - val_loss: 0.0742 - val_accuracy: 0.9782
 Epoch 5/20
-422/422 [==============================] - 9s 20ms/step - loss: 0.1090 - accuracy: 0.9674 - val_loss: 0.0703 - val_accuracy: 0.9785
+422/422 [==============================] - 7s 16ms/step - loss: 0.1094 - accuracy: 0.9663 - val_loss: 0.0698 - val_accuracy: 0.9790
 Epoch 6/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0978 - accuracy: 0.9699 - val_loss: 0.0667 - val_accuracy: 0.9800
+422/422 [==============================] - 7s 16ms/step - loss: 0.0985 - accuracy: 0.9692 - val_loss: 0.0670 - val_accuracy: 0.9805
 Epoch 7/20
-422/422 [==============================] - 7s 17ms/step - loss: 0.0893 - accuracy: 0.9719 - val_loss: 0.0618 - val_accuracy: 0.9823
+422/422 [==============================] - 7s 16ms/step - loss: 0.0901 - accuracy: 0.9715 - val_loss: 0.0636 - val_accuracy: 0.9807
 Epoch 8/20
-422/422 [==============================] - 6s 15ms/step - loss: 0.0829 - accuracy: 0.9734 - val_loss: 0.0608 - val_accuracy: 0.9812
+422/422 [==============================] - 7s 16ms/step - loss: 0.0804 - accuracy: 0.9741 - val_loss: 0.0645 - val_accuracy: 0.9805
 Epoch 9/20
-422/422 [==============================] - 6s 15ms/step - loss: 0.0763 - accuracy: 0.9760 - val_loss: 0.0581 - val_accuracy: 0.9832
+422/422 [==============================] - 7s 16ms/step - loss: 0.0773 - accuracy: 0.9753 - val_loss: 0.0598 - val_accuracy: 0.9828
 Epoch 10/20
-422/422 [==============================] - 6s 15ms/step - loss: 0.0713 - accuracy: 0.9781 - val_loss: 0.0574 - val_accuracy: 0.9828
+422/422 [==============================] - 7s 16ms/step - loss: 0.0705 - accuracy: 0.9771 - val_loss: 0.0580 - val_accuracy: 0.9827
 Epoch 11/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0686 - accuracy: 0.9779 - val_loss: 0.0589 - val_accuracy: 0.9828
+422/422 [==============================] - 7s 16ms/step - loss: 0.0671 - accuracy: 0.9784 - val_loss: 0.0603 - val_accuracy: 0.9817
 Epoch 12/20
-422/422 [==============================] - 7s 17ms/step - loss: 0.0623 - accuracy: 0.9795 - val_loss: 0.0577 - val_accuracy: 0.9838
+422/422 [==============================] - 7s 16ms/step - loss: 0.0615 - accuracy: 0.9804 - val_loss: 0.0600 - val_accuracy: 0.9817
 Epoch 13/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0585 - accuracy: 0.9814 - val_loss: 0.0550 - val_accuracy: 0.9848
+422/422 [==============================] - 7s 16ms/step - loss: 0.0586 - accuracy: 0.9813 - val_loss: 0.0551 - val_accuracy: 0.9850
 Epoch 14/20
-422/422 [==============================] - 7s 17ms/step - loss: 0.0567 - accuracy: 0.9817 - val_loss: 0.0605 - val_accuracy: 0.9830
+422/422 [==============================] - 7s 17ms/step - loss: 0.0558 - accuracy: 0.9809 - val_loss: 0.0621 - val_accuracy: 0.9812
 Epoch 15/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0564 - accuracy: 0.9816 - val_loss: 0.0599 - val_accuracy: 0.9837
+422/422 [==============================] - 7s 16ms/step - loss: 0.0525 - accuracy: 0.9828 - val_loss: 0.0575 - val_accuracy: 0.9833
 Epoch 16/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0506 - accuracy: 0.9837 - val_loss: 0.0585 - val_accuracy: 0.9833
+422/422 [==============================] - 7s 16ms/step - loss: 0.0502 - accuracy: 0.9838 - val_loss: 0.0615 - val_accuracy: 0.9828
 Epoch 17/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0493 - accuracy: 0.9835 - val_loss: 0.0556 - val_accuracy: 0.9838
+422/422 [==============================] - 7s 15ms/step - loss: 0.0502 - accuracy: 0.9836 - val_loss: 0.0581 - val_accuracy: 0.9833
 Epoch 18/20
-422/422 [==============================] - 7s 17ms/step - loss: 0.0509 - accuracy: 0.9831 - val_loss: 0.0597 - val_accuracy: 0.9833
+422/422 [==============================] - 7s 16ms/step - loss: 0.0494 - accuracy: 0.9834 - val_loss: 0.0579 - val_accuracy: 0.9837
 Epoch 19/20
-422/422 [==============================] - 7s 16ms/step - loss: 0.0443 - accuracy: 0.9851 - val_loss: 0.0547 - val_accuracy: 0.9855
+422/422 [==============================] - 7s 15ms/step - loss: 0.0445 - accuracy: 0.9845 - val_loss: 0.0537 - val_accuracy: 0.9852
 Epoch 20/20
-422/422 [==============================] - 7s 17ms/step - loss: 0.0456 - accuracy: 0.9849 - val_loss: 0.0594 - val_accuracy: 0.9843
-Test loss: 0.05959333851933479
-Test accuracy: 0.9823000431060791</code></pre>
+422/422 [==============================] - 7s 15ms/step - loss: 0.0437 - accuracy: 0.9852 - val_loss: 0.0513 - val_accuracy: 0.9857
+Test loss: 0.059500761330127716
+Test accuracy: 0.9824000597000122</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1115,9 +1104,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1182,6 +1185,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1236,7 +1325,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

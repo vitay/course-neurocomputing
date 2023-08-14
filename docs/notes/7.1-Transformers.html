@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 18&nbsp; Transformers</title>
+<title>Neurocomputing - Transformers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -167,11 +139,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Transformers</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/7.1-Transformers.html"><strong>Self-supervised learning</strong></a></li><li class="breadcrumb-item"><a href="../notes/7.1-Transformers.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Transformers</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -179,7 +156,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -188,22 +165,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -227,8 +206,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -257,8 +237,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,8 +258,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -302,8 +284,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -327,8 +310,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -347,8 +331,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -377,8 +362,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -397,8 +383,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -415,7 +402,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,12 +469,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -518,7 +507,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Transformers</span></h1>
+<h1 class="title"><span class="chapter-title">Transformers</span></h1>
 </div>
 
 
@@ -536,28 +525,27 @@ div.csl-indent {
 <p>Slides: <a href="../slides/7.1-Transformers.html" target="_blank">html</a> <a href="../slides/pdf/7.1-Transformers.pdf" target="_blank">pdf</a></p>
 <section id="transformers" class="level2">
 <h2 class="anchored" data-anchor-id="transformers">Transformers</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AO-gqXNCEx0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="architecture" class="level3">
 <h3 class="anchored" data-anchor-id="architecture">Architecture</h3>
 <p>Attentional mechanisms are so powerful that recurrent networks are not even needed anymore. <strong>Transformer networks</strong> <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span> use <strong>self-attention</strong> in a purely feedforward architecture and outperform recurrent architectures. They are used in Google BERT and OpenAI GPT-3 for text understanding (e.g.&nbsp;search engine queries) and generation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_resideual_layer_norm_3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Architecture of the Transformer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Architecture of the Transformer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Transformer networks use an <strong>encoder-decoder</strong> architecture, each with 6 stacked layers.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Encoder-decoder structure of the Transformer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Encoder-decoder structure of the Transformer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Each layer of the encoder processes the <span class="math inline">n</span> words of the input sentence <strong>in parallel</strong>. Word embeddings (as in word2vec) of dimension 512 are used as inputs (but learned end-to-end).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/encoder_with_tensors.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Two operations are performed on each word embedding <span class="math inline">\mathbf{x}_i</span>:</p>
@@ -568,7 +556,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/encoder_with_tensors_2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -583,14 +571,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_self_attention_vectors.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Self-attention. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Self-attention. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>This operation can be done in parallel over all words:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-attention-matrix-calculation.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Query, key and value matrices. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Query, key and value matrices. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Why query / key / value? This a concept inspired from recommendation systems / databases. A Python dictionary is a set of key / value entries:</p>
@@ -610,7 +598,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_self-attention_visualization.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></figcaption>
 </figure>
 </div>
 <p>Each word <span class="math inline">\mathbf{x}_i</span> of the sentence generates its query <span class="math inline">\mathbf{q}_i</span>, key <span class="math inline">\mathbf{k}_i</span> and value <span class="math inline">\mathbf{v}_i</span>.</p>
@@ -623,7 +611,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-attention-output.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Summary of self-attention on two words. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Summary of self-attention on two words. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>If we concatenate the word embeddings into a <span class="math inline">n\times d</span> matrix <span class="math inline">X</span>, self-attention only implies matrix multiplications and a row-based softmax:</p>
@@ -638,7 +626,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-attention-matrix-calculation-2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Self-attention. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Self-attention. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Note 1: everything is differentiable, backpropagation will work.</p>
@@ -651,34 +639,34 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer-needforheads.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" class="uri">https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html</a></figcaption>
 </figure>
 </div>
 <p>The solution is to use <strong>multiple attention heads</strong> (<span class="math inline">h=8</span>) with their own matrices <span class="math inline">W^Q_k</span>, <span class="math inline">W^K_k</span> and <span class="math inline">W^V_k</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_qkv.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Each <strong>attention head</strong> will output a vector <span class="math inline">\mathbf{z}_i</span> of size <span class="math inline">d_k=64</span> for each word. How do we combine them?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_z.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>The proposed solution is based on <strong>ensemble learning</strong> (stacking): let another matrix <span class="math inline">W^O</span> decide which attention head to trust… <span class="math inline">8 \times 64</span> rows, 512 columns.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_attention_heads_weight_matrix_o.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Multiple attention heads. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_multi-headed_self-attention-recap.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Summary of self-attention. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Summary of self-attention. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Each attention head learns a different context:</p>
@@ -701,7 +689,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/encoder_with_tensors_2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Encoder layer. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -716,7 +704,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_positional_encoding_vectors.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Positional encoding. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Positional encoding. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>If the elements of the 512-d embeddings are numbers between 0 and 1, concatenating an integer between 1 and <span class="math inline">n</span> will unbalance the dimensions. Normalizing that integer between 0 and 1 requires to know <span class="math inline">n</span> in advance, this introduces a maximal sentence length…</p>
@@ -724,7 +712,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/trasnformer-positionalencoding.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Positional encoding. Source: <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/" class="uri">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></figcaption><p></p>
+<figcaption class="figure-caption">Positional encoding. Source: <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/" class="uri">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></figcaption>
 </figure>
 </div>
 <p>Sounds good, we have numbers between 0 and 1, and we just need to use enough bits to encode very long sentences. However, representing a binary value (0 or 1) with a 64 bits floating number is a waste of computational resources.</p>
@@ -738,7 +726,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/positional_encoding.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Positional encoding. Source: <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/" class="uri">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></figcaption><p></p>
+<figcaption class="figure-caption">Positional encoding. Source: <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/" class="uri">https://kazemnejad.com/blog/transformer_architecture_positional_encoding/</a></figcaption>
 </figure>
 </div>
 <p>In practice, a 512-d vector is created using sine and cosine functions.</p>
@@ -751,7 +739,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/attention-is-all-you-need-positional-encoding.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Positional encoding. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Positional encoding. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>The positional encoding vector is <strong>added</strong> element-wise to the embedding, not concatenated!</p>
@@ -772,14 +760,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_resideual_layer_norm_2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Encoder layer with layer normalization and skip connections. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Encoder layer with layer normalization and skip connections. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>We can now stack 6 (or more, 96 in GPT-3) of these encoder layers and use the final representation of each word as an input to the decoder.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_resideual_layer_norm_3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The encoder is a stack of encoder layers. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">The encoder is a stack of encoder layers. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -789,14 +777,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_decoding_1.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Encoding of a sentence. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Encoding of a sentence. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>The decoder is <strong>autoregressive</strong>: it outputs words one at a time, using the previously generated words as an input.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_decoding_2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Autoregressive generation of words. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Autoregressive generation of words. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 <p>Each decoder layer has two multi-head attention sub-layers:</p>
@@ -808,21 +796,21 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer-architecture.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Transformer architecture. Source <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Transformer architecture. Source <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>When the sentence has been fully generated (up to the <code>&lt;eos&gt;</code> symbol), <strong>masked self-attention</strong> has to applied in order for a word in the middle of the sentence to not “see” the solution in the input when learning. Learning occurs on minibatches of sentences, not on single words.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-attention-and-masked-self-attention.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Masked self-attention. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Masked self-attention. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <p>The output of the decoder is a simple softmax classification layer, predicting the one-hot encoding of the word using a vocabulary (<code>vocab_size=25000</code>).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer_decoder_output_softmax.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Word production from the output. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption><p></p>
+<figcaption class="figure-caption">Word production from the output. Source: <a href="http://jalammar.github.io/illustrated-transformer/" class="uri">http://jalammar.github.io/illustrated-transformer/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -837,14 +825,13 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer-results.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Performance of the Transformer on NLP tasks. Source <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Performance of the Transformer on NLP tasks. Source <span class="citation" data-cites="Vaswani2017">(<a href="../references.html#ref-Vaswani2017" role="doc-biblioref">Vaswani et al., 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="self-supervised-transformers" class="level2">
 <h2 class="anchored" data-anchor-id="self-supervised-transformers">Self-supervised Transformers</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/jYDEFZWn6co" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The Transformer is considered as the <strong>AlexNet</strong> moment of natural language processing (NLP). However, it is limited to supervised learning of sentence-based translation.</p>
 <p>Two families of architectures have been developed from that idea to perform all NLP tasks using <strong>unsupervised pretraining</strong> or <strong>self-supervised training</strong>:</p>
 <ul>
@@ -854,7 +841,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gpt-2-transformer-xl-bert-3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <section id="bert" class="level3">
@@ -866,7 +853,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/BERT-language-modeling-masked-lm.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Masked language model. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Masked language model. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 <ul>
@@ -875,7 +862,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/bert-next-sentence-prediction.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Next sentence prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Next sentence prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 <p>Once BERT is pretrained, one can use <strong>transfer learning</strong> with or without fine-tuning from the high-level representations to perform:</p>
@@ -886,13 +873,13 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/bert-classifier.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Sentiment analysis with BERT. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Sentiment analysis with BERT. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/bert-transfer-learning.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Transfer learning with BERT. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Transfer learning with BERT. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -902,49 +889,49 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transformer-decoder-intro.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">GPT is the decoder of the Transformer. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">GPT is the decoder of the Transformer. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <p><strong>Autoregression</strong> mimicks a LSTM that would output words one at a time.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gpt-2-autoregression-2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Autoregression. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Autoregression. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <p>GPT-2 comes in various sizes, with increasing performance. GPT-3 is even bigger, with 175 <strong>billion</strong> parameters and a much larger training corpus.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gpt2-sizes-hyperparameters-3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">GPT sizes. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">GPT sizes. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <p>GPT can be fine-tuned (transfer learning) to perform <strong>machine translation</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/decoder-only-transformer-translation.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Machine translation with GPT. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Machine translation with GPT. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <p>GPT can be fine-tuned to summarize Wikipedia articles.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/wikipedia-summarization.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Wikipedia summarization with GPT. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Wikipedia summarization with GPT. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/decoder-only-summarization.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Wikipedia summarization with GPT. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Wikipedia summarization with GPT. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -957,14 +944,14 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/githubcopliot.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Github Copilot. <a href="https://copilot.github.com/" class="uri">https://copilot.github.com/</a></figcaption><p></p>
+<figcaption class="figure-caption">Github Copilot. <a href="https://copilot.github.com/" class="uri">https://copilot.github.com/</a></figcaption>
 </figure>
 </div>
 <p>ChatGPT (<a href="https://chat.openai.com" class="uri">https://chat.openai.com</a>) interacts in a conversational way. The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/chatpgt2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">ChatGPT. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a></figcaption><p></p>
+<figcaption class="figure-caption">ChatGPT. <a href="https://chat.openai.com" class="uri">https://chat.openai.com</a></figcaption>
 </figure>
 </div>
 <p>All NLP tasks (translation, sentence classification, text generation) are now done using <strong>Large Language Models</strong> (LLM), <strong>self-supervisedly</strong> pre-trained on huge corpuses. BERT can be used for feature extraction, while GPT is more generative. Transformer architectures seem to <strong>scale</strong>: more parameters = better performance. Is there a limit?</p>
@@ -975,14 +962,14 @@ Note
 <p>See <a href="https://medium.com/mlearning-ai/recent-language-models-9fcf1b5f17f5" class="uri">https://medium.com/mlearning-ai/recent-language-models-9fcf1b5f17f5</a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Ba2016" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Ba2016" class="csl-entry" role="listitem">
 Ba, J. L., Kiros, J. R., and Hinton, G. E. (2016). Layer <span>Normalization</span>. <a href="http://arxiv.org/abs/1607.06450">http://arxiv.org/abs/1607.06450</a>.
 </div>
-<div id="ref-Devlin2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Devlin2019" class="csl-entry" role="listitem">
 Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K. (2019). <span>BERT</span>: <span class="nocase">Pre-training</span> of <span>Deep Bidirectional Transformers</span> for <span>Language Understanding</span>. <a href="http://arxiv.org/abs/1810.04805">http://arxiv.org/abs/1810.04805</a>.
 </div>
-<div id="ref-Vaswani2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Vaswani2017" class="csl-entry" role="listitem">
 Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., et al. (2017). Attention <span>Is All You Need</span>. <a href="http://arxiv.org/abs/1706.03762">http://arxiv.org/abs/1706.03762</a>.
 </div>
 </div>
@@ -1017,9 +1004,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1084,6 +1085,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1138,7 +1225,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

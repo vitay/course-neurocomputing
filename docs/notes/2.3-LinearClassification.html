@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 6&nbsp; Linear classification</title>
+<title>Neurocomputing - Linear classification</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,8 +17,42 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -57,7 +91,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -85,11 +120,16 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Linear classification</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/2.1-Optimization.html"><strong>Linear algorithms</strong></a></li><li class="breadcrumb-item"><a href="../notes/2.3-LinearClassification.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Linear classification</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -97,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -106,22 +146,24 @@ ul.task-list li input[type="checkbox"] {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -145,8 +187,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -175,8 +218,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -195,8 +239,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -220,8 +265,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -245,8 +291,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -265,8 +312,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -295,8 +343,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -315,8 +364,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -333,7 +383,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -400,12 +450,14 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -425,6 +477,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#comparison-of-linear-classification-and-regression" id="toc-comparison-of-linear-classification-and-regression" class="nav-link" data-scroll-target="#comparison-of-linear-classification-and-regression">Comparison of linear classification and regression</a></li>
   <li><a href="#multi-label-classification" id="toc-multi-label-classification" class="nav-link" data-scroll-target="#multi-label-classification">Multi-label classification</a></li>
   </ul></li>
+  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
   </ul>
 </nav>
     </div>
@@ -433,7 +486,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Linear classification</span></h1>
+<h1 class="title"><span class="chapter-title">Linear classification</span></h1>
 </div>
 
 
@@ -451,26 +504,25 @@ ul.task-list li input[type="checkbox"] {
 <p>Slides: <a href="../slides/2.3-LinearClassification.html" target="_blank">html</a> <a href="../slides/pdf/2.3-LinearClassification.pdf" target="_blank">pdf</a></p>
 <section id="hard-linear-classification" class="level2">
 <h2 class="anchored" data-anchor-id="hard-linear-classification">Hard linear classification</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/jZoJHIHi6Qw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The training data <span class="math inline">\mathcal{D}</span> is composed of <span class="math inline">N</span> examples <span class="math inline">(\mathbf{x}_i, t_i)_{i=1..N}</span> , with a d-dimensional input vector <span class="math inline">\mathbf{x}_i \in \Re^d</span> and a binary output <span class="math inline">t_i \in \{-1, +1\}</span>. The data points where <span class="math inline">t = + 1</span> are called the <strong>positive class</strong>, the other the <strong>negative class</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/classification-animation1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Binary linear classification of 2D data.</figcaption><p></p>
+<figcaption class="figure-caption">Binary linear classification of 2D data.</figcaption>
 </figure>
 </div>
 <p>For example, the inputs <span class="math inline">\mathbf{x}_i</span> can be images (one dimension per pixel) and the positive class corresponds to cats (<span class="math inline">t_i = +1</span>), the negative class to dogs (<span class="math inline">t_i = -1</span>).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/cats-dogs.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Binary linear classification of cats vs.&nbsp;dogs images. Source: <a href="http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe" class="uri">http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe</a></figcaption><p></p>
+<figcaption class="figure-caption">Binary linear classification of cats vs.&nbsp;dogs images. Source: <a href="http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe" class="uri">http://adilmoujahid.com/posts/2016/06/introduction-deep-learning-python-caffe</a></figcaption>
 </figure>
 </div>
 <p>We want to find the hyperplane <span class="math inline">(\mathbf{w}, b)</span> of <span class="math inline">\Re^d</span> that correctly separates the two classes.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/classification-animation2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">The hyperplane separates the input space into two regions.</figcaption><p></p>
+<figcaption class="figure-caption">The hyperplane separates the input space into two regions.</figcaption>
 </figure>
 </div>
 <p>For a point <span class="math inline">\mathbf{x} \in \mathcal{D}</span>, <span class="math inline">\langle \mathbf{w} \cdot \mathbf{x} \rangle +b</span> is the projection of <span class="math inline">\mathbf{x}</span> onto the hyperplane <span class="math inline">(\mathbf{w}, b)</span>.</p>
@@ -482,7 +534,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/projection.svg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Projection on an hyperplane.</figcaption><p></p>
+<figcaption class="figure-caption">Projection on an hyperplane.</figcaption>
 </figure>
 </div>
 <p>By looking at the <strong>sign</strong> of <span class="math inline">\langle \mathbf{w} \cdot \mathbf{x} \rangle +b</span>, we can predict the class of the input.</p>
@@ -496,7 +548,7 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/linearlyseparable.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Linearly and non-linearly separable datasets.</figcaption><p></p>
+<figcaption class="figure-caption">Linearly and non-linearly separable datasets.</figcaption>
 </figure>
 </div>
 <section id="perceptron-algorithm" class="level3">
@@ -535,12 +587,12 @@ y = f_{\mathbf{w}, b} (\mathbf{x}) = \text{sign} ( \langle \mathbf{w} \cdot \mat
     \Delta b = \eta \, \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )
 </span></p>
 <p>By applying gradient descent on the quadratic error function, one obtains the following algorithm:</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Batch perceptron
 </div>
 </div>
@@ -565,16 +617,16 @@ Batch perceptron
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/classification-animation.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Batch perceptron algorithm.</figcaption><p></p>
+<figcaption class="figure-caption">Batch perceptron algorithm.</figcaption>
 </figure>
 </div>
 <p>The <strong>Perceptron algorithm</strong> was invented by the psychologist Frank Rosenblatt in 1958. It was the first algorithmic neural network able to learn linear classification.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Online perceptron algorithm
 </div>
 </div>
@@ -596,7 +648,7 @@ Online perceptron algorithm
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/classification-animation-online.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Online perceptron algorithm.</figcaption><p></p>
+<figcaption class="figure-caption">Online perceptron algorithm.</figcaption>
 </figure>
 </div>
 </section>
@@ -621,12 +673,12 @@ Online perceptron algorithm
     \Delta \mathbf{w} = \eta \, \frac{1}{K} \sum_{i=1}^{K} (t_i - y_i) \, \mathbf{x_i}
 </span></p>
 <p>If the <strong>batch size</strong> is well chosen, SGD is as stable as batch learning and as fast as online learning. The minibatches are randomly selected at each epoch (i.i.d).</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -638,7 +690,6 @@ Note
 </section>
 <section id="maximum-likelihood-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/9Hw6nLMiPiI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s consider <span class="math inline">N</span> <strong>samples</strong> <span class="math inline">\{x_i\}_{i=1}^N</span> independently taken from a <strong>normal distribution</strong> <span class="math inline">X</span>. The probability density function (pdf) of a normal distribution is:</p>
 <p><span class="math display">
     f(x ; \mu, \sigma) =  \frac{1}{\sqrt{2\pi \sigma^2}} \, \exp{- \frac{(x - \mu)^2}{2\sigma^2}}
@@ -647,7 +698,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/MLE2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Normal distributions with different parameters <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> explain the data with different likelihoods.</figcaption><p></p>
+<figcaption class="figure-caption">Normal distributions with different parameters <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> explain the data with different likelihoods.</figcaption>
 </figure>
 </div>
 <p>The problem is to find the values of <span class="math inline">\mu</span> and <span class="math inline">\sigma</span> which explain best the observations <span class="math inline">\{x_i\}_{i=1}^N</span>.</p>
@@ -701,7 +752,6 @@ Note
 </section>
 <section id="soft-linear-classification-logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="soft-linear-classification-logistic-regression">Soft linear classification : Logistic regression</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/_Zc-k9pXVvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>In logistic regression, we want to perform a regression, but where the targets <span class="math inline">t_i</span> are bounded betwen 0 and 1. We can use a logistic function instead of a linear function in order to transform the net activation into an output:</p>
 <p><span class="math display">
 \begin{aligned}
@@ -764,12 +814,12 @@ Note
     \Delta b = \eta \, ( t_i - y_i ) \\
     \end{cases}
 </span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Logistic regression
 </div>
 </div>
@@ -801,14 +851,13 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/logisticregression-animation.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Logistic regression for soft classification. The confidence scores tells how certain the classification is.</figcaption><p></p>
+<figcaption class="figure-caption">Logistic regression for soft classification. The confidence scores tells how certain the classification is.</figcaption>
 </figure>
 </div>
 <p>Logistic regression also provides a <strong>confidence score</strong>: the closer <span class="math inline">y</span> is from 0 or 1, the more confident we can be that the classification is correct. This is particularly important in <strong>safety critical</strong> applications: if you detect the positive class but with a confidence of 0.51, you should perhaps not trust the prediction. If the confidence score is 0.99, you can probably trust the prediction.</p>
 </section>
 <section id="multi-class-classification" class="level2">
 <h2 class="anchored" data-anchor-id="multi-class-classification">Multi-class classification</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/24GpIHcaTxA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Can we perform multi-class classification using the previous methods when <span class="math inline">t \in \{A, B, C\}</span> instead of <span class="math inline">t = +1</span> or <span class="math inline">-1</span>? There are two main solutions:</p>
 <ul>
 <li><p><strong>One-vs-All</strong> (or One-vs-the-rest): one trains simultaneously a binary (linear) classifier for each class. The examples belonging to this class form the positive class, all others are the negative class:</p>
@@ -831,7 +880,7 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/pixelspace.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Example of <strong>One-vs-All</strong> classification: one binary classifier per class. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
+<figcaption class="figure-caption">Example of <strong>One-vs-All</strong> classification: one binary classifier per class. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption>
 </figure>
 </div>
 <section id="softmax-linear-classifier" class="level3">
@@ -846,7 +895,7 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/imagemap.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Linear perceptron for images. The output is the logit score. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
+<figcaption class="figure-caption">Linear perceptron for images. The output is the logit score. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption>
 </figure>
 </div>
 <p>The net activations form a vector <span class="math inline">\mathbf{z}</span>:</p>
@@ -865,7 +914,7 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/softmax-transformation.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">The logit scores <span class="math inline">\mathbf{z}</span> cannot be compared to the targets <span class="math inline">\mathbf{t}</span>: we need to transform them into a probability distribution <span class="math inline">\mathbf{y}</span>.</figcaption><p></p>
+<figcaption class="figure-caption">The logit scores <span class="math inline">\mathbf{z}</span> cannot be compared to the targets <span class="math inline">\mathbf{t}</span>: we need to transform them into a probability distribution <span class="math inline">\mathbf{y}</span>.</figcaption>
 </figure>
 </div>
 <p>We need to transform the logit score <span class="math inline">\mathbf{z}</span> into a <strong>probability distribution</strong> <span class="math inline">P(\mathbf{y} | \mathbf{x})</span> that should be as close as possible from <span class="math inline">P(\mathbf{t} | \mathbf{x})</span>.</p>
@@ -879,7 +928,7 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/softmax-comp.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Softmax activation transforms the logit score into a probability distribution. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption><p></p>
+<figcaption class="figure-caption">Softmax activation transforms the logit score into a probability distribution. Source <a href="http://cs231n.github.io/linear-classify" class="uri">http://cs231n.github.io/linear-classify</a></figcaption>
 </figure>
 </div>
 <p>The higher <span class="math inline">z_j</span>, the higher the probability that the example belongs to class <span class="math inline">j</span>. This is very similar to logistic regression for soft classification, except that we have multiple classes.</p>
@@ -899,7 +948,7 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/crossentropy.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Cross-entropy between two distributions <span class="math inline">X</span> and <span class="math inline">Y</span>: are samples of <span class="math inline">X</span> likely under <span class="math inline">Y</span>?</figcaption><p></p>
+<figcaption class="figure-caption">Cross-entropy between two distributions <span class="math inline">X</span> and <span class="math inline">Y</span>: are samples of <span class="math inline">X</span> likely under <span class="math inline">Y</span>?</figcaption>
 </figure>
 </div>
 <p>For an input <span class="math inline">\mathbf{x}</span>, we minimize the <strong>cross-entropy</strong> between the target distribution and the predicted outputs:</p>
@@ -930,7 +979,7 @@ Logistic regression
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/crossentropy-animation.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Minimizing the cross-entropy between <span class="math inline">\mathbf{t} | \mathbf{x}</span> and <span class="math inline">\mathbf{y} | \mathbf{x}</span> makes them similar.</figcaption><p></p>
+<figcaption class="figure-caption">Minimizing the cross-entropy between <span class="math inline">\mathbf{t} | \mathbf{x}</span> and <span class="math inline">\mathbf{y} | \mathbf{x}</span> makes them similar.</figcaption>
 </figure>
 </div>
 <p>As <span class="math inline">\mathbf{t}</span> is a binary vector <span class="math inline">[0, 1, 0, 0, 0]</span>, the cross-entropy / negative log-likelihood can also be noted as the dot product between <span class="math inline">\mathbf{t}</span> and <span class="math inline">\log \mathbf{y}</span>:</p>
@@ -954,12 +1003,12 @@ Logistic regression
 \end{split}
 </span></p>
 <p>i.e.&nbsp;the same as with the mse in linear regression! Refer <a href="https://peterroelants.github.io/posts/cross-entropy-softmax/" class="uri">https://peterroelants.github.io/posts/cross-entropy-softmax/</a> for more explanations on the proof.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1011,12 +1060,12 @@ Note
     \Delta \mathbf{b} = \eta \,  (\mathbf{t} - \mathbf{y} ) \\
 \end{cases}
 </span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Softmax linear classifier
 </div>
 </div>
@@ -1100,9 +1149,75 @@ Softmax linear classifier
 <p><span class="math display">
 \mathcal{L}(W, \mathbf{b}) =  \mathbb{E}_{\mathcal{D}} [- \sum_{j=1}^C t_j \, \log y_j + (1 - t_j) \, \log( 1- y_j)]
 </span></p>
-
-
 </section>
+</section>
+<section id="metrics" class="level2">
+<h2 class="anchored" data-anchor-id="metrics">Metrics</h2>
+<p>The <strong>training error</strong> is the error made on the training set. It is easy to measure for classification: number of misclassified examples divided by the total number.</p>
+<p><span class="math display">
+    \epsilon_\mathcal{D} = \dfrac{\text{number of misclassifications}}{\text{number of examples}}
+</span></p>
+<p>It is totally irrelevant on usage: reading the training set has a training error of 0%. What matters is the <strong>generalization error</strong>, which is the error that will be made on new examples (not used during learning). The generalization error is much harder to measure (potentially infinite number of new examples, what is the correct answer?) and often approximated by the <strong>empirical error on the test set</strong>: one keeps a number of training examples out of the learning phase and one tests the performance on them. We need <strong>cross-validation</strong> to detect <strong>overfitting</strong>.</p>
+<p>Classification errors can also depend on the class:</p>
+<ul>
+<li><strong>False Positive</strong> errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.</li>
+<li><strong>False Negative</strong> errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.</li>
+</ul>
+<p><strong>True Positive</strong> (TP) and <strong>True Negative</strong> (TN) are correctly classified examples. Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/TP_FP.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Source: <a href="https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.PrecisionRecall" class="uri">https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.PrecisionRecall</a></figcaption>
+</figure>
+</div>
+<ul>
+<li>Error</li>
+</ul>
+<p><span class="math display">
+    \epsilon = \frac{\text{FP} + \text{FN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+</span></p>
+<ul>
+<li>Accuracy (1 - error)</li>
+</ul>
+<p><span class="math display">
+    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
+</span></p>
+<ul>
+<li>Recall (hit rate, sensitivity) and Precision (specificity)</li>
+</ul>
+<p><span class="math display">
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}} \;\;
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+</span></p>
+<ul>
+<li>F1 score = harmonic mean of precision and recall</li>
+</ul>
+<p><span class="math display">
+    \text{F1} = \frac{2\, P \, R}{P + R}
+</span></p>
+<p>For multiclass classification problems, the <strong>confusion matrix</strong> tells how many examples are correctly classified and where confusion happens. One axis is the predicted class, the other is the target class. Each element of the matrix tells how many examples are classified or misclassified. The matrix should be as diagonal as possible.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/confusionmatrix.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Using <code>scikit-learn</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> confusion_matrix(t, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1133,9 +1248,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1200,6 +1329,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1254,7 +1469,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

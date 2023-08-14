@@ -4,8 +4,6 @@ Slides: [html](../slides/2.1-Optimization.html){target="_blank"} [pdf](../slides
 
 ## Analytic optimization
 
-{{< youtube  1_sPEA6nnIA >}}
-
 Machine learning is all about optimization:
 
 * Supervised learning minimizes the error between the prediction and the data.
@@ -31,11 +29,12 @@ The sign of the second order derivative tells us whether it is a maximum or mini
 
 **Multivariate functions**
 
-A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. A point $(x^*, y^*)$ is an optimum of $f$ if all partial derivatives are zero:
+A multivariate function is a function of more than one variable, e.g.  $f(x, y)$. A point $(x^*, y^*)$ is an optimum of $f$ if all partial derivatives are simultaneously zero:
 
 $$
     \begin{cases}
         \dfrac{\partial f(x^*, y^*)}{\partial x} = 0 \\
+        \\
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
 $$
@@ -49,8 +48,6 @@ $$
 ![Multivariate optimization of $f(x, y) = (x - 1)^2 + y^2 + 1$. The minimum is in $(1, 0)$.](../slides/img/optimization-example-multivariate.png){width=80%}
 
 ## Gradient descent
-
-{{< youtube  UpJL2M6GKog >}}
 
 In machine learning, we generally do not have access to the analytical form of the objective function. We can not therefore get its derivative and search where it is 0. However, we have access to its value (and derivative) for certain values, for example:
 
@@ -66,7 +63,7 @@ We can "ask" the model for as many values as we want, but we never get its analy
 Let's remember the definition of the derivative of a function. The derivative $f'(x)$ is defined by the slope of the tangent of the function:
 
 $$
-    f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{x + h - x} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+    f'(x) = \lim_{h \to 0} \dfrac{f(x + h) - f(x)}{x + h - x} = \lim_{h \to 0} \dfrac{f(x + h) - f(x)}{h}
 $$
 
 If we take $h$ small enough, we have the following approximation:
@@ -137,19 +134,19 @@ $$
 Each variable is updated independently using partial derivatives:
 
 $$
-    \Delta x = x_{n+1} - x_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial x}
-$$
-$$
-    \Delta y = y_{n+1} - y_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial y}
-$$
-$$
-    \Delta z = z_{n+1} - z_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial z}
+\begin{cases}
+    \Delta x = x_{n+1} - x_{n} = - \eta \, \dfrac{\partial f(x_n, y_n, z_n)}{\partial x} \\
+    \\
+    \Delta y = y_{n+1} - y_{n} = - \eta \, \dfrac{\partial f(x_n, y_n, z_n)}{\partial y} \\
+    \\
+    \Delta z = z_{n+1} - z_{n} = - \eta \, \dfrac{\partial f(x_n, y_n, z_n)}{\partial z} \\
+\end{cases}
 $$
 
 We can also use the vector notation to use the **gradient operator**:
 
 $$
-    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} f(\mathbf{x}) = \begin{bmatrix} \frac{\partial f(x, y, z)}{\partial x} \\ \frac{\partial f(x, y, z)}{\partial y} \\ \frac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
+    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} f(\mathbf{x}) = \begin{bmatrix} \dfrac{\partial f(x, y, z)}{\partial x} \\ \\ \dfrac{\partial f(x, y, z)}{\partial y} \\ \\ \dfrac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
     \qquad \rightarrow \qquad \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} f(\mathbf{x}_n)
 $$
 
@@ -169,8 +166,6 @@ Gradient descent is not optimal: it always finds a local minimum, but there is n
 
 
 ## Regularization
-
-{{< youtube  LI5ExC4d9Js >}}
 
 
 ### L2 - Regularization
@@ -201,13 +196,13 @@ $$
 For a fixed value of $\lambda$ (for example 0.1), we now minimize using gradient descent this new loss function. To do that, we just need to compute its gradient:
 
 $$
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 $$
 
 and apply gradient descent iteratively:
 
 $$
-    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 $$
 
 
@@ -242,7 +237,7 @@ The right value for $\lambda$ is hard to find. We will see later methods to expe
 Regularization is a form of **constrained optimization**. What we actually want to solve is the constrained optimization problem:
 
 $$
-    \min_{x, y} \qquad f(x, y)
+    \min_{x, y} \,f(x, y)
 $$
 so that:
 $$
@@ -269,7 +264,7 @@ $$
 Its gradient only depend on the sign of $x$ and $y$:
 
 $$
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \frac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \\ \dfrac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
 $$
 
 It tends to lead to **sparser** value of $(x, y)$, i.e. either $x$ or $y$ will be close or equal to 0.

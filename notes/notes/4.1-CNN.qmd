@@ -4,8 +4,6 @@ Slides: [html](../slides/4.1-CNN.html){target="_blank"} [pdf](../slides/pdf/4.1-
 
 ## Convolutional neural networks
 
-{{< youtube  2KASQi7avYA >}}
-
 
 ### Rationale
 
@@ -147,8 +145,6 @@ model.compile(
 
 ## Some famous convolutional networks
 
-{{< youtube  pw-sFY3UqG4 >}}
-
 ### Neocognitron
 
 The **Neocognitron** (Fukushima, 1980 [@Fukushima1980]) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.
@@ -286,8 +282,6 @@ Several criteria have to be considered when choosing an architecture:
 
 ## Applications of CNN
 
-{{< youtube  n7U9pywhQYM >}}
-
 ### Object recognition
 
 **Object recognition** has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like **ImageNet** (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.
@@ -331,8 +325,6 @@ It is also possible to apply convolutions on text. **Sentiment analysis** assign
 
 
 ## Transfer learning
-
-{{< youtube  12ohNYgDHvY >}}
 
 **Myth:** ones needs at least one million labeled examples to use deep learning. This is true if you train the CNN **end-to-end** with randomly initialized weights. But there are alternatives:
 
@@ -401,8 +393,6 @@ See <https://keras.io/api/applications/> for the full list of pretrained network
 
 
 ## Ensemble learning
-
-{{< youtube  WVNqiUnHRPA >}}
 
 Since 2016, only ensembles of existing networks win the competitions.
 

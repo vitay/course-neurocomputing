@@ -4,8 +4,6 @@ Slides: [html](../slides/3.1-NeuralNetworks.html){target="_blank"} [pdf](../slid
 
 ## Multi-layer perceptron
 
-{{< youtube  M5GwvFpzrjE >}}
-
 A **Multi-Layer Perceptron** (MLP) or **feedforward neural network** is composed of:
 
 * an input layer for the input vector $\mathbf{x}$
@@ -157,8 +155,6 @@ For a controversy about the origins of backpropagation and who should get credit
 :::
 
 ## Backpropagation
-
-{{< youtube  eq3uVwtzWmA >}}
 
 ### Backpropagation on a shallow network
 
@@ -440,8 +436,6 @@ The more neurons in the hidden layer, the better the training error, but the wor
 
 ### Backpropagation on a deep neural network
 
-{{< youtube  2Ew8Sz0Giw0 >}}
-
 A MLP with more than one hidden layer is a **deep neural network**.
 
 ![Deep network extract progressively more complex features.](../slides/img/deeplearning.png){width=80%}
@@ -524,8 +518,6 @@ $$
 :::
 
 ## Example of a shallow network
-
-{{< youtube  8B7RcBC11Lo >}}
 
 Let's try to solve this **non-linear** binary classification problem:
 

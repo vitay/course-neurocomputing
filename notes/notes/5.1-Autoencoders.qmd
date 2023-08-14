@@ -4,8 +4,6 @@ Slides: [html](../slides/5.1-Autoencoders.html){target="_blank"} [pdf](../slides
 
 ## Autoencoders
 
-{{< youtube  bW2jYMdaPZk >}}
-
 
 **Supervised learning** algorithms need a lot of labeled data (with $\mathbf{t}$) in order to learn classification/regression tasks, but labeled data is very expensive to obtain (experts, crowd sourcing). A "bad" algorithm trained with a lot of data will perform better than a "good" algorithm trained with few data. 
 
@@ -58,8 +56,6 @@ This defines a **stacked autoencoder**, trained using **Greedy layer-wise** lear
 
 
 ## Deep autoencoders
-
-{{< youtube  daBrY1dmvn0 >}}
 
 ### Semi-supervised learning
 
@@ -114,8 +110,6 @@ A **denoising autoencoder** (DAE, [@Vincent2010]) is trained with noisy inputs (
 ![Clustering can be applied on the latent representations. Source: <doi:10.1007/978-3-030-32520-6_55>.](../slides/img/deepclustering.jpg){width=90%}
 
 ## Variational autoencoders (VAE)
-
-{{< youtube  XhBI14qOzXg >}}
 
 ### Motivation
 
@@ -382,8 +376,6 @@ The condition does not need to be a label, it can be a shape or another image (p
 ![CVAE conditioned on shapes. Source:  <https://hci.iwr.uni-heidelberg.de/content/variational-u-net-conditional-appearance-and-shape-generation>](../slides/img/cvae-shape.png){width=60%}
 
 ## Variational inference (optional)
-
-{{< youtube  IP8YqRBBCP8 >}}
 
 ### Learning probability distributions from samples
 

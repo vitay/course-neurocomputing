@@ -4,8 +4,6 @@ Slides: [html](../slides/5.3-GAN.html){target="_blank"} [pdf](../slides/pdf/5.3-
 
 ## Generative adversarial networks
 
-{{< youtube  CWgvnu8Qtug >}}
-
 ### Generative models
 
 An autoencoder learns to first encode inputs in a **latent space** and then use a generative model to model the data distribution.
@@ -106,8 +104,6 @@ StyleGAN2 from NVIDIA [@Karras2020] is one of the most realistic GAN variant. Ch
 
 
 ## Conditional GANs
-
-{{< youtube  WxVKJfwPjw4 >}}
 
 ### cGAN
 

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 19&nbsp; Contrastive Learning</title>
+<title>Neurocomputing - Contrastive Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,14 +17,15 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -38,8 +39,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,7 +76,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -104,11 +105,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Contrastive Learning</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/7.1-Transformers.html"><strong>Self-supervised learning</strong></a></li><li class="breadcrumb-item"><a href="../notes/7.2-ContrastiveLearning.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Contrastive Learning</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -116,7 +122,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -125,22 +131,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -164,8 +172,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -194,8 +203,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -214,8 +224,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -239,8 +250,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,8 +276,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -284,8 +297,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,8 +328,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -334,8 +349,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -352,7 +368,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,12 +435,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -441,7 +459,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Contrastive Learning</span></h1>
+<h1 class="title"><span class="chapter-title">Contrastive Learning</span></h1>
 </div>
 
 
@@ -468,7 +486,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/nlp-ssl.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/05/self-supervised-learning-nlp/" class="uri">https://amitness.com/2020/05/self-supervised-learning-nlp/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/05/self-supervised-learning-nlp/" class="uri">https://amitness.com/2020/05/self-supervised-learning-nlp/</a></figcaption>
 </figure>
 </div>
 <p>Pretext tasks can be easily and automatically derived from the existing data, such as predicting the future of a signal.</p>
@@ -476,80 +494,80 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/denoisingautoencoder.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption>
 </figure>
 </div>
 <p>word2vec <span class="citation" data-cites="Mikolov2013">(<a href="../references.html#ref-Mikolov2013" role="doc-biblioref">Mikolov et al., 2013</a>)</span> is trained using the pretext task of predicting the surrounding words in a sentence.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/word2vec-training.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://jaxenter.com/deep-learning-search-word2vec-147782.html" class="uri">https://jaxenter.com/deep-learning-search-word2vec-147782.html</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/BERT-language-modeling-masked-lm.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Masked word prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Masked word prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/bert-next-sentence-prediction.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Next sentence prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption><p></p>
+<figcaption class="figure-caption">Next sentence prediction. Source: <a href="https://jalammar.github.io/illustrated-bert/" class="uri">https://jalammar.github.io/illustrated-bert/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gpt-2-autoregression-2.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Next word prediction. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption><p></p>
+<figcaption class="figure-caption">Next word prediction. Source: <a href="https://jalammar.github.io/illustrated-gpt2/" class="uri">https://jalammar.github.io/illustrated-gpt2/</a></figcaption>
 </figure>
 </div>
 <p>Autoregressive models (RNN) are trained to predict the next value <span class="math inline">\mathbf{x}_{t+1}</span> of a (multivariate) signal based on its history <span class="math inline">(\mathbf{x}_{t-T}, \ldots, \mathbf{x}_{t})</span>. At inference time, they can “unroll” the future by considering their prediction as the future “ground truth”. Useful for forecasting: weather, share values, predictive maintenance, etc.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/arima.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://saas.berkeley.edu/rp/arima" class="uri">https://saas.berkeley.edu/rp/arima</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://saas.berkeley.edu/rp/arima" class="uri">https://saas.berkeley.edu/rp/arima</a></figcaption>
 </figure>
 </div>
 <p>Rotations are applied to an image and the CNN has to guess which one has been applied. By doing so, it has to learn visual features that “understand” what the regular position of an object is.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-sup-rotation.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Rotation prediciton. <span class="citation" data-cites="Gidaris2018">(<a href="../references.html#ref-Gidaris2018" role="doc-biblioref">Gidaris et al., 2018</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Rotation prediciton. <span class="citation" data-cites="Gidaris2018">(<a href="../references.html#ref-Gidaris2018" role="doc-biblioref">Gidaris et al., 2018</a>)</span></figcaption>
 </figure>
 </div>
 <p>One can also cut two patches of an image and ask the CNN to predict their relative position on a grid. The task is easier when the CNN “understands” the content of the patches, i.e.&nbsp;has learned good features. Note that the two patches go through the <strong>same</strong> CNN, but the two outputs are concatenated before the classification layers.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/selfsup-patches.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Context prediction. <span class="citation" data-cites="Doersch2016">(<a href="../references.html#ref-Doersch2016" role="doc-biblioref">Doersch et al., 2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Context prediction. <span class="citation" data-cites="Doersch2016">(<a href="../references.html#ref-Doersch2016" role="doc-biblioref">Doersch et al., 2016</a>)</span></figcaption>
 </figure>
 </div>
 <p>One can also shuffle patches of an image according to a specific permutation, and have the network predict which permutation was applied.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/self-sup-jigsaw-puzzle.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Jigsaw puzzles. <span class="citation" data-cites="Noroozi2017">(<a href="../references.html#ref-Noroozi2017" role="doc-biblioref">Noroozi and Favaro, 2017</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Jigsaw puzzles. <span class="citation" data-cites="Noroozi2017">(<a href="../references.html#ref-Noroozi2017" role="doc-biblioref">Noroozi and Favaro, 2017</a>)</span></figcaption>
 </figure>
 </div>
 <p>As with denoising autoencoders, <strong>context encoders</strong> can be trained to generate the contents of an arbitrary image region based on its surroundings. The loss function is the sum of the reconstruction loss and an adversarial loss (as in GANs). Useful for in-paintings. The encoder part can be fine-tuned on classification tasks.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/context-encoder.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Context encoder. <span class="citation" data-cites="Pathak2016">(<a href="../references.html#ref-Pathak2016" role="doc-biblioref">Pathak et al., 2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Context encoder. <span class="citation" data-cites="Pathak2016">(<a href="../references.html#ref-Pathak2016" role="doc-biblioref">Pathak et al., 2016</a>)</span></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/context-network.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Context encoder. <span class="citation" data-cites="Pathak2016">(<a href="../references.html#ref-Pathak2016" role="doc-biblioref">Pathak et al., 2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Context encoder. <span class="citation" data-cites="Pathak2016">(<a href="../references.html#ref-Pathak2016" role="doc-biblioref">Pathak et al., 2016</a>)</span></figcaption>
 </figure>
 </div>
 <p>Triplet siamese networks have to guess whether three frames are consecutive in a video sequence or not.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/frame-order-validation.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Frame order validation. <span class="citation" data-cites="Misra2016">(<a href="../references.html#ref-Misra2016" role="doc-biblioref">Misra et al., 2016</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Frame order validation. <span class="citation" data-cites="Misra2016">(<a href="../references.html#ref-Misra2016" role="doc-biblioref">Misra et al., 2016</a>)</span></figcaption>
 </figure>
 </div>
 </section>
@@ -560,13 +578,13 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/contrastive-1.webp" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/contrastive-2.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://ai.stanford.edu/blog/understanding-contrastive-learning/" class="uri">https://ai.stanford.edu/blog/understanding-contrastive-learning/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://ai.stanford.edu/blog/understanding-contrastive-learning/" class="uri">https://ai.stanford.edu/blog/understanding-contrastive-learning/</a></figcaption>
 </figure>
 </div>
 <p>A cheap and easy to obtain similar instances of the same class without labels is to perform <strong>data augmentation</strong> on the same image:</p>
@@ -577,20 +595,20 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/contrastive-dataaugmentation.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-dataaugmentation.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <span class="citation" data-cites="Chen2020a">Chen et al. (<a href="../references.html#ref-Chen2020a" role="doc-biblioref">2020</a>)</span></figcaption><p></p>
+<figcaption class="figure-caption">Source: <span class="citation" data-cites="Chen2020a">Chen et al. (<a href="../references.html#ref-Chen2020a" role="doc-biblioref">2020</a>)</span></figcaption>
 </figure>
 </div>
 <p>SimCLR <span class="citation" data-cites="Chen2020a">(<strong>Sim</strong>ple framework for <strong>C</strong>ontrastive <strong>L</strong>earning of visual <strong>R</strong>epresentations, <a href="../references.html#ref-Chen2020a" role="doc-biblioref">Chen et al., 2020</a>)</span> generates a <strong>positive pair</strong> of augmented images. Both images <span class="math inline">\mathbf{x}_i</span> and <span class="math inline">\mathbf{x}_j</span> go through the same CNN encoder <span class="math inline">f</span> (e.g.&nbsp;a ResNet-50) to produce high-level representations <span class="math inline">\mathbf{h}_i</span> and <span class="math inline">\mathbf{h}_j</span>. The representations are passed through a FCN <span class="math inline">g</span> to produce embeddings <span class="math inline">\mathbf{z}_i</span> and <span class="math inline">\mathbf{z}_j</span>. The goal is to <strong>maximize the similarity</strong> or agreement between the embeddings <span class="math inline">\mathbf{z}_i</span> and <span class="math inline">\mathbf{z}_j</span>, i.e.&nbsp;have the vectors as close as possible from each other..</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-architecture.webp" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption>
 </figure>
 </div>
 <p>The similarity between the embeddings <span class="math inline">\mathbf{z}_i</span> and <span class="math inline">\mathbf{z}_j</span> is calculated using the <strong>cosine similarity</strong>:</p>
@@ -604,7 +622,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-cosinesimilarity.webp" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607" class="uri">https://towardsdatascience.com/understanding-contrastive-learning-d5b19fd96607</a></figcaption>
 </figure>
 </div>
 <p>SimCLR actually selects a minibatch of <span class="math inline">K</span> images and generates two augmented images for each of them.</p>
@@ -617,7 +635,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2020/04/advancing-self-supervised-and-semi.html" class="uri">https://ai.googleblog.com/2020/04/advancing-self-supervised-and-semi.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://ai.googleblog.com/2020/04/advancing-self-supervised-and-semi.html" class="uri">https://ai.googleblog.com/2020/04/advancing-self-supervised-and-semi.html</a></figcaption>
 </figure>
 </div>
 <p>The NT-Xent (Normalized Temperature-Scaled Cross-Entropy Loss) loss function allows to achieve this. It is a variant of the Noise Contrastive Estimator (NCE) loss.</p>
@@ -628,7 +646,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-softmax-interpretation.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption>
 </figure>
 </div>
 <p>For a positive pair, this softmax represents the probability that the second augmented cat is closer to the first one, compared to the other negative images in the minibatch:</p>
@@ -645,7 +663,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-softmax-loss.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption>
 </figure>
 </div>
 <p>Note that the loss function is not symmetric, as the denominator changes:</p>
@@ -657,7 +675,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-softmax-loss-inverted.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr/" class="uri">https://amitness.com/2020/03/illustrated-simclr/</a></figcaption>
 </figure>
 </div>
 <p>For a positive pair <span class="math inline">(2k, 2k+1)</span>, we will then average the two losses:</p>
@@ -682,7 +700,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/simclr-downstream.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr" class="uri">https://amitness.com/2020/03/illustrated-simclr</a></figcaption><p></p>
+<figcaption class="figure-caption">Source: <a href="https://amitness.com/2020/03/illustrated-simclr" class="uri">https://amitness.com/2020/03/illustrated-simclr</a></figcaption>
 </figure>
 </div>
 <p>A simple logistic regression on the learned representations is already on-par with fully supervised models.</p>
@@ -696,12 +714,12 @@ div.csl-indent {
 <p><img src="../slides/img/simclr-semisupervised.png" class="img-fluid figure-img" style="width:70.0%"></p>
 </figure>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Additional resources
 </div>
 </div>
@@ -717,30 +735,30 @@ Additional resources
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Chen2020a" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Chen2020a" class="csl-entry" role="listitem">
 Chen, T., Kornblith, S., Norouzi, M., and Hinton, G. (2020). A <span>Simple Framework</span> for <span>Contrastive Learning</span> of <span>Visual Representations</span>. doi:<a href="https://doi.org/10.48550/arXiv.2002.05709">10.48550/arXiv.2002.05709</a>.
 </div>
-<div id="ref-Doersch2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Doersch2016" class="csl-entry" role="listitem">
 Doersch, C., Gupta, A., and Efros, A. A. (2016). Unsupervised <span>Visual Representation Learning</span> by <span>Context Prediction</span>. doi:<a href="https://doi.org/10.48550/arXiv.1505.05192">10.48550/arXiv.1505.05192</a>.
 </div>
-<div id="ref-Gidaris2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Gidaris2018" class="csl-entry" role="listitem">
 Gidaris, S., Singh, P., and Komodakis, N. (2018). Unsupervised <span>Representation Learning</span> by <span>Predicting Image Rotations</span>. doi:<a href="https://doi.org/10.48550/arXiv.1803.07728">10.48550/arXiv.1803.07728</a>.
 </div>
-<div id="ref-Mikolov2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Mikolov2013" class="csl-entry" role="listitem">
 Mikolov, T., Chen, K., Corrado, G., and Dean, J. (2013). Efficient <span>Estimation</span> of <span>Word Representations</span> in <span>Vector Space</span>. <a href="http://arxiv.org/abs/1301.3781">http://arxiv.org/abs/1301.3781</a>.
 </div>
-<div id="ref-Misra2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Misra2016" class="csl-entry" role="listitem">
 Misra, I., Zitnick, C. L., and Hebert, M. (2016). Shuffle and <span>Learn</span>: <span>Unsupervised Learning</span> using <span>Temporal Order Verification</span>. doi:<a href="https://doi.org/10.48550/arXiv.1603.08561">10.48550/arXiv.1603.08561</a>.
 </div>
-<div id="ref-Noroozi2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Noroozi2017" class="csl-entry" role="listitem">
 Noroozi, M., and Favaro, P. (2017). Unsupervised <span>Learning</span> of <span>Visual Representations</span> by <span>Solving Jigsaw Puzzles</span>. doi:<a href="https://doi.org/10.48550/arXiv.1603.09246">10.48550/arXiv.1603.09246</a>.
 </div>
-<div id="ref-Pathak2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Pathak2016" class="csl-entry" role="listitem">
 Pathak, D., Krahenbuhl, P., Donahue, J., Darrell, T., and Efros, A. A. (2016). Context <span>Encoders</span>: <span>Feature Learning</span> by <span>Inpainting</span>. doi:<a href="https://doi.org/10.48550/arXiv.1604.07379">10.48550/arXiv.1604.07379</a>.
 </div>
-<div id="ref-Vincent2010" class="csl-entry" role="doc-biblioentry">
-Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>Journal of Machine Learning Research</em>, 38.
+<div id="ref-Vincent2010" class="csl-entry" role="listitem">
+Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>J. Mach. Learn. Res.</em> 11, 3371–3408.
 </div>
 </div>
 </section>
@@ -773,9 +791,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -840,6 +872,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -894,7 +1012,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

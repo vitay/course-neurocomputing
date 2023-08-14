@@ -122,19 +122,23 @@ Goodfellow IJ, Pouget-Abadie J, Mirza M, Xu B, Warde-Farley D, Ozair S, Courvill
 :::
 ::: {.column width=40%}
 
-![](img/negative-loglikelihood.png)
+![](img/negative-loglikelihood.png){width=80%}
 
 :::
 :::
 
 
-* The goal of the discriminator is to **minimize** the negative log-likelihood (cross-entropy) of classifying correctly the data:
+* The goal of the discriminator is to **minimize** the negative log-likelihood (binary cross-entropy) of classifying correctly the data:
 
 $$
     \mathcal{L}(D) = \mathbb{E}_{x \sim P_\text{data}(x)} [ - \log D(x)] + \mathbb{E}_{z \sim P_z(z)} [ - \log(1 - D(G(z)))]
 $$
 
 * It is similar to logistic regression: $x$ belongs to the positive class, $G(z)$ to the negative class.
+
+$$
+    \mathcal{L}(\mathbf{w}, b) =  - \sum_{i=1}^{N} [t_i \, \log y_i + (1 - t_i) \, \log( 1- y_i)]
+$$
 
 # Loss of the generator
 

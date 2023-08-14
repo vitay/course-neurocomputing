@@ -8,179 +8,17 @@ institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
 resources: pdf/2.4-LearningTheory.pdf
 ---
 
-# 1 - Error measurements
+# Non-linear regression and classification
 
-# Training vs. Generalization error
+* We have seen sofar **linear learning algorithms** for regression and classification.
 
+* Most interesting problems are non-linear: classes are not linearly separable, the output is not a linear function of the input, etc...
 
-::: {.columns}
-::: {.column width=30%}
-
-![](img/supervisedlearning.png)
-
-:::
-::: {.column width=60%}
-
-* The **training error** is the error made on the training set.
-
-    * Easy to measure for classification: number of misclassified examples divided by the total number.
-
-    $$
-        \epsilon_\mathcal{D} = \dfrac{\text{number of misclassifications}}{\text{number of examples}}
-    $$
-
-    * For regression, the mse and coefficient of determination are generally used.
-
-    * Totally irrelevant on usage: reading the training set has a training error of 0%.
-
-:::
-:::
-
-
-* What matters is the **generalization error**, which is the error that will be made on new examples (not used during learning).
-
-    * Much harder to measure (potentially infinite number of new examples, what is the correct answer?).
-
-    * Often approximated by the **empirical error**: one keeps a number of training examples out of the learning phase and one tests the performance on them.
-
-
-# Classification errors
-
-::: {.columns}
-::: {.column width=50%}
-
-
-**Confusion matrix**
-
-![Source: <https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.PrecisionRecall>](img/TP_FP.png)
-
-
-:::
-::: {.column width=50%}
-
-
-* Classification errors can also depend on the class:
-
-    * **False Positive** errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.
-
-    * **False Negative** errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.
-
-* **True Positive** (TP) and **True Negative** (TN) are correctly classified examples.
-
-* Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?
-
-:::
-:::
-
-# Classification errors
-
-::: {.columns}
-::: {.column width=30%}
-
-![Source: <https://upload.wikimedia.org/wikipedia/commons/2/26/Precisionrecall.svg>](img/Precisionrecall.svg)
-
-
-:::
-::: {.column width=70%}
-
-
-* Error
-
-$$
-    \epsilon = \frac{\text{FP} + \text{FN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
-$$
-
-* Accuracy (1 - error)
-
-$$
-    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
-$$
-
-* Recall (hit rate, sensitivity) and Precision (specificity)
-
-$$
-    R = \frac{\text{TP}}{\text{TP} + \text{FN}} \;\;
-    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
-$$
-
-* F1 score = harmonic mean of precision and recall
-
-$$
-    \text{F1} = \frac{2\, P \, R}{P + R}
-$$
-
-:::
-:::
-
-
-# Confusion matrix
-
-::: {.columns}
-::: {.column width=50%}
-
-
-* For multiclass classification problems, the **confusion matrix** tells how many examples are correctly classified and where confusion happens.
-
-* One axis is the predicted class, the other is the target class.
-
-* Each element of the matrix tells how many examples are classified or misclassified.
-
-* The matrix should be as diagonal as possible.
-
-:::
-::: {.column width=50%}
-
-
-![](img/confusionmatrix.png)
-
-:::
-:::
-
-
-* Using `scikit-learn`:
-
-```python
-from sklearn.metrics import confusion_matrix
-
-m = confusion_matrix(t, y)
-```
-
----
-
-**Overfitting in regression**
-
-![](img/underfitting-overfitting.png){width=80%}
-
-**Overfitting in classification**
+* Do we need totally new methods, or can we re-use our linear algorithms?
 
 ![](img/underfitting-overfitting-classification.png){width=80%}
 
-# Cross-validation
-
-* In classification too, **cross-validation** has to be used to prevent overfitting.
-
-* The classifier is trained on the **training set** and tested on the **test set**.
-
-* Optionally, a third **validation set** can be used to track overfitting during training.
-
-![Source: <https://developers.google.com/machine-learning/crash-course/validation/another-partition>](img/validationset.svg){width=70%}
-
-
-
-# Training and test data distribution
-
-* Beware: the test data must come from the same distribution as the training data, otherwise it makes no sense.
-
-![](img/traintest1.png){width=50%}
-
-# Training and test data distribution
-
-* Beware: the test data must come from the same distribution as the training data, otherwise it makes no sense.
-
-![](img/traintest2.png){width=50%}
-
-
-# 2 - VC dimension
+# 1 - VC dimension
 
 # Vapnik-Chervonenkis dimension of an hypothesis class
 
@@ -361,7 +199,7 @@ $$\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1$$
 * Basic principle of all non-linear methods: multi-layer perceptron, radial-basis-function networks, support-vector machines...
 
 
-# 3 - Feature space
+# 2 - Feature space
 
 # Cover's theorem on the separability of patterns (1965)
 
@@ -467,7 +305,8 @@ we obtain a smooth **non-linear** partition of the input space.
 
 ![Source: <https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/>](img/rbf3.png){width=45%}
 
-<!--
+
+# 3 - Kernel algorithms (optional)
 
 # Kernel perceptron
 
@@ -746,4 +585,3 @@ $$
 
 * SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.
 
--->

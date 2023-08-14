@@ -5,9 +5,6 @@ Slides: [html](../slides/6.1-RNN.html){target="_blank"} [pdf](../slides/pdf/6.1-
 
 ## Recurrent neural networks
 
-{{< youtube  IIeWpVMgriI >}}
-
-
 ### Problem with feedforward neural networks
 
 **Feedforward neural networks** learn to associate an input vector to an output.
@@ -199,8 +196,6 @@ In order to limit vanishing gradients and learn long-term dependencies, one has 
 This is the idea behind **long short-term memory** (LSTM) networks.
 
 ## Long short-term memory networks - LSTM
-
-{{< youtube  jvBOgXSebV0 >}}
 
 :::{.callout-note}
 All figures in this section are taken from this great blog post by Christopher Olah, which is worth a read:

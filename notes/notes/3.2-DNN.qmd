@@ -4,8 +4,6 @@ Slides: [html](../slides/3.2-DeepNN.html){target="_blank"} [pdf](../slides/pdf/3
 
 ## Why deep neural networks?
 
-{{< youtube  TWGcYiykAn4 >}}
-
 The **universal approximation theorem** (Cybenko, 1989) states that a **shallow** network can approximate any mapping function between inputs and outputs. However, if the mapping function is too complex, a shallow network may need too many hidden neurons.
 
 The hidden neurons extract **features** in the input space: typical characteristics of the input which, when combined by the output neurons, allow to solve the classification task. Problem: the features are not hierarchically organized and cannot become complex enough.
@@ -37,8 +35,6 @@ In practice, training a deep network is not as easy as the theory would suggest.
 
 
 ## Bad convergence
-
-{{< youtube  UdcmfiDZrVU >}}
 
 The loss function $\mathcal{L}(\theta)$ of a deep neural network has usually not a single global minimum, but many local minima: irregular **loss landscape**.
 
@@ -282,8 +278,6 @@ print best
 
 ## Long training times
 
-{{< youtube  nnf253n2HCY >}}
-
 ### Importance of normalization
 
 ![](../slides/img/meanremoval.gif)
@@ -355,8 +349,6 @@ $$
 
 ## Overfitting
 
-
-{{< youtube  AflXkfzAzoo >}}
 
 The main problem with deep NN is **overfitting**. With increasing depth, the network has too many weights = free parameters, so its VC dimension is high.
 
@@ -445,9 +437,7 @@ Early-stopping fights overfitting by monitoring the model’s performance on a v
 
 ![Early-stopping by checking the validation loss during training.](../slides/img/earlystopping.png){width=60%}
 
-## Vanishing gradient
-
-{{< youtube  NPUqQb9U-ww >}}
+## Vanishing gradients
 
 ### Principle 
 

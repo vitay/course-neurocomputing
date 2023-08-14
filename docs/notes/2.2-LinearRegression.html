@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 5&nbsp; Linear regression</title>
+<title>Neurocomputing - Linear regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,7 +91,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -148,11 +120,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Linear regression</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/2.1-Optimization.html"><strong>Linear algorithms</strong></a></li><li class="breadcrumb-item"><a href="../notes/2.2-LinearRegression.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear regression</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -160,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -169,22 +146,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -208,8 +187,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -238,8 +218,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -258,8 +239,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -283,8 +265,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -308,8 +291,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -328,8 +312,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -358,8 +343,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -378,8 +364,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -396,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -463,12 +450,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -485,6 +474,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression">Polynomial regression</a></li>
   <li><a href="#a-bit-of-learning-theory" id="toc-a-bit-of-learning-theory" class="nav-link" data-scroll-target="#a-bit-of-learning-theory">A bit of learning theory</a>
   <ul class="collapse">
+  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
   <li><a href="#sensibility-to-outliers" id="toc-sensibility-to-outliers" class="nav-link" data-scroll-target="#sensibility-to-outliers">Sensibility to outliers</a></li>
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-validation</a></li>
   <li><a href="#underfitting---overfitting" id="toc-underfitting---overfitting" class="nav-link" data-scroll-target="#underfitting---overfitting">Underfitting - overfitting</a></li>
@@ -503,7 +493,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Linear regression</span></h1>
+<h1 class="title"><span class="chapter-title">Linear regression</span></h1>
 </div>
 
 
@@ -521,11 +511,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Slides: <a href="../slides/2.2-LinearRegression.html" target="_blank">html</a> <a href="../slides/pdf/2.2-LinearRegression.pdf" target="_blank">pdf</a></p>
 <section id="linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression">Linear regression</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/lEILkDvT0gI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation2.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Simple linear regression. <span class="math inline">x</span> is the input, <span class="math inline">y</span> the output. The data is represented by blue dots, the model by the black line.</figcaption><p></p>
+<figcaption class="figure-caption">Simple linear regression. <span class="math inline">x</span> is the input, <span class="math inline">y</span> the output. The data is represented by blue dots, the model by the black line.</figcaption>
 </figure>
 </div>
 <p>Let’s consider a training set of N examples <span class="math inline">\mathcal{D} = (x_i, t_i)_{i=1..N}</span>. In <strong>linear regression</strong>, we want to learn a linear model (hypothesis) <span class="math inline">y</span> that is linearly dependent on the input <span class="math inline">x</span>:</p>
@@ -535,8 +524,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <strong>free parameters</strong> of the model are the slope <span class="math inline">w</span> and the intercept <span class="math inline">b</span>. This model corresponds to a single <strong>artificial neuron</strong> with output <span class="math inline">y</span>, having one input <span class="math inline">x</span>, one weight <span class="math inline">w</span>, one bias <span class="math inline">b</span> and a <strong>linear</strong> activation function <span class="math inline">f(x) = x</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Artificial neuron with multiple inputs.</figcaption><p></p>
+<p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption">Artificial neuron with multiple inputs.</figcaption>
 </figure>
 </div>
 <p>The goal of the linear regression (or least mean squares - LMS) is to minimize the <strong>mean square error</strong> (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:</p>
@@ -545,38 +534,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </span></p>
 <p>As the training set is finite and the samples i.i.d (independent and identically distributed), we can simply replace the expectation by a sampling average over the training set:</p>
 <p><span class="math display">
-    \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
+    \mathcal{L}(w, b) = \dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 </span></p>
 <p>The minimum of the mse is achieved when the <strong>prediction</strong> <span class="math inline">y_i = f_{w, b}(x_i)</span> is equal to the <strong>true value</strong> <span class="math inline">t_i</span> for all training examples. In other words, we want to minimize the <strong>residual error</strong> of the model on the data. It is not always possible to obtain the global minimum (0) as the data may be noisy, but the closer, the better.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation-mse-dual.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">A good fit to the data is when the prediction <span class="math inline">y_i</span> (on the line) is close to the data <span class="math inline">t_i</span> for all training examples.</figcaption><p></p>
+<figcaption class="figure-caption">A good fit to the data is when the prediction <span class="math inline">y_i</span> (on the line) is close to the data <span class="math inline">t_i</span> for all training examples.</figcaption>
 </figure>
 </div>
 <section id="least-mean-squares" class="level3">
 <h3 class="anchored" data-anchor-id="least-mean-squares">Least Mean Squares</h3>
 <p>We search for <span class="math inline">w</span> and <span class="math inline">b</span> which minimize the mean square error:</p>
 <p><span class="math display">
-    \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
+    \mathcal{L}(w, b) = \dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 </span></p>
 <p>We will apply <strong>gradient descent</strong> to iteratively modify estimates of <span class="math inline">w</span> and <span class="math inline">b</span>:</p>
 <p><span class="math display">
-    \Delta w = - \eta \, \frac{\partial \mathcal{L}(w, b)}{\partial w}
-</span> <span class="math display">
-    \Delta b = - \eta \, \frac{\partial \mathcal{L}(w, b)}{\partial b}
+\begin{cases}
+    \Delta w = - \eta \, \dfrac{\partial \mathcal{L}(w, b)}{\partial w}\\
+    \\
+    \Delta b = - \eta \, \dfrac{\partial \mathcal{L}(w, b)}{\partial b}\\
+\end{cases}
 </span></p>
 <p>Let’s search for the partial derivative of the mean square error with respect to <span class="math inline">w</span>:</p>
 <p><span class="math display">
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = \frac{\partial}{\partial w} [\frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2]
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = \dfrac{\partial}{\partial w} [\dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2]
 </span></p>
 <p>Partial derivatives are linear, so the derivative of a sum is the sum of the derivatives:</p>
 <p><span class="math display">
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = \frac{1}{N} \, \sum_{i=1}^{N} \frac{\partial}{\partial w} (t_i - y_i )^2
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = \dfrac{1}{N} \, \sum_{i=1}^{N} \dfrac{\partial}{\partial w} (t_i - y_i )^2
 </span></p>
 <p>This means we can compute a gradient for each training example instead of for the whole training set (see later the distinction batch/online):</p>
 <p><span class="math display">
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = \frac{1}{N} \, \sum_{i=1}^{N} \frac{\partial}{\partial w} \mathcal{l}_i(w, b)
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = \dfrac{1}{N} \, \sum_{i=1}^{N} \dfrac{\partial}{\partial w} \mathcal{l}_i(w, b)
     \qquad \text{with} \qquad \mathcal{l}_i(w, b) = (t_i - y_i )^2
 </span></p>
 <p>The individual loss <span class="math inline">\mathcal{l}_i(w, b) = (t_i - y_i )^2</span> is the composition of two functions:</p>
@@ -586,57 +577,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The <strong>chain rule</strong> tells us how to derive such composite functions:</p>
 <p><span class="math display">
-    \frac{ d f(g(x))}{dx} = \frac{ d f(g(x))}{d g(x)} \times \frac{ d g(x)}{dx} = \frac{ d f(y)}{dy} \times \frac{ d g(x)}{dx}
+    \dfrac{ d f(g(x))}{dx} = \dfrac{ d f(g(x))}{d g(x)} \times \dfrac{ d g(x)}{dx} = \dfrac{ d f(y)}{dy} \times \dfrac{ d g(x)}{dx}
 </span></p>
 <p>The first derivative considers <span class="math inline">g(x)</span> to be a single variable. Applied to our problem, this gives:</p>
 <p><span class="math display">
-     \frac{\partial}{\partial w} \mathcal{l}_i(w, b) =  \frac{\partial g_i(y_i)}{\partial y_i} \times  \frac{\partial y_i}{\partial w}
+     \dfrac{\partial}{\partial w} \mathcal{l}_i(w, b) =  \dfrac{\partial g_i(y_i)}{\partial y_i} \times  \dfrac{\partial y_i}{\partial w}
 </span></p>
 <p>The square error function <span class="math inline">g_i(y) = (t_i - y)^2</span> is easy to differentiate w.r.t <span class="math inline">y</span>:</p>
 <p><span class="math display">
-    \frac{\partial g_i(y_i)}{\partial y_i} = - 2 \, (t_i - y_i)
+    \dfrac{\partial g_i(y_i)}{\partial y_i} = - 2 \, (t_i - y_i)
 </span></p>
 <p>The prediction <span class="math inline">y_i = w \, x_i + b</span> also w.r.t <span class="math inline">w</span> and <span class="math inline">b</span>:</p>
 <p><span class="math display">
-   \frac{\partial  y_i}{\partial w} = x_i
-</span></p>
-<p><span class="math display">
-   \frac{\partial  y_i}{\partial b} = 1
+\begin{cases}
+   \dfrac{\partial  y_i}{\partial w} = x_i \\
+    \\
+   \dfrac{\partial  y_i}{\partial b} = 1 \\
+\end{cases}
 </span></p>
 <p>The partial derivative of the individual loss is:</p>
 <p><span class="math display">
-    \frac{\partial \mathcal{l}_i(w, b)}{\partial w} = - 2 \, (t_i - y_i) \, x_i
-</span></p>
-<p><span class="math display">
-    \frac{\partial \mathcal{l}_i(w, b)}{\partial b} = - 2 \, (t_i - y_i)
+\begin{cases}
+    \dfrac{\partial \mathcal{l}_i(w, b)}{\partial w} = - 2 \, (t_i - y_i) \, x_i \\
+    \\
+    \dfrac{\partial \mathcal{l}_i(w, b)}{\partial b} = - 2 \, (t_i - y_i) \\
+\end{cases}
 </span></p>
 <p>This gives us:</p>
 <p><span class="math display">
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = - \frac{2}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-</span></p>
-<p><span class="math display">
-    \frac{\partial \mathcal{L}(w, b)}{\partial b} = - \frac{2}{N} \sum_{i=1}^{N} (t_i - y_i)
+\begin{cases}
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = - \dfrac{2}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial b} = - \dfrac{2}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 </span></p>
 <p>Gradient descent is then defined by the learning rules (absorbing the 2 in <span class="math inline">\eta</span>):</p>
 <p><span class="math display">
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
+\begin{cases}
+    \Delta w = \eta \, \dfrac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \Delta b = \eta \, \dfrac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 </span></p>
-<p><span class="math display">
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
-</span></p>
-<p><strong>Least Mean Squares</strong> (LMS) or Ordinary Least Squares (OLS) is a <strong>batch</strong> algorithm: the parameter changes are computed over the whole dataset.</p>
-<p><span class="math display">
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-</span> <span class="math display">
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
-</span></p>
-<p>The parameter changes have to be applied multiple times (<strong>epochs</strong>) in order for the parameters to converge. One can stop when the parameters do not change much, or after a fixed number of epochs.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<p><strong>Least Mean Squares</strong> (LMS) or Ordinary Least Squares (OLS) is a <strong>batch</strong> algorithm: the parameter changes are computed over the whole dataset. The parameter changes have to be applied multiple times (<strong>epochs</strong>) in order for the parameters to converge. One can stop when the parameters do not change much, or after a fixed number of epochs.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 LMS algorithm
 </div>
 </div>
@@ -652,8 +641,8 @@ LMS algorithm
 <li><p><span class="math inline">dw = dw + (t_i - y_i) \, x_i</span></p></li>
 <li><p><span class="math inline">db = db + (t_i - y_i)</span></p></li>
 </ul></li>
-<li><p><span class="math inline">\Delta w = \eta \, \frac{1}{N} dw</span></p></li>
-<li><p><span class="math inline">\Delta b = \eta \, \frac{1}{N} db</span></p></li>
+<li><p><span class="math inline">\Delta w = \eta \, \dfrac{1}{N} dw</span></p></li>
+<li><p><span class="math inline">\Delta b = \eta \, \dfrac{1}{N} db</span></p></li>
 </ul></li>
 </ul>
 </div>
@@ -661,28 +650,33 @@ LMS algorithm
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Visualization of least mean squares applied to a simple regression problem with <span class="math inline">\eta=0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption><p></p>
+<figcaption class="figure-caption">Visualization of least mean squares applied to a simple regression problem with <span class="math inline">\eta=0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption>
 </figure>
 </div>
 <p>During learning, the <strong>mean square error</strong> (mse) decreases with the number of epochs but does not reach zero because of the noise in the data.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation-loss.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Evolution of the loss function during training.</figcaption><p></p>
+<figcaption class="figure-caption">Evolution of the loss function during training.</figcaption>
 </figure>
 </div>
 </section>
 <section id="delta-learning-rule" class="level3">
 <h3 class="anchored" data-anchor-id="delta-learning-rule">Delta learning rule</h3>
 <p>LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the <strong>delta learning rule</strong>, which is the <strong>online</strong> version of LMS:</p>
-<p><span class="math display">\Delta w = \eta \, (t_i - y_i) \, x_i</span></p>
-<p><span class="math display">\Delta b = \eta \, (t_i - y_i)</span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<p><span class="math display">
+\begin{cases}
+\Delta w = \eta \, (t_i - y_i) \, x_i \\
+\\
+\Delta b = \eta \, (t_i - y_i) \\
+\end{cases}
+</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Delta learning rule
 </div>
 </div>
@@ -705,20 +699,19 @@ Delta learning rule
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation-online.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Visualization of the delta learning rule applied to a simple regression problem with <span class="math inline">\eta = 0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption><p></p>
+<figcaption class="figure-caption">Visualization of the delta learning rule applied to a simple regression problem with <span class="math inline">\eta = 0.1</span>. Each step of the animation corresponds to one epoch (iteration over the training set).</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation-online-loss.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</figcaption><p></p>
+<figcaption class="figure-caption">Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.</figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="multiple-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/BOJFFy0nA6I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>The key idea of linear regression (one input <span class="math inline">x</span>, one output <span class="math inline">y</span>) can be generalized to multiple inputs and outputs.</p>
 <p><strong>Multiple Linear Regression</strong> (MLR) predicts several output variables based on several explanatory variables:</p>
 <p><span class="math display">
@@ -728,12 +721,12 @@ y_1 = w_1 \, x_1 + w_2 \, x_2 + b_1\\
 y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 \end{cases}
 </span></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Example: fuel consumption and CO2 emissions
 </div>
 </div>
@@ -784,13 +777,13 @@ Example: fuel consumption and CO2 emissions
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/MLR-example-data.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption><p></p>
+<figcaption class="figure-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/MLR-example-data-3d.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption><p></p>
+<figcaption class="figure-caption">CO2 emissions and fuel consumption depend almost linearly on the engine size and number of cylinders.</figcaption>
 </figure>
 </div>
 <p>We can notice that the output variables seem to linearly depend on the inputs. Noting the input variables <span class="math inline">x_1</span>, <span class="math inline">x_2</span> and the output ones <span class="math inline">y_1</span>, <span class="math inline">y_2</span>, we can define our problem as a multiple linear regression:</p>
@@ -805,7 +798,7 @@ y_2 = w_3 \, x_1 + w_3 \, x_2 + b_2\\
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/MLR-example-fit-3d.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The result of MLR is a plane in the input space.</figcaption><p></p>
+<figcaption class="figure-caption">The result of MLR is a plane in the input space.</figcaption>
 </figure>
 </div>
 <p>Using the Python library <code>scikit-learn</code> (<a href="https://scikit-learn.org" class="uri">https://scikit-learn.org</a>), this is done in two lines of code:</p>
@@ -838,7 +831,7 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/linearperceptron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math inline">\mathbf{y}</span> is compared to the ground truth vector <span class="math inline">\mathbf{t}</span> using the mse loss.</figcaption><p></p>
+<figcaption class="figure-caption">A linear perceptron is a single layer of artificial neurons. The output vector <span class="math inline">\mathbf{y}</span> is compared to the ground truth vector <span class="math inline">\mathbf{t}</span> using the mse loss.</figcaption>
 </figure>
 </div>
 <p>The mean square error still needs to be a scalar in order to be minimized. We can define it as the squared norm of the error <strong>vector</strong>:</p>
@@ -853,12 +846,12 @@ y_2 = w_3 \, x_1 + w_4 \, x_2 + b_2\\
     \Delta \mathbf{b} = - \eta \, \nabla_\mathbf{b} \, \mathcal{L}(W, \mathbf{b}) \\
     \end{cases}
 </span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -869,18 +862,18 @@ Note
 </div>
 <p>We search the minimum of the mse loss function:</p>
 <p><span class="math display">
-    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] \approx \frac{1}{N} \, \sum_{i=1}^N ||\mathbf{t}_i - \mathbf{y}_i||^2 = \frac{1}{N} \, \sum_{i=1}^N \mathcal{l}_i(W, \mathbf{b})
+    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] \approx \dfrac{1}{N} \, \sum_{i=1}^N ||\mathbf{t}_i - \mathbf{y}_i||^2 = \dfrac{1}{N} \, \sum_{i=1}^N \mathcal{l}_i(W, \mathbf{b})
 </span></p>
 <p>The individual loss function <span class="math inline">\mathcal{l}_i(W, \mathbf{b})</span> is the squared <span class="math inline">\mathcal{L}^2</span>-norm of the error vector, what can be expressed as a dot product or a vector multiplication:</p>
 <p><span class="math display">
     \mathcal{l}_i(W, \mathbf{b}) = ||\mathbf{t}_i - \mathbf{y}_i||^2 = \langle \mathbf{t}_i - \mathbf{y}_i \cdot \mathbf{t}_i - \mathbf{y}_i \rangle = (\mathbf{t}_i - \mathbf{y}_i)^T \times (\mathbf{t}_i - \mathbf{y}_i)
 </span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -902,12 +895,12 @@ Note
     &amp;= - 2 \, (\mathbf{t}_i - \mathbf{y}_i) \\
 \end{aligned}
 </span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -915,19 +908,23 @@ Note
 <p>We use the properties <span class="math inline">\nabla_{\mathbf{x}}\, \mathbf{x}^T \times \mathbf{z} = \mathbf{z}</span> and <span class="math inline">\nabla_{\mathbf{z}} \, \mathbf{x}^T \times \mathbf{z} = \mathbf{x}</span> to get rid of the transpose.</p>
 </div>
 </div>
-<p>The “problem” is when computing <span class="math inline">\nabla_{W} \, \mathbf{y}_i = \nabla_{W} \, (W \times \mathbf{x}_i + \mathbf{b})</span>: * <span class="math inline">\mathbf{y}_i</span> is a vector and <span class="math inline">W</span> a matrix. * <span class="math inline">\nabla_{W} \, \mathbf{y}_i</span> is then a Jacobian (matrix), not a gradient (vector).</p>
+<p>The “problem” is when computing <span class="math inline">\nabla_{W} \, \mathbf{y}_i = \nabla_{W} \, (W \times \mathbf{x}_i + \mathbf{b})</span>:</p>
+<ul>
+<li><span class="math inline">\mathbf{y}_i</span> is a vector and <span class="math inline">W</span> a matrix.</li>
+<li><span class="math inline">\nabla_{W} \, \mathbf{y}_i</span> is then a Jacobian (matrix), not a gradient (vector).</li>
+</ul>
 <p>Intuitively, differentiating <span class="math inline">W \times \mathbf{x}_i + \mathbf{b}</span> w.r.t <span class="math inline">W</span> should return <span class="math inline">\mathbf{x}_i</span>, but it is a vector, not a matrix…</p>
 <p>Actually, only the gradient (or Jacobian) of <span class="math inline">\mathcal{l}_i(W, \mathbf{b})</span> w.r.t <span class="math inline">W</span> should be a matrix of the same size as <span class="math inline">W</span> so that we can apply gradient descent:</p>
 <p><span class="math display">\Delta W = - \eta \, \nabla_W \, \mathcal{L}(W, \mathbf{b})</span></p>
 <p>We already know that:</p>
 <p><span class="math display">\nabla_{W} \, \mathcal{l}_i(W, \mathbf{b}) = - 2\, (\mathbf{t}_i - \mathbf{y}_i) \times \nabla_{W} \, \mathbf{y}_i</span></p>
 <p>If <span class="math inline">\mathbf{x}_i</span> has <span class="math inline">n</span> elements and <span class="math inline">\mathbf{y}_i</span> <span class="math inline">m</span> elements, <span class="math inline">W</span> is a <span class="math inline">m \times n</span> matrix.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -963,10 +960,10 @@ Note
 <p>The Jacobian w.r.t <span class="math inline">W</span> can be explicitly formed using partial derivatives:</p>
 <p><span class="math display">
 \nabla_W \, \mathcal{l}(W, \mathbf{b}) = \begin{bmatrix}
-\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
+\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} &amp; \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
 \end{bmatrix}
 = \begin{bmatrix}
--2 \, (t_1 - y_1) \, x_1 &amp; -2 \, (t_1 - y_1) \, x_2 \\ -2 \, (t_2 - y_2) \, x_1 &amp; -2 \, (t_2 - y_2) \, x_2 \\
+-2 \, (t_1 - y_1) \, x_1 &amp; -2 \, (t_1 - y_1) \, x_2 \\ \\ -2 \, (t_2 - y_2) \, x_1 &amp; -2 \, (t_2 - y_2) \, x_2 \\
 \end{bmatrix}
 </span></p>
 <p>We can rearrange this matrix as an outer product:</p>
@@ -1011,12 +1008,12 @@ x_1 &amp; x_2 \\
     \Delta b_2 = \eta \, (t_2 - y_2) \\
 \end{cases}
 </span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1027,15 +1024,14 @@ Note
 </section>
 <section id="logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/fRuzoyV036Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Let’s suppose we want to perform a regression, but where the outputs <span class="math inline">t_i</span> are bounded between 0 and 1. We could use a logistic (or sigmoid) function instead of a linear function in order to transform the input into an output:</p>
 <p><span class="math display">
-    y = \sigma(w \, x + b )  = \displaystyle\frac{1}{1+\exp(-w \, x - b )}
+    y = \sigma(w \, x + b )  = \displaystyle\dfrac{1}{1+\exp(-w \, x - b )}
 </span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/sigmoid.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Logistic or sigmoid function <span class="math inline">\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Logistic or sigmoid function <span class="math inline">\sigma(x)=\displaystyle\dfrac{1}{1+\exp(-x)}</span>.</figcaption>
 </figure>
 </div>
 <p>By definition of the logistic function, the prediction <span class="math inline">y</span> will be bounded between 0 and 1, what matches the targets <span class="math inline">t</span>. Let’s now apply gradient descent on the <strong>mse</strong> loss using this new model. The individual loss will be:</p>
@@ -1043,8 +1039,8 @@ Note
 <p>The partial derivative of the individual loss is easy to find using the chain rule:</p>
 <p><span class="math display">
 \begin{aligned}
-    \displaystyle\frac{\partial l_i(w, b)}{\partial w}
-        &amp;= 2 \, (t_i - y_i)  \, \frac{\partial}{\partial w}  (t_i - \sigma(w \, x_i + b ))\\
+    \displaystyle\dfrac{\partial l_i(w, b)}{\partial w}
+        &amp;= 2 \, (t_i - y_i)  \, \dfrac{\partial}{\partial w}  (t_i - \sigma(w \, x_i + b ))\\
         &amp;\\
         &amp;= - 2 \, (t_i - y_i) \, \sigma'(w \, x_i + b ) \,  x_i \\
 \end{aligned}
@@ -1053,29 +1049,29 @@ Note
 <p><span class="math display">
     \Delta w = \eta \, (t_i - y_i) \, \sigma'(w \, x_i + b ) \, x_i
 </span></p>
-<p>The logistic function <span class="math inline">\sigma(x)=\frac{1}{1+\exp(-x)}</span> has the nice property that its derivative can be expressed easily:</p>
+<p>The logistic function <span class="math inline">\sigma(x)=\dfrac{1}{1+\exp(-x)}</span> has the nice property that its derivative can be expressed easily:</p>
 <p><span class="math display">
     \sigma'(x) = \sigma(x) \, (1 - \sigma(x) )
 </span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Here is the proof using the fact that the derivative of <span class="math inline">\displaystyle\frac{1}{f(x)}</span> is <span class="math inline">\displaystyle\frac{- f'(x)}{f^2(x)}</span> :</p>
+<p>Here is the proof using the fact that the derivative of <span class="math inline">\displaystyle\dfrac{1}{f(x)}</span> is <span class="math inline">\displaystyle\dfrac{- f'(x)}{f^2(x)}</span> :</p>
 <p><span class="math display">\begin{aligned}
-    \sigma'(x) &amp; = \displaystyle\frac{-1}{(1+\exp(-x))^2} \, (- \exp(-x)) \\
+    \sigma'(x) &amp; = \displaystyle\dfrac{-1}{(1+\exp(-x))^2} \, (- \exp(-x)) \\
     &amp;\\
-    &amp;= \frac{1}{1+\exp(-x)} \times \frac{\exp(-x)}{1+\exp(-x)}\\
+    &amp;= \dfrac{1}{1+\exp(-x)} \times \dfrac{\exp(-x)}{1+\exp(-x)}\\
     &amp;\\
-    &amp;= \frac{1}{1+\exp(-x)} \times \frac{1 + \exp(-x) - 1}{1+\exp(-x)}\\
+    &amp;= \dfrac{1}{1+\exp(-x)} \times \dfrac{1 + \exp(-x) - 1}{1+\exp(-x)}\\
     &amp;\\
-    &amp;= \frac{1}{1+\exp(-x)} \times (1 - \frac{1}{1+\exp(-x)})\\
+    &amp;= \dfrac{1}{1+\exp(-x)} \times (1 - \dfrac{1}{1+\exp(-x)})\\
     &amp;\\
     &amp;= \sigma(x) \, (1 - \sigma(x) )\\
 \end{aligned}
@@ -1094,7 +1090,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/artificialneuron.svg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Artificial neuron with multiple inputs.</figcaption><p></p>
+<figcaption class="figure-caption">Artificial neuron with multiple inputs.</figcaption>
 </figure>
 </div>
 <p>For a linear perceptron with parameters <span class="math inline">W</span> and <span class="math inline">\mathbf{b}</span> and any activation function <span class="math inline">f</span>:</p>
@@ -1118,7 +1114,6 @@ Note
 </section>
 <section id="polynomial-regression" class="level2">
 <h2 class="anchored" data-anchor-id="polynomial-regression">Polynomial regression</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/a6sQgJovhzU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/polynomialregression.png" class="img-fluid figure-img"></p>
@@ -1151,7 +1146,8 @@ Note
 </section>
 <section id="a-bit-of-learning-theory" class="level2">
 <h2 class="anchored" data-anchor-id="a-bit-of-learning-theory">A bit of learning theory</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/QbvCJNfeXbE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
+<section id="metrics" class="level3">
+<h3 class="anchored" data-anchor-id="metrics">Metrics</h3>
 <p>Before going further, let’s think about what we have been doing so far. We had a bunch of data samples <span class="math inline">\mathcal{D} = (\mathbf{x}_i, t_i)_{i=1..N}</span> (the <strong>training set</strong>). We decided to apply a (linear) model on it:</p>
 <p><span class="math display">y_i = \langle \mathbf{w} . \mathbf{x}_i \rangle + b</span></p>
 <p>We then minimized the mean square error (mse) on that training set using gradient descent:</p>
@@ -1160,62 +1156,63 @@ Note
 </span></p>
 <p>At the end of learning, we can measure the <strong>residual error</strong> of the model on the data:</p>
 <p><span class="math display">
-    \epsilon_\mathcal{D} = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
+    \epsilon_\mathcal{D} = \dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 </span></p>
 <p>We get a number, for example 0.04567. Is that good?</p>
 <p>The <strong>mean square error</strong> mse is not very informative, as its value depends on how the outputs are scaled: multiply the targets and prediction by 10 and the mse is 100 times higher.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-animation-mse-dual.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The residual error measures the quality of the fit, but it is sensible to the scaling of the outputs.</figcaption><p></p>
+<figcaption class="figure-caption">The residual error measures the quality of the fit, but it is sensible to the scaling of the outputs.</figcaption>
 </figure>
 </div>
 <p>The <strong>coefficient of determination</strong> <span class="math inline">R^2</span> is a rescaled variant of the mse comparing the variance of the residuals to the variance of the data around its mean <span class="math inline">\hat{t}</span>:</p>
 <p><span class="math display">
-    R^2 = 1 - \frac{\text{Var}(\text{residuals})}{\text{Var}(\text{data})} = 1 - \frac{\sum_{i=1}^N (t_i- y_i)^2}{\sum_{i=1}^N (t_i - \hat{t})^2}
+    R^2 = 1 - \dfrac{\text{Var}(\text{residuals})}{\text{Var}(\text{data})} = 1 - \dfrac{\sum_{i=1}^N (t_i- y_i)^2}{\sum_{i=1}^N (t_i - \hat{t})^2}
 </span></p>
 <p><span class="math inline">R^2</span> should be as close from 1 as possible. For example, if <span class="math inline">R^2 = 0.8</span>, we can say that the <strong>model explains 80% of the variance of the data</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/r2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">The coefficient of determination compares the variance of the residuals to the variance of the data. Source: <a href="https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0" class="uri">https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0</a></figcaption><p></p>
+<figcaption class="figure-caption">The coefficient of determination compares the variance of the residuals to the variance of the data. Source: <a href="https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0" class="uri">https://towardsdatascience.com/introduction-to-linear-regression-in-python-c12a072bedf0</a></figcaption>
 </figure>
 </div>
+</section>
 <section id="sensibility-to-outliers" class="level3">
 <h3 class="anchored" data-anchor-id="sensibility-to-outliers">Sensibility to outliers</h3>
 <p>Suppose we have a training set with one <strong>outlier</strong> (bad measurement, bad luck, etc).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-outlier.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Linear data with one outlier.</figcaption><p></p>
+<figcaption class="figure-caption">Linear data with one outlier.</figcaption>
 </figure>
 </div>
 <p>LMS would find the minimum of the mse, but it is clearly a bad fit for most points.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-outlier-fit.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">LMS is attracted by the outlier, leading to a bad prediction for all points.</figcaption><p></p>
+<figcaption class="figure-caption">LMS is attracted by the outlier, leading to a bad prediction for all points.</figcaption>
 </figure>
 </div>
 <p>This model feels much better, but its residual mse is actually higher…</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-outlier-fit-corrected.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">By ignoring the outlier, the prediction would be correct for most points.</figcaption><p></p>
+<figcaption class="figure-caption">By ignoring the outlier, the prediction would be correct for most points.</figcaption>
 </figure>
 </div>
 <p>Let’s visualize polynomial regression with various orders of the polynomial on a small dataset.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/polynomialregression-animation.gif" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Polynomial regression with various orders.</figcaption><p></p>
+<figcaption class="figure-caption">Polynomial regression with various orders.</figcaption>
 </figure>
 </div>
 <p>When only looking at the residual mse on the training data, one could think that the higher the order of the polynomial, the better. But it is obvious that the interpolation quickly becomes very bad when the order is too high. A <strong>complex</strong> model (with a lot of parameters) is useless for predicting new values. We actually do <strong>not</strong> care about the error on the training set, but about <strong>generalization</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/polynomialregression-mse.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Residual mse of polynomial regression depending on the order of the polynomial.</figcaption><p></p>
+<figcaption class="figure-caption">Residual mse of polynomial regression depending on the order of the polynomial.</figcaption>
 </figure>
 </div>
 </section>
@@ -1223,12 +1220,12 @@ Note
 <h3 class="anchored" data-anchor-id="cross-validation">Cross-validation</h3>
 <p>Let’s suppose we dispose of <span class="math inline">m</span> models <span class="math inline">\mathcal{M} = \{ M_1, ..., M_m\}</span> that could be used to fit (or classify) some data <span class="math inline">\mathcal{D} = \{\mathbf{x}_i, t_i\}_{i=1}^N</span>. Such a class could be the ensemble of polynomes with different orders, different algorithms (NN, SVM) or the same algorithm with different values for the hyperparameters (learning rate, regularization parameters…).</p>
 <p>The naive and <strong>wrong</strong> method to find the best hypothesis would be:</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Do not do this!
 </div>
 </div>
@@ -1255,16 +1252,16 @@ Do not do this!
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/polynomialregression-traintest.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Polynomial data split in a training set and a test set.</figcaption><p></p>
+<figcaption class="figure-caption">Polynomial data split in a training set and a test set.</figcaption>
 </figure>
 </div>
 <p>The test performance will better measure how well the model generalizes to new examples.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Simple hold-out cross-validation
 </div>
 </div>
@@ -1286,21 +1283,21 @@ Simple hold-out cross-validation
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/kfold.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">k-fold cross-validation. Source <a href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" class="uri">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></figcaption><p></p>
+<figcaption class="figure-caption">k-fold cross-validation. Source <a href="https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg" class="uri">https://upload.wikimedia.org/wikipedia/commons/1/1c/K-fold_cross_validation_EN.jpg</a></figcaption>
 </figure>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 k-fold cross-validation
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Randomly split the data <span class="math inline">\mathcal{D}</span> into <span class="math inline">k</span> subsets of <span class="math inline">\frac{N}{k}</span> examples <span class="math inline">\{ \mathcal{S}_{1}, \dots , \mathcal{S}_{k}\}</span></p></li>
+<li><p>Randomly split the data <span class="math inline">\mathcal{D}</span> into <span class="math inline">k</span> subsets of <span class="math inline">\dfrac{N}{k}</span> examples <span class="math inline">\{ \mathcal{S}_{1}, \dots , \mathcal{S}_{k}\}</span></p></li>
 <li><p>For all models <span class="math inline">M_i</span>:</p>
 <ul>
 <li><p>For all <span class="math inline">k</span> subsets <span class="math inline">\mathcal{S}_j</span>:</p>
@@ -1310,7 +1307,7 @@ k-fold cross-validation
 </ul></li>
 <li><p>The empirical error of the model <span class="math inline">M_i</span> on <span class="math inline">\mathcal{D}</span> is the average of empirical errors made on <span class="math inline">(\mathcal{S}_j)_{j=1}^{k}</span></p>
 <p><span class="math display">
-      \epsilon_{\mathcal{D}} (M_i) = \frac{1}{k} \cdot \sum_{j=1}^{k} \epsilon_{\mathcal{S}_j}(h_{ij})
+      \epsilon_{\mathcal{D}} (M_i) = \dfrac{1}{k} \cdot \sum_{j=1}^{k} \epsilon_{\mathcal{S}_j}(h_{ij})
   </span></p></li>
 </ul></li>
 <li><p>Select the model <span class="math inline">M_{i}^*</span> with the minimal empirical error on <span class="math inline">\mathcal{D}</span>.</p></li>
@@ -1318,6 +1315,14 @@ k-fold cross-validation
 </div>
 </div>
 <p>In general, you can take <span class="math inline">k=10</span> partitions. The extreme case is to take <span class="math inline">k=N</span> partition, i.e.&nbsp;the test set has only one sample each time: <strong>leave-one-out cross-validation</strong>. k-fold cross-validation works well, but needs a lot of repeated learning.</p>
+<p>The bare minimum in ML is to have separate training and test sets. However, the test set should only be used once. If you try many variations of the same algorithm on a single test set and keep the best one, you end up overfitting the test set: the model may not generalize well to novel data…</p>
+<p>A third <strong>validation set</strong> is typically used to track overfitting during training and perform model selection. The test set is ultimately used to report the final performance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../slides/img/validationset.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Source: <a href="https://developers.google.com/machine-learning/crash-course/validation/another-partition" class="uri">https://developers.google.com/machine-learning/crash-course/validation/another-partition</a></figcaption>
+</figure>
+</div>
 </section>
 <section id="underfitting---overfitting" class="level3">
 <h3 class="anchored" data-anchor-id="underfitting---overfitting">Underfitting - overfitting</h3>
@@ -1325,14 +1330,14 @@ k-fold cross-validation
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/polynomialregression-mse-traintest.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Training and test mse of polynomial regression.</figcaption><p></p>
+<figcaption class="figure-caption">Training and test mse of polynomial regression.</figcaption>
 </figure>
 </div>
 <p>A model not complex enough for the data will <strong>underfit</strong>: its training error is high. A model too complex for the data will <strong>overfit</strong>: its test error is high. In between, there is the right complexity for the model: it learns the data correctly but does not overfit.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/underfitting-overfitting.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Underfitting and overfitting.</figcaption><p></p>
+<figcaption class="figure-caption">Underfitting and overfitting.</figcaption>
 </figure>
 </div>
 <p>What does complexity mean? In polynomial regression, the complexity is related to the order of the polynomial, i.e.&nbsp;the number of coefficients to estimate:</p>
@@ -1342,12 +1347,12 @@ k-fold cross-validation
 <blockquote class="blockquote">
 <p><strong>The more free parameters, the more complex the model is, the more likely it will overfit.</strong></p>
 </blockquote>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Bias-variance trade-off
 </div>
 </div>
@@ -1356,7 +1361,7 @@ Bias-variance trade-off
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/biasvariance3.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Bias and variance of an estimator. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Bias and variance of an estimator. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption>
 </figure>
 </div>
 <p>The bias decreases when the model becomes complex; the variance increases when the model becomes complex. The <strong>generalization error</strong> is a combination of the bias and variance:</p>
@@ -1367,7 +1372,7 @@ Bias-variance trade-off
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/biasvariance2.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption><p></p>
+<figcaption class="figure-caption">The optimal complexity of an algorithm is a trade-off between bias and variance. Source: <a href="http://scott.fortmann-roe.com/docs/BiasVariance.html" class="uri">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></figcaption>
 </figure>
 </div>
 </div>
@@ -1376,18 +1381,17 @@ Bias-variance trade-off
 </section>
 <section id="regularized-regression" class="level2">
 <h2 class="anchored" data-anchor-id="regularized-regression">Regularized regression</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/6R46KLgfw5s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Linear regression can either underfit or overfit depending on the data.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/underfitting-overfitting-linear.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Linear regression underfits non-linear data.</figcaption><p></p>
+<figcaption class="figure-caption">Linear regression underfits non-linear data.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/regression-outlier-fit.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Linear regression overfits outliers.</figcaption><p></p>
+<figcaption class="figure-caption">Linear regression overfits outliers.</figcaption>
 </figure>
 </div>
 <p>When linear regression <strong>underfits</strong> (both training and test errors are high), the data is not linear: we need to use a <strong>neural network</strong>. When linear regression <strong>overfits</strong> (the test error is higher than the training error), we would like to <strong>decrease its complexity</strong>.</p>
@@ -1415,7 +1419,7 @@ Bias-variance trade-off
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ridge-effect.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Ridge regression finds the smallest value for the weights that minimize the mse. Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption><p></p>
+<figcaption class="figure-caption">Ridge regression finds the smallest value for the weights that minimize the mse. Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1437,7 +1441,7 @@ Bias-variance trade-off
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/lasso-effect.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption><p></p>
+<figcaption class="figure-caption">LASSO regression tries to set as many weight to 0 as possible (sparse code). Source: <a href="https://www.mlalgorithms.org/articles/l1-l2-regression/" class="uri">https://www.mlalgorithms.org/articles/l1-l2-regression/</a></figcaption>
 </figure>
 </div>
 <p>Both methods depend on the <strong>regularization parameter</strong> <span class="math inline">\lambda</span>. Its value determines how important the regularization term should. Regularization introduce a <strong>bias</strong>, as the solution found is <strong>not</strong> the minimum of the mse, but reduces the variance of the estimation, as small weights are less sensible to noise.</p>
@@ -1445,13 +1449,13 @@ Bias-variance trade-off
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/linearregression-withoutregularization.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Linear regression tends to assign values to all weights. Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption><p></p>
+<figcaption class="figure-caption">Linear regression tends to assign values to all weights. Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/linearregression-withregularization.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption><p></p>
+<figcaption class="figure-caption">LASSO regression tries to set as many weights to 0 as possible (sparse code). Source: <a href="https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/" class="uri">https://www.analyticsvidhya.com/blog/2017/06/a-comprehensive-guide-for-linear-ridge-and-lasso-regression/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1495,9 +1499,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1562,6 +1580,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1616,7 +1720,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

@@ -11,7 +11,7 @@ book:
     type: light
     background: white
     logo: notes/img/tuc-new.png
-  page-footer: "Copyright 2022, Julien Vitay - <julien.vitay@informatik.tu-chemnitz.de>" 
+  page-footer: "Copyright Julien Vitay - <julien.vitay@informatik.tu-chemnitz.de>" 
   chapters:
     - index.qmd
     - part: "**Introduction**"
@@ -57,7 +57,7 @@ book:
       chapters:
       - exercises/Content.qmd
       - exercises/Installation.qmd
-      - exercises/1-Python-solution.ipynb
+      - exercises/1-Python.ipynb
       - exercises/2-Numpy-solution.ipynb
       - exercises/3-LinearRegression-solution.ipynb
       - exercises/4-MLR-solution.ipynb

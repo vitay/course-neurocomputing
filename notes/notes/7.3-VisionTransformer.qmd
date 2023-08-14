@@ -10,7 +10,7 @@ The transformer architecture can also be applied to computer vision, by splittin
 ![Source: <https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html>](../slides/img/vision-transformer.gif){width=60%}
 
 
-The Vision Transformer [ViT, @Dosovitskiy2021] outperforms state-of-the-art CNNs on Imagenet while requiring less computations (Flops), but only when pretrained on bigger datasets. The performance is acceptable when trained on ImageNet (1M images), great when pre-trained on ImageNet-21k (14M images), and state-of-the-art when pre-trained on Google’s internal JFT-300M dataset (300M images).Transfer learning on smaller datasets is also SotA. 
+The Vision Transformer [ViT, @Dosovitskiy2021] outperforms state-of-the-art CNNs on Imagenet while requiring less computations (Flops), but only when pretrained on bigger datasets. The performance is acceptable when trained on ImageNet (1M images), great when pre-trained on ImageNet-21k (14M images), and state-of-the-art when pre-trained on Google’s internal JFT-300M dataset (300M images). Transfer learning on smaller datasets is also SotA. 
 
 
 

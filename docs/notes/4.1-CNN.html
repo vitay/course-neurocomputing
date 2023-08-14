@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 10&nbsp; Convolutional neural networks</title>
+<title>Neurocomputing - Convolutional neural networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -167,11 +139,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Convolutional neural networks</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/4.1-CNN.html"><strong>Computer Vision</strong></a></li><li class="breadcrumb-item"><a href="../notes/4.1-CNN.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Convolutional neural networks</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -179,7 +156,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -188,22 +165,24 @@ div.csl-indent {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -227,8 +206,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -257,8 +237,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,8 +258,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -302,8 +284,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -327,8 +310,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -347,8 +331,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -377,8 +362,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -397,8 +383,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -415,7 +402,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -482,12 +469,14 @@ div.csl-indent {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -541,7 +530,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Convolutional neural networks</span></h1>
+<h1 class="title"><span class="chapter-title">Convolutional neural networks</span></h1>
 </div>
 
 
@@ -559,7 +548,6 @@ div.csl-indent {
 <p>Slides: <a href="../slides/4.1-CNN.html" target="_blank">html</a> <a href="../slides/pdf/4.1-CNN.pdf" target="_blank">pdf</a></p>
 <section id="convolutional-neural-networks" class="level2">
 <h2 class="anchored" data-anchor-id="convolutional-neural-networks">Convolutional neural networks</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/2KASQi7avYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>The different layers of a deep network extract increasingly complex features.</p>
@@ -576,14 +564,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/fullyconnected.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Fully-connected layers require a lot of weights in images.</figcaption><p></p>
+<figcaption class="figure-caption">Fully-connected layers require a lot of weights in images.</figcaption>
 </figure>
 </div>
 <p>Early features (edges) are usually local, there is no need to learn weights from the whole image. Natural images are stationary: the statistics of the pixel in a small patch are the same, regardless the position on the image. <strong>Idea:</strong> One only needs to extract features locally and <strong>share the weights</strong> between the different locations. This is a <strong>convolution operation</strong>: a filter/kernel is applied on small patches and slided over the whole image.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolutional.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Convolutional layers share weights along the image dimensions.</figcaption><p></p>
+<figcaption class="figure-caption">Convolutional layers share weights along the image dimensions.</figcaption>
 </figure>
 </div>
 </section>
@@ -592,7 +580,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolution-anim2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Principle of a convolution. Source: <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" class="uri">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></figcaption><p></p>
+<figcaption class="figure-caption">Principle of a convolution. Source: <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53" class="uri">https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53</a></figcaption>
 </figure>
 </div>
 <p>In a <strong>convolutional layer</strong>, <span class="math inline">d</span> filters are defined with very small sizes (3x3, 5x5…). Each filter is convoluted over the input image (or the previous layer) to create a <strong>feature map</strong>. The set of <span class="math inline">d</span> feature maps becomes a new 3D structure: a <strong>tensor</strong>.</p>
@@ -600,14 +588,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/depthcol.jpeg" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Convolutional layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
+<figcaption class="figure-caption">Convolutional layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption>
 </figure>
 </div>
 <p>If the input image is 32x32x3, the resulting tensor will be 32x32xd. The convolutional layer has only very few parameters: each feature map has 3x3x3 values in the filter plus a bias, i.e.&nbsp;28 parameters. As in image processing, a padding method must be chosen (what to do when a pixel is outside the image).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/same_padding_no_strides.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Convolution with stride 1. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+<figcaption class="figure-caption">Convolution with stride 1. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption>
 </figure>
 </div>
 </section>
@@ -617,13 +605,13 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/pooling.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Pooling layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
+<figcaption class="figure-caption">Pooling layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/maxpooling.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Pooling layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption><p></p>
+<figcaption class="figure-caption">Pooling layer. Source: <a href="http://cs231n.github.io/convolutional-networks/" class="uri">http://cs231n.github.io/convolutional-networks/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -633,7 +621,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/padding_strides.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Convolution with stride 2. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+<figcaption class="figure-caption">Convolution with stride 2. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption>
 </figure>
 </div>
 </section>
@@ -643,7 +631,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/dilation.gif" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Convolution à trous. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption><p></p>
+<figcaption class="figure-caption">Convolution à trous. Source: <a href="https://github.com/vdumoulin/conv_arithmetic" class="uri">https://github.com/vdumoulin/conv_arithmetic</a></figcaption>
 </figure>
 </div>
 </section>
@@ -653,7 +641,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolutional-forward.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Forward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
+<figcaption class="figure-caption">Forward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption>
 </figure>
 </div>
 <p>In the example above, the four neurons of the feature map will receive a gradient from the upper layers. How can we use it to learn the filter values and pass the gradient to the lower layers?</p>
@@ -661,14 +649,14 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolutional-backward.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Backward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
+<figcaption class="figure-caption">Backward convolution. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption>
 </figure>
 </div>
 <p>The filter just has to be flipped (<span class="math inline">180^o</span> symmetry) before the convolution.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/convolution-flipped.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Flipping the filter. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption><p></p>
+<figcaption class="figure-caption">Flipping the filter. Source: <a href="https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710" class="uri">https://medium.com/@mayank.utexas/backpropagation-for-convolution-with-strides-8137e4fc2710</a></figcaption>
 </figure>
 </div>
 <p>The convolution operation is differentiable, so we can apply backpropagation and learn the filters.</p>
@@ -681,7 +669,7 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/max-pooling-backprop.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Backpropagation through a max-pooling layer. Source: <a href="https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/" class="uri">https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/</a></figcaption><p></p>
+<figcaption class="figure-caption">Backpropagation through a max-pooling layer. Source: <a href="https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/" class="uri">https://mukulrathi.com/demystifying-deep-learning/conv-net-backpropagation-maths-intuition-derivation/</a></figcaption>
 </figure>
 </div>
 </section>
@@ -691,15 +679,15 @@ div.csl-indent {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/lenet.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Convolutional Neural Network. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Convolutional Neural Network. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption>
 </figure>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Implementing a CNN in keras
 </div>
 </div>
@@ -745,14 +733,13 @@ Implementing a CNN in keras
 </section>
 <section id="some-famous-convolutional-networks" class="level2">
 <h2 class="anchored" data-anchor-id="some-famous-convolutional-networks">Some famous convolutional networks</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/pw-sFY3UqG4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="neocognitron" class="level3">
 <h3 class="anchored" data-anchor-id="neocognitron">Neocognitron</h3>
 <p>The <strong>Neocognitron</strong> (Fukushima, 1980 <span class="citation" data-cites="Fukushima1980">(<a href="../references.html#ref-Fukushima1980" role="doc-biblioref">Fukushima, 1980</a>)</span>) was actually the first CNN able to recognize handwritten digits. Training is not based on backpropagation, but a set of biologically realistic learning rules (Add-if-silent, margined WTA). Inspired by the human visual system.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/Neocognitron.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Neocognitron. <span class="citation" data-cites="Fukushima1980">(<a href="../references.html#ref-Fukushima1980" role="doc-biblioref">Fukushima, 1980</a>)</span>. Source: <a href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg" class="uri">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></figcaption><p></p>
+<figcaption class="figure-caption">Neocognitron. <span class="citation" data-cites="Fukushima1980">(<a href="../references.html#ref-Fukushima1980" role="doc-biblioref">Fukushima, 1980</a>)</span>. Source: <a href="https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg" class="uri">https://uplLoad.wikimedia.org/wikipedia/uk/4/42/Neocognitron.jpg</a></figcaption>
 </figure>
 </div>
 </section>
@@ -762,7 +749,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/lenet.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">LeNet5. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">LeNet5. <span class="citation" data-cites="LeCun1998">(<a href="../references.html#ref-LeCun1998" role="doc-biblioref">LeCun et al., 1998</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -772,7 +759,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/alexnet.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Alexnet <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Alexnet <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -782,7 +769,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vgg16.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">VGG-16 <span class="citation" data-cites="Simonyan2015">(<a href="../references.html#ref-Simonyan2015" role="doc-biblioref">Simonyan and Zisserman, 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">VGG-16 <span class="citation" data-cites="Simonyan2015">(<a href="../references.html#ref-Simonyan2015" role="doc-biblioref">Simonyan and Zisserman, 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -792,14 +779,14 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/googlenet-arch.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">GoogLeNet <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">GoogLeNet <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>Inside GoogleNet, each <strong>Inception</strong> module learns features at different resolutions using convolutions and max poolings of different sizes. 1x1 convolutions are <strong>shared MLPS</strong>: they transform a <span class="math inline">(w, h, d_1)</span> tensor into <span class="math inline">(w, h, d_2)</span> pixel per pixel. The resulting feature maps are concatenated along the feature dimension and passed to the next module.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/inception.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Inception module <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Inception module <span class="citation" data-cites="Szegedy2015">(<a href="../references.html#ref-Szegedy2015" role="doc-biblioref">Szegedy et al., 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>Three softmax layers predict the classes at different levels of the network. The combined loss is:</p>
@@ -810,7 +797,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/inceptionv3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Inception v3 <span class="citation" data-cites="Chollet2017b">(<a href="../references.html#ref-Chollet2017b" role="doc-biblioref">Chollet, 2017</a>)</span>. Source: <a href="https://cloud.google.com/tpu/docs/inception-v3-advanced" class="uri">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></figcaption><p></p>
+<figcaption class="figure-caption">Inception v3 <span class="citation" data-cites="Chollet2017b">(<a href="../references.html#ref-Chollet2017b" role="doc-biblioref">Chollet, 2017</a>)</span>. Source: <a href="https://cloud.google.com/tpu/docs/inception-v3-advanced" class="uri">https://cloud.google.com/tpu/docs/inception-v3-advanced</a></figcaption>
 </figure>
 </div>
 </section>
@@ -823,14 +810,14 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/resnetlayer.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Residual layer with skip connections <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Residual layer with skip connections <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>These <strong>skip connections</strong> allow the network to decide how deep it has to be. If the layer is not needed, the residual layer learns to output 0.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/resnet2.png" class="img-fluid figure-img" style="width:20.0%"></p>
-<p></p><figcaption class="figure-caption">ResNet <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">ResNet <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>Skip connections help overcome the <strong>vanishing gradients</strong> problem, as the contribution of bypassed layers to the backpropagated gradient is 1.</p>
@@ -846,7 +833,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/resnet-block.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">Residual block <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Residual block <span class="citation" data-cites="He2015">(<a href="../references.html#ref-He2015" role="doc-biblioref">He et al., 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -860,7 +847,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/highway.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Highway network <span class="citation" data-cites="Srivastava2015">(<a href="../references.html#ref-Srivastava2015" role="doc-biblioref">Srivastava et al., 2015</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Highway network <span class="citation" data-cites="Srivastava2015">(<a href="../references.html#ref-Srivastava2015" role="doc-biblioref">Srivastava et al., 2015</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -870,7 +857,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/densenetworks.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Dense network <span class="citation" data-cites="Huang2018">(<a href="../references.html#ref-Huang2018" role="doc-biblioref">Huang et al., 2018</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Dense network <span class="citation" data-cites="Huang2018">(<a href="../references.html#ref-Huang2018" role="doc-biblioref">Huang et al., 2018</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -906,21 +893,20 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepnets-comparison.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Speed-accuracy trade-off of state-of-the-art CNNs. Source: <a href="https://dataconomy.com/2017/04/history-neural-networks" class="uri">https://dataconomy.com/2017/04/history-neural-networks</a></figcaption><p></p>
+<figcaption class="figure-caption">Speed-accuracy trade-off of state-of-the-art CNNs. Source: <a href="https://dataconomy.com/2017/04/history-neural-networks" class="uri">https://dataconomy.com/2017/04/history-neural-networks</a></figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="applications-of-cnn" class="level2">
 <h2 class="anchored" data-anchor-id="applications-of-cnn">Applications of CNN</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/n7U9pywhQYM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="object-recognition" class="level3">
 <h3 class="anchored" data-anchor-id="object-recognition">Object recognition</h3>
 <p><strong>Object recognition</strong> has become very easy thanks to CNNs. In object recognition, each image is associated to a label. With huge datasets like <strong>ImageNet</strong> (14 millions images), a CNN can learn to recognize 1000 classes of objects with a better accuracy than humans. Just get enough examples of an object and it can be recognized.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/objrecog.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Object recognition on ImageNet. Source <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Object recognition on ImageNet. Source <span class="citation" data-cites="Krizhevsky2012">(<a href="../references.html#ref-Krizhevsky2012" role="doc-biblioref">Krizhevsky et al., 2012</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -930,7 +916,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepface.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">DeepFace. Source <span class="citation" data-cites="Taigman2014">(<a href="../references.html#ref-Taigman2014" role="doc-biblioref">Taigman et al., 2014</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">DeepFace. Source <span class="citation" data-cites="Taigman2014">(<a href="../references.html#ref-Taigman2014" role="doc-biblioref">Taigman et al., 2014</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -940,7 +926,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/posnet-face.gif" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">PoseNet <span class="citation" data-cites="Kendall2016">(<a href="../references.html#ref-Kendall2016" role="doc-biblioref">Kendall et al., 2016</a>)</span>. Source: <a href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html" class="uri">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></figcaption><p></p>
+<figcaption class="figure-caption">PoseNet <span class="citation" data-cites="Kendall2016">(<a href="../references.html#ref-Kendall2016" role="doc-biblioref">Kendall et al., 2016</a>)</span>. Source: <a href="https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html" class="uri">https://blog.tensorflow.org/2019/01/tensorflow-lite-now-faster-with-mobile.html</a></figcaption>
 </figure>
 </div>
 </section>
@@ -950,7 +936,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/deepspeech.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">DeepSpeech. Source <span class="citation" data-cites="Hannun2014">(<a href="../references.html#ref-Hannun2014" role="doc-biblioref">Hannun et al., 2014</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">DeepSpeech. Source <span class="citation" data-cites="Hannun2014">(<a href="../references.html#ref-Hannun2014" role="doc-biblioref">Hannun et al., 2014</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -960,7 +946,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/sentimentanalysis.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Sentiment analysis. Source <span class="citation" data-cites="Kim2014">(<a href="../references.html#ref-Kim2014" role="doc-biblioref">Kim, 2014</a>)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Sentiment analysis. Source <span class="citation" data-cites="Kim2014">(<a href="../references.html#ref-Kim2014" role="doc-biblioref">Kim, 2014</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -970,20 +956,19 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/wavenet.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Wavenet <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>. Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption><p></p>
+<figcaption class="figure-caption">Wavenet <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>. Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/wavenet-dilated.gif" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Dilated convolutions in Wavenet <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>. Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption><p></p>
+<figcaption class="figure-caption">Dilated convolutions in Wavenet <span class="citation" data-cites="Oord2016">(<a href="../references.html#ref-Oord2016" role="doc-biblioref">Oord et al., 2016</a>)</span>. Source: <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/" class="uri">https://deepmind.com/blog/wavenet-generative-model-raw-audio/</a></figcaption>
 </figure>
 </div>
 </section>
 </section>
 <section id="transfer-learning" class="level2">
 <h2 class="anchored" data-anchor-id="transfer-learning">Transfer learning</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/12ohNYgDHvY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p><strong>Myth:</strong> ones needs at least one million labeled examples to use deep learning. This is true if you train the CNN <strong>end-to-end</strong> with randomly initialized weights. But there are alternatives:</p>
 <ol type="1">
 <li><strong>Unsupervised learning</strong> (autoencoders) may help extract useful representations using only images.</li>
@@ -992,7 +977,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transferlearning2.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+<figcaption class="figure-caption">Transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption>
 </figure>
 </div>
 <p>Take a classical network (VGG-16, Inception, ResNet, etc.) trained on ImageNet (if your task is object recognition).</p>
@@ -1004,7 +989,7 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transferlearning3.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Off-the-shelf transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+<figcaption class="figure-caption">Off-the-shelf transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption>
 </figure>
 </div>
 <p><strong>Fine-tuning</strong></p>
@@ -1014,15 +999,15 @@ Implementing a CNN in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/transferlearning4.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Fine-tuned transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption><p></p>
+<figcaption class="figure-caption">Fine-tuned transfer learning. Source: <a href="http://imatge-upc.github.io/telecombcn-2016-dlcv" class="uri">http://imatge-upc.github.io/telecombcn-2016-dlcv</a></figcaption>
 </figure>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Example of transfer learning
 </div>
 </div>
@@ -1036,12 +1021,12 @@ Example of transfer learning
 <p>Source: <a href="https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/" class="uri">https://blogs.technet.microsoft.com/machinelearning/2017/06/27/saving-snow-leopards-with-deep-learning-and-computer-vision-on-spark/</a></p>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Transfer learning in keras
 </div>
 </div>
@@ -1072,19 +1057,18 @@ Transfer learning in keras
 </section>
 <section id="ensemble-learning" class="level2">
 <h2 class="anchored" data-anchor-id="ensemble-learning">Ensemble learning</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WVNqiUnHRPA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Since 2016, only ensembles of existing networks win the competitions.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ensemble-scores.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Top networks on the ImageNet 2016 competition. Source <a href="http://image-net.org/challenges/LSVRC/2016/results" class="uri">http://image-net.org/challenges/LSVRC/2016/results</a></figcaption><p></p>
+<figcaption class="figure-caption">Top networks on the ImageNet 2016 competition. Source <a href="http://image-net.org/challenges/LSVRC/2016/results" class="uri">http://image-net.org/challenges/LSVRC/2016/results</a></figcaption>
 </figure>
 </div>
 <p><strong>Ensemble learning</strong> is the process of combining multiple independent classifiers together, in order to obtain a better performance. As long the individual classifiers do not make mistakes for the same examples, a simple majority vote might be enough to get better approximations.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/ensemble-example.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Ensemble of pre-trained CNNs. Source <a href="https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html" class="uri">https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Ensemble of pre-trained CNNs. Source <a href="https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html" class="uri">https://flyyufelix.github.io/2017/04/16/kaggle-nature-conservancy.html</a></figcaption>
 </figure>
 </div>
 <p>Let’s consider we have three <strong>independent</strong> binary classifiers, each with an accuracy of 70% (P = 0.7 of being correct). When using a majority vote, we get the following cases:</p>
@@ -1105,7 +1089,7 @@ Transfer learning in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/bagging.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Bagging. Source: <a href="http://www.sciencedirect.com/science/article/pii/S0957417409008781" class="uri">http://www.sciencedirect.com/science/article/pii/S0957417409008781</a></figcaption><p></p>
+<figcaption class="figure-caption">Bagging. Source: <a href="http://www.sciencedirect.com/science/article/pii/S0957417409008781" class="uri">http://www.sciencedirect.com/science/article/pii/S0957417409008781</a></figcaption>
 </figure>
 </div>
 </section>
@@ -1115,7 +1099,7 @@ Transfer learning in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/boosting.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Boosting. Source: <a href="https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/" class="uri">https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/</a></figcaption><p></p>
+<figcaption class="figure-caption">Boosting. Source: <a href="https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/" class="uri">https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/</a></figcaption>
 </figure>
 </div>
 <p>Boosting is not very useful with deep networks (overfitting), but there are some approaches like SelfieBoost (<a href="https://arxiv.org/pdf/1411.3436.pdf" class="uri">https://arxiv.org/pdf/1411.3436.pdf</a>).</p>
@@ -1126,55 +1110,55 @@ Transfer learning in keras
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/stacking.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Stacking. Source: <a href="doi:10.1371/journal.pone.0024386.g005" class="uri">doi:10.1371/journal.pone.0024386.g005</a></figcaption><p></p>
+<figcaption class="figure-caption">Stacking. Source: <a href="doi:10.1371/journal.pone.0024386.g005" class="uri">doi:10.1371/journal.pone.0024386.g005</a></figcaption>
 </figure>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Chollet2017b" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Chollet2017b" class="csl-entry" role="listitem">
 Chollet, F. (2017). Xception: <span>Deep Learning</span> with <span>Depthwise Separable Convolutions</span>. <a href="http://arxiv.org/abs/1610.02357">http://arxiv.org/abs/1610.02357</a>.
 </div>
-<div id="ref-Fukushima1980" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Fukushima1980" class="csl-entry" role="listitem">
 Fukushima, K. (1980). Neocognitron: <span>A</span> self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. <em>Biol. Cybernetics</em> 36, 193–202. doi:<a href="https://doi.org/10.1007/BF00344251">10.1007/BF00344251</a>.
 </div>
-<div id="ref-Hannun2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Hannun2014" class="csl-entry" role="listitem">
 Hannun, A., Case, C., Casper, J., Catanzaro, B., Diamos, G., Elsen, E., et al. (2014). Deep <span>Speech</span>: <span>Scaling</span> up end-to-end speech recognition. <a href="http://arxiv.org/abs/1412.5567">http://arxiv.org/abs/1412.5567</a>.
 </div>
-<div id="ref-He2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-He2015" class="csl-entry" role="listitem">
 He, K., Zhang, X., Ren, S., and Sun, J. (2015). Deep <span>Residual Learning</span> for <span>Image Recognition</span>. <a href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>.
 </div>
-<div id="ref-Huang2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Huang2018" class="csl-entry" role="listitem">
 Huang, G., Liu, Z., van der Maaten, L., and Weinberger, K. Q. (2018). Densely <span>Connected Convolutional Networks</span>. <a href="http://arxiv.org/abs/1608.06993">http://arxiv.org/abs/1608.06993</a>.
 </div>
-<div id="ref-Kendall2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kendall2016" class="csl-entry" role="listitem">
 Kendall, A., Grimes, M., and Cipolla, R. (2016). <span>PoseNet</span>: <span>A Convolutional Network</span> for <span>Real-Time</span> 6-<span>DOF Camera Relocalization</span>. <a href="http://arxiv.org/abs/1505.07427">http://arxiv.org/abs/1505.07427</a>.
 </div>
-<div id="ref-Kim2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Kim2014" class="csl-entry" role="listitem">
 Kim, Y. (2014). Convolutional <span>Neural Networks</span> for <span>Sentence Classification</span>. <a href="http://arxiv.org/abs/1408.5882">http://arxiv.org/abs/1408.5882</a>.
 </div>
-<div id="ref-Krizhevsky2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Krizhevsky2012" class="csl-entry" role="listitem">
 Krizhevsky, A., Sutskever, I., and Hinton, G. E. (2012). <span>ImageNet Classification</span> with <span>Deep Convolutional Neural Networks</span>. in <em>Advances in <span>Neural Information Processing Systems</span> (<span>NIPS</span>)</em> <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf</a>.
 </div>
-<div id="ref-LeCun1998" class="csl-entry" role="doc-biblioentry">
+<div id="ref-LeCun1998" class="csl-entry" role="listitem">
 LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998). Gradient <span>Based Learning Applied</span> to <span>Document Recognition</span>. <em>Proceedings of the IEEE</em> 86, 2278–2324. doi:<a href="https://doi.org/10.1109/5.726791">10.1109/5.726791</a>.
 </div>
-<div id="ref-Oord2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Oord2016" class="csl-entry" role="listitem">
 Oord, A. van den, Dieleman, S., Zen, H., Simonyan, K., Vinyals, O., Graves, A., et al. (2016). <span>WaveNet</span>: <span>A Generative Model</span> for <span>Raw Audio</span>. <a href="http://arxiv.org/abs/1609.03499">http://arxiv.org/abs/1609.03499</a>.
 </div>
-<div id="ref-Simonyan2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Simonyan2015" class="csl-entry" role="listitem">
 Simonyan, K., and Zisserman, A. (2015). Very <span>Deep Convolutional Networks</span> for <span>Large-Scale Image Recognition</span>. <em>International Conference on Learning Representations (ICRL)</em>, 1–14. doi:<a href="https://doi.org/10.1016/j.infsof.2008.09.005">10.1016/j.infsof.2008.09.005</a>.
 </div>
-<div id="ref-Springenberg2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Springenberg2015" class="csl-entry" role="listitem">
 Springenberg, J. T., Dosovitskiy, A., Brox, T., and Riedmiller, M. (2015). Striving for <span>Simplicity</span>: <span>The All Convolutional Net</span>. <a href="http://arxiv.org/abs/1412.6806">http://arxiv.org/abs/1412.6806</a>.
 </div>
-<div id="ref-Srivastava2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Srivastava2015" class="csl-entry" role="listitem">
 Srivastava, R. K., Greff, K., and Schmidhuber, J. (2015). Highway <span>Networks</span>. <a href="http://arxiv.org/abs/1505.00387">http://arxiv.org/abs/1505.00387</a>.
 </div>
-<div id="ref-Szegedy2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Szegedy2015" class="csl-entry" role="listitem">
 Szegedy, C., Vanhoucke, V., Ioffe, S., Shlens, J., and Wojna, Z. (2015). Rethinking the <span>Inception Architecture</span> for <span>Computer Vision</span>. <a href="http://arxiv.org/abs/1512.00567">http://arxiv.org/abs/1512.00567</a>.
 </div>
-<div id="ref-Taigman2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Taigman2014" class="csl-entry" role="listitem">
 Taigman, Y., Yang, M., Ranzato, M., and Wolf, L. (2014). <span>DeepFace</span>: <span>Closing</span> the <span>Gap</span> to <span>Human-Level Performance</span> in <span>Face Verification</span>. in <em>2014 <span>IEEE Conference</span> on <span>Computer Vision</span> and <span>Pattern Recognition</span></em> (<span>Columbus, OH, USA</span>: <span>IEEE</span>), 1701–1708. doi:<a href="https://doi.org/10.1109/CVPR.2014.220">10.1109/CVPR.2014.220</a>.
 </div>
 </div>
@@ -1209,9 +1193,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1276,6 +1274,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1330,7 +1414,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

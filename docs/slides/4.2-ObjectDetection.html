@@ -5,9 +5,10 @@
 <script src="4.2-ObjectDetection_files/libs/quarto-html/popper.min.js"></script>
 <script src="4.2-ObjectDetection_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="4.2-ObjectDetection_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="4.2-ObjectDetection_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="4.2-ObjectDetection_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="4.2-ObjectDetection_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -25,11 +26,76 @@
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
       width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="4.2-ObjectDetection_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="4.2-ObjectDetection_files/libs/revealjs/dist/theme/quarto.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -90,44 +156,44 @@
     font-weight: 400;
   }
 
-  .callout.callout-captioned.callout-style-simple .callout-body {
+  .callout.callout-titled.callout-style-simple .callout-body {
     margin-top: 0.2em;
   }
 
-  .callout:not(.callout-captioned) .callout-body {
+  .callout:not(.callout-titled) .callout-body {
       display: flex;
   }
 
-  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
     padding-left: 1.6em;
   }
 
-  .callout.callout-captioned .callout-header {
+  .callout.callout-titled .callout-header {
     padding-top: 0.2em;
     margin-bottom: -0.2em;
   }
 
-  .callout.callout-captioned .callout-caption  p {
+  .callout.callout-titled .callout-title  p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
   }
     
-  .callout.callout-captioned.callout-style-simple .callout-content  p {
+  .callout.callout-titled.callout-style-simple .callout-content  p {
     margin-top: 0;
   }
 
-  .callout.callout-captioned.callout-style-default .callout-content  p {
+  .callout.callout-titled.callout-style-default .callout-content  p {
     margin-top: 0.7em;
   }
 
-  .callout.callout-style-simple div.callout-caption {
+  .callout.callout-style-simple div.callout-title {
     border-bottom: none;
     font-size: .9rem;
     font-weight: 600;
     opacity: 75%;
   }
 
-  .callout.callout-style-default  div.callout-caption {
+  .callout.callout-style-default  div.callout-title {
     border-bottom: none;
     font-weight: 600;
     opacity: 85%;
@@ -159,7 +225,7 @@
     background-size: 0.9rem 0.9rem;
   }
 
-  .callout-caption {
+  .callout-title {
     display: flex
   }
     
@@ -172,16 +238,16 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
-  .callout.callout-captioned .callout-icon::before {
+  .callout.callout-titled .callout-icon::before {
     margin-top: .5rem;
     padding-right: .5rem;
   }
 
-  .callout:not(.callout-captioned) .callout-icon::before {
+  .callout:not(.callout-titled) .callout-icon::before {
     margin-top: 1rem;
     padding-right: .5rem;
   }
@@ -196,7 +262,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
   }
 
-  div.callout-note.callout-style-default .callout-caption {
+  div.callout-note.callout-style-default .callout-title {
     background-color: #dae6fb
   }
 
@@ -208,7 +274,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
   }
 
-  div.callout-important.callout-style-default .callout-caption {
+  div.callout-important.callout-style-default .callout-title {
     background-color: #f7dddc
   }
 
@@ -220,7 +286,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
   }
 
-  div.callout-warning.callout-style-default .callout-caption {
+  div.callout-warning.callout-style-default .callout-title {
     background-color: #fcefdc
   }
 
@@ -232,7 +298,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
   }
 
-  div.callout-tip.callout-style-default .callout-caption {
+  div.callout-tip.callout-style-default .callout-title {
     background-color: #ccf1e3
   }
 
@@ -244,7 +310,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
   }
 
-  div.callout-caution.callout-style-default .callout-caption {
+  div.callout-caution.callout-style-default .callout-title {
     background-color: #ffe5d0
   }
 
@@ -357,6 +423,11 @@ Julien Vitay
 </div>
 
 </section>
+<section id="object-detection" class="title-slide slide level1 center">
+<h1>1 - Object detection</h1>
+
+</section>
+
 <section id="object-recognition-vs.-object-detection" class="title-slide slide level1 center">
 <h1>Object recognition vs.&nbsp;object detection</h1>
 
@@ -379,7 +450,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/pascal-cow.jpg"></p>
-<p></p><figcaption>Source: <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2008/" class="uri">http://host.robots.ox.ac.uk/pascal/VOC/voc2008/</a></figcaption><p></p>
+<figcaption>Source: <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2008/" class="uri">http://host.robots.ox.ac.uk/pascal/VOC/voc2008/</a></figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -401,7 +472,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/localization.png"></p>
-<p></p><figcaption>Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption><p></p>
+<figcaption>Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption>
 </figure>
 </div>
 </section>
@@ -412,7 +483,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/mscoco.png" style="width:80.0%"></p>
-<p></p><figcaption>Source: <a href="http://cocodataset.org" class="uri">http://cocodataset.org</a></figcaption><p></p>
+<figcaption>Source: <a href="http://cocodataset.org" class="uri">http://cocodataset.org</a></figcaption>
 </figure>
 </div>
 </div>
@@ -459,7 +530,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/rcnn-detail.png"></p>
-<p></p><figcaption>Source: <a href="https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf" class="uri">https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf</a></figcaption><p></p>
+<figcaption>Source: <a href="https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf" class="uri">https://courses.cs.washington.edu/courses/cse590v/14au/cse590v_wk1_rcnn.pdf</a></figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:55%;">
@@ -469,7 +540,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/rcnn-training.png"></p>
-<p></p><figcaption>Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption><p></p>
+<figcaption>Source: <a href="https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e" class="uri">https://towardsdatascience.com/r-cnn-fast-r-cnn-faster-r-cnn-yolo-object-detection-algorithms-36d53571365e</a></figcaption>
 </figure>
 </div>
 </div>
@@ -532,6 +603,11 @@ Julien Vitay
 <div class="footer">
 <p>Ren et al.&nbsp;(2015). Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks. arXiv:1506.01497</p>
 </div>
+</section>
+
+<section id="yolo" class="title-slide slide level1 center">
+<h1>2 - YOLO</h1>
+
 </section>
 
 <section id="yolo-you-only-look-once" class="title-slide slide level1 center">
@@ -629,7 +705,7 @@ Julien Vitay
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/iou1.jpg"></p>
-<p></p><figcaption>Source: <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" class="uri">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></figcaption><p></p>
+<figcaption>Source: <a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/" class="uri">https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/</a></figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -783,6 +859,11 @@ Julien Vitay
 <p><a href="https://pjreddie.com/darknet/yolo/" class="uri">https://pjreddie.com/darknet/yolo/</a></p>
 </div>
 </section></section>
+<section id="other-object-detectors" class="title-slide slide level1 center">
+<h1>3 - Other object detectors</h1>
+
+</section>
+
 <section id="ssd-single-shot-detector" class="title-slide slide level1 center">
 <h1>SSD: Single-Shot Detector</h1>
 
@@ -840,6 +921,185 @@ Julien Vitay
 
 <img data-src="img/voxelnet-result.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a" class="uri">https://medium.com/@SmartLabAI/3d-object-detection-from-lidar-data-with-deep-learning-95f6d400399a</a></p></section>
 
+<section id="metrics" class="title-slide slide level1 center">
+<h1>4 - Metrics</h1>
+
+</section>
+
+<section id="metrics-for-object-detection" class="title-slide slide level1 center">
+<h1>Metrics for object detection</h1>
+<ul>
+<li><p>How do we measure the “accuracy” of an object detector? The output is both a classification and a regression.</p></li>
+<li><p>Not only must the predicted class be correct, but the predicted bounding box must overlap with the ground truth, i.e.&nbsp;have an high IoU.</p></li>
+</ul>
+
+<img data-src="img/mAP-basic.png" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2" class="uri">https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2</a></p></section>
+
+<section id="metrics-for-object-detection-1" class="title-slide slide level1 center">
+<h1>Metrics for object detection</h1>
+<ul>
+<li><p>The accuracy of an object detector depends on a threshold for the IoU, for example 0.5.</p></li>
+<li><p>A prediction is correct if the predicted class is correct <strong>and</strong> the IoU is above the threshold.</p></li>
+</ul>
+
+<img data-src="img/mAP-basic2.webp" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2" class="uri">https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2</a></p></section>
+
+<section id="precision-and-recall" class="title-slide slide level1 center">
+<h1>Precision and recall</h1>
+<ul>
+<li>For a given class (e.g.&nbsp;“human”), we can compute the binary <strong>precision</strong> and <strong>recall</strong> values:</li>
+</ul>
+<p><span class="math display">
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}} \;\;
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
+</span></p>
+<ul>
+<li><p>P = when something is detected, is it correct? R = if something exists, is it detected?</p></li>
+<li><p>In the image below, we have one TP, one FN, zero FP and an undefined number of TN:</p></li>
+</ul>
+<p><span class="math display">
+    P = \frac{\text{1}}{\text{1} + \text{0}} = 1\;\;
+    R = \frac{\text{1}}{\text{1} + \text{1}} = 0.5
+</span></p>
+
+<img data-src="img/mAP-basic3.webp" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2" class="uri">https://towardsdatascience.com/map-mean-average-precision-might-confuse-you-5956f1bfa9e2</a></p></section>
+
+<section id="map-mean-average-precision" class="title-slide slide level1 center">
+<h1>mAP: mean average precision</h1>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li>Let’s now compute the <strong>precision-recall curve</strong> over 7 images, with 15 ground truth boxes and 24 predictions.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-1.png"></p>
+<figcaption>Source: <a href="https://github.com/rafaelpadilla/Object-Detection-Metrics" class="uri">https://github.com/rafaelpadilla/Object-Detection-Metrics</a></figcaption>
+</figure>
+</div>
+<ul>
+<li>Each prediction has a confidence score for the classification, and is either a TP or FP (depending on the IoU threshold).</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-2.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="map-mean-average-precision-1" class="title-slide slide level1 center">
+<h1>mAP: mean average precision</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Let’s now <strong>sort</strong> the predictions with a decreasing confidence score and <strong>incrementally</strong> compute the prediction and recall:</li>
+</ul>
+<p><span class="math display">
+    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
+</span> <span class="math display">
+    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
+</span></p>
+<ul>
+<li><p>We just accumulate the number of TP and FP over the 24 predictions.</p></li>
+<li><p>Note that <code>TP + FN</code> is the number of ground truths and is constant (15), so the recall will increase.</p></li>
+<li><p>This equivalent to setting a high threshold for the confidence score and progressively decreasing it.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-3.png"></p>
+<figcaption>Source: <a href="https://github.com/rafaelpadilla/Object-Detection-Metrics" class="uri">https://github.com/rafaelpadilla/Object-Detection-Metrics</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="map-mean-average-precision-2" class="title-slide slide level1 center">
+<h1>mAP: mean average precision</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>If we plot the <strong>precision x recall curve</strong> (PR curve) for the 24 predictions, we obtain:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-4.png"></p>
+</figure>
+</div>
+<ul>
+<li>The precision globally decreases with the recall, as we use predictions with lower confidence scores, but there are some oscillations.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-3.png"></p>
+<figcaption>Source: <a href="https://github.com/rafaelpadilla/Object-Detection-Metrics" class="uri">https://github.com/rafaelpadilla/Object-Detection-Metrics</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="map-mean-average-precision-3" class="title-slide slide level1 center">
+<h1>mAP: mean average precision</h1>
+<ul>
+<li><p>To get rid of these oscillations, we <strong>interpolate</strong> the precision by taking maximal precision value for higher recall (left).</p></li>
+<li><p>We can then easily integrate this curve by computing the <strong>area under the curve</strong> (AUC, right), what defines the <strong>average precision</strong> (AP).</p></li>
+</ul>
+<p><span class="math display">
+    \text{AP} = \sum_n (R_{n} - R_{n-1}) \, P_n
+</span></p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-5.png"></p>
+<figcaption>Source: <a href="https://github.com/rafaelpadilla/Object-Detection-Metrics" class="uri">https://github.com/rafaelpadilla/Object-Detection-Metrics</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/meanAP-6.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="map-mean-average-precision-4" class="title-slide slide level1 center">
+<h1>mAP: mean average precision</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><p>A good detector sees its precision decreases not that much when the recall increases, i.e.&nbsp;when it is still correct when it increasingly detects objects.</p></li>
+<li><p>The ideal detector has an AP of 1.</p></li>
+<li><p>When averaging the AP over the classes, one obtains the <strong>mean average precision (mAP)</strong>:</p></li>
+</ul>
+<p><span class="math display">
+    \text{mAP} = \dfrac{1}{N_\text{classes}} \, \sum_{i=1}^{N_\text{classes}} \, AP_i
+</span></p>
+<ul>
+<li><p>One usually reports the mAP value with the IoU threshold, e.g.&nbsp;<code>mAP@0.5</code>.</p></li>
+<li><p>mAP is a better trade-off between precision and recall than the F1 score.</p></li>
+<li><p><code>scikit-learn</code> is your friend:</p></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/mAP-ssd.webp"></p>
+<figcaption>Source: Van Etten, A. (2019). Satellite Imagery Multiscale Rapid Detection with Windowed Networks. 2019 IEEE Winter Conference on Applications of Computer Vision (WACV), 735–743. doi:10.1109/WACV.2019.00083</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mAP <span class="op">=</span> sklearn.metrics.average_precision_score(t, y, average<span class="op">=</span><span class="st">"micro"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+
 <section id="additional-resources-on-object-detection" class="title-slide slide level1 center">
 <h1>Additional resources on object detection</h1>
 <ul>
@@ -886,7 +1146,7 @@ Julien Vitay
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
  
@@ -1073,9 +1333,23 @@ Julien Vitay
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
       });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
       const clipboard = new window.ClipboardJS('.code-copy-button', {
-        target: function(trigger) {
-          return trigger.previousElementSibling;
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
         }
       });
       clipboard.on('success', function(e) {
@@ -1123,7 +1397,7 @@ Julien Vitay
           },
           interactive: true,
           interactiveBorder: 10,
-          theme: 'quarto-reveal',
+          theme: 'light-border',
           placement: 'bottom-start'
         };
           config['offset'] = [0,0];

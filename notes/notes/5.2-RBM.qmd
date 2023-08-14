@@ -2,8 +2,6 @@
 
 Slides: [html](../slides/5.2-RBM.html){target="_blank"} [pdf](../slides/pdf/5.2-RBM.pdf){target="_blank"}
 
-{{< youtube  LzarsZlz7As >}}
-
 ## Structure of a RBM
 
 Auto-encoders are not the only feature extractors that can be stacked.

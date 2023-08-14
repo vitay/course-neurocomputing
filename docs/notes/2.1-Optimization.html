@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 4&nbsp; Optimization</title>
+<title>Neurocomputing - Optimization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -57,7 +57,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -85,11 +86,16 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Optimization</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/2.1-Optimization.html"><strong>Linear algorithms</strong></a></li><li class="breadcrumb-item"><a href="../notes/2.1-Optimization.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Optimization</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -97,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -106,22 +112,24 @@ ul.task-list li input[type="checkbox"] {
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -145,8 +153,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -175,8 +184,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -195,8 +205,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -220,8 +231,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -245,8 +257,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -265,8 +278,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -295,8 +309,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -315,8 +330,9 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -333,7 +349,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -400,12 +416,14 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -427,7 +445,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Optimization</span></h1>
+<h1 class="title"><span class="chapter-title">Optimization</span></h1>
 </div>
 
 
@@ -445,7 +463,6 @@ ul.task-list li input[type="checkbox"] {
 <p>Slides: <a href="../slides/2.1-Optimization.html" target="_blank">html</a> <a href="../slides/pdf/2.1-Optimization.pdf" target="_blank">pdf</a></p>
 <section id="analytic-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="analytic-optimization">Analytic optimization</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/1_sPEA6nnIA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>Machine learning is all about optimization:</p>
 <ul>
 <li>Supervised learning minimizes the error between the prediction and the data.</li>
@@ -464,14 +481,15 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/localminimum.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Functions (may) have one global minimum but several local minima.</figcaption><p></p>
+<figcaption class="figure-caption">Functions (may) have one global minimum but several local minima.</figcaption>
 </figure>
 </div>
 <p><strong>Multivariate functions</strong></p>
-<p>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>. A point <span class="math inline">(x^*, y^*)</span> is an optimum of <span class="math inline">f</span> if all partial derivatives are zero:</p>
+<p>A multivariate function is a function of more than one variable, e.g.&nbsp;<span class="math inline">f(x, y)</span>. A point <span class="math inline">(x^*, y^*)</span> is an optimum of <span class="math inline">f</span> if all partial derivatives are simultaneously zero:</p>
 <p><span class="math display">
     \begin{cases}
         \dfrac{\partial f(x^*, y^*)}{\partial x} = 0 \\
+        \\
         \dfrac{\partial f(x^*, y^*)}{\partial y} = 0 \\
     \end{cases}
 </span></p>
@@ -482,13 +500,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/optimization-example-multivariate.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Multivariate optimization of <span class="math inline">f(x, y) = (x - 1)^2 + y^2 + 1</span>. The minimum is in <span class="math inline">(1, 0)</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Multivariate optimization of <span class="math inline">f(x, y) = (x - 1)^2 + y^2 + 1</span>. The minimum is in <span class="math inline">(1, 0)</span>.</figcaption>
 </figure>
 </div>
 </section>
 <section id="gradient-descent" class="level2">
 <h2 class="anchored" data-anchor-id="gradient-descent">Gradient descent</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/UpJL2M6GKog" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>In machine learning, we generally do not have access to the analytical form of the objective function. We can not therefore get its derivative and search where it is 0. However, we have access to its value (and derivative) for certain values, for example:</p>
 <p><span class="math display">
     f(0, 1) = 2 \qquad f'(0, 1) = -1.5
@@ -497,12 +514,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/derivative-approx.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">Euler method: the derivative of a function is the slope of its tangent.</figcaption><p></p>
+<figcaption class="figure-caption">Euler method: the derivative of a function is the slope of its tangent.</figcaption>
 </figure>
 </div>
 <p>Let’s remember the definition of the derivative of a function. The derivative <span class="math inline">f'(x)</span> is defined by the slope of the tangent of the function:</p>
 <p><span class="math display">
-    f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{x + h - x} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+    f'(x) = \lim_{h \to 0} \dfrac{f(x + h) - f(x)}{x + h - x} = \lim_{h \to 0} \dfrac{f(x + h) - f(x)}{h}
 </span></p>
 <p>If we take <span class="math inline">h</span> small enough, we have the following approximation:</p>
 <p><span class="math display">
@@ -525,7 +542,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Gradient descent iteratively modifies the estimate <span class="math inline">x_n</span> in the opposite direction of the derivative.</figcaption><p></p>
+<figcaption class="figure-caption">Gradient descent iteratively modifies the estimate <span class="math inline">x_n</span> in the opposite direction of the derivative.</figcaption>
 </figure>
 </div>
 <p>It creates a series of estimates <span class="math inline">[x_0, x_1, x_2, \ldots]</span> that converge to a local minimum of <span class="math inline">f</span>. Each element of the series is calculated based on the previous element and the derivative of the function in that element:</p>
@@ -549,7 +566,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation.gif" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Visualization of Gradient Descent on a quadratic function. Notice how the speed of convergence slows down when approaching the minimum.</figcaption><p></p>
+<figcaption class="figure-caption">Visualization of Gradient Descent on a quadratic function. Notice how the speed of convergence slows down when approaching the minimum.</figcaption>
 </figure>
 </div>
 <p>Gradient descent can be applied to multivariate functions:</p>
@@ -558,22 +575,24 @@ ul.task-list li input[type="checkbox"] {
 </span></p>
 <p>Each variable is updated independently using partial derivatives:</p>
 <p><span class="math display">
-    \Delta x = x_{n+1} - x_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial x}
-</span> <span class="math display">
-    \Delta y = y_{n+1} - y_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial y}
-</span> <span class="math display">
-    \Delta z = z_{n+1} - z_{n} = - \eta \, \frac{\partial f(x_n, y_n, z_n)}{\partial z}
+\begin{cases}
+    \Delta x = x_{n+1} - x_{n} = - \eta \, \dfrac{\partial f(x_n, y_n, z_n)}{\partial x} \\
+    \\
+    \Delta y = y_{n+1} - y_{n} = - \eta \, \dfrac{\partial f(x_n, y_n, z_n)}{\partial y} \\
+    \\
+    \Delta z = z_{n+1} - z_{n} = - \eta \, \dfrac{\partial f(x_n, y_n, z_n)}{\partial z} \\
+\end{cases}
 </span></p>
 <p>We can also use the vector notation to use the <strong>gradient operator</strong>:</p>
 <p><span class="math display">
-    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} f(\mathbf{x}) = \begin{bmatrix} \frac{\partial f(x, y, z)}{\partial x} \\ \frac{\partial f(x, y, z)}{\partial y} \\ \frac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
+    \mathbf{x}_n = \begin{bmatrix} x_n \\ y_n \\ z_n \end{bmatrix} \quad \text{and} \quad \nabla_\mathbf{x} f(\mathbf{x}) = \begin{bmatrix} \dfrac{\partial f(x, y, z)}{\partial x} \\ \\ \dfrac{\partial f(x, y, z)}{\partial y} \\ \\ \dfrac{\partial f(x, y, z)}{\partial z} \end{bmatrix}
     \qquad \rightarrow \qquad \Delta \mathbf{x} = - \eta \, \nabla_\mathbf{x} f(\mathbf{x}_n)
 </span></p>
 <p>The change in the estimation is in the <strong>opposite direction of the gradient</strong>, hence the name <strong>gradient descent</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-multivariate.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Visualization of Gradient Descent on a multivariate function in 2 dimensions.</figcaption><p></p>
+<figcaption class="figure-caption">Visualization of Gradient Descent on a multivariate function in 2 dimensions.</figcaption>
 </figure>
 </div>
 <p>The choice of the learning rate <span class="math inline">\eta</span> is critical:</p>
@@ -584,14 +603,13 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-learningrate.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Influence of the learning on convergence: too small (red) and it takes forever, too high (green) and convergence is unstable. Finding its optimal value (blue) is hard as it depends on the function itself.</figcaption><p></p>
+<figcaption class="figure-caption">Influence of the learning on convergence: too small (red) and it takes forever, too high (green) and convergence is unstable. Finding its optimal value (blue) is hard as it depends on the function itself.</figcaption>
 </figure>
 </div>
 <p>Gradient descent is not optimal: it always finds a local minimum, but there is no guarantee that it is the global minimum. The found solution depends on the initial choice of <span class="math inline">x_0</span>. If you initialize the parameters near to the global minimum, you are lucky. But how? This will be a big issue in neural networks.</p>
 </section>
 <section id="regularization" class="level2">
 <h2 class="anchored" data-anchor-id="regularization">Regularization</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/LI5ExC4d9Js" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <section id="l2---regularization" class="level3">
 <h3 class="anchored" data-anchor-id="l2---regularization">L2 - Regularization</h3>
 <p>Most of the time, there are many minima to a function, if not an infinity. As GD only converges to the “closest” local minimum, you are never sure that you get a good solution. Consider the following function:</p>
@@ -602,7 +620,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-regularization1.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Function with an infinity of minima: as long as <span class="math inline">x=1</span>, each point on the vertical line is a minimum.</figcaption><p></p>
+<figcaption class="figure-caption">Function with an infinity of minima: as long as <span class="math inline">x=1</span>, each point on the vertical line is a minimum.</figcaption>
 </figure>
 </div>
 <p>To obtain a single solution, we may want to put the additional <strong>constraint</strong> that both <span class="math inline">x</span> and <span class="math inline">y</span> should be as small as possible. One possibility is to also minimize the <strong>Euclidian norm</strong> (or <strong>L2-norm</strong>) of the vector <span class="math inline">\mathbf{x} = [x, y]</span>.</p>
@@ -615,36 +633,36 @@ ul.task-list li input[type="checkbox"] {
 </span></p>
 <p>For a fixed value of <span class="math inline">\lambda</span> (for example 0.1), we now minimize using gradient descent this new loss function. To do that, we just need to compute its gradient:</p>
 <p><span class="math display">
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 </span></p>
 <p>and apply gradient descent iteratively:</p>
 <p><span class="math display">
-    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \frac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
+    \Delta \begin{bmatrix} x \\ y \end{bmatrix} = - \eta \, \nabla_{x, y} \, \mathcal{L}(x, y) = - \eta \, \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + 2\, \lambda \, x \\ \\ \dfrac{\partial f(x, y)}{\partial y} + 2\, \lambda \, y \end{bmatrix}
 </span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-regularization2.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Gradient descent with L2 regularization, using <span class="math inline">\lambda = 0.1</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Gradient descent with L2 regularization, using <span class="math inline">\lambda = 0.1</span>.</figcaption>
 </figure>
 </div>
 <p>You may notice that the result of the optimization is a bit off, it is not exactly <span class="math inline">(1, 0)</span>. This is because we do not optimize <span class="math inline">f(x, y)</span> directly, but <span class="math inline">\mathcal{L}(x, y)</span>. Let’s have a look at the landscape of the loss function:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-regularization3.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Landscape of the loss function <span class="math inline">\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)</span> with <span class="math inline">\lambda = 0.1</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Landscape of the loss function <span class="math inline">\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)</span> with <span class="math inline">\lambda = 0.1</span>.</figcaption>
 </figure>
 </div>
 <p>The optimization with GD indeed works, it is just that the function is different. The constraint on the Euclidian norm “attracts” or “distorts” the function towards <span class="math inline">(0, 0)</span>. This may seem counter-intuitive, but we will see with deep networks that we can live with it. Let’s now look at what happens when we increase <span class="math inline">\lambda</span> to 5:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-regularization4.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Gradient descent with L2 regularization, using <span class="math inline">\lambda = 5</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Gradient descent with L2 regularization, using <span class="math inline">\lambda = 5</span>.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-regularization5.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Landscape of the loss function <span class="math inline">\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)</span> with <span class="math inline">\lambda = 5</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Landscape of the loss function <span class="math inline">\mathcal{L}(x, y) = f(x, y) + \lambda \, (x^2 + y^2)</span> with <span class="math inline">\lambda = 5</span>.</figcaption>
 </figure>
 </div>
 <p>Now the result of the optimization is totally wrong: the constraint on the norm completely dominates the optimization process.</p>
@@ -657,19 +675,19 @@ ul.task-list li input[type="checkbox"] {
 <li><p>When <span class="math inline">\lambda</span> is big, <span class="math inline">x^2 + y^2</span> dominates, the result will be very small but <span class="math inline">f(x, y)</span> will have any value.</p></li>
 </ul>
 <p>The right value for <span class="math inline">\lambda</span> is hard to find. We will see later methods to experimentally find its most adequate value.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Regularization is a form of <strong>constrained optimization</strong>. What we actually want to solve is the constrained optimization problem:</p>
 <p><span class="math display">
-    \min_{x, y} \qquad f(x, y)
+    \min_{x, y} \,f(x, y)
 </span> so that: <span class="math display">
     x^2 + y^2 &lt; \delta
 </span></p>
@@ -689,13 +707,13 @@ Note
 </span></p>
 <p>Its gradient only depend on the sign of <span class="math inline">x</span> and <span class="math inline">y</span>:</p>
 <p><span class="math display">
-    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \frac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \frac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
+    \nabla_{x, y} \, \mathcal{L}(x, y) = \begin{bmatrix} \dfrac{\partial f(x, y)}{\partial x} + \lambda \, \text{sign}(x) \\ \\ \dfrac{\partial f(x, y)}{\partial y} + \lambda \, \text{sign}(y) \end{bmatrix}
 </span></p>
 <p>It tends to lead to <strong>sparser</strong> value of <span class="math inline">(x, y)</span>, i.e.&nbsp;either <span class="math inline">x</span> or <span class="math inline">y</span> will be close or equal to 0.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/gradient-descent-animation-regularization6.gif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Gradient descent with L1 regularization, using <span class="math inline">\lambda = 0.1</span>.</figcaption><p></p>
+<figcaption class="figure-caption">Gradient descent with L1 regularization, using <span class="math inline">\lambda = 0.1</span>.</figcaption>
 </figure>
 </div>
 <p>Both L1 and L2 regularization can be used in neural networks depending on the desired effect.</p>
@@ -732,9 +750,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -799,6 +831,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -853,7 +971,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

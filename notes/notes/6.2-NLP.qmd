@@ -5,8 +5,6 @@ Slides: [html](../slides/6.2-NLP.html){target="_blank"} [pdf](../slides/pdf/6.2-
 
 ## word2vec
 
-{{< youtube  8ub1oavRfIE >}}
-
 The most famous application of RNNs is **Natural Language Processing** (NLP): text understanding, translation, etc... Each word of a sentence has to be represented as a vector $\mathbf{x}_t$ in order to be fed to a LSTM. Which representation should we use?
 
 The naive solution is to use **one-hot encoding**, one element of the vector corresponding to one word of the dictionary.
@@ -47,8 +45,6 @@ It is trained on huge datasets of sentences (e.g. Wikipedia). After learning, th
 ![Arithmetic operations on word2vec representations. Source: <https://www.tensorflow.org/tutorials/representation/word2vec>.](../slides/img/linear-relationships.png){width=100%}
 
 ## Applications of RNNs
-
-{{< youtube  FiSqycJE_i0 >}}
 
 ### Classification of LSTM architectures
 
@@ -153,8 +149,6 @@ The **encoder** learns for example to encode each word of a sentence in French. 
 
 
 ## RNNs with Attention
-
-{{< youtube  Gi8aHnnyDaM >}}
 
 
 :::{.callout-note}

@@ -11,9 +11,6 @@ It is not supposed to replace any course in mathematics (we won't show any proof
 
 ## Linear algebra
 
-
-{{< youtube gE3W7pymA2k >}}
-
 Several mathematical objects are manipulated in linear algebra:
 
 * **Scalars** $x$ are 0-dimensional values (single numbers, so to speak). They can either take real values ($x \in \Re$, e.g. $x = 1.4573$, floats in CS) or natural values ($x \in \mathbb{N}$, e.g. $x = 3$, integers in CS). 
@@ -263,8 +260,6 @@ $$\mathbf{x} = A^{-1} \times \mathbf{b}$$
 
 ## Calculus
 
-{{< youtube  RsQVNOTgYwk >}}
-
 ### Functions
 
 A **univariate function** $f$ associates to any real number $x \in \Re$ (or a subset of $\Re$ called the support of the function) another (unique) real number $f(x)$:
@@ -502,8 +497,6 @@ Very roughly speaking, the integral can be considered as the equivalent of a sum
 
 
 ## Probability theory
-
-{{< youtube  X5uSbrFe82Q >}}
 
 ### Discrete probability distributions
 
@@ -779,8 +772,6 @@ $$
 
 ## Statistics
 
-{{< youtube  Q7u_iMZ89K8 >}}
-
 ### Monte Carlo sampling
 
 **Random sampling** or **Monte Carlo sampling** (MC) consists of taking $N$ samples $x_i$ out of the distribution $X$ (discrete or continuous) and computing the **sample average**:
@@ -893,8 +884,6 @@ Unfortunately, the perfect estimator does not exist in practice.  One usually ta
 
 
 ## Information theory
-
-{{< youtube  -WZKHdKDtTY >}}
 
 
 ### Entropy

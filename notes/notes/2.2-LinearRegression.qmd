@@ -6,7 +6,6 @@ Slides: [html](../slides/2.2-LinearRegression.html){target="_blank"} [pdf](../sl
 
 ## Linear regression
 
-{{< youtube  lEILkDvT0gI >}}
 
 ![Simple linear regression. $x$ is the input, $y$ the output. The data is represented by blue dots, the model by the black line.](../slides/img/regression-animation2.png){width=70%}
 
@@ -19,7 +18,7 @@ $$
 The **free parameters** of the model are the slope $w$ and the intercept $b$. This model corresponds to a single **artificial neuron** with output $y$, having one input $x$, one weight $w$, one bias $b$ and a **linear** activation function $f(x) = x$.
 
 
-![Artificial neuron with multiple inputs.](../slides/img/artificialneuron.svg)
+![Artificial neuron with multiple inputs.](../slides/img/artificialneuron.svg){width=60%}
 
 The goal of the linear regression (or least mean squares - LMS) is to minimize the **mean square error** (mse) between the targets and the predictions. This loss function is defined as the mathematical expectation of the quadratic error over the training set:
 
@@ -31,7 +30,7 @@ $$
 As the training set is finite and the samples i.i.d (independent and identically distributed), we can simply replace the expectation by a sampling average over the training set:
 
 $$
-    \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
+    \mathcal{L}(w, b) = \dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 $$
 
 The minimum of the mse is achieved when the **prediction** $y_i = f_{w, b}(x_i)$ is equal to the **true value** $t_i$ for all training examples. In other words, we want to minimize the **residual error** of the model on the data. It is not always possible to obtain the global minimum (0) as the data may be noisy, but the closer, the better.
@@ -43,34 +42,35 @@ The minimum of the mse is achieved when the **prediction** $y_i = f_{w, b}(x_i)$
 We search for $w$ and $b$ which minimize the mean square error:
 
 $$
-    \mathcal{L}(w, b) = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
+    \mathcal{L}(w, b) = \dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 $$
 
 We will apply **gradient descent** to iteratively modify estimates of $w$ and $b$:
 
 $$
-    \Delta w = - \eta \, \frac{\partial \mathcal{L}(w, b)}{\partial w}
-$$
-$$
-    \Delta b = - \eta \, \frac{\partial \mathcal{L}(w, b)}{\partial b}
+\begin{cases}
+    \Delta w = - \eta \, \dfrac{\partial \mathcal{L}(w, b)}{\partial w}\\
+    \\
+    \Delta b = - \eta \, \dfrac{\partial \mathcal{L}(w, b)}{\partial b}\\
+\end{cases}
 $$
 
 Let's search for the partial derivative of the mean square error with respect to $w$:
 
 $$
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = \frac{\partial}{\partial w} [\frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2]
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = \dfrac{\partial}{\partial w} [\dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2]
 $$
 
 Partial derivatives are linear, so the derivative of a sum is the sum of the derivatives:
 
 $$
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = \frac{1}{N} \, \sum_{i=1}^{N} \frac{\partial}{\partial w} (t_i - y_i )^2
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = \dfrac{1}{N} \, \sum_{i=1}^{N} \dfrac{\partial}{\partial w} (t_i - y_i )^2
 $$
 
 This means we can compute a gradient for each training example instead of for the whole training set (see later the distinction batch/online):
 
 $$
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = \frac{1}{N} \, \sum_{i=1}^{N} \frac{\partial}{\partial w} \mathcal{l}_i(w, b)
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = \dfrac{1}{N} \, \sum_{i=1}^{N} \dfrac{\partial}{\partial w} \mathcal{l}_i(w, b)
     \qquad \text{with} \qquad \mathcal{l}_i(w, b) = (t_i - y_i )^2
 $$
 
@@ -83,71 +83,63 @@ The individual loss $\mathcal{l}_i(w, b) = (t_i - y_i )^2$ is the composition of
 The **chain rule** tells us how to derive such composite functions:
 
 $$
-    \frac{ d f(g(x))}{dx} = \frac{ d f(g(x))}{d g(x)} \times \frac{ d g(x)}{dx} = \frac{ d f(y)}{dy} \times \frac{ d g(x)}{dx}
+    \dfrac{ d f(g(x))}{dx} = \dfrac{ d f(g(x))}{d g(x)} \times \dfrac{ d g(x)}{dx} = \dfrac{ d f(y)}{dy} \times \dfrac{ d g(x)}{dx}
 $$
 
 The first derivative considers $g(x)$ to be a single variable. Applied to our problem, this gives:
 
 $$
-     \frac{\partial}{\partial w} \mathcal{l}_i(w, b) =  \frac{\partial g_i(y_i)}{\partial y_i} \times  \frac{\partial y_i}{\partial w}
+     \dfrac{\partial}{\partial w} \mathcal{l}_i(w, b) =  \dfrac{\partial g_i(y_i)}{\partial y_i} \times  \dfrac{\partial y_i}{\partial w}
 $$
 
 The square error function $g_i(y) = (t_i - y)^2$ is easy to differentiate w.r.t $y$:
 
 $$
-    \frac{\partial g_i(y_i)}{\partial y_i} = - 2 \, (t_i - y_i)
+    \dfrac{\partial g_i(y_i)}{\partial y_i} = - 2 \, (t_i - y_i)
 $$
 
 The prediction $y_i = w \, x_i + b$ also w.r.t $w$ and $b$:
 
 $$
-   \frac{\partial  y_i}{\partial w} = x_i
-$$
-
-$$
-   \frac{\partial  y_i}{\partial b} = 1
+\begin{cases}
+   \dfrac{\partial  y_i}{\partial w} = x_i \\
+    \\
+   \dfrac{\partial  y_i}{\partial b} = 1 \\
+\end{cases}
 $$
 
 The partial derivative of the individual loss is:
 
 $$
-    \frac{\partial \mathcal{l}_i(w, b)}{\partial w} = - 2 \, (t_i - y_i) \, x_i
-$$
-
-$$
-    \frac{\partial \mathcal{l}_i(w, b)}{\partial b} = - 2 \, (t_i - y_i)
+\begin{cases}
+    \dfrac{\partial \mathcal{l}_i(w, b)}{\partial w} = - 2 \, (t_i - y_i) \, x_i \\
+    \\
+    \dfrac{\partial \mathcal{l}_i(w, b)}{\partial b} = - 2 \, (t_i - y_i) \\
+\end{cases}
 $$
 
 This gives us:
 
 $$
-    \frac{\partial \mathcal{L}(w, b)}{\partial w} = - \frac{2}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-$$
-
-$$
-    \frac{\partial \mathcal{L}(w, b)}{\partial b} = - \frac{2}{N} \sum_{i=1}^{N} (t_i - y_i)
+\begin{cases}
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial w} = - \dfrac{2}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \dfrac{\partial \mathcal{L}(w, b)}{\partial b} = - \dfrac{2}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 $$
 
 Gradient descent is then defined by the learning rules (absorbing the 2 in $\eta$):
 
 $$
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-$$
-
-$$
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
+\begin{cases}
+    \Delta w = \eta \, \dfrac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i \\
+    \\
+    \Delta b = \eta \, \dfrac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \\
+\end{cases}
 $$
 
 
 **Least Mean Squares** (LMS) or Ordinary Least Squares (OLS) is a **batch** algorithm: the parameter changes are computed over the whole dataset.
-
-$$
-    \Delta w = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i) \, x_i
-$$
-$$
-    \Delta b = \eta \, \frac{1}{N} \sum_{i=1}^{N} (t_i - y_i)
-$$
-
 The parameter changes have to be applied multiple times (**epochs**) in order for the parameters to converge. One can stop when the parameters do not change much, or after a fixed number of epochs.
 
 
@@ -168,9 +160,9 @@ The parameter changes have to be applied multiple times (**epochs**) in order fo
 
         * $db = db + (t_i - y_i)$
 
-    * $\Delta w = \eta \, \frac{1}{N} dw$
+    * $\Delta w = \eta \, \dfrac{1}{N} dw$
 
-    * $\Delta b = \eta \, \frac{1}{N} db$
+    * $\Delta b = \eta \, \dfrac{1}{N} db$
 :::
 
 ![Visualization of least mean squares applied to a simple regression problem with $\eta=0.1$. Each step of the animation corresponds to one epoch (iteration over the training set).](../slides/img/regression-animation.gif)
@@ -184,9 +176,13 @@ During learning, the **mean square error** (mse) decreases with the number of ep
 
 LMS is very slow, because it changes the weights only after the whole training set has been evaluated. It is also possible to update the weights immediately after each example using the **delta learning rule**, which is the **online** version of LMS:
 
-$$\Delta w = \eta \, (t_i - y_i) \, x_i$$
-
-$$\Delta b = \eta \, (t_i - y_i)$$
+$$
+\begin{cases}
+\Delta w = \eta \, (t_i - y_i) \, x_i \\
+\\
+\Delta b = \eta \, (t_i - y_i) \\
+\end{cases}
+$$
 
 
 :::{.callout-tip}
@@ -212,8 +208,6 @@ The batch version is more stable, but the online version is faster: the weights 
 ![Evolution of the loss function during training. With the same learning rate, the delta learning rule converges much faster but reaches a poorer minimum. Lowering the learning rate slows down learning but reaches a better minimum.](../slides/img/regression-animation-online-loss.png)
 
 ## Multiple linear regression
-
-{{< youtube  BOJFFy0nA6I >}}
 
 The key idea of linear regression (one input $x$, one output $y$) can be generalized to multiple inputs and outputs.
 
@@ -333,7 +327,7 @@ Some more advanced linear algebra becomes important to know how to compute these
  We search the minimum of the mse loss function:
 
 $$
-    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] \approx \frac{1}{N} \, \sum_{i=1}^N ||\mathbf{t}_i - \mathbf{y}_i||^2 = \frac{1}{N} \, \sum_{i=1}^N \mathcal{l}_i(W, \mathbf{b})
+    \min_{W, \mathbf{b}} \, \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_\mathcal{D} [ ||\mathbf{t} - \mathbf{y}||^2 ] \approx \dfrac{1}{N} \, \sum_{i=1}^N ||\mathbf{t}_i - \mathbf{y}_i||^2 = \dfrac{1}{N} \, \sum_{i=1}^N \mathcal{l}_i(W, \mathbf{b})
 $$
 
 The individual loss function $\mathcal{l}_i(W, \mathbf{b})$ is the squared $\mathcal{L}^2$-norm of the error vector, what can be expressed as a dot product or a vector multiplication:
@@ -372,6 +366,7 @@ We use the properties $\nabla_{\mathbf{x}}\,  \mathbf{x}^T \times \mathbf{z} = \
 :::
 
 The "problem" is when computing $\nabla_{W} \, \mathbf{y}_i = \nabla_{W} \, (W \times \mathbf{x}_i + \mathbf{b})$: 
+
 * $\mathbf{y}_i$ is a vector and $W$ a matrix.
 * $\nabla_{W} \, \mathbf{y}_i$ is then a Jacobian (matrix), not a gradient (vector).
 
@@ -427,10 +422,10 @@ The Jacobian w.r.t $W$ can be explicitly formed using partial derivatives:
 
 $$
 \nabla_W \, \mathcal{l}(W, \mathbf{b}) = \begin{bmatrix} 
-\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
+\dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_1} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_2} \\ \\ \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_3} & \dfrac{\partial \mathcal{l}(W, \mathbf{b})}{\partial w_4} \\
 \end{bmatrix}
 = \begin{bmatrix} 
--2 \, (t_1 - y_1) \, x_1 & -2 \, (t_1 - y_1) \, x_2 \\ -2 \, (t_2 - y_2) \, x_1 & -2 \, (t_2 - y_2) \, x_2 \\
+-2 \, (t_1 - y_1) \, x_1 & -2 \, (t_1 - y_1) \, x_2 \\ \\ -2 \, (t_2 - y_2) \, x_1 & -2 \, (t_2 - y_2) \, x_2 \\
 \end{bmatrix}
 $$
 
@@ -491,15 +486,13 @@ The delta learning rule is always of the form: $\Delta w$ = eta * error * input.
 
 ## Logistic regression
 
-{{< youtube  fRuzoyV036Y >}}
-
 Let's suppose we want to perform a regression, but where the outputs $t_i$ are bounded between 0 and 1. We could use a logistic (or sigmoid) function instead of a linear function in order to transform the input into an output:
 
 $$
-    y = \sigma(w \, x + b )  = \displaystyle\frac{1}{1+\exp(-w \, x - b )}
+    y = \sigma(w \, x + b )  = \displaystyle\dfrac{1}{1+\exp(-w \, x - b )}
 $$
 
-![Logistic or sigmoid function $\sigma(x)=\displaystyle\frac{1}{1+\exp(-x)}$.](../slides/img/sigmoid.png){width=60%}
+![Logistic or sigmoid function $\sigma(x)=\displaystyle\dfrac{1}{1+\exp(-x)}$.](../slides/img/sigmoid.png){width=60%}
 
 By definition of the logistic function, the prediction $y$ will be bounded between 0 and 1, what matches the targets $t$. Let's now apply gradient descent on the **mse** loss using this new model. The individual loss will be:
 
@@ -509,8 +502,8 @@ The partial derivative of the individual loss is easy to find using the chain ru
 
 $$
 \begin{aligned}
-    \displaystyle\frac{\partial l_i(w, b)}{\partial w}
-        &= 2 \, (t_i - y_i)  \, \frac{\partial}{\partial w}  (t_i - \sigma(w \, x_i + b ))\\
+    \displaystyle\dfrac{\partial l_i(w, b)}{\partial w}
+        &= 2 \, (t_i - y_i)  \, \dfrac{\partial}{\partial w}  (t_i - \sigma(w \, x_i + b ))\\
         &\\
         &= - 2 \, (t_i - y_i) \, \sigma'(w \, x_i + b ) \,  x_i \\
 \end{aligned}
@@ -522,7 +515,7 @@ $$
     \Delta w = \eta \, (t_i - y_i) \, \sigma'(w \, x_i + b ) \, x_i
 $$
 
-The logistic function $\sigma(x)=\frac{1}{1+\exp(-x)}$ has the nice property that its derivative can be expressed easily:
+The logistic function $\sigma(x)=\dfrac{1}{1+\exp(-x)}$ has the nice property that its derivative can be expressed easily:
 
 $$
     \sigma'(x) = \sigma(x) \, (1 - \sigma(x) )
@@ -530,16 +523,16 @@ $$
 
 
 :::{.callout-note}
-Here is the proof using the fact that the derivative of $\displaystyle\frac{1}{f(x)}$ is $\displaystyle\frac{- f'(x)}{f^2(x)}$ :
+Here is the proof using the fact that the derivative of $\displaystyle\dfrac{1}{f(x)}$ is $\displaystyle\dfrac{- f'(x)}{f^2(x)}$ :
 
 $$\begin{aligned}
-    \sigma'(x) & = \displaystyle\frac{-1}{(1+\exp(-x))^2} \, (- \exp(-x)) \\
+    \sigma'(x) & = \displaystyle\dfrac{-1}{(1+\exp(-x))^2} \, (- \exp(-x)) \\
     &\\
-    &= \frac{1}{1+\exp(-x)} \times \frac{\exp(-x)}{1+\exp(-x)}\\
+    &= \dfrac{1}{1+\exp(-x)} \times \dfrac{\exp(-x)}{1+\exp(-x)}\\
     &\\
-    &= \frac{1}{1+\exp(-x)} \times \frac{1 + \exp(-x) - 1}{1+\exp(-x)}\\
+    &= \dfrac{1}{1+\exp(-x)} \times \dfrac{1 + \exp(-x) - 1}{1+\exp(-x)}\\
     &\\
-    &= \frac{1}{1+\exp(-x)} \times (1 - \frac{1}{1+\exp(-x)})\\
+    &= \dfrac{1}{1+\exp(-x)} \times (1 - \dfrac{1}{1+\exp(-x)})\\
     &\\
     &= \sigma(x) \, (1 - \sigma(x) )\\
 \end{aligned}
@@ -591,8 +584,6 @@ In the linear case, $f'(x) = 1$. One can use any non-linear function, e.g hyperb
 
 ## Polynomial regression
 
-{{< youtube  a6sQgJovhzU >}}
-
 ![](../slides/img/polynomialregression.png)
 
 The functions underlying real data are rarely linear plus some noise around the ideal value. In the figure above, the input/output function is better modeled by a second-order polynomial:
@@ -638,7 +629,7 @@ Non-linear problem solved! The only unknown is which order for the polynomial ma
 
 ## A bit of learning theory
 
-{{< youtube  QbvCJNfeXbE >}}
+### Metrics
 
 Before going further, let's think about what we have been doing so far. We had a bunch of data samples $\mathcal{D} = (\mathbf{x}_i, t_i)_{i=1..N}$ (the **training set**). We decided to apply a (linear) model on it:
 
@@ -653,7 +644,7 @@ $$
 At the end of learning, we can measure the **residual error** of the model on the data:
 
 $$
-    \epsilon_\mathcal{D} = \frac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
+    \epsilon_\mathcal{D} = \dfrac{1}{N} \, \sum_{i=1}^{N} (t_i - y_i )^2
 $$
 
 We get a number, for example 0.04567. Is that good?
@@ -666,7 +657,7 @@ The **mean square error** mse is not very informative, as its value depends on h
 The **coefficient of determination** $R^2$ is a rescaled variant of the mse comparing the variance of the residuals to the variance of the data around its mean $\hat{t}$:
 
 $$
-    R^2 = 1 - \frac{\text{Var}(\text{residuals})}{\text{Var}(\text{data})} = 1 - \frac{\sum_{i=1}^N (t_i- y_i)^2}{\sum_{i=1}^N (t_i - \hat{t})^2}
+    R^2 = 1 - \dfrac{\text{Var}(\text{residuals})}{\text{Var}(\text{data})} = 1 - \dfrac{\sum_{i=1}^N (t_i- y_i)^2}{\sum_{i=1}^N (t_i - \hat{t})^2}
 $$
 
 $R^2$ should be as close from 1 as possible. For example, if $R^2 = 0.8$, we can say that the **model explains 80% of the variance of the data**.  
@@ -757,7 +748,7 @@ The disadvantage of **simple hold-out cross-validation** is that 20 or 30% of th
 :::{.callout-tip} 
 ## k-fold cross-validation
 
-* Randomly split the data $\mathcal{D}$ into $k$ subsets of $\frac{N}{k}$ examples $\{ \mathcal{S}_{1}, \dots , \mathcal{S}_{k}\}$
+* Randomly split the data $\mathcal{D}$ into $k$ subsets of $\dfrac{N}{k}$ examples $\{ \mathcal{S}_{1}, \dots , \mathcal{S}_{k}\}$
 
 * For all models $M_i$:
 
@@ -770,7 +761,7 @@ The disadvantage of **simple hold-out cross-validation** is that 20 or 30% of th
     * The empirical error of the model $M_i$ on $\mathcal{D}$ is the average of empirical errors made on $(\mathcal{S}_j)_{j=1}^{k}$
         
         $$
-            \epsilon_{\mathcal{D}} (M_i) = \frac{1}{k} \cdot \sum_{j=1}^{k} \epsilon_{\mathcal{S}_j}(h_{ij})
+            \epsilon_{\mathcal{D}} (M_i) = \dfrac{1}{k} \cdot \sum_{j=1}^{k} \epsilon_{\mathcal{S}_j}(h_{ij})
         $$
 
 * Select the model $M_{i}^*$ with the minimal empirical error on $\mathcal{D}$.
@@ -778,12 +769,19 @@ The disadvantage of **simple hold-out cross-validation** is that 20 or 30% of th
 
 In general, you can take $k=10$ partitions. The extreme case is to take $k=N$ partition, i.e. the test set has only one sample each time: **leave-one-out cross-validation**. k-fold cross-validation works well, but needs a lot of repeated learning.
 
+The bare minimum in ML is to have separate training and test sets. However, the test set should only be used once. If you try many variations of the same algorithm on a single test set and keep the best one, you end up overfitting the test set: the model may not generalize well to novel data...
+
+A third **validation set** is typically used to track overfitting during training and perform model selection. The test set is ultimately used to report the final performance.
+
+![Source: <https://developers.google.com/machine-learning/crash-course/validation/another-partition>](../slides/img/validationset.svg)
+
+
+
 ### Underfitting - overfitting
 
 While the training mse always decrease with more complex models, the test mse increases after a while. This is called **overfitting**: learning by heart the data without caring about generalization. The two curves suggest that we should chose a polynomial order between 2 and 9.
 
 ![Training and test mse of polynomial regression.](../slides/img/polynomialregression-mse-traintest.png)
-
 
 A model not complex enough for the data will **underfit**: its training error is high. A model too complex for the data will **overfit**: its test error is high. In between, there is the right complexity for the model: it learns the data correctly but does not overfit. 
 
@@ -820,8 +818,6 @@ We search for the model with the **optimum complexity** realizing the trade-off 
 
 
 ## Regularized regression
-
-{{< youtube  6R46KLgfw5s >}}
 
 Linear regression can either underfit or overfit depending on the data.
 

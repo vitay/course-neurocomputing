@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Neurocomputing - 7&nbsp; Learning theory</title>
+<title>Neurocomputing - Learning theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,72 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,7 +57,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -148,11 +86,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Learning theory</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/2.1-Optimization.html"><strong>Linear algorithms</strong></a></li><li class="breadcrumb-item"><a href="../notes/2.4-LearningTheory.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Learning theory</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -160,7 +103,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../notes/img/tuc-new.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -169,22 +112,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="../">Neurocomputing</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Overview</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Introduction</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -208,8 +153,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Linear algorithms</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text"><strong>Linear algorithms</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -238,8 +184,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text"><strong>Neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -258,8 +205,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Computer Vision</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text"><strong>Computer Vision</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -283,8 +231,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Generative modeling</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text"><strong>Generative modeling</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -308,8 +257,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true"><strong>Recurrent neural networks</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text"><strong>Recurrent neural networks</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -328,8 +278,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true"><strong>Self-supervised learning</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text"><strong>Self-supervised learning</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -358,8 +309,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true"><strong>Outlook</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text"><strong>Outlook</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -378,8 +330,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true"><strong>Exercises</strong></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+ <span class="menu-text"><strong>Exercises</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -396,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/1-Python-solution.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
+  <a href="../exercises/1-Python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction To Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -463,21 +416,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#error-measurements" id="toc-error-measurements" class="nav-link active" data-scroll-target="#error-measurements">Error measurements</a></li>
-  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-validation</a></li>
-  <li><a href="#vapnik-chervonenkis-dimension" id="toc-vapnik-chervonenkis-dimension" class="nav-link" data-scroll-target="#vapnik-chervonenkis-dimension">Vapnik-Chervonenkis dimension</a></li>
+  <li><a href="#vapnik-chervonenkis-dimension" id="toc-vapnik-chervonenkis-dimension" class="nav-link active" data-scroll-target="#vapnik-chervonenkis-dimension">Vapnik-Chervonenkis dimension</a></li>
   <li><a href="#structural-risk-minimization" id="toc-structural-risk-minimization" class="nav-link" data-scroll-target="#structural-risk-minimization">Structural risk minimization</a></li>
   <li><a href="#feature-space" id="toc-feature-space" class="nav-link" data-scroll-target="#feature-space">Feature space</a>
   <ul class="collapse">
@@ -494,7 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-title">Learning theory</span></h1>
+<h1 class="title"><span class="chapter-title">Learning theory</span></h1>
 </div>
 
 
@@ -510,118 +463,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Slides: <a href="../slides/2.4-LearningTheory.html" target="_blank">html</a> <a href="../slides/pdf/2.4-LearningTheory.pdf" target="_blank">pdf</a></p>
-<section id="error-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="error-measurements">Error measurements</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/WNGmapP2JL8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<p>The <strong>training error</strong> is the error made on the training set. It is easy to measure for classification as the number of misclassified examples divided by the total number of examples.</p>
-<p><span class="math display">\epsilon_\mathcal{D} = \dfrac{\text{Number of misclassifications}}{\text{Total number of examples}}</span></p>
-<p>The training error is totally irrelevant on usage: reading the training set has a training error of 0%. What matters is the <strong>generalization error</strong>, which is the error that will be made on new examples (not used during learning). It is much harder to measure (potentially infinite number of new examples, what is the correct answer?). The generalization error is often approximated by the <strong>empirical error</strong>: one keeps a number of training examples out of the learning phase and one tests the performance on them.</p>
-<p>Classification errors can also depend on the class:</p>
-<ul>
-<li><strong>False Positive</strong> errors (FP, false alarm, type I) is when the classifier predicts a positive class for a negative example.</li>
-<li><strong>False Negative</strong> errors (FN, miss, type II) is when the classifier predicts a negative class for a positive example.</li>
-<li><strong>True Positive</strong> (TP) and <strong>True Negative</strong> (TN) are correctly classified examples.</li>
-</ul>
-<p>Is it better to fail to detect a cancer (FN) or to incorrectly predict one (FP)?</p>
-<p>Some other metrics:</p>
-<ul>
-<li>Accuracy (1 - error)</li>
-</ul>
-<p><span class="math display">
-    \text{acc} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}
-</span></p>
-<ul>
-<li>Recall (hit rate, sensitivity)</li>
-</ul>
-<p><span class="math display">
-    R = \frac{\text{TP}}{\text{TP} + \text{FN}}
-</span></p>
-<ul>
-<li>Precision (specificity)</li>
-</ul>
-<p><span class="math display">
-    P = \frac{\text{TP}}{\text{TP} + \text{FP}}
-</span></p>
-<ul>
-<li>F1 score = harmonic mean of precision and recall</li>
-</ul>
-<p><span class="math display">
-    \text{F1} = \frac{2\, P \, R}{P + R}
-</span></p>
-<p>For multiclass classification problems, the <strong>confusion matrix</strong> tells how many examples are correctly classified and where confusion happens. One axis is the predicted class, the other is the target class. Each element of the matrix tells how many examples are classified or misclassified. The matrix should be as diagonal as possible.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/confusionmatrix.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Confusion matrix.</figcaption><p></p>
-</figure>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Using <code>scikit-learn</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> confusion_matrix(t, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="cross-validation" class="level2">
-<h2 class="anchored" data-anchor-id="cross-validation">Cross-validation</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/underfitting-overfitting.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Overfitting in regression.</figcaption><p></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/underfitting-overfitting-classification.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Overfitting in classification.</figcaption><p></p>
-</figure>
-</div>
-<p>In classification too, <strong>cross-validation</strong> has to be used to prevent overfitting. The classifier is trained on the <strong>training set</strong> and tested on the <strong>test set</strong>. Optionally, a third <strong>validation set</strong> can be used to track overfitting during training.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../slides/img/validationset.svg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Training, validation and test sets. Source: <a href="https://developers.google.com/machine-learning/crash-course/validation/another-partition" class="uri">https://developers.google.com/machine-learning/crash-course/validation/another-partition</a></figcaption><p></p>
-</figure>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Beware: the test data must come from the same distribution as the training data, otherwise it makes no sense.</p>
-</div>
-</div>
-</section>
+<p>We have seen sofar <strong>linear learning algorithms</strong> for regression and classification. Most interesting problems are non-linear: classes are not linearly separable, the output is not a linear function of the input, etc… Do we need totally new methods, or can we re-use our linear algorithms?</p>
 <section id="vapnik-chervonenkis-dimension" class="level2">
 <h2 class="anchored" data-anchor-id="vapnik-chervonenkis-dimension">Vapnik-Chervonenkis dimension</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/w3drWJ-tFH8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <p>How many data examples can be correctly classified by a linear model in <span class="math inline">\Re^d</span>? In <span class="math inline">\Re^2</span>, all dichotomies of three non-aligned examples can be correctly classified by a linear model (<span class="math inline">y = w_1 \, x_1 + w_2 \, x_2 + b</span>).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vc4.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">A linear classifier in 2D can classify any configuration of three points.</figcaption><p></p>
+<figcaption class="figure-caption">A linear classifier in 2D can classify any configuration of three points.</figcaption>
 </figure>
 </div>
 <p>However, there exists sets of four examples in <span class="math inline">\Re^2</span> which can NOT be correctly classified by a linear model, i.e.&nbsp;they are not linearly separable.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/vc6.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">There exists configurations of four points in 2D that cannot be linearly classified.</figcaption><p></p>
+<figcaption class="figure-caption">There exists configurations of four points in 2D that cannot be linearly classified.</figcaption>
 </figure>
 </div>
 <p>The XOR function in <span class="math inline">\Re^2</span> is for example not linearly separable, i.e.&nbsp;the Perceptron algorithm can not converge.</p>
@@ -631,12 +487,12 @@ Note
 <p>This can be generalized to linear classifiers in <span class="math inline">\Re^d</span>:</p>
 <p><span class="math display">\text{VC}_\text{dim} (\text{Linear}(\Re^d) ) = d+1</span></p>
 <p>This corresponds to the number of <strong>free parameters</strong> of the linear classifier: <span class="math inline">d</span> parameters for the weight vector, 1 for the bias. Given any set of <span class="math inline">(d+1)</span> examples in <span class="math inline">\Re^d</span>, there exists a linear classifier able to classify them perfectly. For other types of (non-linear) hypotheses, the VC dimension is generally proportional to the <strong>number of free parameters</strong>, but <strong>regularization</strong> reduces the VC dimension of the classifier.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Vapnik-Chervonenkis theorem
 </div>
 </div>
@@ -655,7 +511,7 @@ Vapnik-Chervonenkis theorem
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/srm.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Structural risk minimization.</figcaption><p></p>
+<figcaption class="figure-caption">Structural risk minimization.</figcaption>
 </figure>
 </div>
 <p>The generalization error increases with the VC dimension, while the training error decreases. Structural risk minimization is an alternative method to cross-validation. The VC dimensions of various classes of hypothesis are already known (~ number of free parameters). The VC bounds tells how many training samples are needed by a given hypothesis class in order to obtain a satisfying generalization error.</p>
@@ -676,24 +532,26 @@ Vapnik-Chervonenkis theorem
 </section>
 <section id="feature-space" class="level2">
 <h2 class="anchored" data-anchor-id="feature-space">Feature space</h2>
-<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/KXCcZBFuk08" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Cover’s theorem on the separability of patterns (1965)
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<blockquote class="blockquote">
 <p>A complex pattern-classification problem, cast in a high dimensional space non-linearly, is more likely to be linearly separable than in a low-dimensional space, provided that the space is not densely populated.</p>
+</blockquote>
 </div>
 </div>
+<p></p><div id="youtube-frame" style="position: relative; padding-bottom: 56.25%; /* 16:9 */ height: 0;"><iframe width="100%" height="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/9NrALgHFwTo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><p></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/featurespace.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Projection to a feature space.</figcaption><p></p>
+<figcaption class="figure-caption">Projection to a feature space.</figcaption>
 </figure>
 </div>
 <p>The highly dimensional space where the input data is projected is called the <strong>feature space</strong> When the number of dimensions of the feature space increases, the training error decreases (the pattern is more likely linearly separable) but the generalization error increases (the VC dimension increases).</p>
@@ -709,7 +567,7 @@ Cover’s theorem on the separability of patterns (1965)
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rbf.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Radial basis function network. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+<figcaption class="figure-caption">Radial basis function network. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption>
 </figure>
 </div>
 <p>Radial-basis function (<strong>RBF</strong>) networks samples a subset of <span class="math inline">K</span> training examples and form the feature space using a <strong>gaussian kernel</strong>:</p>
@@ -718,13 +576,13 @@ Cover’s theorem on the separability of patterns (1965)
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rbf2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Selection of protypes among the training data. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+<figcaption class="figure-caption">Selection of protypes among the training data. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rbf4.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<p></p><figcaption class="figure-caption">Gaussian kernel. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+<figcaption class="figure-caption">Gaussian kernel. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption>
 </figure>
 </div>
 <p>By applying a linear classification algorithm on the RBF feature space:</p>
@@ -733,19 +591,19 @@ Cover’s theorem on the separability of patterns (1965)
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/rbf3.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">RBF networks learn linearly smooth transitions between the training examples. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption><p></p>
+<figcaption class="figure-caption">RBF networks learn linearly smooth transitions between the training examples. Source: <a href="https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/" class="uri">https://mccormickml.com/2013/08/15/radial-basis-function-network-rbfn-tutorial/</a></figcaption>
 </figure>
 </div>
 </section>
 <section id="kernel-perceptron-optional" class="level3">
 <h3 class="anchored" data-anchor-id="kernel-perceptron-optional">Kernel perceptron (optional)</h3>
 <p>What happens during online Perceptron learning?</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Primal form of the online Perceptron algorithm
 </div>
 </div>
@@ -773,12 +631,12 @@ Primal form of the online Perceptron algorithm
 <p>With <span class="math inline">\mathbf{w} = \sum_{i=1}^N \alpha_i \, t_i \, \mathbf{x}_i</span>, the prediction for an input <span class="math inline">\mathbf{x}</span> only depends on the training samples and their <span class="math inline">\alpha_i</span> value:</p>
 <p><span class="math display">y =  \text{sign}( \sum_{i=1}^N \alpha_i \, t_i \, \langle \mathbf{x}_i \cdot \mathbf{x} \rangle)</span></p>
 <p>To make a prediction <span class="math inline">y</span>, we need the dot product between the input <span class="math inline">\mathbf{x}</span> and all training examples <span class="math inline">\mathbf{x}_i</span>. We ignore the bias here, but it can be added back.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Dual form of the online Perceptron algorithm
 </div>
 </div>
@@ -841,12 +699,12 @@ Dual form of the online Perceptron algorithm
 <p>transforms the input from a space with <span class="math inline">d</span> dimensions into a feature space of <span class="math inline">d^p</span> dimensions.</p>
 <p>While the inner product in the feature space would require <span class="math inline">O(d^p)</span> operations, the calculation of the kernel directly in the input space only requires <span class="math inline">O(d)</span> operations. This is called the <strong>kernel trick</strong>: when a linear algorithm only relies on the dot product between input vectors, it can be safely projected into a higher dimensional feature space through a kernel function, without increasing too much its computational complexity, and without ever computing the values in the feature space.</p>
 <p>The <strong>kernel perceptron</strong> is the dual form of the Perceptron algorithm using a kernel:</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Kernel perceptron
 </div>
 </div>
@@ -895,7 +753,7 @@ k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangl
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/kernels.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Different kernels lead to different decision functions. Source: <a href="http://beta.cambridgespark.com/courses/jpm/05-module.html" class="uri">http://beta.cambridgespark.com/courses/jpm/05-module.html</a></figcaption><p></p>
+<figcaption class="figure-caption">Different kernels lead to different decision functions. Source: <a href="http://beta.cambridgespark.com/courses/jpm/05-module.html" class="uri">http://beta.cambridgespark.com/courses/jpm/05-module.html</a></figcaption>
 </figure>
 </div>
 </section>
@@ -908,7 +766,7 @@ k(\mathbf{x},\mathbf{z})=\tanh(\langle \kappa \mathbf{x} \cdot \mathbf{z} \rangl
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../slides/img/supportvectors.svg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Support-vectors are the closest examples to the hyperplane. They have a non-zero <span class="math inline">\alpha</span> coefficient.</figcaption><p></p>
+<figcaption class="figure-caption">Support-vectors are the closest examples to the hyperplane. They have a non-zero <span class="math inline">\alpha</span> coefficient.</figcaption>
 </figure>
 </div>
 <p>Coupled with a good kernel, a SVM can efficiently solve non-linear classification problems without overfitting. SVMs were the weapon of choice before the deep learning era, which deals better with huge datasets.</p>
@@ -945,9 +803,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1012,6 +884,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1066,7 +1024,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Copyright Julien Vitay - <a href="mailto:julien.vitay@informatik.tu-chemnitz.de" class="email">julien.vitay@informatik.tu-chemnitz.de</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

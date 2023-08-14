@@ -2,8 +2,6 @@
 
 Slides: [html](../slides/4.3-Segnet.html){target="_blank"} [pdf](../slides/pdf/4.3-Segnet.pdf){target="_blank"}
 
-{{< youtube  JiQdlzqT4Qs >}}
-
 ## Semantic segmentation
 
 **Semantic segmentation** is a class of segmentation methods where you use knowledge about the identity of objects to partition the image pixel-per-pixel.
@@ -19,7 +17,7 @@ The classes can be binary, for example foreground/background, person/not, etc. S
 
 Clothes can be segmented to allow for virtual try-ons.
 
-![Virtual try-ons. Source: [@Wang2018b].](../slides/img/semanticsegmentation-clothes.png){width=100%}
+![Virtual try-ons. Source: [@Wang2018a].](../slides/img/semanticsegmentation-clothes.png){width=100%}
 
 
 There are many datasets freely available, but annotating such data is very painful, expensive and error-prone.
