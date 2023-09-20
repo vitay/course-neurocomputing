@@ -503,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>The goal of this exercise is to implement a shallow multi-layer perceptron to perform non-linear classification. Let’s start with usual imports, including the logistic function.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -554,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>The MLP will be trained on a non-linear dataset with samples of each class forming a circle. Each sample has two input dimensions. In the cell below, blue points represent the positive class (t=1), orange ones the negative class (t=0).</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
@@ -574,14 +574,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Q:</strong> Split the data into a training and test set (80/20). Make sure to call them <code>X_train, X_test, t_train, t_test</code>.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, t_train, t_test <span class="op">=</span> train_test_split(X, t, test_size<span class="op">=</span><span class="fl">.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="class-definition" class="level2">
 <h2 class="anchored" data-anchor-id="class-definition">Class definition</h2>
 <p>The neural network is entirely defined by its parameters, i.e.&nbsp;the weight matrices and bias vectors, as well the transfer function of the hidden neurons. In order to make your code more reusable, the MLP will be implemented as a Python class. The following cell defines the class, but we will explain it step by step afterwards.</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, d, K, activation_function, max_val, eta):</span>
@@ -730,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can then already create the <code>MLP</code> object and observe how the parameters are initialized:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mlp <span class="op">=</span> MLP(d<span class="op">=</span><span class="dv">2</span>, K<span class="op">=</span><span class="dv">15</span>, activation_function<span class="op">=</span>logistic, max_val<span class="op">=</span><span class="fl">1.0</span>, eta<span class="op">=</span><span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Q:</strong> Create the object and print the weight matrices and bias vectors.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">15</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>max_val <span class="op">=</span> <span class="fl">1.0</span></span>
@@ -744,40 +744,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mlp.W2)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mlp.b2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[-0.52897144  0.21044788]
- [-0.10686506  0.54739532]
- [-0.6209987   0.48604941]
- [ 0.03467845 -0.97584376]
- [-0.70737448 -0.50240962]
- [-0.12108698  0.75048116]
- [-0.06807349 -0.63271267]
- [ 0.760424   -0.9367907 ]
- [ 0.695763   -0.14137454]
- [-0.91937516 -0.14493619]
- [ 0.80299858  0.59695668]
- [-0.87467725 -0.60570258]
- [ 0.04708669  0.29757085]
- [ 0.08505661 -0.14859975]
- [-0.87574304  0.5493211 ]]
-[[-0.401296  ]
- [-0.23382752]
- [-0.04195576]
- [ 0.14020117]
- [-0.55679288]
- [-0.73736505]
- [-0.98903676]
- [ 0.76104882]
- [ 0.54034658]
- [-0.48841228]
- [ 0.79080937]
- [ 0.1840221 ]
- [-0.79145236]
- [ 0.87786545]
- [-0.70295808]]
-[[-0.56649207 -0.21574322  0.17677365 -0.98804858 -0.37548242  0.77594839
-  -0.54093023  0.03327597  0.25656232 -0.78975971 -0.25568574  0.68177235
-   0.71376027 -0.04533073 -0.4154252 ]]
-[[0.31429382]]</code></pre>
+<pre><code>[[-0.05976336 -0.08497881]
+ [ 0.3609705   0.32223523]
+ [ 0.36730564 -0.55654717]
+ [-0.20719753  0.35368985]
+ [ 0.74033524  0.34669996]
+ [-0.03313026  0.31597552]
+ [-0.78592444  0.19381916]
+ [ 0.26311789 -0.14376931]
+ [-0.10836461 -0.65688825]
+ [ 0.93464305  0.02814398]
+ [ 0.17003232  0.09866934]
+ [ 0.14558728 -0.67342277]
+ [ 0.09599103 -0.56060259]
+ [ 0.71031056  0.16669883]
+ [-0.43146885 -0.40314978]]
+[[-0.05576069]
+ [ 0.64533978]
+ [-0.62514709]
+ [-0.00349511]
+ [-0.66535888]
+ [ 0.9176304 ]
+ [ 0.56057713]
+ [-0.34782236]
+ [ 0.09243376]
+ [ 0.48444012]
+ [ 0.61388272]
+ [ 0.45749073]
+ [ 0.83108324]
+ [ 0.96957611]
+ [ 0.03765266]]
+[[-0.69548795 -0.74384074  0.73544427 -0.43764399  0.92303608 -0.47316183
+   0.23095071 -0.47053184 -0.01537147 -0.52445533 -0.99513169  0.66231794
+  -0.95377207 -0.35165498  0.61658371]]
+[[0.48396291]]</code></pre>
 </div>
 </div>
 <p>The <code>feedforward</code> method takes a vector <code>x</code> as input, reshapes it to make sure it has two rows, and computes the hidden activation <span class="math inline">\mathbf{h}</span> and the prediction <span class="math inline">\mathbf{y}</span>.</p>
@@ -793,7 +793,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.y <span class="op">=</span> logistic(np.dot(<span class="va">self</span>.W2, <span class="va">self</span>.h) <span class="op">+</span> <span class="va">self</span>.b2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Notice the use of <code>self.</code> to access attributes, as well as the use of <code>np.dot()</code> to mulitply vectors and matrices.</p>
 <p><strong>Q:</strong> Using the randomly initialized weights, apply the <code>feedforward()</code> method to an input vector (for example <span class="math inline">[0.5, 0.5]</span>) and print <code>h</code> and <code>y</code>. What is the predicted class of the example?</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">0.5</span>, <span class="fl">0.5</span>])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mlp.feedforward(x)</span>
@@ -806,28 +806,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"negative class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[0.36341841]
- [0.49660946]
- [0.47266967]
- [0.41814781]
- [0.23836126]
- [0.39587851]
- [0.20760384]
- [0.66214449]
- [0.69371407]
- [0.26491678]
- [0.81619637]
- [0.36443462]
- [0.3499808 ]
- [0.6997471 ]
- [0.29605207]]
-[[0.47570096]]
+<pre><code>[[0.46801081]
+ [0.72848361]
+ [0.32744411]
+ [0.51743069]
+ [0.46957731]
+ [0.74250954]
+ [0.56574819]
+ [0.42845731]
+ [0.4279567 ]
+ [0.72428827]
+ [0.67879368]
+ [0.5482427 ]
+ [0.64537656]
+ [0.80346306]
+ [0.40620971]]
+[[0.15390313]]
 negative class</code></pre>
 </div>
 </div>
 <p>The class also provides a visualization method. It is not import to understand the code for the exercise, so you can safely skip it. It displays the training data as plain points, the test data as semi-transparent points and displays the decision function as a background color (all points in the blue region will be classified as negative examples).</p>
 <p><strong>Q:</strong> Plot the initial classification on the dataset with random weights. Is there a need for learning? Reinitialize the weights and biases multiple times. What do you observe?</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mlp <span class="op">=</span> MLP(d, K, logistic, max_val, eta)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mlp.plot_classification() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -900,7 +900,7 @@ negative class</code></pre>
 </ol>
 <p>The only difficulty is to take care of the shape of each matrix (before multiplying two matrices or vectors, test what their shape is).</p>
 <p><em>Note:</em> you can either edit directly the cell containing the definition of the class, or create a new class <code>TrainableMLP</code> inheriting from the class <code>MLP</code> and simply redefine the <code>backprop()</code> method. The solution will use the second option to be more readable, but it does not matter.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TrainableMLP (MLP):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> backprop(<span class="va">self</span>, x, t):</span>
@@ -955,7 +955,7 @@ negative class</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 669
+<pre><code>Number of epochs needed: 670
 Training accuracy: 1.0</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -972,7 +972,7 @@ Training accuracy: 1.0</code></pre>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, <span class="fl">1.</span> <span class="op">-</span> test_error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test accuracy: 0.95</code></pre>
+<pre><code>Test accuracy: 1.0</code></pre>
 </div>
 </div>
 </section>
@@ -1060,7 +1060,7 @@ Test accuracy: 0.95</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 300
+<pre><code>Number of epochs needed: 271
 Training accuracy: 1.0
 Test accuracy: 1.0</code></pre>
 </div>
@@ -1161,7 +1161,7 @@ Test accuracy: 0.30000000000000004</code></pre>
 <li>tanh</li>
 <li>relu</li>
 </ul>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear transfer function</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear(x):</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
@@ -1192,7 +1192,7 @@ Test accuracy: 0.30000000000000004</code></pre>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> something</span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> <span class="va">self</span>.activation_function <span class="op">==</span> relu:</span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TrainableMLP (MLP):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> backprop(<span class="va">self</span>, x, t):</span>
@@ -1309,9 +1309,9 @@ Test accuracy: 0.30000000000000004</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 290
+<pre><code>Number of epochs needed: 278
 Training accuracy: 1.0
-Test accuracy: 0.95</code></pre>
+Test accuracy: 1.0</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1354,7 +1354,7 @@ Test accuracy: 0.95</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 159
+<pre><code>Number of epochs needed: 140
 Training accuracy: 1.0
 Test accuracy: 0.95</code></pre>
 </div>
@@ -1374,7 +1374,7 @@ Test accuracy: 0.95</code></pre>
 <p><strong>Q:</strong> Shift the input data <code>X</code> using the formula:</p>
 <p><span class="math display">X_\text{shifted} = 8 \, X + 2</span></p>
 <p>regenerate the training and test sets and train the MLP on them. What do you observe?</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>X_shifted <span class="op">=</span> <span class="dv">8</span><span class="op">*</span> X <span class="op">+</span> <span class="dv">2</span> </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
@@ -1424,8 +1424,8 @@ Test accuracy: 0.95</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of epochs needed: 1000
-Training accuracy: 0.7571428571428571
-Test accuracy: 0.6333333333333333</code></pre>
+Training accuracy: 0.7142857142857143
+Test accuracy: 0.6</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1439,7 +1439,7 @@ Test accuracy: 0.6333333333333333</code></pre>
 <p><strong>Q:</strong> Normalize the shifted data so that it has a mean of 0 and a variance of 1 in each dimension, using the formula:</p>
 <p><span class="math display">X_\text{normalized} = \dfrac{X_\text{shifted} - \text{mean}(X_\text{shifted})}{\text{std}(X_\text{shifted})}</span></p>
 <p>and retrain the network. Conclude.</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> (X_shifted <span class="op">-</span> X_shifted.mean(axis<span class="op">=</span><span class="dv">0</span>))<span class="op">/</span>(X_shifted.std(axis<span class="op">=</span><span class="dv">0</span>)) </span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
@@ -1488,8 +1488,8 @@ Test accuracy: 0.6333333333333333</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 1000
-Training accuracy: 0.9857142857142858
+<pre><code>Number of epochs needed: 311
+Training accuracy: 1.0
 Test accuracy: 0.9666666666666667</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -1506,7 +1506,7 @@ Test accuracy: 0.9666666666666667</code></pre>
 <h3 class="anchored" data-anchor-id="influence-of-randomization">Influence of randomization</h3>
 <p>The training loop we used until now iterated over the training samples in the exact same order at every epoch. The samples are therefore not i.i.d (independent and identically distributed) as they follow the same sequence.</p>
 <p><strong>Q:</strong> Modify the <code>train()</code> method so that the indices of the training samples are randomized between two epochs. Check the doc of <code>rng.permutation()</code> for help.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StochasticMLP (TrainableMLP):</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -1583,9 +1583,9 @@ Test accuracy: 0.9666666666666667</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 78
+<pre><code>Number of epochs needed: 55
 Training accuracy: 1.0
-Test accuracy: 0.9</code></pre>
+Test accuracy: 0.8666666666666667</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1604,7 +1604,7 @@ Test accuracy: 0.9</code></pre>
 </span></p>
 <p>where <span class="math inline">N_{\text{in}}</span> is the number of neurons in the first layer and <span class="math inline">N_{\text{out}}</span> the number of neurons in the second layer.</p>
 <p><strong>Q:</strong> Modify the constructor of your class to initialize both hidden and output weights with this new range. The biases should be initialized to 0. What is the effect?</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GlorotMLP (StochasticMLP):</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, d, K, activation_function, eta):</span>
@@ -1653,9 +1653,9 @@ Test accuracy: 0.9</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of epochs needed: 72
+<pre><code>Number of epochs needed: 67
 Training accuracy: 1.0
-Test accuracy: 0.9666666666666667</code></pre>
+Test accuracy: 0.8666666666666667</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1669,8 +1669,8 @@ Test accuracy: 0.9666666666666667</code></pre>
 </section>
 <section id="summary" class="level3">
 <h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<p><strong>Q:</strong> Now that we optimized the MLP, it is time to cross-validate again the number of hidden neurons and the learning rate. As the networks always get a training error rate of 0 and the test set is not very relevant, the maincriteria will be the number of epochs needed on average to converge. Find the best MLP for the dataset (there is not a single solution), for example by iterating over multiple values of <code>K</code> and <code>eta</code>. What do you think of the change in performance between the first naive implementation and the final one? What were the most critical changes?</p>
-<div class="cell" data-execution_count="16">
+<p><strong>Q:</strong> Now that we optimized the MLP, it is time to cross-validate again the number of hidden neurons and the learning rate. As the networks always get a training error rate of 0 and the test set is not very relevant, the main criteria will be the number of epochs needed on average to converge. Find the best MLP for the dataset (there is not a single solution), for example by iterating over multiple values of <code>K</code> and <code>eta</code> (grid search). What do you think of the change in performance between the first naive implementation and the final one? What were the most critical changes?</p>
+<div class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>activation_function <span class="op">=</span> relu</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(K, eta):</span>
@@ -1698,111 +1698,112 @@ Test accuracy: 0.9666666666666667</code></pre>
 <span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> eta <span class="kw">in</span> [<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>]:</span>
 <span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>        acc <span class="op">=</span> run(K, eta)</span>
 <span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> acc <span class="op">&gt;</span> best_test_accuracy:</span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>            best_K, best_eta <span class="op">=</span> K, eta</span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best hyperparameters: K ="</span>, best_K, <span class="st">"; eta = "</span>, best_eta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>            best_test_accuracy <span class="op">=</span> acc</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>            best_K, best_eta <span class="op">=</span> K, eta</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best hyperparameters: K ="</span>, best_K, <span class="st">"; eta = "</span>, best_eta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>K: 10 eta: 0.01
-Number of epochs needed: 330
+Number of epochs needed: 222
+Training accuracy: 1.0
+Test accuracy: 1.0
+--------------------
+K: 10 eta: 0.05
+Number of epochs needed: 88
 Training accuracy: 1.0
 Test accuracy: 0.9
 --------------------
-K: 10 eta: 0.05
-Number of epochs needed: 86
-Training accuracy: 1.0
-Test accuracy: 0.9333333333333333
---------------------
 K: 10 eta: 0.1
-Number of epochs needed: 86
+Number of epochs needed: 47
 Training accuracy: 1.0
-Test accuracy: 0.8333333333333334
+Test accuracy: 0.7666666666666666
 --------------------
 K: 10 eta: 0.2
-Number of epochs needed: 56
+Number of epochs needed: 76
 Training accuracy: 1.0
 Test accuracy: 1.0
 --------------------
 K: 10 eta: 0.3
-Number of epochs needed: 79
+Number of epochs needed: 89
 Training accuracy: 1.0
 Test accuracy: 0.9666666666666667
 --------------------
 K: 15 eta: 0.01
-Number of epochs needed: 254
+Number of epochs needed: 370
 Training accuracy: 1.0
 Test accuracy: 0.8
 --------------------
 K: 15 eta: 0.05
-Number of epochs needed: 87
+Number of epochs needed: 89
 Training accuracy: 1.0
-Test accuracy: 0.8666666666666667
+Test accuracy: 0.7666666666666666
 --------------------
 K: 15 eta: 0.1
-Number of epochs needed: 57
+Number of epochs needed: 74
 Training accuracy: 1.0
-Test accuracy: 0.8333333333333334
+Test accuracy: 0.9
 --------------------
 K: 15 eta: 0.2
-Number of epochs needed: 46
+Number of epochs needed: 54
 Training accuracy: 1.0
 Test accuracy: 0.9333333333333333
 --------------------
 K: 15 eta: 0.3
-Number of epochs needed: 69
+Number of epochs needed: 78
+Training accuracy: 1.0
+Test accuracy: 0.9
+--------------------
+K: 20 eta: 0.01
+Number of epochs needed: 203
+Training accuracy: 1.0
+Test accuracy: 0.8333333333333334
+--------------------
+K: 20 eta: 0.05
+Number of epochs needed: 129
+Training accuracy: 1.0
+Test accuracy: 0.8
+--------------------
+K: 20 eta: 0.1
+Number of epochs needed: 54
+Training accuracy: 1.0
+Test accuracy: 0.8
+--------------------
+K: 20 eta: 0.2
+Number of epochs needed: 61
 Training accuracy: 1.0
 Test accuracy: 0.9666666666666667
 --------------------
-K: 20 eta: 0.01
-Number of epochs needed: 269
-Training accuracy: 1.0
-Test accuracy: 0.9333333333333333
---------------------
-K: 20 eta: 0.05
-Number of epochs needed: 117
-Training accuracy: 1.0
-Test accuracy: 0.9333333333333333
---------------------
-K: 20 eta: 0.1
-Number of epochs needed: 62
-Training accuracy: 1.0
-Test accuracy: 0.8666666666666667
---------------------
-K: 20 eta: 0.2
-Number of epochs needed: 72
-Training accuracy: 1.0
-Test accuracy: 0.9333333333333333
---------------------
 K: 20 eta: 0.3
-Number of epochs needed: 69
+Number of epochs needed: 73
 Training accuracy: 1.0
 Test accuracy: 0.9666666666666667
 --------------------
 K: 25 eta: 0.01
-Number of epochs needed: 178
+Number of epochs needed: 185
 Training accuracy: 1.0
-Test accuracy: 0.8333333333333334
+Test accuracy: 0.8
 --------------------
 K: 25 eta: 0.05
-Number of epochs needed: 79
+Number of epochs needed: 105
 Training accuracy: 1.0
-Test accuracy: 0.8666666666666667
+Test accuracy: 0.8
 --------------------
 K: 25 eta: 0.1
-Number of epochs needed: 78
+Number of epochs needed: 79
 Training accuracy: 1.0
-Test accuracy: 0.8666666666666667
+Test accuracy: 0.9666666666666667
 --------------------
 K: 25 eta: 0.2
-Number of epochs needed: 56
+Number of epochs needed: 54
 Training accuracy: 1.0
-Test accuracy: 0.8666666666666667
+Test accuracy: 0.9333333333333333
 --------------------
 K: 25 eta: 0.3
-Number of epochs needed: 69
+Number of epochs needed: 93
 Training accuracy: 1.0
 Test accuracy: 1.0
 --------------------
-Best hyperparameters: K = 25 ; eta =  0.3</code></pre>
+Best hyperparameters: K = 10 ; eta =  0.01</code></pre>
 </div>
 </div>
 <p><strong>A:</strong> Quite small changes can drastically change the performance of the network, both in terms of accuracy and training time. Data normalization, Glorot initialization and the use of ReLU are the most determinant here.</p>

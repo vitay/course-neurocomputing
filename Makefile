@@ -17,6 +17,11 @@ clean:
 	quarto render slides --to revealjs
 	quarto render notes --to html
 
+github: 
+	git add *
+	git commit -a -m "`date`"
+	git push origin master
+
 export: 
 	git add *
 	git commit -a -m "`date`"
