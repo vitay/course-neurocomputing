@@ -1,0 +1,17 @@
+name: deeprl
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - matplotlib
+  - jupyterlab
+  - pip:
+    - tensorflow
+    - pygame
+    - moviepy
+    - gymnasium
+    - gymnasium[classic_control]
+    - gymnasium[box2d]
