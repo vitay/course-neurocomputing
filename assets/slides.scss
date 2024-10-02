@@ -1,0 +1,35 @@
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: Roboto , 'open sans', Arial, Helvetica, serif !default;
+$presentation-font-size-root: 22px;
+
+// colors
+$body-bg: #fff !default;
+$body-color: #000 !default;
+$link-color: #51483d !default;
+$selection-bg: #26351c !default;
+
+// headings
+$presentation-heading-font: Roboto , 'open sans', Arial, Helvetica, serif !default;
+$presentation-heading-color: #383d3d !default;
+$presentation-h1-font-size:	1.5em;
+$presentation-h2-font-size:	1.3em;
+$presentation-h3-font-size:	1.2em;
+$presentation-h4-font-size:	1em;
+$code-block-font-size: 0.8em;
+$code-block-border-color: #fff;
+
+// figures
+
+/*-- scss:rules --*/
+.reveal .title {
+    padding-top: 5em;
+}
+
+// references
+.csl-entry {
+    font-size: 1.3em;
+    padding-top: 0.5em;
+
+}

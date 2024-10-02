@@ -2,3 +2,5 @@
 .htaccess
 docs/.htaccess
 slides/pdf
+
+/.quarto/

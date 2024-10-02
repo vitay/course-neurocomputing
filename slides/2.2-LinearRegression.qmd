@@ -228,8 +228,8 @@ $$
 
 # Least Mean Squares (LMS) - Ordinary Least Squares (OLS)
 
-::::: {.columns}
-:::: {.column width=50%}
+::: {.columns}
+::: {.column width=50%}
 
 
 * LMS is a **batch** algorithm: the parameter changes are computed over the whole dataset.
@@ -246,11 +246,10 @@ $$
 
 * One can stop when the parameters do not change much, or after a fixed number of epochs.
 
-:::::
-:::: {.column width=50%}
+:::
+::: {.column width=50%}
 
-::::{.callout-tip}
-## Least Mean Squares algorithm
+**Least Mean Squares algorithm**
 
 * $w=0 \quad;\quad b=0$
 
@@ -269,10 +268,10 @@ $$
     * $\Delta w = \eta \, \frac{1}{N} dw$
 
     * $\Delta b = \eta \, \frac{1}{N} db$
-:::
 
-::::
-:::::
+
+:::
+:::
 
 
 # Least mean squares in action
@@ -306,8 +305,7 @@ $$
 ::: {.column width=50%}
 
 
-:::{.callout-tip}
-## Online version of LMS : delta learning rule
+**Online version of LMS : delta learning rule**
 
 * $w=0 \quad;\quad b=0$
 
@@ -320,7 +318,7 @@ $$
         * $\Delta w = \eta \, (t_i - y_i ) \, x_i$
 
         * $\Delta b = \eta \, (t_i - y_i)$
-:::
+
 
 :::
 :::
@@ -398,7 +396,7 @@ Engine size | Cylinders | Fuel consumption | CO2 emissions
 
 # MLR example: fuel consumption and CO2 emissions
 
-![](img/MLR-example-data.png){width=65%}
+![](img/MLR-example-data.png){width=60%}
 
 # MLR example: fuel consumption and CO2 emissions
 
@@ -406,6 +404,9 @@ Engine size | Cylinders | Fuel consumption | CO2 emissions
 
 
 # MLR example: fuel consumption and CO2 emissions
+
+:::columns
+:::column
 
 * Noting the variables $x_1$, $x_2$, $y_1$, $y_2$, we can define our MLR problem:
 
@@ -419,8 +420,13 @@ $$
 
 and use the least mean squares method to obtain the value of the parameters.
 
-![](img/MLR-example-fit-3d.png){width=70%}
+:::
+:::column
 
+![](img/MLR-example-fit-3d.png)
+
+:::
+:::
 
 * Note: using the Python library `scikit-learn` (<https://scikit-learn.org>), this is done in two lines of code:
 
@@ -464,7 +470,7 @@ $$
 
 # Multiple linear regression
 
-![](img/matrixvector.png){width=60%}
+![](img/matrixvector.png){width=50%}
 
 ::: {.columns}
 ::: {.column width=40%}
@@ -653,7 +659,8 @@ $$\begin{cases}
     \Delta W = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, \dfrac{1}{N} \displaystyle\sum_{i=1}^N \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}$$
+\end{cases}
+$$
 
 * Online version (**delta learning rule**):
 
@@ -661,7 +668,8 @@ $$\begin{cases}
     \Delta W = \eta \, (\mathbf{t}_i - \mathbf{y}_i ) \times \mathbf{x}_i^T \\
     \\
     \Delta \mathbf{b} = \eta \, (\mathbf{t}_i - \mathbf{y}_i) \\
-\end{cases}$$
+\end{cases}
+$$
 
 
 :::
@@ -807,7 +815,7 @@ $$
 ::: {.column width=50%}
 
 
-![](img/linearperceptron.svg){width=90%}
+![](img/linearperceptron.svg){width=70%}
 
 :::
 ::: {.column width=50%}
@@ -926,8 +934,6 @@ $$
 
 * We get a number, for example 0.04567. Is that good?
 
-
-![](img/regression-animation-mse-dual.png){width=70%}
 
 # Regression error
 

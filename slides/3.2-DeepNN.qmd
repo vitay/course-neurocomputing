@@ -432,7 +432,7 @@ optimizer = tf.keras.optimizers.Adam(
 
 ![Source: <https://cs231n.github.io/neural-networks-3/>](img/learningrates.jpeg){width=60%}
 
-![Source: <https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1>](img/learningratescheduler.jpeg)
+![Source: <https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1>](img/learningratescheduler.jpeg){width=70%}
 
 :::
 ::: {.column width=50%}
@@ -897,7 +897,7 @@ Srivastava et al. (2014). Dropout:  A Simple Way to Prevent Neural Networks from
 
 # Vanishing Gradient problem
 
-![](img/deepbackward.png){width=70%}
+![](img/deepbackward.png){width=60%}
 
 * The gradient of the loss function is repeatedly multiplied by a weight matrix $W$ as it travels backwards in a deep network.
 

@@ -1,0 +1,194 @@
+---
+title: Neurocomputing
+author: 
+  - name: Julien Vitay 
+    email: julien.vitay@informatik.tu-chemnitz.de
+    url: https://julien-vitay.net
+    affiliation: Chemnitz University of Technology
+    affiliation-url: https://tu-chemnitz.de
+    orcid: 0000-0001-5229-2349
+
+abstract: This website contains the materials for the module **Neurocomputing**, covering basics in machine learning, deep learning and neuro-AI. 
+echo: false
+---
+
+## Lectures
+
+You will find below the links to the slides for each lecture (html and pdf).
+
+#### 1 - Introduction
+
+
+```{python}
+from IPython.display import Markdown
+
+def table_lecture(lectures):
+    # header
+    text = """
+|          | Slides |
+|----------|--------|"""
+
+    # fields
+    for key, desc in lectures.items():
+        text += f"""
+| {desc}  | [html](slides/{key}.qmd){{target="_blank"}}, [pdf](slides/pdf/{key}.pdf){{target="_blank"}} |"""
+
+    # finish
+    text += """
+: {tbl-colwidths="[90, 10]"}
+"""
+
+    return Markdown(text)
+```
+
+```{python} 
+lecs = {
+    '1.1-Introduction': """**1.1 - Introduction**\\
+Introduction to the main concepts of reinforcement learning and showcasing of the current applications.""",
+    '1.2-Basics': """**1.2 - (optional) Basics in math**\\
+Mathematical background necessary to follow this course.""",
+    '1.3-Neurons': """**1.3 - Neurons**\\
+Quick journey from biological neurons to artificial neurons.""",
+}
+table_lecture(lecs)
+```
+
+
+#### 2 - Linear algorithms
+
+
+```{python} 
+lecs = {
+    '2.1-Optimization': """**2.1 - Optimization**\\
+Overview of gradient descent and regularization.""",
+    '2.2-LinearRegression': """**2.2 - Linear regression**\\
+Linear regression, multiple linear regression, logistic regression, polynomial regression and how to evaluate them.""",
+    '2.3-LinearClassification': """**2.3 - Linear classification**\\
+Hard linear classification, Maximum Likelihood Estimation, Soft linear classication, multi-class softmax classification.""",
+    '2.4-LearningTheory': """**2.4 - Learning theory**\\
+Vapnik-Chervonenkis dimension, Cover's theorem, feature spaces and the kernel methods..""",
+}
+table_lecture(lecs)
+```
+
+
+
+#### 3 - Deep learning
+
+```{python} 
+lecs = {
+    '3.1-NeuralNetworks': """**3.1 - Feedforward neural networks**\\
+Basic neural network aka Multi-layer perceptrons (MLP), and the almighty backpropagation algorithm.""",
+    '3.2-DeepNN': """**3.2 - Modern neural networks**\\
+Advanced methods for training neural networks: optimizers, activation functions, normalization, etc.""",
+    '3.3-CNN': """**3.3 - Convolutional neural networks**\\
+CNNs like AlexNet and its followers (VGG, ResNet, Inception) started the deep learning hype and revolutionized computer vision..""",
+    '3.4-ObjectDetection': """**3.4 - Object detection**\\
+Object detection networks (R-CNN, YOLO, SSD) are able to locate objects in an image.""",
+    '3.5-Segnet': """**3.5 - Segmentation network**\\
+Segmentation networks (U-Net) can tell which pixels belong to an object.""",
+    '3.6-Autoencoders': """**3.6 - Autoencoders**\\
+Autoencoders and variational autoencoders (VAE) can be used to extract latent representations from raw data.""",
+    '3.7-RBM': """**3.7 - Restricted Boltzmann machines**\\
+RBMs are generative stochastic neural networks that can learn the distribution of their inputs.""",
+    '3.8-GAN': """**3.8 - Generative Adversarial Networks**\\
+GANs are generative networks able to generate images from pure noise.""",
+    '3.9-RNN': """**3.9 - Recurrent neural networks**\\
+RNNs, especially LSTMs, were long the weapon of choice to process temporal sequences (text, video, etc)..""",
+}
+table_lecture(lecs)
+```
+
+
+#### 4 - Generative AI
+
+
+```{python} 
+lecs = {
+    '4.1-Transformers': """**4.1 - Transformers**\\
+The Transformer architecture of (Vaswani, 2017) used self-attention to replace RNNs and start the second wave of AI hype.""",
+    '4.2-ContrastiveLearning': """**4.2 - Contrastive learning**\\
+Contrastive learning is a form of self-supervised allowing to learn context-relevant representations from raw data..""",
+    '4.3-VisionTransformer': """**4.3 - Vision Transformer**\\
+Vision transformers use the Transformer architecture to be the new state of the art in computer vision.""",
+    '4.4-DiffusionModels': """**4.4 - Diffusion models**\\
+Diffusion models are a novel probabilistic architecture allowing to learn to generate images (Midjourney, Dall-E, etc).""",
+}
+table_lecture(lecs)
+```
+
+
+
+#### 5 - Neuro-AI
+
+
+```{python} 
+lecs = {
+    '5.1-Limits': """**5.1 - Limits of deep learning**\\
+.""",
+    '5.2-Hopfield': """**5.2 - Hopfield networks**\\
+.""",
+    '5.3-Reservoir': """**5.3 - Reservoir Computing**\\
+.""",
+    '5.4-Spiking': """**5.4 - Spiking networks**\\
+.""",
+    '5.5-Beyond': """**5.5 - Beyond deep learning**\\
+.""",
+}
+table_lecture(lecs)
+```
+
+
+## Exercises
+
+You will find below links to download the notebooks for the exercises (which you have to fill) and their solution (which you can look at after you have finished the exercise). It is recommended not to look at the solution while doing the exercise unless you are lost.  Alternatively, you can run the notebooks directly on Colab (<https://colab.research.google.com/>) if you have a Google account. 
+
+For instructions on how to install a Python distribution on your computer, check this [page](webpage/Installation.qmd).
+
+
+```{python}
+from IPython.display import Markdown
+
+repo = "https://raw.githubusercontent.com/vitay/notebooks-neurocomputing/main"
+colab = "https://colab.research.google.com/github/vitay/notebooks-neurocomputing/blob/main"
+
+def table_exercise(exs):
+    text = """
+|           | Notebook  | Solution |
+|-----------|-----------|----------|"""
+
+    for key, val in exs.items():
+        text += f"""
+| {val}  | [ipynb]({repo}/notebooks/{key}.ipynb){{target="_blank"}}, [colab]({colab}/notebooks/{key}.ipynb){{target="_blank"}}   | [ipynb]({repo}/solutions/{key}.ipynb){{target="_blank"}}, [colab]({colab}/solutions/{key}.ipynb){{target="_blank"}} |"""
+
+
+    text += """
+: {tbl-colwidths="[80, 10, 10]", .striped, .hover}
+"""
+
+    return Markdown(text)
+```
+
+```{python} 
+exs = {
+  '1-Python' : """**1 - Introduction to Python**\\
+Introduction to the Python programming language. Optional for students already knowing Python.""",
+  '2-Numpy' : """**2 - Numpy and Matplotlib**\\
+Presentation of the numpy library for numerical computations and matplotlib for visualization. Also optional for students already familiar.""",
+}
+
+table_exercise(exs)
+```
+
+## Recommended readings
+
+* Kevin Murphy. Probabilistic Machine Learning: An introduction. MIT Press, 2022. <https://probml.github.io/pml-book/book1.html>
+
+* Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. <http://www.deeplearningbook.org>.
+
+* François Chollet. Deep Learning with Python. Manning publications, 2017. <https://www.manning.com/books/deep-learning-with-python>.
+
+* Simon S. Haykin. Neural Networks and Learning Machines, 3rd Edition. Pearson, 2009. <http://dai.fmph.uniba.sk/courses/NN/haykin.neural-networks.3ed.2009.pdf>.
+
+
+

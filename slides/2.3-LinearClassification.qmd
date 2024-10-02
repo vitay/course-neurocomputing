@@ -580,8 +580,7 @@ $$
 ::: {.columns}
 ::: {.column width=40%}
 
-:::{.callout-tip}
-## Logistic regression
+**Logistic regression**
 
 * $\mathbf{w} = 0 \qquad b = 0$
 
@@ -594,7 +593,6 @@ $$
         * $\Delta \mathbf{w} = \eta \, (t_i - y_i) \, \mathbf{x}_i$
 
         * $\Delta b = \eta \, (t_i - y_i)$
-:::
 
 ![](img/sigmoid.png)
 
@@ -746,9 +744,8 @@ Source <http://cs231n.github.io/linear-classify>
 
 * The target vector $\mathbf{t}$ is represented using **one-hot encoding**.
 
-::: {}
 ![](img/one-hot.png){width=60%}
-:::
+
 
 * The binary vector has one element per class: only one element is 1, the others are 0.
 
@@ -766,7 +763,7 @@ $$
 
 $$P(\mathbf{t} | \mathbf{x}) = [P(\text{cat}| \mathbf{x}), P(\text{dog}| \mathbf{x}), P(\text{ship}| \mathbf{x}), P(\text{house}| \mathbf{x}), P(\text{car}| \mathbf{x})] = [0, 1, 0, 0, 0]$$
 
-![](img/softmax-transformation.png)
+![](img/softmax-transformation.png){width=70%}
 
 * We need to transform the logit score $\mathbf{z}$ into a **probability distribution** $P(\mathbf{y} | \mathbf{x})$ that should be as close as possible from $P(\mathbf{t} | \mathbf{x})$.
 
@@ -801,7 +798,7 @@ $$
     \text{mse}(W, \mathbf{b}) = \sum_j (t_{j} - \frac{\exp(z_j)}{\sum_k \exp(z_k)})^2
 $$
 
-![](img/softmax-transformation.png)
+![](img/softmax-transformation.png){width=80%}
 
 
 * We actually want to minimize the statistical distance netween two distributions:
@@ -831,7 +828,7 @@ $$
 # Cross-entropy and negative log-likelihood
 
 
-![](img/softmax-transformation.png)
+![](img/softmax-transformation.png){width=80%}
 
 
 * The cross-entropy samples from $\mathbf{t} | \mathbf{x}$:
@@ -902,10 +899,9 @@ $$
 $$
 
 
-![](img/softmaxclassifier.svg){width=50%}
+![](img/softmaxclassifier.svg){width=45%}
 
 * The **cross-entropy loss function** is then the expectation over the training set of the individual cross-entropies:
-
 $$
     \mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{D}} [- \langle \mathbf{t} \cdot \log \mathbf{y} \rangle ] \approx \frac{1}{N} \sum_{i=1}^N - \langle \mathbf{t}_i \cdot \log \mathbf{y}_i \rangle
 $$
@@ -1069,14 +1065,6 @@ $$\mathcal{L}(W, \mathbf{b}) = \mathbb{E}_{\mathbf{x}, \mathbf{t} \sim \mathcal{
 
 # Multi-label classification
 
-::: {.columns}
-::: {.column width=40%}
-
-![GK Hart/Vikki Hart/Getty Images](img/catdog2.jpg)
-
-
-:::
-::: {.column width=60%}
 
 * What if there is more than one label on the image?
 
@@ -1092,8 +1080,6 @@ $$
     \mathbf{t} = [\text{cat}, \text{dog}, \text{ship}, \text{house}, \text{car}] = [0.5, 0.5, 0, 0, 0]
 $$
 
-:::
-:::
 
 
 

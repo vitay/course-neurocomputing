@@ -431,7 +431,7 @@ $$
 \mathbf{x} &\mapsto \overrightarrow{f}(\mathbf{x}),\end{align}
 $$
 
-![Source: <https://en.wikipedia.org/wiki/Vector_field>](img/vectorfield.png){width=35%}
+![Source: <https://en.wikipedia.org/wiki/Vector_field>](img/vectorfield.png){width=30%}
 
 **Note:** The matrix-vector multiplication $\mathbf{y} = A \times \mathbf{x}$ is a linear vector field, mapping any vector $\mathbf{x}$ into another vector $\mathbf{y}$.
 
@@ -542,7 +542,8 @@ $$\begin{cases}
 \displaystyle\frac{\partial f(x, y)}{\partial x} = 2 \, x + 3\, y + 4 \, y^2 \\
 \\
 \displaystyle\frac{\partial f(x, y)}{\partial y} = 3 \, x + 8\, x \, y
-\end{cases}$$
+\end{cases}
+$$
 
 # Jacobian
 
@@ -673,7 +674,7 @@ $$\int_a^b f(x) \, dx = \lim_{dx \to 0} \sum_{i=1}^n f(x_i) \, dx$$
 
 * Very roughly speaking, the integral can be considered as the equivalent of a sum for continuous functions.
 
-![Source: <https://www.math24.net/riemann-sums-definite-integral/>](img/riemann-sum.svg){width=50%}
+![Source: <https://www.math24.net/riemann-sums-definite-integral/>](img/riemann-sum.svg){width=40%}
 
 
 
@@ -994,14 +995,14 @@ $$
 # Joint and conditional probabilities: using a Venn diagram
 
 ::: {.columns}
-::: {.column width=50%}
+::: {.column width=40%}
 
 
 ![Credit: <https://www.elevise.co.uk/g-e-m-h-5-u.html>](img/conditionalprobability.png)
 
 
 :::
-::: {.column width=50%}
+::: {.column width=60%}
 
 
 * You ask 50 people whether they like cats or dogs:
@@ -1013,7 +1014,7 @@ $$
 
 * We consider loving cats and dogs as random variables (and that our sample size is big enough to use probabilities...)
 
-* We have $P(\text{dog}) = \frac{18+21}{50}$ and $P(\text{cat}) = \frac{18+5}{50}$.
+* We have $P(\text{dog}) = \dfrac{18+21}{50}$ and $P(\text{cat}) = \dfrac{18+5}{50}$.
 
 * Among the 23 who love cats, which proportion also loves dogs?
 
@@ -1021,11 +1022,11 @@ $$
 :::
 
 
-* The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog}) = \frac{18}{50}$.
+* The joint probability of loving both cats and dogs is $P(\text{cat}, \text{dog}) = \dfrac{18}{50}$.
 
 * The conditional probability of loving dogs given one loves cats is:
 
-$$P(\text{dog} | \text{cat}) = \frac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \frac{\frac{18}{50}}{\frac{23}{50}} = \frac{18}{23}$$
+$$P(\text{dog} | \text{cat}) = \dfrac{P(\text{cat}, \text{dog})}{P(\text{cat})} = \dfrac{\dfrac{18}{50}}{\dfrac{23}{50}} = \dfrac{18}{23}$$
 
 
 # Bayes' rule

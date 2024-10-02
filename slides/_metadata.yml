@@ -1,0 +1,35 @@
+format:
+  revealjs: 
+    theme: [default, ../assets/slides.scss]
+    slide-number: c/t
+    html-math-method: katex
+
+    auto-stretch: false
+    touch: true
+    fig-align: "center"
+
+    filters:
+      - ../assets/center_images.lua
+
+    chalkboard: 
+      buttons: false
+      theme: whiteboard
+
+    center-title-slide: true
+    title-slide-attributes:
+        data-background-image: "img/tuc-new-large.png"
+        data-background-size: 30%
+        data-background-opacity: "1"
+        data-background-position: top
+
+
+    highlight-style: github
+    code-line-numbers: false
+    callout-appearance: minimal
+    citations-hover: true
+
+
+bibliography: 
+  - ../assets/DeepLearning.bib
+  - ../assets/RecurrentNetworks.bib
+csl: ../assets/frontiers.csl
