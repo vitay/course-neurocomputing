@@ -179,6 +179,7 @@ $$\theta^* = \text{argmin} \sum_{i=1}^N || t_i - y_i||$$
     * Text $\rightarrow$ Speech : **speech synthesis**
 
 
+
 # Supervised learning : regression
 
 ![](img/regression-animation1.png)
@@ -214,6 +215,8 @@ $$
 $$
 
 * A neuron integrates inputs $x_i$ by multiplying them with weights $w_i$, adds a bias $b$ and transforms the result into an output $y$ using a transfer function (or activation function) $f$.
+
+
 
 # Artificial Neural Network
 
@@ -267,8 +270,6 @@ $$
 
 :::
 :::
-
-
 
 
 # ImageNet recognition challenge
@@ -370,6 +371,8 @@ Krizhevsky, A., Sutskever, I., & Hinton, G. E. (2012). ImageNet Classification w
 
 {{< youtube OOT3UIXZztE >}}
 
+
+
 # Dave2 : NVIDIA's self-driving car
 
 ::: {.columns}
@@ -399,6 +402,7 @@ M Bojarski, D Del Testa, D Dworakowski, B Firner (2016). End to end learning for
 {{< youtube qhUvQiKec2U >}}
 
 
+
 # Facial recognition
 
 ![](img/deepface.png)
@@ -422,28 +426,6 @@ M Bojarski, D Del Testa, D Dworakowski, B Firner (2016). End to end learning for
 
 ::: footer 
 Taigman, Yang, Ranzato, Wolf (2014), "DeepFace: Closing the Gap to Human-Level Performance in Face Verification". CVPR.
-:::
-
-
-# Augmented Reality Microscope for Real-time Automated Detection of Cancer
-
-::: {.columns}
-::: {.column}
-
-![](img/cancer.png)
-
-![](img/cancer2.png)
-
-:::
-::: {.column}
-
-{{< youtube 9Mz84cwVmS0 >}}
-
-:::
-:::
-
-::: footer
-Google AI Research <http://ai.googleblog.com/2018/04/an-augmented-reality-microscope.html>
 :::
 
 
@@ -1036,3 +1018,4 @@ David Silver et al. (2016). Mastering the game of Go with deep neural networks a
 * The d2l.ai online book is a great resource, including programming exercises:
 
 <http://d2l.ai/index.html>
+

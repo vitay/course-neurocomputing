@@ -1,6 +1,4 @@
 *.DS_Store
 .htaccess
 docs/
-slides/pdf
-
 /.quarto/
