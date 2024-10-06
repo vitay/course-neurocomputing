@@ -112,7 +112,7 @@ Contrastive learning is a form of self-supervised allowing to learn context-rele
     '4.3-VisionTransformer': """**4.3 - Vision Transformer**\\
 Vision transformers use the Transformer architecture to be the new state of the art in computer vision.""",
     '4.4-DiffusionModels': """**4.4 - Diffusion models**\\
-Diffusion models are a novel probabilistic architecture allowing to learn to generate images (Midjourney, Dall-E, etc).""",
+Diffusion models are a novel probabilistic architecture allowing to learn to generate images (Midjourney, Dall-E, etc) through incremental denoising.""",
 }
 table_lecture(lecs)
 ```
@@ -125,15 +125,15 @@ table_lecture(lecs)
 ```{python} 
 lecs = {
     '5.1-Limits': """**5.1 - Limits of deep learning**\\
-.""",
+This lecture (provocatively) explains why deep learning-based approaches will never be able to achieve Artificial General Intelligence and why more brain-inspired approaches (neuro-AI) are the next step for AI..""",
     '5.2-Hopfield': """**5.2 - Hopfield networks**\\
-.""",
+Hopfield network allow to implement associative memory, a fundamental aspect of cognition..""",
     '5.3-Reservoir': """**5.3 - Reservoir Computing**\\
-.""",
+Reservoir Computing (RC) is a paradigm allowing to train recurrent neural networks on time series with much less compuations than with deep learning approaches.""",
     '5.4-Spiking': """**5.4 - Spiking networks**\\
-.""",
+Spiking networks, in addition to being closer to brain functioning, allow to perform the same computations as deep netowkrs without requiring as much communication, allowing energy-efficient implementations on neuro-morphic hardware.""",
     '5.5-Beyond': """**5.5 - Beyond deep learning**\\
-.""",
+To conclude, we will see some of the requirement of genetral intelligence that need to be added to our models.""",
 }
 table_lecture(lecs)
 ```
@@ -175,6 +175,28 @@ exs = {
 Introduction to the Python programming language. Optional for students already knowing Python.""",
   '2-Numpy' : """**2 - Numpy and Matplotlib**\\
 Presentation of the numpy library for numerical computations and matplotlib for visualization. Also optional for students already familiar.""",
+  '3-LinearRegression' : """**3 - Linear regression**\\
+Implementation of the basic linear regression algorithm in Python and scikit-learn.""",
+  '4-MLR' : """**4 - Multiple Linear regression**\\
+MLR on the California Housing dataset using scikit-learn.""",
+  '5-Crossvalidation' : """**5 - Cross-validation**\\
+Different approaches to cross-validation using scikit-learn.""",
+  '6-LinearClassification' : """**6 - Linear classification**\\
+Hard and soft linear classification.""",
+  '7-SoftmaxClassifier' : """**7 - Softmax classifier**\\
+Softmax classifier for multi-class classification.""",
+  '8-MLP' : """**8 - Multi-layer perceptron**\\
+Basic implementation in Python+Numpy of the multi-layer perceptron and the backpropagation algorithm.""",
+  '9-MNIST' : """**9 - MNIST classification using keras**\\
+Keras tutorial applied to classifying the MNIST dataset with a MLP.""",
+  '10-CNN' : """**10 - Convolutional neural networks**\\
+Implementation of a CNN in keras for MNIST.""",
+  '11-TransferLearning' : """**11 - Transfer learning**\\
+Leveraging data augmentation and/or pre-trained CNNs (Xception) for learning a small cats vs. dogs dataset.""",
+  '12-VAE' : """**12 - Variational autoencoders**\\
+Implementing a VAE in keras.""",
+  '13-RNN' : """**13 - Recurrent neural networks**\\
+Sentiment analysis and time series prediction using LSTM layers.""",
 }
 
 table_exercise(exs)
