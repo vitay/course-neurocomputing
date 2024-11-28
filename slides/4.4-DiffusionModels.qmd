@@ -8,7 +8,7 @@ institute: Professur für Künstliche Intelligenz - Fakultät für Informatik
 resources: pdf/4.4-DiffusionModels.pdf
 ---
 
-# 1 - Denoising Diffusion probabilistic models
+# 1 - Denoising Diffusion Probabilistic Model (DDPM)
 
 ![](img/paper-dpm.png)
 
@@ -149,7 +149,7 @@ with $\alpha_t = 1 - \beta_t$ and $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$ only
 
 
 
-# Probabilistic diffusion models
+# Reverse diffusion model
 
 
 * The goal of the reverse diffusion process is to find a parameterized model $p_\theta$ explaining the sequence of images backwards in time:
@@ -173,8 +173,7 @@ See <https://lilianweng.github.io/posts/2021-07-11-diffusion-models/>
 :::
 
 
-# Probabilistic diffusion models
-
+# Denoising Probabilistic Diffusion Model
 
 * By doing some Bayesian inference on the true posterior $q(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_t, \sigma_t)$, (Ho et al., 2020) could show that:
 
@@ -197,7 +196,7 @@ See <https://lilianweng.github.io/posts/2021-07-11-diffusion-models/>
 :::
 
 
-# Probabilistic diffusion models
+# Denoising Probabilistic Diffusion Model
 
 
 * The reverse model $p_\theta(x_{t-1} | x_t)$ only need to approximate the mean:
@@ -221,8 +220,7 @@ $$
 See <https://lilianweng.github.io/posts/2021-07-11-diffusion-models/>
 :::
 
-
-# Probabilistic diffusion models
+# Denoising Probabilistic Diffusion Model
 
 :::::: {.columns}
 ::: {.column width=60%}
@@ -254,7 +252,7 @@ $$
 
 
 
-# Probabilistic diffusion models
+# Denoising Probabilistic Diffusion Model
 
 * Training can be done on individual samples, no need for the whole Markov chain to create the minibatches.
 
@@ -263,7 +261,10 @@ $$
 
 
 
-# Probabilistic diffusion models
+
+# Denoising Probabilistic Diffusion Model
+
+
 
 * The reverse diffusion occurs iteratively backwards in time:
 
@@ -276,30 +277,10 @@ $$
 
 
 
-# Probabilistic diffusion models
+# Denoising Probabilistic Diffusion Model
 
 ![Source: <http://adityaramesh.com/posts/dalle2/dalle2.html>](img/diffusion.gif)
 
-
-# GLIDE
-
-* PDMs generate images from raw noise, but there is no control over which image will emerge.
-
-* **GLIDE** (Guided Language to Image Diffusion for Generation and Editing) is a PDM conditioned on a latent representation of a caption $c$.
-
-* As for cGAN and cVAE, the caption $c$ is provided to the learned model:
-
-$$
-    \epsilon_\theta(x_t, t, c) \approx \epsilon_t
-$$
-
-* Text embeddings can be obtained from any NLP model, for example a Transformer.
-
-![Source: <https://ffighting.net/deep-learning-paper-review/diffusion-model/glide/>](img/glide.png){width=60%}
-
-:::footer
-@Nichol2022 GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models. arXiv:2112.10741
-:::
 
 
 # 2 - Dall-e 2
@@ -317,15 +298,16 @@ $$
 
 # Dall-e 2
 
+* Text-to-image generators such as Dall-e, Midjourney, or Stable Diffusion combine LLM for text embedding with diffusion models for image generation.
+
+* CLIP embeddings of texts and images are first learned using contrastive learning.
+
+* A conditional diffusion process (GLIDE) then uses the image embeddings to produce images.
+
+
+
 
 ![Source: @Ramesh2022](img/dall-e2.png){width=80%}
-
-* CLIP embeddings are first learned using contrastive learning.
-
-* A conditional diffusion process (GLIDE) uses the image embeddings to produce images.
-
-* Dall-e 3, Midjourney, Stable Diffusion, etc., work on similar principles.
-
 
 ::: footer
 <https://openai.com/dall-e-2/>
@@ -341,13 +323,38 @@ $$
 ![Source: <https://towardsdatascience.com/understanding-how-dall-e-mini-works-114048912b3b>](img/clip-training.png)
 
 
+# GLIDE
+
+* DDPMs generate images from raw noise, but there is no control over which image will emerge.
+
+* **GLIDE** (Guided Language to Image Diffusion for Generation and Editing) is a DDPM conditioned on a latent representation of a caption $c$.
+
+* As for cGAN and cVAE, the caption $c$ is provided to the learned model:
+
+$$
+    \epsilon_\theta(x_t, t, c) \approx \epsilon_t
+$$
+
+* Text embeddings can be obtained from any NLP model, for example a Transformer.
+
+![Source: <https://ffighting.net/deep-learning-paper-review/diffusion-model/glide/>](img/glide.png){width=60%}
+
+:::footer
+@Nichol2022 GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models. arXiv:2112.10741
+:::
+
+
+
+
 # Dall-e 2
 
-* The prior network learns to map text embeddings to a sequence of image embeddings:
+* In Dall-e 2, the prior network learns to map text embeddings to a sequence of image embeddings:
 
 ![](img/dalle-text_to_image_encoding_2.png){width=40%}
 
 * After CLIP training, the two embeddings are already close from each other, but the authors find that the diffusion process works better when the image embeddings change during the diffusion.
+
+* The image embedding is then used as the condition for GLIDE.
 
 :::footer
 @Ramesh2022 Hierarchical Text-Conditional Image Generation with CLIP Latents. arXiv:2204.06125
