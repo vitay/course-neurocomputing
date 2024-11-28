@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/index.html</loc>
-    <lastmod>2024-10-06T09:35:24.441Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/webpage/Installation.html</loc>
+    <lastmod>2024-11-28T11:48:33.821Z</lastmod>
   </url>
   <url>
     <loc>https://vitay.github.io/course-neurocomputing/slides/5.4-Spiking.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
     <loc>https://vitay.github.io/course-neurocomputing/slides/5.2-Hopfield.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/1.3-Neurons.html</loc>
-    <lastmod>2024-10-06T09:35:24.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.9-RNN.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.6-Autoencoders.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.4-ObjectDetection.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/webpage/Installation.html</loc>
-    <lastmod>2024-10-06T09:35:26.395Z</lastmod>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
     <loc>https://vitay.github.io/course-neurocomputing/slides/4.4-DiffusionModels.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/4.1-Transformers.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.3-CNN.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.1-NeuralNetworks.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/2.2-LinearRegression.html</loc>
-    <lastmod>2024-10-06T09:35:24.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/1.2-Basics.html</loc>
-    <lastmod>2024-10-06T09:35:24.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/2.1-Optimization.html</loc>
-    <lastmod>2024-10-06T09:35:24.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/2.3-LinearClassification.html</loc>
-    <lastmod>2024-10-06T09:35:24.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.2-DeepNN.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.7-RBM.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
     <loc>https://vitay.github.io/course-neurocomputing/slides/4.2-ContrastiveLearning.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/5.5-Beyond.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.9-RNN.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/2.4-LearningTheory.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.7-RBM.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
     <loc>https://vitay.github.io/course-neurocomputing/slides/3.5-Segnet.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/3.8-GAN.html</loc>
-    <lastmod>2024-10-06T09:35:24.444Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.3-CNN.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/4.3-VisionTransformer.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.1-NeuralNetworks.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/5.1-Limits.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/2.3-LinearClassification.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
   <url>
-    <loc>https://vitay.github.io/course-neurocomputing/slides/5.3-Reservoir.html</loc>
-    <lastmod>2024-10-06T09:35:24.445Z</lastmod>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/2.1-Optimization.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/1.2-Basics.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/index.html</loc>
+    <lastmod>2024-11-28T11:48:31.705Z</lastmod>
   </url>
   <url>
     <loc>https://vitay.github.io/course-neurocomputing/slides/1.1-Introduction.html</loc>
-    <lastmod>2024-10-06T09:35:24.443Z</lastmod>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/1.3-Neurons.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/2.2-LinearRegression.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/2.4-LearningTheory.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.2-DeepNN.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.4-ObjectDetection.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.6-Autoencoders.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/3.8-GAN.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/4.1-Transformers.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/4.3-VisionTransformer.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/5.1-Limits.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/5.3-Reservoir.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vitay.github.io/course-neurocomputing/slides/5.5-Beyond.html</loc>
+    <lastmod>2024-11-28T11:48:31.709Z</lastmod>
   </url>
 </urlset>
