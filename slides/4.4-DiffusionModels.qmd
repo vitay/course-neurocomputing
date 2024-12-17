@@ -97,7 +97,7 @@ $$
 
 * The forward process iteratively corrupts the image using $q(x_t | x_{t-1})$ for $T$ steps (e.g. $T=1000$). 
 
-* The goal is to learn a reverse model $p_\theta(x_{t-1} | x_t)$ that approximates the true $q(x_{t-1} | x_t)$.
+* The goal is to learn a reverse process $p_\theta(x_{t-1} | x_t)$ that approximates the true $q(x_{t-1} | x_t)$.
 
 ![Source: <https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048>](img/diffusion-steps4.webp){width=80%}
 
@@ -113,12 +113,13 @@ $$
 $$
     q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t} \, x_{t-1}, \beta_t I)
 $$
+
 $$
-    x_t = \sqrt{1 - \beta_t} \, x_t +  \beta_t \epsilon \;\; \text{where} \; \epsilon \sim \mathcal{N}(0, I)
+    x_t = \sqrt{1 - \beta_t} \, x_{t-1} +  \beta_t \epsilon \;\; \text{where} \; \epsilon \sim \mathcal{N}(0, I)
 $$
 
 
-* $\mu_t = \sqrt{1 - \beta_t} \, x_t$ is the mean of the distribution, $\sigma_t = \beta_t I$ its variance.
+* $\mu_t = \sqrt{1 - \beta_t} \, x_{t-1}$ is the mean of the distribution, $\sigma_t = \beta_t I$ its variance.
 
 
 :::
@@ -131,21 +132,21 @@ $$
 
 
 
-* The parameter $\beta_t$ is annealed with a decreasing schedule, as adding more noise at the end does not destroy much information.
+* The parameter $\beta_t$ is annealed with a decreasing schedule, as adding more noise at the end does not destroy much more information.
 
 
-* Note that each image $x_t$ is also a Gaussian noisy version of the original image $x_0$:
+* **Nice property:** each image $x_t$ is also a noisy version of the original image $x_0$:
 
 $$
     q(x_t | x_{0}) = \mathcal{N}(x_t; \sqrt{1 - \bar{\alpha}_t} \, x_0, \bar{\alpha}_t I)
 $$
 $$
-    x_t = \sqrt{1 - \bar{\alpha}_t} \, x_0 +  \bar{\alpha}_t \, \epsilon_t \;\; \text{where} \; \epsilon_t \sim \mathcal{N}(0, I)
+    x_t = \sqrt{\bar{\alpha}_t} \, x_0 +  (1 - \bar{\alpha}_t) \, \epsilon_t \;\; \text{where} \; \epsilon_t \sim \mathcal{N}(0, I)
 $$
 
 with $\alpha_t = 1 - \beta_t$ and $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$ only depending on the history of $\beta_t$.
 
-* Given the original image $x_0$ and a noisy version $x_t$, we can find the noise $\epsilon_t$ that was added.
+* We do not need to perform $t$ noising steps on $x_0$ to obtain $x_t$!
 
 
 
@@ -263,7 +264,6 @@ $$
 
 
 # Denoising Probabilistic Diffusion Model
-
 
 
 * The reverse diffusion occurs iteratively backwards in time:
