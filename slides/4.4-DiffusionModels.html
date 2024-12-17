@@ -316,7 +316,7 @@ Julien Vitay
 <h1>Forward Diffusion process</h1>
 <ul>
 <li><p>The forward process iteratively corrupts the image using <span class="math inline">q(x_t | x_{t-1})</span> for <span class="math inline">T</span> steps (e.g.&nbsp;<span class="math inline">T=1000</span>).</p></li>
-<li><p>The goal is to learn a reverse model <span class="math inline">p_\theta(x_{t-1} | x_t)</span> that approximates the true <span class="math inline">q(x_{t-1} | x_t)</span>.</p></li>
+<li><p>The goal is to learn a reverse process <span class="math inline">p_\theta(x_{t-1} | x_t)</span> that approximates the true <span class="math inline">q(x_{t-1} | x_t)</span>.</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -335,11 +335,12 @@ Julien Vitay
 </ul>
 <p><span class="math display">
     q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t} \, x_{t-1}, \beta_t I)
-</span> <span class="math display">
-    x_t = \sqrt{1 - \beta_t} \, x_t +  \beta_t \epsilon \;\; \text{where} \; \epsilon \sim \mathcal{N}(0, I)
+</span></p>
+<p><span class="math display">
+    x_t = \sqrt{1 - \beta_t} \, x_{t-1} +  \beta_t \epsilon \;\; \text{where} \; \epsilon \sim \mathcal{N}(0, I)
 </span></p>
 <ul>
-<li><span class="math inline">\mu_t = \sqrt{1 - \beta_t} \, x_t</span> is the mean of the distribution, <span class="math inline">\sigma_t = \beta_t I</span> its variance.</li>
+<li><span class="math inline">\mu_t = \sqrt{1 - \beta_t} \, x_{t-1}</span> is the mean of the distribution, <span class="math inline">\sigma_t = \beta_t I</span> its variance.</li>
 </ul>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
@@ -350,17 +351,17 @@ Julien Vitay
 </div>
 </div></div>
 <ul>
-<li><p>The parameter <span class="math inline">\beta_t</span> is annealed with a decreasing schedule, as adding more noise at the end does not destroy much information.</p></li>
-<li><p>Note that each image <span class="math inline">x_t</span> is also a Gaussian noisy version of the original image <span class="math inline">x_0</span>:</p></li>
+<li><p>The parameter <span class="math inline">\beta_t</span> is annealed with a decreasing schedule, as adding more noise at the end does not destroy much more information.</p></li>
+<li><p><strong>Nice property:</strong> each image <span class="math inline">x_t</span> is also a noisy version of the original image <span class="math inline">x_0</span>:</p></li>
 </ul>
 <p><span class="math display">
     q(x_t | x_{0}) = \mathcal{N}(x_t; \sqrt{1 - \bar{\alpha}_t} \, x_0, \bar{\alpha}_t I)
 </span> <span class="math display">
-    x_t = \sqrt{1 - \bar{\alpha}_t} \, x_0 +  \bar{\alpha}_t \, \epsilon_t \;\; \text{where} \; \epsilon_t \sim \mathcal{N}(0, I)
+    x_t = \sqrt{\bar{\alpha}_t} \, x_0 +  (1 - \bar{\alpha}_t) \, \epsilon_t \;\; \text{where} \; \epsilon_t \sim \mathcal{N}(0, I)
 </span></p>
 <p>with <span class="math inline">\alpha_t = 1 - \beta_t</span> and <span class="math inline">\bar{\alpha}_t = \prod_{s=1}^t \alpha_s</span> only depending on the history of <span class="math inline">\beta_t</span>.</p>
 <ul>
-<li>Given the original image <span class="math inline">x_0</span> and a noisy version <span class="math inline">x_t</span>, we can find the noise <span class="math inline">\epsilon_t</span> that was added.</li>
+<li>We do not need to perform <span class="math inline">t</span> noising steps on <span class="math inline">x_0</span> to obtain <span class="math inline">x_t</span>!</li>
 </ul>
 </section>
 

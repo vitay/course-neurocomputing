@@ -759,7 +759,7 @@ Julien Vitay
 <section id="kullback-leibler-divergence-1" class="title-slide slide level1 center">
 <h1>Kullback-Leibler divergence</h1>
 <ul>
-<li>The advantage of minimizing the KL of <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> with <span class="math inline">\mathcal{N}(0, 1)</span> is that the KL takes a <strong>closed form</strong> when the distributions are normal, i.e.&nbsp;there is no need to compute the expectation over all possible latent representations <span class="math inline">\mathbf{z}</span>:</li>
+<li>The advantage of minimizing the KL of <span class="math inline">q_\phi(\mathbf{z}|\mathbf{x})</span> with <span class="math inline">\mathcal{N}(0, 1)</span> is that the KL takes a <strong>closed form</strong> when the distributions are normal, i.e.&nbsp;there is no need to compute the expectation over all possible latent representations <span class="math inline">\mathbf{z}</span>, nor to take samples:</li>
 </ul>
 <p><span class="math display">
     \mathcal{L}_\text{regularization}(\phi) = \text{KL}(q_\phi(\mathbf{z}|\mathbf{x}) || \mathcal{N}(\mathbf{0}, \mathbf{1})) = \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \mathbf{z} \sim q_\phi(\mathbf{z}|\mathbf{x})}[- \log \frac{f_{0, 1}(\mathbf{z}|\mathbf{x})}{q_\phi(\mathbf{z}|\mathbf{x})}]
@@ -885,7 +885,8 @@ Julien Vitay
 <p><span class="math display">\begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \mathcal{L}_\text{regularization}(\phi) \\
     &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{1}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})] \\
-\end{aligned}</span></p>
+\end{aligned}
+</span></p>
 </section>
 
 <section id="variational-autoencoder-3" class="title-slide slide level1 center">
@@ -951,7 +952,8 @@ Julien Vitay
 <p><span class="math display">\begin{aligned}
     \mathcal{L}(\theta, \phi) &amp;= \mathcal{L}_\text{reconstruction}(\theta, \phi) + \beta \, \mathcal{L}_\text{regularization}(\phi) \\
     &amp;= \mathbb{E}_{\mathbf{x} \in \mathcal{D}, \xi \sim \mathcal{N}(0, 1)} [ - \log p_\theta(\mathbf{\mu_x} + \mathbf{\sigma_x} \, \xi) + \dfrac{\beta}{2} \, \sum_{k=1}^K (\mathbf{\sigma_x^2} + \mathbf{\mu_x}^2 -1 - \log \mathbf{\sigma_x^2})] \\
-\end{aligned}</span></p>
+\end{aligned}
+</span></p>
 <ul>
 <li><p>Using <span class="math inline">\beta &gt; 1</span> puts emphasis on learning statistically independent latent factors.</p></li>
 <li><p>The <span class="math inline">\beta</span>-VAE allows to <strong>disentangle</strong> the latent variables, i.e.&nbsp;manipulate them individually to vary only one aspect of the image (pose, color, gender, etc.).</p></li>
@@ -1063,8 +1065,8 @@ Julien Vitay
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li><p>The input data <span class="math inline">X</span> comes from an unknown distribution <span class="math inline">P(X)</span>. The training set <span class="math inline">\mathcal{D}</span> is formed by <strong>samples</strong> of that distribution.</p></li>
-<li><p>Learning the distribution of the data means learning a <strong>parameterized distribution</strong> <span class="math inline">p_\theta(X)</span> that is as close as possible from the true distribution <span class="math inline">P(X)</span>.</p></li>
+<li><p>The input data <span class="math inline">x</span> comes from an unknown distribution <span class="math inline">p(x)</span>. The training set <span class="math inline">\mathcal{D}</span> is formed by <strong>samples</strong> of that distribution.</p></li>
+<li><p>Learning the distribution of the data means learning a <strong>parameterized distribution</strong> <span class="math inline">p_\theta(x)</span> that is as close as possible from the true distribution <span class="math inline">P(X)</span>.</p></li>
 <li><p>The parameterized distribution could be a family of known distributions (e.g.&nbsp;normal) or a neural network with a softmax output layer.</p></li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -1078,9 +1080,9 @@ Julien Vitay
 <ul>
 <li>This means that we want to minimize the KL between the two distributions:</li>
 </ul>
-<p><span class="math display">\min_\theta \, \text{KL}(P(X) || p_\theta(X)) = \mathbb{E}_{x \sim P(X)} [- \log \dfrac{p_\theta(X=x)}{P(X=x)}]</span></p>
+<p><span class="math display">\min_\theta \, \text{KL}(p(x) || p_\theta(x)) = \mathbb{E}_{x \sim p(x)} [- \log \dfrac{p_\theta(x)}{p(x)}]</span></p>
 <ul>
-<li>The problem is that we do not know <span class="math inline">P(X)</span> as it is what we want to learn, so we cannot estimate the KL directly.</li>
+<li>The problem is that we do not know <span class="math inline">p(x)</span> as it is what we want to learn, so we cannot estimate the KL directly.</li>
 </ul>
 </section>
 
@@ -1089,11 +1091,11 @@ Julien Vitay
 <div class="columns">
 <div class="column" style="width:65%;">
 <ul>
-<li><p>In supervised learning, we are learning the <strong>conditional probability</strong> <span class="math inline">P(T | X)</span> of the targets given the inputs, i.e.&nbsp;what is the probability of having the label <span class="math inline">T=t</span> given the input <span class="math inline">X=x</span>.</p></li>
-<li><p>A NN with a softmax output layer represents the parameterized distribution <span class="math inline">p_\theta(T | X)</span>.</p></li>
+<li><p>In supervised learning, we are learning the <strong>conditional probability</strong> <span class="math inline">p(t | x)</span> of the targets given the inputs.</p></li>
+<li><p>A NN with a softmax output layer represents the parameterized distribution <span class="math inline">p_\theta(t | x)</span>.</p></li>
 <li><p>The KL between the two distributions is:</p></li>
 </ul>
-<p><span class="math display">\text{KL}(P(T | X) || p_\theta(T | X)) = \mathbb{E}_{x, t \sim \mathcal{D}} [- \log \dfrac{p_\theta(T=t | X=x)}{P(T=t | X=x)}]</span></p>
+<p><span class="math display">\text{KL}(p(t | x) || p_\theta(t | x)) = \mathbb{E}_{x, t \sim p(t | x)} [- \log \dfrac{p_\theta(t | x)}{p(t | x)}]</span></p>
 </div><div class="column" style="width:35%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1105,10 +1107,11 @@ Julien Vitay
 <li>With the properties of the log, we know that the KL is the cross-entropy minus the entropy of the data:</li>
 </ul>
 <p><span class="math display">\begin{aligned}
-\text{KL}(P(T | X) || p_\theta(T | X)) &amp;= \mathbb{E}_{x, t \sim \mathcal{D}} [- \log p_\theta(T=t | X=x)]  - \mathbb{E}_{x, t \sim \mathcal{D}} [- \log P(T=t | X=x)] \\
+\text{KL}(p(t | x) || p_\theta(t | x)) &amp;= \mathbb{E}_{x, t \sim p(t | x)} [- \log p_\theta(t | x)]  - \mathbb{E}_{x, t \sim p(t, x)} [- \log p(t | x)] \\
 &amp;\\
-    &amp; = H(P(T | X), p_\theta(T |X)) - H(P(T|X)) \\
-\end{aligned}</span></p>
+    &amp; = H(p(t | x), p_\theta(t |x)) - H(p(t|x)) \\
+\end{aligned}
+</span></p>
 </section>
 
 <section id="supervised-learning-1" class="title-slide slide level1 center">
@@ -1117,18 +1120,22 @@ Julien Vitay
 <li>Kullback-Leibler divergence between the model and the data:</li>
 </ul>
 <p><span class="math display">\begin{aligned}
-\text{KL}(P(T | X) || p_\theta(T | X)) &amp; = H(P(T | X), p_\theta(T |X)) - H(P(T|X)) \\
-\end{aligned}</span></p>
+\text{KL}(p(t | x) || p_\theta(t | x)) &amp;= \mathbb{E}_{x, t \sim p(t | x)} [- \log p_\theta(t | x)]  - \mathbb{E}_{x, t \sim p(t, x)} [- \log p(t | x)] \\
+&amp;\\
+    &amp; = H(p(t | x), p_\theta(t |x)) - H(p(t|x)) \\
+\end{aligned}
+</span></p>
 <ul>
 <li>When we minimize the KL by applying gradient descent on the parameters <span class="math inline">\theta</span>, only the cross-entropy will change, as the data does not depends on the model:</li>
 </ul>
 <p><span class="math display">\begin{aligned}
-\nabla_\theta \, \text{KL}(P(T | X) || p_\theta(T | X))  &amp; = \nabla_\theta \, H(P(T | X), p_\theta(T |X)) - \nabla_\theta \,  H(P(T|X)) \\
+\nabla_\theta \, \text{KL}(p(t | x) || p_\theta(t | x))  &amp; = \nabla_\theta \, H(p(t | x), p_\theta(t |x)) - \nabla_\theta \,  H(p(t|x)) \\
     &amp;\\
-     &amp; = \nabla_\theta \, H(P(T | X), p_\theta(T |X)) \\
+     &amp; = \nabla_\theta \, H(p(t | x), p_\theta(t | x)) \\
      &amp; \\
-     &amp; = \nabla_\theta \, \mathbb{E}_{x, t \sim \mathcal{D}} [-  \log p_\theta(T=t | X=x) ]\\
-\end{aligned}</span></p>
+     &amp; = \nabla_\theta \, \mathbb{E}_{x, t \sim \mathcal{D}} [-  \log p_\theta(t | x) ]\\
+\end{aligned}
+</span></p>
 <ul>
 <li><p>Minimizing the cross-entropy (negative log likelihood) of the model on the data is the same as minimizing the KL between the two distributions in supervised learning!</p></li>
 <li><p>We were actually minimizing the KL all along.</p></li>
@@ -1138,15 +1145,15 @@ Julien Vitay
 <section id="maximum-likelihood-estimation" class="title-slide slide level1 center">
 <h1>Maximum likelihood estimation</h1>
 <ul>
-<li>When trying to learn the distribution <span class="math inline">P(X)</span> of the data directly, we could use the same trick:</li>
+<li>When trying to learn the distribution <span class="math inline">p(x)</span> of the data directly, we could use the same trick:</li>
 </ul>
-<p><span class="math display">\nabla_\theta \, \text{KL}(P(X) || p_\theta(X)) = \nabla_\theta \, H(P(X), p_\theta(X))  = \nabla_\theta \, \mathbb{E}_{x \sim X} [- \log p_\theta(X=x)]</span></p>
+<p><span class="math display">\nabla_\theta \, \text{KL}(p(x) || p_\theta(x)) = \nabla_\theta \, H(p(x), p_\theta(x))  = \nabla_\theta \, \mathbb{E}_{x \sim p(x)} [- \log p_\theta(x)]</span></p>
 <p>i.e.&nbsp;maximize the log-likelihood of the model on the data <span class="math inline">X</span>.</p>
 <ul>
 <li>If we use <span class="math inline">N</span> data samples to estimate the expectation, we notice that:</li>
 </ul>
 <p><span class="math display">
-\mathbb{E}_{x \sim X} [\log p_\theta(X=x)] \approx \dfrac{1}{N} \, \sum_{i=1}^N \log p_\theta(X=x_i) = \dfrac{1}{N} \, \log \prod_{i=1}^N p_\theta(X=x_i) = \dfrac{1}{N} \, \log L(\theta)
+\mathbb{E}_{x \sim p(x)} [\log p_\theta(x)] \approx \dfrac{1}{N} \, \sum_{i=1}^N \log p_\theta(x_i) = \dfrac{1}{N} \, \log \prod_{i=1}^N p_\theta(x_i) = \dfrac{1}{N} \, \log L(\theta)
 </span></p>
 <p>is indeed the log-likelihood of the model on the data that we maximized in <strong>maximum likelihood estimation</strong>.</p>
 </section>
@@ -1176,7 +1183,7 @@ Julien Vitay
 <li><p>Images are not random samples of the pixel space: <strong>natural images</strong> are embedded in a much lower-dimensional space called a <strong>manifold</strong>.</p></li>
 <li><p>A manifold is a <strong>locally Euclidian</strong> topological space of lower dimension.</p></li>
 <li><p>The surface of the earth is locally flat and 2D, but globally spherical and 3D.</p></li>
-<li><p>If we have a <strong>generative model</strong> telling us how a point on the manifold <span class="math inline">z</span> maps to the image space (<span class="math inline">P(X | z)</span>), we would only need to learn the distribution of the data in the lower-dimensional <strong>latent space</strong>.</p></li>
+<li><p>If we had a <strong>generative model</strong> telling us how a point on the manifold <span class="math inline">z</span> maps to the image space (<span class="math inline">p(x | z)</span>), we would only need to learn the distribution of the data in the lower-dimensional <strong>latent space</strong>.</p></li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1193,9 +1200,9 @@ Julien Vitay
 <div class="columns">
 <div class="column" style="width:70%;">
 <ul>
-<li><p>The low-dimensional <strong>latent variables</strong> <span class="math inline">z</span> are the actual cause for the observations <span class="math inline">X</span>.</p></li>
-<li><p>Given a sample <span class="math inline">z</span> on the manifold, we can train a <strong>generative model</strong> <span class="math inline">p_\theta(X | z)</span> to recreate the input <span class="math inline">X</span>.</p></li>
-<li><p><span class="math inline">p_\theta(X | z)</span> is the <strong>decoder</strong>: given a latent representation <span class="math inline">z</span>, what is the corresponding observation <span class="math inline">X</span>?</p></li>
+<li><p>The low-dimensional <strong>latent variables</strong> <span class="math inline">z</span> are the actual cause for the observations <span class="math inline">x</span>.</p></li>
+<li><p>Given a sample <span class="math inline">z</span> on the manifold, we can train a <strong>generative model</strong> <span class="math inline">p_\theta(x | z)</span> to recreate the input <span class="math inline">x</span>.</p></li>
+<li><p><span class="math inline">p_\theta(x | z)</span> is the <strong>decoder</strong>: given a latent representation <span class="math inline">z</span>, what is the corresponding observation <span class="math inline">x</span>?</p></li>
 </ul>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1206,44 +1213,44 @@ Julien Vitay
 </div>
 </div></div>
 <ul>
-<li>If we learn the distribution <span class="math inline">p_\theta(z)</span> of the manifold (latent space), we can infer the distribution of the data <span class="math inline">p_\theta(X)</span> using that model:</li>
+<li>If we knew the distribution <span class="math inline">p_\theta(z)</span> of the manifold (latent space), we could infer the distribution of the data <span class="math inline">p_\theta(x)</span> using that model throug <strong>marginalization</strong>:</li>
 </ul>
-<p><span class="math display">p_\theta(X) = \mathbb{E}_{z \sim p_\theta(z)} [p_\theta(X | z)] = \int_z p_\theta(X | z) \, p_\theta(z) \, dz</span></p>
+<p><span class="math display">p_\theta(x) = \mathbb{E}_{z \sim p_\theta(z)} [p_\theta(x | z)] = \int_z p_\theta(x | z) \, p_\theta(z) \, dz</span></p>
 <ul>
-<li>Problem: we do not know <span class="math inline">p_\theta(z)</span>, as the only data we see is <span class="math inline">X</span>: <span class="math inline">z</span> is called a <strong>latent variable</strong> because it explains the data but is hidden.</li>
+<li>Problem: we do not know <span class="math inline">p_\theta(z)</span>, as the only data we see is <span class="math inline">x</span>: <span class="math inline">z</span> is called a <strong>latent variable</strong> because it explains the data but is hidden.</li>
 </ul>
 </section>
 
 <section id="variational-inference" class="title-slide slide level1 center">
 <h1>Variational inference</h1>
 <ul>
-<li>To estimate <span class="math inline">p_\theta(z)</span>, we could again marginalize over <span class="math inline">X</span>:</li>
+<li>To estimate <span class="math inline">p_\theta(z)</span>, we could again marginalize over <span class="math inline">x</span>:</li>
 </ul>
-<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(z | x)] = \int_x p_\theta(z | x) \, p_\theta(x) \, dx</span></p>
+<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(x)} [p_\theta(z | x)] = \int_x p_\theta(z | x) \, p_\theta(x) \, dx</span></p>
 <ul>
-<li><p><span class="math inline">p_\theta(z | x)</span> is the <strong>encoder</strong>: given an input <span class="math inline">x \sim p_\theta(X)</span>, what is its latent representation <span class="math inline">z</span>?</p></li>
+<li><p><span class="math inline">p_\theta(z | x)</span> is the <strong>encoder</strong>: given an input <span class="math inline">x \sim p_\theta(x)</span>, what is its latent representation <span class="math inline">z</span>?</p></li>
 <li><p>The Bayes rule tells us:</p></li>
 </ul>
 <p><span class="math display">p_\theta(z | x) = p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}</span></p>
 <ul>
-<li><p>The posterior probability (encoder) <span class="math inline">p_\theta(z | X)</span> depends on the model (decoder) <span class="math inline">p_\theta(X|z)</span>, the prior (assumption) <span class="math inline">p_\theta(z)</span> and the evidence (data) <span class="math inline">p_\theta(X)</span>.</p></li>
+<li><p>The posterior probability (encoder) <span class="math inline">p_\theta(z | x)</span> depends on the model (decoder) <span class="math inline">p_\theta(x|z)</span>, the prior (assumption) <span class="math inline">p_\theta(z)</span> and the evidence (data) <span class="math inline">p_\theta(x)</span>.</p></li>
 <li><p>We get:</p></li>
 </ul>
-<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}]</span></p>
+<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(x)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}]</span></p>
 </section>
 
 <section id="variational-inference-1" class="title-slide slide level1 center">
 <h1>Variational inference</h1>
 <ul>
-<li>The posterior is <strong>untractable</strong> as it would require to integrate over all possible inputs <span class="math inline">x \sim p_\theta(X)</span>:</li>
+<li>The posterior is <strong>untractable</strong> as it would require to integrate over all possible inputs <span class="math inline">x \sim p_\theta(x)</span>:</li>
 </ul>
-<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(X)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}] = \int_x p_\theta(x |z) \, p_\theta(z) \, dx</span></p>
+<p><span class="math display">p_\theta(z) = \mathbb{E}_{x \sim p_\theta(x)} [p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}] = \int_x p_\theta(x |z) \, p_\theta(z) \, dx</span></p>
 <ul>
-<li><strong>Variational inference</strong> proposes to approximate the true encoder <span class="math inline">p_\theta(z | x)</span> by another parameterized distribution <span class="math inline">q_\phi(z|x)</span>.</li>
+<li><strong>Variational inference</strong> proposes to approximate the <strong>true posterior</strong> (encoder) <span class="math inline">p_\theta(z | x)</span> by another parameterized posterior distribution <span class="math inline">q_\phi(z|x)</span> (encoder).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/VAE-graphical-model.png" style="width:60.0%"></p>
+<p><img data-src="img/VAE-graphical-model.png" style="width:55.0%"></p>
 <figcaption>Source: <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html" class="uri">https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html</a></figcaption>
 </figure>
 </div>
@@ -1256,26 +1263,31 @@ Julien Vitay
 <section id="variational-inference-2" class="title-slide slide level1 center">
 <h1>Variational inference</h1>
 <ul>
-<li>To make <span class="math inline">q_\phi(z| X)</span> close from <span class="math inline">p_\theta(z | X)</span>, we minimize their KL divergence:</li>
+<li>To make <span class="math inline">q_\phi(z| x)</span> close from <span class="math inline">p_\theta(z | x)</span>, we minimize their KL divergence:</li>
 </ul>
-<p><span class="math display">\begin{aligned}
-\text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;= \mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(z | X)}{q_\phi(z|X)}]\\
-\end{aligned}</span></p>
+<p><span class="math display">
+\begin{aligned}
+\text{KL}(q_\phi(z|x) || p_\theta(z | x) ) &amp;= \mathbb{E}_{z \sim q_\phi(z|x)} [- \log \dfrac{p_\theta(z | x)}{q_\phi(z|x)}]\\
+\end{aligned}
+</span></p>
 <ul>
-<li><p>Note that we sample the latent representations from the learned encoder <span class="math inline">q_\phi(z|X)</span> (imagination).</p></li>
-<li><p>As <span class="math inline">p_\theta(z | X) = p_\theta(X |z) \, \dfrac{p_\theta(z)}{p_\theta(X)}</span>, we get:</p></li>
+<li><p>Note that we sample the latent representations from the learned encoder <span class="math inline">q_\phi(z|x)</span> (imagination).</p></li>
+<li><p>As <span class="math inline">p_\theta(z | x) = p_\theta(x |z) \, \dfrac{p_\theta(z)}{p_\theta(x)}</span>, we get:</p></li>
 </ul>
 <p><span class="math display">\begin{aligned}
-\text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;= \mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(X | z) \, p_\theta(z)}{q_\phi(z|X) \, p_\theta(X)}]\\
-&amp;=\mathbb{E}_{z \sim q_\phi(z|X)} [- \log \dfrac{p_\theta(z)}{q_\phi(z|X)}] - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X)]  \\
-&amp;+ \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]\\
-\end{aligned}</span></p>
+\text{KL}(q_\phi(z|x) || p_\theta(z | x) ) &amp;= \mathbb{E}_{z \sim q_\phi(z|x)} [- \log \dfrac{p_\theta(x | z) \, p_\theta(z)}{q_\phi(z|x) \, p_\theta(x)}]\\
+&amp;=\mathbb{E}_{z \sim q_\phi(z|x)} [- \log \dfrac{p_\theta(z)}{q_\phi(z|x)}] - \mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x)]  \\
+&amp;+ \mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x | z)]\\
+\end{aligned}
+</span></p>
 <ul>
-<li><span class="math inline">p_\theta(X)</span> does not depend on <span class="math inline">z</span>, so its expectation w.r.t <span class="math inline">z</span> is constant:</li>
+<li><span class="math inline">p_\theta(x)</span> does not depend on <span class="math inline">z</span>, so its expectation w.r.t <span class="math inline">z</span> is constant:</li>
 </ul>
-<p><span class="math display">\begin{aligned}
-\text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;= \text{KL}(q_\phi(z|X) || p_\theta(z)) + \log p_\theta(X) + \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]\\
-\end{aligned}</span></p>
+<p><span class="math display">
+\begin{aligned}
+\text{KL}(q_\phi(z|x) || p_\theta(z | x) ) &amp;= \text{KL}(q_\phi(z|x) || p_\theta(z)) + \log p_\theta(x) + \mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x | z)]\\
+\end{aligned}
+</span></p>
 </section>
 
 <section id="evidence-lower-bound" class="title-slide slide level1 center">
@@ -1284,20 +1296,20 @@ Julien Vitay
 <li>We rearrange the terms:</li>
 </ul>
 <p><span class="math display">\begin{aligned}
-\log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) &amp;=  - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] - \text{KL}(q_\phi(z|X) || p_\theta(z))\\
+\log p_\theta(x) - \text{KL}(q_\phi(z|x) || p_\theta(z | x) ) &amp;=  - \mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x | z)] - \text{KL}(q_\phi(z|x) || p_\theta(z))\\
 \end{aligned}</span></p>
 <ul>
-<li><p>Training the <strong>encoder</strong> means that we <strong>minimize</strong> <span class="math inline">\text{KL}(q_\phi(z|X) || p_\theta(z | X) )</span>.</p></li>
-<li><p>Training the <strong>decoder</strong> means that we <strong>maximize</strong> <span class="math inline">\log p_\theta(X)</span> (log-likelihood of the model).</p></li>
+<li><p>Training the <strong>encoder</strong> means that we <strong>minimize</strong> <span class="math inline">\text{KL}(q_\phi(z|x) || p_\theta(z | x) )</span>.</p></li>
+<li><p>Training the <strong>decoder</strong> means that we <strong>maximize</strong> <span class="math inline">\log p_\theta(x)</span> (log-likelihood of the model).</p></li>
 <li><p>Training the encoder and decoder together means that we <strong>maximize</strong>:</p></li>
 </ul>
-<p><span class="math display"> \text{ELBO}(\theta, \phi) = \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) )</span></p>
+<p><span class="math display"> \text{ELBO}(\theta, \phi) = \log p_\theta(x) - \text{KL}(q_\phi(z|x) || p_\theta(z | x) )</span></p>
 <ul>
 <li>The KL divergence is always positive or equal to 0, so we have:</li>
 </ul>
-<p><span class="math display">\text{ELBO}(\theta, \phi) \leq \log p_\theta(X)</span></p>
+<p><span class="math display">\text{ELBO}(\theta, \phi) \leq \log p_\theta(x)</span></p>
 <ul>
-<li>This term is called the <strong>evidence lower bound</strong> (ELBO): by maximizing it, we also maximize the untractable evidence <span class="math inline">\log p_\theta(X)</span>, which is what we want to do.</li>
+<li>This term is called the <strong>evidence lower bound</strong> (ELBO): by maximizing it, we also maximize the untractable evidence <span class="math inline">\log p_\theta(x)</span>, which is what we want to do.</li>
 </ul>
 </section>
 
@@ -1307,22 +1319,22 @@ Julien Vitay
 <li>The trick is that the right-hand term of the equation gives us a tractable definition of the ELBO term:</li>
 </ul>
 <p><span class="math display">\begin{aligned}
-\text{ELBO}(\theta, \phi) &amp;=  \log p_\theta(X) - \text{KL}(q_\phi(z|X) || p_\theta(z | X) ) \\
+\text{ELBO}(\theta, \phi) &amp;=  \log p_\theta(x) - \text{KL}(q_\phi(z|x) || p_\theta(z | x) ) \\
 &amp;\\
-&amp;= - \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] - \text{KL}(q_\phi(z|X) || p_\theta(z))
+&amp;= - \mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x | z)] - \text{KL}(q_\phi(z|x) || p_\theta(z))
 \end{aligned}</span></p>
 <ul>
 <li>What happens when we <strong>minimize</strong> the negative ELBO?</li>
 </ul>
-<p><span class="math display"> \mathcal{L}(\theta, \phi) = - \text{ELBO}(\theta, \phi) = \mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)] + \text{KL}(q_\phi(z|X) || p_\theta(z))</span></p>
+<p><span class="math display"> \mathcal{L}(\theta, \phi) = - \text{ELBO}(\theta, \phi) = \mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x | z)] + \text{KL}(q_\phi(z|x) || p_\theta(z))</span></p>
 <ul>
-<li><p><span class="math inline">\mathbb{E}_{z \sim q_\phi(z|X)} [- \log p_\theta(X | z)]</span> is the <strong>reconstruction loss</strong> of the decoder <span class="math inline">p_\theta(X | z)</span>:</p>
+<li><p><span class="math inline">\mathbb{E}_{z \sim q_\phi(z|x)} [- \log p_\theta(x | z)]</span> is the <strong>reconstruction loss</strong> of the decoder <span class="math inline">p_\theta(x | z)</span>:</p>
 <ul>
-<li>Given a sample <span class="math inline">z</span> of the encoder <span class="math inline">q_\phi(z|X)</span>, minimize the negative log-likelihood of the reconstruction <span class="math inline">p_\theta(X | z)</span>.</li>
+<li>Given a sample <span class="math inline">z</span> of the encoder <span class="math inline">q_\phi(z|x)</span>, minimize the negative log-likelihood of the reconstruction <span class="math inline">p_\theta(x | z)</span>.</li>
 </ul></li>
-<li><p><span class="math inline">\text{KL}(q_\phi(z|X) || p_\theta(z))</span> is the <strong>regularization loss</strong> for the encoder:</p>
+<li><p><span class="math inline">\text{KL}(q_\phi(z|x) || p_\theta(z))</span> is the <strong>regularization loss</strong> for the encoder:</p>
 <ul>
-<li>The latent distribution <span class="math inline">q_\phi(z|X)</span> should be too far from the <strong>prior</strong> <span class="math inline">p_\theta(z)</span>.</li>
+<li>The latent distribution <span class="math inline">q_\phi(z|x)</span> should be too far from the <strong>prior</strong> <span class="math inline">p_\theta(z)</span>.</li>
 </ul></li>
 </ul>
 </section>
@@ -1339,7 +1351,7 @@ Julien Vitay
 \end{aligned}</span></p>
 <ul>
 <li><p>The reparameterization trick and the fact that the KL between normal distributions has a closed form allow us to use backpropagation end-to-end.</p></li>
-<li><p>The encoder <span class="math inline">q_\phi(z|X)</span> and decoder <span class="math inline">p_\theta(X | z)</span> are neural networks in a VAE, but other parametrized distributions can be used (e.g.&nbsp;in physics).</p></li>
+<li><p>The encoder <span class="math inline">q_\phi(z|x)</span> and decoder <span class="math inline">p_\theta(x | z)</span> are neural networks in a VAE, but other parametrized distributions can be used (e.g.&nbsp;in physics).</p></li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
