@@ -2,3 +2,5 @@
 .htaccess
 docs/
 /.quarto/
+
+**/*.quarto_ipynb

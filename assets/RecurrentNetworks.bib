@@ -112,6 +112,25 @@
   file = {/Users/vitay/Documents/Zotero/storage/KQXCNGH3/Bellec_et_al_2020_A_solution_to_the_learning_dilemma_for_recurrent_networks_of_spiking_neurons.pdf}
 }
 
+@article{Berg2024,
+  title = {Biologically Plausible Gated Recurrent Neural Networks for Working Memory and Learning-to-Learn},
+  author = {family=Berg, given=Alexandra R., prefix=van den, useprefix=false and Roelfsema, Pieter R. and Bohte, Sander M.},
+  date = {2024-12-31},
+  journaltitle = {PLOS ONE},
+  shortjournal = {PLOS ONE},
+  volume = {19},
+  number = {12},
+  pages = {e0316453},
+  publisher = {Public Library of Science},
+  issn = {1932-6203},
+  doi = {10.1371/journal.pone.0316453},
+  url = {https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0316453},
+  urldate = {2025-01-30},
+  abstract = {The acquisition of knowledge and skills does not occur in isolation but learning experiences amalgamate within and across domains. The process through which learning can accelerate over time is referred to as learning-to-learn or meta-learning. While meta-learning can be implemented in recurrent neural networks, these networks tend to be trained with architectures that are not easily interpretable or mappable to the brain and with learning rules that are biologically implausible. Specifically, these rules have often employed backpropagation-through-time, which relies on information that is unavailable at synapses that are undergoing plasticity in the brain. Previous studies that exclusively used local information for their weight updates had a limited capacity to integrate information over long timespans and could not easily learn-to-learn. Here, we propose a novel gated memory network named RECOLLECT, which can flexibly retain or forget information by means of a single memory gate and is trained with a biologically plausible trial-and-error-learning that requires only local information. We demonstrate that RECOLLECT successfully learns to represent task-relevant information over increasingly long memory delays in a pro-/anti-saccade task, and that it learns to flush its memory at the end of a trial. Moreover, we show that RECOLLECT can learn-to-learn an effective policy on a reversal bandit task. Finally, we show that the solutions acquired by RECOLLECT resemble how animals learn similar tasks.},
+  langid = {english},
+  file = {/Users/vitay/Documents/Zotero/storage/IFLXGLWU/Berg et al. - 2024 - Biologically plausible gated recurrent neural networks for working memory and learning-to-learn.pdf}
+}
+
 @article{Berger2017,
   title = {Spatial Features of Synaptic Adaptation Affecting Learning Performance},
   author = {Berger, Damian L. and family=Arcangelis, given=Lucilla, prefix=de, useprefix=true and Herrmann, Hans J.},
@@ -513,6 +532,26 @@
   file = {/Users/vitay/Documents/Zotero/storage/G99HQ8UX/Dominey_2021_Narrative_event_segmentation_in_the_cortical_reservoir.pdf;/Users/vitay/Documents/Zotero/storage/S7PY7RQH/article.html}
 }
 
+@article{Druckmann2012,
+  title = {Neuronal {{Circuits Underlying Persistent Representations Despite Time Varying Activity}}},
+  author = {Druckmann, Shaul and Chklovskii, Dmitri B.},
+  date = {2012-11-20},
+  journaltitle = {Current Biology},
+  shortjournal = {Current Biology},
+  volume = {22},
+  number = {22},
+  eprint = {23084992},
+  eprinttype = {pmid},
+  pages = {2095--2103},
+  publisher = {Elsevier},
+  issn = {0960-9822},
+  doi = {10.1016/j.cub.2012.08.058},
+  url = {https://www.cell.com/current-biology/abstract/S0960-9822(12)01081-0},
+  urldate = {2024-06-17},
+  langid = {english},
+  file = {/Users/vitay/Documents/Zotero/storage/NHHSSPDR/Druckmann and Chklovskii - 2012 - Neuronal Circuits Underlying Persistent Representations Despite Time Varying Activity.pdf}
+}
+
 @article{Enel2016,
   title = {Reservoir {{Computing Properties}} of {{Neural Dynamics}} in {{Prefrontal Cortex}}},
   author = {Enel, Pierre and Procyk, Emmanuel and Quilodran, René and Dominey, Peter Ford},
@@ -540,6 +579,36 @@
   abstract = {Deep Reservoir Computing has emerged as a new paradigm for deep learning, which is based around the reservoir computing principle of maintaining random pools of neurons combined with hierarchical deep learning. The reservoir paradigm reflects and respects the high degree of recurrence in biological brains, and the role that neuronal dynamics play in learning. However, one issue hampering deep reservoir network development is that one cannot backpropagate through the reservoir layers. Recent deep reservoir architectures do not learn hidden or hierarchical representations in the same manner as deep artificial neural networks, but rather concatenate all hidden reservoirs together to perform traditional regression. Here we present a novel Deep Reservoir Network for time series prediction and classification that learns through the non-differentiable hidden reservoir layers using a biologically-inspired backpropagation alternative called Direct Feedback Alignment, which resembles global dopamine signal broadcasting in the brain. We demonstrate its efficacy on two real world multidimensional time series datasets.},
   pubstate = {prepublished},
   file = {/Users/vitay/Documents/Zotero/storage/AB7NFCKV/Evanusa_et_al_2020_Deep_Reservoir_Networks_with_Learned_Hidden_Reservoir_Weights_using_Direct.pdf}
+}
+
+@article{Federer2018,
+  title = {A Self-Organizing Short-Term Dynamical Memory Network},
+  author = {Federer, Callie and Zylberberg, Joel},
+  date = {2018-10-01},
+  journaltitle = {Neural Networks},
+  shortjournal = {Neural Networks},
+  volume = {106},
+  pages = {30--41},
+  issn = {0893-6080},
+  doi = {10.1016/j.neunet.2018.06.008},
+  url = {https://www.sciencedirect.com/science/article/pii/S0893608018301904},
+  urldate = {2024-06-18},
+  abstract = {Working memory requires information about external stimuli to be represented in the brain even after those stimuli go away. This information is encoded in the activities of neurons, and neural activities change over timescales of tens of milliseconds. Information in working memory, however, is retained for tens of seconds, suggesting the question of how time-varying neural activities maintain stable representations. Prior work shows that, if the neural dynamics are in the ‘null space’ of the representation –~so that changes to neural activity do not affect the downstream read-out of stimulus information –~then information can be retained for periods much longer than the time-scale of individual-neuronal activities. The prior work, however, requires precisely constructed synaptic connectivity matrices, without explaining how this would arise in a biological neural network. To identify mechanisms through which biological networks can self-organize to learn memory function, we derived biologically plausible synaptic plasticity rules that dynamically modify the connectivity matrix to enable information storing. Networks implementing this plasticity rule can successfully learn to form memory representations even if only 10\% of the synapses are plastic, they are robust to synaptic noise, and they can represent information about multiple stimuli.},
+  file = {/Users/vitay/Documents/Zotero/storage/27APQAY4/Federer and Zylberberg - 2018 - A self-organizing short-term dynamical memory network.pdf}
+}
+
+@online{Feng2024,
+  title = {Were {{RNNs All We Needed}}?},
+  author = {Feng, Leo and Tung, Frederick and Ahmed, Mohamed Osama and Bengio, Yoshua and Hajimirsadegh, Hossein},
+  date = {2024-10-04},
+  eprint = {2410.01201},
+  eprinttype = {arXiv},
+  doi = {10.48550/arXiv.2410.01201},
+  url = {http://arxiv.org/abs/2410.01201},
+  urldate = {2024-10-29},
+  abstract = {The scalability limitations of Transformers regarding sequence length have renewed interest in recurrent sequence models that are parallelizable during training. As a result, many novel recurrent architectures, such as S4, Mamba, and Aaren, have been proposed that achieve comparable performance. In this work, we revisit traditional recurrent neural networks (RNNs) from over a decade ago: LSTMs (1997) and GRUs (2014). While these models were slow due to requiring to backpropagate through time (BPTT), we show that by removing their hidden state dependencies from their input, forget, and update gates, LSTMs and GRUs no longer need to BPTT and can be efficiently trained in parallel. Building on this, we introduce minimal versions (minLSTMs and minGRUs) that (1) use significantly fewer parameters than their traditional counterparts and (2) are fully parallelizable during training (175x faster for a sequence of length 512). Lastly, we show that these stripped-down versions of decade-old RNNs match the empirical performance of recent sequence models.},
+  pubstate = {prepublished},
+  file = {/Users/vitay/Documents/Zotero/storage/4TELHD5M/Feng et al. - 2024 - Were RNNs All We Needed.pdf}
 }
 
 @inproceedings{Fernando2003,
@@ -788,6 +857,25 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   langid = {english},
   keywords = {Action Potentials,Computer Simulation,cortical microcircuit model,cortical plasticity,Humans,Learning,Models Neurological,Neural Networks Computer,Neurons,pattern generation,Reward,working memory},
   file = {/Users/vitay/Documents/Zotero/storage/YVVKC9EL/Hoerzer_et_al_2014_Emergence_of_complex_computational_structures_from_chaotic_neural_networks.pdf}
+}
+
+@article{Hummos2022,
+  title = {Thalamic Regulation of Frontal Interactions in Human Cognitive Flexibility},
+  author = {Hummos, Ali and Wang, Bin A. and Drammis, Sabrina and Halassa, Michael M. and Pleger, Burkhard},
+  date = {2022-09-12},
+  journaltitle = {PLOS Computational Biology},
+  shortjournal = {PLOS Computational Biology},
+  volume = {18},
+  number = {9},
+  pages = {e1010500},
+  publisher = {Public Library of Science},
+  issn = {1553-7358},
+  doi = {10.1371/journal.pcbi.1010500},
+  url = {https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010500},
+  urldate = {2025-03-10},
+  abstract = {Interactions across frontal cortex are critical for cognition. Animal studies suggest a role for mediodorsal thalamus (MD) in these interactions, but the computations performed and direct relevance to human decision making are unclear. Here, inspired by animal work, we extended a neural model of an executive frontal-MD network and trained it on a human decision-making task for which neuroimaging data were collected. Using a biologically-plausible learning rule, we found that the model MD thalamus compressed its cortical inputs (dorsolateral prefrontal cortex, dlPFC) underlying stimulus-response representations. Through direct feedback to dlPFC, this thalamic operation efficiently partitioned cortical activity patterns and enhanced task switching across different contingencies. To account for interactions with other frontal regions, we expanded the model to compute higher-order strategy signals outside dlPFC, and found that the MD offered a more efficient route for such signals to switch dlPFC activity patterns. Human fMRI data provided evidence that the MD engaged in feedback to dlPFC, and had a role in routing orbitofrontal cortex inputs when subjects switched behavioral strategy. Collectively, our findings contribute to the emerging evidence for thalamic regulation of frontal interactions in the human brain.},
+  langid = {english},
+  file = {/Users/vitay/Documents/Zotero/storage/LTT737NX/Hummos et al. - 2022 - Thalamic regulation of frontal interactions in human cognitive flexibility.pdf}
 }
 
 @article{Ingrosso2019,
@@ -1242,6 +1330,24 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   file = {/Users/vitay/Documents/Zotero/storage/DB3FHWFV/Legenstein et al_2010_A Reward-Modulated Hebbian Learning Rule Can Explain Experimentally Observed.pdf}
 }
 
+@article{Lillicrap2016,
+  title = {Random Synaptic Feedback Weights Support Error Backpropagation for Deep Learning},
+  author = {Lillicrap, Timothy P. and Cownden, Daniel and Tweed, Douglas B. and Akerman, Colin J.},
+  date = {2016-11-08},
+  journaltitle = {Nature Communications},
+  shortjournal = {Nat Commun},
+  volume = {7},
+  number = {1},
+  pages = {1--10},
+  issn = {2041-1723},
+  doi = {10.1038/ncomms13276},
+  url = {https://www.nature.com/articles/ncomms13276},
+  urldate = {2020-01-08},
+  abstract = {Multi-layered neural architectures that implement learning require elaborate mechanisms for symmetric backpropagation of errors that are biologically implausible. Here the authors propose a simple resolution to this problem of blame assignment that works even with feedback using random synaptic weights.},
+  langid = {english},
+  file = {/Users/vitay/Documents/Zotero/storage/HIEUML58/Lillicrap_et_al_2016_Random_synaptic_feedback_weights_support_error_backpropagation_for_deep_learning.pdf;/Users/vitay/Documents/Zotero/storage/BAB8D8GY/ncomms13276.html}
+}
+
 @article{Liu2022d,
   title = {Tension: {{A Python}} Package for {{FORCE}} Learning},
   shorttitle = {Tension},
@@ -1534,6 +1640,21 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   file = {/Users/vitay/Documents/Zotero/storage/2YXI9GNY/Matsuki_Shibata_2020_Adaptive_balancing_of_exploration_and_exploitation_around_the_edge_of_chaos_in.pdf;/Users/vitay/Documents/Zotero/storage/DWX5XNJ3/S0893608020302914.html}
 }
 
+@article{Mattera2024,
+  title = {Chaotic Recurrent Neural Networks for Brain Modelling: {{A}} Review},
+  shorttitle = {Chaotic Recurrent Neural Networks for Brain Modelling},
+  author = {Mattera, Andrea and Alfieri, Valerio and Granato, Giovanni and Baldassarre, Gianluca},
+  date = {2024-12-27},
+  journaltitle = {Neural Networks},
+  shortjournal = {Neural Networks},
+  pages = {107079},
+  issn = {0893-6080},
+  doi = {10.1016/j.neunet.2024.107079},
+  url = {https://www.sciencedirect.com/science/article/pii/S0893608024010086},
+  urldate = {2025-01-04},
+  abstract = {Even in the absence of external stimuli, the brain is spontaneously active. Indeed, most cortical activity is internally generated by recurrence. Both theoretical and experimental studies suggest that chaotic dynamics characterize this spontaneous activity. While the precise function of brain chaotic activity is still puzzling, we know that chaos confers many advantages. From a computational perspective, chaos enhances the complexity of network dynamics. From a behavioural point of view, chaotic activity could generate the variability required for exploration. Furthermore, information storage and transfer are maximized at the critical border between order and chaos. Despite these benefits, many computational brain models avoid incorporating spontaneous chaotic activity due to the challenges it poses for learning algorithms. In recent years, however, multiple approaches have been proposed to overcome this limitation. As a result, many different algorithms have been developed, initially within the reservoir computing paradigm. Over time, the field has evolved to increase the biological plausibility and performance of the algorithms, sometimes going beyond the reservoir computing framework. In this review article, we examine the computational benefits of chaos and the unique properties of chaotic recurrent neural networks, with a particular focus on those typically utilized in reservoir computing. We also provide a detailed analysis of the algorithms designed to train chaotic RNNs, tracing their historical evolution and highlighting key milestones in their development. Finally, we explore the applications and limitations of chaotic RNNs for brain modelling, consider their potential broader impacts beyond neuroscience, and outline promising directions for future research.}
+}
+
 @article{Miconi2017,
   title = {Biologically Plausible Learning in Recurrent Neural Networks Reproduces Neural Dynamics Observed during Cognitive Tasks},
   author = {Miconi, Thomas},
@@ -1621,7 +1742,7 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   doi = {10.1007/978-981-13-1687-6},
   url = {https://link.springer.com/10.1007/978-981-13-1687-6},
   urldate = {2023-07-11},
-  isbn = {9789811316869 9789811316876},
+  isbn = {978-981-13-1686-9 978-981-13-1687-6},
   langid = {english},
   file = {/Users/vitay/Documents/Zotero/storage/BKDCTSEK/Nakajima and Fischer - 2021 - Reservoir Computing Theory, Physical Implementati.pdf}
 }
@@ -1707,6 +1828,25 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   file = {/Users/vitay/Documents/Zotero/storage/DP96QQUI/Panda_Srinivasa_2018_Learning_to_Recognize_Actions_From_Limited_Training_Examples_Using_a_Recurrent.pdf}
 }
 
+@article{Park2019b,
+  title = {Dynamically Changing Neuronal Activity Supporting Working Memory for Predictable and Unpredictable Durations},
+  author = {Park, Jong Chan and Bae, Jung Won and Kim, Jieun and Jung, Min Whan},
+  date = {2019-10-29},
+  journaltitle = {Scientific Reports},
+  shortjournal = {Sci Rep},
+  volume = {9},
+  number = {1},
+  pages = {15512},
+  publisher = {Nature Publishing Group},
+  issn = {2045-2322},
+  doi = {10.1038/s41598-019-52017-8},
+  url = {https://www.nature.com/articles/s41598-019-52017-8},
+  urldate = {2024-07-17},
+  abstract = {Diverse neural processes have been proposed as the neural basis of working memory. To investigate whether the medial prefrontal cortex (mPFC) relies on different neural processes to mediate working memory depending on the predictability of delay duration, we examined mPFC neural activity in mice performing a delayed response task with fixed (4\,s) or random (between 1–7\,s) delay durations. mPFC neural activity was strongly influenced by the predictability of delay duration. Nevertheless, mPFC neurons seldom showed persistent activity spanning the entire delay period and instead showed dynamically-changing delay-period activity under both the fixed-delay and random-delay conditions. mPFC neurons conveyed higher working memory information under the random-delay than fixed-delay conditions, possibly due to a higher demand for stable working memory maintenance. Our results suggest that the rodent mPFC may rely on dynamically-changing neuronal activity to maintain working memory regardless of the predictability of delay duration.},
+  langid = {english},
+  file = {/Users/vitay/Documents/Zotero/storage/EXKKWG57/Park et al. - 2019 - Dynamically changing neuronal activity supporting working memory for predictable and unpredictable d.pdf}
+}
+
 @article{Pascanu2011,
   title = {A Neurodynamical Model for Working Memory},
   author = {Pascanu, Razvan and Jaeger, Herbert},
@@ -1742,6 +1882,22 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   doi = {10.1103/PhysRevLett.120.024102},
   url = {https://link.aps.org/doi/10.1103/PhysRevLett.120.024102},
   file = {/Users/vitay/Documents/Zotero/storage/BW5CUIDT/Pathak et al_2018_Model-Free Prediction of Large Spatiotemporally Chaotic Systems from Data.pdf}
+}
+
+@inproceedings{Paul2024,
+  title = {Learning in~{{Recurrent Spiking Neural Networks}} with~{{Sparse Full-FORCE Training}}},
+  booktitle = {Artificial {{Neural Networks}} and {{Machine Learning}} – {{ICANN}} 2024},
+  author = {Paul, Ankita and Das, Anup},
+  editor = {Wand, Michael and Malinovská, Kristína and Schmidhuber, Jürgen and Tetko, Igor V.},
+  date = {2024},
+  pages = {365--376},
+  publisher = {Springer Nature Switzerland},
+  location = {Cham},
+  doi = {10.1007/978-3-031-72359-9_27},
+  abstract = {Recurrent Spiking Neural Networks (RSNNs) are bio-plausible computational models to detect temporal patterns in data and mimic nonlinear dynamical systems. Due to their temporal information processing structure, neurons in RSNNs need to process a significantly large number of spikes, which increases the energy consumption of inference performed on a neuromorphic hardware. We propose FFSR, a full-FORCE sparsity regularization based supervised training algorithm for RSNNs. The key idea of FFSR is to use a sparsity regularization (SR) technique involving sparse vector optimization to regulate the firing rate of each neuron using a threshold. Supervised learning is facilitated using full-FORCE, which uses a recursive least square-based First-Order and Reduced Control Error (FORCE) algorithm to train a full RSNN structure involving both reservoir and readout. FFSR suppresses information redundancy using SR while improving performance and training convergence using full-FORCE. We evaluate FFSR using seven workloads. Our results show an average 30.5\% reduction in the mean square error and an average 53\% reduction in the training convergence time with respect to the baseline full-FORCE algorithm.},
+  isbn = {978-3-031-72359-9},
+  langid = {english},
+  file = {/Users/vitay/Documents/Zotero/storage/RK3N6W5A/Paul and Das - 2024 - Learning in Recurrent Spiking Neural Networks with Sparse Full-FORCE Training.pdf}
 }
 
 @article{Pitti2017,
@@ -2160,7 +2316,7 @@ Subject\_term\_id: computational-science;electrical-and-electronic-engineering},
   date = {2006-03},
   journaltitle = {Neurocomputing},
   volume = {69},
-  number = {7-9},
+  number = {7--9},
   pages = {642--650},
   doi = {10.1016/J.NEUCOM.2005.12.012},
   url = {https://www.sciencedirect.com/science/article/pii/S0925231205003073?via%3Dihub},
