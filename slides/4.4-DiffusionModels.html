@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0626ff4d7a71b55c8707dcae1d04a9b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.39">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Julien Vitay">
   <title>Neurocomputing</title>
@@ -48,7 +48,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-31e5e70a95169d1719a5a4fd7b5514a9.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-1b686d1946b542cf9e9d5a361ec217f3.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -211,7 +211,7 @@ Julien Vitay
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/generation-distribution.jpeg"></p>
+<p><img data-src="img/generation-distribution.jpeg" style="width:80.0%"></p>
 <figcaption>Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption>
 </figure>
 </div>
@@ -225,7 +225,7 @@ Julien Vitay
 </div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/gan-principle.png" style="width:80.0%"></p>
+<p><img data-src="img/gan-principle.png" style="width:70.0%"></p>
 <figcaption>Source: <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29" class="uri">https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29</a></figcaption>
 </figure>
 </div>
@@ -245,30 +245,11 @@ Julien Vitay
 </div>
 </section>
 
-<section id="stochastic-processes-can-destroy-information" class="title-slide slide level1 center">
-<h1>Stochastic processes can destroy information</h1>
-<ul>
-<li>Iteratively adding normal noise to a signal creates a <strong>stochastic differential equation</strong> (SDE).</li>
-</ul>
-<p><span class="math display">
-    X_t = \sqrt{1 - p} \, X_{t-1} + \sqrt{p}   \, \sigma \qquad\qquad \text{where} \qquad\qquad  \sigma \sim \mathcal{N}(0, 1)
-</span></p>
-<ul>
-<li>Under some conditions, any probability distribution converges to a normal distribution.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/diffusion-noiseconvergence.webp" style="width:80.0%"></p>
-<figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
-</figure>
-</div>
-</section>
-
 <section id="diffusion-process" class="title-slide slide level1 center">
 <h1>Diffusion process</h1>
 <ul>
-<li><p>A <strong>diffusion process</strong> can iteratively destruct all information in an image through a Markov chain.</p></li>
-<li><p>A Markov chain implies that each step is independent and governed by a probability distribution <span class="math inline">p(X_t | X_{t-1})</span>.</p></li>
+<li><p>The forward <strong>diffusion process</strong> iteratively destructs all information in the image through a Markov chain that adds white noise.</p></li>
+<li><p>A Markov chain implies that each step is independent and governed by a probability distribution <span class="math inline">q(x_t | x_{t-1})</span>.</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -278,14 +259,48 @@ Julien Vitay
 </div>
 </section>
 
+<section id="stochastic-processes-can-destroy-information" class="title-slide slide level1 center">
+<h1>Stochastic processes can destroy information</h1>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Iteratively adding normal noise to a signal creates a <strong>stochastic differential equation</strong> (SDE), such as the <strong>Ornstein–Uhlenbeck</strong> (OU) stochastic process.</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+   \text{discrete:}&nbsp;\qquad&amp; x_t = \sqrt{1 - \beta_t} \, x_{t-1} + \sqrt{\beta_t}   \, \epsilon \\
+   &amp; \qquad\qquad\text{where} \qquad  \epsilon \sim \mathcal{N}(0, 1) \\
+&amp;\\
+   \text{continuous:}&nbsp;\qquad &amp; dx = - \dfrac{1}{2} \, \beta(t) \, x \, dt  + \sqrt{\beta(t)} \, dW \\
+\end{aligned}
+</span></p>
+<ul>
+<li>Any probability distribution converges to a normal distribution when following the OU process.</li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/diffusion-noiseconvergence.webp"></p>
+<figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
+</figure>
+</div>
+</div></div>
+<ul>
+<li>The <strong>Focker-Planck equation</strong> is a general form of the OU process (drift + diffusion), hence the name:</li>
+</ul>
+<p><span class="math display">
+     dx = \underbrace{\mu(x, t) \, dt}_{\text{drift}}  + \underbrace{\sigma(x, t) \, dW}_{\text{diffusion}}
+</span></p>
+</section>
+
 <section id="probabilistic-diffusion-models" class="title-slide slide level1 center">
 <h1>Probabilistic diffusion models</h1>
 <ul>
-<li>It should be possible to <strong>reverse</strong> each diffusion step by removing the noise using a form of denoising autoencoder.</li>
+<li>It should be possible to <strong>reverse</strong> each diffusion step by removing the noise using a sort of denoising autoencoder.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/diffusion-steps.webp" style="width:70.0%"></p>
+<p><img data-src="img/diffusion-steps.webp" style="width:60.0%"></p>
 <figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
 </figure>
 </div>
@@ -316,11 +331,11 @@ Julien Vitay
 <h1>Forward Diffusion process</h1>
 <ul>
 <li><p>The forward process iteratively corrupts the image using <span class="math inline">q(x_t | x_{t-1})</span> for <span class="math inline">T</span> steps (e.g.&nbsp;<span class="math inline">T=1000</span>).</p></li>
-<li><p>The goal is to learn a reverse process <span class="math inline">p_\theta(x_{t-1} | x_t)</span> that approximates the true <span class="math inline">q(x_{t-1} | x_t)</span>.</p></li>
+<li><p>The goal is to learn a reverse process <span class="math inline">p_\theta(x_{t-1} | x_t)</span> that approximates the true posterior <span class="math inline">q(x_{t-1} | x_t)</span>.</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/diffusion-steps4.webp" style="width:80.0%"></p>
+<p><img data-src="img/diffusion-steps4.webp" style="width:70.0%"></p>
 <figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
 </figure>
 </div>
@@ -331,16 +346,20 @@ Julien Vitay
 <div class="columns">
 <div class="column" style="width:70%;">
 <ul>
-<li>The forward diffusion process iteratively adds Gaussian noise with a fixed schedule <span class="math inline">\beta_t</span>:</li>
+<li>The forward diffusion process iteratively adds Gaussian noise with a fixed variance schedule <span class="math inline">\beta_t</span>:</li>
 </ul>
 <p><span class="math display">
-    q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t} \, x_{t-1}, \beta_t I)
-</span></p>
-<p><span class="math display">
-    x_t = \sqrt{1 - \beta_t} \, x_{t-1} +  \beta_t \epsilon \;\; \text{where} \; \epsilon \sim \mathcal{N}(0, I)
+    x_t = \sqrt{1 - \beta_t} \, x_{t-1} +  \sqrt{\beta_t} \,  \epsilon \;\; \text{where} \; \epsilon \sim \mathcal{N}(0, I)
 </span></p>
 <ul>
-<li><span class="math inline">\mu_t = \sqrt{1 - \beta_t} \, x_{t-1}</span> is the mean of the distribution, <span class="math inline">\sigma_t = \beta_t I</span> its variance.</li>
+<li>It is equivalent to say that we sample <span class="math inline">x_t</span> from a conditional normal distribution.</li>
+</ul>
+<p><span class="math display">
+    q(x_t | x_{t-1}) = \mathcal{N}(\mu_t = \sqrt{1 - \beta_t} \, x_{t-1}, \Sigma_t^2 = \beta_t \, I)
+</span></p>
+<ul>
+<li><p><span class="math inline">\mu_t = \sqrt{1 - \beta_t} \, x_{t-1}</span> is the mean of the distribution, <span class="math inline">\Sigma_t^2 = \beta_t \, I</span> its variance.</p></li>
+<li><p>The parameter <span class="math inline">\beta_t</span> is annealed with a decreasing schedule, as adding more noise at the end does not destroy much more information.</p></li>
 </ul>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
@@ -350,19 +369,29 @@ Julien Vitay
 </figure>
 </div>
 </div></div>
+</section>
+
+<section id="forward-diffusion-process-2" class="title-slide slide level1 center">
+<h1>Forward Diffusion process</h1>
 <ul>
-<li><p>The parameter <span class="math inline">\beta_t</span> is annealed with a decreasing schedule, as adding more noise at the end does not destroy much more information.</p></li>
-<li><p><strong>Nice property:</strong> each image <span class="math inline">x_t</span> is also a noisy version of the original image <span class="math inline">x_0</span>:</p></li>
+<li><strong>Nice property:</strong> each image <span class="math inline">x_t</span> is also a noisy version of the original image <span class="math inline">x_0</span>:</li>
 </ul>
 <p><span class="math display">
-    q(x_t | x_{0}) = \mathcal{N}(x_t; \sqrt{1 - \bar{\alpha}_t} \, x_0, \bar{\alpha}_t I)
+    q(x_t | x_{0}) = \mathcal{N}(\sqrt{\bar{\alpha}_t} \, x_0 ,  (1 - \bar{\alpha}_t) \, I)
 </span> <span class="math display">
-    x_t = \sqrt{\bar{\alpha}_t} \, x_0 +  (1 - \bar{\alpha}_t) \, \epsilon_t \;\; \text{where} \; \epsilon_t \sim \mathcal{N}(0, I)
+    x_t = \sqrt{\bar{\alpha}_t} \, x_0 +  \sqrt{1 - \bar{\alpha}_t} \, \epsilon_t \;\; \text{where} \; \epsilon_t \sim \mathcal{N}(0, I)
 </span></p>
 <p>with <span class="math inline">\alpha_t = 1 - \beta_t</span> and <span class="math inline">\bar{\alpha}_t = \prod_{s=1}^t \alpha_s</span> only depending on the history of <span class="math inline">\beta_t</span>.</p>
 <ul>
-<li>We do not need to perform <span class="math inline">t</span> noising steps on <span class="math inline">x_0</span> to obtain <span class="math inline">x_t</span>!</li>
+<li><p>Adding Gaussian noise to Gaussian noise is still Gaussian noise.</p></li>
+<li><p>We do not need to perform <span class="math inline">t</span> noising steps on <span class="math inline">x_0</span> to obtain <span class="math inline">x_t</span>!</p></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/ddpm-forwardprocess.png"></p>
+<figcaption>Source: <a href="https://hydragon-cv.info/entry/%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0-DDPM-Denoising-Diffusion-Probabilistic-Model" class="uri">https://hydragon-cv.info/entry/%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0-DDPM-Denoising-Diffusion-Probabilistic-Model</a></figcaption>
+</figure>
+</div>
 </section>
 
 <section id="reverse-diffusion-model" class="title-slide slide level1 center">
@@ -375,7 +404,7 @@ Julien Vitay
 </span></p>
 <p>where:</p>
 <p><span class="math display">
-p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+p_\theta(x_{t-1} | x_t) = \mathcal{N}(\mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
 </span></p>
 <ul>
 <li>The reverse process is also normally distributed, given that the noise <span class="math inline">\beta_t</span> is not too big.</li>
@@ -394,18 +423,17 @@ p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta
 <section id="denoising-probabilistic-diffusion-model" class="title-slide slide level1 center">
 <h1>Denoising Probabilistic Diffusion Model</h1>
 <ul>
-<li>By doing some Bayesian inference on the true posterior <span class="math inline">q(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_t, \sigma_t)</span>, (Ho et al., 2020) could show that:</li>
+<li>By doing some Bayesian inference on the true posterior <span class="math inline">q(x_{t-1} | x_t) = \mathcal{N}(\mu_t, \Sigma_t)</span>, <span class="citation" data-cites="Ho2020">Ho et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> could show that:</li>
 </ul>
 <p><span class="math display">
 \begin{cases}
 \mu_t = \dfrac{1}{\sqrt{\alpha_t}} \, (x_t - \dfrac{1-\alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_t)\\
 \\
-\sigma_t = \dfrac{1 - \bar{\alpha}_{t-1}}{1 - \bar{\alpha}_{t}} \beta_t \, I = \bar{\beta}_t \, I \\
+\Sigma_t = \dfrac{1 - \bar{\alpha}_{t-1}}{1 - \bar{\alpha}_{t}} \beta_t \, I = \bar{\beta}_t \, I \\
 \end{cases}
 </span></p>
 <ul>
-<li><p>The reverse process is also normally distributed, provided the forward noise <span class="math inline">\beta_t</span> was not too big.</p></li>
-<li><p>The reverse variance only depends on the schedule of <span class="math inline">\beta_t</span>, it can be pre-computed.</p></li>
+<li>The reverse variance only depends on the schedule of <span class="math inline">\beta_t</span>, it can be pre-computed.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -431,7 +459,7 @@ p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta
 <li><p>All we need to learn is the noise <span class="math inline">\epsilon_\theta(x_t, t) \approx \epsilon_t</span> that was added to the original image <span class="math inline">x_0</span> to obtain <span class="math inline">x_t</span>:</p></li>
 </ul>
 <p><span class="math display">
-    x_t = \sqrt{1 - \bar{\alpha}_t} \, x_0 +  \bar{\alpha}_t \, \epsilon_t
+    x_t = \sqrt{\bar{\alpha}_t} \, x_0 +  \sqrt{1 - \bar{\alpha}_t} \, \epsilon_t
 </span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -452,7 +480,7 @@ p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta
 <li>We want to predict the added noise in the image space:</li>
 </ul>
 <p><span class="math display">
-    \epsilon_\theta(x_t, t) = \epsilon_\theta(\sqrt{1 - \bar{\alpha}_t} \, x_0 +  \bar{\alpha}_t \, \epsilon_t, t) \approx \epsilon_t
+    \epsilon_\theta(x_t, t) = \epsilon_\theta(\sqrt{\bar{\alpha}_t} \, x_0 +  \sqrt{1 - \bar{\alpha}_t} \, \epsilon_t, t) \approx \epsilon_t
 </span></p>
 <ul>
 <li>We can simply minimize the mse with the true noise:</li>
@@ -460,7 +488,7 @@ p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta
 <p><span class="math display">
 \begin{aligned}
     \mathcal{L}(\theta) &amp;= \mathbb{E}_{t \sim [1, T], x_0, \epsilon_t} [(\epsilon_t - \epsilon_\theta(x_t, t))^2] \\
-&amp;= \mathbb{E}_{t \sim [1, T], x_0, \epsilon_t} [(\epsilon_t - \epsilon_\theta(\sqrt{1 - \bar{\alpha}_t} \, x_0 +  \bar{\alpha}_t \, \epsilon_t, t) )^2] \\
+&amp;= \mathbb{E}_{t \sim [1, T], x_0, \epsilon_t} [(\epsilon_t - \epsilon_\theta(\sqrt{\bar{\alpha}_t} \, x_0 +  \sqrt{1 - \bar{\alpha}_t} \, \epsilon_t, t) )^2] \\
 \end{aligned}
 </span></p>
 <ul>
@@ -469,14 +497,13 @@ p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/unet.png"></p>
-<figcaption>Source: <span class="citation" data-cites="Ronneberger2015">Ronneberger et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> U-Net: Convolutional Networks for Biomedical Image Segmentation. arXiv:1505.04597</figcaption>
+<p><img data-src="img/ddpm-training.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div></div>
-<ul>
-<li>The neural network used for the reverse diffusion is usually some kind of U-net, with attentional layers, or even a vision Transformer.</li>
-</ul>
+<div class="footer">
+<p><span class="citation" data-cites="Ho2020">Ho et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> Denoising Diffusion Probabilistic Models. arXiv:2006.11239</p>
+</div>
 </section>
 
 <section id="denoising-probabilistic-diffusion-model-3" class="title-slide slide level1 center">
@@ -486,29 +513,72 @@ p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/dpm-training.webp"></p>
+<p><img data-src="img/dpm-training.webp" style="width:80.0%"></p>
 <figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
+</figure>
+</div>
+</section>
+
+<section id="ddpm-backbone" class="title-slide slide level1 center">
+<h1>DDPM backbone</h1>
+<ul>
+<li>The neural network used for the reverse diffusion is usually some kind of U-net, with attentional layers, or even a vision Transformer.</li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/unet.png"></p>
+<figcaption>Source: <span class="citation" data-cites="Ronneberger2015">Ronneberger et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> U-Net: Convolutional Networks for Biomedical Image Segmentation. arXiv:1505.04597</figcaption>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/U-Net-attention.webp"></p>
+<figcaption>Source: <a href="https://learnopencv.com/denoising-diffusion-probabilistic-models/" class="uri">https://learnopencv.com/denoising-diffusion-probabilistic-models/</a></figcaption>
+</figure>
+</div>
+<ul>
+<li>A <strong>time embedding</strong> for the time index <span class="math inline">t</span> is necessary. It is usually added to each layer of the U-Net.</li>
+</ul>
+</div></div>
+</section>
+
+<section id="ddpm-sampler" class="title-slide slide level1 center">
+<h1>DDPM sampler</h1>
+<div class="columns">
+<div class="column">
+<ul>
+<li>The reverse diffusion occurs iteratively backwards in time (1000 steps) by sampling the posterior:</li>
+</ul>
+<p><span class="math display">
+    p_\theta(x_{t-1} | x_t) = \mathcal{N}(\mu_\theta(x_t, t), \bar{\beta}_t \, I)
+</span></p>
+<p><span class="math display">
+x_{t-1} = \dfrac{1}{\sqrt{\alpha_t}} \, (x_t - \dfrac{1-\alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_\theta(x_t, t)) + \bar{\beta}_t \, \epsilon
+</span></p>
+<ul>
+<li><p>The last step <span class="math inline">x_1 \rightarrow x_0</span> can be done deterministically.</p></li>
+<li><p>It is possible to use less iterations (200) by taking bigger steps, but this stays expensive and generates lower quality images.</p></li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/dpm-sampling.webp"></p>
+<figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
+</figure>
+</div>
+</div></div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/graphical_diffusion_model.png" style="width:70.0%"></p>
+<figcaption>Source: <span class="citation" data-cites="Ho2020">Ho et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> Denoising Diffusion Probabilistic Models arXiv:2006.11239</figcaption>
 </figure>
 </div>
 </section>
 
 <section id="denoising-probabilistic-diffusion-model-4" class="title-slide slide level1 center">
-<h1>Denoising Probabilistic Diffusion Model</h1>
-<ul>
-<li>The reverse diffusion occurs iteratively backwards in time:</li>
-</ul>
-<p><span class="math display">
-x_{t-1} = \dfrac{1}{\sqrt{\alpha_t}} \, (x_t - \dfrac{1-\alpha_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_\theta(x_t, t)) + \sigma_t \, z
-</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/dpm-sampling.webp" style="width:65.0%"></p>
-<figcaption>Source: <a href="https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048" class="uri">https://towardsdatascience.com/understanding-diffusion-probabilistic-models-dpms-1940329d6048</a></figcaption>
-</figure>
-</div>
-</section>
-
-<section id="denoising-probabilistic-diffusion-model-5" class="title-slide slide level1 center">
 <h1>Denoising Probabilistic Diffusion Model</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -518,8 +588,272 @@ x_{t-1} = \dfrac{1}{\sqrt{\alpha_t}} \, (x_t - \dfrac{1-\alpha_t}{\sqrt{1 - \bar
 </div>
 </section>
 
+<section id="modern-samplers" class="title-slide slide level1 center">
+<h1>Modern samplers</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>The equivalent SDE is:</li>
+</ul>
+<p><span class="math display">
+    dx = \left[-\frac{1}{2}\beta(t) x + \frac{\beta(t)}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x, t)\right] dt + \sqrt{\beta(t)} \, d\bar{W}
+</span></p>
+<ul>
+<li>The DDPM sampler is actually a simple first-order Euler-Maruyama SDE solver:</li>
+</ul>
+<p><span class="math display">
+x_{t-1} = \dfrac{1}{\sqrt{\alpha_t}} \, (x_t - \dfrac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_\theta(x_t, t)) + \bar{\beta}_t \, \epsilon
+</span></p>
+<ul>
+<li>Higher-order and/or deterministic solvers allow to more precisely evaluate the SDE while taking much less steps (50), such as the DDIM sampler, or fancier ones like DPM++, Heun, etc.</li>
+</ul>
+<p><span class="math display">
+x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \, (\dfrac{x_t - \sqrt{1- \bar{\alpha}_t} \, \epsilon_\theta(x_t, t)}{ \sqrt{\bar{\alpha}_t}}) + \sqrt{1 - \bar{\alpha}_{t-1}} \, \epsilon_\theta(x_t, t)
+</span></p>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/diffusion-samplers-overview.webp" style="width:70.0%"></p>
+<figcaption>Source: <a href="https://learn.rundiffusion.com/sampling-methods/" class="uri">https://learn.rundiffusion.com/sampling-methods/</a></figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/diffusion-ddim.png"></p>
+<figcaption>Source: <span class="citation" data-cites="Nichol2021">Nichol and Dhariwal (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="loss-derivation" class="title-slide slide level1 center">
+<h1>2 - Loss derivation</h1>
+
+</section>
+
+<section id="loss-derivation-1" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li><p>Let’s now see how to arrive to the same loss function from a variational point of view.</p></li>
+<li><p>The blog post by Lilian Weng is very helpful: <a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/" class="uri">https://lilianweng.github.io/posts/2021-07-11-diffusion-models/</a>, as well as this one by Jonathan Kernes <a href="https://towardsdatascience.com/diffusion-models-91b75430ec2" class="uri">https://towardsdatascience.com/diffusion-models-91b75430ec2</a>.</p></li>
+<li><p>As we have a generative model (learning the distribution of images <span class="math inline">x_0</span>), all we want to maximize is the log-likelihood of the model <span class="math inline">p_\theta(x_0)</span> on the data, which gives us the following NLL loss:</p></li>
+</ul>
+<p><span class="math display">
+    \mathcal{L}(\theta) = \mathbb{E}_{x_0 \sim q(x_0)} [- \log p_\theta(x_0)]  = \int - q(x_0) \log p_\theta(x_0) dx_0
+</span></p>
+</section>
+
+<section id="loss-derivation-2" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li><p>The first trick is to rewrite the log-evidence <span class="math inline">\log p_\theta(x_0)</span> as a function of normalized transition probabilities using the <strong>Markov assumption</strong>.</p></li>
+<li><p>Let’s first marginalize <span class="math inline">p_\theta(x_0)</span> using the rest of the sequence <span class="math inline">(x_1, \ldots x_T)</span>, involving the joint probability of the sequence:</p></li>
+</ul>
+<p><span class="math display">
+\log p_\theta(x_0) = \log \int p_\theta(x_0, x_1, \ldots, x_T)\, dx_1 \, dx_2 \ldots \, dx_T
+</span></p>
+<ul>
+<li>The Markov assumption states that the different denoising steps of the sequence are independent from each other, i.e.&nbsp;<span class="math inline">x_t</span> contains enough information to predict the distribution of <span class="math inline">x_{t-1}</span>, there is no need to know the “history”, i.e.&nbsp;the other steps:</li>
+</ul>
+<p><span class="math display">
+p_\theta(x_0, x_1, \ldots, x_T) = p_\theta(x_T) \prod_{t=1}^T p_\theta(x_{t-1} | x_t)
+</span></p>
+</section>
+
+<section id="loss-derivation-3" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>Let’s do the same with the <strong>forward process</strong> on the whole sequence <span class="math inline">q(x_0, x_1, \ldots x_t)</span>, but in the other direction:</li>
+</ul>
+<p><span class="math display">
+q(x_0, x_1, \ldots, x_T) = q(x_0) \prod_{t=1}^T q(x_{t} | x_{t-1})
+</span></p>
+<ul>
+<li>Dividing both sides with <span class="math inline">q(x_0)</span>, we obtain the conditional:</li>
+</ul>
+<p><span class="math display">
+q(x_1, \ldots, x_T | x_0) = \prod_{t=1}^T q(x_{t} | x_{t-1})
+</span></p>
+<ul>
+<li>Noting <span class="math inline">dx_{1..T} = dx_1 \, dx_2 \ldots \, dx_T</span>, we have</li>
+</ul>
+<p><span class="math display">
+\log p_\theta(x_0) = \log \int p_\theta(x_T) \prod_{t=1}^T p_\theta(x_{t-1} | x_t) \, dx_{1..T}
+</span></p>
+</section>
+
+<section id="loss-derivation-4" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>We now use the <strong>importance sampling</strong> trick, by adding the term <span class="math inline">\dfrac{q(x_1, \ldots, x_T | x_0)}{q(x_1, \ldots, x_T | x_0)} = 1</span> inside the equation and expanding the denominator:</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\log p_\theta(x_0) &amp; = \log \int \dfrac{q(x_1, \ldots, x_T | x_0)}{q(x_1, \ldots, x_T | x_0)} p_\theta(x_T) \prod_{t=1}^T p_\theta(x_{t-1} | x_t) \, dx_{1..T} \\
+&amp;\\
+&amp;= \log \int q(x_1, \ldots, x_T | x_0) \, p_\theta(x_T) \prod_{t=1}^T \frac{p_\theta(x_{t-1} | x_t)}{q(x_t | x_{t-1})} \, dx_{1..T} \\
+&amp;\\
+&amp;= \log \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ p_\theta(x_T) \prod_{t=1}^T \frac{p_\theta(x_{t-1} | x_t)}{q(x_t | x_{t-1})} ] \\
+\end{aligned}
+</span></p>
+<ul>
+<li><p>The importance sampling trick is a brilliant way to replace pesky integrals with expectations, which can later be sampled. This is exactly the same trick as in RL and policy gradients.</p></li>
+<li><p>What this expectation means is that we only need to sample the sequence <span class="math inline">x_1, \ldots, x_t</span> conditioned on <span class="math inline">x_0</span> (the input image) following the <strong>forward process</strong>.</p></li>
+</ul>
+</section>
+
+<section id="loss-derivation-5" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>We now use <strong>Jensen’s inequality</strong> (<span class="math inline">\mathbb{E}[f(X)] \geq f(\mathbb{E}[X])</span> if <span class="math inline">f</span> is convex) to put the log inside the expectation and obtain a <strong>lower bound on the log-evidence</strong>:</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\log p_\theta(x_0) &amp;\geq \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log ( p_\theta(x_T) \prod_{t=1}^T \frac{p_\theta(x_{t-1} | x_t)}{q(x_t | x_{t-1})} )] \\
+&amp;\\
+&amp;= \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log p_\theta(x_T) + \sum_{t=1}^T \log \frac{p_\theta(x_{t-1} | x_t)}{q(x_t | x_{t-1})} ] \\
+&amp;\\
+&amp;= \text{ELBO}(p_\theta, q, x_0)
+\end{aligned}
+</span></p>
+<ul>
+<li><p>The <strong>evidence lower bound</strong> (ELBO) or <strong>variational lower bound</strong> (VLB) is a classical trick in variational inference (including VAE): the goal is to maximize the evidence <span class="math inline">\log p_\theta(x_0)</span>, but it is generally intractable.</p></li>
+<li><p>We instead maximize its lower bound, as the parameters <span class="math inline">\theta</span> maximizing the ELBO will also maximize the evidence (see <a href="https://yunfanj.com/blog/2021/01/11/ELBO.html" class="uri">https://yunfanj.com/blog/2021/01/11/ELBO.html</a> for more details).</p></li>
+</ul>
+</section>
+
+<section id="loss-derivation-6" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li><p>The ratio of probabilities <span class="math inline">\log \dfrac{p_\theta(x_{t-1} | x_t)}{q(x_t | x_{t-1})}</span> looks interesting, as it might lead us to a KL divergence, but the conditionals are reversed.</p></li>
+<li><p>Let’s use the Bayes rule to invert <span class="math inline">q(x_t | x_{t-1})</span>, remembering from earlier that it is only tractable when conditioned on <span class="math inline">x_0</span>:</p></li>
+</ul>
+<p><span class="math display">
+q(x_{t}| x_{t-1}) = q(x_{t}| x_{t-1}, x_0) = q(x_{t-1}| x_{t}, x_0) \, \dfrac{q(x_{t} | x_0)}{q(x_{t-1} | x_0)}
+</span></p>
+<ul>
+<li>The first equality <span class="math inline">q(x_{t}| x_{t-1}) = q(x_{t}| x_{t-1}, x_0)</span> is due to the <strong>Markov property</strong>, we do not need <span class="math inline">x_0</span> to predict <span class="math inline">x_{t}</span> from <span class="math inline">x_{t-1}</span> in the forward process!</li>
+</ul>
+</section>
+
+<section id="loss-derivation-7" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>Let’s plug this in our ELBO, taking out <span class="math inline">t=1</span> from the sum:</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\log p_\theta(x_0) &amp;\geq \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log p_\theta(x_T) + \sum_{t=2}^T \log \frac{p_\theta(x_{t-1} | x_t)}{q(x_t | x_{t-1})} + \log \dfrac{p_\theta(x_0 | x_1)}{q(x_1 | x_0)}] \\
+&amp;\\
+&amp;= \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log p_\theta(x_T) + \sum_{t=2}^T \log \frac{p_\theta(x_{t-1} | x_t)}{q(x_{t-1} | x_{t}, x_0)}  \, \dfrac{q(x_{t-1} | x_0)}{q(x_t | x_0)}+ \log \dfrac{p_\theta(x_0 | x_1)}{q(x_1 | x_0)}] \\
+&amp;\\
+&amp;= \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log p_\theta(x_T) + \sum_{t=2}^T \log \frac{p_\theta(x_{t-1} | x_t)}{q(x_{t-1} | x_{t}, x_0)}  + \sum_{t=2}^T \log  \dfrac{q(x_{t-1} | x_0)}{q(x_t | x_0)} + \log \dfrac{p_\theta(x_0 | x_1)}{q(x_1 | x_0)}] \\
+\end{aligned}
+</span></p>
+<ul>
+<li>The term <span class="math inline">\sum_{t=2}^T \log  \dfrac{q(x_{t-1} | x_0)}{q(x_t | x_0)}</span> cancels nicely and becomes equal to <span class="math inline">\log q(x_1 | x_0) - \log q(x_{T} | x_0)</span>.</li>
+</ul>
+</section>
+
+<section id="loss-derivation-8" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>The first term <span class="math inline">\log q(x_1 | x_0)</span> even cancels the denominator of <span class="math inline">\log \dfrac{p_\theta(x_0 | x_1)}{q(x_1 | x_0)}</span>, so we obtain:</li>
+</ul>
+<p><span class="math display">
+\begin{aligned}
+\log p_\theta(x_0) &amp;\geq  \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log p_\theta(x_T) + \sum_{t=2}^T \log \frac{p_\theta(x_{t-1} | x_t)}{q(x_{t-1} | x_{t}, x_0)} -\log q(x_T | x_0)  + \log p_\theta(x_0 | x_1) ] \\
+&amp;\\
+&amp; = \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ \log \dfrac{p_\theta(x_T)}{q(x_T | x_0)} + \sum_{t=2}^T \log \frac{p_\theta(x_{t-1} | x_t)}{q(x_{t-1} | x_{t}, x_0)}  + \log p_\theta(x_0 | x_1) ]\\
+&amp;\\
+&amp; = \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ L_T + \sum_{t=2}^T L_{t}  + L_0 ]\\
+\end{aligned}
+</span></p>
+</section>
+
+<section id="loss-derivation-9" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<p><span class="math display">
+\begin{aligned}
+\log p_\theta(x_0)
+&amp; = \mathbb{E}_{x_1, \dots, x_T \sim q(x_1, \ldots, x_T | x_0)} [ L_T + \sum_{t=2}^T L_{t}  + L_0 ]\\
+\end{aligned}
+</span></p>
+<ul>
+<li>The final term <span class="math inline">L_T</span> depends on the final image <span class="math inline">x_T</span>, which is just pure noise if the forward process was parameterized correctly. The reverse process does not play a role in obtaining <span class="math inline">x_T</span>, so it is a constant with respect to <span class="math inline">\theta</span>, and we can ignore it for the optimization process.</li>
+<li>The initial loss <span class="math inline">L_0 = \log p_\theta(x_0 | x_1)</span> concerns the reconstruction of the original image from the first noisy version. It ensures that the model can accurately recover the original data after the noise has been gradually removed through the reverse process. It is in particular involved in scaling the pixels to <span class="math inline">[-1,1]</span>, ensuring that a real image comes out of the denoising process.</li>
+<li>The loss at time <span class="math inline">t</span> <span class="math inline">L_t = \log \dfrac{p_\theta(x_{t-1} | x_t)}{q(x_{t-1} | x_{t}, x_0)} = - \text{KL} (p_\theta(x_{t-1} | x_t), q(x_{t-1} | x_{t}, x_0))</span> is the KL divergence between the learned posterior <span class="math inline">p_\theta(x_{t-1} | x_t)</span> and the “true” posterior <span class="math inline">q(x_{t-1} | x_{t}, x_0)</span>.</li>
+</ul>
+</section>
+
+<section id="loss-derivation-10" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>Now we can simplify this loss using all our assumptions. In particular, the <strong>Markov property</strong> states that the different step of the noising/denoising process are independent, so we do no need to explicitly optimize the sum of all <span class="math inline">L_t</span> terms: optimizing each of them individually by sampling <span class="math inline">t</span> uniformly in <span class="math inline">[1, T]</span> would lead to the same result.</li>
+</ul>
+<p><span class="math display">
+\mathcal{L}_\text{VLB}(\theta) = \mathbb{E}_{x_0 \sim q(x_0), t \sim \mathcal{U}(1, T)} [\text{KL} (p_\theta(x_{t-1} | x_t), q(x_{t-1} | x_{t}, x_0) ) ]
+</span></p>
+<ul>
+<li><p>Remember that <span class="math inline">L_T</span> does not matter, and that <span class="math inline">L_0</span> will be a special case. We call this loss the <strong>variational lower bound</strong> VLB.</p></li>
+<li><p>Moreover, we know that both distributions inside the KL are <strong>normal distributions</strong>. As shown earlier, the true posterior is known to be:</p></li>
+</ul>
+<p><span class="math display">
+    q(x_{t-1}| x_t, x_0) = \mathcal{N}(x_{t-1}; \hat{\mu}(x_t, t) = \dfrac{1}{\sqrt{\bar{\alpha}_t}} \, (x_t - \dfrac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_t), (\dfrac{1 - \bar{\alpha}_{t-1}}{1 - \bar{\alpha}_t} \, \beta_t)^2 \, I)
+</span></p>
+<ul>
+<li>The learned posterior should therefore also be a normal distribution, whose parameters should be learned.</li>
+</ul>
+<p><span class="math display">
+    p_\theta(x_{t-1}| x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma^2_\theta(x_t, t))
+</span></p>
+</section>
+
+<section id="loss-derivation-11" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>The interest of having normal distributions is that their KL divergence takes a closed form:</li>
+</ul>
+<blockquote>
+<p><strong>Closed form of the KL divergence between two Gaussians</strong></p>
+<p>The closed form of the KL divergence between <span class="math inline">X = \mathcal{N}(\mu_x, \sigma^2_x)</span> and <span class="math inline">Y=\mathcal{N}(\mu_y, \sigma^2_y)</span> is simply a function of their parameters:</p>
+</blockquote>
+<p><span class="math display">
+\text{KL}(X ||Y) = \log \dfrac{\sigma_y}{\sigma_x} + \dfrac{\sigma_x^2 + (\mu_x - \mu_y)^2}{2 \sigma_y^2} - \dfrac{1}{2}
+</span></p>
+</section>
+
+<section id="loss-derivation-12" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li><p>Furthermore, an assumption of DDPM is that <strong>the variance schedule <span class="math inline">\beta_t</span></strong> is fixed and does not depend on <span class="math inline">\theta</span>.</p></li>
+<li><p>All terms of the KL depending on the variances disappear when calculating the gradient of the KL.</p></li>
+<li><p>All that remains in the loss function is the squared difference between the means, i.e.&nbsp;the <strong>mse</strong>!</p></li>
+</ul>
+<p><span class="math display">
+\mathcal{L}_\text{VLB}(\theta) = \mathbb{E}_{x_0 \sim q(x_0), t \sim \mathcal{U}(1, T)} [ (\hat{\mu}(x_t, t) - \mu_\theta(x_t, t))^2 ]
+</span></p>
+</section>
+
+<section id="loss-derivation-13" class="title-slide slide level1 center">
+<h1>Loss derivation</h1>
+<ul>
+<li>In addition, noting that <span class="math inline">\hat{\mu}(x_t, t) = \dfrac{1}{\sqrt{\bar{\alpha}_t}} \, (x_t - \dfrac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_t)</span>, we can parameterize <span class="math inline">\mu_\theta(x_t, t)</span> in the following way:</li>
+</ul>
+<p><span class="math display">
+\mu_\theta(x_t, t) = \dfrac{1}{\sqrt{\bar{\alpha}_t}} \, (x_t - \dfrac{\beta_t}{\sqrt{1 - \bar{\alpha}_t}} \, \epsilon_\theta(x_t, t))
+</span></p>
+<p>and have only to compute the mse between the <strong>residuals</strong> <span class="math inline">\epsilon_t</span> and <span class="math inline">\epsilon_\theta(x_t, t)</span>. This is the simple objective we used previously:</p>
+<p><span class="math display">
+\mathcal{L}(\theta) = \mathbb{E}_{x_0 \sim q, \epsilon_t \sim \mathcal{N}(0, I), t \sim \mathcal{U}(1, T)} [(\epsilon_t - \epsilon_\theta(x_t, t))^2]
+</span></p>
+<ul>
+<li>Using the Markov property, normal distributions, a fixed variance schedule and a clever reparameterization, we moved from the very complex ELBO loss to a simple regression on the residuals.</li>
+</ul>
+</section>
+
 <section id="dall-e-2" class="title-slide slide level1 center">
-<h1>2 - Dall-e 2</h1>
+<h1>3 - Dall-e 2</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/diffusion-dall-e.webp"></p>
@@ -624,10 +958,10 @@ Nichol, A., Dhariwal, P., Ramesh, A., Shyam, P., Mishkin, P., McGrew, B., et al.
 Ramesh, A., Dhariwal, P., Nichol, A., Chu, C., and Chen, M. (2022). Hierarchical <span>Text-Conditional Image Generation</span> with <span>CLIP Latents</span>. doi:<a href="https://doi.org/10.48550/arXiv.2204.06125">10.48550/arXiv.2204.06125</a>.
 </div>
 <div id="ref-Ronneberger2015" class="csl-entry" role="listitem">
-Ronneberger, O., Fischer, P., and Brox, T. (2015). U-<span>Net</span>: <span>Convolutional Networks</span> for <span>Biomedical Image Segmentation</span>. <a href="http://arxiv.org/abs/1505.04597">http://arxiv.org/abs/1505.04597</a>.
+Ronneberger, O., Fischer, P., and Brox, T. (2015). U-<span>Net</span>: <span>Convolutional Networks</span> for <span>Biomedical Image Segmentation</span>. <em>arXiv:1505.04597 [cs]</em>. <a href="https://arxiv.org/abs/1505.04597">https://arxiv.org/abs/1505.04597</a>.
 </div>
 <div id="ref-Vincent2010" class="csl-entry" role="listitem">
-Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>J. Mach. Learn. Res.</em> 11, 3371–3408.
+Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010). Stacked <span>Denoising Autoencoders</span>: <span>Learning Useful Representations</span> in a <span>Deep Network</span> with a <span>Local Denoising Criterion</span>. <em>The Journal of Machine Learning Research</em> 11, 3371–3408.
 </div>
 </div>
 </section>
@@ -830,190 +1164,173 @@ Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., and Manzagol, P.-A. (2010).
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/vitay\.github\.io\/course-neurocomputing\/");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/vitay\.github\.io\/course-neurocomputing\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
